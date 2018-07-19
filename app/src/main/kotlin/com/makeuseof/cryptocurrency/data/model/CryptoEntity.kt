@@ -12,4 +12,7 @@ data class CryptoEntity(
         val lastUpdated: Long,
         val quotes: Quotes
 ) {
+    override fun toString(): String {
+        return "$id $symbol $name"
+    }
 }

@@ -1,21 +1,29 @@
 package com.makeuseof.cryptocurrency.data.crypto
 
 import com.makeuseof.core.model.Result
-import com.makeuseof.cryptocurrency.data.NetworkError
+import com.makeuseof.core.network.NetworkClientFactory
+import com.makeuseof.core.network.NetworkError
+import com.makeuseof.core.network.RHWithErrorHandler
+import com.makeuseof.cryptocurrency.data.NetworkException
+import com.makeuseof.cryptocurrency.data.crypto.network.CryptoConfig
+import com.makeuseof.cryptocurrency.data.crypto.network.CryptoNetworkClient
 import com.makeuseof.cryptocurrency.data.model.CryptoListResponse
-import com.makeuseof.utils.coroutine.AppExecutors
-import kotlinx.coroutines.experimental.withContext
+import kotlin.coroutines.experimental.suspendCoroutine
 
 // Created by askar on 7/19/18.
-class CryptoService(
-        private val appExecutors: AppExecutors
-): CryptoSourceContract {
+class CryptoService(): CryptoSourceContract {
+
+    private val mClient: CryptoNetworkClient = NetworkClientFactory.getRetrofitClient(
+            CryptoNetworkClient::class.java,
+            CryptoConfig.BASE_URL
+    )
+
     companion object {
         private var INSTANCE: CryptoService? = null
 
-        fun getInstance(appExecutors: AppExecutors): CryptoSourceContract{
+        fun getInstance(): CryptoSourceContract{
             if (INSTANCE == null){
-                INSTANCE = CryptoService(appExecutors)
+                INSTANCE = CryptoService()
             }
             return INSTANCE!!
         }
@@ -23,8 +31,17 @@ class CryptoService(
 
     //region Contract
 
-    override suspend fun getAllCurrencies(): Result<CryptoListResponse> = withContext(appExecutors.ioContext) {
-        Result.Error(NetworkError())
+    override suspend fun getAllCurrencies(): Result<CryptoListResponse> = suspendCoroutine {
+        val call = mClient.getCurrencies()
+        call.enqueue(object : RHWithErrorHandler<CryptoListResponse>{
+            override fun onSuccess(result: CryptoListResponse) {
+                it.resume(Result.Success(result))
+            }
+
+            override fun onFailure(error: NetworkError) {
+                it.resume(Result.Error(NetworkException(error.toString())))
+            }
+        })
     }
 
     //endregion
