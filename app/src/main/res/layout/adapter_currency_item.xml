@@ -37,8 +37,9 @@
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
             android:paddingLeft="20dp"
-            android:paddingRight="10dp"
-            android:text="BTC"/>
+            android:text="BTC"
+            android:textColor="@color/default_text"
+            android:textStyle="bold"/>
 
         <View
             android:layout_width="0.5dp"
@@ -49,12 +50,13 @@
             android:id="@+id/adapter_currency_market_cap"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.8"
+            android:layout_weight="0.9"
             app:layout_constraintLeft_toRightOf="@+id/adapter_currency_symbol"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/adapter_currency_volume"
             android:gravity="center"
+            android:textColor="@color/default_text"
             android:text="$165b"/>
 
         <View
@@ -66,12 +68,13 @@
             android:id="@+id/adapter_currency_volume"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.8"
+            android:layout_weight="0.9"
             app:layout_constraintLeft_toRightOf="@+id/adapter_currency_market_cap"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/adapter_currency_price"
             android:gravity="center"
+            android:textColor="@color/default_text"
             android:text="$9.8b"/>
 
         <View
@@ -89,7 +92,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:gravity="right"
             android:paddingRight="20dp"
-            android:paddingLeft="10dp"
             android:text="$800.0"/>
 
     </LinearLayout>

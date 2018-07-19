@@ -2,8 +2,15 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#04A9F5</color>
 
+    <color name="light_blue">#04A9F5</color>
+    <color name="green">#1DE3BF</color>
+    <color name="red">#F44236</color>
+    <color name="black">#000</color>
+    <color name="white">#FFF</color>
     <color name="light_status_bar">#EFF0F3</color>
-    <color name="default_grey">#cccccc</color>
+    <color name="default_grey">#F0F0F0</color>
+    <color name="subtitle_text">#AAAEB3</color>
+    <color name="default_text">#393C40</color>
 </resources>

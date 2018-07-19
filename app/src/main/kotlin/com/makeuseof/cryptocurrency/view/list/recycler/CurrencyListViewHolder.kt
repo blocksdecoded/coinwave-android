@@ -26,8 +26,8 @@ class CurrencyListViewHolder(
     fun onBind(currency: CurrencyEntity){
         mSymbol.text = currency.symbol
         mMarketCap.text = currency.totalSupply.toString()
-        mVolume.text = currency.quotes.dailyVolume.toString()
-        mPrice.text = currency.quotes.price.toString()
+        mVolume.text = currency.quotes["USD"]?.dailyVolume.toString()
+        mPrice.text = "$${currency.quotes["USD"]?.price}"
 
         setupDividers()
     }
