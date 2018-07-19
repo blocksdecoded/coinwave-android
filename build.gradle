@@ -7,6 +7,7 @@ buildscript {
         constraint_version = '1.1.0'
         room_version = '1.1.0'
         volley_version = '1.1.0'
+        retrofit_version = "2.4.0"
         coroutineVersion = "0.23.3"
 
         min_sdk_version = 19
