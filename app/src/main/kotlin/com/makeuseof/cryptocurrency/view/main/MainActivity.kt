@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import com.makeuseof.cryptocurrency.R
+import com.makeuseof.cryptocurrency.domain.UseCaseProvider
 import com.makeuseof.cryptocurrency.view.list.CurrencyListContract
 import com.makeuseof.cryptocurrency.view.list.CurrencyListFragment
 import com.makeuseof.cryptocurrency.view.list.CurrencyListPresenter
@@ -49,7 +50,10 @@ class MainActivity : AppCompatActivity() {
     private fun createCurrencyListScreen(): Fragment{
         val fragment = CurrencyListFragment()
 
-        mCurrencyListPresenter = CurrencyListPresenter(fragment)
+        mCurrencyListPresenter = CurrencyListPresenter(
+                fragment,
+                UseCaseProvider.getCurrencyListUseCases()
+        )
 
         return fragment
     }

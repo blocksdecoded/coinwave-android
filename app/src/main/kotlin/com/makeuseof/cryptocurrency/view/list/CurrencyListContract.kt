@@ -9,11 +9,15 @@ interface CurrencyListContract {
         fun showCurrencies(currencies: List<CurrencyEntity>)
 
         fun showNetworkError()
+
+        fun showLoading()
     }
 
     interface Presenter : BaseMVPContract.Presenter<View> {
-        fun onPickCurrency(position: Int)
+        fun onCurrencyPick(position: Int)
 
         fun onCurrencyClick(position: Int)
+
+        fun getCurrencyList()
     }
 }
