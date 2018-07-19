@@ -1,7 +1,7 @@
 package com.makeuseof.cryptocurrency.data.model
 
 // Created by askar on 7/19/18.
-data class CryptoEntity(
+data class CurrencyEntity(
         val id: Int,
         val name: String,
         val symbol: String,

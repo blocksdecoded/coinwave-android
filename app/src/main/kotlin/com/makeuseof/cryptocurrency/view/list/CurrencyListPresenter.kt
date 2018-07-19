@@ -9,4 +9,12 @@ class CurrencyListPresenter(
         mView = view
         injectSelfToView()
     }
+
+    override fun onPickCurrency(position: Int) {
+
+    }
+
+    override fun onCurrencyClick(position: Int) {
+
+    }
 }
