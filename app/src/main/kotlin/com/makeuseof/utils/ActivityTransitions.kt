@@ -1,0 +1,33 @@
+package com.makeuseof.utils
+
+import android.app.Activity
+import android.support.v7.app.AppCompatActivity
+import com.makeuseof.cryptocurrency.R
+
+/**
+ * Created by Tameki on 2/15/18.
+ */
+private const val TRANSITIONS_ENABLED = true
+
+fun Activity.inRightTransition(){
+	if (TRANSITIONS_ENABLED){
+		this.overridePendingTransition(R.anim.slide_in_right, 0)
+	}
+}
+
+fun Activity.inRightWithFinish(): Boolean{
+	if (TRANSITIONS_ENABLED){
+		this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+		if (this is AppCompatActivity){
+			this.supportFinishAfterTransition()
+		}
+	}
+	
+	return TRANSITIONS_ENABLED
+}
+
+fun Activity.outRightTransition(){
+	if (TRANSITIONS_ENABLED){
+		this.overridePendingTransition(0, R.anim.slide_out_right )
+	}
+}
