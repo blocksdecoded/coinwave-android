@@ -17,4 +17,8 @@ data class CurrencyEntity(
     override fun toString(): String {
         return "$id $symbol $name"
     }
+
+    fun getMarketCap(): Float? = quotes["USD"]?.marketCap
+    fun getDailyVolume(): Float? = quotes["USD"]?.dailyVolume
+    fun getPrice(): Float? = quotes["USD"]?.price
 }
