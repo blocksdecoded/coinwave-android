@@ -12,7 +12,8 @@ data class CurrencyEntity(
         @SerializedName("circulating_supply") val circulatingSupply: Float,
         @SerializedName("max_supply") val maxSupply: Float?,
         @SerializedName("last_updated") val lastUpdated: Long,
-        @SerializedName("quotes") val quotes: HashMap<String, Quote>
+        @SerializedName("quotes") val quotes: HashMap<String, Quote>,
+        var isSaved: Boolean = false
 ) {
     override fun toString(): String {
         return "$id $symbol $name"

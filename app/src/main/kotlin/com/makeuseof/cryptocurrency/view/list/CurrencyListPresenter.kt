@@ -25,7 +25,7 @@ class CurrencyListPresenter(
 
     private fun getCurrencies() = launchSilent(uiContext){
         mView?.showLoading()
-        val result = mCurrencyListUseCases.getCryptoList()
+        val result = mCurrencyListUseCases.getCryptoList(true)
         when(result){
             is Result.Success -> {
                 mView?.showCurrencies(result.data)

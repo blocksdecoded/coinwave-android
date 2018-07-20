@@ -57,6 +57,7 @@
             app:layout_constraintRight_toLeftOf="@+id/adapter_currency_volume"
             android:gravity="center"
             android:textColor="@color/default_text"
+            android:textSize="12.5sp"
             android:text="$165b"/>
 
         <View
@@ -75,6 +76,7 @@
             app:layout_constraintRight_toLeftOf="@+id/adapter_currency_price"
             android:gravity="center"
             android:textColor="@color/default_text"
+            android:textSize="12.5sp"
             android:text="$9.8b"/>
 
         <View

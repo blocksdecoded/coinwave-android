@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 
         mCurrencyListPresenter = CurrencyListPresenter(
                 fragment,
-                UseCaseProvider.getCurrencyListUseCases()
+                UseCaseProvider.getCurrencyListUseCases(applicationContext)
         )
 
         return fragment
