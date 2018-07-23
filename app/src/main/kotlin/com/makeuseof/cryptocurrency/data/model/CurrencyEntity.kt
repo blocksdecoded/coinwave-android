@@ -22,4 +22,5 @@ data class CurrencyEntity(
     fun getMarketCap(): Float? = quotes["USD"]?.marketCap
     fun getDailyVolume(): Float? = quotes["USD"]?.dailyVolume
     fun getPrice(): Float? = quotes["USD"]?.price
+    fun getPriceChange(): Float? = quotes["USD"]?.dayChange
 }

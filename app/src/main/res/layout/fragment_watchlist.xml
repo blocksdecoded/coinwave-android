@@ -25,8 +25,8 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:paddingTop="20dp"
-            android:paddingBottom="16dp"
+            android:paddingTop="24dp"
+            android:paddingBottom="24dp"
             android:paddingLeft="20dp"
             android:text="Name"
             android:textSize="13sp"
@@ -69,7 +69,7 @@
             android:gravity="right"
             android:paddingRight="20dp"
             android:textColor="@color/subtitle_text"
-            android:text="Price"
+            android:text="Price(24h)"
             android:textSize="13sp"/>
 
     </LinearLayout>
