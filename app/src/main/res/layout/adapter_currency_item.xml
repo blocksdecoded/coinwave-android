@@ -40,7 +40,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="12dp"/>
 
-            <TextView
+            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
                 android:id="@+id/adapter_currency_symbol"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
                 android:text="BTC"
                 android:textSize="15sp"
                 android:textColor="@color/default_text"
-                android:textStyle="bold"/>
+                app:ftv_typeface="bold"/>
         </android.support.constraint.ConstraintLayout>
 
         <View
@@ -62,7 +62,7 @@
             android:layout_height="match_parent"
             android:background="@color/light_grey"/>
 
-        <TextView
+        <com.makeuseof.cryptocurrency.view.widgets.FontTextView
             android:id="@+id/adapter_currency_market_cap"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
             android:gravity="center"
             android:layout_gravity="center"
             android:textColor="@color/default_text"
-            android:textSize="12.5sp"
+            android:textSize="13sp"
             android:text="$165b"/>
 
         <View
@@ -82,7 +82,7 @@
             android:layout_height="match_parent"
             android:background="@color/light_grey"/>
 
-        <TextView
+        <com.makeuseof.cryptocurrency.view.widgets.FontTextView
             android:id="@+id/adapter_currency_volume"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -94,7 +94,7 @@
             android:gravity="center"
             android:layout_gravity="center"
             android:textColor="@color/default_text"
-            android:textSize="12.5sp"
+            android:textSize="13sp"
             android:text="$9.8b"/>
 
         <View
@@ -122,7 +122,7 @@
                 android:layout_marginLeft="4dp"
                 />
 
-            <TextView
+            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
                 android:id="@+id/adapter_currency_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -133,9 +133,10 @@
                 android:paddingRight="20dp"
                 app:layout_constraintVertical_chainStyle="packed"
                 android:textSize="15sp"
-                android:text="$800.0"/>
+                android:text="$800.0"
+                app:ftv_typeface="medium"/>
 
-            <TextView
+            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
                 android:id="@+id/adapter_currency_price_change"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
