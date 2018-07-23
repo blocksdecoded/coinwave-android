@@ -28,6 +28,13 @@ class MainActivity : AppCompatActivity() {
         init()
     }
 
+    override fun onBackPressed() {
+        when(main_view_pager.currentItem){
+            1 -> {main_view_pager.currentItem = 0}
+            else -> super.onBackPressed()
+        }
+    }
+
     //region Init
 
     private fun init(){
