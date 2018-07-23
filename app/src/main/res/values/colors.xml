@@ -9,6 +9,7 @@
     <color name="red">#F44236</color>
     <color name="black">#000</color>
     <color name="white">#FFF</color>
+    <color name="saved_bg">#f9f9f9</color>
     <color name="light_status_bar">#EFF0F3</color>
     <color name="default_grey">#F0F0F0</color>
     <color name="subtitle_text">#AAAEB3</color>

@@ -6,14 +6,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.makeuseof.cryptocurrency.R
 import com.makeuseof.cryptocurrency.data.model.CurrencyEntity
-import com.makeuseof.cryptocurrency.util.ConstantSourceUtil
 import com.makeuseof.cryptocurrency.util.FormatUtil
 import com.makeuseof.cryptocurrency.util.format
 import com.makeuseof.cryptocurrency.util.loadIcon
 import com.makeuseof.utils.ResourceUtil
 import com.makeuseof.utils.hide
 import com.makeuseof.utils.visible
-import com.squareup.picasso.Picasso
 
 // Created by askar on 7/19/18.
 class CurrencyListViewHolder(
@@ -34,6 +32,11 @@ class CurrencyListViewHolder(
     }
 
     fun onBind(currency: CurrencyEntity){
+        if (currency.isSaved){
+            itemView.setBackgroundResource(R.color.saved_bg)
+        } else {
+            itemView.setBackgroundResource(R.color.white)
+        }
         mSymbol.text = "${currency.symbol}"
         mMarketCap.text = "$${FormatUtil.withSuffix(currency.getMarketCap()!!)}"
         mVolume.text = "$${FormatUtil.withSuffix(currency.getDailyVolume()!!)}"
