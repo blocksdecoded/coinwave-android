@@ -17,7 +17,9 @@
             android:id="@+id/main_tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll|enterAlways"/>
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:tabTextColor="@color/subtitle_text"
+            app:tabSelectedTextColor="@color/light_blue"/>
     </android.support.design.widget.AppBarLayout>
 
     <com.makeuseof.cryptocurrency.view.widgets.NonSwipeableViewPager
