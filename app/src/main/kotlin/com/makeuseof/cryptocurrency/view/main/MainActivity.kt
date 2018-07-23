@@ -1,9 +1,14 @@
 package com.makeuseof.cryptocurrency.view.main
 
+import android.content.res.ColorStateList
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
+import android.util.TypedValue
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.widget.TextView
 import com.makeuseof.cryptocurrency.R
 import com.makeuseof.cryptocurrency.domain.UseCaseProvider
 import com.makeuseof.cryptocurrency.view.list.CurrencyListContract
@@ -12,8 +17,12 @@ import com.makeuseof.cryptocurrency.view.list.CurrencyListPresenter
 import com.makeuseof.cryptocurrency.view.watchlist.WatchListContract
 import com.makeuseof.cryptocurrency.view.watchlist.WatchListFragment
 import com.makeuseof.cryptocurrency.view.watchlist.WatchListPresenter
+import com.makeuseof.cryptocurrency.view.widgets.FontTextView
 import com.makeuseof.cryptocurrency.view.widgets.PagerAdapter
+import com.makeuseof.utils.ResourceUtil
 import kotlinx.android.synthetic.main.activity_main.*
+import org.xmlpull.v1.XmlPullParser
+import org.xmlpull.v1.XmlPullParserFactory
 
 class MainActivity : AppCompatActivity() {
 
@@ -69,8 +78,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViewPager(fragments: ArrayList<Fragment>){
-        main_tab_layout.addTab(main_tab_layout.newTab().setText("Watchlist"))
-        main_tab_layout.addTab(main_tab_layout.newTab().setText("CryptoCurrencies"))
+        main_tab_layout.addTab(getTab("Watchlist"))
+        main_tab_layout.addTab(getTab("Cryptocurrencies"))
         main_tab_layout.tabGravity = TabLayout.GRAVITY_FILL
 
         val adapter = PagerAdapter(supportFragmentManager, fragments)
@@ -88,6 +97,28 @@ class MainActivity : AppCompatActivity() {
                 tab?.let { main_view_pager.currentItem = tab.position }
             }
         })
+    }
+
+    private fun getTab(title: String): TabLayout.Tab {
+        val textView = FontTextView(this)
+        textView.gravity = Gravity.CENTER
+        textView.text = title
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f)
+
+        val colorStates = ColorStateList(
+                arrayOf(
+                        intArrayOf(android.R.attr.state_selected), intArrayOf()
+                ),
+                intArrayOf(
+                        ResourceUtil.getColor(this, R.color.light_blue),
+                        ResourceUtil.getColor(this, R.color.subtitle_text)
+                )
+        )
+
+        textView.setTextColor(colorStates)
+
+
+        return main_tab_layout.newTab().setCustomView(textView)
     }
 
     //endregion
