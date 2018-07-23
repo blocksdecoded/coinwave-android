@@ -8,6 +8,8 @@ import com.makeuseof.cryptocurrency.data.model.CurrencyEntity
 interface CurrencyListUseCases {
     suspend fun getCryptoList(skipCache: Boolean): Result<List<CurrencyEntity>>
 
+    fun getCurrency(id: Int): CurrencyEntity?
+
     fun saveCurrency(id: Int): Boolean
 
     fun removeCurrency(id: Int): Boolean

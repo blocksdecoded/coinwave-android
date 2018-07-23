@@ -58,12 +58,12 @@ class WatchListFragment :
 
     //region Contract
 
-    override fun updateCurrency(currency: CurrencyEntity) {
-        mAdapter?.updateItem(currency)
+    override fun updateCurrency(position: Int, currencyEntity: CurrencyEntity) {
+        mAdapter?.updateItem(currencyEntity)
     }
 
-    override fun deleteCurrency(currency: CurrencyEntity) {
-        mAdapter?.deleteItem(currency)
+    override fun deleteCurrency(position: Int) {
+        mAdapter?.deleteItemAt(position)
     }
 
     override fun showCurrencies(currencies: List<CurrencyEntity>) {

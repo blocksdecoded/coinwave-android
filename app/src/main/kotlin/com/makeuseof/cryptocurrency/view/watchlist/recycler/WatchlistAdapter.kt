@@ -4,8 +4,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import com.makeuseof.cryptocurrency.R
 import com.makeuseof.cryptocurrency.data.model.CurrencyEntity
+import com.makeuseof.cryptocurrency.util.addSortedByRank
 import com.makeuseof.utils.Lg
 import com.makeuseof.utils.inflate
+import com.makeuseof.utils.isValidIndex
 
 // Created by askar on 7/19/18.
 class WatchlistAdapter(
@@ -34,12 +36,16 @@ class WatchlistAdapter(
         notifyDataSetChanged()
     }
 
+    fun deleteItemAt(position: Int){
+        if(mItems.isValidIndex(position)){
+            mItems.removeAt(position)
+            notifyItemRemoved(position)
+        }
+    }
+
     fun deleteItem(currency: CurrencyEntity){
         findItem(currency.id) {
-            if(it >= 0){
-                mItems.removeAt(it)
-                notifyItemRemoved(it)
-            }
+            deleteItemAt(it)
         }
     }
 
@@ -49,7 +55,7 @@ class WatchlistAdapter(
                 mItems[it] = currency
                 notifyDataSetChanged()
             } else {
-                mItems.add(currency)
+                mItems.addSortedByRank(currency)
                 notifyDataSetChanged()
             }
         }

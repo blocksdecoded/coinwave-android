@@ -4,7 +4,9 @@ import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import com.makeuseof.cryptocurrency.R
 import com.makeuseof.cryptocurrency.data.model.CurrencyEntity
+import com.makeuseof.cryptocurrency.util.findCurrency
 import com.makeuseof.utils.inflate
+import com.makeuseof.utils.isValidIndex
 
 // Created by askar on 7/19/18.
 class CurrencyListAdapter(
@@ -27,5 +29,19 @@ class CurrencyListAdapter(
         mItems.clear()
         mItems.addAll(currencies)
         notifyDataSetChanged()
+    }
+
+    fun deleteItem(position: Int){
+        if(mItems.isValidIndex(position)){
+            mItems.removeAt(position)
+            notifyItemRemoved(position)
+        }
+    }
+
+    fun updateItem(currency: CurrencyEntity){
+        mItems.findCurrency(currency) {
+            mItems[it] = currency
+            notifyDataSetChanged()
+        }
     }
 }

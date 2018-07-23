@@ -58,6 +58,14 @@ class CurrencyListFragment :
 
     //region Contract
 
+    override fun updateCurrency(position: Int, currencyEntity: CurrencyEntity) {
+        mAdapter?.updateItem(currencyEntity)
+    }
+
+    override fun deleteCurrency(position: Int) {
+        mAdapter?.deleteItem(position)
+    }
+
     override fun showCurrencies(currencies: List<CurrencyEntity>) {
         mProgress.hide()
         mRecycler.visible()

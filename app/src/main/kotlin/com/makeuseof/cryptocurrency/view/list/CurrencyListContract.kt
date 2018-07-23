@@ -8,6 +8,10 @@ interface CurrencyListContract {
     interface View : BaseMVPContract.View<Presenter> {
         fun showCurrencies(currencies: List<CurrencyEntity>)
 
+        fun updateCurrency(position: Int, currencyEntity: CurrencyEntity)
+
+        fun deleteCurrency(position: Int)
+
         fun showNetworkError()
 
         fun showLoading()

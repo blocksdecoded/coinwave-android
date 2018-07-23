@@ -25,6 +25,10 @@ class CurrencyListInteractor(
         }
     }
 
+    override fun getCurrency(id: Int): CurrencyEntity? {
+        return mCryptoService.getCurrency(id)
+    }
+
     override fun saveCurrency(id: Int): Boolean {
         return mCryptoService.saveCurrency(id)
     }
