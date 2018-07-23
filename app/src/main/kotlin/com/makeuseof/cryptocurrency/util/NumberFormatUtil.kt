@@ -33,7 +33,7 @@ object FormatUtil {
         return if (cleanDouble(double) == double.roundToInt().toDouble()){
             double.roundToInt().toString()
         } else {
-            String.format("%.2f", double)
+            String.format("%.3f", double)
         }
     }
 
@@ -41,7 +41,7 @@ object FormatUtil {
         return if (cleanFloat(float) == float.roundToInt().toFloat()){
             float.roundToInt().toString()
         } else {
-            String.format("%.2f", float)
+            String.format("%.3f", float)
         }
     }
 }

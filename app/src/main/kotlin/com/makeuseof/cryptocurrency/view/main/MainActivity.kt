@@ -42,7 +42,10 @@ class MainActivity : AppCompatActivity() {
     private fun createWatchListScreen(): Fragment{
         val fragment = WatchListFragment()
 
-        mWatchListPresenter = WatchListPresenter(fragment)
+        mWatchListPresenter = WatchListPresenter(
+                fragment,
+                UseCaseProvider.getCurrencyListUseCases(applicationContext)
+        )
 
         return fragment
     }

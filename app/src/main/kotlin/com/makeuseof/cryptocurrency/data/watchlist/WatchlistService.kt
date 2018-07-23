@@ -41,8 +41,8 @@ class WatchlistService(
     private fun save(ids: ArrayList<Int>){
         var save = ""
 
-        ids.forEach {
-            save += "$it$saveDelimiter"
+        ids.forEachIndexed { index, i ->
+            save += "$i${if (index == ids.size - 1) "" else saveDelimiter}"
         }
 
         mSharedStorage.setPreference(SAVED_CURRENCIES, save)

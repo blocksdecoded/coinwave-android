@@ -116,7 +116,7 @@ fun ImageView?.setImageColor(resId: Int){
 			), PorterDuff.Mode.SRC_ATOP)
 }
 
-fun <T>ArrayList<T>?.isValidIndex(index: Int): Boolean{
+fun <T>List<T>?.isValidIndex(index: Int): Boolean{
 	this?.let { return index >= 0 && it.size > index}
 	return false
 }

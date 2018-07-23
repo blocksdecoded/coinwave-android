@@ -2,8 +2,10 @@ package com.makeuseof.cryptocurrency.view.list
 
 import com.makeuseof.core.model.Result
 import com.makeuseof.core.mvp.BaseMVPPresenter
+import com.makeuseof.cryptocurrency.data.model.CurrencyEntity
 import com.makeuseof.cryptocurrency.domain.usecases.list.CurrencyListUseCases
 import com.makeuseof.utils.coroutine.launchSilent
+import com.makeuseof.utils.isValidIndex
 import kotlinx.coroutines.experimental.android.UI
 import kotlin.coroutines.experimental.CoroutineContext
 
@@ -12,6 +14,7 @@ class CurrencyListPresenter(
         private val mCurrencyListUseCases: CurrencyListUseCases,
         private val uiContext: CoroutineContext = UI
 ) : BaseMVPPresenter<CurrencyListContract.View>(view), CurrencyListContract.Presenter {
+    private var mCachedData = listOf<CurrencyEntity>()
 
     override fun attachView(view: CurrencyListContract.View) {
         mView = view
@@ -28,6 +31,7 @@ class CurrencyListPresenter(
         val result = mCurrencyListUseCases.getCryptoList(true)
         when(result){
             is Result.Success -> {
+                mCachedData = result.data
                 mView?.showCurrencies(result.data)
             }
 
@@ -46,6 +50,12 @@ class CurrencyListPresenter(
     }
 
     override fun onCurrencyClick(position: Int) {
-
+        if(mCachedData.isValidIndex(position)){
+            if(mCachedData[position].isSaved){
+                mCurrencyListUseCases.removeCurrency(mCachedData[position].id)
+            } else {
+                mCurrencyListUseCases.saveCurrency(mCachedData[position].id)
+            }
+        }
     }
 }

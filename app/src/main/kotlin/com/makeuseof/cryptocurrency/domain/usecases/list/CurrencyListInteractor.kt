@@ -2,6 +2,7 @@ package com.makeuseof.cryptocurrency.domain.usecases.list
 
 import com.makeuseof.core.model.Result
 import com.makeuseof.cryptocurrency.data.crypto.CurrencySourceContract
+import com.makeuseof.cryptocurrency.data.crypto.CurrencyUpdateObserver
 import com.makeuseof.cryptocurrency.data.model.CurrencyEntity
 import com.makeuseof.utils.coroutine.AppExecutors
 import kotlinx.coroutines.experimental.withContext
@@ -30,5 +31,13 @@ class CurrencyListInteractor(
 
     override fun removeCurrency(id: Int): Boolean {
         return mCryptoService.removeCurrency(id)
+    }
+
+    override fun addObserver(observer: CurrencyUpdateObserver) {
+        mCryptoService.addCurrencyObserver(observer)
+    }
+
+    override fun removeObserver(observer: CurrencyUpdateObserver) {
+        mCryptoService.removeCurrencyObserver(observer)
     }
 }

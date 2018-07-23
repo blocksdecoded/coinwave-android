@@ -1,12 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/fragment_watchlist_recycler"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="WatchList"/>
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_watchlist_header"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/fragment_watchlist_header"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:paddingTop="20dp"
+            android:paddingBottom="16dp"
+            android:paddingLeft="20dp"
+            android:text="Name"
+            android:textSize="13sp"
+            android:textColor="@color/subtitle_text" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.9"
+            app:layout_constraintLeft_toRightOf="@+id/adapter_currency_symbol"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/adapter_currency_volume"
+            android:gravity="center"
+            android:textColor="@color/subtitle_text"
+            android:text="Market Cap"
+            android:textSize="13sp"/>
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.9"
+            app:layout_constraintLeft_toRightOf="@+id/adapter_currency_market_cap"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/adapter_currency_price"
+            android:gravity="center"
+            android:textColor="@color/subtitle_text"
+            android:text="Volume(24h)"
+            android:textSize="13sp"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:gravity="right"
+            android:paddingRight="20dp"
+            android:textColor="@color/subtitle_text"
+            android:text="Price"
+            android:textSize="13sp"/>
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/fragment_watchlist_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_watchlist_header"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>

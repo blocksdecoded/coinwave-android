@@ -1,4 +1,4 @@
-package com.makeuseof.cryptocurrency.view.list.recycler
+package com.makeuseof.cryptocurrency.view.watchlist.recycler
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -11,7 +11,7 @@ import com.makeuseof.utils.hide
 import com.makeuseof.utils.visible
 
 // Created by askar on 7/19/18.
-class CurrencyListViewHolder(
+class WatchlistViewHolder(
         view: View,
         private val mListener: CurrencyVHClickListener
 ): RecyclerView.ViewHolder(view) {

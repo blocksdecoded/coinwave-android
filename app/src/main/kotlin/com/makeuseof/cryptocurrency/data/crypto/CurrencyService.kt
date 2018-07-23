@@ -11,6 +11,7 @@ import com.makeuseof.cryptocurrency.data.crypto.network.CryptoNetworkClient
 import com.makeuseof.cryptocurrency.data.model.CurrencyEntity
 import com.makeuseof.cryptocurrency.data.model.CurrencyListResponse
 import com.makeuseof.cryptocurrency.data.watchlist.WatchlistSourceContract
+import com.makeuseof.utils.Lg
 import kotlin.coroutines.experimental.suspendCoroutine
 
 // Created by askar on 7/19/18.
@@ -93,6 +94,7 @@ class CurrencyService(
             false
         } else {
             mWatchlistSource.addId(id)
+            currency.isSaved = true
             notifyAdded(currency)
             true
         }
@@ -104,6 +106,7 @@ class CurrencyService(
             false
         } else {
             mWatchlistSource.deleteId(id)
+            currency.isSaved = false
             notifyRemoved(currency)
             true
         }
