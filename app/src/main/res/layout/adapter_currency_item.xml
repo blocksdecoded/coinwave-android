@@ -26,21 +26,35 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/adapter_currency_symbol"
+        <android.support.constraint.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1.0"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp"
-            android:paddingLeft="20dp"
-            android:text="BTC"
-            android:textSize="15sp"
-            android:textColor="@color/default_text"
-            android:textStyle="bold"/>
+            android:layout_weight="1.0">
+
+            <ImageView
+                android:id="@+id/adapter_currency_icon"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                app:layout_constraintLeft_toLeftOf="@id/adapter_currency_symbol"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="12dp"/>
+
+            <TextView
+                android:id="@+id/adapter_currency_symbol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/adapter_currency_icon"
+                android:layout_marginBottom="12dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="4dp"
+                android:text="BTC"
+                android:textSize="15sp"
+                android:textColor="@color/default_text"
+                android:textStyle="bold"/>
+        </android.support.constraint.ConstraintLayout>
 
         <View
             android:layout_width="0.5dp"
@@ -57,6 +71,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/adapter_currency_volume"
             android:gravity="center"
+            android:layout_gravity="center"
             android:textColor="@color/default_text"
             android:textSize="12.5sp"
             android:text="$165b"/>
@@ -76,6 +91,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/adapter_currency_price"
             android:gravity="center"
+            android:layout_gravity="center"
             android:textColor="@color/default_text"
             android:textSize="12.5sp"
             android:text="$9.8b"/>

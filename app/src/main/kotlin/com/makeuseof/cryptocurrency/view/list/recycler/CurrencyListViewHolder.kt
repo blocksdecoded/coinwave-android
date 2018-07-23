@@ -6,17 +6,21 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.makeuseof.cryptocurrency.R
 import com.makeuseof.cryptocurrency.data.model.CurrencyEntity
+import com.makeuseof.cryptocurrency.util.ConstantSourceUtil
 import com.makeuseof.cryptocurrency.util.FormatUtil
 import com.makeuseof.cryptocurrency.util.format
+import com.makeuseof.cryptocurrency.util.loadIcon
 import com.makeuseof.utils.ResourceUtil
 import com.makeuseof.utils.hide
 import com.makeuseof.utils.visible
+import com.squareup.picasso.Picasso
 
 // Created by askar on 7/19/18.
 class CurrencyListViewHolder(
         view: View,
         private val mListener: CurrencyVHClickListener
 ): RecyclerView.ViewHolder(view) {
+    private val mSymbolIcon: ImageView = itemView.findViewById(R.id.adapter_currency_icon)
     private val mSymbol: TextView = itemView.findViewById(R.id.adapter_currency_symbol)
     private val mMarketCap: TextView = itemView.findViewById(R.id.adapter_currency_market_cap)
     private val mVolume: TextView = itemView.findViewById(R.id.adapter_currency_volume)
@@ -52,6 +56,8 @@ class CurrencyListViewHolder(
         }
 
         setupDividers()
+
+        mSymbolIcon.loadIcon(currency)
     }
 
     private fun setupDividers(){
