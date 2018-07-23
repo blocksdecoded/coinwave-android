@@ -7,8 +7,6 @@ import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.util.TypedValue
 import android.view.Gravity
-import android.view.LayoutInflater
-import android.widget.TextView
 import com.makeuseof.cryptocurrency.R
 import com.makeuseof.cryptocurrency.domain.UseCaseProvider
 import com.makeuseof.cryptocurrency.view.list.CurrencyListContract
@@ -21,8 +19,6 @@ import com.makeuseof.cryptocurrency.view.widgets.FontTextView
 import com.makeuseof.cryptocurrency.view.widgets.PagerAdapter
 import com.makeuseof.utils.ResourceUtil
 import kotlinx.android.synthetic.main.activity_main.*
-import org.xmlpull.v1.XmlPullParser
-import org.xmlpull.v1.XmlPullParserFactory
 
 class MainActivity : AppCompatActivity() {
 

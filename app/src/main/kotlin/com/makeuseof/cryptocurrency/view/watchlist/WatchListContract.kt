@@ -14,6 +14,8 @@ interface WatchListContract {
 
         fun showNetworkError()
 
+        fun showEmpty()
+
         fun showLoading()
     }
 

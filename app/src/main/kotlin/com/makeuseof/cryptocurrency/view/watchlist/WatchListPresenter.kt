@@ -28,10 +28,13 @@ class WatchListPresenter(
             mCachedData.clear()
             mCachedData.addAll(currencies.filter { it.isSaved })
             mView?.showCurrencies(mCachedData)
+
+            if(mCachedData.isEmpty()) mView?.showEmpty()
         }
 
         override fun onRemoved(currencyEntity: CurrencyEntity) {
             mView?.deleteCurrency(removeCurrency(currencyEntity))
+            if(mCachedData.isEmpty()) mView?.showEmpty()
         }
     }
 

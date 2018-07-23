@@ -1,6 +1,7 @@
 package com.makeuseof.cryptocurrency.view.list
 
 import android.os.Bundle
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -22,9 +23,9 @@ class CurrencyListFragment :
         CurrencyListViewHolder.CurrencyVHClickListener {
     override var mPresenter: CurrencyListContract.Presenter? = null
 
-    private var mProgress: ProgressBar? = null
     private var mRecycler: RecyclerView? = null
     private var mAdapter: CurrencyListAdapter? = null
+    private var mSwipeRefreshLayout: SwipeRefreshLayout? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = container.inflate(R.layout.fragment_currency_list)
@@ -37,7 +38,11 @@ class CurrencyListFragment :
     private fun initView(rootView: View?) {
         mAdapter = CurrencyListAdapter(arrayListOf(), this)
         mRecycler = rootView?.findViewById(R.id.fragment_currency_list_recycler)
-        mProgress = rootView?.findViewById(R.id.fragment_currency_list_progress)
+        mSwipeRefreshLayout = rootView?.findViewById(R.id.fragment_currency_list_refresh)
+
+        mSwipeRefreshLayout?.setOnRefreshListener {
+            mPresenter?.getCurrencyList()
+        }
 
         val lm = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         mRecycler?.layoutManager = lm
@@ -67,7 +72,7 @@ class CurrencyListFragment :
     }
 
     override fun showCurrencies(currencies: List<CurrencyEntity>) {
-        mProgress.hide()
+        mSwipeRefreshLayout?.isRefreshing = false
         mRecycler.visible()
         mAdapter?.setItems(currencies)
     }
@@ -77,7 +82,7 @@ class CurrencyListFragment :
     }
 
     override fun showLoading() {
-        mProgress.visible()
+        mSwipeRefreshLayout?.isRefreshing = true
         mRecycler.hide()
     }
 
