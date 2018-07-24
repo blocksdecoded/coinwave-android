@@ -38,6 +38,13 @@ class WatchlistViewHolder(
 
         mPrice.text = "$${currency.getPrice()?.format()}"
 
+        configPriceChanges(currency)
+
+        setupDividers()
+        mSymbolIcon.loadIcon(currency)
+    }
+
+    private fun configPriceChanges(currency: CurrencyEntity){
         currency.getPriceChange()?.let {
             mPriceChange.text = "${if (it > 0) "+" else ""}$it%"
 
@@ -52,9 +59,6 @@ class WatchlistViewHolder(
             mPrice.setTextColor(color)
             mPriceChange.setTextColor(color)
         }
-
-        setupDividers()
-        mSymbolIcon.loadIcon(currency)
     }
 
     private fun setupDividers(){
