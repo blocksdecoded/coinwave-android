@@ -60,12 +60,13 @@ class CurrencyService(
         mObservers.forEach { it.onRemoved(currencyEntity) }
     }
 
-    private fun findCurrency(id: Int, onFind: (currency: CurrencyEntity) -> Boolean){
+    private fun findCurrency(id: Int, onFind: (currency: CurrencyEntity) -> Unit): Boolean{
         val currency = mCached?.currencies?.first { it.id == id }
-        if(currency == null){
-
-        } else {
+        return if(currency != null){
             onFind.invoke(currency)
+            true
+        } else {
+            false
         }
     }
 
@@ -85,35 +86,16 @@ class CurrencyService(
         mObservers.remove(observer)
     }
 
-    override fun saveCurrency(id: Int): Boolean {
-//        findCurrency(id) {
-//            mWatchlistSource.addId(id)
-//            notifyAdded(it)
-//            true
-//        }
-//
-//        return false
-        val currency = mCached?.currencies?.first { it.id == id }
-        return if(currency == null){
-            false
-        } else {
-            mWatchlistSource.addId(id)
-            currency.isSaved = true
-            notifyAdded(currency)
-            true
-        }
+    override fun saveCurrency(id: Int): Boolean = findCurrency(id) {
+        mWatchlistSource.addId(id)
+        it.isSaved = true
+        notifyAdded(it)
     }
 
-    override fun removeCurrency(id: Int): Boolean {
-        val currency = mCached?.currencies?.first { it.id == id }
-        return if(currency == null){
-            false
-        } else {
-            mWatchlistSource.deleteId(id)
-            currency.isSaved = false
-            notifyRemoved(currency)
-            true
-        }
+    override fun removeCurrency(id: Int): Boolean = findCurrency(id) {
+        mWatchlistSource.deleteId(id)
+        it.isSaved = false
+        notifyRemoved(it)
     }
 
     override suspend fun getAllCurrencies(skipCache: Boolean): Result<CurrencyListResponse> = suspendCoroutine {

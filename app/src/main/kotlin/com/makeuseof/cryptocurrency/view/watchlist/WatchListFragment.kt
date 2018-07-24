@@ -111,7 +111,7 @@ class WatchListFragment :
             mErrorContainer.visible()
             mRecycler.hide()
         } else {
-            showShortToast(context, "Couldn't refresh currencies.\nPlease check internet connection and try again.")
+            showShortToast(context, "Can't refresh currencies.\nPlease check internet connection and try again.")
             mErrorContainer.hide()
             mRecycler.visible()
         }

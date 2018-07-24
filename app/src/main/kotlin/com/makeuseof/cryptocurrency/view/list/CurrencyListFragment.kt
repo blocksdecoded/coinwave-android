@@ -97,7 +97,7 @@ class CurrencyListFragment :
             mRecycler.hide()
             mErrorContainer.visible()
         } else {
-            showShortToast(context, "Couldn't refresh currencies.\nPlease check internet connection and try again.")
+            showShortToast(context, "Can't refresh currencies.\nPlease check internet connection and try again.")
             mRecycler.visible()
             mErrorContainer.hide()
         }
