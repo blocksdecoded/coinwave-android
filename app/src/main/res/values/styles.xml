@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -16,6 +16,11 @@
 
     <style name="AppTheme.TabBarTextStyle" parent="android:TextAppearance.Widget.TabWidget">
         <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="PopupMenu" parent="android:Widget.Material.PopupMenu" tools:targetApi="lollipop">
+        <item name="android:popupBackground">@color/cardview_light_background</item>
+        <item name="android:popupElevation">4dp</item>
     </style>
 
 </resources>
