@@ -35,7 +35,7 @@
                 android:paddingBottom="24dp"
                 android:paddingLeft="20dp"
                 android:text="Name"
-                android:textSize="13sp"
+                android:textSize="14sp"
                 android:textColor="@color/subtitle_text" />
 
             <com.makeuseof.cryptocurrency.view.widgets.FontTextView
@@ -50,7 +50,7 @@
                 android:gravity="center"
                 android:textColor="@color/subtitle_text"
                 android:text="Market Cap"
-                android:textSize="13sp"/>
+                android:textSize="14sp"/>
 
 
             <com.makeuseof.cryptocurrency.view.widgets.FontTextView
@@ -65,7 +65,7 @@
                 android:gravity="center"
                 android:textColor="@color/subtitle_text"
                 android:text="Volume(24h)"
-                android:textSize="13sp"/>
+                android:textSize="14sp"/>
 
             <com.makeuseof.cryptocurrency.view.widgets.FontTextView
                 android:id="@+id/adapter_currency_price"
@@ -79,7 +79,7 @@
                 android:paddingRight="20dp"
                 android:textColor="@color/subtitle_text"
                 android:text="Price(24h)"
-                android:textSize="13sp"/>
+                android:textSize="14sp"/>
 
         </LinearLayout>
 
