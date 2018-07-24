@@ -109,6 +109,9 @@ class CurrencyService(
 
                 override fun onFailure(error: NetworkError) {
                     it.resume(Result.Error(NetworkException(error.toString())))
+                    if (mCached != null){
+                        setCache(mCached!!)
+                    }
                 }
             })
         } else {
