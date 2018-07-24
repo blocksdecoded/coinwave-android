@@ -74,7 +74,9 @@ class CurrencyListFragment :
     override fun showCurrencies(currencies: List<CurrencyEntity>) {
         mSwipeRefreshLayout?.isRefreshing = false
         mRecycler.visible()
-        mAdapter?.setItems(currencies)
+        mRecycler?.post {
+            mAdapter?.setItems(currencies)
+        }
     }
 
     override fun showNetworkError() {

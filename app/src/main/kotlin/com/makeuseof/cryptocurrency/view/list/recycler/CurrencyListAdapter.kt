@@ -41,7 +41,7 @@ class CurrencyListAdapter(
     fun updateItem(currency: CurrencyEntity){
         mItems.findCurrency(currency) {
             mItems[it] = currency
-            notifyDataSetChanged()
+            notifyItemChanged(it)
         }
     }
 }

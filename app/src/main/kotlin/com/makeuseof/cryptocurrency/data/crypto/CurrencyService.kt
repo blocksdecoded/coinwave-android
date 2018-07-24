@@ -131,9 +131,9 @@ class CurrencyService(
             })
         } else {
             if (mCached != null){
-                Result.Success(Result.Success(mCached!!))
+                it.resume(Result.Success(mCached!!))
             } else {
-                Result.Error(EmptyCache("Cache is empty"))
+                it.resume(Result.Error(EmptyCache("Cache is empty")))
             }
         }
     }

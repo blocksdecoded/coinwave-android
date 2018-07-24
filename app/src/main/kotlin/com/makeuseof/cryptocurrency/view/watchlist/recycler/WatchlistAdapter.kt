@@ -53,7 +53,7 @@ class WatchlistAdapter(
         findItem(currency.id) {
             if(it >= 0){
                 mItems[it] = currency
-                notifyDataSetChanged()
+                notifyItemChanged(it)
             } else {
                 mItems.addSortedByRank(currency)
                 notifyDataSetChanged()

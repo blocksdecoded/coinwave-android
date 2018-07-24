@@ -38,7 +38,7 @@
                 android:layout_height="16dp"
                 app:layout_constraintLeft_toLeftOf="@id/adapter_currency_symbol"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="12dp"/>
+                android:layout_marginTop="30dp"/>
 
             <com.makeuseof.cryptocurrency.view.widgets.FontTextView
                 android:id="@+id/adapter_currency_symbol"
@@ -48,9 +48,9 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/adapter_currency_icon"
-                android:layout_marginBottom="12dp"
+                android:layout_marginBottom="30dp"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="8dp"
                 android:text="BTC"
                 android:textSize="15sp"
                 android:textColor="@color/default_text"
@@ -74,7 +74,9 @@
             android:gravity="center"
             android:layout_gravity="center"
             android:textColor="@color/default_text"
-            android:textSize="13sp"
+            android:textSize="14sp"
+            android:paddingTop="30dp"
+            android:paddingBottom="30dp"
             android:text="$165b"/>
 
         <View
@@ -94,7 +96,7 @@
             android:gravity="center"
             android:layout_gravity="center"
             android:textColor="@color/default_text"
-            android:textSize="13sp"
+            android:textSize="14sp"
             android:text="$9.8b"/>
 
         <View
@@ -132,7 +134,7 @@
                 android:gravity="right"
                 android:paddingRight="20dp"
                 app:layout_constraintVertical_chainStyle="packed"
-                android:textSize="15sp"
+                android:textSize="16sp"
                 android:text="$800.0"
                 app:ftv_typeface="medium"/>
 
@@ -146,7 +148,7 @@
                 android:gravity="right"
                 android:paddingRight="20dp"
                 android:text="+4,5%"
-                android:textSize="13sp"/>
+                android:textSize="14sp"/>
 
         </android.support.constraint.ConstraintLayout>
 

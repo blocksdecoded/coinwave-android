@@ -80,7 +80,9 @@ class WatchListFragment :
         mSwipeRefreshLayout?.isRefreshing = false
         mRecycler.visible()
         mEmptyText.hide()
-        mAdapter?.setItems(currencies)
+        mRecycler?.post {
+            mAdapter?.setItems(currencies)
+        }
     }
 
     override fun showEmpty() {

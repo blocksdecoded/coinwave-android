@@ -1,6 +1,7 @@
 package com.makeuseof.cryptocurrency.util
 
 import android.widget.ImageView
+import com.bumptech.glide.Glide
 import com.makeuseof.cryptocurrency.data.model.CurrencyEntity
 import com.squareup.picasso.Picasso
 
@@ -12,7 +13,11 @@ object ConstantSourceUtil {
 }
 
 fun ImageView.loadIcon(currencyEntity: CurrencyEntity){
-    Picasso.get()
+
+    Glide.with(this)
             .load(ConstantSourceUtil.getIconUrl(currencyEntity))
             .into(this)
+//    Picasso.get()
+//            .load(ConstantSourceUtil.getIconUrl(currencyEntity))
+//            .into(this)
 }

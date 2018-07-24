@@ -19,15 +19,15 @@ class CurrencyListPresenter(
     private var mCachedData = arrayListOf<CurrencyEntity>()
 
     private val mCurrenciesObserver = object: CurrencyUpdateObserver {
-        override fun onAdded(currencyEntity: CurrencyEntity) {
+        override fun onAdded(currencyEntity: CurrencyEntity) = launchSilent(uiContext){
             mView?.updateCurrency(updateCurrency(currencyEntity), currencyEntity)
         }
 
-        override fun onUpdated(currencies: List<CurrencyEntity>) {
+        override fun onUpdated(currencies: List<CurrencyEntity>) = launchSilent(uiContext){
             updateCache(currencies)
         }
 
-        override fun onRemoved(currencyEntity: CurrencyEntity) {
+        override fun onRemoved(currencyEntity: CurrencyEntity) = launchSilent(uiContext){
             mView?.updateCurrency(updateCurrency(currencyEntity), currencyEntity)
         }
     }
@@ -58,7 +58,7 @@ class CurrencyListPresenter(
         val result = mCurrencyListUseCases.getCryptoList(true)
         when(result){
             is Result.Success -> {
-                updateCache(result.data)
+//                updateCache(result.data)
             }
 
             is Result.Error -> {

@@ -12,7 +12,7 @@ class CurrencyListInteractor(
         private val appExecutors: AppExecutors,
         private val mCryptoService: CurrencySourceContract
 ): CurrencyListUseCases {
-    override suspend fun getCryptoList(skipCache: Boolean): Result<List<CurrencyEntity>> = withContext(appExecutors.networkContext) {
+    override suspend fun getCryptoList(skipCache: Boolean): Result<List<CurrencyEntity>> = withContext(appExecutors.ioContext) {
         val result = mCryptoService.getAllCurrencies(skipCache)
         when(result){
             is Result.Success -> {
