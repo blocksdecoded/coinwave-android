@@ -62,7 +62,7 @@ class CurrencyListPresenter(
             }
 
             is Result.Error -> {
-                mView?.showNetworkError()
+                mView?.showNetworkError(mCachedData.isEmpty())
             }
         }
     }

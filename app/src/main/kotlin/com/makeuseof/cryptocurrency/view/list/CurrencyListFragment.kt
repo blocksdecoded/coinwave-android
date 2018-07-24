@@ -15,6 +15,7 @@ import com.makeuseof.cryptocurrency.view.list.recycler.CurrencyListAdapter
 import com.makeuseof.cryptocurrency.view.list.recycler.CurrencyListViewHolder
 import com.makeuseof.utils.hide
 import com.makeuseof.utils.inflate
+import com.makeuseof.utils.showShortToast
 import com.makeuseof.utils.visible
 
 class CurrencyListFragment :
@@ -26,6 +27,9 @@ class CurrencyListFragment :
     private var mRecycler: RecyclerView? = null
     private var mAdapter: CurrencyListAdapter? = null
     private var mSwipeRefreshLayout: SwipeRefreshLayout? = null
+
+    private var mErrorContainer: View? = null
+    private var mRetry: View? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = container.inflate(R.layout.fragment_currency_list)
@@ -39,6 +43,13 @@ class CurrencyListFragment :
         mAdapter = CurrencyListAdapter(arrayListOf(), this)
         mRecycler = rootView?.findViewById(R.id.fragment_currency_list_recycler)
         mSwipeRefreshLayout = rootView?.findViewById(R.id.fragment_currency_list_refresh)
+
+        mErrorContainer = rootView?.findViewById(R.id.fragment_currency_list_error)
+        mRetry = rootView?.findViewById(R.id.connection_error_retry)
+
+        mRetry?.setOnClickListener {
+            mPresenter?.getCurrencyList()
+        }
 
         mSwipeRefreshLayout?.setOnRefreshListener {
             mPresenter?.getCurrencyList()
@@ -74,18 +85,27 @@ class CurrencyListFragment :
     override fun showCurrencies(currencies: List<CurrencyEntity>) {
         mSwipeRefreshLayout?.isRefreshing = false
         mRecycler.visible()
+        mErrorContainer.hide()
         mRecycler?.post {
             mAdapter?.setItems(currencies)
         }
     }
 
-    override fun showNetworkError() {
-
+    override fun showNetworkError(hideList: Boolean) {
+        mSwipeRefreshLayout?.isRefreshing = false
+        if(hideList){
+            mRecycler.hide()
+            mErrorContainer.visible()
+        } else {
+            showShortToast(context, "Couldn't refresh currencies.\nPlease check internet connection and try again.")
+            mRecycler.visible()
+            mErrorContainer.hide()
+        }
     }
 
     override fun showLoading() {
         mSwipeRefreshLayout?.isRefreshing = true
-        mRecycler.hide()
+        mErrorContainer.hide()
     }
 
     //endregion

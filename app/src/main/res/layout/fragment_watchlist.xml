@@ -90,6 +90,10 @@
 
         </LinearLayout>
 
+        <include
+            android:id="@+id/fragment_watchlist_error"
+            layout="@layout/connection_error"/>
+
     </android.support.constraint.ConstraintLayout>
 
 </android.support.v4.widget.SwipeRefreshLayout>

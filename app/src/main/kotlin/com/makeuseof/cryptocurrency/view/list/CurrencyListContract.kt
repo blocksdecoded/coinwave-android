@@ -12,7 +12,7 @@ interface CurrencyListContract {
 
         fun deleteCurrency(position: Int)
 
-        fun showNetworkError()
+        fun showNetworkError(hideList: Boolean)
 
         fun showLoading()
     }

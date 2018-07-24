@@ -2,6 +2,7 @@ package com.makeuseof.cryptocurrency.view.watchlist
 
 import com.makeuseof.core.model.Result
 import com.makeuseof.core.mvp.BaseMVPPresenter
+import com.makeuseof.cryptocurrency.data.NetworkException
 import com.makeuseof.cryptocurrency.data.crypto.CurrencyUpdateObserver
 import com.makeuseof.cryptocurrency.data.model.CurrencyEntity
 import com.makeuseof.cryptocurrency.domain.usecases.list.CurrencyListUseCases
@@ -64,16 +65,20 @@ class WatchListPresenter(
                 mCachedData.removeAt(it)
             }
 
-    private fun getCurrencies() = launchSilent(uiContext){
+    private fun getCurrencies(skipCache: Boolean) = launchSilent(uiContext){
         mView?.showLoading()
-        val result = mCurrencyListUseCases.getCryptoList(false)
+        val result = mCurrencyListUseCases.getCryptoList(skipCache)
         when(result){
             is Result.Success -> {
                 setCache(result.data)
             }
 
             is Result.Error -> {
-                mView?.showNetworkError()
+                when(result.exception){
+                    is NetworkException -> {
+                        mView?.showNetworkError(mCachedData.isEmpty())
+                    }
+                }
             }
         }
     }
@@ -95,11 +100,11 @@ class WatchListPresenter(
     override fun onResume() {
         super.onResume()
         mCurrencyListUseCases.addObserver(mCurrenciesObserver)
-        getCurrencies()
+        getCurrencies(false)
     }
 
     override fun getCurrencyList() {
-        getCurrencies()
+        getCurrencies(true)
     }
 
     override fun onCurrencyPick(position: Int) {
