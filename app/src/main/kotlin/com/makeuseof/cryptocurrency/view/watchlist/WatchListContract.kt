@@ -14,6 +14,8 @@ interface WatchListContract {
 
         fun showNetworkError(hideList: Boolean)
 
+        fun openCurrencyScreen(id: Int)
+
         fun showDeleteConfirm(currencyEntity: CurrencyEntity, position: Int)
 
         fun showEmpty()

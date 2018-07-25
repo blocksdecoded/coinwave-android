@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import com.makeuseof.core.mvp.BaseMVPFragment
 import com.makeuseof.cryptocurrency.R
 import com.makeuseof.cryptocurrency.data.model.CurrencyEntity
+import com.makeuseof.cryptocurrency.view.currency.CurrencyActivity
 import com.makeuseof.cryptocurrency.view.watchlist.recycler.WatchlistAdapter
 import com.makeuseof.cryptocurrency.view.watchlist.recycler.WatchlistViewHolder
 import com.makeuseof.cryptocurrency.view.widgets.ActionConfirmDialog
@@ -83,6 +84,12 @@ class WatchListFragment :
     //endregion
 
     //region Contract
+
+    override fun openCurrencyScreen(id: Int) {
+        activity?.let {
+            CurrencyActivity.start(it, id)
+        }
+    }
 
     override fun showDeleteConfirm(currencyEntity: CurrencyEntity, position: Int) {
         activity?.let {
