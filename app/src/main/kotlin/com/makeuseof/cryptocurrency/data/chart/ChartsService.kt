@@ -8,6 +8,7 @@ import com.makeuseof.cryptocurrency.data.NetworkException
 import com.makeuseof.cryptocurrency.data.chart.network.ChartsConfig
 import com.makeuseof.cryptocurrency.data.chart.network.ChartsNetworkClient
 import com.makeuseof.cryptocurrency.data.model.ChartData
+import com.makeuseof.utils.Lg
 import kotlin.coroutines.experimental.suspendCoroutine
 
 // Created by askar on 7/25/18.
@@ -36,6 +37,7 @@ class ChartsService: ChartsSourceContract{
             }
 
             override fun onFailure(error: NetworkError) {
+                Lg.d(error.toString())
                 it.resume(Result.Error(NetworkException(error.toString())))
             }
         })

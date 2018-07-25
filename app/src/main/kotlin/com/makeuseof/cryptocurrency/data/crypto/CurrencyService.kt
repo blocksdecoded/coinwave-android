@@ -74,7 +74,7 @@ class CurrencyService(
     //region Contract
 
     override fun getCurrency(id: Int): CurrencyEntity? {
-        return mCached?.currencies?.get(id)
+        return mCached?.currencies?.first { it.id == id }
     }
 
     override fun addCurrencyObserver(observer: CurrencyUpdateObserver) {

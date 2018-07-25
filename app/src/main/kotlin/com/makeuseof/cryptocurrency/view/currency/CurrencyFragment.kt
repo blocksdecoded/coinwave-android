@@ -13,6 +13,9 @@ import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.makeuseof.core.mvp.BaseMVPFragment
 import com.makeuseof.cryptocurrency.R
+import com.makeuseof.cryptocurrency.data.model.ChartData
+import com.makeuseof.cryptocurrency.data.model.CurrencyEntity
+import com.makeuseof.utils.Lg
 import com.makeuseof.utils.ResourceUtil
 import com.makeuseof.utils.inflate
 import com.makeuseof.utils.showShortToast
@@ -51,22 +54,24 @@ class CurrencyFragment :
         mChart?.axisRight?.isEnabled = false
         mChart?.xAxis?.isEnabled = false
         mChart?.setOnChartValueSelectedListener(this)
-
-        showData(listOf(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,33,44))
     }
 
-    private fun showData(data: List<Int>){
+    private fun showData(data: ChartData){
         val entries = arrayListOf<Entry>()
 
-        data.forEach {
-            entries.add(Entry(it.toFloat(), it.toFloat()))
+        data.usdChart.forEach {
+            try {
+                entries.add(Entry(it[0].toFloat(), it[1].toFloat()))
+            } catch (e: Exception) {
+                Lg.d(e.message)
+            }
         }
 
         val dataSet = LineDataSet(entries, "")
         dataSet.setDrawCircleHole(false)
         dataSet.setDrawCircles(false)
         dataSet.setDrawFilled(true)
-        dataSet.lineWidth = 1f
+        dataSet.lineWidth = 1.2f
         dataSet.setDrawValues(false)
 
         context?.let {
@@ -86,6 +91,19 @@ class CurrencyFragment :
 
     override fun onValueSelected(e: Entry?, h: Highlight?) {
         showShortToast(context, e.toString())
+    }
+
+    //endregion
+
+    //region Contract
+    override fun showChartData(chartData: ChartData) {
+        showData(chartData)
+    }
+
+    override fun showCurrencyData(currencyEntity: CurrencyEntity) {
+    }
+
+    override fun showChartLoading() {
     }
 
     //endregion

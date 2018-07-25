@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.makeuseof.core.SwipeableActivity
+import com.makeuseof.core.network.NetworkErrorHandler
+import com.makeuseof.cryptocurrency.domain.UseCaseProvider
 
 // Created by askar on 7/24/18.
 class CurrencyActivity: SwipeableActivity() {
@@ -30,6 +32,7 @@ class CurrencyActivity: SwipeableActivity() {
     @SuppressLint("CommitTransaction")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        NetworkErrorHandler.getInstance(applicationContext)
 
         if (savedInstanceState == null) {
             val fragment = CurrencyFragment()
@@ -40,8 +43,11 @@ class CurrencyActivity: SwipeableActivity() {
                     .commit()
 
             mPresenter = CurrencyPresenter(
-                    fragment
+                    fragment,
+                    UseCaseProvider.getChartsInteractor(this)
             )
+
+            mPresenter?.fetchCurrencyData(getIdFromIntent(intent))
         }
     }
 }
