@@ -43,6 +43,11 @@ class WatchListFragment :
         return rootView
     }
 
+    override fun onPause() {
+        super.onPause()
+        mActiveDialog?.dismiss()
+    }
+
     private fun initView(rootView: View?) {
         mAdapter = WatchlistAdapter(arrayListOf(), this)
         mRecycler = rootView?.findViewById(R.id.fragment_watchlist_recycler)
