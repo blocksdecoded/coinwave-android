@@ -12,6 +12,8 @@ interface CurrencyListContract {
 
         fun deleteCurrency(position: Int)
 
+        fun showDeleteConfirm(currencyEntity: CurrencyEntity, position: Int)
+
         fun showNetworkError(hideList: Boolean)
 
         fun showLoading()
@@ -21,6 +23,8 @@ interface CurrencyListContract {
         fun onCurrencyPick(position: Int)
 
         fun onCurrencyClick(position: Int)
+
+        fun deleteCurrency(position: Int)
 
         fun getCurrencyList()
     }

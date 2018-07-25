@@ -1,5 +1,6 @@
 package com.makeuseof.cryptocurrency.view.watchlist
 
+import android.app.Dialog
 import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
@@ -7,12 +8,12 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
 import com.makeuseof.core.mvp.BaseMVPFragment
 import com.makeuseof.cryptocurrency.R
 import com.makeuseof.cryptocurrency.data.model.CurrencyEntity
 import com.makeuseof.cryptocurrency.view.watchlist.recycler.WatchlistAdapter
 import com.makeuseof.cryptocurrency.view.watchlist.recycler.WatchlistViewHolder
+import com.makeuseof.cryptocurrency.view.widgets.ActionConfirmDialog
 import com.makeuseof.utils.hide
 import com.makeuseof.utils.inflate
 import com.makeuseof.utils.showShortToast
@@ -31,6 +32,8 @@ class WatchListFragment :
 
     private var mErrorContainer: View? = null
     private var mRetry: View? = null
+
+    private var mActiveDialog: Dialog? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = container.inflate(R.layout.fragment_watchlist)
@@ -75,6 +78,21 @@ class WatchListFragment :
     //endregion
 
     //region Contract
+
+    override fun showDeleteConfirm(currencyEntity: CurrencyEntity, position: Int) {
+        activity?.let {
+            mActiveDialog = ActionConfirmDialog(it)
+                    .setCancelListener { it.dismiss() }
+                    .setTitle("Remove ${currencyEntity.name} from Watchlist?")
+                    .setConfirmText("Remove")
+                    .setConfirmListener {
+                        it.dismiss()
+                        mPresenter?.deleteCurrency(position)
+                    }.setDismissListener {
+                        mActiveDialog = null
+                    }.showDialog()
+        }
+    }
 
     override fun updateCurrency(position: Int, currencyEntity: CurrencyEntity) {
         mRecycler.visible()

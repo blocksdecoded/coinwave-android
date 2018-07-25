@@ -14,6 +14,8 @@ interface WatchListContract {
 
         fun showNetworkError(hideList: Boolean)
 
+        fun showDeleteConfirm(currencyEntity: CurrencyEntity, position: Int)
+
         fun showEmpty()
 
         fun showLoading()
@@ -23,6 +25,8 @@ interface WatchListContract {
         fun onCurrencyPick(position: Int)
 
         fun onCurrencyClick(position: Int)
+
+        fun deleteCurrency(position: Int)
 
         fun getCurrencyList()
     }
