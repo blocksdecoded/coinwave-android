@@ -18,6 +18,12 @@ class CurrencyPresenter(
 ) : BaseMVPPresenter<CurrencyContract.View>(view), CurrencyContract.Presenter {
     private var mCached: CurrencyEntity? = null
 
+    override fun onGoToWebsiteClick() {
+        mCached?.let {
+            mView?.openSite("https://www.${it.websiteSlug}.org")
+        }
+    }
+
     override fun attachView(view: CurrencyContract.View) {
         mView = view
         injectSelfToView()

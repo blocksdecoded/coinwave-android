@@ -1,10 +1,10 @@
 package com.makeuseof.cryptocurrency.view.currency
 
+import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
-import android.support.design.widget.TabLayout
+import android.support.customtabs.CustomTabsIntent
 import android.support.v4.content.ContextCompat
-import android.support.v4.widget.NestedScrollView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -57,6 +57,7 @@ class CurrencyFragment :
     private var mProgress: View? = null
     private var mChartPeriods: OptionSelectorView? = null
     private var mScrollEnabled = true
+    private var mGoToWeb: ImageView? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = container.inflate(R.layout.fragment_currency_info)
@@ -69,6 +70,9 @@ class CurrencyFragment :
     private fun initView(rootView: View?){
         mChartPeriods = rootView?.findViewById(R.id.currency_chart_period)
         mChartPeriods?.addClickListener { mPresenter?.onPeriodChanged(it) }
+
+        mGoToWeb = rootView?.findViewById(R.id.currency_graph_icon)
+        mGoToWeb?.setOnClickListener { mPresenter?.onGoToWebsiteClick() }
 
         mBack = rootView?.findViewById(R.id.back)
         mWatchlist = rootView?.findViewById(R.id.fragment_currency_add_to_watchlist)
@@ -221,6 +225,16 @@ class CurrencyFragment :
     //endregion
 
     //region Contract
+
+    override fun openSite(url: String) {
+        activity?.let {
+            CustomTabsIntent
+                    .Builder()
+                    .setToolbarColor(Color.WHITE)
+                    .build()
+                    .launchUrl(it, Uri.parse(url))
+        }
+    }
 
     override fun setWatched(watched: Boolean) {
         setWatchedIcon(watched)

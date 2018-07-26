@@ -47,7 +47,7 @@ class ChartsInteractor(
             val currency = mCryptoService.getCurrency(currencyId)
             if(currency != null){
                 val times = getTimesForPeriod(period)
-                val result = mChartsService.getChart(currency.name.toLowerCase(), times.first, times.second)
+                val result = mChartsService.getChart(currency.websiteSlug, times.first, times.second)
                 when(result){
                     is Result.Success -> {
                         cachedChart[period.toString()] = result.data

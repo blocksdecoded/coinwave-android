@@ -13,6 +13,8 @@ interface CurrencyContract {
 
         fun setWatched(watched: Boolean)
 
+        fun openSite(url: String)
+
         fun showChartLoading()
     }
 
@@ -20,6 +22,8 @@ interface CurrencyContract {
         fun fetchCurrencyData(id: Int)
 
         fun onPeriodChanged(position: Int)
+
+        fun onGoToWebsiteClick()
 
         fun onWatchingClick()
     }

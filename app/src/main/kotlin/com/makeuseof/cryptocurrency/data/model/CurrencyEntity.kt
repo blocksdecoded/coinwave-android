@@ -7,6 +7,7 @@ data class CurrencyEntity(
         @SerializedName("id") val id: Int,
         @SerializedName("name") val name: String,
         @SerializedName("symbol") val symbol: String,
+        @SerializedName("website_slug") val websiteSlug: String,
         @SerializedName("rank") val rank: Int,
         @SerializedName("total_supply") val totalSupply: Float,
         @SerializedName("circulating_supply") val circulatingSupply: Float,

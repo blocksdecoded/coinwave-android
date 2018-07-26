@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.main.MainActivity"
-    android:background="@color/white">
+    android:background="@drawable/main_bg">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -30,5 +30,46 @@
         app:layout_constraintTop_toBottomOf="@+id/main_tab_layout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+    <ImageView
+        android:id="@+id/currency_graph_icon"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:src="@drawable/graph"
+        android:scaleType="centerCrop"
+        android:layout_gravity="bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:visibility="gone"/>
+    <ImageView
+        android:id="@+id/currency_go_to_site"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/currency_graph_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/currency_graph_icon"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/gradient_circle"
+        android:padding="12dp"
+        android:src="@drawable/ic_add"
+        android:visibility="gone"/>
+    <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@+id/currency_go_to_site"
+        app:layout_constraintRight_toRightOf="@+id/currency_go_to_site"
+        app:layout_constraintTop_toBottomOf="@+id/currency_go_to_site"
+        android:paddingLeft="4dp"
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="bottom|center"
+        android:text="ADD COIN"
+        android:textColor="@color/accent_text"
+        android:textSize="12sp"
+        android:letterSpacing="0.15"
+        app:ftv_typeface="semibold"
+        android:visibility="gone"/>
 
 </android.support.design.widget.CoordinatorLayout>
