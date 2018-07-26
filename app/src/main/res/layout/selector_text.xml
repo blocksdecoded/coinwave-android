@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.makeuseof.cryptocurrency.view.widgets.FontTextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center"
+    android:text="first"
+    android:textColor="@color/light_text"
+    android:textSize="14sp"
+    android:layout_weight="1.0"
+    android:textAllCaps="false"
+    android:focusableInTouchMode="true"
+    android:background="?selectableItemBackground"/>

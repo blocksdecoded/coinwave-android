@@ -12,4 +12,12 @@
             <enum name="black" value="7"/>
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="OptionSelectorView">
+        <attr name="osv_options" format="string"/>
+        <attr name="selectedNumBackground" format="integer"/>
+        <attr name="defaultNumBackground" format="integer"/>
+        <attr name="selectedTextColor" format="integer"/>
+        <attr name="defaultTextColor" format="integer"/>
+    </declare-styleable>
 </resources>

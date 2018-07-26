@@ -1,6 +1,7 @@
 package com.makeuseof.cryptocurrency.view.currency
 
 import android.os.Bundle
+import android.support.design.widget.TabLayout
 import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
@@ -20,8 +21,8 @@ import com.makeuseof.cryptocurrency.data.model.CurrencyEntity
 import com.makeuseof.cryptocurrency.util.format
 import com.makeuseof.cryptocurrency.util.loadIcon
 import com.makeuseof.cryptocurrency.util.setChangedPercent
+import com.makeuseof.cryptocurrency.view.widgets.OptionSelectorView
 import com.makeuseof.utils.*
-import java.util.*
 
 class CurrencyFragment :
         BaseMVPFragment<CurrencyContract.Presenter>(),
@@ -44,6 +45,8 @@ class CurrencyFragment :
     private var mChange1d: TextView? = null
     private var mChange1w: TextView? = null
 
+    private var mChartPeriods: OptionSelectorView? = null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = container.inflate(R.layout.fragment_currency_info)
 
@@ -53,6 +56,9 @@ class CurrencyFragment :
     }
 
     private fun initView(rootView: View?){
+        mChartPeriods = rootView?.findViewById(R.id.currency_chart_period)
+        mChartPeriods?.addClickListener { mPresenter?.onPeriodChanged(it) }
+
         mBack = rootView?.findViewById(R.id.back)
         mWatchlist = rootView?.findViewById(R.id.fragment_currency_add_to_watchlist)
         mIcon = rootView?.findViewById(R.id.fragment_currency_info_icon)
@@ -171,17 +177,7 @@ class CurrencyFragment :
     }
 
     override fun showChartData(chartData: ChartData) {
-        data = chartData
         showData(chartData)
-        Timer().scheduleAtFixedRate(task, 4000, 4000)
-    }
-    private var data: ChartData? = null
-    private var task = object: TimerTask(){
-        override fun run() {
-            runOnUi {
-                data?.let { showData(it) }
-            }
-        }
     }
 
     override fun showCurrencyData(currencyEntity: CurrencyEntity) {

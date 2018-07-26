@@ -28,8 +28,12 @@ class ChartsService: ChartsSourceContract{
         }
     }
 
-    override suspend fun getChart(chartName: String): Result<ChartData> = suspendCoroutine {
-        val call = mClient.getChart(chartName)
+    override suspend fun getChart(chartName: String, fromTime: Long, toTime: Long): Result<ChartData> = suspendCoroutine {
+        val call = if(fromTime == 0L){
+            mClient.getChartForTime(chartName, fromTime, toTime)
+        } else {
+            mClient.getAllChartData(chartName)
+        }
 
         call.enqueue(object : RHWithErrorHandler<ChartData> {
             override fun onSuccess(result: ChartData) {

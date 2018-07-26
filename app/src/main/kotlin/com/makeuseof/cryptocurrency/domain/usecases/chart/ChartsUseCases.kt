@@ -14,5 +14,5 @@ interface ChartsUseCases {
         YEAR,
         ALL
     }
-    suspend fun getChartData(currencyId: Int, period: ChartPeriod = ChartPeriod.ALL): Result<ChartData>
+    suspend fun getChartData(currencyId: Int, period: ChartPeriod = ChartPeriod.TODAY): Result<ChartData>
 }

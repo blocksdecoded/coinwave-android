@@ -7,6 +7,14 @@ import retrofit2.http.Path
 
 // Created by askar on 7/19/18.
 interface ChartsNetworkClient {
+
     @GET("${ChartsConfig.CURRENCIES}/{currency}")
-    fun getChart(@Path("currency") currency: String): Call<ChartData>
+    fun getAllChartData(@Path("currency") currency: String): Call<ChartData>
+
+    @GET("${ChartsConfig.CURRENCIES}/{currency}/{fromTime}/{toTime}")
+    fun getChartForTime(
+            @Path("currency") currency: String,
+            @Path("fromTime") fromTime: Long,
+            @Path("toTime") toTime: Long
+    ): Call<ChartData>
 }
