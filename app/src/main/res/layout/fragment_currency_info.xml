@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white">
+    android:background="@drawable/main_bg">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -14,14 +14,15 @@
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="16dp">
+            android:layout_height="60dp">
 
             <ImageView
                 android:id="@+id/back"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 android:background="?selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_left_arrow"
                 android:layout_marginLeft="12dp"
@@ -56,6 +57,8 @@
                 android:layout_height="40dp"
                 android:src="@drawable/ic_star_border"
                 app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginRight="12dp"
                 android:padding="6dp"
                 android:background="?selectableItemBackgroundBorderless"/>
@@ -63,17 +66,18 @@
         </android.support.constraint.ConstraintLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.widget.NestedScrollView
+    <ScrollView
         android:id="@+id/currency_scroll_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:isScrollContainer="true">
+        android:overScrollMode="never"
+        android:scrollbars="none">
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingBottom="50dp">
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp">
 
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/fragment_currency_chart"
@@ -299,7 +303,44 @@
                 app:layout_constraintTop_toBottomOf="@+id/currency_change_1w_title"
                 android:background="@color/light_grey"/>
 
+            <ImageView
+                android:id="@+id/currency_graph_icon"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:src="@drawable/graph"
+                android:scaleType="centerCrop"
+                android:layout_gravity="bottom"
+                app:layout_constraintTop_toBottomOf="@+id/currency_change_1w"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:paddingTop="30dp"/>
+            <ImageView
+                android:id="@+id/currency_go_to_site"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/currency_graph_icon"
+                app:layout_constraintBottom_toBottomOf="@+id/currency_graph_icon"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/gradient_circle"
+                android:padding="14dp"
+                android:src="@drawable/ic_internet"/>
+            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="@+id/currency_go_to_site"
+                app:layout_constraintRight_toRightOf="@+id/currency_go_to_site"
+                app:layout_constraintTop_toBottomOf="@+id/currency_go_to_site"
+                android:paddingLeft="8dp"
+                android:paddingTop="4dp"
+                android:text="GO TO WEBSITE"
+                android:textColor="@color/accent_text"
+                android:textSize="12sp"
+                android:letterSpacing="0.15"
+                app:ftv_typeface="semibold"/>
         </android.support.constraint.ConstraintLayout>
-    </android.support.v4.widget.NestedScrollView>
+    </ScrollView>
 
 </android.support.design.widget.CoordinatorLayout>

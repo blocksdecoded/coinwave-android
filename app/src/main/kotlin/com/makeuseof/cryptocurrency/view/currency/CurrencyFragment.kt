@@ -39,7 +39,7 @@ class CurrencyFragment :
 
     private var mChart: LineChart? = null
 
-    private var mScrollContainer: NestedScrollView? = null
+    private var mScrollContainer: ScrollView? = null
     private var mBack: View? = null
     private var mWatchlist: ImageView? = null
     private var mIcon: ImageView? = null
