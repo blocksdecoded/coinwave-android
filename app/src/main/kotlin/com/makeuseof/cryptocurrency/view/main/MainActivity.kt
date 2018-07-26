@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
+import android.support.v4.view.ViewPager
 import android.util.TypedValue
 import android.view.Gravity
 import com.makeuseof.cryptocurrency.R
@@ -17,7 +18,7 @@ import com.makeuseof.cryptocurrency.view.watchlist.WatchListFragment
 import com.makeuseof.cryptocurrency.view.watchlist.WatchListPresenter
 import com.makeuseof.cryptocurrency.view.widgets.FontTextView
 import com.makeuseof.cryptocurrency.view.widgets.PagerAdapter
-import com.makeuseof.utils.ResourceUtil
+import com.makeuseof.utils.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -49,6 +50,10 @@ class MainActivity : AppCompatActivity() {
         fragments.add(createCurrencyListScreen())
 
         initViewPager(fragments)
+
+        main_add_container.setOnClickListener {
+            main_view_pager.currentItem = 1
+        }
     }
 
     private fun createWatchListScreen(): Fragment{
@@ -81,6 +86,21 @@ class MainActivity : AppCompatActivity() {
         val adapter = PagerAdapter(supportFragmentManager, fragments)
         main_view_pager.adapter = adapter
         main_view_pager.offscreenPageLimit = 2
+
+        main_view_pager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
+            override fun onPageScrollStateChanged(state: Int) = Unit
+
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+            }
+
+            override fun onPageSelected(position: Int) {
+                when(position){
+                    0 -> setAddVisibility(true)
+                    else -> setAddVisibility(false)
+                }
+            }
+        })
+
         main_view_pager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(main_tab_layout))
         main_tab_layout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             override fun onTabReselected(tab: TabLayout.Tab?) {
@@ -94,6 +114,16 @@ class MainActivity : AppCompatActivity() {
                 tab?.let { main_view_pager.currentItem = tab.position }
             }
         })
+    }
+
+    private fun setAddVisibility(visible: Boolean){
+        if (visible){
+            main_add_container.visible()
+            main_add_container.animate().alpha(1f).setDuration(400L).start()
+        } else {
+            main_add_container.hide()
+            main_add_container.animate().alpha(0f).setDuration(50L).start()
+        }
     }
 
     private fun getTab(title: String): TabLayout.Tab {

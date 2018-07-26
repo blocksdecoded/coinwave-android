@@ -15,10 +15,8 @@ import com.makeuseof.cryptocurrency.view.currency.CurrencyActivity
 import com.makeuseof.cryptocurrency.view.watchlist.recycler.WatchlistAdapter
 import com.makeuseof.cryptocurrency.view.watchlist.recycler.WatchlistViewHolder
 import com.makeuseof.cryptocurrency.view.widgets.ActionConfirmDialog
-import com.makeuseof.utils.hide
-import com.makeuseof.utils.inflate
-import com.makeuseof.utils.showShortToast
-import com.makeuseof.utils.visible
+import com.makeuseof.cryptocurrency.view.widgets.RecyclerItemSpaceDecoration
+import com.makeuseof.utils.*
 
 class WatchListFragment :
         BaseMVPFragment<WatchListContract.Presenter>(),
@@ -69,6 +67,10 @@ class WatchListFragment :
         val lm = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         mRecycler?.layoutManager = lm
         mRecycler?.adapter = mAdapter
+
+        context?.let {
+            mRecycler?.addItemDecoration(RecyclerItemSpaceDecoration(mBottomSpace = DimenUtils.dpToPx(it, 100)))
+        }
     }
 
     //region ViewHolder

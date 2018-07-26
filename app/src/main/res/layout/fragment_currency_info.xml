@@ -330,15 +330,15 @@
                 android:paddingTop="30dp"/>
             <ImageView
                 android:id="@+id/currency_go_to_site"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/currency_graph_icon"
                 app:layout_constraintBottom_toBottomOf="@+id/currency_graph_icon"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/gradient_circle"
-                android:padding="14dp"
+                android:padding="12dp"
                 android:src="@drawable/ic_internet"/>
             <com.makeuseof.cryptocurrency.view.widgets.FontTextView
                 android:layout_width="wrap_content"
