@@ -90,7 +90,7 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="16dp">
+            android:paddingBottom="24dp">
 
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/fragment_currency_chart"
