@@ -35,27 +35,19 @@ class ChartsInteractor(
         }
     }
 
-    private fun applyPeriod(data: ChartData, period: ChartPeriod): ChartData{
-        val date = Date(data.usdChart.last()[0].toLong())
-
-        if (period == ALL) return data
+    private fun getTimesForPeriod(period: ChartPeriod): Pair<Long, Long>{
+        if (period == ALL) return Pair(0L, 0L)
 
         val time = System.currentTimeMillis() - getChartPeriodTime(period)
-
-        Lg.d("$date - ${Date(time)}")
-
-        val result = arrayListOf<List<Double>>()
-
-        result.addAll( data.usdChart.filter { it[0] > time } )
-
-        return ChartData(result)
+        return Pair(time, System.currentTimeMillis())
     }
 
     override suspend fun getChartData(currencyId: Int, period: ChartPeriod): Result<ChartData> = withContext(appExecutors.ioContext) {
         if (cachedChart[period.toString()] == null){
             val currency = mCryptoService.getCurrency(currencyId)
             if(currency != null){
-                val result = mChartsService.getChart(currency.name.toLowerCase())
+                val times = getTimesForPeriod(period)
+                val result = mChartsService.getChart(currency.name.toLowerCase(), times.first, times.second)
                 when(result){
                     is Result.Success -> {
                         cachedChart[period.toString()] = result.data

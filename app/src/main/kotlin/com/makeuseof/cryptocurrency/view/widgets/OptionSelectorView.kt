@@ -109,7 +109,6 @@ class OptionSelectorView: LinearLayout, View.OnClickListener {
 		mListener = listener
 	}
 
-
     override fun onClick(v: View?) {
         v?.let{
             if (it is TextView){

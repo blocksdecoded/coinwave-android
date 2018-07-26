@@ -3,16 +3,22 @@ package com.makeuseof.cryptocurrency.view.currency
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.content.ContextCompat
+import android.support.v4.widget.NestedScrollView
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ScrollView
 import android.widget.TextView
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.highlight.Highlight
+import com.github.mikephil.charting.listener.ChartTouchListener
+import com.github.mikephil.charting.listener.OnChartGestureListener
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.makeuseof.core.mvp.BaseMVPFragment
 import com.makeuseof.cryptocurrency.R
@@ -27,11 +33,13 @@ import com.makeuseof.utils.*
 class CurrencyFragment :
         BaseMVPFragment<CurrencyContract.Presenter>(),
         CurrencyContract.View,
-        OnChartValueSelectedListener {
+        OnChartValueSelectedListener,
+        OnChartGestureListener {
     override var mPresenter: CurrencyContract.Presenter? = null
 
     private var mChart: LineChart? = null
 
+    private var mScrollContainer: NestedScrollView? = null
     private var mBack: View? = null
     private var mWatchlist: ImageView? = null
     private var mIcon: ImageView? = null
@@ -45,7 +53,9 @@ class CurrencyFragment :
     private var mChange1d: TextView? = null
     private var mChange1w: TextView? = null
 
+    private var mProgress: View? = null
     private var mChartPeriods: OptionSelectorView? = null
+    private var mScrollEnabled = true
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = container.inflate(R.layout.fragment_currency_info)
@@ -71,6 +81,7 @@ class CurrencyFragment :
         mChange1h = rootView?.findViewById(R.id.currency_change_1h)
         mChange1d = rootView?.findViewById(R.id.currency_change_1d)
         mChange1w = rootView?.findViewById(R.id.currency_change_1w)
+        mProgress = rootView?.findViewById(R.id.fragment_currency_progress)
 
         mBack?.setOnClickListener { finishView() }
         mWatchlist?.setOnClickListener { mPresenter?.onWatchingClick() }
@@ -78,6 +89,11 @@ class CurrencyFragment :
         mChart = rootView?.findViewById(R.id.fragment_currency_chart)
 
         initChart()
+
+        mScrollContainer = rootView?.findViewById(R.id.currency_scroll_container)
+        mScrollContainer?.setOnTouchListener { v, event ->
+            return@setOnTouchListener !mScrollEnabled
+        }
     }
 
     private fun initChart(){
@@ -92,12 +108,14 @@ class CurrencyFragment :
         mChart?.axisRight?.isEnabled = false
         mChart?.xAxis?.isEnabled = false
         mChart?.setBorderWidth(0f)
-        mChart?.setViewPortOffsets(0f,10f,0f,10f)
-        mChart?.labelFor
+        mChart?.setViewPortOffsets(0f,50f,0f,50f)
         mChart?.setOnChartValueSelectedListener(this)
+        mChart?.onChartGestureListener = this
     }
 
     private fun showData(data: ChartData){
+        mChart?.resetZoom()
+        mChart?.zoomOut()
         val entries = arrayListOf<Entry>()
 
         data.usdChart.forEach {
@@ -114,7 +132,7 @@ class CurrencyFragment :
         dataSet.setDrawCircleHole(false)
         dataSet.mode = LineDataSet.Mode.CUBIC_BEZIER
         dataSet.setDrawCircles(false)
-        dataSet.cubicIntensity = 0.2f
+        dataSet.cubicIntensity = 0.3f
         dataSet.setDrawFilled(true)
         dataSet.lineWidth = 1.2f
         dataSet.setDrawValues(false)
@@ -168,6 +186,35 @@ class CurrencyFragment :
 //        showShortToast(context, e.toString())
     }
 
+    override fun onChartGestureEnd(me: MotionEvent?, lastPerformedGesture: ChartTouchListener.ChartGesture?) {
+        Lg.d("End ")
+        mScrollEnabled = true
+    }
+
+    override fun onChartFling(me1: MotionEvent?, me2: MotionEvent?, velocityX: Float, velocityY: Float) {
+
+    }
+
+    override fun onChartSingleTapped(me: MotionEvent?) {
+    }
+
+    override fun onChartGestureStart(me: MotionEvent?, lastPerformedGesture: ChartTouchListener.ChartGesture?) {
+        Lg.d("Start ")
+        mScrollEnabled = false
+    }
+
+    override fun onChartScale(me: MotionEvent?, scaleX: Float, scaleY: Float) {
+    }
+
+    override fun onChartLongPressed(me: MotionEvent?) {
+    }
+
+    override fun onChartDoubleTapped(me: MotionEvent?) {
+    }
+
+    override fun onChartTranslate(me: MotionEvent?, dX: Float, dY: Float) {
+    }
+
     //endregion
 
     //region Contract
@@ -177,6 +224,8 @@ class CurrencyFragment :
     }
 
     override fun showChartData(chartData: ChartData) {
+        mProgress.hide()
+        mChart.visible()
         showData(chartData)
     }
 
@@ -185,7 +234,8 @@ class CurrencyFragment :
     }
 
     override fun showChartLoading() {
-
+        mProgress.visible()
+        mChart.invisible()
     }
 
     //endregion
