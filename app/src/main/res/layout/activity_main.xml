@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             app:layout_scrollFlags="scroll|enterAlways|snap"
             app:tabTextAppearance="@style/AppTheme.TabBarTextStyle"
-            app:tabTextColor="@color/subtitle_text"
+            app:tabTextColor="@color/light_text"
             app:tabSelectedTextColor="@color/light_blue" />
     </android.support.design.widget.AppBarLayout>
 

@@ -5,7 +5,9 @@ import kotlin.math.roundToInt
 
 // Created by askar on 7/20/18.
 object FormatUtil {
-    private val decimalFormat = DecimalFormat("###,###,###,###.#####")
+    private val defaultFormat = DecimalFormat("###,###,###,###,###,###,###")
+    private val decimalFormat = DecimalFormat("###,###,###,###,###,###,###.00")
+    private val smallDecimalFormat = DecimalFormat("###,###,###,###,###,###,##0.00000")
 
     fun withSuffix(count: Float): String {
         if (count < 1000) return "" + count
@@ -31,12 +33,12 @@ object FormatUtil {
 
     fun formatFloatString(float: Float): String{
         return if (cleanFloat(float) == float.roundToInt().toFloat()){
-            float.roundToInt().toString()
+            defaultFormat.format(float)
         } else {
             if(float < 10f){
-                String.format("%.5f", float)
+                smallDecimalFormat.format(float)
             } else {
-                String.format("%.2f", float)
+                decimalFormat.format(float)
             }
         }
     }

@@ -17,6 +17,7 @@ class CurrencyListPresenter(
         private val uiContext: CoroutineContext = UI
 ) : BaseMVPPresenter<CurrencyListContract.View>(view), CurrencyListContract.Presenter {
     private var mCachedData = arrayListOf<CurrencyEntity>()
+    private var mInitialized = false
 
     private val mCurrenciesObserver = object: CurrencyUpdateObserver {
         override fun onAdded(currencyEntity: CurrencyEntity) = launchSilent(uiContext){
@@ -71,6 +72,15 @@ class CurrencyListPresenter(
 
     //region Contract
 
+    override fun onResume() {
+        super.onResume()
+        mCurrencyListUseCases.addObserver(mCurrenciesObserver)
+        if (!mInitialized){
+            mInitialized = true
+            getCurrencies()
+        }
+    }
+
     override fun attachView(view: CurrencyListContract.View) {
         mView = view
         injectSelfToView()
@@ -79,12 +89,6 @@ class CurrencyListPresenter(
     override fun onDestroy() {
         super.onDestroy()
         mCurrencyListUseCases.removeObserver(mCurrenciesObserver)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        mCurrencyListUseCases.addObserver(mCurrenciesObserver)
-        getCurrencies()
     }
 
     override fun getCurrencyList() {
@@ -107,12 +111,6 @@ class CurrencyListPresenter(
     override fun onCurrencyClick(position: Int) {
         if(mCachedData.isValidIndex(position)){
             mView?.openCurrencyScreen(mCachedData[position].id)
-//            if(mCachedData[position].isSaved){
-//                mView?.showDeleteConfirm(mCachedData[position], position)
-//            } else {
-//                mView?.showMessage("${mCachedData[position].name} added to Watchlist")
-//                mCurrencyListUseCases.saveCurrency(mCachedData[position].id)
-//            }
         }
     }
 

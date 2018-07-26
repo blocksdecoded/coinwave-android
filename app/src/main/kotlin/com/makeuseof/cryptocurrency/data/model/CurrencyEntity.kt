@@ -19,6 +19,7 @@ data class CurrencyEntity(
         return "$id $symbol $name"
     }
 
+    fun getUsdQuotes(): Quote? = quotes["USD"]
     fun getMarketCap(): Float? = quotes["USD"]?.marketCap
     fun getDailyVolume(): Float? = quotes["USD"]?.dailyVolume
     fun getPrice(): Float? = quotes["USD"]?.price

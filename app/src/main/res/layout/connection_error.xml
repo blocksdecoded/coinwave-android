@@ -14,7 +14,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintVertical_bias="0.43"
         android:text="Connection Error.\nPlease check your internet and press"
-        android:textColor="@color/subtitle_text"
+        android:textColor="@color/light_text"
         android:gravity="center"/>
 
     <com.makeuseof.cryptocurrency.view.widgets.FontTextView

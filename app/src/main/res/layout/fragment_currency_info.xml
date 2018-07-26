@@ -1,14 +1,282 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white">
 
-    <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/fragment_currency_chart"
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@color/white" />
+        android:layout_height="wrap_content"
+        app:elevation="0dp"
+        android:background="@color/white">
 
-</android.support.constraint.ConstraintLayout>
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="16dp">
+
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:background="?selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_left_arrow"
+                android:layout_marginLeft="12dp"
+                android:padding="10dp"/>
+
+            <ImageView
+                android:id="@+id/fragment_currency_info_icon"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                app:layout_constraintTop_toTopOf="@+id/fragment_currency_info_name"
+                app:layout_constraintBottom_toBottomOf="@+id/fragment_currency_info_name"
+                app:layout_constraintRight_toLeftOf="@+id/fragment_currency_info_name"
+                android:src="@drawable/circle_red_bg"
+                android:layout_marginRight="8dp"/>
+
+            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+                android:id="@+id/fragment_currency_info_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:text="Bitcoin"
+                app:ftv_typeface="regular"
+                android:textColor="@color/default_text"
+                android:textSize="20sp"/>
+
+            <ImageView
+                android:id="@+id/fragment_currency_add_to_watchlist"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_star_border"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginRight="12dp"
+                android:padding="6dp"
+                android:background="?selectableItemBackgroundBorderless"/>
+
+        </android.support.constraint.ConstraintLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="50dp">
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/fragment_currency_chart"
+                android:layout_width="match_parent"
+                android:layout_height="150dp" />
+
+            <!--Price-->
+            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+                style="@style/AppTheme.FieldTitle"
+                android:id="@+id/currency_price_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_currency_chart"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:text="Price:"
+                android:textColor="@color/default_text"/>
+            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+                style="@style/AppTheme.FieldValue"
+                android:id="@+id/currency_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@+id/currency_price_title"
+                app:layout_constraintBottom_toBottomOf="@+id/currency_price_title"
+                app:layout_constraintRight_toRightOf="parent"
+                android:text="$4400"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                app:layout_constraintBottom_toTopOf="@id/currency_price_title"
+                android:background="@color/light_grey"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                app:layout_constraintTop_toBottomOf="@+id/currency_price_title"
+                android:background="@color/light_grey"/>
+
+            <!--Market cap-->
+            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+                style="@style/AppTheme.FieldTitle"
+                android:id="@+id/currency_market_cap_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/currency_price_title"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:text="Market Cap:"/>
+            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+                style="@style/AppTheme.FieldValue"
+                android:id="@+id/currency_market_cap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@+id/currency_market_cap_title"
+                app:layout_constraintBottom_toBottomOf="@+id/currency_market_cap_title"
+                app:layout_constraintRight_toRightOf="parent"
+                android:text="$4,444,444"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                app:layout_constraintTop_toBottomOf="@+id/currency_market_cap_title"
+                android:background="@color/light_grey"/>
+
+            <!--Volume 24h-->
+            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+                style="@style/AppTheme.FieldTitle"
+                android:id="@+id/currency_volume_24h_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/currency_market_cap_title"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:text="Volume 24h:"/>
+            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+                style="@style/AppTheme.FieldValue"
+                android:id="@+id/currency_volume_24h"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@+id/currency_volume_24h_title"
+                app:layout_constraintBottom_toBottomOf="@+id/currency_volume_24h_title"
+                app:layout_constraintRight_toRightOf="parent"
+                android:text="$4,444,444"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                app:layout_constraintTop_toBottomOf="@+id/currency_volume_24h_title"
+                android:background="@color/light_grey"/>
+
+            <!--Available supply-->
+            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+                style="@style/AppTheme.FieldTitle"
+                android:id="@+id/currency_available_supply_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/currency_volume_24h_title"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:text="Available Supply:"/>
+            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+                style="@style/AppTheme.FieldValue"
+                android:id="@+id/currency_available_supply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@+id/currency_available_supply_title"
+                app:layout_constraintBottom_toBottomOf="@+id/currency_available_supply_title"
+                app:layout_constraintRight_toRightOf="parent"
+                android:text="14,244,111"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                app:layout_constraintTop_toBottomOf="@+id/currency_available_supply_title"
+                android:background="@color/light_grey"/>
+
+            <!--Total supply-->
+            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+                style="@style/AppTheme.FieldTitle"
+                android:id="@+id/currency_total_supply_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/currency_available_supply_title"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:text="Total Supply:"/>
+            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+                style="@style/AppTheme.FieldValue"
+                android:id="@+id/currency_total_supply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@+id/currency_total_supply_title"
+                app:layout_constraintBottom_toBottomOf="@+id/currency_total_supply_title"
+                app:layout_constraintRight_toRightOf="parent"
+                android:text="14,244,111"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                app:layout_constraintTop_toBottomOf="@+id/currency_total_supply_title"
+                android:background="@color/light_grey"/>
+
+            <!--Change 1h-->
+            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+                style="@style/AppTheme.FieldTitle"
+                android:id="@+id/currency_change_1h_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/currency_total_supply_title"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:text="% Change 1h:"/>
+            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+                style="@style/AppTheme.FieldValue"
+                android:id="@+id/currency_change_1h"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@+id/currency_change_1h_title"
+                app:layout_constraintBottom_toBottomOf="@+id/currency_change_1h_title"
+                app:layout_constraintRight_toRightOf="parent"
+                android:text="0.74%"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                app:layout_constraintTop_toBottomOf="@+id/currency_change_1h_title"
+                android:background="@color/light_grey"/>
+
+            <!--Change 1d-->
+            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+                style="@style/AppTheme.FieldTitle"
+                android:id="@+id/currency_change_1d_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/currency_change_1h_title"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:text="% Change 1d:"/>
+            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+                style="@style/AppTheme.FieldValue"
+                android:id="@+id/currency_change_1d"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@+id/currency_change_1d_title"
+                app:layout_constraintBottom_toBottomOf="@+id/currency_change_1d_title"
+                app:layout_constraintRight_toRightOf="parent"
+                android:text="2.74%"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                app:layout_constraintTop_toBottomOf="@+id/currency_change_1d_title"
+                android:background="@color/light_grey"/>
+
+            <!--Change 1w-->
+            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+                style="@style/AppTheme.FieldTitle"
+                android:id="@+id/currency_change_1w_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/currency_change_1d_title"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:text="% Change 1w:"/>
+            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+                style="@style/AppTheme.FieldValue"
+                android:id="@+id/currency_change_1w"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@+id/currency_change_1w_title"
+                app:layout_constraintBottom_toBottomOf="@+id/currency_change_1w_title"
+                app:layout_constraintRight_toRightOf="parent"
+                android:text="2.74%"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                app:layout_constraintTop_toBottomOf="@+id/currency_change_1w_title"
+                android:background="@color/light_grey"/>
+
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

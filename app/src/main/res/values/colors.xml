@@ -12,6 +12,7 @@
     <color name="saved_bg">#f9f9f9</color>
     <color name="light_status_bar">#FFF</color>
     <color name="light_grey">#F0F0F0</color>
-    <color name="subtitle_text">#AAAEB3</color>
+
+    <color name="light_text">#AAAEB3</color>
     <color name="default_text">#393C40</color>
 </resources>

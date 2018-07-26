@@ -108,7 +108,7 @@ class MainActivity : AppCompatActivity() {
                 ),
                 intArrayOf(
                         ResourceUtil.getColor(this, R.color.light_blue),
-                        ResourceUtil.getColor(this, R.color.subtitle_text)
+                        ResourceUtil.getColor(this, R.color.light_text)
                 )
         )
 

@@ -44,7 +44,8 @@ class CurrencyActivity: SwipeableActivity() {
 
             mPresenter = CurrencyPresenter(
                     fragment,
-                    UseCaseProvider.getChartsInteractor(this)
+                    UseCaseProvider.getChartsInteractor(this),
+                    UseCaseProvider.getCurrencyListUseCases(this)
             )
 
             mPresenter?.fetchCurrencyData(getIdFromIntent(intent))
