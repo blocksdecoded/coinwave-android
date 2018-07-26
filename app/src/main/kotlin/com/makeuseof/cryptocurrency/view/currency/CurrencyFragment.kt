@@ -231,6 +231,8 @@ class CurrencyFragment :
             CustomTabsIntent
                     .Builder()
                     .setToolbarColor(Color.WHITE)
+                    .setStartAnimations(it, R.anim.slide_in_right, R.anim.slide_out_left)
+                    .setExitAnimations(it, R.anim.slide_in_left, R.anim.slide_out_right)
                     .build()
                     .launchUrl(it, Uri.parse(url))
         }

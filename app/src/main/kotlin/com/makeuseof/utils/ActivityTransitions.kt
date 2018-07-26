@@ -11,7 +11,7 @@ private const val TRANSITIONS_ENABLED = true
 
 fun Activity.inRightTransition(){
 	if (TRANSITIONS_ENABLED){
-		this.overridePendingTransition(R.anim.slide_in_right, 0)
+		this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
 	}
 }
 
@@ -28,6 +28,6 @@ fun Activity.inRightWithFinish(): Boolean{
 
 fun Activity.outRightTransition(){
 	if (TRANSITIONS_ENABLED){
-		this.overridePendingTransition(0, R.anim.slide_out_right )
+		this.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right )
 	}
 }
