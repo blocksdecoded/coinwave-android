@@ -135,7 +135,7 @@
                 app:layout_constraintVertical_chainStyle="packed"
                 android:textSize="16sp"
                 android:text="$800.0"
-                app:ftv_typeface="medium"/>
+                app:ftv_typeface="semibold"/>
 
             <com.makeuseof.cryptocurrency.view.widgets.FontTextView
                 android:id="@+id/adapter_currency_price_change"
