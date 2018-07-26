@@ -21,6 +21,7 @@ import com.makeuseof.cryptocurrency.util.format
 import com.makeuseof.cryptocurrency.util.loadIcon
 import com.makeuseof.cryptocurrency.util.setChangedPercent
 import com.makeuseof.utils.*
+import java.util.*
 
 class CurrencyFragment :
         BaseMVPFragment<CurrencyContract.Presenter>(),
@@ -66,7 +67,7 @@ class CurrencyFragment :
         mChange1w = rootView?.findViewById(R.id.currency_change_1w)
 
         mBack?.setOnClickListener { finishView() }
-        mWatchlist?.setOnClickListener { showShortToast(context, "Not implemented yet") }
+        mWatchlist?.setOnClickListener { mPresenter?.onWatchingClick() }
 
         mChart = rootView?.findViewById(R.id.fragment_currency_chart)
 
@@ -129,6 +130,7 @@ class CurrencyFragment :
         mVolume24h?.text = "$${currencyEntity.getDailyVolume()?.format()}"
         mAvailableSupply?.text = currencyEntity.circulatingSupply.format()
         mTotalSupply?.text = currencyEntity.totalSupply.format()
+
         currencyEntity.getUsdQuotes()?.hourChange?.let{
             mChange1h?.setChangedPercent(it)
         }
@@ -139,6 +141,15 @@ class CurrencyFragment :
             mChange1w?.setChangedPercent(it)
         }
 
+        setWatchedIcon(currencyEntity.isSaved)
+    }
+
+    private fun setWatchedIcon(watched: Boolean){
+        if (watched){
+            mWatchlist?.setImageResource(R.drawable.ic_star_filled)
+        } else {
+            mWatchlist?.setImageResource(R.drawable.ic_star_border)
+        }
     }
 
     //region Chart
@@ -148,14 +159,29 @@ class CurrencyFragment :
     }
 
     override fun onValueSelected(e: Entry?, h: Highlight?) {
-        showShortToast(context, e.toString())
+//        showShortToast(context, e.toString())
     }
 
     //endregion
 
     //region Contract
+
+    override fun setWatched(watched: Boolean) {
+        setWatchedIcon(watched)
+    }
+
     override fun showChartData(chartData: ChartData) {
+        data = chartData
         showData(chartData)
+        Timer().scheduleAtFixedRate(task, 4000, 4000)
+    }
+    private var data: ChartData? = null
+    private var task = object: TimerTask(){
+        override fun run() {
+            runOnUi {
+                data?.let { showData(it) }
+            }
+        }
     }
 
     override fun showCurrencyData(currencyEntity: CurrencyEntity) {

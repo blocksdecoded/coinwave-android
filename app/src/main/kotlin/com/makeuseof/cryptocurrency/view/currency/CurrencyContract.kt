@@ -11,10 +11,16 @@ interface CurrencyContract {
 
         fun showCurrencyData(currencyEntity: CurrencyEntity)
 
+        fun setWatched(watched: Boolean)
+
         fun showChartLoading()
     }
 
     interface Presenter : BaseMVPContract.Presenter<View> {
         fun fetchCurrencyData(id: Int)
+
+        fun onPeriodChanged(position: Int)
+
+        fun onWatchingClick()
     }
 }

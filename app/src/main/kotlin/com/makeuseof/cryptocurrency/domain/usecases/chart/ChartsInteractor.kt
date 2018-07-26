@@ -2,6 +2,7 @@ package com.makeuseof.cryptocurrency.domain.usecases.chart
 
 import com.makeuseof.core.model.Result
 import com.makeuseof.cryptocurrency.data.EmptyCache
+import com.makeuseof.cryptocurrency.data.NetworkException
 import com.makeuseof.cryptocurrency.data.chart.ChartsSourceContract
 import com.makeuseof.cryptocurrency.data.crypto.CurrencySourceContract
 import com.makeuseof.cryptocurrency.data.model.ChartData
@@ -15,12 +16,33 @@ class ChartsInteractor(
         private val mCryptoService: CurrencySourceContract,
         private val mChartsService: ChartsSourceContract
 ): ChartsUseCases {
+    private var cachedChart: ChartData? = null
+
+    private fun applyPeriod(data: ChartData, period: ChartPeriod): ChartData{
+        val result = arrayListOf<List<Double>>()
+        result.addAll(data.usdChart)
+        return ChartData(result)
+    }
+
     override suspend fun getChartData(currencyId: Int, period: ChartPeriod): Result<ChartData> = withContext(appExecutors.ioContext) {
-        val currency = mCryptoService.getCurrency(currencyId)
-        if(currency != null){
-            mChartsService.getChart(currency.name.toLowerCase())
+        if (cachedChart == null){
+            val currency = mCryptoService.getCurrency(currencyId)
+            if(currency != null){
+                val result = mChartsService.getChart(currency.name.toLowerCase())
+                when(result){
+                    is Result.Success -> {
+                        cachedChart = result.data
+                        Result.Success(applyPeriod(result.data, period))
+                    }
+                    else -> {
+                        Result.Error(NetworkException("Unknown error"))
+                    }
+                }
+            } else {
+                Result.Error(EmptyCache("Currency not found"))
+            }
         } else {
-            Result.Error(EmptyCache("Currency not found"))
+            Result.Success(applyPeriod(cachedChart!!, period))
         }
     }
 }
