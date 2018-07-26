@@ -19,6 +19,7 @@ import com.makeuseof.cryptocurrency.data.model.ChartData
 import com.makeuseof.cryptocurrency.data.model.CurrencyEntity
 import com.makeuseof.cryptocurrency.util.format
 import com.makeuseof.cryptocurrency.util.loadIcon
+import com.makeuseof.cryptocurrency.util.setChangedPercent
 import com.makeuseof.utils.*
 
 class CurrencyFragment :
@@ -128,9 +129,16 @@ class CurrencyFragment :
         mVolume24h?.text = "$${currencyEntity.getDailyVolume()?.format()}"
         mAvailableSupply?.text = currencyEntity.circulatingSupply.format()
         mTotalSupply?.text = currencyEntity.totalSupply.format()
-        mChange1h?.text = "${currencyEntity.getUsdQuotes()?.hourChange}%"
-        mChange1d?.text = "${currencyEntity.getUsdQuotes()?.dayChange}%"
-        mChange1w?.text = "${currencyEntity.getUsdQuotes()?.weekChange}%"
+        currencyEntity.getUsdQuotes()?.hourChange?.let{
+            mChange1h?.setChangedPercent(it)
+        }
+        currencyEntity.getUsdQuotes()?.dayChange?.let{
+            mChange1d?.setChangedPercent(it)
+        }
+        currencyEntity.getUsdQuotes()?.weekChange?.let{
+            mChange1w?.setChangedPercent(it)
+        }
+
     }
 
     //region Chart
