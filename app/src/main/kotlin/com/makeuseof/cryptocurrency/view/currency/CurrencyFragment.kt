@@ -44,6 +44,7 @@ class CurrencyFragment :
     private var mWatchlist: ImageView? = null
     private var mIcon: ImageView? = null
     private var mName: TextView? = null
+    private var mSymbol: TextView? = null
     private var mPrice: TextView? = null
     private var mMarketCap: TextView? = null
     private var mVolume24h: TextView? = null
@@ -73,6 +74,7 @@ class CurrencyFragment :
         mWatchlist = rootView?.findViewById(R.id.fragment_currency_add_to_watchlist)
         mIcon = rootView?.findViewById(R.id.fragment_currency_info_icon)
         mName = rootView?.findViewById(R.id.fragment_currency_info_name)
+        mSymbol = rootView?.findViewById(R.id.fragment_currency_info_symbol)
         mPrice = rootView?.findViewById(R.id.currency_price)
         mMarketCap = rootView?.findViewById(R.id.currency_market_cap)
         mVolume24h = rootView?.findViewById(R.id.currency_volume_24h)
@@ -149,6 +151,7 @@ class CurrencyFragment :
     private fun showCurrencyInfo(currencyEntity: CurrencyEntity){
         mIcon?.loadIcon(currencyEntity)
         mName?.text = currencyEntity.name
+        mSymbol?.text = currencyEntity.symbol
         mPrice?.text = "$${currencyEntity.getPrice()?.format()}"
         mMarketCap?.text = "$${currencyEntity.getMarketCap()?.format()}"
         mVolume24h?.text = "$${currencyEntity.getDailyVolume()?.format()}"

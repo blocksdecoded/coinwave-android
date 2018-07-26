@@ -51,6 +51,19 @@
                 android:textColor="@color/default_text"
                 android:textSize="20sp"/>
 
+            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+                android:id="@+id/fragment_currency_info_symbol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@+id/fragment_currency_info_name"
+                android:layout_marginLeft="4dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:text="BTC"
+                app:ftv_typeface="bold"
+                android:textColor="@color/default_text"
+                android:textSize="20sp"/>
+
             <ImageView
                 android:id="@+id/fragment_currency_add_to_watchlist"
                 android:layout_width="40dp"
