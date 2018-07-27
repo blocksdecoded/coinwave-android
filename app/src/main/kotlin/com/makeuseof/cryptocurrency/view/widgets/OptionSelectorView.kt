@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.makeuseof.cryptocurrency.R
+import com.makeuseof.utils.Lg
 import com.makeuseof.utils.ResourceUtil
 import com.makeuseof.utils.inflate
 
@@ -36,9 +37,6 @@ class OptionSelectorView: LinearLayout, View.OnClickListener {
 		try {
 			mSelectedTextColor = a.getInt(R.styleable.OptionSelectorView_selectedTextColor, R.color.green)
 			mDefaultTextColor = a.getInt(R.styleable.OptionSelectorView_defaultTextColor, R.color.light_text)
-			
-			mSelectedBackground = a.getInt(R.styleable.OptionSelectorView_selectedNumBackground, android.R.attr.selectableItemBackground)
-			mDefaultBackground = a.getInt(R.styleable.OptionSelectorView_defaultNumBackground, android.R.attr.selectableItemBackground)
 
             mOptions.clear()
             mOptions.addAll(a.getString(R.styleable.OptionSelectorView_osv_options).split(","))
@@ -50,13 +48,14 @@ class OptionSelectorView: LinearLayout, View.OnClickListener {
 	}
 
 	private fun inflateViews(options: ArrayList<String>){
-        removeAllViewsInLayout()
+        mNumberViews.clear()
 
         options.forEachIndexed { index, it ->
             val view = this.inflate(R.layout.selector_text) as TextView
             view.text = it
             mNumberViews[index] = view
             this.addView(view)
+
             view.setOnClickListener(this)
         }
 		
@@ -86,18 +85,18 @@ class OptionSelectorView: LinearLayout, View.OnClickListener {
 	private fun deselectAll(){
 		mNumberViews.values.forEach { setDefaultView(it) }
 	}
-	
-	private fun onViewTouch(view: View?){
-		view?.let{
-			if (it is TextView){
-				it.text?.let { text ->
+
+    private fun onViewInteract(v: View?){
+        v?.let{
+            if (it is TextView){
+                it.text?.let { text ->
                     val index = mOptions.indexOfFirst { it == text }
-					setSelectedView(index)
-					mListener?.invoke(index)
-				}
-			}
-		}
-	}
+                    setSelectedView(index)
+                    mListener?.invoke(index)
+                }
+            }
+        }
+    }
 	
 	fun setSelectedView(value: Int){
 		mNumberViews[value]?.let {
@@ -110,14 +109,7 @@ class OptionSelectorView: LinearLayout, View.OnClickListener {
 	}
 
     override fun onClick(v: View?) {
-        v?.let{
-            if (it is TextView){
-                it.text?.let { text ->
-                    val index = mOptions.indexOfFirst { it == text }
-                    setSelectedView(index)
-                    mListener?.invoke(index)
-                }
-            }
-        }
+        Lg.d("View click $v")
+        onViewInteract(v)
     }
 }

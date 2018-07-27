@@ -116,7 +116,8 @@
                 app:layout_constraintRight_toRightOf="parent"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                app:osv_options="Today,1W,1M,3M,6M,1Y,All"/>
+                app:osv_options="Today,1W,1M,3M,6M,1Y,All"
+                android:focusable="false"/>
 
             <!--Price-->
             <com.makeuseof.cryptocurrency.view.widgets.FontTextView
