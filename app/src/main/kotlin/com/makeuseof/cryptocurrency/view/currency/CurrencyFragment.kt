@@ -194,7 +194,6 @@ class CurrencyFragment :
     }
 
     override fun onChartGestureEnd(me: MotionEvent?, lastPerformedGesture: ChartTouchListener.ChartGesture?) {
-        Lg.d("End ")
         mScrollEnabled = true
     }
 
@@ -206,7 +205,6 @@ class CurrencyFragment :
     }
 
     override fun onChartGestureStart(me: MotionEvent?, lastPerformedGesture: ChartTouchListener.ChartGesture?) {
-        Lg.d("Start ")
         mScrollEnabled = false
     }
 
