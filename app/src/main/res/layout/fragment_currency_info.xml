@@ -26,7 +26,7 @@
                 android:background="?selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_left_arrow"
                 android:layout_marginLeft="12dp"
-                android:padding="10dp"/>
+                android:padding="13dp"/>
 
             <ImageView
                 android:id="@+id/fragment_currency_info_icon"
@@ -75,7 +75,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginRight="12dp"
-                android:padding="6dp"
+                android:padding="9dp"
                 android:background="?selectableItemBackgroundBorderless"/>
 
         </android.support.constraint.ConstraintLayout>
