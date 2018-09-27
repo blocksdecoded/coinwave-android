@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/main_bg">
+    android:background="@drawable/bg_main">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:elevation="0dp"
-        android:background="@color/white">
+        android:background="@color/dark_gradient_start">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -48,7 +48,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:text="Bitcoin"
                 app:ftv_typeface="regular"
-                android:textColor="@color/default_text"
+                android:textColor="@color/white"
+                android:alpha="0.8"
                 android:textSize="20sp"/>
 
             <com.makeuseof.cryptocurrency.view.widgets.FontTextView
@@ -61,7 +62,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:text="BTC"
                 app:ftv_typeface="bold"
-                android:textColor="@color/default_text"
+                android:textColor="@color/white"
+                android:alpha="0.8"
                 android:textSize="20sp"/>
 
             <ImageView
@@ -127,8 +129,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/currency_chart_period"
                 app:layout_constraintLeft_toLeftOf="parent"
-                android:text="Price:"
-                android:textColor="@color/default_text"/>
+                android:text="Price:" />
             <com.makeuseof.cryptocurrency.view.widgets.FontTextView
                 style="@style/AppTheme.FieldValue"
                 android:id="@+id/currency_price"
@@ -320,7 +321,7 @@
             <ImageView
                 android:id="@+id/currency_graph_icon"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="120dp"
                 android:src="@drawable/graph"
                 android:scaleType="centerCrop"
                 android:layout_gravity="bottom"
@@ -328,7 +329,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                android:paddingTop="30dp"/>
+                android:paddingTop="50dp"/>
             <ImageView
                 android:id="@+id/currency_go_to_site"
                 android:layout_width="40dp"

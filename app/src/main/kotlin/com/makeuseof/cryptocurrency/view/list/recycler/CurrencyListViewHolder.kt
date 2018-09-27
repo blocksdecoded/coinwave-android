@@ -33,10 +33,11 @@ class CurrencyListViewHolder(
 
     fun onBind(currency: CurrencyEntity){
         if (currency.isSaved){
-            itemView.setBackgroundResource(R.color.saved_bg)
+            itemView.setBackgroundResource(R.color.dark_saved_bg)
         } else {
-            itemView.setBackgroundResource(R.color.white)
+            itemView.background = null
         }
+
         mSymbol.text = "${currency.symbol}"
         mMarketCap.text = "$${FormatUtil.withSuffix(currency.getMarketCap()!!)}"
         mVolume.text = "$${FormatUtil.withSuffix(currency.getDailyVolume()!!)}"

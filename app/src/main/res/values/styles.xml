@@ -5,7 +5,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/white</item>
     </style>
 
 
@@ -19,7 +19,7 @@
     </style>
 
     <style name="PopupMenu" parent="android:Widget.Material.PopupMenu" tools:targetApi="lollipop">
-        <item name="android:popupBackground">@color/cardview_light_background</item>
+        <item name="android:popupBackground">@color/cardview_dark_background</item>
         <item name="android:popupElevation">4dp</item>
     </style>
 
@@ -27,6 +27,8 @@
         <item name="android:layout_marginLeft">20dp</item>
         <item name="android:paddingTop">12dp</item>
         <item name="android:paddingBottom">12dp</item>
+        <item name="android:textColor">#FFF</item>
+        <item name="android:alpha">0.8</item>
     </style>
 
     <style name="AppTheme.FieldValue">

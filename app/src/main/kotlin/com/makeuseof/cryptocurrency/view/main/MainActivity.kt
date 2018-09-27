@@ -137,7 +137,7 @@ class MainActivity : AppCompatActivity() {
                         intArrayOf(android.R.attr.state_selected), intArrayOf()
                 ),
                 intArrayOf(
-                        ResourceUtil.getColor(this, R.color.light_blue),
+                        ResourceUtil.getColor(this, R.color.white),
                         ResourceUtil.getColor(this, R.color.light_text)
                 )
         )

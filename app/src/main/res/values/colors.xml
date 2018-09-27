@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#F0F0F0</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#28343c</color>
+    <color name="colorPrimaryDark">#28343c</color>
     <color name="colorAccent">#04A9F5</color>
 
     <color name="accent_text">#1dc7e7</color>
@@ -12,9 +12,14 @@
     <color name="white">#FFF</color>
     <color name="white_transparent">#30FFFFFF</color>
     <color name="saved_bg">#f9f9f9</color>
-    <color name="light_status_bar">#FFF</color>
-    <color name="light_grey">#F0F0F0</color>
+    <color name="dark_saved_bg">#19252d</color>
+
+    <!--<color name="light_status_bar">#FFF</color>-->
+    <color name="light_grey">#50F0F0F0</color>
+
+    <color name="dark_gradient_start">#28343c</color>
+    <color name="dark_gradient_end">#0e1216</color>
 
     <color name="light_text">#AAAEB3</color>
-    <color name="default_text">#393C40</color>
+    <color name="default_text">#FFF</color>
 </resources>

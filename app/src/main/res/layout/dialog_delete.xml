@@ -5,7 +5,8 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="8dp">
+    app:cardCornerRadius="8dp"
+    app:cardBackgroundColor="@color/dark_gradient_start">
     <android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
@@ -28,7 +29,8 @@
             android:paddingLeft="48dp"
             android:textSize="15sp"
             android:text="Remove from Watchlist?"
-            android:textColor="@color/default_text"/>
+            android:textColor="@color/white"
+            android:alpha="0.8"/>
 
         <com.makeuseof.cryptocurrency.view.widgets.FontTextView
             android:id="@+id/dialog_delete_confirm"

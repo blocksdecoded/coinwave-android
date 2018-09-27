@@ -150,6 +150,7 @@ class CurrencyFragment :
 
         mChart?.data = LineData(dataSet)
         mChart?.animateX(1500)
+//        mChart?.animateY(1500)
     }
 
     private fun showCurrencyInfo(currencyEntity: CurrencyEntity){
