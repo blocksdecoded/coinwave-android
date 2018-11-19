@@ -3,15 +3,16 @@ package com.makeuseof.cryptocurrency.view.postlist.recycler
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import com.makeuseof.cryptocurrency.R
-import com.makeuseof.cryptocurrency.domain.model.Post
+import com.makeuseof.muocore.models.PublisherPost
 import com.makeuseof.utils.inflate
+import com.makeuseof.utils.isValidIndex
 
 /**
  * Created by askar on 11/19/18
  * with Android Studio
  */
 class PostListAdapter(
-        private var mItems: ArrayList<Post>,
+        private var mItems: ArrayList<PublisherPost>,
         private val mListener: PostListViewHolder.PostVHCLickListener
 ) : RecyclerView.Adapter<PostListViewHolder>(){
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): PostListViewHolder =
@@ -22,6 +23,20 @@ class PostListAdapter(
     }
 
     override fun onBindViewHolder(p0: PostListViewHolder, p1: Int) {
-        p0.onBind()
+        if (mItems.isValidIndex(p1)){
+            p0.onBind(mItems[p1])
+        }
+    }
+
+    fun setItems(posts: List<PublisherPost>) {
+        mItems.clear()
+        mItems.addAll(posts)
+        notifyDataSetChanged()
+    }
+
+    fun getItem(position: Int): PublisherPost? = if (mItems.isValidIndex(position)) {
+        mItems[position]
+    } else {
+        null
     }
 }

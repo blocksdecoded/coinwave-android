@@ -12,7 +12,13 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 
+fun ImageView.loadImageFromUrl(url: String) {
+    Glide.with(context)
+            .load(url)
+            .into(this)
+}
 
 fun View?.visible(){
 	this?.let {
