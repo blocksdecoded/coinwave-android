@@ -11,6 +11,7 @@ buildscript {
         retrofit_version = '2.4.0'
         picasso_version = '2.71828'
         glide_version = '4.7.1'
+        moshi = "1.8.0"
 
         min_sdk_version = 19
         target_sdk_version = 28

@@ -1,4 +1,4 @@
-package com.makeuseof.cryptocurrency.view.list
+package com.makeuseof.cryptocurrency.view.currencylist
 
 import com.makeuseof.core.mvp.BaseMVPContract
 import com.makeuseof.cryptocurrency.data.model.CurrencyEntity

@@ -1,4 +1,4 @@
-package com.makeuseof.cryptocurrency.view.list
+package com.makeuseof.cryptocurrency.view.currencylist
 
 import com.makeuseof.core.model.Result
 import com.makeuseof.core.mvp.BaseMVPPresenter

@@ -10,9 +10,9 @@ import android.util.TypedValue
 import android.view.Gravity
 import com.makeuseof.cryptocurrency.R
 import com.makeuseof.cryptocurrency.domain.UseCaseProvider
-import com.makeuseof.cryptocurrency.view.list.CurrencyListContract
-import com.makeuseof.cryptocurrency.view.list.CurrencyListFragment
-import com.makeuseof.cryptocurrency.view.list.CurrencyListPresenter
+import com.makeuseof.cryptocurrency.view.currencylist.CurrencyListContract
+import com.makeuseof.cryptocurrency.view.currencylist.CurrencyListFragment
+import com.makeuseof.cryptocurrency.view.currencylist.CurrencyListPresenter
 import com.makeuseof.cryptocurrency.view.postlist.PostListContract
 import com.makeuseof.cryptocurrency.view.postlist.PostListFragment
 import com.makeuseof.cryptocurrency.view.postlist.PostListPresenter

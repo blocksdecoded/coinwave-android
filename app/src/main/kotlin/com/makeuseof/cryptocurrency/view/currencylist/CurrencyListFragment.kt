@@ -1,4 +1,4 @@
-package com.makeuseof.cryptocurrency.view.list
+package com.makeuseof.cryptocurrency.view.currencylist
 
 import android.app.Dialog
 import android.os.Bundle
@@ -12,8 +12,8 @@ import com.makeuseof.core.mvp.BaseMVPFragment
 import com.makeuseof.cryptocurrency.R
 import com.makeuseof.cryptocurrency.data.model.CurrencyEntity
 import com.makeuseof.cryptocurrency.view.currency.CurrencyActivity
-import com.makeuseof.cryptocurrency.view.list.recycler.CurrencyListAdapter
-import com.makeuseof.cryptocurrency.view.list.recycler.CurrencyListViewHolder
+import com.makeuseof.cryptocurrency.view.currencylist.recycler.CurrencyListAdapter
+import com.makeuseof.cryptocurrency.view.currencylist.recycler.CurrencyListViewHolder
 import com.makeuseof.cryptocurrency.view.widgets.ActionConfirmDialog
 import com.makeuseof.utils.hide
 import com.makeuseof.utils.inflate

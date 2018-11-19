@@ -9,4 +9,12 @@ class PostListPresenter(
         mView = view
         injectSelfToView()
     }
+
+    //region Contract
+
+    override fun onPostClick(position: Int) {
+
+    }
+
+    //endregion
 }

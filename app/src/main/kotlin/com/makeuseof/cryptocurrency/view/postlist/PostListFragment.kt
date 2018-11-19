@@ -9,9 +9,14 @@ import android.view.ViewGroup
 import com.makeuseof.core.mvp.BaseMVPFragment
 import com.makeuseof.cryptocurrency.R
 import com.makeuseof.cryptocurrency.view.postlist.recycler.PostListAdapter
+import com.makeuseof.cryptocurrency.view.postlist.recycler.PostListViewHolder
 import com.makeuseof.utils.inflate
 
-class PostListFragment : BaseMVPFragment<PostListContract.Presenter>(), PostListContract.View {
+class PostListFragment :
+        BaseMVPFragment<PostListContract.Presenter>(),
+        PostListContract.View,
+        PostListViewHolder.PostVHCLickListener
+{
     companion object {
         fun newInstance(): PostListFragment = PostListFragment()
     }
@@ -39,11 +44,27 @@ class PostListFragment : BaseMVPFragment<PostListContract.Presenter>(), PostList
         initRecycler(rootView)
     }
 
-    private fun initRecycler(rootView: View?){
-        mAdapter = PostListAdapter()
+    private fun initRecycler(rootView: View?) {
+        mAdapter = PostListAdapter(arrayListOf(), this)
         mRecycler = rootView?.findViewById(R.id.fragment_post_list_recycler)
         mRecycler?.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         mRecycler?.adapter = mAdapter
+    }
+
+    //endregion
+
+    //region Click
+
+    override fun onClick(position: Int) {
+
+    }
+
+    //endregion
+
+    //region Contract
+
+    override fun openPost(postId: Int) {
+
     }
 
     //endregion
