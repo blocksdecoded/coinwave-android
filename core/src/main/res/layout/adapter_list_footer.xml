@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="60dp"
+    android:background="?android:selectableItemBackground"
+    >
+
+    <com.makeuseof.muocore.ui.widgets.LoadingView
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:id="@+id/footer_progress"
+        android:layout_width="@dimen/progressBar_small"
+        android:layout_height="@dimen/progressBar_small"/>
+
+    <LinearLayout
+        android:id="@+id/footer_error_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        >
+
+        <com.socratica.mobile.TypefaceTextView
+            android:id="@+id/footer_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/primary"
+            android:textSize="14sp"
+            android:layout_gravity="center"
+            android:text="@string/can_not_connect"
+            app:customTypeface="fonts/Roboto-Light.ttf"
+            />
+
+        <com.socratica.mobile.TypefaceTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tap_to_retry"
+            android:textSize="14sp"
+            android:textColor="@android:color/black"
+            android:layout_gravity="center"
+            app:customTypeface="fonts/Roboto-Light.ttf"
+            />
+    </LinearLayout>
+</FrameLayout>

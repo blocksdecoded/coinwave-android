@@ -1,0 +1,20 @@
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent">
+
+    <com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
+        android:id="@+id/image_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+    </com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView>
+
+    <com.makeuseof.muocore.ui.widgets.LoadingView
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:id="@+id/image_view_progress"
+        android:layout_width="@dimen/progressBar_normal"
+        android:layout_height="@dimen/progressBar_normal"/>
+</FrameLayout>

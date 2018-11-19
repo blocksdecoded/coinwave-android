@@ -1,0 +1,35 @@
+<FrameLayout
+    android:id="@+id/web_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <WebView
+            android:id="@+id/web_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+        <com.rey.material.widget.ProgressView
+            android:id="@+id/page_progressbar"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            app:pv_autostart="true"
+            app:pv_circular="false"
+            app:pv_progressStyle="@style/Material.Drawable.LinearProgress"
+            android:visibility="gone"
+            app:pv_progressMode="indeterminate"/>
+
+        <ImageView
+            android:id="@+id/dialog_close"
+            android:layout_gravity="right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:background="#FFF"
+            android:src="@drawable/ic_close_white_24dp"
+            />
+
+
+    </FrameLayout>

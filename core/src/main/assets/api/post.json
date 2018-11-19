@@ -1,0 +1,20 @@
+//Получение одного поста
+//  URL: GET: /posts/[id]
+//  Параметров нет
+//
+// Ответ:
+//    Content-Type:application/json
+// пример ответа:
+
+{
+  "ID": 425039,
+  "post_date": "2015-01-27T10:30:39.000Z",
+  "post_title": "Where Might We Be Going In The Far Future?",
+  "html": "<html>...</html>",
+  "url": "http://somesite.url/sometitle",
+  "featured_image": {
+    "featured": "http://placehold.it/350x175", // можно пока везде одно и то же изображение ставить
+    "thumb": "http://placehold.it/100x70", // или пусто, если нет изображения
+    "middle": "http://placehold.it/200x140"
+  }
+}

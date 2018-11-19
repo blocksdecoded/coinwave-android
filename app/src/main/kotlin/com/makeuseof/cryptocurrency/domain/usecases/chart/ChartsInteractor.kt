@@ -8,7 +8,6 @@ import com.makeuseof.cryptocurrency.data.crypto.CurrencySourceContract
 import com.makeuseof.cryptocurrency.data.model.ChartData
 import com.makeuseof.cryptocurrency.domain.usecases.chart.ChartsUseCases.ChartPeriod
 import com.makeuseof.cryptocurrency.domain.usecases.chart.ChartsUseCases.ChartPeriod.*
-import com.makeuseof.utils.Lg
 import com.makeuseof.utils.coroutine.AppExecutors
 import kotlinx.coroutines.experimental.withContext
 import java.util.*

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="action_format_text">Формат текста</string>
+    <string name="action_save">Сохранить</string>
+    <string name="action_save_delete">Удалить</string>
+    <string name="action_share">Поделиться</string>
+    <string name="big_size">Большой</string>
+    <string name="can_not_connect">Не могу подключиться</string>
+    <string name="checking_url">Проверка..</string>
+    <string name="empty_post_list_text">Не найдено</string>
+    <string name="error_network">Нет связи</string>
+    <string name="error_network_subtitle">Кажется у вас нет интернета</string>
+    <string name="error_server">Ошибка Сервера</string>
+    <string name="error_server_subtitle">Сервер вернул ошибку</string>
+    <string name="error_uncommon_subtitle">Случилась ошибка, которая не должна была случиться</string>
+    <string name="medium_size">Средний</string>
+    <string name="new_posts_indicator">↑ Новые статьи</string>
+    <string name="no_internet_connection_or_server_unreachable">Нет подключения к Интернету</string>
+    <string name="ok">Хорошо</string>
+    <string name="please_check_system_time">Проверьте настройки Даты и Времени</string>
+    <string name="post_deleted_from_saves">Статья удалена из закладок</string>
+    <string name="post_saved">Статья сохранена</string>
+    <string name="saves_list_empty">Статьи добавленные в закладки будут отображаться здесь</string>
+    <string name="settings">Настройки</string>
+    <string name="share">Поделиться</string>
+    <string name="share_media">Поделиться</string>
+    <string name="small_size">Маленький</string>
+    <string name="tap_to_retry">Повторить еще раз</string>
+</resources>

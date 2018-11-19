@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:foreground="?android:selectableItemBackground"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/post_item_divider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <View
+            android:background="#8c8c8c"
+            android:layout_width="match_parent"
+            android:layout_height="1px"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/post_item_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:orientation="vertical">
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/post_item_img"
+            android:layout_width="match_parent"
+            android:layout_height="112dp"
+            android:layout_marginTop="2px"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:transitionName="@string/image_transition"
+            app:riv_corner_radius="5dp" />
+
+        <com.socratica.mobile.TypefaceTextView
+            android:id="@+id/post_item_title"
+            android:text="@string/lorem_ipsum_long"
+            style="@style/PostItemTitle"
+            android:minLines="4"
+            android:maxLines="4"
+            android:layout_marginTop="5dp"/>
+
+        <LinearLayout
+            android:paddingTop="7dp"
+            android:paddingBottom="1dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/post_item_like_img"
+                android:src="@drawable/ic_like"
+                android:layout_width="@dimen/like_heart_size"
+                android:layout_height="@dimen/like_heart_size" />
+            <com.socratica.mobile.TypefaceTextView
+                android:id="@+id/post_item_likes"
+                android:layout_marginLeft="2dp"
+                android:textColor="#8c8c8c"
+                android:text="118"
+                android:textSize="14sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <com.makeuseof.muocore.ui.widgets.FormatDateView
+                android:id="@+id/posted_date"
+                android:gravity="right"
+                android:textColor="@color/disabled"
+                android:text="2h"
+                android:textSize="14sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
