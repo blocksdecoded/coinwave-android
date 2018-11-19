@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.DisplayMetrics
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -57,7 +58,6 @@ class PostListFragment :
         try {
             ApiRequest.apiClient.perform(object: GetPostsRequest(context, null){
                 override fun onSuccess(posts: MutableList<PublisherPost>?) {
-                    Log.d("ololo", "Received posts ${posts?.size}")
                     posts?.also { it ->
                         showPosts(posts.map { it })
                     }
@@ -68,7 +68,14 @@ class PostListFragment :
     }
 
     private fun initRecycler(rootView: View?) {
-        mAdapter = PostListAdapter(arrayListOf(), this)
+        var postHeight = 0
+        activity?.also {
+            val metrics = DisplayMetrics()
+            it.windowManager.defaultDisplay.getMetrics(metrics)
+            postHeight = metrics.widthPixels * 9 / 16
+        }
+
+        mAdapter = PostListAdapter(arrayListOf(), this, postHeight)
         mRecycler = rootView?.findViewById(R.id.fragment_post_list_recycler)
         mRecycler?.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         mRecycler?.adapter = mAdapter

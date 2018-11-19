@@ -6,6 +6,7 @@ import com.makeuseof.cryptocurrency.R
 import com.makeuseof.muocore.models.PublisherPost
 import com.makeuseof.utils.inflate
 import com.makeuseof.utils.isValidIndex
+import com.makeuseof.utils.setHeight
 
 /**
  * Created by askar on 11/19/18
@@ -13,10 +14,14 @@ import com.makeuseof.utils.isValidIndex
  */
 class PostListAdapter(
         private var mItems: ArrayList<PublisherPost>,
-        private val mListener: PostListViewHolder.PostVHCLickListener
-) : RecyclerView.Adapter<PostListViewHolder>(){
+        private val mListener: PostListViewHolder.PostVHCLickListener,
+        private val mPostHeight: Int
+) : RecyclerView.Adapter<PostListViewHolder>() {
+
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): PostListViewHolder =
-            PostListViewHolder(p0.inflate(R.layout.adapter_post_list_item)!!, mListener)
+            PostListViewHolder(p0.inflate(R.layout.adapter_post_list_item)!!, mListener).apply {
+                setHeight(mPostHeight)
+            }
 
     override fun getItemCount(): Int {
         return mItems.size
