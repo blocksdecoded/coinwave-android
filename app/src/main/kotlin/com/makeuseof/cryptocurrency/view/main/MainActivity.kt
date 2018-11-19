@@ -144,7 +144,6 @@ class MainActivity : AppCompatActivity() {
 
         textView.setTextColor(colorStates)
 
-
         return main_tab_layout.newTab().setCustomView(textView)
     }
 
