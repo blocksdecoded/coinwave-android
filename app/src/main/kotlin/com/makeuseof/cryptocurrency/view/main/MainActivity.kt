@@ -13,6 +13,9 @@ import com.makeuseof.cryptocurrency.domain.UseCaseProvider
 import com.makeuseof.cryptocurrency.view.list.CurrencyListContract
 import com.makeuseof.cryptocurrency.view.list.CurrencyListFragment
 import com.makeuseof.cryptocurrency.view.list.CurrencyListPresenter
+import com.makeuseof.cryptocurrency.view.postlist.PostListContract
+import com.makeuseof.cryptocurrency.view.postlist.PostListFragment
+import com.makeuseof.cryptocurrency.view.postlist.PostListPresenter
 import com.makeuseof.cryptocurrency.view.watchlist.WatchListContract
 import com.makeuseof.cryptocurrency.view.watchlist.WatchListFragment
 import com.makeuseof.cryptocurrency.view.watchlist.WatchListPresenter
@@ -25,6 +28,9 @@ class MainActivity : AppCompatActivity() {
 
     private var mWatchListPresenter: WatchListContract.Presenter? = null
     private var mCurrencyListPresenter: CurrencyListContract.Presenter? = null
+    private var mPostListPresenter: PostListContract.Presenter? = null
+
+    //region Lifecycle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +47,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    //endregion
+
     //region Init
 
     private fun init(){
@@ -48,6 +56,7 @@ class MainActivity : AppCompatActivity() {
 
         fragments.add(createWatchListScreen())
         fragments.add(createCurrencyListScreen())
+        fragments.add(createPostListScreen())
 
         initViewPager(fragments)
 
@@ -56,8 +65,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun createWatchListScreen(): Fragment{
-        val fragment = WatchListFragment()
+    //region Screens
+
+    private fun createWatchListScreen(): Fragment {
+        val fragment = WatchListFragment.newInstance()
 
         mWatchListPresenter = WatchListPresenter(
                 fragment,
@@ -67,8 +78,8 @@ class MainActivity : AppCompatActivity() {
         return fragment
     }
 
-    private fun createCurrencyListScreen(): Fragment{
-        val fragment = CurrencyListFragment()
+    private fun createCurrencyListScreen(): Fragment {
+        val fragment = CurrencyListFragment.newInstance()
 
         mCurrencyListPresenter = CurrencyListPresenter(
                 fragment,
@@ -77,6 +88,18 @@ class MainActivity : AppCompatActivity() {
 
         return fragment
     }
+
+    private fun createPostListScreen(): Fragment {
+        val fragment = PostListFragment.newInstance()
+
+        mPostListPresenter = PostListPresenter(
+                fragment
+        )
+
+        return fragment
+    }
+
+    //endregion
 
     private fun initViewPager(fragments: ArrayList<Fragment>){
         main_tab_layout.addTab(getTab("Watchlist"))

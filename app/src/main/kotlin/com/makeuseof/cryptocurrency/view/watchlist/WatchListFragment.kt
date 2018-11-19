@@ -22,6 +22,11 @@ class WatchListFragment :
         BaseMVPFragment<WatchListContract.Presenter>(),
         WatchListContract.View,
         WatchlistViewHolder.CurrencyVHClickListener {
+
+    companion object {
+        fun newInstance(): WatchListFragment = WatchListFragment()
+    }
+
     override var mPresenter: WatchListContract.Presenter? = null
 
     private var mRecycler: RecyclerView? = null

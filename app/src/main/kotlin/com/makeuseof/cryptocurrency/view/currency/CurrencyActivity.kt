@@ -53,7 +53,7 @@ class CurrencyActivity: SwipeableActivity() {
         NetworkErrorHandler.getInstance(applicationContext)
 
         if (savedInstanceState == null) {
-            val fragment = CurrencyFragment()
+            val fragment = CurrencyFragment.newInstance()
 
             supportFragmentManager
                     .beginTransaction()

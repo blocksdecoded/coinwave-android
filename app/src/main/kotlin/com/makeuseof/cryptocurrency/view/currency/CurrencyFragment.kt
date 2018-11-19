@@ -35,6 +35,10 @@ class CurrencyFragment :
         CurrencyContract.View,
         OnChartValueSelectedListener,
         OnChartGestureListener {
+    companion object {
+        fun newInstance(): CurrencyFragment = CurrencyFragment()
+    }
+
     override var mPresenter: CurrencyContract.Presenter? = null
 
     private var mChart: LineChart? = null
