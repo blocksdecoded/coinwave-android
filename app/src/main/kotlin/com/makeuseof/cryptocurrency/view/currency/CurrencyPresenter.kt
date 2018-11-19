@@ -7,14 +7,14 @@ import com.makeuseof.cryptocurrency.domain.usecases.chart.ChartsUseCases
 import com.makeuseof.cryptocurrency.domain.usecases.chart.ChartsUseCases.ChartPeriod.*
 import com.makeuseof.cryptocurrency.domain.usecases.list.CurrencyListUseCases
 import com.makeuseof.utils.coroutine.launchSilent
-import kotlinx.coroutines.experimental.android.UI
-import kotlin.coroutines.experimental.CoroutineContext
+import kotlinx.coroutines.Dispatchers
+import kotlin.coroutines.CoroutineContext
 
 class CurrencyPresenter(
         view: CurrencyContract.View?,
         private val mChartsUseCases: ChartsUseCases,
         private val mCurrencyListUseCases: CurrencyListUseCases,
-        private val uiContext: CoroutineContext = UI
+        private val uiContext: CoroutineContext = Dispatchers.Main
 ) : BaseMVPPresenter<CurrencyContract.View>(view), CurrencyContract.Presenter {
     private var mCached: CurrencyEntity? = null
 

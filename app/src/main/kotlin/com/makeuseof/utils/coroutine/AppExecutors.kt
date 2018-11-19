@@ -1,9 +1,9 @@
 package com.makeuseof.utils.coroutine
 
-import kotlinx.coroutines.experimental.DefaultDispatcher
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.newFixedThreadPoolContext
-import kotlin.coroutines.experimental.CoroutineContext
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ObsoleteCoroutinesApi
+import kotlinx.coroutines.newFixedThreadPoolContext
+import kotlin.coroutines.CoroutineContext
 
 const val THREAD_COUNT = 3
 
@@ -13,10 +13,11 @@ const val THREAD_COUNT = 3
  * Grouping tasks like this avoids the effects of task starvation (e.g. disk reads don't wait behind
  * webservice requests).
  */
+@ObsoleteCoroutinesApi
 open class AppExecutors constructor(
-        val ioContext: CoroutineContext = DefaultDispatcher,
+        val ioContext: CoroutineContext = Dispatchers.Default,
         val networkContext: CoroutineContext = newFixedThreadPoolContext(THREAD_COUNT, "networkIO"),
-        val uiContext: CoroutineContext = UI){
+        val uiContext: CoroutineContext = Dispatchers.Main){
     companion object {
         private var INSTANCE: AppExecutors? = null
 

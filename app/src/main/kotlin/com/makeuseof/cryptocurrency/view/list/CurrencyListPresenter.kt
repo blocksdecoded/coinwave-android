@@ -8,13 +8,13 @@ import com.makeuseof.cryptocurrency.domain.usecases.list.CurrencyListUseCases
 import com.makeuseof.cryptocurrency.util.findCurrency
 import com.makeuseof.utils.coroutine.launchSilent
 import com.makeuseof.utils.isValidIndex
-import kotlinx.coroutines.experimental.android.UI
-import kotlin.coroutines.experimental.CoroutineContext
+import kotlinx.coroutines.Dispatchers
+import kotlin.coroutines.CoroutineContext
 
 class CurrencyListPresenter(
         view: CurrencyListContract.View?,
         private val mCurrencyListUseCases: CurrencyListUseCases,
-        private val uiContext: CoroutineContext = UI
+        private val uiContext: CoroutineContext = Dispatchers.Main
 ) : BaseMVPPresenter<CurrencyListContract.View>(view), CurrencyListContract.Presenter {
     private var mCachedData = arrayListOf<CurrencyEntity>()
     private var mInitialized = false

@@ -9,8 +9,7 @@ import com.makeuseof.cryptocurrency.data.model.ChartData
 import com.makeuseof.cryptocurrency.domain.usecases.chart.ChartsUseCases.ChartPeriod
 import com.makeuseof.cryptocurrency.domain.usecases.chart.ChartsUseCases.ChartPeriod.*
 import com.makeuseof.utils.coroutine.AppExecutors
-import kotlinx.coroutines.experimental.withContext
-import java.util.*
+import kotlinx.coroutines.withContext
 import kotlin.collections.HashMap
 
 // Created by askar on 7/25/18.

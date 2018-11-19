@@ -1,8 +1,8 @@
 package com.makeuseof.cryptocurrency.data.watchlist
 
 import com.makeuseof.utils.shared.SharedContract
-import kotlinx.coroutines.experimental.async
-
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 
 // Created by askar on 7/20/18.
 class WatchlistService(
@@ -39,7 +39,7 @@ class WatchlistService(
         }
     }
 
-    private fun save(ids: ArrayList<Int>) = async{
+    private fun save(ids: ArrayList<Int>) = GlobalScope.async {
         var save = ""
 
         ids.forEachIndexed { index, i ->

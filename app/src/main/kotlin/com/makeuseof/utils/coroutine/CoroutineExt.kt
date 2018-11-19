@@ -1,8 +1,8 @@
 package com.makeuseof.utils.coroutine
 
-import kotlinx.coroutines.experimental.*
-import kotlin.coroutines.experimental.CoroutineContext
-import kotlin.coroutines.experimental.EmptyCoroutineContext
+import kotlinx.coroutines.*
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.EmptyCoroutineContext
 
 /**
  * Equivalent to [launch] but return [Unit] instead of [Job].
@@ -16,12 +16,12 @@ import kotlin.coroutines.experimental.EmptyCoroutineContext
  * ```
  */
 fun launchSilent(
-        context: CoroutineContext = DefaultDispatcher,
+        context: CoroutineContext = Dispatchers.Default,
         start: CoroutineStart = CoroutineStart.DEFAULT,
         parent: Job? = null,
         block: suspend CoroutineScope.() -> Unit
 ) {
-    launch(context, start, parent, block = block)
+    GlobalScope.launch(context, start, block = block)
 }
 
 /**

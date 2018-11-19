@@ -5,7 +5,7 @@ import com.makeuseof.cryptocurrency.data.crypto.CurrencySourceContract
 import com.makeuseof.cryptocurrency.data.crypto.CurrencyUpdateObserver
 import com.makeuseof.cryptocurrency.data.model.CurrencyEntity
 import com.makeuseof.utils.coroutine.AppExecutors
-import kotlinx.coroutines.experimental.withContext
+import kotlinx.coroutines.withContext
 
 // Created by askar on 7/19/18.
 class CurrencyListInteractor(
