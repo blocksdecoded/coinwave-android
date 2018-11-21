@@ -1,6 +1,6 @@
 package com.makeuseof.cryptocurrency.data.post
 
-import com.makeuseof.core.model.Result
+import com.makeuseof.utils.coroutine.model.Result
 import com.makeuseof.cryptocurrency.data.post.model.PublisherPost
 
 /**

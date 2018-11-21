@@ -1,6 +1,6 @@
 package com.makeuseof.cryptocurrency.data.crypto
 
-import com.makeuseof.core.model.Result
+import com.makeuseof.utils.coroutine.model.Result
 import com.makeuseof.core.network.NetworkClientFactory
 import com.makeuseof.cryptocurrency.data.EmptyCache
 import com.makeuseof.cryptocurrency.data.crypto.network.CryptoConfig

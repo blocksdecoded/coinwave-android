@@ -1,6 +1,6 @@
 package com.makeuseof.cryptocurrency.view.currency
 
-import com.makeuseof.core.model.Result
+import com.makeuseof.utils.coroutine.model.Result
 import com.makeuseof.core.mvp.BaseMVPPresenter
 import com.makeuseof.cryptocurrency.data.model.CurrencyEntity
 import com.makeuseof.cryptocurrency.domain.usecases.chart.ChartsUseCases

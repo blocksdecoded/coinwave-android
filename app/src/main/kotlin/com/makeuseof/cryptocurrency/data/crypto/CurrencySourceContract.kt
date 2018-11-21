@@ -1,6 +1,6 @@
 package com.makeuseof.cryptocurrency.data.crypto
 
-import com.makeuseof.core.model.Result
+import com.makeuseof.utils.coroutine.model.Result
 import com.makeuseof.cryptocurrency.data.model.CurrencyEntity
 import com.makeuseof.cryptocurrency.data.model.CurrencyListResponse
 

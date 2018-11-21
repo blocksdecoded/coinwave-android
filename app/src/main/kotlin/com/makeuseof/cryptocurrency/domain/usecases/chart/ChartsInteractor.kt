@@ -1,6 +1,6 @@
 package com.makeuseof.cryptocurrency.domain.usecases.chart
 
-import com.makeuseof.core.model.Result
+import com.makeuseof.utils.coroutine.model.Result
 import com.makeuseof.cryptocurrency.data.EmptyCache
 import com.makeuseof.cryptocurrency.data.NetworkException
 import com.makeuseof.cryptocurrency.data.chart.ChartsSourceContract

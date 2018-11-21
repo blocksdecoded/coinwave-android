@@ -1,4 +1,4 @@
-package com.makeuseof.core.model
+package com.makeuseof.utils.coroutine.model
 
 // Created by askar on 6/18/18.
 sealed class Result<out T : Any> {

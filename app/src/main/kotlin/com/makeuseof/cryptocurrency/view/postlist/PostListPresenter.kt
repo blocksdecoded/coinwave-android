@@ -1,9 +1,7 @@
 package com.makeuseof.cryptocurrency.view.postlist
 
-import android.util.Log
-import com.makeuseof.core.model.Result.Success
-import com.makeuseof.core.model.onError
-import com.makeuseof.core.model.onSuccess
+import com.makeuseof.utils.coroutine.model.onError
+import com.makeuseof.utils.coroutine.model.onSuccess
 import com.makeuseof.core.mvp.BaseMVPPresenter
 import com.makeuseof.cryptocurrency.domain.usecases.postlist.PostUseCases
 import com.makeuseof.utils.Lg
@@ -34,8 +32,10 @@ class PostListPresenter(
 
     //region Contract
 
-    override fun onPostClick(position: Int) = launchSilent(ui){
-
+    override fun onPostClick(id: Int) = launchSilent(ui){
+        mPostUseCases.getPost(id)?.also {
+            mView?.openPost(id)
+        }
     }
 
     override fun getPosts() = launchSilent(ui) {

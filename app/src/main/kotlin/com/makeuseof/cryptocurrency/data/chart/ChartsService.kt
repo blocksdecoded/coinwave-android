@@ -1,6 +1,6 @@
 package com.makeuseof.cryptocurrency.data.chart
 
-import com.makeuseof.core.model.Result
+import com.makeuseof.utils.coroutine.model.Result
 import com.makeuseof.core.network.NetworkClientFactory
 import com.makeuseof.core.network.NetworkError
 import com.makeuseof.core.network.RHWithErrorHandler

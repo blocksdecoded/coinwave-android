@@ -1,6 +1,6 @@
 package com.makeuseof.cryptocurrency.domain.usecases.list
 
-import com.makeuseof.core.model.Result
+import com.makeuseof.utils.coroutine.model.Result
 import com.makeuseof.cryptocurrency.data.crypto.CurrencyUpdateObserver
 import com.makeuseof.cryptocurrency.data.model.CurrencyEntity
 

@@ -1,6 +1,7 @@
 package com.makeuseof.cryptocurrency.domain.usecases.list
 
-import com.makeuseof.core.model.Result
+import com.makeuseof.utils.coroutine.model.Result
+import com.makeuseof.utils.coroutine.model.mapOnSuccess
 import com.makeuseof.cryptocurrency.data.crypto.CurrencySourceContract
 import com.makeuseof.cryptocurrency.data.crypto.CurrencyUpdateObserver
 import com.makeuseof.cryptocurrency.data.model.CurrencyEntity
@@ -13,16 +14,8 @@ class CurrencyListInteractor(
         private val mCryptoService: CurrencySourceContract
 ): CurrencyListUseCases {
     override suspend fun getCryptoList(skipCache: Boolean): Result<List<CurrencyEntity>> = withContext(appExecutors.ioContext) {
-        val result = mCryptoService.getAllCurrencies(skipCache)
-        when(result){
-            is Result.Success -> {
-                Result.Success(result.data.currencies)
-            }
-
-            is Result.Error -> {
-                Result.Error(result.exception)
-            }
-        }
+        mCryptoService.getAllCurrencies(skipCache)
+                .mapOnSuccess { it.currencies }
     }
 
     override fun getCurrency(id: Int): CurrencyEntity? {

@@ -18,7 +18,7 @@ interface PostListContract {
     }
 
     interface Presenter : BaseMVPContract.Presenter<View> {
-        fun onPostClick(position: Int)
+        fun onPostClick(id: Int)
 
         fun getPosts()
 

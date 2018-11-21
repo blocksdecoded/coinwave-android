@@ -1,6 +1,6 @@
 package com.makeuseof.cryptocurrency.view.watchlist
 
-import com.makeuseof.core.model.Result
+import com.makeuseof.utils.coroutine.model.Result
 import com.makeuseof.core.mvp.BaseMVPPresenter
 import com.makeuseof.cryptocurrency.data.NetworkException
 import com.makeuseof.cryptocurrency.data.crypto.CurrencyUpdateObserver

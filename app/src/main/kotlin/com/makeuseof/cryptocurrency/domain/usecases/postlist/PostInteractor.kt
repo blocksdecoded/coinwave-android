@@ -1,7 +1,7 @@
 package com.makeuseof.cryptocurrency.domain.usecases.postlist
 
-import com.makeuseof.core.model.Result
-import com.makeuseof.core.model.Result.Success
+import com.makeuseof.utils.coroutine.model.Result
+import com.makeuseof.utils.coroutine.model.Result.Success
 import com.makeuseof.cryptocurrency.data.post.PostDataSource
 import com.makeuseof.cryptocurrency.data.post.model.PublisherPost
 import com.makeuseof.utils.coroutine.AppExecutors

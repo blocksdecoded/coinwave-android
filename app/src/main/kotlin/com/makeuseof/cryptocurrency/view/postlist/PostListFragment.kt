@@ -73,7 +73,7 @@ class PostListFragment :
 
     override fun onClick(position: Int) {
         mAdapter?.getItem(position)?.also {
-            openPost(it.id)
+            mPresenter?.onPostClick(it.id)
         }
     }
 

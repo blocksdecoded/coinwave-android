@@ -1,7 +1,7 @@
-package com.makeuseof.core.model
+package com.makeuseof.utils.coroutine.model
 
-import com.makeuseof.core.model.Result.Success
-import com.makeuseof.core.model.Result.Error
+import com.makeuseof.utils.coroutine.model.Result.Success
+import com.makeuseof.utils.coroutine.model.Result.Error
 
 /**
  * Created by askar on 11/21/18

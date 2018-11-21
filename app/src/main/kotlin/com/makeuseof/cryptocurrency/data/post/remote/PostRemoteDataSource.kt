@@ -1,10 +1,9 @@
 package com.makeuseof.cryptocurrency.data.post.remote
 
-import com.makeuseof.core.model.Result
-import com.makeuseof.core.model.mapOnSuccess
+import com.makeuseof.utils.coroutine.model.Result
+import com.makeuseof.utils.coroutine.model.mapOnSuccess
 import com.makeuseof.cryptocurrency.data.post.PostDataSource
 import com.makeuseof.cryptocurrency.data.post.model.PublisherPost
-import com.makeuseof.utils.Lg
 import com.makeuseof.utils.retrofit.BaseRetrofitDataSource
 
 /**

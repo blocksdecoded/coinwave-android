@@ -1,7 +1,7 @@
 package com.makeuseof.utils.retrofit
 
-import com.makeuseof.core.model.Result
-import com.makeuseof.core.model.Result.*
+import com.makeuseof.utils.coroutine.model.Result
+import com.makeuseof.utils.coroutine.model.Result.*
 import com.makeuseof.core.network.NetworkError
 import com.makeuseof.core.network.RHWithErrorHandler
 import com.makeuseof.cryptocurrency.data.NetworkException
