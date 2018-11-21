@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import butterknife.BindView
 import com.makeuseof.core.mvp.BaseMVPFragment
 import com.makeuseof.cryptocurrency.R
 import com.makeuseof.cryptocurrency.data.model.CurrencyEntity
@@ -18,7 +19,7 @@ import com.makeuseof.cryptocurrency.view.widgets.ActionConfirmDialog
 import com.makeuseof.cryptocurrency.view.widgets.RecyclerItemSpaceDecoration
 import com.makeuseof.utils.*
 
-class WatchListFragment :
+open class WatchListFragment :
         BaseMVPFragment<WatchListContract.Presenter>(),
         WatchListContract.View,
         WatchlistViewHolder.CurrencyVHClickListener {
@@ -28,38 +29,31 @@ class WatchListFragment :
     }
 
     override var mPresenter: WatchListContract.Presenter? = null
+    override val layoutId: Int = R.layout.fragment_watchlist
 
-    private var mRecycler: RecyclerView? = null
+    @BindView(R.id.fragment_watchlist_recycler)
+    @JvmField var mRecycler: RecyclerView? = null
     private var mAdapter: WatchlistAdapter? = null
-    private var mSwipeRefreshLayout: SwipeRefreshLayout? = null
-    private var mEmptyText: View? = null
 
-    private var mErrorContainer: View? = null
-    private var mRetry: View? = null
+    @BindView(R.id.fragment_watchlist_refresh)
+    @JvmField var mSwipeRefreshLayout: SwipeRefreshLayout? = null
+    @BindView(R.id.fragment_watchlist_empty)
+    @JvmField var mEmptyText: View? = null
+
+    @BindView(R.id.fragment_watchlist_error)
+    @JvmField var mErrorContainer: View? = null
+    @BindView(R.id.connection_error_retry)
+    @JvmField var mRetry: View? = null
 
     private var mActiveDialog: Dialog? = null
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = container.inflate(R.layout.fragment_watchlist)
-
-        initView(rootView)
-
-        return rootView
-    }
 
     override fun onPause() {
         super.onPause()
         mActiveDialog?.dismiss()
     }
 
-    private fun initView(rootView: View?) {
+    override fun initView(rootView: View) {
         mAdapter = WatchlistAdapter(arrayListOf(), this)
-        mRecycler = rootView?.findViewById(R.id.fragment_watchlist_recycler)
-        mSwipeRefreshLayout = rootView?.findViewById(R.id.fragment_watchlist_refresh)
-        mEmptyText = rootView?.findViewById(R.id.fragment_watchlist_empty)
-
-        mErrorContainer = rootView?.findViewById(R.id.fragment_watchlist_error)
-        mRetry = rootView?.findViewById(R.id.connection_error_retry)
 
         mRetry?.setOnClickListener {
             mPresenter?.getCurrencyList()

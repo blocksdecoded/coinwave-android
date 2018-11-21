@@ -4,6 +4,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import butterknife.BindView
+import butterknife.ButterKnife
 import com.makeuseof.cryptocurrency.R
 import com.makeuseof.cryptocurrency.data.post.model.PublisherPost
 import com.makeuseof.utils.loadImageFromUrl
@@ -17,10 +19,14 @@ class PostListViewHolder(
         private val mListener: PostVHCLickListener
 ): RecyclerView.ViewHolder(view) {
 
-    private val mImage: ImageView = itemView.findViewById(R.id.adapter_post_item_image)
-    private val mTitle: TextView = itemView.findViewById(R.id.adapter_post_item_title)
+    @BindView(R.id.adapter_post_item_image)
+    lateinit var mImage: ImageView
+    @BindView(R.id.adapter_post_item_title)
+    lateinit var mTitle: TextView
 
     init {
+        ButterKnife.bind(this, view)
+
         itemView.setOnClickListener {
             mListener.onClick(adapterPosition)
         }

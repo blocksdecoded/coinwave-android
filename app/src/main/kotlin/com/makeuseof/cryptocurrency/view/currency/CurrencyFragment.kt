@@ -12,6 +12,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ScrollView
 import android.widget.TextView
+import butterknife.BindView
+import butterknife.ButterKnife
+import butterknife.OnClick
+import butterknife.Unbinder
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
@@ -30,7 +34,7 @@ import com.makeuseof.cryptocurrency.util.setChangedPercent
 import com.makeuseof.cryptocurrency.view.widgets.OptionSelectorView
 import com.makeuseof.utils.*
 
-class CurrencyFragment :
+open class CurrencyFragment :
         BaseMVPFragment<CurrencyContract.Presenter>(),
         CurrencyContract.View,
         OnChartValueSelectedListener,
@@ -40,67 +44,58 @@ class CurrencyFragment :
     }
 
     override var mPresenter: CurrencyContract.Presenter? = null
+    override val layoutId: Int = R.layout.fragment_currency_info
 
-    private var mChart: LineChart? = null
+    @BindView(R.id.fragment_currency_chart)
+    @JvmField var mChart: LineChart? = null
 
-    private var mScrollContainer: ScrollView? = null
-    private var mBack: View? = null
-    private var mWatchlist: ImageView? = null
-    private var mIcon: ImageView? = null
-    private var mName: TextView? = null
-    private var mSymbol: TextView? = null
-    private var mPrice: TextView? = null
-    private var mMarketCap: TextView? = null
-    private var mVolume24h: TextView? = null
-    private var mAvailableSupply: TextView? = null
-    private var mTotalSupply: TextView? = null
-    private var mChange1h: TextView? = null
-    private var mChange1d: TextView? = null
-    private var mChange1w: TextView? = null
+    @BindView(R.id.currency_scroll_container)
+    @JvmField var mScrollContainer: ScrollView? = null
+    @BindView(R.id.fragment_currency_add_to_watchlist)
+    @JvmField var mWatchlist: ImageView? = null
+    @BindView(R.id.fragment_currency_info_icon)
+    @JvmField var mIcon: ImageView? = null
+    @BindView(R.id.fragment_currency_info_name)
+    @JvmField var mName: TextView? = null
+    @BindView(R.id.fragment_currency_info_symbol)
+    @JvmField var mSymbol: TextView? = null
+    @BindView(R.id.currency_price)
+    @JvmField var mPrice: TextView? = null
+    @BindView(R.id.currency_market_cap)
+    @JvmField var mMarketCap: TextView? = null
+    @BindView(R.id.currency_volume_24h)
+    @JvmField var mVolume24h: TextView? = null
+    @BindView(R.id.currency_available_supply)
+    @JvmField var mAvailableSupply: TextView? = null
+    @BindView(R.id.currency_total_supply)
+    @JvmField var mTotalSupply: TextView? = null
+    @BindView(R.id.currency_change_1h)
+    @JvmField var mChange1h: TextView? = null
+    @BindView(R.id.currency_change_1d)
+    @JvmField var mChange1d: TextView? = null
+    @BindView(R.id.currency_change_1w)
+    @JvmField var mChange1w: TextView? = null
 
-    private var mProgress: View? = null
-    private var mChartPeriods: OptionSelectorView? = null
-    private var mScrollEnabled = true
-    private var mGoToWeb: ImageView? = null
+    @BindView(R.id.fragment_currency_progress)
+    @JvmField var mProgress: View? = null
+    @BindView(R.id.currency_chart_period)
+    @JvmField var mChartPeriods: OptionSelectorView? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = container.inflate(R.layout.fragment_currency_info)
-
-        initView(rootView)
-
-        return rootView
+    @OnClick(R.id.currency_graph_icon, R.id.back, R.id.fragment_currency_add_to_watchlist)
+    fun onClick(view: View){
+        when(view.id) {
+            R.id.currency_graph_icon -> mPresenter?.onGoToWebsiteClick()
+            R.id.back -> finishView()
+            R.id.fragment_currency_add_to_watchlist -> mPresenter?.onWatchingClick()
+        }
     }
+    var mScrollEnabled = true
 
-    private fun initView(rootView: View?){
-        mChartPeriods = rootView?.findViewById(R.id.currency_chart_period)
+    override fun initView(rootView: View){
         mChartPeriods?.addClickListener { mPresenter?.onPeriodChanged(it) }
-
-        mGoToWeb = rootView?.findViewById(R.id.currency_graph_icon)
-        mGoToWeb?.setOnClickListener { mPresenter?.onGoToWebsiteClick() }
-
-        mBack = rootView?.findViewById(R.id.back)
-        mWatchlist = rootView?.findViewById(R.id.fragment_currency_add_to_watchlist)
-        mIcon = rootView?.findViewById(R.id.fragment_currency_info_icon)
-        mName = rootView?.findViewById(R.id.fragment_currency_info_name)
-        mSymbol = rootView?.findViewById(R.id.fragment_currency_info_symbol)
-        mPrice = rootView?.findViewById(R.id.currency_price)
-        mMarketCap = rootView?.findViewById(R.id.currency_market_cap)
-        mVolume24h = rootView?.findViewById(R.id.currency_volume_24h)
-        mAvailableSupply = rootView?.findViewById(R.id.currency_available_supply)
-        mTotalSupply = rootView?.findViewById(R.id.currency_total_supply)
-        mChange1h = rootView?.findViewById(R.id.currency_change_1h)
-        mChange1d = rootView?.findViewById(R.id.currency_change_1d)
-        mChange1w = rootView?.findViewById(R.id.currency_change_1w)
-        mProgress = rootView?.findViewById(R.id.fragment_currency_progress)
-
-        mBack?.setOnClickListener { finishView() }
-        mWatchlist?.setOnClickListener { mPresenter?.onWatchingClick() }
-
-        mChart = rootView?.findViewById(R.id.fragment_currency_chart)
 
         initChart()
 
-        mScrollContainer = rootView?.findViewById(R.id.currency_scroll_container)
         mScrollContainer?.setOnTouchListener { v, event ->
             return@setOnTouchListener !mScrollEnabled
         }

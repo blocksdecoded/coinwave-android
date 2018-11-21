@@ -9,6 +9,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import butterknife.BindView
+import butterknife.ButterKnife
+import butterknife.Unbinder
 import com.makeuseof.core.contracts.LoadNextListener
 import com.makeuseof.core.mvp.BaseMVPFragment
 import com.makeuseof.cryptocurrency.R
@@ -22,7 +25,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 
-class PostListFragment :
+open class PostListFragment :
         BaseMVPFragment<PostListContract.Presenter>(),
         PostListContract.View,
         PostListViewHolder.PostVHCLickListener,
@@ -33,25 +36,15 @@ class PostListFragment :
     }
 
     override var mPresenter: PostListContract.Presenter? = null
+    override val layoutId: Int = R.layout.fragment_post_list
 
-    private var mRecycler: RecyclerView? = null
-    private var mAdapter: PostListAdapter? = null
-
-    //region Lifecycle
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = container.inflate(R.layout.fragment_post_list)
-
-        init(rootView)
-
-        return rootView
-    }
-
-    //endregion
+    @BindView(R.id.fragment_post_list_recycler)
+    @JvmField var mRecycler: RecyclerView? = null
+    var mAdapter: PostListAdapter? = null
 
     //region Init
 
-    private fun init(rootView: View?) {
+    override fun initView(rootView: View) {
         initRecycler(rootView)
     }
 
@@ -64,7 +57,6 @@ class PostListFragment :
         }
 
         mAdapter = PostListAdapter(arrayListOf(), this, this, postHeight)
-        mRecycler = rootView?.findViewById(R.id.fragment_post_list_recycler)
         mRecycler?.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         mRecycler?.adapter = mAdapter
     }
