@@ -93,7 +93,8 @@ class MainActivity : AppCompatActivity() {
         val fragment = PostListFragment.newInstance()
 
         mPostListPresenter = PostListPresenter(
-                fragment
+                fragment,
+                UseCaseProvider.getPostUseCases()
         )
 
         return fragment
@@ -108,7 +109,7 @@ class MainActivity : AppCompatActivity() {
 
         val adapter = PagerAdapter(supportFragmentManager, fragments)
         main_view_pager.adapter = adapter
-        main_view_pager.offscreenPageLimit = 2
+        main_view_pager.offscreenPageLimit = 4
 
         main_view_pager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
             override fun onPageScrollStateChanged(state: Int) = Unit

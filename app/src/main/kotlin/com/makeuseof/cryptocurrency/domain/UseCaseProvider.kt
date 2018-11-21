@@ -5,6 +5,8 @@ import com.makeuseof.cryptocurrency.domain.usecases.chart.ChartsUseCases
 import com.makeuseof.cryptocurrency.domain.usecases.chart.ChartsInteractor
 import com.makeuseof.cryptocurrency.domain.usecases.list.CurrencyListInteractor
 import com.makeuseof.cryptocurrency.domain.usecases.list.CurrencyListUseCases
+import com.makeuseof.cryptocurrency.domain.usecases.postlist.PostInteractor
+import com.makeuseof.cryptocurrency.domain.usecases.postlist.PostUseCases
 import com.makeuseof.utils.coroutine.AppExecutors
 
 // Created by askar on 7/19/18.
@@ -21,6 +23,13 @@ object UseCaseProvider {
                 AppExecutors.getInstance(),
                 ServiceProvider.getCurrencyService(context),
                 ServiceProvider.getChartsService()
+        )
+    }
+
+    fun getPostUseCases(): PostUseCases{
+        return PostInteractor(
+                AppExecutors.getInstance(),
+                ServiceProvider.getPostService()
         )
     }
 }

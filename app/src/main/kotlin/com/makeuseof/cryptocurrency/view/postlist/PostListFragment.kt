@@ -11,13 +11,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.makeuseof.core.mvp.BaseMVPFragment
 import com.makeuseof.cryptocurrency.R
-import com.makeuseof.cryptocurrency.data.post.GetPostsRequest
+import com.makeuseof.cryptocurrency.data.post.model.PublisherPost
 import com.makeuseof.cryptocurrency.view.postlist.recycler.PostListAdapter
 import com.makeuseof.cryptocurrency.view.postlist.recycler.PostListViewHolder
 import com.makeuseof.muocore.CoreSharedConstants
-import com.makeuseof.muocore.backend.ApiRequest
-import com.makeuseof.muocore.backend.GetPostRequest
-import com.makeuseof.muocore.models.PublisherPost
 import com.makeuseof.muocore.ui.PostViewActivity
 import com.makeuseof.utils.inflate
 import kotlinx.coroutines.Dispatchers
@@ -54,17 +51,6 @@ class PostListFragment :
 
     private fun init(rootView: View?) {
         initRecycler(rootView)
-
-        try {
-            ApiRequest.apiClient.perform(object: GetPostsRequest(context, null){
-                override fun onSuccess(posts: MutableList<PublisherPost>?) {
-                    posts?.also { it ->
-                        showPosts(posts.map { it })
-                    }
-                }
-            })
-        } catch (e: Exception) {
-        }
     }
 
     private fun initRecycler(rootView: View?) {
@@ -83,18 +69,9 @@ class PostListFragment :
 
     //endregion
 
-    //region Private
-
-    private fun showPosts(posts: List<PublisherPost>) = GlobalScope.async(Dispatchers.Main) {
-        mAdapter?.setItems(posts)
-    }
-
-    //endregion
-
     //region Click
 
     override fun onClick(position: Int) {
-        Log.d("ololo", "On post click $position")
         mAdapter?.getItem(position)?.also {
             openPost(it.id)
         }
@@ -106,13 +83,26 @@ class PostListFragment :
 
     override fun openPost(postId: Int) {
         activity?.also {
-            Log.d("ololo", "Open post $postId")
             it.startActivity(
                     Intent(it, PostViewActivity::class.java)
                             .putExtra(CoreSharedConstants.KEY_POST_ID, postId.toString())
             )
             activity?.overridePendingTransition(R.anim.slide_in_right, 0)
         }
+    }
+
+    override fun showLoading() {
+    }
+
+    override fun stopLoading() {
+    }
+
+    override fun showPosts(posts: List<PublisherPost>) {
+        mAdapter?.setItems(posts)
+    }
+
+    override fun nextPosts(posts: List<PublisherPost>) {
+        mAdapter?.addItems(posts)
     }
 
     //endregion

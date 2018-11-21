@@ -3,7 +3,7 @@ package com.makeuseof.cryptocurrency.view.postlist.recycler
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import com.makeuseof.cryptocurrency.R
-import com.makeuseof.muocore.models.PublisherPost
+import com.makeuseof.cryptocurrency.data.post.model.PublisherPost
 import com.makeuseof.utils.inflate
 import com.makeuseof.utils.isValidIndex
 import com.makeuseof.utils.setHeight
@@ -35,6 +35,11 @@ class PostListAdapter(
 
     fun setItems(posts: List<PublisherPost>) {
         mItems.clear()
+        mItems.addAll(posts)
+        notifyDataSetChanged()
+    }
+
+    fun addItems(posts: List<PublisherPost>){
         mItems.addAll(posts)
         notifyDataSetChanged()
     }

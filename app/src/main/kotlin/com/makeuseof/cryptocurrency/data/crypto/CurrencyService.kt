@@ -2,21 +2,18 @@ package com.makeuseof.cryptocurrency.data.crypto
 
 import com.makeuseof.core.model.Result
 import com.makeuseof.core.network.NetworkClientFactory
-import com.makeuseof.core.network.NetworkError
-import com.makeuseof.core.network.RHWithErrorHandler
 import com.makeuseof.cryptocurrency.data.EmptyCache
-import com.makeuseof.cryptocurrency.data.NetworkException
 import com.makeuseof.cryptocurrency.data.crypto.network.CryptoConfig
 import com.makeuseof.cryptocurrency.data.crypto.network.CryptoNetworkClient
 import com.makeuseof.cryptocurrency.data.model.CurrencyEntity
 import com.makeuseof.cryptocurrency.data.model.CurrencyListResponse
 import com.makeuseof.cryptocurrency.data.watchlist.WatchlistSourceContract
-import kotlin.coroutines.experimental.suspendCoroutine
+import com.makeuseof.utils.retrofit.BaseRetrofitDataSource
 
 // Created by askar on 7/19/18.
 class CurrencyService(
         private val mWatchlistSource: WatchlistSourceContract
-): CurrencySourceContract {
+): BaseRetrofitDataSource(), CurrencySourceContract {
     private var mCached: CurrencyListResponse? = null
     private val mObservers = hashSetOf<CurrencyUpdateObserver>()
 
@@ -97,27 +94,28 @@ class CurrencyService(
         notifyRemoved(it)
     }
 
-    override suspend fun getAllCurrencies(skipCache: Boolean): Result<CurrencyListResponse> = suspendCoroutine {
-        if (skipCache){
+    override suspend fun getAllCurrencies(skipCache: Boolean): Result<CurrencyListResponse> {
+        return if (skipCache){
             val call = mClient.getCurrencies()
-            call.enqueue(object : RHWithErrorHandler<CurrencyListResponse>{
-                override fun onSuccess(result: CurrencyListResponse) {
-                    setCache(result)
-                    it.resume(Result.Success(result))
-                }
 
-                override fun onFailure(error: NetworkError) {
-                    it.resume(Result.Error(NetworkException(error.toString())))
-                    if (mCached != null){
-                        setCache(mCached!!)
+            call.getResult().apply {
+                when(this) {
+                    is Result.Success -> {
+                        setCache(data)
+                    }
+
+                    is Result.Error -> {
+                        if (mCached != null){
+                            setCache(mCached!!)
+                        }
                     }
                 }
-            })
+            }
         } else {
             if (mCached != null){
-                it.resume(Result.Success(mCached!!))
+                Result.Success(mCached!!)
             } else {
-                it.resume(Result.Error(EmptyCache("Cache is empty")))
+                Result.Error(EmptyCache("Cache is empty"))
             }
         }
     }

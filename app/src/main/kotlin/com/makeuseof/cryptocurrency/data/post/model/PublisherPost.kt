@@ -3,20 +3,20 @@ package com.makeuseof.cryptocurrency.data.post.model
 import com.squareup.moshi.Json
 
 import java.text.SimpleDateFormat
-import java.util.Date
 
 /**
- * Created by abaikirov on 10/3/17.
+ * Created by askar on 11/19/18
+ * with Android Studio
  */
 
 data class PublisherPost(
-        @Json(name = "ID") var id: Int = 0,
-        @Json(name = "post_date") var date: String? = null,
-        @Json(name = "post_title") var title: String? = null,
-        @Json(name = "author") var author: String? = null,
-        @Json(name = "html") var html: String? = null,
-        @Json(name = "url") var url: String? = null,
-        @Json(name = "featured_image") var image: PublisherImage? = null
+        @Json(name = "ID") var id: Int,
+        @Json(name = "post_date") var date: String?,
+        @Json(name = "post_title") var title: String?,
+        @Json(name = "author") var author: String?,
+        @Json(name = "html") var html: String?,
+        @Json(name = "url") var url: String?,
+        @Json(name = "featured_image") var image: PublisherImage?
 ) {
 
     companion object {

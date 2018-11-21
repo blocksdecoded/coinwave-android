@@ -5,7 +5,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.makeuseof.cryptocurrency.R
-import com.makeuseof.muocore.models.PublisherPost
+import com.makeuseof.cryptocurrency.data.post.model.PublisherPost
 import com.makeuseof.utils.loadImageFromUrl
 
 /**
@@ -28,7 +28,10 @@ class PostListViewHolder(
 
     fun onBind(post: PublisherPost){
         mTitle.text = post.title
-        mImage.loadImageFromUrl(post.image.featured)
+
+        post.image?.featured?.also {
+            mImage.loadImageFromUrl(it)
+        }
     }
 
     interface PostVHCLickListener{

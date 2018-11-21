@@ -7,15 +7,8 @@ import com.squareup.moshi.Json
  * with Android Studio
  */
 
-class PublisherImage {
-
-    @Json(name = "featured")
-    var featured: String? = null
-
-    @Json(name = "thumb")
-    var thumb: String? = null
-
-    @Json(name = "middle")
-    var middle: String? = null
-
-}
+data class PublisherImage(
+        @Json(name = "featured") var featured: String?,
+        @Json(name = "thumb") var thumb: String?,
+        @Json(name = "middle") var middle: String?
+)
