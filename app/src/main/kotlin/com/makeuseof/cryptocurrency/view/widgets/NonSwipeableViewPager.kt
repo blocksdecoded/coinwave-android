@@ -20,7 +20,7 @@ class NonSwipeableViewPager: ViewPager{
             val viewpager = ViewPager::class.java
             val scroller = viewpager.getDeclaredField("mScroller")
             scroller.isAccessible = true
-            scroller.set(this, SmoothScroller(context))
+            scroller.set(this, SmoothScroller(context, 0))
         } catch (e: Exception) {
             e.printStackTrace()
         }

@@ -1,13 +1,10 @@
 package com.makeuseof.cryptocurrency.view.main
 
-import android.content.res.ColorStateList
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.design.widget.TabLayout
+import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
-import android.util.TypedValue
-import android.view.Gravity
 import com.makeuseof.cryptocurrency.R
 import com.makeuseof.cryptocurrency.domain.UseCaseProvider
 import com.makeuseof.cryptocurrency.view.currencylist.CurrencyListContract
@@ -19,7 +16,6 @@ import com.makeuseof.cryptocurrency.view.postlist.PostListPresenter
 import com.makeuseof.cryptocurrency.view.watchlist.WatchListContract
 import com.makeuseof.cryptocurrency.view.watchlist.WatchListFragment
 import com.makeuseof.cryptocurrency.view.watchlist.WatchListPresenter
-import com.makeuseof.cryptocurrency.view.widgets.FontTextView
 import com.makeuseof.cryptocurrency.view.widgets.PagerAdapter
 import com.makeuseof.utils.*
 import kotlinx.android.synthetic.main.activity_main.*
@@ -29,6 +25,24 @@ class MainActivity : AppCompatActivity() {
     private var mWatchListPresenter: WatchListContract.Presenter? = null
     private var mCurrencyListPresenter: CurrencyListContract.Presenter? = null
     private var mPostListPresenter: PostListContract.Presenter? = null
+
+    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+        when (item.itemId) {
+            R.id.navigation_watchlist -> {
+                main_view_pager.currentItem = 0
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_currencies -> {
+                main_view_pager.currentItem = 1
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_news -> {
+                main_view_pager.currentItem = 2
+                return@OnNavigationItemSelectedListener true
+            }
+        }
+        false
+    }
 
     //region Lifecycle
 
@@ -42,8 +56,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         when(main_view_pager.currentItem){
-            1 -> {main_view_pager.currentItem = 0}
-            else -> super.onBackPressed()
+            0 -> super.onBackPressed()
+            else -> {main_view_pager.currentItem = 0}
         }
     }
 
@@ -103,9 +117,7 @@ class MainActivity : AppCompatActivity() {
     //endregion
 
     private fun initViewPager(fragments: ArrayList<Fragment>){
-        main_tab_layout.addTab(getTab("Watchlist"))
-        main_tab_layout.addTab(getTab("Cryptocurrencies"))
-        main_tab_layout.tabGravity = TabLayout.GRAVITY_FILL
+        main_nav_view.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
         val adapter = PagerAdapter(supportFragmentManager, fragments)
         main_view_pager.adapter = adapter
@@ -118,6 +130,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onPageSelected(position: Int) {
+                main_nav_view.selectedItemId = getNavigationItemId(position)
+
                 when(position){
                     0 -> setAddVisibility(true)
                     else -> setAddVisibility(false)
@@ -125,19 +139,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        main_view_pager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(main_tab_layout))
-        main_tab_layout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-            }
-
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                tab?.let { main_view_pager.currentItem = tab.position }
-            }
-        })
     }
 
     private fun setAddVisibility(visible: Boolean){
@@ -150,26 +151,33 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun getTab(title: String): TabLayout.Tab {
-        val textView = FontTextView(this)
-        textView.gravity = Gravity.CENTER
-        textView.text = title
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f)
-
-        val colorStates = ColorStateList(
-                arrayOf(
-                        intArrayOf(android.R.attr.state_selected), intArrayOf()
-                ),
-                intArrayOf(
-                        ResourceUtil.getColor(this, R.color.white),
-                        ResourceUtil.getColor(this, R.color.light_text)
-                )
-        )
-
-        textView.setTextColor(colorStates)
-
-        return main_tab_layout.newTab().setCustomView(textView)
+    private fun getNavigationItemId(position: Int): Int = when (position) {
+        0 -> R.id.navigation_watchlist
+        1 -> R.id.navigation_currencies
+        2 -> R.id.navigation_news
+        else -> R.id.navigation_watchlist
     }
+
+//    private fun getTab(title: String): TabLayout.Tab {
+//        val textView = FontTextView(this)
+//        textView.gravity = Gravity.CENTER
+//        textView.text = title
+//        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f)
+//
+//        val colorStates = ColorStateList(
+//                arrayOf(
+//                        intArrayOf(android.R.attr.state_selected), intArrayOf()
+//                ),
+//                intArrayOf(
+//                        ResourceUtil.getColor(this, R.color.white),
+//                        ResourceUtil.getColor(this, R.color.light_text)
+//                )
+//        )
+//
+//        textView.setTextColor(colorStates)
+//
+//        return main_tab_layout.newTab().setCustomView(textView)
+//    }
 
     //endregion
 }
