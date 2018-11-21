@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.makeuseof.core.contracts.LoadNextListener
 import com.makeuseof.core.mvp.BaseMVPFragment
 import com.makeuseof.cryptocurrency.R
 import com.makeuseof.cryptocurrency.data.post.model.PublisherPost
@@ -24,7 +25,8 @@ import kotlinx.coroutines.async
 class PostListFragment :
         BaseMVPFragment<PostListContract.Presenter>(),
         PostListContract.View,
-        PostListViewHolder.PostVHCLickListener
+        PostListViewHolder.PostVHCLickListener,
+        LoadNextListener
 {
     companion object {
         fun newInstance(): PostListFragment = PostListFragment()
@@ -61,7 +63,7 @@ class PostListFragment :
             postHeight = metrics.widthPixels * 9 / 16
         }
 
-        mAdapter = PostListAdapter(arrayListOf(), this, postHeight)
+        mAdapter = PostListAdapter(arrayListOf(), this, this, postHeight)
         mRecycler = rootView?.findViewById(R.id.fragment_post_list_recycler)
         mRecycler?.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         mRecycler?.adapter = mAdapter
@@ -75,6 +77,14 @@ class PostListFragment :
         mAdapter?.getItem(position)?.also {
             mPresenter?.onPostClick(it.id)
         }
+    }
+
+    //endregion
+
+    //region Load next
+
+    override fun onLoadNext() {
+        mPresenter?.getNextPosts()
     }
 
     //endregion

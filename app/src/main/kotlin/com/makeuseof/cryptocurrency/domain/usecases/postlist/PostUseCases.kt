@@ -10,5 +10,7 @@ import com.makeuseof.cryptocurrency.data.post.model.PublisherPost
 interface PostUseCases {
     suspend fun getPosts(): Result<List<PublisherPost>>?
 
+    suspend fun getNextPosts(): Result<List<PublisherPost>>?
+
     suspend fun getPost(id: Int): PublisherPost?
 }

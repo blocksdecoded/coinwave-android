@@ -52,7 +52,7 @@ class PostListPresenter(
     }
 
     override fun getNextPosts()  = launchSilent(ui){
-        mPostUseCases.getPosts()
+        mPostUseCases.getNextPosts()
                 ?.onSuccess { mView?.nextPosts(it) }
                 ?.onError { mView?.showMessage("Next loading fail.") }
     }

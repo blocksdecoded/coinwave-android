@@ -5,6 +5,7 @@ import com.makeuseof.utils.coroutine.model.Result.Success
 import com.makeuseof.cryptocurrency.data.post.PostDataSource
 import com.makeuseof.cryptocurrency.data.post.model.PublisherPost
 import com.makeuseof.utils.coroutine.AppExecutors
+import com.makeuseof.utils.coroutine.model.onSuccess
 import kotlinx.coroutines.withContext
 
 /**
@@ -17,14 +18,21 @@ class PostInteractor(
 ): PostUseCases {
     private var date = ""
 
+    private fun updateLastDate(posts: List<PublisherPost>){
+        date = posts.last().date?:""
+    }
+
     override suspend fun getPosts(): Result<List<PublisherPost>>? = withContext(appExecutors.networkContext) {
-        val result = mPostsSource.getPosts(date)
-
-        when(result) {
-            is Success -> { date = result.data.last().date?:"" }
+        date = ""
+        mPostsSource.getPosts(date)?.onSuccess {
+            updateLastDate(it)
         }
+    }
 
-        result
+    override suspend fun getNextPosts(): Result<List<PublisherPost>>? = withContext(appExecutors.networkContext) {
+        mPostsSource.getPosts(date)?.onSuccess {
+            updateLastDate(it)
+        }
     }
 
     override suspend fun getPost(id: Int): PublisherPost? {
