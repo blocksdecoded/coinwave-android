@@ -1,32 +1,20 @@
 package com.makeuseof.cryptocurrency.view.postlist
 
-import android.content.Intent
-import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.DisplayMetrics
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import butterknife.BindView
-import butterknife.ButterKnife
-import butterknife.Unbinder
 import com.makeuseof.core.contracts.LoadNextListener
 import com.makeuseof.core.mvp.BaseMVPFragment
 import com.makeuseof.cryptocurrency.R
 import com.makeuseof.cryptocurrency.data.post.model.PublisherPost
+import com.makeuseof.cryptocurrency.view.post.PostActivity
 import com.makeuseof.cryptocurrency.view.postlist.recycler.PostListAdapter
 import com.makeuseof.cryptocurrency.view.postlist.recycler.PostListViewHolder
-import com.makeuseof.muocore.CoreSharedConstants
-import com.makeuseof.muocore.ui.PostViewActivity
 import com.makeuseof.utils.hide
-import com.makeuseof.utils.inflate
 import com.makeuseof.utils.visible
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
 
 open class PostListFragment :
         BaseMVPFragment<PostListContract.Presenter>(),
@@ -95,11 +83,12 @@ open class PostListFragment :
 
     override fun openPost(postId: Int) {
         activity?.also {
-            it.startActivity(
-                    Intent(it, PostViewActivity::class.java)
-                            .putExtra(CoreSharedConstants.KEY_POST_ID, postId.toString())
-            )
-            activity?.overridePendingTransition(R.anim.slide_in_right, 0)
+            PostActivity.start(it, postId)
+//            it.startActivity(
+//                    Intent(it, PostViewActivity::class.java)
+//                            .putExtra(CoreSharedConstants.KEY_POST_ID, postId.toString())
+//            )
+//            activity?.overridePendingTransition(R.anim.slide_in_right, 0)
         }
     }
 

@@ -109,7 +109,7 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'com.makeramen:roundedimageview:2.2.1'
     implementation 'com.davemorrissey.labs:subsampling-scale-image-view:3.6.0'
-    implementation 'com.github.ksoichiro:android-observablescrollview:1.6.0'
+    api 'com.github.ksoichiro:android-observablescrollview:1.6.0'
     implementation 'com.facebook.android:facebook-android-sdk:4.16.0'
     implementation 'me.imid.swipebacklayout.lib:library:1.1.0'
 
