@@ -18,17 +18,13 @@ class PostListViewHolder(
         view: View,
         private val mListener: PostVHCLickListener
 ): RecyclerView.ViewHolder(view) {
-
     @BindView(R.id.adapter_post_item_image)
     lateinit var mImage: ImageView
     @BindView(R.id.adapter_post_item_title)
     lateinit var mTitle: TextView
-    @BindView(R.id.adapter_post_item_underline)
-    lateinit var mUnderline: View
 
     init {
         ButterKnife.bind(this, view)
-
         itemView.setOnClickListener {
             mListener.onClick(adapterPosition)
         }
