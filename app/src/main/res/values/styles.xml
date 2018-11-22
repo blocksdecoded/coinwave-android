@@ -17,6 +17,10 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="AppTheme.ProgressStyle">
+        <item name="colorAccent">@color/black</item>
+    </style>
+
     <style name="AppTheme.TabBarTextStyle" parent="android:TextAppearance.Widget.TabWidget">
         <item name="android:textSize">17sp</item>
     </style>

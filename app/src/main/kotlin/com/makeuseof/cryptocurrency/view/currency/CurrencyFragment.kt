@@ -143,7 +143,8 @@ open class CurrencyFragment :
         dataSet.setDrawValues(false)
 
         context?.let {
-            dataSet.color = ResourceUtil.getColor(it, R.color.green)
+//            dataSet.color = ResourceUtil.getColor(it, R.color.green)
+            dataSet.color = ResourceUtil.getColor(it, R.color.black)
             dataSet.fillDrawable = ContextCompat.getDrawable(it, R.drawable.chart_bg)
         }
 
