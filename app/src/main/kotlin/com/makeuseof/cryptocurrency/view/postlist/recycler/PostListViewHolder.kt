@@ -23,6 +23,8 @@ class PostListViewHolder(
     lateinit var mImage: ImageView
     @BindView(R.id.adapter_post_item_title)
     lateinit var mTitle: TextView
+    @BindView(R.id.adapter_post_item_underline)
+    lateinit var mUnderline: View
 
     init {
         ButterKnife.bind(this, view)

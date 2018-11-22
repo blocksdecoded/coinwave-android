@@ -93,6 +93,7 @@ class PostListAdapter(
     //region Public
 
     fun setItems(posts: List<PublisherPost>) {
+        mAlreadyLoading = false
         mItems.clear()
         mItems.addAll(posts)
         notifyDataSetChanged()

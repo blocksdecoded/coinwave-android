@@ -23,7 +23,7 @@ fun TextView?.setBoldFont(){
 
 fun TextView?.setHeavyFont(){
 	this?.let {
-		typeface = OpenSansTypeface.getBold(it.context)
+		typeface = SFUITypeface.getHeavy(it.context)
 	}
 }
 
