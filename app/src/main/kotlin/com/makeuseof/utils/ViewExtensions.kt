@@ -1,6 +1,7 @@
 package com.makeuseof.utils
 
 import android.animation.Animator
+import android.annotation.SuppressLint
 import android.graphics.Paint
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
@@ -11,10 +12,13 @@ import android.view.Gravity
 import android.support.v4.content.ContextCompat
 import android.support.annotation.DimenRes
 import android.support.annotation.ColorRes
+import android.support.design.internal.BottomNavigationItemView
+import android.support.design.internal.BottomNavigationMenuView
+import android.support.design.widget.BottomNavigationView
 import android.view.View
 import android.support.v4.view.ViewCompat.LAYER_TYPE_SOFTWARE
 import android.view.animation.DecelerateInterpolator
-
+import android.util.Log
 
 // Created by askar on 5/31/18.
 
@@ -122,5 +126,27 @@ fun View.animateAlpha(
                 }
             })
             .start()
+}
+
+@SuppressLint("RestrictedApi")
+fun BottomNavigationView.removeShiftMode(){
+    val menuView = this.getChildAt(0) as BottomNavigationMenuView
+    try {
+        val shiftingMode = menuView::class.java.getDeclaredField("mShiftingMode")
+        shiftingMode.isAccessible = true
+        shiftingMode.setBoolean(menuView, false)
+        shiftingMode.isAccessible = false
+        for (i in 0 until menuView.childCount) {
+            val item = menuView.getChildAt(i) as BottomNavigationItemView
+            item.setShifting(false)
+            // set once again checked value, so view will be updated
+            item.setChecked(item.itemData.isChecked)
+        }
+    } catch (e: NoSuchFieldException) {
+        Log.e("ERROR NO SUCH FIELD", "Unable to get shift mode field")
+    } catch (e: IllegalAccessException) {
+        Log.e("ERROR ILLEGAL ALG", "Unable to change value of shift mode")
+    }
+
 }
 

@@ -8,7 +8,7 @@
     tools:context=".view.main.MainActivity"
     android:background="@drawable/bg_main">
 
-    <android.support.design.widget.BottomNavigationView
+    <com.makeuseof.cryptocurrency.view.widgets.BottomNavigationViewEx
         android:id="@+id/main_nav_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,7 +17,8 @@
         app:layout_constraintRight_toRightOf="parent"
         app:itemIconTint="@drawable/menu_item_color"
         app:itemTextColor="@drawable/menu_item_color"
-        app:menu="@menu/menu_bottom_nav"/>
+        app:menu="@menu/menu_bottom_nav"
+        app:itemIconSize="20dp"/>
 
     <com.makeuseof.cryptocurrency.view.widgets.NonSwipeableViewPager
         android:id="@+id/main_view_pager"

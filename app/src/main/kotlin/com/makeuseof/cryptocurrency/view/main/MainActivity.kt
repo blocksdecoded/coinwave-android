@@ -129,6 +129,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun initViewPager(fragments: ArrayList<Fragment>){
         main_nav_view.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        main_nav_view.enableAnimation(false)
+        main_nav_view.isItemHorizontalTranslationEnabled = false
+        main_nav_view.removeShiftMode()
 
         val adapter = PagerAdapter(supportFragmentManager, fragments)
         main_view_pager.adapter = adapter
