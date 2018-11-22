@@ -13,6 +13,9 @@ import com.makeuseof.cryptocurrency.view.currencylist.CurrencyListPresenter
 import com.makeuseof.cryptocurrency.view.postlist.PostListContract
 import com.makeuseof.cryptocurrency.view.postlist.PostListFragment
 import com.makeuseof.cryptocurrency.view.postlist.PostListPresenter
+import com.makeuseof.cryptocurrency.view.settings.SettingsContract
+import com.makeuseof.cryptocurrency.view.settings.SettingsFragment
+import com.makeuseof.cryptocurrency.view.settings.SettingsPresenter
 import com.makeuseof.cryptocurrency.view.watchlist.WatchListContract
 import com.makeuseof.cryptocurrency.view.watchlist.WatchListFragment
 import com.makeuseof.cryptocurrency.view.watchlist.WatchListPresenter
@@ -25,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     private var mWatchListPresenter: WatchListContract.Presenter? = null
     private var mCurrencyListPresenter: CurrencyListContract.Presenter? = null
     private var mPostListPresenter: PostListContract.Presenter? = null
+    private var mSettingsPresenter: SettingsContract.Presenter? = null
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
@@ -38,6 +42,10 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.navigation_news -> {
                 main_view_pager.currentItem = 2
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_settings -> {
+                main_view_pager.currentItem = 3
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -71,6 +79,7 @@ class MainActivity : AppCompatActivity() {
         fragments.add(createWatchListScreen())
         fragments.add(createCurrencyListScreen())
         fragments.add(createPostListScreen())
+        fragments.add(createSettingsScreen())
 
         initViewPager(fragments)
 
@@ -82,36 +91,38 @@ class MainActivity : AppCompatActivity() {
     //region Screens
 
     private fun createWatchListScreen(): Fragment {
-        val fragment = WatchListFragment.newInstance()
-
-        mWatchListPresenter = WatchListPresenter(
-                fragment,
-                UseCaseProvider.getCurrencyListUseCases(applicationContext)
-        )
-
-        return fragment
+        return WatchListFragment.newInstance().apply {
+            mWatchListPresenter = WatchListPresenter(
+                    this,
+                    UseCaseProvider.getCurrencyListUseCases(applicationContext)
+            )
+        }
     }
 
     private fun createCurrencyListScreen(): Fragment {
-        val fragment = CurrencyListFragment.newInstance()
-
-        mCurrencyListPresenter = CurrencyListPresenter(
-                fragment,
-                UseCaseProvider.getCurrencyListUseCases(applicationContext)
-        )
-
-        return fragment
+        return CurrencyListFragment.newInstance().apply {
+            mCurrencyListPresenter = CurrencyListPresenter(
+                    this,
+                    UseCaseProvider.getCurrencyListUseCases(applicationContext)
+            )
+        }
     }
 
     private fun createPostListScreen(): Fragment {
-        val fragment = PostListFragment.newInstance()
+        return PostListFragment.newInstance().apply {
+            mPostListPresenter = PostListPresenter(
+                    this,
+                    UseCaseProvider.getPostUseCases()
+            )
+        }
+    }
 
-        mPostListPresenter = PostListPresenter(
-                fragment,
-                UseCaseProvider.getPostUseCases()
-        )
-
-        return fragment
+    private fun createSettingsScreen(): Fragment {
+        return SettingsFragment().apply {
+            mSettingsPresenter = SettingsPresenter(
+                    this
+            )
+        }
     }
 
     //endregion
@@ -155,29 +166,9 @@ class MainActivity : AppCompatActivity() {
         0 -> R.id.navigation_watchlist
         1 -> R.id.navigation_currencies
         2 -> R.id.navigation_news
+        3 -> R.id.navigation_settings
         else -> R.id.navigation_watchlist
     }
-
-//    private fun getTab(title: String): TabLayout.Tab {
-//        val textView = FontTextView(this)
-//        textView.gravity = Gravity.CENTER
-//        textView.text = title
-//        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f)
-//
-//        val colorStates = ColorStateList(
-//                arrayOf(
-//                        intArrayOf(android.R.attr.state_selected), intArrayOf()
-//                ),
-//                intArrayOf(
-//                        ResourceUtil.getColor(this, R.color.white),
-//                        ResourceUtil.getColor(this, R.color.light_text)
-//                )
-//        )
-//
-//        textView.setTextColor(colorStates)
-//
-//        return main_tab_layout.newTab().setCustomView(textView)
-//    }
 
     //endregion
 }
