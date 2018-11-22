@@ -2,6 +2,7 @@ package com.makeuseof.cryptocurrency.view.postlist
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.DisplayMetrics
@@ -20,7 +21,9 @@ import com.makeuseof.cryptocurrency.view.postlist.recycler.PostListAdapter
 import com.makeuseof.cryptocurrency.view.postlist.recycler.PostListViewHolder
 import com.makeuseof.muocore.CoreSharedConstants
 import com.makeuseof.muocore.ui.PostViewActivity
+import com.makeuseof.utils.hide
 import com.makeuseof.utils.inflate
+import com.makeuseof.utils.visible
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
@@ -40,12 +43,19 @@ open class PostListFragment :
 
     @BindView(R.id.fragment_post_list_recycler)
     @JvmField var mRecycler: RecyclerView? = null
+    @BindView(R.id.fragment_post_list_swipe_refresh)
+    @JvmField var mSwipeRefresh: SwipeRefreshLayout? = null
+
     var mAdapter: PostListAdapter? = null
 
     //region Init
 
     override fun initView(rootView: View) {
         initRecycler(rootView)
+
+        mSwipeRefresh?.setOnRefreshListener {
+            mPresenter?.getPosts()
+        }
     }
 
     private fun initRecycler(rootView: View?) {
@@ -94,9 +104,13 @@ open class PostListFragment :
     }
 
     override fun showLoading() {
+        mSwipeRefresh?.isRefreshing = true
+        mRecycler?.hide()
     }
 
     override fun stopLoading() {
+        mSwipeRefresh?.isRefreshing = false
+        mRecycler?.visible()
     }
 
     override fun showPosts(posts: List<PublisherPost>) {
