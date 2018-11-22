@@ -81,7 +81,7 @@
         </android.support.constraint.ConstraintLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <ScrollView
+    <com.makeuseof.cryptocurrency.view.widgets.LockableScrollView
         android:id="@+id/currency_scroll_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -110,10 +110,37 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/chart_gradient_bg">
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/currency_chart_picked_container"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="8dp"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="8dp"
+                        app:cardPreventCornerOverlap="false"
+                        app:cardBackgroundColor="@color/colorPrimary"
+                        android:visibility="invisible">
+
+                        <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+                            android:id="@+id/currency_chart_picked"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="6dp"
+                            android:text="$303.3"
+                            android:textColor="@color/white"
+                            android:gravity="center"
+                            android:textSize="12sp"/>
+
+                    </android.support.v7.widget.CardView>
+
                     <com.github.mikephil.charting.charts.LineChart
                         android:id="@+id/fragment_currency_chart"
                         android:layout_width="match_parent"
-                        android:layout_height="190dp"
+                        android:layout_height="200dp"
                         android:visibility="invisible"/>
 
                     <ProgressBar
@@ -377,6 +404,6 @@
                 android:letterSpacing="0.15"
                 app:ftv_typeface="semibold"/>
         </android.support.constraint.ConstraintLayout>
-    </ScrollView>
+    </com.makeuseof.cryptocurrency.view.widgets.LockableScrollView>
 
 </android.support.design.widget.CoordinatorLayout>

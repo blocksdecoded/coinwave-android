@@ -3,6 +3,7 @@ package com.makeuseof.cryptocurrency.view.currency
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
 import android.support.customtabs.CustomTabsIntent
 import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
@@ -31,8 +32,10 @@ import com.makeuseof.cryptocurrency.data.model.CurrencyEntity
 import com.makeuseof.cryptocurrency.util.format
 import com.makeuseof.cryptocurrency.util.loadIcon
 import com.makeuseof.cryptocurrency.util.setChangedPercent
+import com.makeuseof.cryptocurrency.view.widgets.LockableScrollView
 import com.makeuseof.cryptocurrency.view.widgets.OptionSelectorView
 import com.makeuseof.utils.*
+import java.util.*
 
 open class CurrencyFragment :
         BaseMVPFragment<CurrencyContract.Presenter>(),
@@ -50,7 +53,7 @@ open class CurrencyFragment :
     @JvmField var mChart: LineChart? = null
 
     @BindView(R.id.currency_scroll_container)
-    @JvmField var mScrollContainer: ScrollView? = null
+    @JvmField var mScrollContainer: LockableScrollView? = null
     @BindView(R.id.fragment_currency_add_to_watchlist)
     @JvmField var mWatchlist: ImageView? = null
     @BindView(R.id.fragment_currency_info_icon)
@@ -76,6 +79,11 @@ open class CurrencyFragment :
     @BindView(R.id.currency_change_1w)
     @JvmField var mChange1w: TextView? = null
 
+    @BindView(R.id.currency_chart_picked_container)
+    @JvmField var mPickedContainer: View? = null
+    @BindView(R.id.currency_chart_picked)
+    @JvmField var mPickedPrice: TextView? = null
+
     @BindView(R.id.fragment_currency_progress)
     @JvmField var mProgress: View? = null
     @BindView(R.id.currency_chart_period)
@@ -90,15 +98,15 @@ open class CurrencyFragment :
         }
     }
     var mScrollEnabled = true
+        set(value) {
+            field = value
+            mScrollContainer?.mScrollable = value
+        }
 
     override fun initView(rootView: View){
         mChartPeriods?.addClickListener { mPresenter?.onPeriodChanged(it) }
 
         initChart()
-
-        mScrollContainer?.setOnTouchListener { v, event ->
-            return@setOnTouchListener !mScrollEnabled
-        }
     }
 
     private fun initChart(){
@@ -187,14 +195,30 @@ open class CurrencyFragment :
     //region Chart
 
     override fun onNothingSelected() {
-
     }
 
     override fun onValueSelected(e: Entry?, h: Highlight?) {
-//        showShortToast(context, e.toString())
+        if (mPickedContainer?.visibility != View.VISIBLE){
+            mPickedContainer?.alpha = 0f
+            mPickedContainer?.animate()
+                    ?.setDuration(300L)
+                    ?.alpha(1f)
+                    ?.withStartAction { mPickedContainer.visible() }
+                    ?.start()
+        }
+
+        val date = Date(e?.x?.toLong()?:0L)
+        mPickedPrice?.text = "${date.toMediumFormat()} ${date.toHourFormat()}\n\$${(e?.y ?: 0f).format()}"
     }
 
     override fun onChartGestureEnd(me: MotionEvent?, lastPerformedGesture: ChartTouchListener.ChartGesture?) {
+        Handler().postDelayed({
+            mPickedContainer?.animate()
+                    ?.setDuration(300L)
+                    ?.alpha(0f)
+                    ?.withEndAction { mPickedContainer.invisible() }
+                    ?.start()
+        }, 200)
         mScrollEnabled = true
     }
 
