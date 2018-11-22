@@ -1,0 +1,11 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape
+            android:innerRadius="0dp"
+            android:useLevel="false"
+            android:thicknessRatio="2"
+            android:shape="ring">
+            <solid android:color="@color/selectable_bg_50"/>
+        </shape>
+    </item>
+</selector>
