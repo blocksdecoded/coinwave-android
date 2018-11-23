@@ -49,10 +49,6 @@ class MainActivity : AppCompatActivity() {
                 main_view_pager.currentItem = 2
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_settings -> {
-                main_view_pager.currentItem = 3
-                return@OnNavigationItemSelectedListener true
-            }
         }
         false
     }
@@ -239,7 +235,6 @@ class MainActivity : AppCompatActivity() {
         0 -> R.id.navigation_watchlist
         1 -> R.id.navigation_currencies
         2 -> R.id.navigation_news
-        3 -> R.id.navigation_settings
         else -> R.id.navigation_watchlist
     }
 
