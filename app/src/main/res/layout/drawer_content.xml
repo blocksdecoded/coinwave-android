@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:paddingTop="30dp"
+        android:paddingBottom="24dp">
+
+        <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+            android:id="@+id/drawer_menu_title"
+            android:theme="@style/AppTheme.DrawerTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:text="Menu"
+            android:paddingBottom="0dp"
+            app:ftv_typeface="regular"/>
+
+        <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+            android:id="@+id/drawer_favorite"
+            android:theme="@style/AppTheme.DrawerMenuItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Favorite cryptocurrency"
+            app:layout_constraintTop_toBottomOf="@+id/drawer_menu_title"
+            app:ftv_typeface="regular"/>
+
+        <!--Scan-->
+        <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+            android:id="@+id/drawer_add_watchlist"
+            android:theme="@style/AppTheme.DrawerMenuItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add to watchlist"
+            app:layout_constraintTop_toBottomOf="@+id/drawer_favorite"
+            app:ftv_typeface="regular"/>
+
+        <!--Docs-->
+        <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+            android:id="@+id/drawer_share_this_app"
+            android:theme="@style/AppTheme.DrawerMenuItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Share this app"
+            app:layout_constraintTop_toBottomOf="@+id/drawer_add_watchlist"
+            app:ftv_typeface="regular"/>
+
+        <!--Settings-->
+        <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+            android:id="@+id/drawer_rate_us"
+            android:theme="@style/AppTheme.DrawerMenuItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Rate us"
+            app:layout_constraintTop_toBottomOf="@+id/drawer_share_this_app"
+            app:ftv_typeface="regular"/>
+
+        <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+            android:id="@+id/drawer_contact_us"
+            android:theme="@style/AppTheme.DrawerMenuItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Contact us"
+            app:layout_constraintTop_toBottomOf="@+id/drawer_rate_us"
+            app:ftv_typeface="regular"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
+        <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+            android:theme="@style/AppTheme.DrawerTitle"
+            android:id="@+id/other_apps_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            android:text="Other apps"
+            app:ftv_typeface="regular"/>
+
+        <com.makeuseof.appslist.view.AppsView
+            android:id="@+id/muo_apps_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@id/other_apps_title"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/other_apps_title"
+            android:overScrollMode="never"
+            app:av_appBackground="@drawable/light_selectable_bg"
+            app:av_textColor="#FFF"
+            android:layout_marginTop="14dp"
+            android:paddingBottom="16dp"/>
+    </android.support.constraint.ConstraintLayout>
+
+</LinearLayout>

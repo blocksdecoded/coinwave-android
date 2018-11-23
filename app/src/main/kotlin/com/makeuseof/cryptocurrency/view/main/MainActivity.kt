@@ -3,9 +3,11 @@ package com.makeuseof.cryptocurrency.view.main
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.support.annotation.ColorInt
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
+import android.support.v4.view.GravityCompat
 import android.support.v4.view.ViewPager
 import android.view.View
 import android.view.ViewGroup
@@ -27,8 +29,10 @@ import com.makeuseof.cryptocurrency.view.watchlist.WatchListPresenter
 import com.makeuseof.cryptocurrency.view.widgets.PagerAdapter
 import com.makeuseof.utils.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.drawer_content.*
+import kotlinx.android.synthetic.main.main_content.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private var mWatchListPresenter: WatchListContract.Presenter? = null
     private var mCurrencyListPresenter: CurrencyListContract.Presenter? = null
@@ -53,6 +57,17 @@ class MainActivity : AppCompatActivity() {
         false
     }
 
+    override fun onBackPressed() {
+        if (drawer_layout.isDrawerOpen(GravityCompat.START)){
+            closeDrawer()
+        } else {
+            when(main_view_pager.currentItem){
+                0 -> super.onBackPressed()
+                else -> {main_view_pager.currentItem = 0}
+            }
+        }
+    }
+
     //region Lifecycle
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,13 +78,6 @@ class MainActivity : AppCompatActivity() {
         init()
 
         initStatusBar()
-    }
-
-    override fun onBackPressed() {
-        when(main_view_pager.currentItem){
-            0 -> super.onBackPressed()
-            else -> {main_view_pager.currentItem = 0}
-        }
     }
 
     //endregion
@@ -92,7 +100,6 @@ class MainActivity : AppCompatActivity() {
             //holdStatusBar(toolbar, R.color.colorPrimary);
         }
     }
-
 
     private fun setStatusBarImmersiveMode(@ColorInt color: Int) {
         val win = window
@@ -136,10 +143,11 @@ class MainActivity : AppCompatActivity() {
 
     //endregion
 
-
     //region Init
 
     private fun init(){
+        initNavigationDrawer()
+
         val fragments = ArrayList<Fragment>()
 
         fragments.add(createWatchListScreen())
@@ -193,6 +201,14 @@ class MainActivity : AppCompatActivity() {
 
     //endregion
 
+    private fun initNavigationDrawer(){
+        drawer_add_watchlist.setOnClickListener(this)
+        drawer_contact_us.setOnClickListener(this)
+        drawer_favorite.setOnClickListener(this)
+        drawer_rate_us.setOnClickListener(this)
+        drawer_share_this_app.setOnClickListener(this)
+    }
+
     private fun initViewPager(fragments: ArrayList<Fragment>){
         main_nav_view.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         main_nav_view.enableAnimation(false)
@@ -236,6 +252,39 @@ class MainActivity : AppCompatActivity() {
         1 -> R.id.navigation_currencies
         2 -> R.id.navigation_news
         else -> R.id.navigation_watchlist
+    }
+
+    //endregion
+
+    //region Click
+
+    override fun onClick(v: View?) {
+        when(v){
+            drawer_add_watchlist -> drawerItemClick {  }
+            drawer_contact_us -> drawerItemClick {  }
+            drawer_favorite -> drawerItemClick {  }
+            drawer_rate_us -> drawerItemClick {  }
+            drawer_share_this_app -> drawerItemClick {  }
+        }
+    }
+
+    private fun drawerItemClick(body: () -> Unit){
+        body.invoke()
+        closeDrawer()
+    }
+
+    //endregion
+
+    //region Navigation Drawer
+
+    private fun openDrawer(){
+        drawer_layout.openDrawer(GravityCompat.START)
+    }
+
+    private fun closeDrawer(delay: Long = 0L){
+        Handler().postDelayed({
+            drawer_layout.closeDrawer(GravityCompat.START)
+        }, delay)
     }
 
     //endregion
