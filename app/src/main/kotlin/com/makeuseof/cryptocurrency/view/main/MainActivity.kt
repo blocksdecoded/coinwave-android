@@ -9,6 +9,7 @@ import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v4.view.ViewPager
+import android.support.v4.widget.DrawerLayout
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
@@ -222,6 +223,21 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         drawer_favorite.setOnClickListener(this)
         drawer_rate_us.setOnClickListener(this)
         drawer_share_this_app.setOnClickListener(this)
+
+        drawer_layout.addDrawerListener(object : DrawerLayout.DrawerListener{
+            override fun onDrawerStateChanged(p0: Int) {
+            }
+
+            override fun onDrawerSlide(p0: View, p1: Float) {
+            }
+
+            override fun onDrawerClosed(p0: View) {
+                main_nav_scroll.scrollTo(0, 0)
+            }
+
+            override fun onDrawerOpened(p0: View) {
+            }
+        })
     }
 
     private fun initViewPager(fragments: ArrayList<Fragment>){
