@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="main_bg_color">#FFFFFF</color>
-    <color name="cedar">#432D2D</color>
-    <color name="primary">#E22524</color>
-    <color name="disabled">#8C8C8C</color>
-    <color name="separator">#D8D8D8</color>
-    <color name="black">#000</color>
-</resources>

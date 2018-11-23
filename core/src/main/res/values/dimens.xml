@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <dimen name="progressBar_normal">40dp</dimen>
-    <dimen name="progressBar_small">25dp</dimen>
-    <dimen name="featured_item_height">220dp</dimen>
-    <dimen name="like_heart_size">13dp</dimen>
-</resources>
