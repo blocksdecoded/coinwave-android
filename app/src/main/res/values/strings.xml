@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">CryptoCurrency</string>
+    <string name="small_size">Small size</string>
+    <string name="medium_size">Medium size</string>
+    <string name="big_size">Big size</string>
 </resources>

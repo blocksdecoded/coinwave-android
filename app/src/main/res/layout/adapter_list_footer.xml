@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="60dp"
+    android:background="?android:selectableItemBackground"
+    >
+
+    <com.makeuseof.cryptocurrency.view.post.widgets.LoadingView
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:id="@+id/footer_progress"
+        android:layout_width="@dimen/progressBar_small"
+        android:layout_height="@dimen/progressBar_small"/>
+
+    <LinearLayout
+        android:id="@+id/footer_error_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        >
+
+        <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+            android:id="@+id/footer_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white_transparent"
+            android:textSize="14sp"
+            android:layout_gravity="center"
+            android:text="Connection error"
+            />
+
+        <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tap to retry"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            />
+    </LinearLayout>
+</FrameLayout>

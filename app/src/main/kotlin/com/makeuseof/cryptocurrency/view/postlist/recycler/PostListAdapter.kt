@@ -1,13 +1,11 @@
 package com.makeuseof.cryptocurrency.view.postlist.recycler
 
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.makeuseof.core.contracts.LoadNextListener
 import com.makeuseof.cryptocurrency.R
 import com.makeuseof.cryptocurrency.data.post.model.PublisherPost
-import com.makeuseof.muocore.ui.holders.ListFooterViewHolder
 import com.makeuseof.utils.inflate
 import com.makeuseof.utils.isValidIndex
 import com.makeuseof.utils.setHeight
@@ -86,7 +84,7 @@ class PostListAdapter(
         mLoadNextListener.onLoadNext()
     }
 
-    override fun onFooterClick(v: View?, position: Int) {
+    override fun onFooterClick(v: View, position: Int) {
 
     }
 

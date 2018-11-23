@@ -4,11 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.makeuseof.muocore.ui.widgets.NestedWebView
+    <com.makeuseof.cryptocurrency.view.post.widgets.NestedWebView
         android:id="@+id/web_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="-49dp"
+        android:layout_marginTop="-55dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <android.support.design.widget.AppBarLayout
@@ -24,8 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@android:color/transparent"
-            app:layout_scrollFlags="scroll|enterAlways|snap"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
+            app:layout_scrollFlags="scroll|enterAlways|snap">
 
             <ImageView
                 android:id="@+id/post_view_fragment_back"
@@ -33,7 +32,7 @@
                 android:layout_height="40dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
-                android:foreground="@drawable/circlur_selectable"
+                android:foreground="@drawable/round_light_selectable_bg"
                 android:padding="4dp"
                 android:src="@drawable/ic_arrow_back_o" />
 
@@ -47,7 +46,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginRight="8dp"
-                    android:foreground="@drawable/circlur_selectable"
+                    android:foreground="@drawable/round_light_selectable_bg"
                     android:padding="4dp"
                     android:src="@drawable/ic_text_format_o" />
                 <ImageView
@@ -55,7 +54,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginRight="8dp"
-                    android:foreground="@drawable/circlur_selectable"
+                    android:foreground="@drawable/round_light_selectable_bg"
                     android:padding="4dp"
                     android:src="@drawable/ic_share_o" />
             </LinearLayout>
