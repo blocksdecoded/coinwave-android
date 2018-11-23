@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import com.makeuseof.cryptocurrency.R
 import com.makeuseof.cryptocurrency.domain.UseCaseProvider
+import com.makeuseof.cryptocurrency.util.CryptoRateUtil
 import com.makeuseof.cryptocurrency.view.currencylist.CurrencyListContract
 import com.makeuseof.cryptocurrency.view.currencylist.CurrencyListFragment
 import com.makeuseof.cryptocurrency.view.currencylist.CurrencyListPresenter
@@ -27,6 +28,8 @@ import com.makeuseof.cryptocurrency.view.watchlist.WatchListContract
 import com.makeuseof.cryptocurrency.view.watchlist.WatchListFragment
 import com.makeuseof.cryptocurrency.view.watchlist.WatchListPresenter
 import com.makeuseof.cryptocurrency.view.widgets.PagerAdapter
+import com.makeuseof.rateus.base.RateUsDialogContract
+import com.makeuseof.rateus.base.RateUsListener
 import com.makeuseof.utils.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.drawer_content.*
@@ -38,6 +41,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private var mCurrencyListPresenter: CurrencyListContract.Presenter? = null
     private var mPostListPresenter: PostListContract.Presenter? = null
     private var mSettingsPresenter: SettingsContract.Presenter? = null
+
+    private var mRateDialog: RateUsDialogContract? = null
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
@@ -78,6 +83,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         init()
 
         initStatusBar()
+
+        mRateDialog = CryptoRateUtil.tryShowRateUs(this)
+                ?.setListener(object : RateUsListener {
+                    override fun onDismiss() { mRateDialog = null }
+                })
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mRateDialog?.dismissRate(true)
     }
 
     //endregion
@@ -260,15 +275,20 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when(v){
-            drawer_add_watchlist -> drawerItemClick {  }
-            drawer_contact_us -> drawerItemClick {  }
-            drawer_favorite -> drawerItemClick {  }
-            drawer_rate_us -> drawerItemClick {  }
-            drawer_share_this_app -> drawerItemClick {  }
+            drawer_add_watchlist -> drawerItemClick { main_view_pager.currentItem = 1 }
+            drawer_favorite -> drawerItemClick { main_view_pager.currentItem = 1 }
+            drawer_contact_us -> drawerItemClick { ShareUtils.contactUs(this) }
+            drawer_rate_us -> drawerItemClick {
+                mRateDialog = CryptoRateUtil.getDialog(this)
+                        .setListener(object : RateUsListener {
+                            override fun onDismiss() { mRateDialog = null }
+                        })
+            }
+            drawer_share_this_app -> drawerItemClick { ShareUtils.shareApp(this) }
         }
     }
 
-    private fun drawerItemClick(body: () -> Unit){
+    private inline fun drawerItemClick(body: () -> Unit){
         body.invoke()
         closeDrawer()
     }

@@ -98,7 +98,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/other_apps_title"
             android:overScrollMode="never"
-            app:av_appBackground="@drawable/light_selectable_bg"
+            app:av_appBackground="@drawable/green_selectable_bg"
             app:av_textColor="#FFF"
             android:layout_marginTop="14dp"
             android:paddingBottom="16dp"/>
