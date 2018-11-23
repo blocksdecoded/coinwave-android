@@ -18,10 +18,7 @@ import com.makeuseof.cryptocurrency.view.currency.CurrencyActivity
 import com.makeuseof.cryptocurrency.view.currencylist.recycler.CurrencyListAdapter
 import com.makeuseof.cryptocurrency.view.currencylist.recycler.CurrencyListViewHolder
 import com.makeuseof.cryptocurrency.view.widgets.ActionConfirmDialog
-import com.makeuseof.utils.hide
-import com.makeuseof.utils.inflate
-import com.makeuseof.utils.showShortToast
-import com.makeuseof.utils.visible
+import com.makeuseof.utils.*
 
 open class CurrencyListFragment :
         BaseMVPFragment<CurrencyListContract.Presenter>(),
@@ -56,6 +53,10 @@ open class CurrencyListFragment :
     //endregion
 
     override fun initView(rootView: View) {
+        context?.also {
+            rootView.setPadding(0, DimenUtils.getStatusBarHeight(it), 0, 0)
+        }
+
         mAdapter = CurrencyListAdapter(arrayListOf(), this)
 
         mRetry?.setOnClickListener {

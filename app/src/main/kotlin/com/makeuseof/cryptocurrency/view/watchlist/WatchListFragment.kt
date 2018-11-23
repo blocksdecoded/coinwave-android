@@ -53,6 +53,9 @@ open class WatchListFragment :
     }
 
     override fun initView(rootView: View) {
+        context?.also {
+            rootView.setPadding(0, DimenUtils.getStatusBarHeight(it), 0, 0)
+        }
         mAdapter = WatchlistAdapter(arrayListOf(), this)
 
         mRetry?.setOnClickListener {

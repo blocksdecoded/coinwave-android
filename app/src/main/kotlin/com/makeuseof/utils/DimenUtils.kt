@@ -4,6 +4,10 @@ import android.content.Context
 import android.graphics.Point
 import android.view.WindowManager
 import android.util.DisplayMetrics
+import android.os.Build.VERSION_CODES
+import android.os.Build.VERSION
+
+
 
 
 
@@ -56,6 +60,19 @@ object DimenUtils {
 				metrics.densityDpi
 		)
 	}
+
+    fun getStatusBarHeight(context: Context): Int {
+        return try {
+            val resources = context.resources
+            val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
+            if (resourceId > 0)
+                resources.getDimensionPixelSize(resourceId)
+            else
+                dpToPx(context, if (VERSION.SDK_INT >= VERSION_CODES.M) 24 else 25)
+        } catch (e: Exception) {
+            0
+        }
+    }
 	
 	class MetricsInfo(
 			var height: Int,

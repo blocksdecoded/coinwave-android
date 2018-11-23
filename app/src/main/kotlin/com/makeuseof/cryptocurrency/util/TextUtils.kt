@@ -5,19 +5,19 @@ import java.util.*
 
 fun TextView?.setRegularFont(){
 	this?.let {
-		typeface = OpenSansTypeface.getRegular(it.context)
+		typeface = AvenirTypeface.getRegular(it.context)
 	}
 }
 
 fun TextView?.setSemiboldFont(){
 	this?.let {
-		typeface = OpenSansTypeface.getSemibold(it.context)
+		typeface = AvenirTypeface.getSemibold(it.context)
 	}
 }
 
 fun TextView?.setBoldFont(){
 	this?.let {
-		typeface = OpenSansTypeface.getBold(it.context)
+		typeface = AvenirTypeface.getBold(it.context)
 	}
 }
 
@@ -29,19 +29,19 @@ fun TextView?.setHeavyFont(){
 
 fun TextView?.setMediumFont(){
 	this?.let {
-		typeface = OpenSansTypeface.getRegular(it.context)
+		typeface = AvenirTypeface.getMedium(it.context)
 	}
 }
 
 fun TextView?.setThinFont(){
 	this?.let {
-		typeface = OpenSansTypeface.getLight(it.context)
+		typeface = AvenirTypeface.getThin(it.context)
 	}
 }
 
 fun TextView?.setLightFont(){
 	this?.let {
-		typeface = OpenSansTypeface.getLight(it.context)
+		typeface = AvenirTypeface.getLight(it.context)
 	}
 }
 
