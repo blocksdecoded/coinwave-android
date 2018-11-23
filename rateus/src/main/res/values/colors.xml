@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="full_transparent">#00000000</color>
+    <color name="white">#FFF</color>
+    <color name="black">#000</color>
+    <color name="window_background">#31343f</color>
+    <color name="button_text_active">#007AFF</color>
+    <color name="button_text_pressed">#90FFFFFF</color>
+
+    <color name="text_color">#FFF</color>
+
+    <color name="rating_active">#ff4e4e</color>
+    <color name="rating_inactive">#a8a9b3</color>
+    <color name="rating_focused">#cccccc</color>
+
+    <color name="positive_btn_bg">#4372ff</color>
+    <color name="positive_btn_bg_pressed">#C856a7ff</color>
+</resources>

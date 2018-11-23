@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center"
+    app:cardElevation="8dp"
+    app:cardBackgroundColor="@color/window_background"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="12dp">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/rate_dialog_container"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_gravity="center"
+        android:layout_margin="12dp">
+
+        <TextView
+            android:id="@+id/dialog_second_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/dialog_buttons_container"
+            android:text="Would you like to rate
+us on the Play Store"
+            android:gravity="center"
+            android:textColor="@color/text_color"
+            android:textSize="20sp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:visibility="gone"
+            android:alpha="0.8"
+            android:lineSpacingMultiplier="1.2"
+            />
+
+        <TextView
+            style="@style/AppThemeRatingBar"
+            android:id="@+id/dialog_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textColor="@color/text_color"
+            android:textSize="18sp"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:lines="2"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:alpha="0.8"
+            android:lineSpacingMultiplier="1.2"
+            android:text="How would you rate
+Washie?"/>
+
+        <RatingBar
+            android:theme="@style/AppThemeRatingBar"
+            android:id="@+id/dialog_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/dialog_title"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:background="@null"
+            android:layout_marginTop="12dp"
+            android:scaleX="0.6"
+            android:scaleY="0.6"
+            android:stepSize="1"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/dialog_buttons_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dialog_rating"
+            android:gravity="center"
+            android:layout_marginTop="12dp">
+
+            <TextView
+                android:theme="@style/DialogButton"
+                android:id="@+id/dialog_positive"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:gravity="center"
+                android:background="@drawable/positive_btn_bg"
+                android:textColor="@color/white"
+                android:alpha="0.9"
+                android:text="Submit"
+                android:stateListAnimator="@drawable/state_list_animator"/>
+
+            <TextView
+                android:theme="@style/DialogButton"
+                android:id="@+id/dialog_negative"
+                android:layout_width="110dp"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:maxLines="1"
+                android:textColor="@color/text_color"
+                android:foreground="?selectableItemBackground"
+                android:alpha="0.6"
+                android:text="Later"
+                android:stateListAnimator="@drawable/state_list_animator"/>
+
+        </LinearLayout>
+
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v7.widget.CardView>
