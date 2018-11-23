@@ -68,7 +68,7 @@ open class WatchListFragment :
         mRecycler?.adapter = mAdapter
 
         context?.let {
-            mRecycler?.addItemDecoration(RecyclerItemSpaceDecoration(mBottomSpace = DimenUtils.dpToPx(it, 100)))
+//            mRecycler?.addItemDecoration(RecyclerItemSpaceDecoration(mBottomSpace = DimenUtils.dpToPx(it, 100)))
         }
     }
 

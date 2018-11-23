@@ -19,8 +19,7 @@
     <color name="light_grey">#50F0F0F0</color>
     <color name="selectable_bg_50">#50FFFFFF</color>
     <color name="selectable_bg_70">#70FFFFFF</color>
-    <color name="light_accent">#5004A9F5</color>
-    <color name="light_accent_bg">#aa04A9F5</color>
+    <color name="light_accent">#501DE3BF</color>
 
     <color name="dark_gradient_start">#28343c</color>
     <color name="dark_gradient_end">#0e1216</color>

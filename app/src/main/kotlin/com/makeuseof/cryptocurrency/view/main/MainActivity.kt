@@ -222,13 +222,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setAddVisibility(visible: Boolean){
-        if (visible){
-            main_add_container.visible()
-            main_add_container.animate().alpha(1f).setDuration(400L).start()
-        } else {
-            main_add_container.hide()
-            main_add_container.animate().alpha(0f).setDuration(50L).start()
-        }
+//        if (visible){
+//            main_add_container.visible()
+//            main_add_container.animate().alpha(1f).setDuration(400L).start()
+//        } else {
+//            main_add_container.hide()
+//            main_add_container.animate().alpha(0f).setDuration(50L).start()
+//        }
     }
 
     private fun getNavigationItemId(position: Int): Int = when (position) {
