@@ -9,7 +9,8 @@ import com.makeuseof.cryptocurrency.data.chart.network.ChartsConfig
 import com.makeuseof.cryptocurrency.data.chart.network.ChartsNetworkClient
 import com.makeuseof.cryptocurrency.data.model.ChartData
 import com.makeuseof.utils.Lg
-import kotlin.coroutines.experimental.suspendCoroutine
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 // Created by askar on 7/25/18.
 class ChartsService: ChartsSourceContract{

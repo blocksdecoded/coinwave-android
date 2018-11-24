@@ -30,8 +30,11 @@
     <color name="dark_gradient_start">#28343c</color>
     <color name="dark_gradient_end">#0e1216</color>
 
-    <color name="chart_gradient_start">#01000000</color>
-    <color name="chart_gradient_end">#25000000</color>
+    <color name="dark_chart_gradient_start">#01000000</color>
+    <color name="dark_chart_gradient_end">#25000000</color>
+
+    <color name="green_chart_gradient_start">#011dd7d1</color>
+    <color name="green_chart_gradient_end">#251dd7d1</color>
 
     <color name="light_text">#AAAEB3</color>
     <color name="dark_title_text">#28333b</color>

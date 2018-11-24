@@ -1,12 +1,19 @@
 package com.makeuseof.cryptocurrency.view.watchlist
 
 import com.makeuseof.core.mvp.BaseMVPContract
+import com.makeuseof.cryptocurrency.data.model.ChartData
 import com.makeuseof.cryptocurrency.data.model.CurrencyEntity
 
 interface WatchListContract {
 
     interface View : BaseMVPContract.View<Presenter> {
         fun showCurrencies(currencies: List<CurrencyEntity>)
+
+        fun showFavoriteChart(chartData: ChartData)
+
+        fun showFavoriteLoading()
+
+        fun hideFavoriteLoading()
 
         fun updateCurrency(position: Int, currencyEntity: CurrencyEntity)
 

@@ -162,7 +162,7 @@
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/chart_dark_gradient_bg">
+                    android:background="@drawable/card_dark_gradient_bg">
 
                     <android.support.v7.widget.CardView
                         android:id="@+id/watchlist_chart_picked_container"
@@ -197,7 +197,7 @@
                         android:visibility="invisible"/>
 
                     <ProgressBar
-                        android:id="@+id/fragment_watchlist_progress"
+                        android:id="@+id/fragment_watchlist_chart_progress"
                         android:layout_width="25dp"
                         android:layout_height="25dp"
                         app:layout_constraintLeft_toLeftOf="parent"

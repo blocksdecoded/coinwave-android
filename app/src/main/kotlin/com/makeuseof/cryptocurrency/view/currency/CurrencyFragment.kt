@@ -77,7 +77,6 @@ open class CurrencyFragment :
     @JvmField var mPickedContainer: View? = null
     @BindView(R.id.currency_chart_picked)
     @JvmField var mPickedPrice: TextView? = null
-
     @BindView(R.id.fragment_currency_progress)
     @JvmField var mProgress: View? = null
     @BindView(R.id.currency_chart_period)
@@ -147,7 +146,7 @@ open class CurrencyFragment :
         context?.let {
 //            dataSet.color = ResourceUtil.getColor(it, R.color.green)
             dataSet.color = ResourceUtil.getColor(it, R.color.black)
-            dataSet.fillDrawable = ContextCompat.getDrawable(it, R.drawable.chart_bg)
+            dataSet.fillDrawable = ContextCompat.getDrawable(it, R.drawable.dark_chart_bg)
         }
 
         mChart?.data = LineData(dataSet)

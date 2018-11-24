@@ -188,7 +188,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         return WatchListFragment.newInstance().apply {
             mWatchListPresenter = WatchListPresenter(
                     this,
-                    UseCaseProvider.getCurrencyListUseCases(applicationContext)
+                    UseCaseProvider.getCurrencyListUseCases(applicationContext),
+                    UseCaseProvider.getFavoriteChartUseVariant(applicationContext)
             )
         }
     }

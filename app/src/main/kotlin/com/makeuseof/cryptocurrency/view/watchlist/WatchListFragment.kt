@@ -1,28 +1,41 @@
 package com.makeuseof.cryptocurrency.view.watchlist
 
 import android.app.Dialog
-import android.os.Bundle
+import android.os.Handler
+import android.support.v4.content.ContextCompat
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
-import android.view.ViewGroup
+import android.widget.TextView
 import butterknife.BindView
+import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.highlight.Highlight
+import com.github.mikephil.charting.listener.ChartTouchListener
+import com.github.mikephil.charting.listener.OnChartGestureListener
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.makeuseof.core.mvp.BaseMVPFragment
 import com.makeuseof.cryptocurrency.R
+import com.makeuseof.cryptocurrency.data.model.ChartData
 import com.makeuseof.cryptocurrency.data.model.CurrencyEntity
+import com.makeuseof.cryptocurrency.util.format
 import com.makeuseof.cryptocurrency.view.currency.CurrencyActivity
 import com.makeuseof.cryptocurrency.view.watchlist.recycler.WatchlistAdapter
 import com.makeuseof.cryptocurrency.view.watchlist.recycler.WatchlistViewHolder
 import com.makeuseof.cryptocurrency.view.widgets.ActionConfirmDialog
-import com.makeuseof.cryptocurrency.view.widgets.RecyclerItemSpaceDecoration
 import com.makeuseof.utils.*
+import java.util.*
 
 open class WatchListFragment :
         BaseMVPFragment<WatchListContract.Presenter>(),
         WatchListContract.View,
-        WatchlistViewHolder.CurrencyVHClickListener {
+        WatchlistViewHolder.CurrencyVHClickListener,
+        OnChartValueSelectedListener,
+        OnChartGestureListener {
 
     companion object {
         fun newInstance(): WatchListFragment = WatchListFragment()
@@ -50,6 +63,20 @@ open class WatchListFragment :
 
     private var mActiveDialog: Dialog? = null
 
+    //region Chart card
+
+    @BindView(R.id.fragment_watchlist_chart)
+    @JvmField var mChart: LineChart? = null
+
+    @BindView(R.id.watchlist_chart_picked_container)
+    @JvmField var mPickedContainer: View? = null
+    @BindView(R.id.watchlist_chart_picked)
+    @JvmField var mPickedPrice: TextView? = null
+    @BindView(R.id.fragment_watchlist_chart_progress)
+    @JvmField var mProgress: View? = null
+
+    //endregion
+
     override fun onPause() {
         super.onPause()
         mActiveDialog?.dismiss()
@@ -74,9 +101,24 @@ open class WatchListFragment :
         mRecycler?.layoutManager = lm
         mRecycler?.adapter = mAdapter
 
-        context?.let {
-//            mRecycler?.addItemDecoration(RecyclerItemSpaceDecoration(mBottomSpace = DimenUtils.dpToPx(it, 100)))
-        }
+        initChart()
+    }
+
+    private fun initChart(){
+        mChart?.setTouchEnabled(true)
+        mChart?.isDragEnabled = true
+        mChart?.setScaleEnabled(true)
+        mChart?.setDrawGridBackground(false)
+        mChart?.setPinchZoom(true)
+        mChart?.description?.isEnabled = false
+        mChart?.setDrawBorders(false)
+        mChart?.axisLeft?.isEnabled = false
+        mChart?.axisRight?.isEnabled = false
+        mChart?.xAxis?.isEnabled = false
+        mChart?.setBorderWidth(0f)
+        mChart?.setViewPortOffsets(0f,50f,0f,50f)
+        mChart?.setOnChartValueSelectedListener(this)
+        mChart?.onChartGestureListener = this
     }
 
     //region ViewHolder
@@ -91,7 +133,107 @@ open class WatchListFragment :
 
     //endregion
 
+    //region Chart
+
+    private fun showChartData(data: ChartData){
+        mChart?.resetZoom()
+        mChart?.zoomOut()
+        val entries = arrayListOf<Entry>()
+
+        data.usdChart.forEach {
+            try {
+                entries.add(
+                        Entry(it[0].toFloat(), it[1].toFloat())
+                )
+            } catch (e: Exception) {
+                Lg.d(e.message)
+            }
+        }
+
+        val dataSet = LineDataSet(entries, "")
+        dataSet.setDrawCircleHole(false)
+        dataSet.mode = LineDataSet.Mode.CUBIC_BEZIER
+        dataSet.setDrawCircles(false)
+        dataSet.cubicIntensity = 0.3f
+        dataSet.setDrawFilled(true)
+        dataSet.lineWidth = 1.2f
+        dataSet.setDrawValues(false)
+
+        context?.let {
+            dataSet.color = ResourceUtil.getColor(it, R.color.blue_green)
+            dataSet.fillDrawable = ContextCompat.getDrawable(it, R.drawable.green_chart_bg)
+        }
+
+        mChart?.data = LineData(dataSet)
+        mChart?.animateX(1500)
+    }
+
+    override fun onNothingSelected() {
+    }
+
+    override fun onValueSelected(e: Entry?, h: Highlight?) {
+        if (mPickedContainer?.visibility != View.VISIBLE){
+            mPickedContainer?.alpha = 0f
+            mPickedContainer?.animate()
+                    ?.setDuration(300L)
+                    ?.alpha(1f)
+                    ?.withStartAction { mPickedContainer.visible() }
+                    ?.start()
+        }
+
+        val date = Date(e?.x?.toLong()?:0L)
+        mPickedPrice?.text = "${date.toMediumFormat()} ${date.toHourFormat()}\n\$${(e?.y ?: 0f).format()}"
+    }
+
+    override fun onChartGestureEnd(me: MotionEvent?, lastPerformedGesture: ChartTouchListener.ChartGesture?) {
+        Handler().postDelayed({
+            mPickedContainer?.animate()
+                    ?.setDuration(300L)
+                    ?.alpha(0f)
+                    ?.withEndAction { mPickedContainer.invisible() }
+                    ?.start()
+        }, 200)
+    }
+
+    override fun onChartFling(me1: MotionEvent?, me2: MotionEvent?, velocityX: Float, velocityY: Float) {
+    }
+
+    override fun onChartSingleTapped(me: MotionEvent?) {
+    }
+
+    override fun onChartGestureStart(me: MotionEvent?, lastPerformedGesture: ChartTouchListener.ChartGesture?) {
+    }
+
+    override fun onChartScale(me: MotionEvent?, scaleX: Float, scaleY: Float) {
+    }
+
+    override fun onChartLongPressed(me: MotionEvent?) {
+    }
+
+    override fun onChartDoubleTapped(me: MotionEvent?) {
+    }
+
+    override fun onChartTranslate(me: MotionEvent?, dX: Float, dY: Float) {
+
+    }
+
+    //endregion
+
     //region Contract
+
+    override fun showFavoriteChart(chartData: ChartData) {
+        showChartData(chartData)
+    }
+
+    override fun showFavoriteLoading() {
+        mProgress.visible()
+        mChart.hide()
+    }
+
+    override fun hideFavoriteLoading() {
+        mProgress.hide()
+        mChart.visible()
+    }
 
     override fun openCurrencyScreen(id: Int) {
         activity?.let {

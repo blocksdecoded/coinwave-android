@@ -6,9 +6,11 @@ import com.makeuseof.cryptocurrency.data.NetworkException
 import com.makeuseof.cryptocurrency.data.crypto.CurrencyUpdateObserver
 import com.makeuseof.cryptocurrency.data.model.CurrencyEntity
 import com.makeuseof.cryptocurrency.domain.usecases.list.CurrencyListUseCases
+import com.makeuseof.cryptocurrency.domain.variant.favoritechart.FavoriteChartUseVariant
 import com.makeuseof.cryptocurrency.util.addSortedByRank
 import com.makeuseof.cryptocurrency.util.findCurrency
 import com.makeuseof.utils.coroutine.launchSilent
+import com.makeuseof.utils.coroutine.model.onSuccess
 import com.makeuseof.utils.isValidIndex
 import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
@@ -16,6 +18,7 @@ import kotlin.coroutines.CoroutineContext
 class WatchListPresenter(
         view: WatchListContract.View?,
         private val mCurrencyListUseCases: CurrencyListUseCases,
+        private val mFavoriteChartUseVariant: FavoriteChartUseVariant,
         private val uiContext: CoroutineContext = Dispatchers.Main
 ) : BaseMVPPresenter<WatchListContract.View>(view), WatchListContract.Presenter {
     private var mCachedData = arrayListOf<CurrencyEntity>()
@@ -37,12 +40,19 @@ class WatchListPresenter(
 
     //region Private
 
-    private fun setCache(currencies: List<CurrencyEntity>){
+    private fun setCache(currencies: List<CurrencyEntity>) = launchSilent(uiContext) {
         mCachedData.clear()
         mCachedData.addAll(currencies.filter { it.isSaved })
         mView?.showCurrencies(mCachedData)
 
         if(mCachedData.isEmpty()) mView?.showEmpty()
+
+        mView?.showFavoriteLoading()
+
+        mFavoriteChartUseVariant.getChart()?.onSuccess {
+            mView?.hideFavoriteLoading()
+            mView?.showFavoriteChart(it)
+        }
     }
 
     private fun searchCurrency(currencyEntity: CurrencyEntity ,body: ((index: Int) -> Unit)? = null): Int =
