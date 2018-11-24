@@ -37,7 +37,7 @@
                 android:layout_height="16dp"
                 app:layout_constraintLeft_toLeftOf="@id/adapter_currency_symbol"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="24dp"/>
+                android:layout_marginTop="16dp"/>
 
             <com.makeuseof.cryptocurrency.view.widgets.FontTextView
                 android:id="@+id/adapter_currency_symbol"
@@ -47,7 +47,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/adapter_currency_icon"
-                android:layout_marginBottom="24dp"
+                android:layout_marginBottom="16dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="8dp"
                 android:text="BTC"

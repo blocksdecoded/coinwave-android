@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/bg_main">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_oval_height"
+        android:src="@drawable/ic_oval_dark"
+        android:scaleType="fitXY"/>
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/fragment_currency_app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:elevation="0dp"
-        android:background="@color/dark_gradient_start">
+        android:background="@color/full_transparent">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -79,14 +85,80 @@
                 android:background="@drawable/round_light_selectable_bg"/>
 
         </android.support.constraint.ConstraintLayout>
+
     </android.support.design.widget.AppBarLayout>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/fragment_currency_chart_container"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_currency_app_bar"
+        android:layout_marginTop="12dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="12dp"
+        app:cardPreventCornerOverlap="false"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/chart_gradient_bg">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/currency_chart_picked_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="8dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="8dp"
+                app:cardPreventCornerOverlap="false"
+                app:cardBackgroundColor="@color/colorPrimary"
+                android:visibility="invisible">
+
+                <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+                    android:id="@+id/currency_chart_picked"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="6dp"
+                    android:text="$303.3"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:textSize="12sp"/>
+
+            </android.support.v7.widget.CardView>
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/fragment_currency_chart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="invisible"/>
+
+            <ProgressBar
+                android:theme="@style/AppTheme.ProgressStyle"
+                android:id="@+id/fragment_currency_progress"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/fragment_currency_chart"/>
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v7.widget.CardView>
 
     <com.makeuseof.cryptocurrency.view.widgets.LockableScrollView
         android:id="@+id/currency_scroll_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@+id/fragment_currency_chart_container"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="100dp"
         android:fillViewport="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:overScrollMode="never"
         android:scrollbars="none">
         <android.support.constraint.ConstraintLayout
@@ -94,76 +166,14 @@
             android:layout_height="wrap_content"
             android:paddingBottom="24dp">
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/fragment_currency_chart_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="24dp"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="8dp"
-                app:cardPreventCornerOverlap="false"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp">
-
-                <android.support.constraint.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/chart_gradient_bg">
-
-                    <android.support.v7.widget.CardView
-                        android:id="@+id/currency_chart_picked_container"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginTop="8dp"
-                        app:cardCornerRadius="12dp"
-                        app:cardElevation="8dp"
-                        app:cardPreventCornerOverlap="false"
-                        app:cardBackgroundColor="@color/colorPrimary"
-                        android:visibility="invisible">
-
-                        <com.makeuseof.cryptocurrency.view.widgets.FontTextView
-                            android:id="@+id/currency_chart_picked"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="6dp"
-                            android:text="$303.3"
-                            android:textColor="@color/white"
-                            android:gravity="center"
-                            android:textSize="12sp"/>
-
-                    </android.support.v7.widget.CardView>
-
-                    <com.github.mikephil.charting.charts.LineChart
-                        android:id="@+id/fragment_currency_chart"
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:visibility="invisible"/>
-
-                    <ProgressBar
-                        android:theme="@style/AppTheme.ProgressStyle"
-                        android:id="@+id/fragment_currency_progress"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="@+id/fragment_currency_chart"/>
-                </android.support.constraint.ConstraintLayout>
-
-            </android.support.v7.widget.CardView>
-
             <com.makeuseof.cryptocurrency.view.widgets.OptionSelectorView
                 android:id="@+id/currency_chart_period"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                app:layout_constraintTop_toBottomOf="@+id/fragment_currency_chart_container"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="116dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 app:osv_options="Today,1W,1M,3M,6M,1Y,All"
@@ -178,6 +188,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/currency_chart_period"
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:text="Price:" />
+
             <com.makeuseof.cryptocurrency.view.widgets.FontTextView
                 style="@style/AppTheme.FieldValue"
                 android:id="@+id/currency_price"
@@ -406,4 +417,4 @@
         </android.support.constraint.ConstraintLayout>
     </com.makeuseof.cryptocurrency.view.widgets.LockableScrollView>
 
-</android.support.design.widget.CoordinatorLayout>
+</android.support.constraint.ConstraintLayout>

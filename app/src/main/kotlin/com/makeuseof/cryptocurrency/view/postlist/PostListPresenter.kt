@@ -46,7 +46,6 @@ class PostListPresenter(
                     mView?.showPosts(it)
                 }
                 ?.onError {
-//                    mView?.showMessage("Posts loading fail.")
                     Lg.d(it.message)
                 }
     }
@@ -54,7 +53,6 @@ class PostListPresenter(
     override fun getNextPosts()  = launchSilent(ui){
         mPostUseCases.getNextPosts()
                 ?.onSuccess { mView?.nextPosts(it) }
-//                ?.onError { mView?.showMessage("Next loading fail.") }
     }
 
     //endregion

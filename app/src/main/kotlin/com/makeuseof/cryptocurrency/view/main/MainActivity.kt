@@ -176,6 +176,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         main_add_container.setOnClickListener {
             main_view_pager.currentItem = 1
         }
+
+        main_menu.setOnClickListener {
+            openDrawer()
+        }
     }
 
     //region Screens
