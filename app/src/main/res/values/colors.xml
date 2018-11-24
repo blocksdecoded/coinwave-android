@@ -34,5 +34,6 @@
     <color name="chart_gradient_end">#25000000</color>
 
     <color name="light_text">#AAAEB3</color>
+    <color name="dark_title_text">#28333b</color>
     <color name="default_text">#FFF</color>
 </resources>

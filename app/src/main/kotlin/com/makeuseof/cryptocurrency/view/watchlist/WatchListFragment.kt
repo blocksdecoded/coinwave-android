@@ -45,6 +45,9 @@ open class WatchListFragment :
     @BindView(R.id.connection_error_retry)
     @JvmField var mRetry: View? = null
 
+    @BindView(R.id.fragment_watchlist_container)
+    @JvmField var mContainer: View? = null
+
     private var mActiveDialog: Dialog? = null
 
     override fun onPause() {
@@ -54,8 +57,9 @@ open class WatchListFragment :
 
     override fun initView(rootView: View) {
         context?.also {
-            rootView.setPadding(0, DimenUtils.getStatusBarHeight(it), 0, 0)
+            mContainer?.setPadding(0, DimenUtils.getStatusBarHeight(it), 0, 0)
         }
+
         mAdapter = WatchlistAdapter(arrayListOf(), this)
 
         mRetry?.setOnClickListener {

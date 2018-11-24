@@ -1,98 +1,215 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.SwipeRefreshLayout
-    android:id="@+id/fragment_watchlist_refresh"
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.constraint.ConstraintLayout
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="@dimen/top_oval_height"
+        android:src="@drawable/ic_oval"
+        android:scaleType="fitXY"/>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/fragment_watchlist_recycler"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/fragment_watchlist_refresh"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/fragment_watchlist_container"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_watchlist_header"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            android:layout_height="match_parent">
 
-        <com.makeuseof.cryptocurrency.view.widgets.FontTextView
-            android:id="@+id/fragment_watchlist_empty"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_watchlist_header"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:text="Watchlist is empty"
-            android:textColor="@color/light_text"
-            android:visibility="gone"/>
-
-        <LinearLayout
-            android:id="@+id/fragment_watchlist_header"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
-                android:layout_width="0dp"
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/fragment_watchlist_header_container"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.9"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:paddingTop="24dp"
-                android:paddingBottom="24dp"
-                android:paddingLeft="20dp"
-                android:text="Name"
-                android:textSize="14sp"
-                android:textColor="@color/light_text" />
+                app:layout_constraintTop_toTopOf="parent">
 
-            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.9"
-                app:layout_constraintLeft_toRightOf="@+id/adapter_currency_symbol"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toLeftOf="@+id/adapter_currency_volume"
-                android:gravity="center"
-                android:textColor="@color/light_text"
-                android:text="Market Cap"
-                android:textSize="14sp"/>
+                <android.support.design.widget.AppBarLayout
+                    android:id="@+id/fragment_watchlist_app_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:elevation="0dp"
+                    android:background="@color/full_transparent">
 
-            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.9"
-                app:layout_constraintLeft_toRightOf="@+id/adapter_currency_market_cap"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toLeftOf="@+id/adapter_currency_price"
-                android:gravity="center"
-                android:textColor="@color/light_text"
-                android:text="Volume(24h)"
-                android:textSize="14sp"/>
+                    <android.support.constraint.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="68dp">
 
-            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.1"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:gravity="right"
-                android:paddingRight="20dp"
-                android:textColor="@color/light_text"
-                android:text="Price(24h)"
-                android:textSize="14sp"/>
+                        <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+                            android:id="@+id/fragment_watchlist_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:layout_marginLeft="40dp"
+                            android:text="Watchlist"
+                            app:ftv_typeface="medium"
+                            android:textColor="@color/dark_title_text"
+                            android:textSize="26sp" />
+                    </android.support.constraint.ConstraintLayout>
+                </android.support.design.widget.AppBarLayout>
+            </android.support.constraint.ConstraintLayout>
 
-        </LinearLayout>
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_watchlist_chart_container"
+                app:layout_constraintBottom_toBottomOf="parent">
 
-        <include
-            android:id="@+id/fragment_watchlist_error"
-            layout="@layout/connection_error"/>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/fragment_watchlist_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintTop_toBottomOf="@+id/fragment_watchlist_header"
+                    app:layout_constraintBottom_toBottomOf="parent" />
 
-    </android.support.constraint.ConstraintLayout>
+                <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+                    android:id="@+id/fragment_watchlist_empty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/fragment_watchlist_header"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:text="Watchlist is empty"
+                    android:textColor="@color/light_text"
+                    android:visibility="gone"/>
 
-</android.support.v4.widget.SwipeRefreshLayout>
+                <LinearLayout
+                    android:id="@+id/fragment_watchlist_header"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.9"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:paddingTop="24dp"
+                        android:paddingBottom="24dp"
+                        android:paddingLeft="20dp"
+                        android:text="Name"
+                        android:textSize="14sp"
+                        android:textColor="@color/light_text" />
+
+                    <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.9"
+                        app:layout_constraintLeft_toRightOf="@+id/adapter_currency_symbol"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toLeftOf="@+id/adapter_currency_volume"
+                        android:gravity="center"
+                        android:textColor="@color/light_text"
+                        android:text="Market Cap"
+                        android:textSize="14sp"/>
+
+                    <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.9"
+                        app:layout_constraintLeft_toRightOf="@+id/adapter_currency_market_cap"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toLeftOf="@+id/adapter_currency_price"
+                        android:gravity="center"
+                        android:textColor="@color/light_text"
+                        android:text="Volume(24h)"
+                        android:textSize="14sp"/>
+
+                    <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.1"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:gravity="right"
+                        android:paddingRight="20dp"
+                        android:textColor="@color/light_text"
+                        android:text="Price(24h)"
+                        android:textSize="14sp"/>
+
+                </LinearLayout>
+
+                <include
+                    android:id="@+id/fragment_watchlist_error"
+                    layout="@layout/connection_error"/>
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/fragment_watchlist_chart_container"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_watchlist_header_container"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="12dp"
+                app:cardPreventCornerOverlap="false"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/chart_dark_gradient_bg">
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/watchlist_chart_picked_container"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="8dp"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="8dp"
+                        app:cardPreventCornerOverlap="false"
+                        app:cardBackgroundColor="@color/colorPrimary"
+                        android:visibility="invisible">
+
+                        <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+                            android:id="@+id/watchlist_chart_picked"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="6dp"
+                            android:text="$303.3"
+                            android:textColor="@color/white"
+                            android:gravity="center"
+                            android:textSize="12sp"/>
+
+                    </android.support.v7.widget.CardView>
+
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/fragment_watchlist_chart"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="invisible"/>
+
+                    <ProgressBar
+                        android:id="@+id/fragment_watchlist_progress"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="@+id/fragment_watchlist_chart"/>
+                </android.support.constraint.ConstraintLayout>
+
+            </android.support.v7.widget.CardView>
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</android.support.design.widget.CoordinatorLayout>
