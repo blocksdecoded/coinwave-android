@@ -666,8 +666,8 @@ class BottomNavigationViewEx : BottomNavigationView {
     fun setTypeface(typeface: Typeface): BottomNavigationViewEx {
         val count = itemCount
         for (i in 0 until count) {
-            getLargeLabelAt(i)!!.typeface = typeface
-            getSmallLabelAt(i)!!.typeface = typeface
+            getLargeLabelAt(i)?.typeface = typeface
+            getSmallLabelAt(i)?.typeface = typeface
         }
         mMenuView?.updateMenuView()
         return this

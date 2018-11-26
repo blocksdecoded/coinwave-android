@@ -19,7 +19,7 @@
         app:menu="@menu/menu_bottom_nav"
         app:labelVisibilityMode="labeled"
         app:itemHorizontalTranslationEnabled="false"
-        app:itemIconSize="17dp"/>
+        app:itemIconSize="18dp"/>
 
     <com.makeuseof.cryptocurrency.view.widgets.NonSwipeableViewPager
         android:id="@+id/main_view_pager"

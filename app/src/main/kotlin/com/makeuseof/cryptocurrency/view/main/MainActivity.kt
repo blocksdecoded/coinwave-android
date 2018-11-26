@@ -15,6 +15,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import com.makeuseof.cryptocurrency.R
 import com.makeuseof.cryptocurrency.domain.UseCaseProvider
+import com.makeuseof.cryptocurrency.util.AvenirTypeface
 import com.makeuseof.cryptocurrency.util.CryptoRateUtil
 import com.makeuseof.cryptocurrency.view.currencylist.CurrencyListContract
 import com.makeuseof.cryptocurrency.view.currencylist.CurrencyListFragment
@@ -251,6 +252,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         main_nav_view.enableAnimation(false)
         main_nav_view.isItemHorizontalTranslationEnabled = false
         main_nav_view.removeShiftMode()
+        main_nav_view.setTypeface(AvenirTypeface.getRegular(this))
 
         val adapter = PagerAdapter(supportFragmentManager, fragments)
         main_view_pager.adapter = adapter
