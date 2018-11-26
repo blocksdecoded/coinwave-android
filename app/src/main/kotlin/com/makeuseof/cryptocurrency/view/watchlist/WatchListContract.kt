@@ -7,7 +7,10 @@ import com.makeuseof.cryptocurrency.data.model.CurrencyEntity
 interface WatchListContract {
 
     interface View : BaseMVPContract.View<Presenter> {
+
         fun showCurrencies(currencies: List<CurrencyEntity>)
+
+        fun showFavoriteCurrency(currency: CurrencyEntity)
 
         fun showFavoriteChart(chartData: ChartData)
 
@@ -28,9 +31,11 @@ interface WatchListContract {
         fun showEmpty()
 
         fun showLoading()
+
     }
 
     interface Presenter : BaseMVPContract.Presenter<View> {
+
         fun onCurrencyPick(position: Int)
 
         fun onCurrencyClick(position: Int)
@@ -38,5 +43,6 @@ interface WatchListContract {
         fun deleteCurrency(position: Int)
 
         fun getCurrencyList()
+
     }
 }

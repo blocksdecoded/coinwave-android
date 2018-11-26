@@ -1,0 +1,51 @@
+<LinearLayout
+    android:id="@+id/fragment_pick_favorite_header"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+        android:id="@+id/pick_favorite_symbol"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.9"
+        android:paddingTop="@dimen/header_content_padding"
+        android:paddingBottom="@dimen/header_content_padding"
+        android:paddingLeft="20dp"
+        android:text="Name"
+        android:textSize="14sp"
+        android:textColor="@color/light_text" />
+
+    <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+        android:id="@+id/pick_favorite_market_cap"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.9"
+        android:gravity="center"
+        android:textColor="@color/light_text"
+        android:text="Market Cap"
+        android:textSize="14sp"/>
+
+    <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+        android:id="@+id/pick_favorite_volume"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.9"
+        android:gravity="center"
+        android:textColor="@color/light_text"
+        android:text="Volume(24h)"
+        android:textSize="14sp"/>
+
+    <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+        android:id="@+id/pick_favorite_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.1"
+        android:gravity="right"
+        android:paddingRight="20dp"
+        android:textColor="@color/light_text"
+        android:text="Price(24h)"
+        android:textSize="14sp"/>
+
+</LinearLayout>

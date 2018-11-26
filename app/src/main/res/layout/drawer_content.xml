@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="Favorite cryptocurrency"
+            android:text="Pick favorite currency"
             app:layout_constraintTop_toBottomOf="@+id/drawer_menu_title"
             app:ftv_typeface="regular"/>
 
