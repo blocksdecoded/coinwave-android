@@ -49,6 +49,7 @@ open class CurrencyListFragment :
         fun newInstance(
                 title: String
         ): CurrencyListFragment = CurrencyListFragment().apply {
+            arguments = Bundle()
             arguments?.putString(TITLE_KEY, title)
         }
 

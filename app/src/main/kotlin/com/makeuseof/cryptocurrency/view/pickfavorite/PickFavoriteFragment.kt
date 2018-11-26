@@ -4,6 +4,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import butterknife.BindView
+import butterknife.OnClick
 import com.makeuseof.core.mvp.BaseMVPFragment
 import com.makeuseof.cryptocurrency.R
 import com.makeuseof.cryptocurrency.data.model.CurrencyEntity
@@ -25,6 +26,13 @@ class PickFavoriteFragment :
     @BindView(R.id.fragment_pick_favorite_recycler)
     @JvmField var mRecycler: RecyclerView? = null
     private var mAdapter: CurrencyListAdapter? = null
+
+    @OnClick(R.id.back)
+    fun onClick(view: View){
+        when(view.id) {
+            R.id.back -> finishView()
+        }
+    }
 
     //region Lifecycle
 
