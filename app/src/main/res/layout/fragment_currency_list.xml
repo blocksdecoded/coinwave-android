@@ -118,7 +118,8 @@
 
             <include
                 android:id="@+id/fragment_currency_list_error"
-                layout="@layout/connection_error"/>
+                layout="@layout/connection_error"
+                android:visibility="gone"/>
 
         </android.support.constraint.ConstraintLayout>
 

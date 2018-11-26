@@ -143,7 +143,8 @@
 
                 <include
                     android:id="@+id/fragment_watchlist_error"
-                    layout="@layout/connection_error"/>
+                    layout="@layout/connection_error"
+                    android:visibility="gone"/>
 
             </android.support.constraint.ConstraintLayout>
 
