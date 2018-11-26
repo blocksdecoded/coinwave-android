@@ -19,6 +19,7 @@ import com.makeuseof.cryptocurrency.util.CryptoRateUtil
 import com.makeuseof.cryptocurrency.view.currencylist.CurrencyListContract
 import com.makeuseof.cryptocurrency.view.currencylist.CurrencyListFragment
 import com.makeuseof.cryptocurrency.view.currencylist.CurrencyListPresenter
+import com.makeuseof.cryptocurrency.view.pickfavorite.PickFavoriteActivity
 import com.makeuseof.cryptocurrency.view.postlist.PostListContract
 import com.makeuseof.cryptocurrency.view.postlist.PostListFragment
 import com.makeuseof.cryptocurrency.view.postlist.PostListPresenter
@@ -195,7 +196,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun createCurrencyListScreen(): Fragment {
-        return CurrencyListFragment.newInstance().apply {
+        return CurrencyListFragment.newInstance(getString(R.string.cryptocurrency)).apply {
             mCurrencyListPresenter = CurrencyListPresenter(
                     this,
                     UseCaseProvider.getCurrencyListUseCases(applicationContext)
@@ -297,7 +298,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when(v){
             drawer_add_watchlist -> drawerItemClick { main_view_pager.currentItem = 1 }
-            drawer_favorite -> drawerItemClick { main_view_pager.currentItem = 1 }
+            drawer_favorite -> drawerItemClick { PickFavoriteActivity.start(this) }
             drawer_contact_us -> drawerItemClick { ShareUtils.contactUs(this) }
             drawer_rate_us -> drawerItemClick {
                 mRateDialog = CryptoRateUtil.getDialog(this)

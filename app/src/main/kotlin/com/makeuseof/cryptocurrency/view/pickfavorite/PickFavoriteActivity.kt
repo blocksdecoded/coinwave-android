@@ -1,8 +1,13 @@
 package com.makeuseof.cryptocurrency.view.pickfavorite
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import com.makeuseof.core.SwipeableActivity
+import com.makeuseof.cryptocurrency.domain.UseCaseProvider
+import com.makeuseof.utils.inRightTransition
 import com.makeuseof.utils.outRightTransition
 
 /**
@@ -11,6 +16,22 @@ import com.makeuseof.utils.outRightTransition
  */
 class PickFavoriteActivity: SwipeableActivity() {
     private var mPresenter: PickFavoriteContract.Presenter? = null
+
+    companion object {
+        fun start(context: Context) {
+            context.startActivity(intent(context))
+
+            if(context is Activity){
+                context.inRightTransition()
+            }
+        }
+
+        fun intent(context: Context): Intent {
+            val intent = Intent(context, PickFavoriteActivity::class.java)
+
+            return intent
+        }
+    }
 
     override fun onBackPressed() {
         super.onBackPressed()
@@ -35,7 +56,9 @@ class PickFavoriteActivity: SwipeableActivity() {
                     .commit()
 
             mPresenter = PickFavoritePresenter(
-                    fragment
+                    fragment,
+                    UseCaseProvider.getFavoriteUseCases(applicationContext),
+                    UseCaseProvider.getCurrencyListUseCases(applicationContext)
             )
         }
     }

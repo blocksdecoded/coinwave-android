@@ -6,6 +6,7 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.widget.TextView
@@ -24,10 +25,13 @@ import com.makeuseof.cryptocurrency.data.model.ChartData
 import com.makeuseof.cryptocurrency.data.model.CurrencyEntity
 import com.makeuseof.cryptocurrency.util.format
 import com.makeuseof.cryptocurrency.view.currency.CurrencyActivity
+import com.makeuseof.cryptocurrency.view.pickfavorite.PickFavoriteActivity
 import com.makeuseof.cryptocurrency.view.watchlist.recycler.WatchlistAdapter
 import com.makeuseof.cryptocurrency.view.watchlist.recycler.WatchlistViewHolder
 import com.makeuseof.cryptocurrency.view.widgets.ActionConfirmDialog
 import com.makeuseof.utils.*
+import com.makeuseof.utils.coroutine.launchSilent
+import kotlinx.coroutines.Dispatchers
 import java.util.*
 
 open class WatchListFragment :
@@ -135,7 +139,7 @@ open class WatchListFragment :
 
     //region Chart
 
-    private fun showChartData(data: ChartData){
+    private fun showChartData(data: ChartData) = launchSilent(Dispatchers.Main) {
         mChart?.resetZoom()
         mChart?.zoomOut()
         val entries = arrayListOf<Entry>()
@@ -199,6 +203,10 @@ open class WatchListFragment :
     }
 
     override fun onChartSingleTapped(me: MotionEvent?) {
+        Log.d("ololo", "Chart single tap")
+        activity?.also {
+            PickFavoriteActivity.start(it)
+        }
     }
 
     override fun onChartGestureStart(me: MotionEvent?, lastPerformedGesture: ChartTouchListener.ChartGesture?) {

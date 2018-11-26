@@ -18,6 +18,7 @@ class ChartsInteractor(
         private val mCryptoService: CurrencySourceContract,
         private val mChartsService: ChartsSourceContract
 ): ChartsUseCases {
+    private var mCachedId: Int = -1
     private var cachedChart: HashMap<String, ChartData> = HashMap()
 
     private fun getChartPeriodTime(period: ChartPeriod): Long{
@@ -41,6 +42,11 @@ class ChartsInteractor(
     }
 
     override suspend fun getChartData(currencyId: Int, period: ChartPeriod): Result<ChartData> = withContext(appExecutors.ioContext) {
+        if (mCachedId != currencyId) {
+            mCachedId = currencyId
+            cachedChart.clear()
+        }
+
         if (cachedChart[period.toString()] == null){
             val currency = mCryptoService.getCurrency(currencyId)
             if(currency != null){

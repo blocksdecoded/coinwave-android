@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.Unbinder
@@ -36,11 +37,24 @@ open class CurrencyListFragment :
     @BindView(R.id.connection_error_retry)
     @JvmField var mRetry: View? = null
 
+    @BindView(R.id.fragment_currency_list_title)
+    @JvmField var mTitle: TextView? = null
+
     private var mAdapter: CurrencyListAdapter? = null
     private var mActiveDialog: Dialog? = null
 
     companion object {
-        fun newInstance(): CurrencyListFragment = CurrencyListFragment()
+        private val TITLE_KEY = "list_title"
+
+        fun newInstance(
+                title: String
+        ): CurrencyListFragment = CurrencyListFragment().apply {
+            arguments?.putString(TITLE_KEY, title)
+        }
+
+        fun getTitle(arguments: Bundle?): String{
+            return arguments?.getString(TITLE_KEY)?:""
+        }
     }
 
     //region Lifecycle
@@ -50,12 +64,12 @@ open class CurrencyListFragment :
         mActiveDialog?.dismiss()
     }
 
-    //endregion
-
     override fun initView(rootView: View) {
         context?.also {
             rootView.setPadding(0, DimenUtils.getStatusBarHeight(it), 0, 0)
         }
+
+        mTitle?.text = getTitle(arguments)
 
         mAdapter = CurrencyListAdapter(arrayListOf(), this)
 
@@ -71,6 +85,8 @@ open class CurrencyListFragment :
         mRecycler?.layoutManager = lm
         mRecycler?.adapter = mAdapter
     }
+
+    //endregion
 
     //region ViewHolder
 
