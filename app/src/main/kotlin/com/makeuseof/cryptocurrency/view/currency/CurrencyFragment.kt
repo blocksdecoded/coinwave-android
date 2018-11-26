@@ -28,14 +28,14 @@ import com.makeuseof.cryptocurrency.util.loadIcon
 import com.makeuseof.cryptocurrency.util.setChangedPercent
 import com.makeuseof.cryptocurrency.view.widgets.LockableScrollView
 import com.makeuseof.cryptocurrency.view.widgets.OptionSelectorView
+import com.makeuseof.cryptocurrency.view.widgets.chart.ChartListener
 import com.makeuseof.utils.*
 import java.util.*
 
 open class CurrencyFragment :
         BaseMVPFragment<CurrencyContract.Presenter>(),
-        CurrencyContract.View,
-        OnChartValueSelectedListener,
-        OnChartGestureListener {
+        CurrencyContract.View
+{
     companion object {
         fun newInstance(): CurrencyFragment = CurrencyFragment()
     }
@@ -82,6 +82,37 @@ open class CurrencyFragment :
     @BindView(R.id.currency_chart_period)
     @JvmField var mChartPeriods: OptionSelectorView? = null
 
+    private val mChartListener = object : ChartListener() {
+        override fun onValueSelected(e: Entry?, h: Highlight?) {
+            if (mPickedContainer?.visibility != View.VISIBLE){
+                mPickedContainer?.alpha = 0f
+                mPickedContainer?.animate()
+                        ?.setDuration(300L)
+                        ?.alpha(1f)
+                        ?.withStartAction { mPickedContainer.visible() }
+                        ?.start()
+            }
+
+            val date = Date(e?.x?.toLong()?:0L)
+            mPickedPrice?.text = "${date.toMediumFormat()} ${date.toHourFormat()}\n\$${(e?.y ?: 0f).format()}"
+        }
+
+        override fun onChartGestureEnd(me: MotionEvent?, lastPerformedGesture: ChartTouchListener.ChartGesture?) {
+            Handler().postDelayed({
+                mPickedContainer?.animate()
+                        ?.setDuration(300L)
+                        ?.alpha(0f)
+                        ?.withEndAction { mPickedContainer.invisible() }
+                        ?.start()
+            }, 200)
+            mScrollEnabled = true
+        }
+
+        override fun onChartGestureStart(me: MotionEvent?, lastPerformedGesture: ChartTouchListener.ChartGesture?) {
+            mScrollEnabled = false
+        }
+    }
+
     @OnClick(R.id.currency_graph_icon, R.id.back, R.id.fragment_currency_add_to_watchlist)
     fun onClick(view: View){
         when(view.id) {
@@ -115,8 +146,8 @@ open class CurrencyFragment :
         mChart?.xAxis?.isEnabled = false
         mChart?.setBorderWidth(0f)
         mChart?.setViewPortOffsets(0f,50f,0f,50f)
-        mChart?.setOnChartValueSelectedListener(this)
-        mChart?.onChartGestureListener = this
+        mChart?.setOnChartValueSelectedListener(mChartListener)
+        mChart?.onChartGestureListener = mChartListener
     }
 
     private fun showData(data: ChartData){
@@ -150,7 +181,7 @@ open class CurrencyFragment :
         }
 
         mChart?.data = LineData(dataSet)
-        mChart?.animateX(1500)
+        mChart?.animateX(1000)
 //        mChart?.animateY(1500)
     }
 
@@ -184,61 +215,6 @@ open class CurrencyFragment :
             mWatchlist?.setImageResource(R.drawable.ic_star_border)
         }
     }
-
-    //region Chart
-
-    override fun onNothingSelected() {
-    }
-
-    override fun onValueSelected(e: Entry?, h: Highlight?) {
-        if (mPickedContainer?.visibility != View.VISIBLE){
-            mPickedContainer?.alpha = 0f
-            mPickedContainer?.animate()
-                    ?.setDuration(300L)
-                    ?.alpha(1f)
-                    ?.withStartAction { mPickedContainer.visible() }
-                    ?.start()
-        }
-
-        val date = Date(e?.x?.toLong()?:0L)
-        mPickedPrice?.text = "${date.toMediumFormat()} ${date.toHourFormat()}\n\$${(e?.y ?: 0f).format()}"
-    }
-
-    override fun onChartGestureEnd(me: MotionEvent?, lastPerformedGesture: ChartTouchListener.ChartGesture?) {
-        Handler().postDelayed({
-            mPickedContainer?.animate()
-                    ?.setDuration(300L)
-                    ?.alpha(0f)
-                    ?.withEndAction { mPickedContainer.invisible() }
-                    ?.start()
-        }, 200)
-        mScrollEnabled = true
-    }
-
-    override fun onChartFling(me1: MotionEvent?, me2: MotionEvent?, velocityX: Float, velocityY: Float) {
-
-    }
-
-    override fun onChartSingleTapped(me: MotionEvent?) {
-    }
-
-    override fun onChartGestureStart(me: MotionEvent?, lastPerformedGesture: ChartTouchListener.ChartGesture?) {
-        mScrollEnabled = false
-    }
-
-    override fun onChartScale(me: MotionEvent?, scaleX: Float, scaleY: Float) {
-    }
-
-    override fun onChartLongPressed(me: MotionEvent?) {
-    }
-
-    override fun onChartDoubleTapped(me: MotionEvent?) {
-    }
-
-    override fun onChartTranslate(me: MotionEvent?, dX: Float, dY: Float) {
-    }
-
-    //endregion
 
     //region Contract
 

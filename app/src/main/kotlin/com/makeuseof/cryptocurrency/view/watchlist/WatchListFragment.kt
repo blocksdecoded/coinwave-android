@@ -29,6 +29,7 @@ import com.makeuseof.cryptocurrency.view.pickfavorite.PickFavoriteActivity
 import com.makeuseof.cryptocurrency.view.watchlist.recycler.WatchlistAdapter
 import com.makeuseof.cryptocurrency.view.watchlist.recycler.WatchlistViewHolder
 import com.makeuseof.cryptocurrency.view.widgets.ActionConfirmDialog
+import com.makeuseof.cryptocurrency.view.widgets.chart.ChartListener
 import com.makeuseof.utils.*
 import com.makeuseof.utils.coroutine.launchSilent
 import kotlinx.coroutines.Dispatchers
@@ -37,9 +38,7 @@ import java.util.*
 open class WatchListFragment :
         BaseMVPFragment<WatchListContract.Presenter>(),
         WatchListContract.View,
-        WatchlistViewHolder.CurrencyVHClickListener,
-        OnChartValueSelectedListener,
-        OnChartGestureListener {
+        WatchlistViewHolder.CurrencyVHClickListener {
 
     companion object {
         fun newInstance(): WatchListFragment = WatchListFragment()
@@ -66,6 +65,38 @@ open class WatchListFragment :
     @JvmField var mContainer: View? = null
 
     private var mActiveDialog: Dialog? = null
+
+    private val mChartListener = object: ChartListener(){
+        override fun onValueSelected(e: Entry?, h: Highlight?) {
+            if (mPickedContainer?.visibility != View.VISIBLE){
+                mPickedContainer?.alpha = 0f
+                mPickedContainer?.animate()
+                        ?.setDuration(300L)
+                        ?.alpha(1f)
+                        ?.withStartAction { mPickedContainer.visible() }
+                        ?.start()
+            }
+
+            val date = Date(e?.x?.toLong()?:0L)
+            mPickedPrice?.text = "${date.toMediumFormat()} ${date.toHourFormat()}\n\$${(e?.y ?: 0f).format()}"
+        }
+
+        override fun onChartGestureEnd(me: MotionEvent?, lastPerformedGesture: ChartTouchListener.ChartGesture?) {
+            Handler().postDelayed({
+                mPickedContainer?.animate()
+                        ?.setDuration(300L)
+                        ?.alpha(0f)
+                        ?.withEndAction { mPickedContainer.invisible() }
+                        ?.start()
+            }, 200)
+        }
+        override fun onChartSingleTapped(me: MotionEvent?) {
+            Log.d("ololo", "Chart single tap")
+            activity?.also {
+                PickFavoriteActivity.start(it)
+            }
+        }
+    }
 
     //region Chart card
 
@@ -121,8 +152,8 @@ open class WatchListFragment :
         mChart?.xAxis?.isEnabled = false
         mChart?.setBorderWidth(0f)
         mChart?.setViewPortOffsets(0f,50f,0f,50f)
-        mChart?.setOnChartValueSelectedListener(this)
-        mChart?.onChartGestureListener = this
+        mChart?.setOnChartValueSelectedListener(mChartListener)
+        mChart?.onChartGestureListener = mChartListener
     }
 
     //region ViewHolder
@@ -169,60 +200,7 @@ open class WatchListFragment :
         }
 
         mChart?.data = LineData(dataSet)
-        mChart?.animateX(1500)
-    }
-
-    override fun onNothingSelected() {
-    }
-
-    override fun onValueSelected(e: Entry?, h: Highlight?) {
-        if (mPickedContainer?.visibility != View.VISIBLE){
-            mPickedContainer?.alpha = 0f
-            mPickedContainer?.animate()
-                    ?.setDuration(300L)
-                    ?.alpha(1f)
-                    ?.withStartAction { mPickedContainer.visible() }
-                    ?.start()
-        }
-
-        val date = Date(e?.x?.toLong()?:0L)
-        mPickedPrice?.text = "${date.toMediumFormat()} ${date.toHourFormat()}\n\$${(e?.y ?: 0f).format()}"
-    }
-
-    override fun onChartGestureEnd(me: MotionEvent?, lastPerformedGesture: ChartTouchListener.ChartGesture?) {
-        Handler().postDelayed({
-            mPickedContainer?.animate()
-                    ?.setDuration(300L)
-                    ?.alpha(0f)
-                    ?.withEndAction { mPickedContainer.invisible() }
-                    ?.start()
-        }, 200)
-    }
-
-    override fun onChartFling(me1: MotionEvent?, me2: MotionEvent?, velocityX: Float, velocityY: Float) {
-    }
-
-    override fun onChartSingleTapped(me: MotionEvent?) {
-        Log.d("ololo", "Chart single tap")
-        activity?.also {
-            PickFavoriteActivity.start(it)
-        }
-    }
-
-    override fun onChartGestureStart(me: MotionEvent?, lastPerformedGesture: ChartTouchListener.ChartGesture?) {
-    }
-
-    override fun onChartScale(me: MotionEvent?, scaleX: Float, scaleY: Float) {
-    }
-
-    override fun onChartLongPressed(me: MotionEvent?) {
-    }
-
-    override fun onChartDoubleTapped(me: MotionEvent?) {
-    }
-
-    override fun onChartTranslate(me: MotionEvent?, dX: Float, dY: Float) {
-
+        mChart?.animateX(1000)
     }
 
     //endregion
@@ -230,7 +208,6 @@ open class WatchListFragment :
     //region Contract
 
     override fun showFavoriteCurrency(currency: CurrencyEntity) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun showFavoriteChart(chartData: ChartData) {
