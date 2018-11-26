@@ -1,6 +1,7 @@
 package com.makeuseof.cryptocurrency.domain.variant.favoritechart
 
 import com.makeuseof.cryptocurrency.data.model.ChartData
+import com.makeuseof.cryptocurrency.data.model.CurrencyEntity
 import com.makeuseof.utils.coroutine.model.Result
 
 /**
@@ -9,4 +10,6 @@ import com.makeuseof.utils.coroutine.model.Result
  */
 interface FavoriteChartUseVariant {
     suspend fun getChart(): Result<ChartData>?
+
+    suspend fun getCurrency(): Result<CurrencyEntity>?
 }

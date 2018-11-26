@@ -39,6 +39,7 @@ object UseCaseProvider {
     fun getFavoriteChartUseVariant(context: Context): FavoriteChartUseVariant = FavoriteChartInteractor(
             AppExecutors.getInstance(),
             getChartsInteractor(context),
-            getFavoriteUseCases(context)
+            getFavoriteUseCases(context),
+            getCurrencyListUseCases(context)
     )
 }

@@ -49,6 +49,10 @@ class WatchListPresenter(
 
         mView?.showFavoriteLoading()
 
+        mFavoriteChartUseVariant.getCurrency()?.onSuccess {
+            mView?.showFavoriteCurrency(it)
+        }
+
         mFavoriteChartUseVariant.getChart()?.onSuccess {
             mView?.hideFavoriteLoading()
             mView?.showFavoriteChart(it)

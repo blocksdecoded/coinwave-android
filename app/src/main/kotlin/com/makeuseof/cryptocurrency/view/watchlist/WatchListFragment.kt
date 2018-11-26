@@ -64,6 +64,11 @@ open class WatchListFragment :
     @BindView(R.id.fragment_watchlist_container)
     @JvmField var mContainer: View? = null
 
+    @BindView(R.id.fragment_watchlist_favorite_name)
+    @JvmField var mFavoriteName: TextView? = null
+    @BindView(R.id.fragment_watchlist_favorite_price)
+    @JvmField var mFavoritePrice: TextView? = null
+
     private var mActiveDialog: Dialog? = null
 
     private val mChartListener = object: ChartListener(){
@@ -208,6 +213,25 @@ open class WatchListFragment :
     //region Contract
 
     override fun showFavoriteCurrency(currency: CurrencyEntity) {
+        mFavoriteName?.text = "${currency.symbol}"
+        mFavoritePrice?.text = "$${currency.getPrice()?.format()}"
+
+        currency.getPriceChange()?.let {
+//            mPriceChange.text = "${if (it > 0) "+" else ""}$it%"
+
+            context?.also { context ->
+                val color: Int = if(it > 0f){
+//                mPriceChangeIcon.setImageResource(R.drawable.ic_arrow_up_green)
+                    ResourceUtil.getColor(context, R.color.green)
+                } else {
+//                mPriceChangeIcon.setImageResource(R.drawable.ic_arrow_down_red)
+                    ResourceUtil.getColor(context, R.color.red)
+                }
+
+                mFavoritePrice?.setTextColor(color)
+//                mPriceChange.setTextColor(color)
+            }
+        }
     }
 
     override fun showFavoriteChart(chartData: ChartData) {
