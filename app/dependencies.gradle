@@ -36,7 +36,6 @@ ext {
 
     mockito = [mockito: "org.mockito:mockito-core:$versions.mockito"]
     junit = [junit: "junit:junit:$versions.junit"]
-    restMock = [restMock: "com.github.andrzejchm.RESTMock:android:$versions.restMock"]
 
     coroutineDeps = [
             core    : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutine",
@@ -106,7 +105,7 @@ ext {
             kotlinJunit         : "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version",
             mockitoKotlin       : "com.nhaarman:mockito-kotlin:$versions.mockitoKotlin"
 
-    ] + junit + mockito + restMock
+    ] + junit + mockito
 
     androidTests = [
             mockitoAndroid      : "org.mockito:mockito-android:$versions.mockito",
@@ -119,7 +118,7 @@ ext {
             espressoNetIdle     : "com.android.support.test.espresso.idling:idling-net:$versions.espresso",
             testRunner          : "com.android.support.test:runner:$versions.testRunner",
             testRules           : "com.android.support.test:rules:$versions.testRunner"
-    ] + mockito + restMock
+    ] + mockito
 
     leakCannary = "com.squareup.leakcanary:leakcanary-android:1.5.1"
     timber = "com.jakewharton.timber:timber:$versions.timber"

@@ -19,7 +19,11 @@ class PostInteractor(
     private var date = ""
 
     private fun updateLastDate(posts: List<PublisherPost>){
-        date = posts.last().date?:""
+        date = if (posts.isNotEmpty()) {
+            posts.last().date?:""
+        } else {
+            ""
+        }
     }
 
     override suspend fun getPosts(): Result<List<PublisherPost>>? = withContext(appExecutors.networkContext) {

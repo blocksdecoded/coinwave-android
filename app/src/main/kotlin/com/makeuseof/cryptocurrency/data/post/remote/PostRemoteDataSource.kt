@@ -30,7 +30,7 @@ class PostRemoteDataSource: BaseRetrofitDataSource(), PostDataSource {
     override suspend fun getPosts(date: String): Result<List<PublisherPost>> {
         val options = HashMap<String, String>()
 
-        options["cats"] = "19"
+//        options["cats"] = "19"
 
         if (date.isNotEmpty()) {
             options["last_item_datetime"] = date

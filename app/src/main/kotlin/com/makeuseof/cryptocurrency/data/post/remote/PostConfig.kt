@@ -6,6 +6,6 @@ package com.makeuseof.cryptocurrency.data.post.remote
  */
 object PostConfig {
     const val BASE_URL = "http://muoarticles.muoapps.com"
-    const val PUBLISHER_URL = "/makeuseof"
+    const val PUBLISHER_URL = "/blocksdecoded"
     const val POSTS_URL = "$PUBLISHER_URL/posts"
 }
