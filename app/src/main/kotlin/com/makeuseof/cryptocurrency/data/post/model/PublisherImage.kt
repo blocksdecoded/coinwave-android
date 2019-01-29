@@ -1,6 +1,6 @@
 package com.makeuseof.cryptocurrency.data.post.model
 
-import com.squareup.moshi.Json
+import com.google.gson.annotations.SerializedName
 
 /**
  * Created by askar on 11/19/18
@@ -8,7 +8,7 @@ import com.squareup.moshi.Json
  */
 
 data class PublisherImage(
-        @Json(name = "featured") var featured: String?,
-        @Json(name = "thumb") var thumb: String?,
-        @Json(name = "middle") var middle: String?
+        @SerializedName("featured") var featured: String?,
+        @SerializedName("thumb") var thumb: String?,
+        @SerializedName("middle") var middle: String?
 )

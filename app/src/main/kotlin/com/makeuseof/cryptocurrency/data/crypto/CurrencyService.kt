@@ -1,13 +1,14 @@
 package com.makeuseof.cryptocurrency.data.crypto
 
 import com.makeuseof.utils.coroutine.model.Result
-import com.makeuseof.core.network.NetworkClientFactory
 import com.makeuseof.cryptocurrency.data.EmptyCache
 import com.makeuseof.cryptocurrency.data.crypto.network.CryptoConfig
 import com.makeuseof.cryptocurrency.data.crypto.network.CryptoNetworkClient
 import com.makeuseof.cryptocurrency.data.model.CurrencyEntity
 import com.makeuseof.cryptocurrency.data.model.CurrencyListResponse
 import com.makeuseof.cryptocurrency.data.watchlist.WatchlistSourceContract
+import com.makeuseof.utils.coroutine.model.onError
+import com.makeuseof.utils.coroutine.model.onSuccess
 import com.makeuseof.utils.retrofit.BaseRetrofitDataSource
 
 // Created by askar on 7/19/18.
@@ -17,9 +18,9 @@ class CurrencyService(
     private var mCached: CurrencyListResponse? = null
     private val mObservers = hashSetOf<CurrencyUpdateObserver>()
 
-    private val mClient: CryptoNetworkClient = NetworkClientFactory.getRetrofitClient(
-            CryptoNetworkClient::class.java,
-            CryptoConfig.BASE_URL
+    private val mClient= getRetrofitClient(
+            CryptoConfig.BASE_URL,
+            CryptoNetworkClient::class.java
     )
 
     companion object {
@@ -96,21 +97,9 @@ class CurrencyService(
 
     override suspend fun getAllCurrencies(skipCache: Boolean): Result<CurrencyListResponse> {
         return if (skipCache){
-            val call = mClient.getCurrencies()
-
-            call.getResult().apply {
-                when(this) {
-                    is Result.Success -> {
-                        setCache(data)
-                    }
-
-                    is Result.Error -> {
-                        if (mCached != null){
-                            setCache(mCached!!)
-                        }
-                    }
-                }
-            }
+            mClient.getCurrencies().getResult()
+                    .onSuccess { setCache(it) }
+                    .onError { mCached?.let { setCache(it) } }
         } else {
             if (mCached != null){
                 Result.Success(mCached!!)

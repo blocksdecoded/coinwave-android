@@ -36,6 +36,7 @@ class PostRepository(
                 result.data.forEach { mCache[it.id] = it }
             }
         }
+
         return result
     }
 

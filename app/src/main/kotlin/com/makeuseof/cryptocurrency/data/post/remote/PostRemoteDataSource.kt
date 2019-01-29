@@ -22,8 +22,10 @@ class PostRemoteDataSource: BaseRetrofitDataSource(), PostDataSource {
         }
     }
 
-    private val mClient: PostNetworkClient = getRetrofit(PostConfig.BASE_URL)
-            .create(PostNetworkClient::class.java)
+    private val mClient: PostNetworkClient = getRetrofitClient(
+            PostConfig.BASE_URL,
+            PostNetworkClient::class.java
+    )
 
     //region Contract
 

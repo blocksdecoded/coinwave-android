@@ -1,6 +1,6 @@
 package com.makeuseof.cryptocurrency.data.post.model
 
-import com.squareup.moshi.Json
+import com.google.gson.annotations.SerializedName
 
 import java.text.SimpleDateFormat
 
@@ -10,13 +10,13 @@ import java.text.SimpleDateFormat
  */
 
 data class PublisherPost(
-        @Json(name = "ID") var id: Int,
-        @Json(name = "post_date") var date: String?,
-        @Json(name = "post_title") var title: String?,
-        @Json(name = "author") var author: String?,
-        @Json(name = "html") var html: String?,
-        @Json(name = "url") var url: String?,
-        @Json(name = "featured_image") var image: PublisherImage?
+        @SerializedName("ID") var id: Int,
+        @SerializedName("post_date") var date: String?,
+        @SerializedName("post_title") var title: String?,
+        @SerializedName("author") var author: String?,
+        @SerializedName("html") var html: String?,
+        @SerializedName("url") var url: String?,
+        @SerializedName("featured_image") var image: PublisherImage?
 ) {
 
     companion object {

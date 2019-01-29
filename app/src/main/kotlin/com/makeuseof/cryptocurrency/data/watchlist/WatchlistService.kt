@@ -52,7 +52,8 @@ class WatchlistService(
     private fun load(): ArrayList<Int> = try {
         val saved = mSharedStorage.getPreference(SAVED_CURRENCIES, "")
         val result = arrayListOf<Int>()
-        result.addAll(saved.split(saveDelimiter).map { it.toInt() })
+        result.addAll(saved.split(saveDelimiter)
+                .map { it.toInt() })
         result
     } catch (e: Exception) {
         arrayListOf()
