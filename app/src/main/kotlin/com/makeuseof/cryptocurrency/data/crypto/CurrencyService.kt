@@ -4,9 +4,11 @@ import com.makeuseof.utils.coroutine.model.Result
 import com.makeuseof.cryptocurrency.data.EmptyCache
 import com.makeuseof.cryptocurrency.data.crypto.network.CryptoConfig
 import com.makeuseof.cryptocurrency.data.crypto.network.CryptoNetworkClient
+import com.makeuseof.cryptocurrency.data.model.CurrencyDataResponse
 import com.makeuseof.cryptocurrency.data.model.CurrencyEntity
 import com.makeuseof.cryptocurrency.data.model.CurrencyListResponse
 import com.makeuseof.cryptocurrency.data.watchlist.WatchlistSourceContract
+import com.makeuseof.utils.coroutine.model.mapOnSuccess
 import com.makeuseof.utils.coroutine.model.onError
 import com.makeuseof.utils.coroutine.model.onSuccess
 import com.makeuseof.utils.retrofit.BaseRetrofitDataSource
@@ -15,7 +17,7 @@ import com.makeuseof.utils.retrofit.BaseRetrofitDataSource
 class CurrencyService(
         private val mWatchlistSource: WatchlistSourceContract
 ): BaseRetrofitDataSource(), CurrencySourceContract {
-    private var mCached: CurrencyListResponse? = null
+    private var mCached: CurrencyDataResponse? = null
     private val mObservers = hashSetOf<CurrencyUpdateObserver>()
 
     private val mClient= getRetrofitClient(
@@ -36,10 +38,10 @@ class CurrencyService(
 
     //region Private
 
-    private fun setCache(data: CurrencyListResponse){
-        markSaved(data.currencies)
+    private fun setCache(data: CurrencyDataResponse){
+        markSaved(data.coins)
         mCached = data
-        mObservers.forEach { it.onUpdated(data.currencies) }
+        mObservers.forEach { it.onUpdated(data.coins) }
     }
 
     private fun markSaved(currencies: List<CurrencyEntity>){
@@ -58,7 +60,7 @@ class CurrencyService(
     }
 
     private fun findCurrency(id: Int, onFind: (currency: CurrencyEntity) -> Unit): Boolean{
-        val currency = mCached?.currencies?.first { it.id == id }
+        val currency = mCached?.coins?.first { it.id == id }
         return if(currency != null){
             onFind.invoke(currency)
             true
@@ -72,7 +74,7 @@ class CurrencyService(
     //region Contract
 
     override fun getCurrency(id: Int): CurrencyEntity? {
-        return mCached?.currencies?.first { it.id == id }
+        return mCached?.coins?.first { it.id == id }
     }
 
     override fun addCurrencyObserver(observer: CurrencyUpdateObserver) {
@@ -95,11 +97,12 @@ class CurrencyService(
         notifyRemoved(it)
     }
 
-    override suspend fun getAllCurrencies(skipCache: Boolean): Result<CurrencyListResponse> {
+    override suspend fun getAllCurrencies(skipCache: Boolean): Result<CurrencyDataResponse> {
         return if (skipCache){
             mClient.getCurrencies().getResult()
-                    .onSuccess { setCache(it) }
+                    .onSuccess { setCache(it.data) }
                     .onError { mCached?.let { setCache(it) } }
+                    .mapOnSuccess { it.data }
         } else {
             if (mCached != null){
                 Result.Success(mCached!!)

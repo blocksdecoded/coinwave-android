@@ -195,15 +195,18 @@ open class CurrencyFragment :
         mAvailableSupply?.text = currencyEntity.circulatingSupply.format()
         mTotalSupply?.text = currencyEntity.totalSupply.format()
 
-        currencyEntity.getUsdQuotes()?.hourChange?.let{
-            mChange1h?.setChangedPercent(it)
-        }
-        currencyEntity.getUsdQuotes()?.dayChange?.let{
-            mChange1d?.setChangedPercent(it)
-        }
-        currencyEntity.getUsdQuotes()?.weekChange?.let{
-            mChange1w?.setChangedPercent(it)
-        }
+        mChange1h.hide()
+        mChange1d.hide()
+        mChange1w.hide()
+//        currencyEntity.getUsdQuotes()?.hourChange?.let{
+//            mChange1h?.setChangedPercent(it)
+//        }
+//        currencyEntity.getUsdQuotes()?.dayChange?.let{
+//            mChange1d?.setChangedPercent(it)
+//        }
+//        currencyEntity.getUsdQuotes()?.weekChange?.let{
+//            mChange1w?.setChangedPercent(it)
+//        }
 
         setWatchedIcon(currencyEntity.isSaved)
     }

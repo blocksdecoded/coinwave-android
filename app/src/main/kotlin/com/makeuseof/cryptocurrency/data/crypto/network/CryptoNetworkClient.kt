@@ -9,7 +9,6 @@ import retrofit2.http.Query
 interface CryptoNetworkClient {
     @GET(CryptoConfig.CURRENCIES_PATH)
     fun getCurrencies(
-            @Query("limit") limit: Int = 50,
-            @Query("structure") structure: String = "array"
+
     ): Call<CurrencyListResponse>
 }

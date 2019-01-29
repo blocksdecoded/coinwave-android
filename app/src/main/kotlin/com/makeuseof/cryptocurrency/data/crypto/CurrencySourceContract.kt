@@ -1,12 +1,13 @@
 package com.makeuseof.cryptocurrency.data.crypto
 
+import com.makeuseof.cryptocurrency.data.model.CurrencyDataResponse
 import com.makeuseof.utils.coroutine.model.Result
 import com.makeuseof.cryptocurrency.data.model.CurrencyEntity
 import com.makeuseof.cryptocurrency.data.model.CurrencyListResponse
 
 // Created by askar on 7/19/18.
 interface CurrencySourceContract {
-    suspend fun getAllCurrencies(skipCache: Boolean): Result<CurrencyListResponse>
+    suspend fun getAllCurrencies(skipCache: Boolean): Result<CurrencyDataResponse>
 
     fun getCurrency(id: Int): CurrencyEntity?
 

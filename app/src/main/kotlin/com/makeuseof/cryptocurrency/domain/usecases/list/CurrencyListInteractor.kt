@@ -15,7 +15,7 @@ class CurrencyListInteractor(
 ): CurrencyListUseCases {
     override suspend fun getCryptoList(skipCache: Boolean): Result<List<CurrencyEntity>> = withContext(appExecutors.ioContext) {
         mCryptoService.getAllCurrencies(skipCache)
-                .mapOnSuccess { it.currencies }
+                .mapOnSuccess { it.coins }
     }
 
     override fun getCurrency(id: Int): CurrencyEntity? {

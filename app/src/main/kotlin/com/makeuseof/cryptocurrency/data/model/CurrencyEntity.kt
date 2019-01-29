@@ -7,22 +7,23 @@ data class CurrencyEntity(
         @SerializedName("id") val id: Int,
         @SerializedName("name") val name: String,
         @SerializedName("symbol") val symbol: String,
-        @SerializedName("website_slug") val websiteSlug: String,
+        @SerializedName("iconUrl") val iconUrl: String,
+        @SerializedName("websiteUrl") val websiteSlug: String,
         @SerializedName("rank") val rank: Int,
-        @SerializedName("total_supply") val totalSupply: Float,
-        @SerializedName("circulating_supply") val circulatingSupply: Float,
-        @SerializedName("max_supply") val maxSupply: Float?,
-        @SerializedName("last_updated") val lastUpdated: Long,
-        @SerializedName("quotes") val quotes: HashMap<String, Quote>,
+        @SerializedName("totalSupply") val totalSupply: Float,
+        @SerializedName("circulatingSupply") val circulatingSupply: Float,
+        @SerializedName("volume") val volume: Long,
+        @SerializedName("marketCap") val marketCap: Long,
+        @SerializedName("price") val price: Float,
+        @SerializedName("change") val priceChange: Float,
         var isSaved: Boolean = false
 ) {
     override fun toString(): String {
         return "$id $symbol $name"
     }
 
-    fun getUsdQuotes(): Quote? = quotes["USD"]
-    fun getMarketCap(): Float? = quotes["USD"]?.marketCap
-    fun getDailyVolume(): Float? = quotes["USD"]?.dailyVolume
-    fun getPrice(): Float? = quotes["USD"]?.price
-    fun getPriceChange(): Float? = quotes["USD"]?.dayChange
+    fun getMarketCap(): Float? = marketCap.toFloat()
+    fun getDailyVolume(): Float? = volume.toFloat()
+    fun getPrice(): Float? = price
+    fun getPriceChange(): Float? = priceChange
 }
