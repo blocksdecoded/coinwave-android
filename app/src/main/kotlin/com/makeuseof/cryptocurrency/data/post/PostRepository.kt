@@ -2,6 +2,7 @@ package com.makeuseof.cryptocurrency.data.post
 
 import com.makeuseof.utils.coroutine.model.Result
 import com.makeuseof.cryptocurrency.data.post.model.PublisherPost
+import com.makeuseof.utils.coroutine.model.mapOnSuccess
 
 /**
  * Created by askar on 11/19/18
@@ -29,15 +30,11 @@ class PostRepository(
     //region Contract
 
     override suspend fun getPosts(date: String): Result<List<PublisherPost>>? {
-        val result = mRemote?.getPosts(date)
-
-        when(result) {
-            is Result.Success -> {
-                result.data.forEach { mCache[it.id] = it }
-            }
-        }
-
-        return result
+        return mRemote?.getPosts(date)
+                ?.mapOnSuccess {
+                    it.forEach { mCache[it.id] = it }
+                    it
+                }
     }
 
     override fun getPost(id: Int): PublisherPost? = mCache[id]

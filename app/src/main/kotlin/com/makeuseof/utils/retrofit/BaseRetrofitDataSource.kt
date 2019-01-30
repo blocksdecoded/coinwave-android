@@ -5,6 +5,7 @@ import com.makeuseof.utils.coroutine.model.Result
 import com.makeuseof.utils.coroutine.model.Result.*
 import com.makeuseof.core.network.NetworkError
 import com.makeuseof.core.network.RHWithErrorHandler
+import com.makeuseof.cryptocurrency.BuildConfig
 import com.makeuseof.cryptocurrency.data.NetworkException
 import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
@@ -44,7 +45,11 @@ abstract class BaseRetrofitDataSource {
         return Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create(gson))
-                .client(httpClient.build())
+                .apply {
+                    if (BuildConfig.DEBUG) {
+                        client(httpClient.build())
+                    }
+                }
                 .build()
     }
 
