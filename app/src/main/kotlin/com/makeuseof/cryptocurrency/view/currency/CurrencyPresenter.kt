@@ -20,7 +20,7 @@ class CurrencyPresenter(
 
     override fun onGoToWebsiteClick() {
         mCached?.let {
-            mView?.openSite("https://www.${it.websiteSlug}.org")
+            mView?.openSite(it.websiteSlug)
         }
     }
 
