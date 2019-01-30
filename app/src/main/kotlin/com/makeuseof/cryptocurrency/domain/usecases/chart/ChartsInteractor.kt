@@ -12,6 +12,8 @@ import com.makeuseof.utils.coroutine.AppExecutors
 import kotlinx.coroutines.withContext
 import kotlin.collections.HashMap
 
+import com.makeuseof.cryptocurrency.data.chart.model.ChartPeriod as RequestChartPeriod
+
 // Created by askar on 7/25/18.
 class ChartsInteractor(
         private val appExecutors: AppExecutors,
@@ -34,11 +36,16 @@ class ChartsInteractor(
         }
     }
 
-    private fun getTimesForPeriod(period: ChartPeriod): Pair<Long, Long>{
-        if (period == ALL) return Pair(0L, 0L)
-
-        val time = System.currentTimeMillis() - getChartPeriodTime(period)
-        return Pair(time, System.currentTimeMillis())
+    private fun getRequestPeriod(period: ChartPeriod): RequestChartPeriod {
+        return when (period) {
+            TODAY -> RequestChartPeriod.DAY
+            WEEK -> RequestChartPeriod.WEEK
+            MONTH_1 -> RequestChartPeriod.MONTH
+            MONTH_3 -> RequestChartPeriod.MONTH
+            MONTH_6 -> RequestChartPeriod.YEAR
+            YEAR -> RequestChartPeriod.YEAR
+            ALL -> RequestChartPeriod.FIVE_YEARS
+        }
     }
 
     override suspend fun getChartData(currencyId: Int, period: ChartPeriod): Result<ChartData> = withContext(appExecutors.ioContext) {
@@ -50,8 +57,7 @@ class ChartsInteractor(
         if (cachedChart[period.toString()] == null){
             val currency = mCryptoService.getCurrency(currencyId)
             if(currency != null){
-                val times = getTimesForPeriod(period)
-                val result = mChartsService.getChart(currency.websiteSlug, times.first, times.second)
+                val result = mChartsService.getChart(currencyId.toString(), getRequestPeriod(period))
                 when(result){
                     is Result.Success -> {
                         cachedChart[period.toString()] = result.data

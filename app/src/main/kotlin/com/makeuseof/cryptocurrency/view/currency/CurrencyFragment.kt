@@ -155,10 +155,10 @@ open class CurrencyFragment :
         mChart?.zoomOut()
         val entries = arrayListOf<Entry>()
 
-        data.usdChart.forEach {
+        data.chart.forEach {
             try {
                 entries.add(
-                        Entry(it[0].toFloat(), it[1].toFloat())
+                        Entry(it.time.toFloat(), it.price.toFloat())
                 )
             } catch (e: Exception) {
                 Lg.d(e.message)

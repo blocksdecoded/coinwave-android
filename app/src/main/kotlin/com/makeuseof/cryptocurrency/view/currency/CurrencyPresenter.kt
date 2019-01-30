@@ -52,10 +52,8 @@ class CurrencyPresenter(
                 0 -> TODAY
                 1 -> WEEK
                 2 -> MONTH_1
-                3 -> MONTH_3
-                4 -> MONTH_6
-                5 -> YEAR
-                6 -> ALL
+                3 -> YEAR
+                4 -> ALL
                 else -> TODAY
             }
             mView?.showChartLoading()

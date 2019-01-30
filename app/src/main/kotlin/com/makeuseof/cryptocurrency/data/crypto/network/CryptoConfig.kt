@@ -8,6 +8,6 @@ object CryptoConfig {
 
     const val API_VERSION = "/v1"
     const val PUBLIC = "/public"
-    const val TICKER_PATH = "/coins"
-    const val CURRENCIES_PATH = "$API_VERSION$PUBLIC$TICKER_PATH"
+    const val COINS_PATH = "/coins"
+    const val CURRENCIES_PATH = "$API_VERSION$PUBLIC$COINS_PATH"
 }
