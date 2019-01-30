@@ -14,5 +14,6 @@ object ConstantSourceUtil {
 fun ImageView.loadIcon(currencyEntity: CurrencyEntity){
     Glide.with(this)
             .load(ConstantSourceUtil.getIconUrl(currencyEntity))
+//            .load(currencyEntity.iconUrl)
             .into(this)
 }
