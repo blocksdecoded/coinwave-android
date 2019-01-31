@@ -43,7 +43,7 @@ class PickFavoritePresenter(
     }
 
     private fun getCurrencies() = launchSilent(uiContext){
-        val result = mCurrencyListUseCases.getCryptoList(false)
+        mCurrencyListUseCases.getCryptoList(false)
                 .onSuccess { updateCache(it) }
     }
 

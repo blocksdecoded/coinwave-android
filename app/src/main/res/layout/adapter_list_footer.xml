@@ -9,8 +9,9 @@
     >
 
     <com.makeuseof.cryptocurrency.view.post.widgets.LoadingView
+        android:theme="@style/AlertDialog.AppCompat.Light"
         android:layout_gravity="center"
-        android:visibility="gone"
+        android:visibility="visible"
         android:id="@+id/footer_progress"
         android:layout_width="@dimen/progressBar_small"
         android:layout_height="@dimen/progressBar_small"/>
@@ -28,7 +29,7 @@
             android:id="@+id/footer_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white_transparent"
+            android:textColor="@color/light_text"
             android:textSize="14sp"
             android:layout_gravity="center"
             android:text="Connection error"
@@ -39,7 +40,7 @@
             android:layout_height="wrap_content"
             android:text="Tap to retry"
             android:textSize="14sp"
-            android:textColor="@color/white"
+            android:textColor="@color/green"
             android:layout_gravity="center"
             />
     </LinearLayout>

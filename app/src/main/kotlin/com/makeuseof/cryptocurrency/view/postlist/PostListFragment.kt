@@ -15,6 +15,7 @@ import com.makeuseof.cryptocurrency.view.postlist.recycler.PostListAdapter
 import com.makeuseof.cryptocurrency.view.postlist.recycler.PostListViewHolder
 import com.makeuseof.utils.hide
 import com.makeuseof.utils.visible
+import kotlin.math.roundToInt
 
 open class PostListFragment :
         BaseMVPFragment<PostListContract.Presenter>(),
@@ -51,7 +52,7 @@ open class PostListFragment :
         activity?.also {
             val metrics = DisplayMetrics()
             it.windowManager.defaultDisplay.getMetrics(metrics)
-            postHeight = metrics.widthPixels * 9 / 16
+            postHeight = (metrics.heightPixels * 0.35).roundToInt()
         }
 
         mAdapter = PostListAdapter(arrayListOf(), this, this, postHeight)

@@ -6,6 +6,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
+import com.bumptech.glide.Glide
 import com.makeuseof.cryptocurrency.R
 import com.makeuseof.cryptocurrency.data.post.model.PublisherPost
 import com.makeuseof.utils.loadImageFromUrl
@@ -34,7 +35,11 @@ class PostListViewHolder(
         mTitle.text = post.title
 
         post.image?.featured?.also {
-            mImage.loadImageFromUrl(it)
+            Glide.with(mImage.context)
+                    .load(it)
+                    .thumbnail(0.01f)
+                    .into(mImage)
+//            mImage.loadImageFromUrl(it)
         }
     }
 
