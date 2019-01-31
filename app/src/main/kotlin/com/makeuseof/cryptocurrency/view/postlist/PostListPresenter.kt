@@ -33,9 +33,7 @@ class PostListPresenter(
     //region Contract
 
     override fun onPostClick(id: Int) = launchSilent(ui){
-        mPostUseCases.getPost(id)?.also {
-            mView?.openPost(id)
-        }
+        mPostUseCases.getPost(id)?.also { mView?.openPost(id) }
     }
 
     override fun getPosts() = launchSilent(ui) {
@@ -45,9 +43,7 @@ class PostListPresenter(
                     mView?.stopLoading()
                     mView?.showPosts(it)
                 }
-                ?.onError {
-                    Lg.d(it.message)
-                }
+                ?.onError { Lg.d(it.message) }
     }
 
     override fun getNextPosts()  = launchSilent(ui){

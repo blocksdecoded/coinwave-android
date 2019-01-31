@@ -7,6 +7,8 @@ import com.makeuseof.cryptocurrency.domain.usecases.chart.ChartsUseCases
 import com.makeuseof.cryptocurrency.domain.usecases.chart.ChartsUseCases.ChartPeriod.*
 import com.makeuseof.cryptocurrency.domain.usecases.list.CurrencyListUseCases
 import com.makeuseof.utils.coroutine.launchSilent
+import com.makeuseof.utils.coroutine.model.onError
+import com.makeuseof.utils.coroutine.model.onSuccess
 import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
 
@@ -35,15 +37,9 @@ class CurrencyPresenter(
             mView?.showCurrencyData(it)
         }
         mView?.showChartLoading()
-        val result = mChartsUseCases.getChartData(id)
-        when(result){
-            is Result.Success -> {
-                mView?.showChartData(result.data)
-            }
-            is Result.Error -> {
-                mView?.showMessage("Chart load error")
-            }
-        }
+        mChartsUseCases.getChartData(id)
+                .onSuccess { mView?.showChartData(it) }
+                .onError { mView?.showMessage("Chart load error") }
     }
 
     override fun onPeriodChanged(position: Int) = launchSilent(uiContext){
@@ -57,15 +53,9 @@ class CurrencyPresenter(
                 else -> TODAY
             }
             mView?.showChartLoading()
-            val result = mChartsUseCases.getChartData(it.id, period)
-            when(result){
-                is Result.Success -> {
-                    mView?.showChartData(result.data)
-                }
-                is Result.Error -> {
-                    mView?.showMessage("Chart load error")
-                }
-            }
+            mChartsUseCases.getChartData(it.id, period)
+                    .onSuccess { mView?.showChartData(it) }
+                    .onError { mView?.showMessage("Chart load error") }
         }
     }
 

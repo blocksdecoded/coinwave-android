@@ -6,6 +6,7 @@ import com.makeuseof.cryptocurrency.domain.usecases.favorite.FavoriteUseCases
 import com.makeuseof.cryptocurrency.domain.usecases.list.CurrencyListUseCases
 import com.makeuseof.utils.coroutine.launchSilent
 import com.makeuseof.utils.coroutine.model.Result
+import com.makeuseof.utils.coroutine.model.onSuccess
 import com.makeuseof.utils.isValidIndex
 import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
@@ -43,11 +44,7 @@ class PickFavoritePresenter(
 
     private fun getCurrencies() = launchSilent(uiContext){
         val result = mCurrencyListUseCases.getCryptoList(false)
-        when(result){
-            is Result.Success -> {
-                updateCache(result.data)
-            }
-        }
+                .onSuccess { updateCache(it) }
     }
 
     //endregion

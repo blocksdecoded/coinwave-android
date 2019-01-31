@@ -7,6 +7,7 @@ import com.makeuseof.cryptocurrency.data.model.CurrencyEntity
 import com.makeuseof.cryptocurrency.domain.usecases.list.CurrencyListUseCases
 import com.makeuseof.cryptocurrency.util.findCurrency
 import com.makeuseof.utils.coroutine.launchSilent
+import com.makeuseof.utils.coroutine.model.onError
 import com.makeuseof.utils.isValidIndex
 import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
@@ -56,16 +57,8 @@ class CurrencyListPresenter(
 
     private fun getCurrencies() = launchSilent(uiContext){
         mView?.showLoading()
-        val result = mCurrencyListUseCases.getCryptoList(true)
-        when(result){
-            is Result.Success -> {
-//                updateCache(result.data)
-            }
-
-            is Result.Error -> {
-                mView?.showNetworkError(mCachedData.isEmpty())
-            }
-        }
+        mCurrencyListUseCases.getCryptoList(true)
+                .onError { mView?.showNetworkError(mCachedData.isEmpty()) }
     }
 
     //endregion

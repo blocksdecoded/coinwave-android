@@ -10,6 +10,7 @@ import com.makeuseof.cryptocurrency.domain.variant.favoritechart.FavoriteChartUs
 import com.makeuseof.cryptocurrency.util.addSortedByRank
 import com.makeuseof.cryptocurrency.util.findCurrency
 import com.makeuseof.utils.coroutine.launchSilent
+import com.makeuseof.utils.coroutine.model.onError
 import com.makeuseof.utils.coroutine.model.onSuccess
 import com.makeuseof.utils.isValidIndex
 import kotlinx.coroutines.Dispatchers
@@ -81,20 +82,15 @@ class WatchListPresenter(
 
     private fun getCurrencies(skipCache: Boolean) = launchSilent(uiContext){
         mView?.showLoading()
-        val result = mCurrencyListUseCases.getCryptoList(skipCache)
-        when(result){
-            is Result.Success -> {
-                setCache(result.data)
-            }
-
-            is Result.Error -> {
-                when(result.exception){
-                    is NetworkException -> {
-                        mView?.showNetworkError(mCachedData.isEmpty())
+        mCurrencyListUseCases.getCryptoList(skipCache)
+                .onSuccess { setCache(it) }
+                .onError {
+                    when(it){
+                        is NetworkException -> {
+                            mView?.showNetworkError(mCachedData.isEmpty())
+                        }
                     }
                 }
-            }
-        }
     }
 
     //endregion
