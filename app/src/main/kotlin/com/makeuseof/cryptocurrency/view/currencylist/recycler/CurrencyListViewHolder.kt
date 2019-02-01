@@ -32,22 +32,24 @@ class CurrencyListViewHolder(
     }
 
     fun onBind(currency: CurrencyEntity){
-//        if (currency.isSaved){
-//            itemView.setBackgroundResource(R.color.dark_saved_bg)
-//        } else {
-//            itemView.background = null
-//        }
-
         mSymbol.text = "${currency.symbol}"
         mMarketCap.text = "$${FormatUtil.withSuffix(currency.getMarketCap()!!)}"
         mVolume.text = "$${FormatUtil.withSuffix(currency.getDailyVolume()!!)}"
 
         mPrice.text = "$${currency.getPrice()?.format()}"
 
+        configPriceChanges(currency)
+
+        setupDividers()
+
+        mSymbolIcon.loadIcon(currency)
+    }
+
+    private fun configPriceChanges(currency: CurrencyEntity) {
         currency.getPriceChange()?.let {
             mPriceChange.text = "${if (it > 0) "+" else ""}$it%"
 
-            val color: Int = if(it > 0f){
+            val color: Int = if (it > 0f) {
                 mPriceChangeIcon.setImageResource(R.drawable.ic_arrow_up_green)
                 ResourceUtil.getColor(itemView.context, R.color.green)
             } else {
@@ -58,10 +60,6 @@ class CurrencyListViewHolder(
             mPrice.setTextColor(color)
             mPriceChange.setTextColor(color)
         }
-
-        setupDividers()
-
-        mSymbolIcon.loadIcon(currency)
     }
 
     private fun setupDividers(){

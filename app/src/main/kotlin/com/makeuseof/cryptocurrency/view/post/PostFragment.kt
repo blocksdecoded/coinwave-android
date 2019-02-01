@@ -100,15 +100,17 @@ open class PostFragment : BaseMVPFragment<PostContract.Presenter>(), PostContrac
 
     @SuppressLint("SetJavaScriptEnabled")
     private fun initWebView() {
-        mWebView?.settings?.javaScriptEnabled = true
-        mWebView!!.settings.useWideViewPort = true
-        mWebView!!.settings.loadWithOverviewMode = true
-        mWebView!!.settings.cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK
-        mWebView!!.webChromeClient = WebChromeClient()
-        mWebView!!.webViewClient = object : WebViewClient() {
-            override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
-                openLink(url)
-                return true
+        if (mWebView != null) {
+            mWebView!!.settings.javaScriptEnabled = true
+            mWebView!!.settings.useWideViewPort = true
+            mWebView!!.settings.loadWithOverviewMode = true
+            mWebView!!.settings.cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK
+            mWebView!!.webChromeClient = WebChromeClient()
+            mWebView!!.webViewClient = object : WebViewClient() {
+                override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
+                    openLink(url)
+                    return true
+                }
             }
         }
     }
