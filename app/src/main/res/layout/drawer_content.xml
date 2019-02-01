@@ -24,6 +24,7 @@
             android:paddingBottom="0dp"
             app:ftv_typeface="regular"/>
 
+        <!--Pick favorite-->
         <com.makeuseof.cryptocurrency.view.widgets.FontTextView
             android:id="@+id/drawer_favorite"
             android:theme="@style/AppTheme.DrawerMenuItem"
@@ -34,7 +35,16 @@
             app:layout_constraintTop_toBottomOf="@+id/drawer_menu_title"
             app:ftv_typeface="regular"/>
 
-        <!--Scan-->
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            app:layout_constraintTop_toTopOf="@+id/drawer_favorite"
+            app:layout_constraintBottom_toBottomOf="@+id/drawer_favorite"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/ic_favorite_star"/>
+
+        <!--Add to watchlist-->
         <com.makeuseof.cryptocurrency.view.widgets.FontTextView
             android:id="@+id/drawer_add_watchlist"
             android:theme="@style/AppTheme.DrawerMenuItem"
@@ -44,7 +54,16 @@
             app:layout_constraintTop_toBottomOf="@+id/drawer_favorite"
             app:ftv_typeface="regular"/>
 
-        <!--Docs-->
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            app:layout_constraintTop_toTopOf="@+id/drawer_add_watchlist"
+            app:layout_constraintBottom_toBottomOf="@+id/drawer_add_watchlist"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/ic_plus"/>
+
+        <!--Share app-->
         <com.makeuseof.cryptocurrency.view.widgets.FontTextView
             android:id="@+id/drawer_share_this_app"
             android:theme="@style/AppTheme.DrawerMenuItem"
@@ -54,7 +73,16 @@
             app:layout_constraintTop_toBottomOf="@+id/drawer_add_watchlist"
             app:ftv_typeface="regular"/>
 
-        <!--Settings-->
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            app:layout_constraintTop_toTopOf="@+id/drawer_share_this_app"
+            app:layout_constraintBottom_toBottomOf="@+id/drawer_share_this_app"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/ic_share"/>
+
+        <!--Rate us-->
         <com.makeuseof.cryptocurrency.view.widgets.FontTextView
             android:id="@+id/drawer_rate_us"
             android:theme="@style/AppTheme.DrawerMenuItem"
@@ -64,6 +92,16 @@
             app:layout_constraintTop_toBottomOf="@+id/drawer_share_this_app"
             app:ftv_typeface="regular"/>
 
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            app:layout_constraintTop_toTopOf="@+id/drawer_rate_us"
+            app:layout_constraintBottom_toBottomOf="@+id/drawer_rate_us"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/ic_rate"/>
+
+        <!--Contact us-->
         <com.makeuseof.cryptocurrency.view.widgets.FontTextView
             android:id="@+id/drawer_contact_us"
             android:theme="@style/AppTheme.DrawerMenuItem"
@@ -73,9 +111,19 @@
             app:layout_constraintTop_toBottomOf="@+id/drawer_rate_us"
             app:ftv_typeface="regular"/>
 
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            app:layout_constraintTop_toTopOf="@+id/drawer_contact_us"
+            app:layout_constraintBottom_toBottomOf="@+id/drawer_contact_us"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/ic_contact_us"/>
+
     </android.support.constraint.ConstraintLayout>
 
-    <android.support.constraint.ConstraintLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom">
@@ -86,7 +134,6 @@
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-
             android:text="Other apps"
             app:ftv_typeface="regular"/>
 
@@ -102,6 +149,6 @@
             app:av_textColor="#FFF"
             android:layout_marginTop="14dp"
             android:paddingBottom="16dp"/>
-    </android.support.constraint.ConstraintLayout>
+    </LinearLayout>
 
 </LinearLayout>

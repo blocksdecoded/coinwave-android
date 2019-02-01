@@ -6,12 +6,32 @@
     android:viewportHeight="10">
   <path
       android:pathData="M1.5,6a0.5,0.5 0,1 0,0.001 1.001A0.5,0.5 0,0 0,1.5 6z"
-      android:fillType="nonZero"
-      android:fillColor="#FF1DE9B6">
+      android:fillType="nonZero">
+    <aapt:attr name="android:fillColor">
+      <gradient 
+          android:startY="5.9997716"
+          android:startX="1.9995553"
+          android:endY="7.00144"
+          android:endX="0.9901711"
+          android:type="linear">
+        <item android:offset="0" android:color="#FF1DE9B6"/>
+        <item android:offset="1" android:color="#FF1DC4E9"/>
+      </gradient>
+    </aapt:attr>
   </path>
   <path
       android:pathData="M10,6.034c0,-0.43 -0.25,-0.63 -0.494,-0.73a0.843,0.843 0,0 0,0.312 -0.649c0,-0.475 -0.408,-0.862 -0.909,-0.862h-2.612l0.133,-0.588c0.177,-0.784 0.06,-1.675 0.02,-1.93 -0.093,-0.602 -0.655,-1.275 -1.266,-1.275h-0.043c-0.29,0 -0.777,0.157 -0.777,1.207 0,2.555 -1.216,2.586 -1.273,2.586h-0.182v-0.345L0,3.448L0,10h2.91v-0.345L8,9.655c0.501,0 0.91,-0.387 0.91,-0.862a0.83,0.83 0,0 0,-0.195 -0.532c0.42,-0.075 0.74,-0.427 0.74,-0.847a0.83,0.83 0,0 0,-0.195 -0.532c0.42,-0.076 0.74,-0.427 0.74,-0.848zM0.364,9.655v-5.862h2.181v5.862h-2.181z"
-      android:fillType="nonZero"
-      android:fillColor="#FF1DE9B6">
+      android:fillType="nonZero">
+    <aapt:attr name="android:fillColor">
+      <gradient 
+          android:startY="-2.3841858E-7"
+          android:startX="10"
+          android:endY="10"
+          android:endX="0"
+          android:type="linear">
+        <item android:offset="0" android:color="#FF1DE9B6"/>
+        <item android:offset="1" android:color="#FF1DC4E9"/>
+      </gradient>
+    </aapt:attr>
   </path>
 </vector>
