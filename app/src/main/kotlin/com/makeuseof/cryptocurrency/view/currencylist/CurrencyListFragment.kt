@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
+import butterknife.OnClick
 import butterknife.Unbinder
 import com.makeuseof.core.mvp.BaseMVPFragment
 import com.makeuseof.cryptocurrency.R
@@ -29,19 +30,26 @@ open class CurrencyListFragment :
     override val layoutId: Int = R.layout.fragment_currency_list
 
     @BindView(R.id.fragment_currency_list_recycler)
-    @JvmField var mRecycler: RecyclerView? = null
+    lateinit var mRecycler: RecyclerView
     @BindView(R.id.fragment_currency_list_refresh)
-    @JvmField var mSwipeRefreshLayout: SwipeRefreshLayout? = null
+    lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
     @BindView(R.id.fragment_currency_list_error)
-    @JvmField var mErrorContainer: View? = null
+    lateinit var mErrorContainer: View
     @BindView(R.id.connection_error_retry)
-    @JvmField var mRetry: View? = null
+    lateinit var mRetry: View
 
     @BindView(R.id.fragment_currency_list_title)
-    @JvmField var mTitle: TextView? = null
+    lateinit var mTitle: TextView
 
     private var mAdapter: CurrencyListAdapter? = null
     private var mActiveDialog: Dialog? = null
+
+    @OnClick(R.id.currency_menu)
+    fun onClick(view: View) {
+        when (view.id) {
+            R.id.currency_menu -> mPresenter?.onMenuClick()
+        }
+    }
 
     companion object {
         private val TITLE_KEY = "list_title"

@@ -23,5 +23,7 @@ interface PostListContract {
         fun getPosts()
 
         fun getNextPosts()
+
+        fun onMenuClick()
     }
 }

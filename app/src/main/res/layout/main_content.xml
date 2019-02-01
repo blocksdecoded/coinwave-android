@@ -101,9 +101,11 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp"
         android:src="@drawable/ic_menu"
         app:backgroundTint="@color/main_light"
         app:useCompatPadding="true"
+        android:visibility="gone"
         app:maxImageSize="18dp" />
 
 </android.support.constraint.ConstraintLayout>

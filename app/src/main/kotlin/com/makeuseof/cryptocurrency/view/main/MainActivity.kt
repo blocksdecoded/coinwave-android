@@ -38,7 +38,10 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.drawer_content.*
 import kotlinx.android.synthetic.main.main_content.*
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity :
+        AppCompatActivity(),
+        View.OnClickListener,
+        MenuClickListener {
 
     private var mWatchListPresenter: WatchListContract.Presenter? = null
     private var mCurrencyListPresenter: CurrencyListContract.Presenter? = null
@@ -186,39 +189,35 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     //region Screens
 
-    private fun createWatchListScreen(): Fragment {
-        return WatchListFragment.newInstance().apply {
-            mWatchListPresenter = WatchListPresenter(
-                    this,
-                    UseCaseProvider.getCurrencyListUseCases(applicationContext),
-                    UseCaseProvider.getFavoriteChartUseVariant(applicationContext)
-            )
-        }
+    private fun createWatchListScreen(): Fragment = WatchListFragment.newInstance().also {
+        mWatchListPresenter = WatchListPresenter(
+                it,
+                this,
+                UseCaseProvider.getCurrencyListUseCases(applicationContext),
+                UseCaseProvider.getFavoriteChartUseVariant(applicationContext)
+        )
     }
 
-    private fun createCurrencyListScreen(): Fragment {
-        return CurrencyListFragment.newInstance(getString(R.string.cryptocurrency)).apply {
-            mCurrencyListPresenter = CurrencyListPresenter(
-                    this,
-                    UseCaseProvider.getCurrencyListUseCases(applicationContext)
-            )
-        }
-    }
+    private fun createCurrencyListScreen(): Fragment =
+            CurrencyListFragment.newInstance(getString(R.string.cryptocurrency)).also {
+                mCurrencyListPresenter = CurrencyListPresenter(
+                        it,
+                        this,
+                        UseCaseProvider.getCurrencyListUseCases(applicationContext)
+                )
+            }
 
-    private fun createPostListScreen(): Fragment {
-        return PostListFragment.newInstance().apply {
-            mPostListPresenter = PostListPresenter(
-                    this,
-                    UseCaseProvider.getPostUseCases()
-            )
-        }
+    private fun createPostListScreen(): Fragment = PostListFragment.newInstance().also {
+        mPostListPresenter = PostListPresenter(
+                it,
+                this,
+                UseCaseProvider.getPostUseCases()
+        )
     }
 
     private fun createSettingsScreen(): Fragment {
-        return SettingsFragment().apply {
-            mSettingsPresenter = SettingsPresenter(
-                    this
-            )
+        return SettingsFragment().also {
+            mSettingsPresenter = SettingsPresenter(it)
         }
     }
 
@@ -296,6 +295,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     //endregion
 
     //region Click
+
+    override fun onMenuClick() {
+        openDrawer()
+    }
 
     override fun onClick(v: View?) {
         when(v){

@@ -11,6 +11,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.TextView
 import butterknife.BindView
+import butterknife.OnClick
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
@@ -48,26 +49,33 @@ open class WatchListFragment :
     override val layoutId: Int = R.layout.fragment_watchlist
 
     @BindView(R.id.fragment_watchlist_recycler)
-    @JvmField var mRecycler: RecyclerView? = null
+    lateinit var mRecycler: RecyclerView
     private var mAdapter: WatchlistAdapter? = null
 
     @BindView(R.id.fragment_watchlist_refresh)
-    @JvmField var mSwipeRefreshLayout: SwipeRefreshLayout? = null
+    lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
     @BindView(R.id.fragment_watchlist_empty)
-    @JvmField var mEmptyText: View? = null
+    lateinit var mEmptyText: View
 
     @BindView(R.id.fragment_watchlist_error)
-    @JvmField var mErrorContainer: View? = null
+    lateinit var mErrorContainer: View
     @BindView(R.id.connection_error_retry)
-    @JvmField var mRetry: View? = null
+    lateinit var mRetry: View
 
     @BindView(R.id.fragment_watchlist_container)
-    @JvmField var mContainer: View? = null
+    lateinit var mContainer: View
 
     @BindView(R.id.fragment_watchlist_favorite_name)
-    @JvmField var mFavoriteName: TextView? = null
+    lateinit var mFavoriteName: TextView
     @BindView(R.id.fragment_watchlist_favorite_price)
-    @JvmField var mFavoritePrice: TextView? = null
+    lateinit var mFavoritePrice: TextView
+
+    @OnClick(R.id.watchlist_menu)
+    fun onClick(view: View) {
+        when (view.id) {
+            R.id.watchlist_menu -> mPresenter?.onMenuClick()
+        }
+    }
 
     private var mActiveDialog: Dialog? = null
 

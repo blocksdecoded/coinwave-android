@@ -29,5 +29,7 @@ interface CurrencyListContract {
         fun deleteCurrency(position: Int)
 
         fun getCurrencyList()
+
+        fun onMenuClick()
     }
 }

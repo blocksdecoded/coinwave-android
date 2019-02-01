@@ -44,5 +44,7 @@ interface WatchListContract {
 
         fun getCurrencyList()
 
+        fun onMenuClick()
+
     }
 }

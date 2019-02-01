@@ -6,6 +6,7 @@ import com.makeuseof.cryptocurrency.data.crypto.CurrencyUpdateObserver
 import com.makeuseof.cryptocurrency.data.model.CurrencyEntity
 import com.makeuseof.cryptocurrency.domain.usecases.list.CurrencyListUseCases
 import com.makeuseof.cryptocurrency.util.findCurrency
+import com.makeuseof.cryptocurrency.view.main.MenuClickListener
 import com.makeuseof.utils.coroutine.launchSilent
 import com.makeuseof.utils.coroutine.model.onError
 import com.makeuseof.utils.isValidIndex
@@ -14,6 +15,7 @@ import kotlin.coroutines.CoroutineContext
 
 class CurrencyListPresenter(
         view: CurrencyListContract.View?,
+        private val mMenuListener: MenuClickListener,
         private val mCurrencyListUseCases: CurrencyListUseCases,
         private val uiContext: CoroutineContext = Dispatchers.Main
 ) : BaseMVPPresenter<CurrencyListContract.View>(view), CurrencyListContract.Presenter {
@@ -105,6 +107,10 @@ class CurrencyListPresenter(
         if(mCachedData.isValidIndex(position)){
             mView?.openCurrencyScreen(mCachedData[position].id)
         }
+    }
+
+    override fun onMenuClick() {
+        mMenuListener.onMenuClick()
     }
 
     //endregion

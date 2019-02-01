@@ -14,8 +14,12 @@
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="68dp"
+            android:layout_height="wrap_content"
             app:layout_scrollFlags="scroll|enterAlways">
+
+            <include
+                layout="@layout/button_menu"
+                android:id="@+id/currency_menu"/>
 
             <com.makeuseof.cryptocurrency.view.widgets.FontTextView
                 android:id="@+id/fragment_currency_list_title"

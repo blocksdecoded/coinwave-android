@@ -5,7 +5,9 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.DisplayMetrics
 import android.view.View
+import android.view.ViewGroup
 import butterknife.BindView
+import butterknife.OnClick
 import com.makeuseof.core.contracts.LoadNextListener
 import com.makeuseof.core.mvp.BaseMVPFragment
 import com.makeuseof.cryptocurrency.R
@@ -13,6 +15,8 @@ import com.makeuseof.cryptocurrency.data.post.model.PublisherPost
 import com.makeuseof.cryptocurrency.view.post.PostActivity
 import com.makeuseof.cryptocurrency.view.postlist.recycler.PostListAdapter
 import com.makeuseof.cryptocurrency.view.postlist.recycler.PostListViewHolder
+import com.makeuseof.utils.DimenUtils
+import com.makeuseof.utils.extensions.setConstraintTopMargin
 import com.makeuseof.utils.hide
 import com.makeuseof.utils.visible
 import kotlin.math.roundToInt
@@ -31,9 +35,18 @@ open class PostListFragment :
     override val layoutId: Int = R.layout.fragment_post_list
 
     @BindView(R.id.fragment_post_list_recycler)
-    @JvmField var mRecycler: RecyclerView? = null
+    lateinit var mRecycler: RecyclerView
     @BindView(R.id.fragment_post_list_swipe_refresh)
-    @JvmField var mSwipeRefresh: SwipeRefreshLayout? = null
+    lateinit var mSwipeRefresh: SwipeRefreshLayout
+    @BindView(R.id.post_menu)
+    lateinit var mMenuBtn: View
+
+    @OnClick(R.id.post_menu)
+    fun onClick(view: View) {
+        when(view.id) {
+            R.id.post_menu -> mPresenter?.onMenuClick()
+        }
+    }
 
     var mAdapter: PostListAdapter? = null
 
@@ -42,7 +55,11 @@ open class PostListFragment :
     override fun initView(rootView: View) {
         initRecycler(rootView)
 
-        mSwipeRefresh?.setOnRefreshListener {
+        context?.also {
+            mMenuBtn.setConstraintTopMargin(DimenUtils.getStatusBarHeight(it) + DimenUtils.dpToPx(it, 12))
+        }
+
+        mSwipeRefresh.setOnRefreshListener {
             mPresenter?.getPosts()
         }
     }
@@ -56,8 +73,8 @@ open class PostListFragment :
         }
 
         mAdapter = PostListAdapter(arrayListOf(), this, this, postHeight)
-        mRecycler?.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        mRecycler?.adapter = mAdapter
+        mRecycler.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        mRecycler.adapter = mAdapter
     }
 
     //endregion
@@ -94,13 +111,13 @@ open class PostListFragment :
     }
 
     override fun showLoading() {
-        mSwipeRefresh?.isRefreshing = true
-        mRecycler?.hide()
+        mSwipeRefresh.isRefreshing = true
+        mRecycler.hide()
     }
 
     override fun stopLoading() {
-        mSwipeRefresh?.isRefreshing = false
-        mRecycler?.visible()
+        mSwipeRefresh.isRefreshing = false
+        mRecycler.visible()
     }
 
     override fun showPosts(posts: List<PublisherPost>) {

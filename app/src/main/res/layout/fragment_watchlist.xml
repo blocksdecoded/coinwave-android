@@ -33,12 +33,17 @@
                     android:id="@+id/fragment_watchlist_app_bar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:elevation="0dp"
                     android:background="@color/full_transparent">
 
                     <android.support.constraint.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="68dp">
+                        android:layout_height="wrap_content">
+
+                        <include
+                            layout="@layout/button_menu"
+                            android:id="@+id/watchlist_menu"/>
 
                         <com.makeuseof.cryptocurrency.view.widgets.FontTextView
                             android:id="@+id/fragment_watchlist_title"

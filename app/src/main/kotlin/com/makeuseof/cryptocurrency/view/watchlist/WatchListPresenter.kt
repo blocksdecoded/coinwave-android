@@ -9,6 +9,7 @@ import com.makeuseof.cryptocurrency.domain.usecases.list.CurrencyListUseCases
 import com.makeuseof.cryptocurrency.domain.variant.favoritechart.FavoriteChartUseVariant
 import com.makeuseof.cryptocurrency.util.addSortedByRank
 import com.makeuseof.cryptocurrency.util.findCurrency
+import com.makeuseof.cryptocurrency.view.main.MenuClickListener
 import com.makeuseof.utils.coroutine.launchSilent
 import com.makeuseof.utils.coroutine.model.onError
 import com.makeuseof.utils.coroutine.model.onSuccess
@@ -18,6 +19,7 @@ import kotlin.coroutines.CoroutineContext
 
 class WatchListPresenter(
         view: WatchListContract.View?,
+        private val mMenuListener: MenuClickListener,
         private val mCurrencyListUseCases: CurrencyListUseCases,
         private val mFavoriteChartUseVariant: FavoriteChartUseVariant,
         private val uiContext: CoroutineContext = Dispatchers.Main
@@ -134,6 +136,10 @@ class WatchListPresenter(
         if(mCachedData.isValidIndex(position)){
             mView?.openCurrencyScreen(mCachedData[position].id)
         }
+    }
+
+    override fun onMenuClick() {
+        mMenuListener.onMenuClick()
     }
 
     //endregion

@@ -4,6 +4,7 @@ import com.makeuseof.utils.coroutine.model.onError
 import com.makeuseof.utils.coroutine.model.onSuccess
 import com.makeuseof.core.mvp.BaseMVPPresenter
 import com.makeuseof.cryptocurrency.domain.usecases.postlist.PostUseCases
+import com.makeuseof.cryptocurrency.view.main.MenuClickListener
 import com.makeuseof.utils.Lg
 import com.makeuseof.utils.coroutine.launchSilent
 import kotlinx.coroutines.Dispatchers
@@ -11,6 +12,7 @@ import kotlinx.coroutines.MainCoroutineDispatcher
 
 class PostListPresenter(
         view: PostListContract.View?,
+        private val mMenuListener: MenuClickListener,
         private val mPostUseCases: PostUseCases,
         private val ui: MainCoroutineDispatcher = Dispatchers.Main
 ) : BaseMVPPresenter<PostListContract.View>(view), PostListContract.Presenter {
@@ -49,6 +51,10 @@ class PostListPresenter(
     override fun getNextPosts()  = launchSilent(ui){
         mPostUseCases.getNextPosts()
                 ?.onSuccess { mView?.nextPosts(it) }
+    }
+
+    override fun onMenuClick() {
+        mMenuListener.onMenuClick()
     }
 
     //endregion
