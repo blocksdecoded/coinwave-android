@@ -17,7 +17,7 @@ fun ImageView.loadIcon(currencyEntity: CurrencyEntity){
 //    loadSvg(currencyEntity.iconUrl)
     Log.d("ololo", currencyEntity.iconUrl)
     Glide.with(this)
-//            .load(ConstantSourceUtil.getIconUrl(currencyEntity))
-            .load(currencyEntity.iconUrl)
+            .load(ConstantSourceUtil.getIconUrl(currencyEntity))
+//            .load(currencyEntity.iconUrl)
             .into(this)
 }

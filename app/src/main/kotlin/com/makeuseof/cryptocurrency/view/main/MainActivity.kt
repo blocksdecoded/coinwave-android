@@ -34,6 +34,7 @@ import com.makeuseof.cryptocurrency.view.widgets.PagerAdapter
 import com.makeuseof.rateus.base.RateUsDialogContract
 import com.makeuseof.rateus.base.RateUsListener
 import com.makeuseof.utils.*
+import com.makeuseof.utils.extensions.setConstraintTopMargin
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.drawer_content.*
 import kotlinx.android.synthetic.main.main_content.*
@@ -238,7 +239,7 @@ class MainActivity :
             }
 
             override fun onDrawerClosed(p0: View) {
-                main_nav_scroll.scrollTo(0, 0)
+                muo_apps_list.resetScroll()
             }
 
             override fun onDrawerOpened(p0: View) {

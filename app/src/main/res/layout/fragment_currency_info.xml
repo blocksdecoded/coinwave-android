@@ -336,6 +336,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/currency_change_1h_title"
+                android:visibility="gone"
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:text="% Change 1d:"/>
             <com.makeuseof.cryptocurrency.view.widgets.FontTextView
@@ -345,12 +346,14 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="@+id/currency_change_1d_title"
                 app:layout_constraintBottom_toBottomOf="@+id/currency_change_1d_title"
+                android:visibility="gone"
                 app:layout_constraintRight_toRightOf="parent"
                 android:text="2.74%"/>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 app:layout_constraintTop_toBottomOf="@+id/currency_change_1d_title"
+                android:visibility="gone"
                 android:background="@color/light_grey"/>
 
             <!--Change 1w-->
@@ -361,6 +364,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/currency_change_1d_title"
                 app:layout_constraintLeft_toLeftOf="parent"
+                android:visibility="gone"
                 android:text="% Change 1w:"/>
             <com.makeuseof.cryptocurrency.view.widgets.FontTextView
                 style="@style/AppTheme.FieldValue"
@@ -370,11 +374,13 @@
                 app:layout_constraintTop_toTopOf="@+id/currency_change_1w_title"
                 app:layout_constraintBottom_toBottomOf="@+id/currency_change_1w_title"
                 app:layout_constraintRight_toRightOf="parent"
+                android:visibility="gone"
                 android:text="2.74%"/>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 app:layout_constraintTop_toBottomOf="@+id/currency_change_1w_title"
+                android:visibility="gone"
                 android:background="@color/light_grey"/>
 
             <ImageView

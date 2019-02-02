@@ -44,49 +44,49 @@ open class CurrencyFragment :
     override val layoutId: Int = R.layout.fragment_currency_info
 
     @BindView(R.id.fragment_currency_chart)
-    @JvmField var mChart: LineChart? = null
+    lateinit var mChart: LineChart
 
     @BindView(R.id.currency_scroll_container)
-    @JvmField var mScrollContainer: LockableScrollView? = null
+    lateinit var mScrollContainer: LockableScrollView
     @BindView(R.id.fragment_currency_add_to_watchlist)
-    @JvmField var mWatchlist: ImageView? = null
+    lateinit var mWatchlist: ImageView
     @BindView(R.id.fragment_currency_info_icon)
-    @JvmField var mIcon: ImageView? = null
+    lateinit var mIcon: ImageView
     @BindView(R.id.fragment_currency_info_name)
-    @JvmField var mName: TextView? = null
+    lateinit var mName: TextView
     @BindView(R.id.fragment_currency_info_symbol)
-    @JvmField var mSymbol: TextView? = null
+    lateinit var mSymbol: TextView
     @BindView(R.id.currency_price)
-    @JvmField var mPrice: TextView? = null
+    lateinit var mPrice: TextView
     @BindView(R.id.currency_market_cap)
-    @JvmField var mMarketCap: TextView? = null
+    lateinit var mMarketCap: TextView
     @BindView(R.id.currency_volume_24h)
-    @JvmField var mVolume24h: TextView? = null
+    lateinit var mVolume24h: TextView
     @BindView(R.id.currency_available_supply)
-    @JvmField var mAvailableSupply: TextView? = null
+    lateinit var mAvailableSupply: TextView
     @BindView(R.id.currency_total_supply)
-    @JvmField var mTotalSupply: TextView? = null
+    lateinit var mTotalSupply: TextView
     @BindView(R.id.currency_change_1h)
-    @JvmField var mChange1h: TextView? = null
+    lateinit var mChange1h: TextView
     @BindView(R.id.currency_change_1d)
-    @JvmField var mChange1d: TextView? = null
+    lateinit var mChange1d: TextView
     @BindView(R.id.currency_change_1w)
-    @JvmField var mChange1w: TextView? = null
+    lateinit var mChange1w: TextView
 
     @BindView(R.id.currency_chart_picked_container)
-    @JvmField var mPickedContainer: View? = null
+    lateinit var mPickedContainer: View
     @BindView(R.id.currency_chart_picked)
-    @JvmField var mPickedPrice: TextView? = null
+    lateinit var mPickedPrice: TextView
     @BindView(R.id.fragment_currency_progress)
-    @JvmField var mProgress: View? = null
+    lateinit var mProgress: View
     @BindView(R.id.currency_chart_period)
-    @JvmField var mChartPeriods: OptionSelectorView? = null
+    lateinit var mChartPeriods: OptionSelectorView
 
     private val mChartListener = object : ChartListener() {
         override fun onValueSelected(e: Entry?, h: Highlight?) {
-            if (mPickedContainer?.visibility != View.VISIBLE){
-                mPickedContainer?.alpha = 0f
-                mPickedContainer?.animate()
+            if (mPickedContainer.visibility != View.VISIBLE){
+                mPickedContainer.alpha = 0f
+                mPickedContainer.animate()
                         ?.setDuration(300L)
                         ?.alpha(1f)
                         ?.withStartAction { mPickedContainer.visible() }
@@ -94,12 +94,12 @@ open class CurrencyFragment :
             }
 
             val date = Date(e?.x?.toLong()?:0L)
-            mPickedPrice?.text = "${date.toMediumFormat()} ${date.toHourFormat()}\n\$${(e?.y ?: 0f).format()}"
+            mPickedPrice.text = "${date.toMediumFormat()} ${date.toHourFormat()}\n\$${(e?.y ?: 0f).format()}"
         }
 
         override fun onChartGestureEnd(me: MotionEvent?, lastPerformedGesture: ChartTouchListener.ChartGesture?) {
             Handler().postDelayed({
-                mPickedContainer?.animate()
+                mPickedContainer.animate()
                         ?.setDuration(300L)
                         ?.alpha(0f)
                         ?.withEndAction { mPickedContainer.invisible() }
@@ -124,30 +124,30 @@ open class CurrencyFragment :
     var mScrollEnabled = true
         set(value) {
             field = value
-            mScrollContainer?.mScrollable = value
+            mScrollContainer.mScrollable = value
         }
 
     override fun initView(rootView: View){
-        mChartPeriods?.addClickListener { mPresenter?.onPeriodChanged(it) }
+        mChartPeriods.addClickListener { mPresenter?.onPeriodChanged(it) }
 
         initChart()
     }
 
     private fun initChart(){
-        mChart?.setTouchEnabled(true)
-        mChart?.isDragEnabled = true
-        mChart?.setScaleEnabled(true)
-        mChart?.setDrawGridBackground(false)
-        mChart?.setPinchZoom(true)
-        mChart?.description?.isEnabled = false
-        mChart?.setDrawBorders(false)
-        mChart?.axisLeft?.isEnabled = false
-        mChart?.axisRight?.isEnabled = false
-        mChart?.xAxis?.isEnabled = false
-        mChart?.setBorderWidth(0f)
-        mChart?.setViewPortOffsets(0f,50f,0f,50f)
-        mChart?.setOnChartValueSelectedListener(mChartListener)
-        mChart?.onChartGestureListener = mChartListener
+        mChart.setTouchEnabled(true)
+        mChart.isDragEnabled = true
+        mChart.setScaleEnabled(true)
+        mChart.setDrawGridBackground(false)
+        mChart.setPinchZoom(true)
+        mChart.description?.isEnabled = false
+        mChart.setDrawBorders(false)
+        mChart.axisLeft?.isEnabled = false
+        mChart.axisRight?.isEnabled = false
+        mChart.xAxis?.isEnabled = false
+        mChart.setBorderWidth(0f)
+        mChart.setViewPortOffsets(0f,50f,0f,50f)
+        mChart.setOnChartValueSelectedListener(mChartListener)
+        mChart.onChartGestureListener = mChartListener
     }
 
     private fun showData(data: ChartData){
@@ -180,24 +180,24 @@ open class CurrencyFragment :
             dataSet.fillDrawable = ContextCompat.getDrawable(it, R.drawable.dark_chart_bg)
         }
 
-        mChart?.data = LineData(dataSet)
-        mChart?.animateX(1000)
+        mChart.data = LineData(dataSet)
+        mChart.animateX(1000)
 //        mChart?.animateY(1500)
     }
 
     private fun showCurrencyInfo(currencyEntity: CurrencyEntity){
-        mIcon?.loadIcon(currencyEntity)
-        mName?.text = currencyEntity.name
-        mSymbol?.text = currencyEntity.symbol
-        mPrice?.text = "$${currencyEntity.getPrice()?.format()}"
-        mMarketCap?.text = "$${currencyEntity.getMarketCap()?.format()}"
-        mVolume24h?.text = "$${currencyEntity.getDailyVolume()?.format()}"
-        mAvailableSupply?.text = currencyEntity.circulatingSupply.format()
-        mTotalSupply?.text = currencyEntity.totalSupply.format()
+        mIcon.loadIcon(currencyEntity)
+        mName.text = currencyEntity.name
+        mSymbol.text = currencyEntity.symbol
+        mPrice.text = "$${currencyEntity.getPrice()?.format()}"
+        mMarketCap.text = "$${currencyEntity.getMarketCap()?.format()}"
+        mVolume24h.text = "$${currencyEntity.getDailyVolume()?.format()}"
+        mAvailableSupply.text = currencyEntity.circulatingSupply.format()
+        mTotalSupply.text = currencyEntity.totalSupply.format()
 
-        mChange1h.hide()
         mChange1d.hide()
         mChange1w.hide()
+        mChange1h.setChangedPercent(currencyEntity.priceChange)
 //        currencyEntity.getUsdQuotes()?.hourChange?.let{
 //            mChange1h?.setChangedPercent(it)
 //        }
@@ -213,9 +213,9 @@ open class CurrencyFragment :
 
     private fun setWatchedIcon(watched: Boolean){
         if (watched){
-            mWatchlist?.setImageResource(R.drawable.ic_star_filled)
+            mWatchlist.setImageResource(R.drawable.ic_star_filled)
         } else {
-            mWatchlist?.setImageResource(R.drawable.ic_star_border)
+            mWatchlist.setImageResource(R.drawable.ic_star_border)
         }
     }
 
