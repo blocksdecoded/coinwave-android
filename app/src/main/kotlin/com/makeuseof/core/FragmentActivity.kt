@@ -2,7 +2,6 @@ package com.makeuseof.core
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 
 /**
  * Created by Tameki on 2/7/18.

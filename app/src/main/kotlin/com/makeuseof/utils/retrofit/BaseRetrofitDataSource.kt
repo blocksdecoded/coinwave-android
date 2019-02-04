@@ -7,7 +7,6 @@ import com.makeuseof.core.network.NetworkError
 import com.makeuseof.core.network.RHWithErrorHandler
 import com.makeuseof.cryptocurrency.BuildConfig
 import com.makeuseof.cryptocurrency.data.NetworkException
-import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.*
@@ -21,13 +20,6 @@ import kotlin.coroutines.suspendCoroutine
  * with Android Studio
  */
 abstract class BaseRetrofitDataSource {
-
-    private fun getMoshi(): Moshi {
-        return Moshi
-                .Builder()
-                .add(com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory())
-                .build()
-    }
 
     private fun getRetrofit(baseUrl: String): Retrofit {
         val logger = HttpLoggingInterceptor()
