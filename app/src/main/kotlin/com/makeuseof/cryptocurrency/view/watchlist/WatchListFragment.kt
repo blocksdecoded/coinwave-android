@@ -25,6 +25,7 @@ import com.makeuseof.cryptocurrency.R
 import com.makeuseof.cryptocurrency.data.model.ChartData
 import com.makeuseof.cryptocurrency.data.model.CurrencyEntity
 import com.makeuseof.cryptocurrency.util.format
+import com.makeuseof.cryptocurrency.util.init
 import com.makeuseof.cryptocurrency.util.loadChartData
 import com.makeuseof.cryptocurrency.view.currency.CurrencyActivity
 import com.makeuseof.cryptocurrency.view.pickfavorite.PickFavoriteActivity
@@ -133,41 +134,24 @@ open class WatchListFragment :
 
     override fun initView(rootView: View) {
         context?.also {
-            mContainer?.setPadding(0, DimenUtils.getStatusBarHeight(it), 0, 0)
+            mContainer.setPadding(0, DimenUtils.getStatusBarHeight(it), 0, 0)
         }
 
         mAdapter = WatchlistAdapter(arrayListOf(), this)
 
-        mRetry?.setOnClickListener {
+        mRetry.setOnClickListener {
             mPresenter?.getCurrencyList()
         }
 
-        mSwipeRefreshLayout?.setOnRefreshListener {
+        mSwipeRefreshLayout.setOnRefreshListener {
             mPresenter?.getCurrencyList()
         }
 
         val lm = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        mRecycler?.layoutManager = lm
-        mRecycler?.adapter = mAdapter
+        mRecycler.layoutManager = lm
+        mRecycler.adapter = mAdapter
 
-        initChart()
-    }
-
-    private fun initChart(){
-        mChart.setTouchEnabled(true)
-        mChart.isDragEnabled = true
-        mChart.setScaleEnabled(true)
-        mChart.setDrawGridBackground(false)
-        mChart.setPinchZoom(true)
-        mChart.description?.isEnabled = false
-        mChart.setDrawBorders(false)
-        mChart.axisLeft?.isEnabled = false
-        mChart.axisRight?.isEnabled = false
-        mChart.xAxis?.isEnabled = false
-        mChart.setBorderWidth(0f)
-        mChart.setViewPortOffsets(0f,50f,0f,50f)
-        mChart.setOnChartValueSelectedListener(mChartListener)
-        mChart.onChartGestureListener = mChartListener
+        mChart.init(mChartListener)
     }
 
     //region ViewHolder

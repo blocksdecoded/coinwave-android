@@ -11,6 +11,7 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.makeuseof.cryptocurrency.R
 import com.makeuseof.cryptocurrency.data.model.ChartData
 import com.makeuseof.cryptocurrency.data.model.CurrencyEntity
+import com.makeuseof.cryptocurrency.view.widgets.chart.ChartListener
 import com.makeuseof.utils.Lg
 import com.makeuseof.utils.ResourceUtil
 import com.makeuseof.utils.isValidIndex
@@ -71,5 +72,21 @@ fun LineChart.loadChartData(
 
     this.data = LineData(dataSet)
     this.animateX(1000)
+}
 
+fun LineChart.init(listener: ChartListener) {
+    this.setTouchEnabled(true)
+    this.isDragEnabled = true
+    this.setScaleEnabled(true)
+    this.setDrawGridBackground(false)
+    this.setPinchZoom(true)
+    this.description?.isEnabled = false
+    this.setDrawBorders(false)
+    this.axisLeft?.isEnabled = false
+    this.axisRight?.isEnabled = false
+    this.xAxis?.isEnabled = false
+    this.setBorderWidth(0f)
+    this.setViewPortOffsets(0f,50f,0f,50f)
+    this.setOnChartValueSelectedListener(listener)
+    this.onChartGestureListener = listener
 }

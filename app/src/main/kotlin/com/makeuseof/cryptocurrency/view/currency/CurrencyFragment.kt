@@ -23,10 +23,7 @@ import com.makeuseof.core.mvp.BaseMVPFragment
 import com.makeuseof.cryptocurrency.R
 import com.makeuseof.cryptocurrency.data.model.ChartData
 import com.makeuseof.cryptocurrency.data.model.CurrencyEntity
-import com.makeuseof.cryptocurrency.util.format
-import com.makeuseof.cryptocurrency.util.loadChartData
-import com.makeuseof.cryptocurrency.util.loadIcon
-import com.makeuseof.cryptocurrency.util.setChangedPercent
+import com.makeuseof.cryptocurrency.util.*
 import com.makeuseof.cryptocurrency.view.widgets.LockableScrollView
 import com.makeuseof.cryptocurrency.view.widgets.OptionSelectorView
 import com.makeuseof.cryptocurrency.view.widgets.chart.ChartListener
@@ -131,24 +128,7 @@ open class CurrencyFragment :
     override fun initView(rootView: View){
         mChartPeriods.addClickListener { mPresenter?.onPeriodChanged(it) }
 
-        initChart()
-    }
-
-    private fun initChart(){
-        mChart.setTouchEnabled(true)
-        mChart.isDragEnabled = true
-        mChart.setScaleEnabled(true)
-        mChart.setDrawGridBackground(false)
-        mChart.setPinchZoom(true)
-        mChart.description?.isEnabled = false
-        mChart.setDrawBorders(false)
-        mChart.axisLeft?.isEnabled = false
-        mChart.axisRight?.isEnabled = false
-        mChart.xAxis?.isEnabled = false
-        mChart.setBorderWidth(0f)
-        mChart.setViewPortOffsets(0f,50f,0f,50f)
-        mChart.setOnChartValueSelectedListener(mChartListener)
-        mChart.onChartGestureListener = mChartListener
+        mChart.init(mChartListener)
     }
 
     private fun showData(data: ChartData) = mChart.loadChartData(
