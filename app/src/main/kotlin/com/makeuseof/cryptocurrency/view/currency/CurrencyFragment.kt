@@ -24,6 +24,7 @@ import com.makeuseof.cryptocurrency.R
 import com.makeuseof.cryptocurrency.data.model.ChartData
 import com.makeuseof.cryptocurrency.data.model.CurrencyEntity
 import com.makeuseof.cryptocurrency.util.format
+import com.makeuseof.cryptocurrency.util.loadChartData
 import com.makeuseof.cryptocurrency.util.loadIcon
 import com.makeuseof.cryptocurrency.util.setChangedPercent
 import com.makeuseof.cryptocurrency.view.widgets.LockableScrollView
@@ -150,40 +151,11 @@ open class CurrencyFragment :
         mChart.onChartGestureListener = mChartListener
     }
 
-    private fun showData(data: ChartData){
-        mChart?.resetZoom()
-        mChart?.zoomOut()
-        val entries = arrayListOf<Entry>()
-
-        data.chart.forEach {
-            try {
-                entries.add(
-                        Entry(it.time.toFloat(), it.price.toFloat())
-                )
-            } catch (e: Exception) {
-                Lg.d(e.message)
-            }
-        }
-
-        val dataSet = LineDataSet(entries, "")
-        dataSet.setDrawCircleHole(false)
-        dataSet.mode = LineDataSet.Mode.CUBIC_BEZIER
-        dataSet.setDrawCircles(false)
-        dataSet.cubicIntensity = 0.3f
-        dataSet.setDrawFilled(true)
-        dataSet.lineWidth = 1.2f
-        dataSet.setDrawValues(false)
-
-        context?.let {
-//            dataSet.color = ResourceUtil.getColor(it, R.color.green)
-            dataSet.color = ResourceUtil.getColor(it, R.color.black)
-            dataSet.fillDrawable = ContextCompat.getDrawable(it, R.drawable.dark_chart_bg)
-        }
-
-        mChart.data = LineData(dataSet)
-        mChart.animateX(1000)
-//        mChart?.animateY(1500)
-    }
+    private fun showData(data: ChartData) = mChart.loadChartData(
+            data,
+            R.color.black,
+            R.drawable.dark_chart_bg
+    )
 
     private fun showCurrencyInfo(currencyEntity: CurrencyEntity){
         mIcon.loadIcon(currencyEntity)

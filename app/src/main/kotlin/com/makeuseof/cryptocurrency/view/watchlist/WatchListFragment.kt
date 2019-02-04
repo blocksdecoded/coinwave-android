@@ -25,6 +25,7 @@ import com.makeuseof.cryptocurrency.R
 import com.makeuseof.cryptocurrency.data.model.ChartData
 import com.makeuseof.cryptocurrency.data.model.CurrencyEntity
 import com.makeuseof.cryptocurrency.util.format
+import com.makeuseof.cryptocurrency.util.loadChartData
 import com.makeuseof.cryptocurrency.view.currency.CurrencyActivity
 import com.makeuseof.cryptocurrency.view.pickfavorite.PickFavoriteActivity
 import com.makeuseof.cryptocurrency.view.watchlist.recycler.WatchlistAdapter
@@ -114,14 +115,14 @@ open class WatchListFragment :
     //region Chart card
 
     @BindView(R.id.fragment_watchlist_chart)
-    @JvmField var mChart: LineChart? = null
+    lateinit var mChart: LineChart
 
     @BindView(R.id.watchlist_chart_picked_container)
-    @JvmField var mPickedContainer: View? = null
+    lateinit var mPickedContainer: View
     @BindView(R.id.watchlist_chart_picked)
-    @JvmField var mPickedPrice: TextView? = null
+    lateinit var mPickedPrice: TextView
     @BindView(R.id.fragment_watchlist_chart_progress)
-    @JvmField var mProgress: View? = null
+    lateinit var mProgress: View
 
     //endregion
 
@@ -153,20 +154,20 @@ open class WatchListFragment :
     }
 
     private fun initChart(){
-        mChart?.setTouchEnabled(true)
-        mChart?.isDragEnabled = true
-        mChart?.setScaleEnabled(true)
-        mChart?.setDrawGridBackground(false)
-        mChart?.setPinchZoom(true)
-        mChart?.description?.isEnabled = false
-        mChart?.setDrawBorders(false)
-        mChart?.axisLeft?.isEnabled = false
-        mChart?.axisRight?.isEnabled = false
-        mChart?.xAxis?.isEnabled = false
-        mChart?.setBorderWidth(0f)
-        mChart?.setViewPortOffsets(0f,50f,0f,50f)
-        mChart?.setOnChartValueSelectedListener(mChartListener)
-        mChart?.onChartGestureListener = mChartListener
+        mChart.setTouchEnabled(true)
+        mChart.isDragEnabled = true
+        mChart.setScaleEnabled(true)
+        mChart.setDrawGridBackground(false)
+        mChart.setPinchZoom(true)
+        mChart.description?.isEnabled = false
+        mChart.setDrawBorders(false)
+        mChart.axisLeft?.isEnabled = false
+        mChart.axisRight?.isEnabled = false
+        mChart.xAxis?.isEnabled = false
+        mChart.setBorderWidth(0f)
+        mChart.setViewPortOffsets(0f,50f,0f,50f)
+        mChart.setOnChartValueSelectedListener(mChartListener)
+        mChart.onChartGestureListener = mChartListener
     }
 
     //region ViewHolder
@@ -183,38 +184,11 @@ open class WatchListFragment :
 
     //region Chart
 
-    private fun showChartData(data: ChartData) = launchSilent(Dispatchers.Main) {
-        mChart?.resetZoom()
-        mChart?.zoomOut()
-        val entries = arrayListOf<Entry>()
-
-        data.chart.forEach {
-            try {
-                entries.add(
-                        Entry(it.time.toFloat(), it.price.toFloat())
-                )
-            } catch (e: Exception) {
-                Lg.d(e.message)
-            }
-        }
-
-        val dataSet = LineDataSet(entries, "")
-        dataSet.setDrawCircleHole(false)
-        dataSet.mode = LineDataSet.Mode.CUBIC_BEZIER
-        dataSet.setDrawCircles(false)
-        dataSet.cubicIntensity = 0.3f
-        dataSet.setDrawFilled(true)
-        dataSet.lineWidth = 1.2f
-        dataSet.setDrawValues(false)
-
-        context?.let {
-            dataSet.color = ResourceUtil.getColor(it, R.color.blue_green)
-            dataSet.fillDrawable = ContextCompat.getDrawable(it, R.drawable.green_chart_bg)
-        }
-
-        mChart?.data = LineData(dataSet)
-        mChart?.animateX(1000)
-    }
+    private fun showChartData(data: ChartData) = mChart.loadChartData(
+            data,
+            R.color.blue_green,
+            R.drawable.green_chart_bg
+    )
 
     //endregion
 
