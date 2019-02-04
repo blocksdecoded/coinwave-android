@@ -1,11 +1,10 @@
 package com.makeuseof.cryptocurrency.view.postlist
 
-import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.util.DisplayMetrics
 import android.view.View
-import android.view.ViewGroup
 import butterknife.BindView
 import butterknife.OnClick
 import com.makeuseof.core.contracts.LoadNextListener
@@ -13,7 +12,7 @@ import com.makeuseof.core.mvp.BaseMVPFragment
 import com.makeuseof.cryptocurrency.R
 import com.makeuseof.cryptocurrency.data.post.model.PublisherPost
 import com.makeuseof.cryptocurrency.view.post.PostActivity
-import com.makeuseof.cryptocurrency.view.postlist.recycler.PostListAdapter
+import com.makeuseof.cryptocurrency.view.postlist.recycler.deprecated.PostListAdapter
 import com.makeuseof.cryptocurrency.view.postlist.recycler.PostListViewHolder
 import com.makeuseof.utils.DimenUtils
 import com.makeuseof.utils.extensions.setConstraintTopMargin
@@ -35,9 +34,9 @@ open class PostListFragment :
     override val layoutId: Int = R.layout.fragment_post_list
 
     @BindView(R.id.fragment_post_list_recycler)
-    lateinit var mRecycler: RecyclerView
+    lateinit var mRecycler: androidx.recyclerview.widget.RecyclerView
     @BindView(R.id.fragment_post_list_swipe_refresh)
-    lateinit var mSwipeRefresh: SwipeRefreshLayout
+    lateinit var mSwipeRefresh: androidx.swiperefreshlayout.widget.SwipeRefreshLayout
     @BindView(R.id.post_menu)
     lateinit var mMenuBtn: View
 
@@ -73,7 +72,7 @@ open class PostListFragment :
         }
 
         mAdapter = PostListAdapter(arrayListOf(), this, this, postHeight)
-        mRecycler.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        mRecycler.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context, androidx.recyclerview.widget.RecyclerView.VERTICAL, false)
         mRecycler.adapter = mAdapter
     }
 

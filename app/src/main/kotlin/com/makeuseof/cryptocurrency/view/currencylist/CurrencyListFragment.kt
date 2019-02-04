@@ -2,9 +2,9 @@ package com.makeuseof.cryptocurrency.view.currencylist
 
 import android.app.Dialog
 import android.os.Bundle
-import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,9 +30,9 @@ open class CurrencyListFragment :
     override val layoutId: Int = R.layout.fragment_currency_list
 
     @BindView(R.id.fragment_currency_list_recycler)
-    lateinit var mRecycler: RecyclerView
+    lateinit var mRecycler: androidx.recyclerview.widget.RecyclerView
     @BindView(R.id.fragment_currency_list_refresh)
-    lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
+    lateinit var mSwipeRefreshLayout: androidx.swiperefreshlayout.widget.SwipeRefreshLayout
     @BindView(R.id.fragment_currency_list_error)
     lateinit var mErrorContainer: View
     @BindView(R.id.connection_error_retry)
@@ -90,7 +90,7 @@ open class CurrencyListFragment :
             mPresenter?.getCurrencyList()
         }
 
-        val lm = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        val lm = androidx.recyclerview.widget.LinearLayoutManager(context, androidx.recyclerview.widget.RecyclerView.VERTICAL, false)
         mRecycler?.layoutManager = lm
         mRecycler?.adapter = mAdapter
     }

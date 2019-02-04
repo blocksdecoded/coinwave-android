@@ -5,10 +5,10 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Paint
 import android.graphics.Typeface
-import android.support.design.internal.BottomNavigationItemView
-import android.support.design.internal.BottomNavigationMenuView
-import android.support.design.widget.BottomNavigationView
-import android.support.v4.view.ViewPager
+import com.google.android.material.bottomnavigation.BottomNavigationItemView
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.viewpager.widget.ViewPager
 import android.util.AttributeSet
 import android.util.SparseIntArray
 import android.util.TypedValue
@@ -40,7 +40,7 @@ class BottomNavigationViewEx : BottomNavigationView {
     // used for animation end
 
     // used for setupWithViewPager
-    private var mViewPager: ViewPager? = null
+    private var mViewPager: androidx.viewpager.widget.ViewPager? = null
     private var mMyOnNavigationItemSelectedListener: MyOnNavigationItemSelectedListener? = null
     private var mPageChangeListener: BottomNavigationViewExOnPageChangeListener? = null
     private var mMenuView: BottomNavigationMenuView? = null
@@ -724,7 +724,7 @@ class BottomNavigationViewEx : BottomNavigationView {
      *
      * @param viewPager
      */
-    fun setupWithViewPager(viewPager: ViewPager) {
+    fun setupWithViewPager(viewPager: androidx.viewpager.widget.ViewPager) {
         setupWithViewPager(viewPager, false)
     }
 
@@ -736,7 +736,7 @@ class BottomNavigationViewEx : BottomNavigationView {
      * @param viewPager
      * @param smoothScroll whether ViewPager changed with smooth scroll animation
      */
-    fun setupWithViewPager(viewPager: ViewPager?, smoothScroll: Boolean): BottomNavigationViewEx {
+    fun setupWithViewPager(viewPager: androidx.viewpager.widget.ViewPager?, smoothScroll: Boolean): BottomNavigationViewEx {
         if (mViewPager != null) {
             // If we've already been setup with a ViewPager, remove us from it
             if (mPageChangeListener != null) {
@@ -776,7 +776,7 @@ class BottomNavigationViewEx : BottomNavigationView {
      * [ addOnPageChangeListener(OnPageChangeListener)][ViewPager.addOnPageChangeListener] without removing the listener and
      * not cause a leak.
      */
-    private class BottomNavigationViewExOnPageChangeListener(bnve: BottomNavigationViewEx) : ViewPager.OnPageChangeListener {
+    private class BottomNavigationViewExOnPageChangeListener(bnve: BottomNavigationViewEx) : androidx.viewpager.widget.ViewPager.OnPageChangeListener {
         private val mBnveRef: WeakReference<BottomNavigationViewEx>
 
         init {
@@ -800,8 +800,8 @@ class BottomNavigationViewEx : BottomNavigationView {
     /**
      * Decorate OnNavigationItemSelectedListener for setupWithViewPager
      */
-    private class MyOnNavigationItemSelectedListener internal constructor(viewPager: ViewPager, bnve: BottomNavigationViewEx, private val smoothScroll: Boolean, private var listener: BottomNavigationView.OnNavigationItemSelectedListener?) : BottomNavigationView.OnNavigationItemSelectedListener {
-        private val viewPagerRef: WeakReference<ViewPager>
+    private class MyOnNavigationItemSelectedListener internal constructor(viewPager: androidx.viewpager.widget.ViewPager, bnve: BottomNavigationViewEx, private val smoothScroll: Boolean, private var listener: BottomNavigationView.OnNavigationItemSelectedListener?) : BottomNavigationView.OnNavigationItemSelectedListener {
+        private val viewPagerRef: WeakReference<androidx.viewpager.widget.ViewPager>
         private val items: SparseIntArray// used for change ViewPager selected item
         private var previousPosition = -1
 

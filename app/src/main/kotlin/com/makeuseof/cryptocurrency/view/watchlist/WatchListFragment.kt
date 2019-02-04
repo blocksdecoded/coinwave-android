@@ -2,10 +2,10 @@ package com.makeuseof.cryptocurrency.view.watchlist
 
 import android.app.Dialog
 import android.os.Handler
-import android.support.v4.content.ContextCompat
-import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.core.content.ContextCompat
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
@@ -51,11 +51,11 @@ open class WatchListFragment :
     override val layoutId: Int = R.layout.fragment_watchlist
 
     @BindView(R.id.fragment_watchlist_recycler)
-    lateinit var mRecycler: RecyclerView
+    lateinit var mRecycler: androidx.recyclerview.widget.RecyclerView
     private var mAdapter: WatchlistAdapter? = null
 
     @BindView(R.id.fragment_watchlist_refresh)
-    lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
+    lateinit var mSwipeRefreshLayout: androidx.swiperefreshlayout.widget.SwipeRefreshLayout
     @BindView(R.id.fragment_watchlist_empty)
     lateinit var mEmptyText: View
 
@@ -147,7 +147,7 @@ open class WatchListFragment :
             mPresenter?.getCurrencyList()
         }
 
-        val lm = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        val lm = androidx.recyclerview.widget.LinearLayoutManager(context, androidx.recyclerview.widget.RecyclerView.VERTICAL, false)
         mRecycler.layoutManager = lm
         mRecycler.adapter = mAdapter
 

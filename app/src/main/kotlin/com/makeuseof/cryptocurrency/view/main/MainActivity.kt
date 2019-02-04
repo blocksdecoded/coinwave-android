@@ -1,15 +1,15 @@
 package com.makeuseof.cryptocurrency.view.main
 
 import android.os.Build
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.support.annotation.ColorInt
-import android.support.design.widget.BottomNavigationView
-import android.support.v4.app.Fragment
-import android.support.v4.view.GravityCompat
-import android.support.v4.view.ViewPager
-import android.support.v4.widget.DrawerLayout
+import androidx.annotation.ColorInt
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.fragment.app.Fragment
+import androidx.core.view.GravityCompat
+import androidx.viewpager.widget.ViewPager
+import androidx.drawerlayout.widget.DrawerLayout
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
@@ -170,7 +170,7 @@ class MainActivity :
     private fun init(){
         initNavigationDrawer()
 
-        val fragments = ArrayList<Fragment>()
+        val fragments = ArrayList<androidx.fragment.app.Fragment>()
 
         fragments.add(createWatchListScreen())
         fragments.add(createCurrencyListScreen())
@@ -190,7 +190,7 @@ class MainActivity :
 
     //region Screens
 
-    private fun createWatchListScreen(): Fragment = WatchListFragment.newInstance().also {
+    private fun createWatchListScreen(): androidx.fragment.app.Fragment = WatchListFragment.newInstance().also {
         mWatchListPresenter = WatchListPresenter(
                 it,
                 this,
@@ -199,7 +199,7 @@ class MainActivity :
         )
     }
 
-    private fun createCurrencyListScreen(): Fragment =
+    private fun createCurrencyListScreen(): androidx.fragment.app.Fragment =
             CurrencyListFragment.newInstance(getString(R.string.cryptocurrency)).also {
                 mCurrencyListPresenter = CurrencyListPresenter(
                         it,
@@ -208,7 +208,7 @@ class MainActivity :
                 )
             }
 
-    private fun createPostListScreen(): Fragment = PostListFragment.newInstance().also {
+    private fun createPostListScreen(): androidx.fragment.app.Fragment = PostListFragment.newInstance().also {
         mPostListPresenter = PostListPresenter(
                 it,
                 this,
@@ -216,7 +216,7 @@ class MainActivity :
         )
     }
 
-    private fun createSettingsScreen(): Fragment {
+    private fun createSettingsScreen(): androidx.fragment.app.Fragment {
         return SettingsFragment().also {
             mSettingsPresenter = SettingsPresenter(it)
         }
@@ -231,7 +231,7 @@ class MainActivity :
         drawer_rate_us.setOnClickListener(this)
         drawer_share_this_app.setOnClickListener(this)
 
-        drawer_layout.addDrawerListener(object : DrawerLayout.DrawerListener{
+        drawer_layout.addDrawerListener(object : androidx.drawerlayout.widget.DrawerLayout.DrawerListener{
             override fun onDrawerStateChanged(p0: Int) {
             }
 
@@ -247,7 +247,7 @@ class MainActivity :
         })
     }
 
-    private fun initViewPager(fragments: ArrayList<Fragment>){
+    private fun initViewPager(fragments: ArrayList<androidx.fragment.app.Fragment>){
         main_nav_view.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         main_nav_view.enableAnimation(false)
         main_nav_view.isItemHorizontalTranslationEnabled = false
@@ -258,7 +258,7 @@ class MainActivity :
         main_view_pager.adapter = adapter
         main_view_pager.offscreenPageLimit = 4
 
-        main_view_pager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
+        main_view_pager.addOnPageChangeListener(object : androidx.viewpager.widget.ViewPager.OnPageChangeListener{
             override fun onPageScrollStateChanged(state: Int) = Unit
 
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {

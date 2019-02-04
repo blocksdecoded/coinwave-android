@@ -1,11 +1,11 @@
 package com.makeuseof.cryptocurrency.view.widgets
 
 import android.content.Context
-import android.support.v4.view.ViewPager
+import androidx.viewpager.widget.ViewPager
 import android.util.AttributeSet
 import android.view.MotionEvent
 
-class NonSwipeableViewPager: ViewPager{
+class NonSwipeableViewPager: androidx.viewpager.widget.ViewPager {
 
     constructor(context: Context) : super(context){
         setScroller()
@@ -17,7 +17,7 @@ class NonSwipeableViewPager: ViewPager{
 
     private fun setScroller() {
         try {
-            val viewpager = ViewPager::class.java
+            val viewpager = androidx.viewpager.widget.ViewPager::class.java
             val scroller = viewpager.getDeclaredField("mScroller")
             scroller.isAccessible = true
             scroller.set(this, SmoothScroller(context, 0))

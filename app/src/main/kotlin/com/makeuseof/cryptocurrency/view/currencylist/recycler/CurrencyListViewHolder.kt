@@ -1,6 +1,6 @@
 package com.makeuseof.cryptocurrency.view.currencylist.recycler
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -17,7 +17,7 @@ import com.makeuseof.utils.visible
 class CurrencyListViewHolder(
         view: View,
         private val mListener: CurrencyVHClickListener
-): RecyclerView.ViewHolder(view) {
+): androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
     private val mSymbolIcon: ImageView = itemView.findViewById(R.id.adapter_currency_icon)
     private val mSymbol: TextView = itemView.findViewById(R.id.adapter_currency_symbol)
     private val mMarketCap: TextView = itemView.findViewById(R.id.adapter_currency_market_cap)

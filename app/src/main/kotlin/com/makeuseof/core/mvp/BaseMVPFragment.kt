@@ -1,7 +1,7 @@
 package com.makeuseof.core.mvp
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +10,7 @@ import butterknife.Unbinder
 import com.makeuseof.utils.inflate
 import com.makeuseof.utils.showShortToast
 
-abstract class BaseMVPFragment<T>: Fragment(), BaseMVPContract.View<T> {
+abstract class BaseMVPFragment<T>: androidx.fragment.app.Fragment(), BaseMVPContract.View<T> {
     abstract var mPresenter: T?
     abstract val layoutId: Int
 

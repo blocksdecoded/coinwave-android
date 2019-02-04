@@ -9,14 +9,14 @@ import android.graphics.drawable.LayerDrawable
 import android.graphics.drawable.shapes.RoundRectShape
 import android.graphics.drawable.ShapeDrawable
 import android.view.Gravity
-import android.support.v4.content.ContextCompat
-import android.support.annotation.DimenRes
-import android.support.annotation.ColorRes
-import android.support.design.internal.BottomNavigationItemView
-import android.support.design.internal.BottomNavigationMenuView
-import android.support.design.widget.BottomNavigationView
+import androidx.core.content.ContextCompat
+import androidx.annotation.DimenRes
+import androidx.annotation.ColorRes
+import com.google.android.material.bottomnavigation.BottomNavigationItemView
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.view.View
-import android.support.v4.view.ViewCompat.LAYER_TYPE_SOFTWARE
+import androidx.core.view.ViewCompat.LAYER_TYPE_SOFTWARE
 import android.view.animation.DecelerateInterpolator
 import android.util.Log
 

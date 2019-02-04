@@ -8,7 +8,7 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivityBase
 import me.imid.swipebacklayout.lib.app.SwipeBackActivityHelper
 import android.os.Build.VERSION_CODES.M
 import android.os.Build.VERSION
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.makeuseof.utils.KeyboardUtil
 
 abstract class SwipeableActivity: AppCompatActivity(), SwipeBackActivityBase{

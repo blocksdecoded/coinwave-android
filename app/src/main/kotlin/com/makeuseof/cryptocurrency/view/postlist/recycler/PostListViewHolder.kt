@@ -1,6 +1,6 @@
 package com.makeuseof.cryptocurrency.view.postlist.recycler
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -18,7 +18,7 @@ import com.makeuseof.utils.loadImageFromUrl
 class PostListViewHolder(
         view: View,
         private val mListener: PostVHCLickListener
-): RecyclerView.ViewHolder(view) {
+): androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
     @BindView(R.id.adapter_post_item_image)
     lateinit var mImage: ImageView
     @BindView(R.id.adapter_post_item_title)

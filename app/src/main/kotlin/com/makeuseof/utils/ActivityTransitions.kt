@@ -1,7 +1,7 @@
 package com.makeuseof.utils
 
 import android.app.Activity
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.makeuseof.cryptocurrency.R
 
 /**

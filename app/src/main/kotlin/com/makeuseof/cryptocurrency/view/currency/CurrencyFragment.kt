@@ -3,8 +3,8 @@ package com.makeuseof.cryptocurrency.view.currency
 import android.graphics.Color
 import android.net.Uri
 import android.os.Handler
-import android.support.customtabs.CustomTabsIntent
-import android.support.v4.content.ContextCompat
+import androidx.browser.customtabs.CustomTabsIntent
+import androidx.core.content.ContextCompat
 import android.view.MotionEvent
 import android.view.View
 import android.widget.ImageView

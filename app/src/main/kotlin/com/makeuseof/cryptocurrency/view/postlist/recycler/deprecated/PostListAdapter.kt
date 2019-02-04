@@ -1,11 +1,13 @@
-package com.makeuseof.cryptocurrency.view.postlist.recycler
+package com.makeuseof.cryptocurrency.view.postlist.recycler.deprecated
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import com.makeuseof.core.contracts.LoadNextListener
 import com.makeuseof.cryptocurrency.R
 import com.makeuseof.cryptocurrency.data.post.model.PublisherPost
+import com.makeuseof.cryptocurrency.view.postlist.recycler.ListFooterViewHolder
+import com.makeuseof.cryptocurrency.view.postlist.recycler.PostListViewHolder
 import com.makeuseof.utils.inflate
 import com.makeuseof.utils.isValidIndex
 import com.makeuseof.utils.setHeight
@@ -14,13 +16,14 @@ import com.makeuseof.utils.setHeight
  * Created by askar on 11/19/18
  * with Android Studio
  */
+@Deprecated("Use newer PagedPostListAdapter")
 class PostListAdapter(
         private var mItems: ArrayList<PublisherPost>,
         private val mListener: PostListViewHolder.PostVHCLickListener,
         private val mLoadNextListener: LoadNextListener,
         private val mPostHeight: Int
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>(),
-        ListFooterViewHolder.ClickListener{
+) : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>(),
+        ListFooterViewHolder.ClickListener {
 
     companion object {
         private val POST = 1
@@ -33,7 +36,7 @@ class PostListAdapter(
 
     //region Override
 
-    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): RecyclerView.ViewHolder = when(p1) {
+    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder = when(p1) {
         1 -> PostListViewHolder(p0.inflate(R.layout.adapter_post_list_item)!!, mListener).apply {
             setHeight(mPostHeight)
         }
@@ -44,7 +47,7 @@ class PostListAdapter(
         return mItems.size + 1
     }
 
-    override fun onBindViewHolder(p0: RecyclerView.ViewHolder, p1: Int) {
+    override fun onBindViewHolder(p0: androidx.recyclerview.widget.RecyclerView.ViewHolder, p1: Int) {
         if (mItems.isValidIndex(p1)){
             when(p0) {
                 is PostListViewHolder -> p0.onBind(mItems[p1])

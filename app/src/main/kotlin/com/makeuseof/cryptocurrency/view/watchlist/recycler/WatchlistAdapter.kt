@@ -1,6 +1,6 @@
 package com.makeuseof.cryptocurrency.view.watchlist.recycler
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
 import com.makeuseof.cryptocurrency.R
 import com.makeuseof.cryptocurrency.data.model.CurrencyEntity
@@ -13,14 +13,14 @@ import com.makeuseof.utils.isValidIndex
 class WatchlistAdapter(
         private var mItems: ArrayList<CurrencyEntity>,
         private val mListener: WatchlistViewHolder.CurrencyVHClickListener
-): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+): androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>(){
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
         return WatchlistViewHolder(parent.inflate(R.layout.adapter_currency_item)!!, mListener)
     }
 
     override fun getItemCount(): Int = mItems.size
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
         when(holder){
             is WatchlistViewHolder -> holder.onBind(mItems[position])
         }

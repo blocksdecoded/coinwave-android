@@ -1,11 +1,11 @@
 package com.makeuseof.utils
 
 import android.animation.ValueAnimator
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 
 // Created by askar on 5/24/18.
 
-fun RecyclerView.ViewHolder.updateHeight(height: Int, animated: Boolean = false){
+fun androidx.recyclerview.widget.RecyclerView.ViewHolder.updateHeight(height: Int, animated: Boolean = false){
     if (animated){
         val start = this.itemView.layoutParams.height
 
@@ -28,6 +28,6 @@ fun RecyclerView.ViewHolder.updateHeight(height: Int, animated: Boolean = false)
     }
 }
 
-fun RecyclerView.ViewHolder.setHeight(height: Int){
+fun androidx.recyclerview.widget.RecyclerView.ViewHolder.setHeight(height: Int){
     this.itemView.layoutParams.height = height
 }

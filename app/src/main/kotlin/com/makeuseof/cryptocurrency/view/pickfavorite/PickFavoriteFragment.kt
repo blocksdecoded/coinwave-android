@@ -1,7 +1,7 @@
 package com.makeuseof.cryptocurrency.view.pickfavorite
 
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import butterknife.BindView
 import butterknife.OnClick
@@ -24,7 +24,7 @@ class PickFavoriteFragment :
     override val layoutId: Int = R.layout.fragment_pick_favorite
 
     @BindView(R.id.fragment_pick_favorite_recycler)
-    @JvmField var mRecycler: RecyclerView? = null
+    @JvmField var mRecycler: androidx.recyclerview.widget.RecyclerView? = null
     private var mAdapter: CurrencyListAdapter? = null
 
     @OnClick(R.id.back)
@@ -39,7 +39,7 @@ class PickFavoriteFragment :
     override fun initView(rootView: View) {
         mAdapter = CurrencyListAdapter(arrayListOf(), this)
 
-        val lm = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        val lm = androidx.recyclerview.widget.LinearLayoutManager(context, androidx.recyclerview.widget.RecyclerView.VERTICAL, false)
         mRecycler?.layoutManager = lm
         mRecycler?.adapter = mAdapter
     }
