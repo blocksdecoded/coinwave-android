@@ -10,6 +10,7 @@ import butterknife.OnClick
 import com.bumptech.glide.Glide
 import com.makeuseof.cryptocurrency.R
 import com.makeuseof.cryptocurrency.data.post.model.PublisherPost
+import com.makeuseof.cryptocurrency.view.postlist.util.setRandomBg
 
 /**
  * Created by askar on 11/19/18
@@ -36,6 +37,7 @@ class PostListViewHolder(
         itemView.setOnClickListener {
             mListener.onClick(adapterPosition)
         }
+        mImage.setRandomBg()
     }
 
     fun onBind(post: PublisherPost){
