@@ -1,15 +1,15 @@
 package com.makeuseof.cryptocurrency.view.postlist.recycler
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
 import butterknife.ButterKnife
+import butterknife.OnClick
 import com.bumptech.glide.Glide
 import com.makeuseof.cryptocurrency.R
 import com.makeuseof.cryptocurrency.data.post.model.PublisherPost
-import com.makeuseof.utils.loadImageFromUrl
 
 /**
  * Created by askar on 11/19/18
@@ -18,11 +18,18 @@ import com.makeuseof.utils.loadImageFromUrl
 class PostListViewHolder(
         view: View,
         private val mListener: PostVHCLickListener
-): androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
+): RecyclerView.ViewHolder(view) {
     @BindView(R.id.adapter_post_item_image)
     lateinit var mImage: ImageView
     @BindView(R.id.adapter_post_item_title)
     lateinit var mTitle: TextView
+
+    @OnClick(R.id.adapter_post_item_read_more)
+    fun onClick(view: View) {
+        when (view.id) {
+            R.id.adapter_post_item_read_more -> mListener.onClick(adapterPosition)
+        }
+    }
 
     init {
         ButterKnife.bind(this, view)

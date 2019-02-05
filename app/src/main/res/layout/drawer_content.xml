@@ -52,7 +52,7 @@
             android:layout_marginRight="4dp"
             android:text="Menu"
             android:paddingLeft="0dp"
-            app:ftv_typeface="regular"/>
+            app:ftv_typeface="light"/>
 
         <!--Pick favorite-->
         <com.makeuseof.cryptocurrency.view.widgets.FontTextView
@@ -164,7 +164,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:text="Other apps"
-            app:ftv_typeface="regular"/>
+            app:ftv_typeface="light"/>
 
         <com.makeuseof.appslist.view.AppsView
             android:id="@+id/muo_apps_list"

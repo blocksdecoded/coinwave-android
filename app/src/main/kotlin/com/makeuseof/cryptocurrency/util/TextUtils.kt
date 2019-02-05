@@ -5,43 +5,43 @@ import java.util.*
 
 fun TextView?.setRegularFont(){
 	this?.let {
-		typeface = AvenirTypeface.getRegular(it.context)
+		typeface = SFProTextTypeface.getRegular(it.context)
 	}
 }
 
 fun TextView?.setSemiboldFont(){
 	this?.let {
-		typeface = AvenirTypeface.getSemibold(it.context)
+		typeface = SFProTextTypeface.getSemibold(it.context)
 	}
 }
 
 fun TextView?.setBoldFont(){
 	this?.let {
-		typeface = AvenirTypeface.getBold(it.context)
+		typeface = SFProTextTypeface.getBold(it.context)
 	}
 }
 
 fun TextView?.setHeavyFont(){
 	this?.let {
-		typeface = SFUITypeface.getHeavy(it.context)
+		typeface = SFProTextTypeface.getHeavy(it.context)
 	}
 }
 
 fun TextView?.setMediumFont(){
 	this?.let {
-		typeface = AvenirTypeface.getMedium(it.context)
+		typeface = SFProTextTypeface.getMedium(it.context)
 	}
 }
 
 fun TextView?.setThinFont(){
 	this?.let {
-		typeface = AvenirTypeface.getThin(it.context)
+		typeface = SFProTextTypeface.getThin(it.context)
 	}
 }
 
 fun TextView?.setLightFont(){
 	this?.let {
-		typeface = AvenirTypeface.getLight(it.context)
+		typeface = SFProTextTypeface.getLight(it.context)
 	}
 }
 

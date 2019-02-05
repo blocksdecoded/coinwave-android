@@ -7,7 +7,7 @@ import com.makeuseof.cryptocurrency.R
 
 import com.makeuseof.cryptocurrency.view.post.widgets.LoadingView
 
-class ListFooterViewHolder(itemView: View, private val mClickListener: ClickListener?) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView), View.OnClickListener {
+class ListFooterViewHolder(itemView: View, private val mClickListener: ClickListener?) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
     var progressView: LoadingView
     var errorView: View
 
