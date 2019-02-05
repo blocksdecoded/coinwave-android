@@ -55,7 +55,7 @@ class PostActivity: SwipeableActivity(){
         super.onCreate(savedInstanceState)
 
         if (savedInstanceState == null) {
-            val fragment = PostFragment()
+            val fragment = PostFragment.newInstance()
 
             supportFragmentManager
                     .beginTransaction()

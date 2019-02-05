@@ -51,11 +51,11 @@ open class WatchListFragment :
     override val layoutId: Int = R.layout.fragment_watchlist
 
     @BindView(R.id.fragment_watchlist_recycler)
-    lateinit var mRecycler: androidx.recyclerview.widget.RecyclerView
+    lateinit var mRecycler: RecyclerView
     private var mAdapter: WatchlistAdapter? = null
 
     @BindView(R.id.fragment_watchlist_refresh)
-    lateinit var mSwipeRefreshLayout: androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
     @BindView(R.id.fragment_watchlist_empty)
     lateinit var mEmptyText: View
 
@@ -147,7 +147,7 @@ open class WatchListFragment :
             mPresenter?.getCurrencyList()
         }
 
-        val lm = androidx.recyclerview.widget.LinearLayoutManager(context, androidx.recyclerview.widget.RecyclerView.VERTICAL, false)
+        val lm = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         mRecycler.layoutManager = lm
         mRecycler.adapter = mAdapter
 

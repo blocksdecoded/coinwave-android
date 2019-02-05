@@ -1,10 +1,10 @@
 package com.makeuseof.cryptocurrency.view.postlist
 
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.util.DisplayMetrics
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import butterknife.BindView
 import butterknife.OnClick
 import com.makeuseof.core.contracts.LoadNextListener
@@ -27,16 +27,16 @@ open class PostListFragment :
         LoadNextListener
 {
     companion object {
-        fun newInstance(): PostListFragment = PostListFragment()
+        fun newInstance() = PostListFragment()
     }
 
     override var mPresenter: PostListContract.Presenter? = null
     override val layoutId: Int = R.layout.fragment_post_list
 
     @BindView(R.id.fragment_post_list_recycler)
-    lateinit var mRecycler: androidx.recyclerview.widget.RecyclerView
+    lateinit var mRecycler: RecyclerView
     @BindView(R.id.fragment_post_list_swipe_refresh)
-    lateinit var mSwipeRefresh: androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    lateinit var mSwipeRefresh: SwipeRefreshLayout
     @BindView(R.id.post_menu)
     lateinit var mMenuBtn: View
 
@@ -68,11 +68,11 @@ open class PostListFragment :
         activity?.also {
             val metrics = DisplayMetrics()
             it.windowManager.defaultDisplay.getMetrics(metrics)
-            postHeight = (metrics.heightPixels * 0.35).roundToInt()
+            postHeight = (metrics.heightPixels * 0.3).roundToInt()
         }
 
         mAdapter = PostListAdapter(arrayListOf(), this, this, postHeight)
-        mRecycler.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context, androidx.recyclerview.widget.RecyclerView.VERTICAL, false)
+        mRecycler.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         mRecycler.adapter = mAdapter
     }
 
@@ -101,11 +101,6 @@ open class PostListFragment :
     override fun openPost(postId: Int) {
         activity?.also {
             PostActivity.start(it, postId)
-//            it.startActivity(
-//                    Intent(it, PostViewActivity::class.java)
-//                            .putExtra(CoreSharedConstants.KEY_POST_ID, postId.toString())
-//            )
-//            activity?.overridePendingTransition(R.anim.slide_in_right, 0)
         }
     }
 

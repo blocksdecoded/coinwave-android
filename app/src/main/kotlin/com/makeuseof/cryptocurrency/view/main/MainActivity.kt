@@ -95,6 +95,8 @@ class MainActivity :
                 ?.setListener(object : RateUsListener {
                     override fun onDismiss() { mRateDialog = null }
                 })
+
+        updateStatusBar()
     }
 
     override fun onPause() {
@@ -163,6 +165,24 @@ class MainActivity :
         setStatusBarImmersiveMode(ResourceUtil.getColor(this, R.color.status_bar_bg))
     }
 
+    private fun updateStatusBar(drawerOpen: Boolean = false) = try {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val flags = if (drawerOpen) {
+                0
+            } else {
+                when(main_view_pager.currentItem) {
+                    1, 2 -> 0
+                    else -> View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                }
+            }
+
+            window.decorView.systemUiVisibility = flags
+        }
+        Unit
+    } catch (e: Exception) {
+        logE(e)
+    }
+
     //endregion
 
     //region Init
@@ -170,12 +190,12 @@ class MainActivity :
     private fun init(){
         initNavigationDrawer()
 
-        val fragments = ArrayList<androidx.fragment.app.Fragment>()
-
-        fragments.add(createWatchListScreen())
-        fragments.add(createCurrencyListScreen())
-        fragments.add(createPostListScreen())
-        fragments.add(createSettingsScreen())
+        val fragments = arrayListOf (
+                createWatchListScreen(),
+                createCurrencyListScreen(),
+                createPostListScreen(),
+                createSettingsScreen()
+        )
 
         initViewPager(fragments)
 
@@ -190,7 +210,7 @@ class MainActivity :
 
     //region Screens
 
-    private fun createWatchListScreen(): androidx.fragment.app.Fragment = WatchListFragment.newInstance().also {
+    private fun createWatchListScreen(): Fragment = WatchListFragment.newInstance().also {
         mWatchListPresenter = WatchListPresenter(
                 it,
                 this,
@@ -199,7 +219,7 @@ class MainActivity :
         )
     }
 
-    private fun createCurrencyListScreen(): androidx.fragment.app.Fragment =
+    private fun createCurrencyListScreen(): Fragment =
             CurrencyListFragment.newInstance(getString(R.string.cryptocurrency)).also {
                 mCurrencyListPresenter = CurrencyListPresenter(
                         it,
@@ -208,7 +228,7 @@ class MainActivity :
                 )
             }
 
-    private fun createPostListScreen(): androidx.fragment.app.Fragment = PostListFragment.newInstance().also {
+    private fun createPostListScreen(): Fragment = PostListFragment.newInstance().also {
         mPostListPresenter = PostListPresenter(
                 it,
                 this,
@@ -216,7 +236,7 @@ class MainActivity :
         )
     }
 
-    private fun createSettingsScreen(): androidx.fragment.app.Fragment {
+    private fun createSettingsScreen(): Fragment {
         return SettingsFragment().also {
             mSettingsPresenter = SettingsPresenter(it)
         }
@@ -240,14 +260,16 @@ class MainActivity :
 
             override fun onDrawerClosed(p0: View) {
                 muo_apps_list.resetScroll()
+                updateStatusBar()
             }
 
             override fun onDrawerOpened(p0: View) {
+                updateStatusBar(true)
             }
         })
     }
 
-    private fun initViewPager(fragments: ArrayList<androidx.fragment.app.Fragment>){
+    private fun initViewPager(fragments: ArrayList<Fragment>){
         main_nav_view.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         main_nav_view.enableAnimation(false)
         main_nav_view.isItemHorizontalTranslationEnabled = false
@@ -271,6 +293,8 @@ class MainActivity :
                     0 -> setAddVisibility(true)
                     else -> setAddVisibility(false)
                 }
+
+                updateStatusBar()
             }
         })
 

@@ -24,7 +24,7 @@ class PickFavoriteFragment :
     override val layoutId: Int = R.layout.fragment_pick_favorite
 
     @BindView(R.id.fragment_pick_favorite_recycler)
-    @JvmField var mRecycler: androidx.recyclerview.widget.RecyclerView? = null
+    @JvmField var mRecycler: RecyclerView? = null
     private var mAdapter: CurrencyListAdapter? = null
 
     @OnClick(R.id.back)
@@ -39,7 +39,7 @@ class PickFavoriteFragment :
     override fun initView(rootView: View) {
         mAdapter = CurrencyListAdapter(arrayListOf(), this)
 
-        val lm = androidx.recyclerview.widget.LinearLayoutManager(context, androidx.recyclerview.widget.RecyclerView.VERTICAL, false)
+        val lm = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         mRecycler?.layoutManager = lm
         mRecycler?.adapter = mAdapter
     }

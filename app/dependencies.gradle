@@ -49,7 +49,7 @@ ext {
             supportAnnotation: "com.android.support:support-annotations:$versions.support",
             gridLayout       : "com.android.support:gridlayout-v7:$versions.support",
             multiDex         : "com.android.support:multidex:$versions.multiDex",
-            constraint       : "com.android.support.constraint:constraint-layout:$versions.constraint"
+            constraint       : "androidx.constraintlayout:constraintlayout:$versions.constraint"
     ]
 
     rxJava = [

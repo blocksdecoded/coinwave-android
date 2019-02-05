@@ -30,9 +30,9 @@ open class CurrencyListFragment :
     override val layoutId: Int = R.layout.fragment_currency_list
 
     @BindView(R.id.fragment_currency_list_recycler)
-    lateinit var mRecycler: androidx.recyclerview.widget.RecyclerView
+    lateinit var mRecycler: RecyclerView
     @BindView(R.id.fragment_currency_list_refresh)
-    lateinit var mSwipeRefreshLayout: androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
     @BindView(R.id.fragment_currency_list_error)
     lateinit var mErrorContainer: View
     @BindView(R.id.connection_error_retry)
@@ -90,7 +90,7 @@ open class CurrencyListFragment :
             mPresenter?.getCurrencyList()
         }
 
-        val lm = androidx.recyclerview.widget.LinearLayoutManager(context, androidx.recyclerview.widget.RecyclerView.VERTICAL, false)
+        val lm = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         mRecycler?.layoutManager = lm
         mRecycler?.adapter = mAdapter
     }
