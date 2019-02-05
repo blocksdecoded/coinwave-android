@@ -250,6 +250,9 @@ class MainActivity :
         drawer_favorite.setOnClickListener(this)
         drawer_rate_us.setOnClickListener(this)
         drawer_share_this_app.setOnClickListener(this)
+        drawer_close_menu.setOnClickListener(this)
+
+        drawer_top_container.setConstraintTopMargin(DimenUtils.getStatusBarHeight(this))
 
         drawer_layout.addDrawerListener(object : androidx.drawerlayout.widget.DrawerLayout.DrawerListener{
             override fun onDrawerStateChanged(p0: Int) {
@@ -337,6 +340,7 @@ class MainActivity :
                         })
             }
             drawer_share_this_app -> drawerItemClick { ShareUtils.shareApp(this) }
+            drawer_close_menu -> closeDrawer()
         }
     }
 

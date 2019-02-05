@@ -2,6 +2,7 @@ package com.makeuseof.cryptocurrency.view.postlist
 
 import android.util.DisplayMetrics
 import android.view.View
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -55,7 +56,7 @@ open class PostListFragment :
         initRecycler(rootView)
 
         context?.also {
-            mMenuBtn.setConstraintTopMargin(DimenUtils.getStatusBarHeight(it) + DimenUtils.dpToPx(it, 12))
+            mMenuBtn.setConstraintTopMargin(DimenUtils.getStatusBarHeight(it) + (mMenuBtn.layoutParams as ConstraintLayout.LayoutParams).topMargin)
         }
 
         mSwipeRefresh.setOnRefreshListener {

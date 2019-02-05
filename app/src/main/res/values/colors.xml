@@ -7,6 +7,7 @@
     <color name="main_dark">#12171c</color>
     <color name="main_light">#141a1f</color>
     <color name="dark_status_bar">#13191e</color>
+    <color name="dark_grey">#232c33</color>
 
     <color name="accent_text">#1dc7e7</color>
     <color name="light_blue">#04A9F5</color>
