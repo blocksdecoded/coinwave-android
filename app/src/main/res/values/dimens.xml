@@ -4,4 +4,7 @@
     <dimen name="progressBar_small">25dp</dimen>
     <dimen name="top_oval_height">200dp</dimen>
     <dimen name="header_content_padding">16dp</dimen>
+
+    <dimen name="drawer_icon_size">14dp</dimen>
+    <dimen name="drawer_arrow_size">8dp</dimen>
 </resources>

@@ -109,19 +109,10 @@ class MainActivity :
     //region Status bar
 
     private fun initStatusBar() {
-        // Ensure `setStatusBarImmersiveMode()`
         if (Build.VERSION.SDK_INT >= 19) { // 19, 4.4, KITKAT
-            // Ensure content view `fitsSystemWindows` is false.
             val contentParent = findViewById<View>(android.R.id.content) as ViewGroup
             val content = contentParent.getChildAt(0)
-            // If using `DrawerLayout`, must ensure its subviews `fitsSystemWindows` are all false.
-            // Because in some roms, such as MIUI, it will fits system windows for each subview.
             setFitsSystemWindows(content, false, true)
-
-            // Add a view to hold the status bar place.
-            // Note: if using appbar_scrolling_view_behavior of CoordinatorLayout, however,
-            // the holder view could be scrolled to outside as it above the app bar.
-            //holdStatusBar(toolbar, R.color.colorPrimary);
         }
     }
 
@@ -138,12 +129,6 @@ class MainActivity :
             win.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
             win.statusBarColor = color
         }
-
-        // Setup immersive mode on third-party rom
-//		if (Build.VERSION.SDK_INT >= 19) { // 19, 4.4, KITKAT
-//			//FlymeUtils.setStatusBarDarkIcon(win, false);
-//			MIUIUtils.setStatusBar(win, MIUIUtils.StatusBarMode.TRANSPARENT)
-//		}
     }
 
     private fun setFitsSystemWindows(view: View?, fitSystemWindows: Boolean, applyToChildren: Boolean) {
@@ -292,25 +277,10 @@ class MainActivity :
             override fun onPageSelected(position: Int) {
                 main_nav_view.selectedItemId = getNavigationItemId(position)
 
-                when(position){
-                    0 -> setAddVisibility(true)
-                    else -> setAddVisibility(false)
-                }
-
                 updateStatusBar()
             }
         })
 
-    }
-
-    private fun setAddVisibility(visible: Boolean){
-//        if (visible){
-//            main_add_container.visible()
-//            main_add_container.animate().alpha(1f).setDuration(400L).start()
-//        } else {
-//            main_add_container.hide()
-//            main_add_container.animate().alpha(0f).setDuration(50L).start()
-//        }
     }
 
     private fun getNavigationItemId(position: Int): Int = when (position) {

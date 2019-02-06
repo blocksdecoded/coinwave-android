@@ -215,7 +215,7 @@
                 android:id="@+id/currency_market_cap_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/currency_price_title"
+                app:layout_constraintTop_toBottomOf="@+id/currency_change_1h_title"
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:text="Market Cap:"/>
             <com.makeuseof.cryptocurrency.view.widgets.FontTextView
@@ -311,9 +311,9 @@
                 android:id="@+id/currency_change_1h_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/currency_total_supply_title"
+                app:layout_constraintTop_toBottomOf="@+id/currency_price_title"
                 app:layout_constraintLeft_toLeftOf="parent"
-                android:text="% Change 1h:"/>
+                android:text="% Change:"/>
             <com.makeuseof.cryptocurrency.view.widgets.FontTextView
                 style="@style/AppTheme.FieldValue"
                 android:id="@+id/currency_change_1h"
@@ -390,7 +390,7 @@
                 android:src="@drawable/graph"
                 android:scaleType="centerCrop"
                 android:layout_gravity="bottom"
-                app:layout_constraintTop_toBottomOf="@+id/currency_change_1w"
+                app:layout_constraintTop_toBottomOf="@+id/currency_total_supply_title"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
