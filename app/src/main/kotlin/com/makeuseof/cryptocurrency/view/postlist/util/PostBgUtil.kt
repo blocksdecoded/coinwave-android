@@ -1,6 +1,8 @@
 package com.makeuseof.cryptocurrency.view.postlist.util
 
 import android.graphics.Color
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.GradientDrawable
 import android.widget.ImageView
 import kotlin.random.Random
 import kotlin.random.nextInt
@@ -11,18 +13,43 @@ import kotlin.random.nextInt
  */
 
 fun ImageView.setRandomBg(seed: Int) {
-    setBackgroundColor(PostBgUtil.getBackground(seed))
+    background = PostBgUtil.getRandomGradient(seed)
 }
 
 object PostBgUtil {
-    private const val MIN_COLOR = 0
-    private const val MAX_COLOR = 100
+    private const val MIN_COLOR = 50
+    private const val MAX_COLOR = 170
 
-    fun getBackground(seed: Int): Int {
+    fun getRandomGradient(seed: Int): Drawable {
         val random = Random(seed)
+
         val r = random.nextInt(MIN_COLOR..MAX_COLOR)
         val g = random.nextInt(MIN_COLOR..MAX_COLOR)
         val b = random.nextInt(MIN_COLOR..MAX_COLOR)
+
+        return getGradientDrawable (
+                Color.rgb(r.minusPercent(), g.minusPercent(), b.minusPercent()),
+                Color.rgb(r, g, b)
+        )
+    }
+
+    private fun Int.minusPercent(percent: Float = 0.5f): Int = (this - (this * percent)).toInt()
+
+    private fun getGradientDrawable(start: Int, end: Int): Drawable{
+        val gd = GradientDrawable(
+                GradientDrawable.Orientation.TOP_BOTTOM,
+                intArrayOf(start, end))
+        gd.cornerRadius = 0f
+        return gd
+    }
+
+    fun getBackground(seed: Int): Int {
+        val random = Random(seed)
+
+        val r = random.nextInt(MIN_COLOR..MAX_COLOR)
+        val g = random.nextInt(MIN_COLOR..MAX_COLOR)
+        val b = random.nextInt(MIN_COLOR..MAX_COLOR)
+
         return Color.rgb(r, g, b)
     }
 }
