@@ -2,6 +2,7 @@ package com.makeuseof.cryptocurrency
 
 import android.app.Application
 import android.content.Context
+import android.location.Geocoder
 import androidx.multidex.MultiDex
 import com.crashlytics.android.Crashlytics
 import io.fabric.sdk.android.Fabric
@@ -22,6 +23,8 @@ class CryptoCurrencyApp: Application() {
     override fun onCreate() {
         super.onCreate()
         INSTANCE = this
+
+
 
 //        Fabric.with(this, Crashlytics())
     }

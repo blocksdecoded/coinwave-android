@@ -40,7 +40,7 @@ class SharedStorage (
             )
 
     private fun editPreference(body: (SharedPreferences.Editor) -> Unit){
-        mSharedPreferences?.edit()?.apply{
+        mSharedPreferences?.edit()?.apply {
             try {
                 body.invoke(this)
             } catch (e: Exception){
@@ -60,7 +60,7 @@ class SharedStorage (
 
     override fun <T> setPreference(key: String, value: T) {
         editPreference {
-            when(value){
+            when(value) {
                 is String -> { it.putString(key, value as String) }
                 is Float -> { it.putFloat(key, value as Float) }
                 is Int -> { it.putInt(key, value as Int) }
@@ -74,7 +74,7 @@ class SharedStorage (
     override fun <T> getPreference(key: String, defValue: T): T {
         try {
             mSharedPreferences?.let {
-                return when(defValue){
+                return when(defValue) {
                     is String -> { it.getString(key, defValue as String) }
                     is Float -> { it.getFloat(key, defValue as Float) }
                     is Int -> { it.getInt(key, defValue as Int) }

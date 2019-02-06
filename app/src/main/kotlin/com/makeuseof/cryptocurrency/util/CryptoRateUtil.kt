@@ -16,10 +16,10 @@ object CryptoRateUtil {
                         context,
                         context.getString(R.string.const_app_name)
                 )
-                ?.setTitleTypeface(AvenirTypeface.getBold(context))
-                ?.setDescriptionTypeface(AvenirTypeface.getBold(context))
-                ?.setNegativeTypeface(AvenirTypeface.getRegular(context))
-                ?.setPositiveTypeface(AvenirTypeface.getBold(context))
+                ?.setTitleTypeface(SFProTextTypeface.getBold(context))
+                ?.setDescriptionTypeface(SFProTextTypeface.getBold(context))
+                ?.setNegativeTypeface(SFProTextTypeface.getRegular(context))
+                ?.setPositiveTypeface(SFProTextTypeface.getBold(context))
     }
 
     fun getDialog(context: Context): RateUsDialogContract {
@@ -28,9 +28,9 @@ object CryptoRateUtil {
                         context,
                         context.getString(R.string.const_app_name)
                 )
-                .setTitleTypeface(AvenirTypeface.getBold(context))
-                .setDescriptionTypeface(AvenirTypeface.getBold(context))
-                .setNegativeTypeface(AvenirTypeface.getRegular(context))
-                .setPositiveTypeface(AvenirTypeface.getBold(context))
+                .setTitleTypeface(SFProTextTypeface.getBold(context))
+                .setDescriptionTypeface(SFProTextTypeface.getBold(context))
+                .setNegativeTypeface(SFProTextTypeface.getRegular(context))
+                .setPositiveTypeface(SFProTextTypeface.getBold(context))
     }
 }
