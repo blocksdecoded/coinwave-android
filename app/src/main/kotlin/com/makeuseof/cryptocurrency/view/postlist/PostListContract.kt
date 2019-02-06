@@ -6,7 +6,7 @@ import com.makeuseof.cryptocurrency.data.post.model.PublisherPost
 interface PostListContract {
 
     interface View : BaseMVPContract.View<Presenter> {
-        fun openPost(postId: Int)
+        fun openPost(url: String)
 
         fun showLoading()
 

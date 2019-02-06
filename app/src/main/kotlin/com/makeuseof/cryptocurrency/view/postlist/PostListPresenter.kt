@@ -35,7 +35,11 @@ class PostListPresenter(
     //region Contract
 
     override fun onPostClick(id: Int) = launchSilent(ui){
-        mPostUseCases.getPost(id)?.also { mView?.openPost(id) }
+        mPostUseCases.getPost(id)?.also {
+            it.url?.also {
+                mView?.openPost(it)
+            }
+        }
     }
 
     override fun getPosts() = launchSilent(ui) {

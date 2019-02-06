@@ -1,7 +1,10 @@
 package com.makeuseof.cryptocurrency.view.postlist
 
+import android.graphics.Color
+import android.net.Uri
 import android.util.DisplayMetrics
 import android.view.View
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -99,10 +102,20 @@ open class PostListFragment :
 
     //region Contract
 
-    override fun openPost(postId: Int) {
-        activity?.also {
-            PostActivity.start(it, postId)
+    override fun openPost(url: String) {
+        activity?.let {
+            CustomTabsIntent
+                    .Builder()
+                    .setToolbarColor(Color.WHITE)
+                    .setStartAnimations(it, R.anim.slide_in_right, R.anim.slide_out_left)
+                    .setExitAnimations(it, R.anim.slide_in_left, R.anim.slide_out_right)
+                    .build()
+                    .launchUrl(it, Uri.parse(url))
         }
+
+//        activity?.also {
+//            PostActivity.start(it, postId)
+//        }
     }
 
     override fun showLoading() {

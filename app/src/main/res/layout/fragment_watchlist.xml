@@ -160,7 +160,8 @@
                         android:layout_marginRight="16dp"
                         android:layout_marginTop="8dp"
                         android:text="9,999"
-                        android:textColor="@color/white"/>
+                        android:textColor="@color/white"
+                        app:ftv_typeface="semibold"/>
 
                     <com.github.mikephil.charting.charts.LineChart
                         android:id="@+id/fragment_watchlist_chart"
