@@ -26,6 +26,7 @@ class CurrencyService(
     )
 
     companion object {
+        private const val NETWORK_PAGE_SIZE = 100
         private var INSTANCE: CurrencyService? = null
 
         fun getInstance(watchlist: WatchlistSourceContract): CurrencySourceContract{
@@ -99,7 +100,7 @@ class CurrencyService(
 
     override suspend fun getAllCurrencies(skipCache: Boolean): Result<CurrencyDataResponse> {
         return if (skipCache){
-            mClient.getCurrencies().getResult()
+            mClient.getCurrencies(NETWORK_PAGE_SIZE).getResult()
                     .onSuccess { setCache(it.data) }
                     .onError { mCached?.let { setCache(it) } }
                     .mapOnSuccess { it.data }

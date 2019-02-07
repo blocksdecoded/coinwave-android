@@ -3,6 +3,7 @@ package com.makeuseof.cryptocurrency.view.postlist.util
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
+import android.view.View
 import android.widget.ImageView
 import kotlin.random.Random
 import kotlin.random.nextInt
@@ -12,7 +13,7 @@ import kotlin.random.nextInt
  * with Android Studio
  */
 
-fun ImageView.setRandomBg(seed: Int) {
+fun View.setRandomBg(seed: Int) {
     background = PostBgUtil.getRandomGradient(seed)
 }
 

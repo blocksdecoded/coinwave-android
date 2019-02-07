@@ -40,7 +40,7 @@ class PostListViewHolder(
     }
 
     fun onBind(post: PublisherPost){
-        mImage.setRandomBg(adapterPosition)
+        itemView.setRandomBg(adapterPosition)
 
         mTitle.text = post.title
 
