@@ -25,18 +25,19 @@ class PostListViewHolder(
     @BindView(R.id.adapter_post_item_title)
     lateinit var mTitle: TextView
 
-    @OnClick(R.id.adapter_post_item_read_more)
+    @OnClick(
+            R.id.adapter_post_item_read_more,
+            R.id.adapter_post_item_selectable
+    )
     fun onClick(view: View) {
         when (view.id) {
             R.id.adapter_post_item_read_more -> mListener.onClick(adapterPosition)
+            R.id.adapter_post_item_selectable -> mListener.onClick(adapterPosition)
         }
     }
 
     init {
         ButterKnife.bind(this, view)
-        itemView.setOnClickListener {
-            mListener.onClick(adapterPosition)
-        }
     }
 
     fun onBind(post: PublisherPost){
