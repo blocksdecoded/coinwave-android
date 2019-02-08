@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CryptoCurrency</string>
+    <string name="app_name">CoinWave</string>
     <string name="const_app_name">CryptoCurrency</string>
     <string name="small_size">Small size</string>
     <string name="medium_size">Medium size</string>
