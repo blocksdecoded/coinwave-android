@@ -3,7 +3,7 @@
     <color name="full_transparent">#00000000</color>
     <color name="white">#FFF</color>
     <color name="black">#000</color>
-    <color name="window_background">#31343f</color>
+    <color name="window_background">#12171c</color>
     <color name="button_text_active">#007AFF</color>
     <color name="button_text_pressed">#90FFFFFF</color>
 
