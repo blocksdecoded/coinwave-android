@@ -135,10 +135,12 @@ class MainActivity :
         if (applyToChildren && view is ViewGroup) {
             val viewGroup = view as ViewGroup?
             var i = 0
-            val n = viewGroup !!.childCount
-            while (i < n) {
-                viewGroup.getChildAt(i).fitsSystemWindows = fitSystemWindows
-                i ++
+            viewGroup?.let {
+                val n = viewGroup.childCount
+                while (i < n) {
+                    viewGroup.getChildAt(i).fitsSystemWindows = fitSystemWindows
+                    i ++
+                }
             }
         }
     }
@@ -245,7 +247,6 @@ class MainActivity :
             }
 
             override fun onDrawerClosed(p0: View) {
-                muo_apps_list.resetScroll()
                 updateStatusBar()
             }
 
