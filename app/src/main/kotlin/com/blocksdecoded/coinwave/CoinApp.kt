@@ -23,6 +23,6 @@ class CoinApp: Application() {
         super.onCreate()
         INSTANCE = this
 
-//        Fabric.with(this, Crashlytics())
+        Fabric.with(this, Crashlytics())
     }
 }
