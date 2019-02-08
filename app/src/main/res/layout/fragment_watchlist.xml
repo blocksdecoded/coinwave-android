@@ -159,7 +159,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         android:layout_marginRight="16dp"
                         android:layout_marginTop="8dp"
-                        android:text="9,999"
+                        android:text=""
                         android:textColor="@color/white"
                         app:ftv_typeface="semibold"/>
 
