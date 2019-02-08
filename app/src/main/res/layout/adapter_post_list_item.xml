@@ -39,7 +39,7 @@
             android:background="@color/black"
             android:alpha="0.3" />
 
-        <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+        <com.blocksdecoded.coinwave.view.widgets.FontTextView
             android:id="@+id/adapter_post_item_title"
             android:layout_marginRight="30dp"
             android:layout_marginLeft="34dp"
@@ -69,7 +69,7 @@
             app:cardUseCompatPadding="true"
             app:cardPreventCornerOverlap="true">
 
-            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+            <com.blocksdecoded.coinwave.view.widgets.FontTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"

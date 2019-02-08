@@ -5,7 +5,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+    <com.blocksdecoded.coinwave.view.widgets.FontTextView
         android:id="@+id/pick_favorite_symbol"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -18,7 +18,7 @@
         android:textColor="@color/light_text"
         app:ftv_typeface="light"/>
 
-    <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+    <com.blocksdecoded.coinwave.view.widgets.FontTextView
         android:id="@+id/pick_favorite_market_cap"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
         android:textSize="13sp"
         app:ftv_typeface="light"/>
 
-    <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+    <com.blocksdecoded.coinwave.view.widgets.FontTextView
         android:id="@+id/pick_favorite_volume"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
         android:textSize="13sp"
         app:ftv_typeface="light"/>
 
-    <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+    <com.blocksdecoded.coinwave.view.widgets.FontTextView
         android:id="@+id/pick_favorite_price"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

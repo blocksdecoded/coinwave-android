@@ -17,7 +17,7 @@
         android:src="@drawable/bg_bottom_nav"
         android:scaleType="fitXY"/>
 
-    <com.makeuseof.cryptocurrency.view.widgets.BottomNavigationViewEx
+    <com.blocksdecoded.coinwave.view.widgets.BottomNavigationViewEx
         android:id="@+id/main_nav_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
         app:itemHorizontalTranslationEnabled="false"
         app:itemIconSize="18dp"/>
 
-    <com.makeuseof.cryptocurrency.view.widgets.NonSwipeableViewPager
+    <com.blocksdecoded.coinwave.view.widgets.NonSwipeableViewPager
         android:id="@+id/main_view_pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -75,7 +75,7 @@
             android:padding="12dp"
             android:src="@drawable/ic_add"
             android:visibility="visible"/>
-        <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+        <com.blocksdecoded.coinwave.view.widgets.FontTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="@+id/currency_go_to_site"

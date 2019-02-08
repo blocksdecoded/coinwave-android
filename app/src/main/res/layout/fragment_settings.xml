@@ -6,7 +6,7 @@
     android:fitsSystemWindows="true"
     android:paddingTop="20dp">
 
-    <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+    <com.blocksdecoded.coinwave.view.widgets.FontTextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="Settings"

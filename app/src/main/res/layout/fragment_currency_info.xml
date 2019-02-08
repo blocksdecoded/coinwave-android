@@ -44,7 +44,7 @@
                 android:src="@drawable/circle_red_bg"
                 android:layout_marginRight="8dp"/>
 
-            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+            <com.blocksdecoded.coinwave.view.widgets.FontTextView
                 android:id="@+id/fragment_currency_info_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -58,7 +58,7 @@
                 android:alpha="0.8"
                 android:textSize="20sp"/>
 
-            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+            <com.blocksdecoded.coinwave.view.widgets.FontTextView
                 android:id="@+id/fragment_currency_info_symbol"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -120,7 +120,7 @@
                 app:cardBackgroundColor="@color/colorPrimary"
                 android:visibility="invisible">
 
-                <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+                <com.blocksdecoded.coinwave.view.widgets.FontTextView
                     android:id="@+id/currency_chart_picked"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -151,7 +151,7 @@
 
     </androidx.cardview.widget.CardView>
 
-    <com.makeuseof.cryptocurrency.view.widgets.LockableScrollView
+    <com.blocksdecoded.coinwave.view.widgets.LockableScrollView
         android:id="@+id/currency_scroll_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -166,7 +166,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="24dp">
 
-            <com.makeuseof.cryptocurrency.view.widgets.OptionSelectorView
+            <com.blocksdecoded.coinwave.view.widgets.OptionSelectorView
                 android:id="@+id/currency_chart_period"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -180,7 +180,7 @@
                 android:focusable="false"/>
 
             <!--Price-->
-            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+            <com.blocksdecoded.coinwave.view.widgets.FontTextView
                 style="@style/AppTheme.FieldTitle"
                 android:id="@+id/currency_price_title"
                 android:layout_width="wrap_content"
@@ -189,7 +189,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:text="Price:" />
 
-            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+            <com.blocksdecoded.coinwave.view.widgets.FontTextView
                 style="@style/AppTheme.FieldValue"
                 android:id="@+id/currency_price"
                 android:layout_width="wrap_content"
@@ -210,7 +210,7 @@
                 android:background="@color/light_grey"/>
 
             <!--Market cap-->
-            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+            <com.blocksdecoded.coinwave.view.widgets.FontTextView
                 style="@style/AppTheme.FieldTitle"
                 android:id="@+id/currency_market_cap_title"
                 android:layout_width="wrap_content"
@@ -218,7 +218,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/currency_change_1h_title"
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:text="Market Cap:"/>
-            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+            <com.blocksdecoded.coinwave.view.widgets.FontTextView
                 style="@style/AppTheme.FieldValue"
                 android:id="@+id/currency_market_cap"
                 android:layout_width="wrap_content"
@@ -234,7 +234,7 @@
                 android:background="@color/light_grey"/>
 
             <!--Volume 24h-->
-            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+            <com.blocksdecoded.coinwave.view.widgets.FontTextView
                 style="@style/AppTheme.FieldTitle"
                 android:id="@+id/currency_volume_24h_title"
                 android:layout_width="wrap_content"
@@ -242,7 +242,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/currency_market_cap_title"
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:text="Volume 24h:"/>
-            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+            <com.blocksdecoded.coinwave.view.widgets.FontTextView
                 style="@style/AppTheme.FieldValue"
                 android:id="@+id/currency_volume_24h"
                 android:layout_width="wrap_content"
@@ -258,7 +258,7 @@
                 android:background="@color/light_grey"/>
 
             <!--Available supply-->
-            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+            <com.blocksdecoded.coinwave.view.widgets.FontTextView
                 style="@style/AppTheme.FieldTitle"
                 android:id="@+id/currency_available_supply_title"
                 android:layout_width="wrap_content"
@@ -266,7 +266,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/currency_volume_24h_title"
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:text="Available Supply:"/>
-            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+            <com.blocksdecoded.coinwave.view.widgets.FontTextView
                 style="@style/AppTheme.FieldValue"
                 android:id="@+id/currency_available_supply"
                 android:layout_width="wrap_content"
@@ -282,7 +282,7 @@
                 android:background="@color/light_grey"/>
 
             <!--Total supply-->
-            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+            <com.blocksdecoded.coinwave.view.widgets.FontTextView
                 style="@style/AppTheme.FieldTitle"
                 android:id="@+id/currency_total_supply_title"
                 android:layout_width="wrap_content"
@@ -290,7 +290,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/currency_available_supply_title"
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:text="Total Supply:"/>
-            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+            <com.blocksdecoded.coinwave.view.widgets.FontTextView
                 style="@style/AppTheme.FieldValue"
                 android:id="@+id/currency_total_supply"
                 android:layout_width="wrap_content"
@@ -306,7 +306,7 @@
                 android:background="@color/light_grey"/>
 
             <!--Change 1h-->
-            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+            <com.blocksdecoded.coinwave.view.widgets.FontTextView
                 style="@style/AppTheme.FieldTitle"
                 android:id="@+id/currency_change_1h_title"
                 android:layout_width="wrap_content"
@@ -314,7 +314,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/currency_price_title"
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:text="% Change:"/>
-            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+            <com.blocksdecoded.coinwave.view.widgets.FontTextView
                 style="@style/AppTheme.FieldValue"
                 android:id="@+id/currency_change_1h"
                 android:layout_width="wrap_content"
@@ -330,7 +330,7 @@
                 android:background="@color/light_grey"/>
 
             <!--Change 1d-->
-            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+            <com.blocksdecoded.coinwave.view.widgets.FontTextView
                 style="@style/AppTheme.FieldTitle"
                 android:id="@+id/currency_change_1d_title"
                 android:layout_width="wrap_content"
@@ -339,7 +339,7 @@
                 android:visibility="gone"
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:text="% Change 1d:"/>
-            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+            <com.blocksdecoded.coinwave.view.widgets.FontTextView
                 style="@style/AppTheme.FieldValue"
                 android:id="@+id/currency_change_1d"
                 android:layout_width="wrap_content"
@@ -357,7 +357,7 @@
                 android:background="@color/light_grey"/>
 
             <!--Change 1w-->
-            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+            <com.blocksdecoded.coinwave.view.widgets.FontTextView
                 style="@style/AppTheme.FieldTitle"
                 android:id="@+id/currency_change_1w_title"
                 android:layout_width="wrap_content"
@@ -366,7 +366,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:visibility="gone"
                 android:text="% Change 1w:"/>
-            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+            <com.blocksdecoded.coinwave.view.widgets.FontTextView
                 style="@style/AppTheme.FieldValue"
                 android:id="@+id/currency_change_1w"
                 android:layout_width="wrap_content"
@@ -407,7 +407,7 @@
                 android:background="@drawable/gradient_circle"
                 android:padding="12dp"
                 android:src="@drawable/ic_internet"/>
-            <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+            <com.blocksdecoded.coinwave.view.widgets.FontTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintLeft_toLeftOf="@+id/currency_go_to_site"
@@ -421,6 +421,6 @@
                 android:letterSpacing="0.15"
                 app:ftv_typeface="semibold"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.makeuseof.cryptocurrency.view.widgets.LockableScrollView>
+    </com.blocksdecoded.coinwave.view.widgets.LockableScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

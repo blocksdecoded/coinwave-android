@@ -40,7 +40,7 @@
                 android:src="@drawable/ic_close"/>
         </androidx.cardview.widget.CardView>
 
-        <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+        <com.blocksdecoded.coinwave.view.widgets.FontTextView
             android:id="@+id/drawer_menu_title"
             android:theme="@style/AppTheme.DrawerTitle"
             android:layout_width="wrap_content"
@@ -55,7 +55,7 @@
             app:ftv_typeface="light"/>
 
         <!--Pick favorite-->
-        <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+        <com.blocksdecoded.coinwave.view.widgets.FontTextView
             android:id="@+id/drawer_favorite"
             android:theme="@style/AppTheme.DrawerMenuItem"
             android:layout_width="match_parent"
@@ -83,7 +83,7 @@
             android:src="@drawable/ic_right_arrow_light"/>
 
         <!--Add to watchlist-->
-        <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+        <com.blocksdecoded.coinwave.view.widgets.FontTextView
             android:id="@+id/drawer_add_watchlist"
             android:theme="@style/AppTheme.DrawerMenuItem"
             android:layout_width="match_parent"
@@ -111,7 +111,7 @@
             android:src="@drawable/ic_right_arrow_light"/>
 
         <!--Share app-->
-        <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+        <com.blocksdecoded.coinwave.view.widgets.FontTextView
             android:id="@+id/drawer_share_this_app"
             android:theme="@style/AppTheme.DrawerMenuItem"
             android:layout_width="match_parent"
@@ -139,7 +139,7 @@
             android:src="@drawable/ic_right_arrow_light"/>
 
         <!--Rate us-->
-        <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+        <com.blocksdecoded.coinwave.view.widgets.FontTextView
             android:id="@+id/drawer_rate_us"
             android:theme="@style/AppTheme.DrawerMenuItem"
             android:layout_width="match_parent"
@@ -167,7 +167,7 @@
             android:src="@drawable/ic_right_arrow_light"/>
 
         <!--Contact us-->
-        <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+        <com.blocksdecoded.coinwave.view.widgets.FontTextView
             android:id="@+id/drawer_contact_us"
             android:theme="@style/AppTheme.DrawerMenuItem"
             android:layout_width="match_parent"
@@ -201,7 +201,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="bottom">
-        <com.makeuseof.cryptocurrency.view.widgets.FontTextView
+        <com.blocksdecoded.coinwave.view.widgets.FontTextView
             android:theme="@style/AppTheme.DrawerTitle"
             android:id="@+id/other_apps_title"
             android:layout_width="wrap_content"
@@ -211,7 +211,7 @@
             android:text="Other apps"
             app:ftv_typeface="light"/>
 
-        <com.makeuseof.appslist.view.AppsView
+        <com.blocksdecoded.appslist.view.AppsView
             android:id="@+id/muo_apps_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

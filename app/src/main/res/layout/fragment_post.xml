@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.makeuseof.cryptocurrency.view.post.widgets.NestedWebView
+    <com.blocksdecoded.coinwave.view.post.widgets.NestedWebView
         android:id="@+id/web_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
