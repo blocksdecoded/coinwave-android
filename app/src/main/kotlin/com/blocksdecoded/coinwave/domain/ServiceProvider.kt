@@ -3,7 +3,7 @@ package com.blocksdecoded.coinwave.domain
 import android.content.Context
 import com.blocksdecoded.coinwave.data.chart.ChartsService
 import com.blocksdecoded.coinwave.data.chart.ChartsSourceContract
-import com.blocksdecoded.coinwave.data.crypto.CurrencyService
+import com.blocksdecoded.coinwave.data.crypto.CurrencyRemoteSouce
 import com.blocksdecoded.coinwave.data.crypto.CurrencySourceContract
 import com.blocksdecoded.coinwave.data.post.PostDataSource
 import com.blocksdecoded.coinwave.data.post.PostRepository
@@ -23,7 +23,7 @@ object ServiceProvider {
     fun getChartsService(): ChartsSourceContract = ChartsService.getInstance()
 
     fun getCurrencyService(context: Context): CurrencySourceContract =
-            CurrencyService.getInstance(getWatchlistService(context))
+            CurrencyRemoteSouce.getInstance(getWatchlistService(context))
 
     fun getWatchlistService(context: Context): WatchlistSourceContract =
             WatchlistService.getInstance(SharedStorage.getInstance(context))

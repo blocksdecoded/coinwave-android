@@ -8,6 +8,8 @@ import com.blocksdecoded.coinwave.data.model.CurrencyEntity
 interface CurrencySourceContract {
     suspend fun getAllCurrencies(skipCache: Boolean): Result<CurrencyDataResponse>
 
+    suspend fun getWatchlist(skipCache: Boolean): Result<CurrencyDataResponse>
+
     fun getCurrency(id: Int): CurrencyEntity?
 
     fun saveCurrency(id: Int): Boolean

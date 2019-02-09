@@ -13,7 +13,7 @@ import com.blocksdecoded.utils.coroutine.model.onSuccess
 import com.blocksdecoded.utils.retrofit.BaseRetrofitDataSource
 
 // Created by askar on 7/19/18.
-class CurrencyService(
+class CurrencyRemoteSouce(
         private val mWatchlistSource: WatchlistSourceContract
 ): BaseRetrofitDataSource(), CurrencySourceContract {
     private var mCached: CurrencyDataResponse? = null
@@ -26,11 +26,12 @@ class CurrencyService(
 
     companion object {
         private const val NETWORK_PAGE_SIZE = 100
-        private var INSTANCE: CurrencyService? = null
+        private const val CURRENT_PAGE = 0
+        private var INSTANCE: CurrencyRemoteSouce? = null
 
-        fun getInstance(watchlist: WatchlistSourceContract): CurrencySourceContract{
+        fun getInstance(watchlist: WatchlistSourceContract): CurrencySourceContract {
             if (INSTANCE == null){
-                INSTANCE = CurrencyService(watchlist)
+                INSTANCE = CurrencyRemoteSouce(watchlist)
             }
             return INSTANCE!!
         }
@@ -38,28 +39,28 @@ class CurrencyService(
 
     //region Private
 
-    private fun setCache(data: CurrencyDataResponse){
+    private fun setCache(data: CurrencyDataResponse) {
         markSaved(data.coins)
         mCached = data
         mObservers.forEach { it.onUpdated(data.coins) }
     }
 
-    private fun markSaved(currencies: List<CurrencyEntity>){
+    private fun markSaved(currencies: List<CurrencyEntity>) {
         val saved = mWatchlistSource.getAll()
         currencies.forEach {
             it.isSaved = saved.contains(it.id)
         }
     }
 
-    private fun notifyAdded(currencyEntity: CurrencyEntity){
+    private fun notifyAdded(currencyEntity: CurrencyEntity) {
         mObservers.forEach { it.onAdded(currencyEntity) }
     }
 
-    private fun notifyRemoved(currencyEntity: CurrencyEntity){
+    private fun notifyRemoved(currencyEntity: CurrencyEntity) {
         mObservers.forEach { it.onRemoved(currencyEntity) }
     }
 
-    private fun findCurrency(id: Int, onFind: (currency: CurrencyEntity) -> Unit): Boolean{
+    private fun findCurrency(id: Int, onFind: (currency: CurrencyEntity) -> Unit): Boolean {
         val currency = mCached?.coins?.first { it.id == id }
         return if(currency != null){
             onFind.invoke(currency)
@@ -97,20 +98,41 @@ class CurrencyService(
         notifyRemoved(it)
     }
 
-    override suspend fun getAllCurrencies(skipCache: Boolean): Result<CurrencyDataResponse> {
-        return if (skipCache){
-            mClient.getCurrencies(NETWORK_PAGE_SIZE).getResult()
-                    .onSuccess { setCache(it.data) }
-                    .onError { mCached?.let { setCache(it) } }
-                    .mapOnSuccess { it.data }
-        } else {
-            if (mCached != null){
-                Result.Success(mCached!!)
+    override suspend fun getAllCurrencies(skipCache: Boolean): Result<CurrencyDataResponse> =
+            if (skipCache){
+                mClient.getCurrencies(NETWORK_PAGE_SIZE).getResult()
+                        .onSuccess { setCache(it.data) }
+                        .onError { mCached?.let { setCache(it) } }
+                        .mapOnSuccess { it.data }
             } else {
-                Result.Error(EmptyCache("Cache is empty"))
+                if (mCached != null){
+                    Result.Success(mCached!!)
+                } else {
+                    Result.Error(EmptyCache("Cache is empty"))
+                }
             }
-        }
-    }
+
+    override suspend fun getWatchlist(skipCache: Boolean): Result<CurrencyDataResponse> =
+            if (skipCache){
+                var ids = ""
+                mWatchlistSource.getAll().forEachIndexed { index, i ->
+                    ids += when (index) {
+                        0 -> "$i"
+                        else -> ",$i"
+                    }
+                }
+
+                mClient.getCurrencies(NETWORK_PAGE_SIZE, ids).getResult()
+                        .onSuccess { setCache(it.data) }
+                        .onError { mCached?.let { setCache(it) } }
+                        .mapOnSuccess { it.data }
+            } else {
+                if (mCached != null){
+                    Result.Success(mCached!!)
+                } else {
+                    Result.Error(EmptyCache("Cache is empty"))
+                }
+            }
 
     //endregion
 }
