@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+###Changed
+- Swap 'Watchlist' and 'Currencies'
 
 ## [0.1.0 (4)] - 2019-02-08
 First dev version 

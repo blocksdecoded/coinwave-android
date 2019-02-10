@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_watchlist"
-        android:icon="@drawable/ic_watchlist"
-        android:title="Watchlist" />
-
-    <item
         android:id="@+id/navigation_currencies"
         android:icon="@drawable/ic_currencies"
         android:title="Currencies" />
+
+    <item
+        android:id="@+id/navigation_watchlist"
+        android:icon="@drawable/ic_watchlist"
+        android:title="Watchlist" />
 
     <item
         android:id="@+id/navigation_news"

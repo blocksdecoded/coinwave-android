@@ -51,11 +51,11 @@ class MainActivity :
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
-            R.id.navigation_watchlist -> {
+            R.id.navigation_currencies -> {
                 main_view_pager.currentItem = 0
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_currencies -> {
+            R.id.navigation_watchlist -> {
                 main_view_pager.currentItem = 1
                 return@OnNavigationItemSelectedListener true
             }
@@ -156,7 +156,7 @@ class MainActivity :
                 0
             } else {
                 when(main_view_pager.currentItem) {
-                    1, 2 -> 0
+                    0, 2 -> 0
                     else -> View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
                 }
             }
@@ -176,16 +176,15 @@ class MainActivity :
         initNavigationDrawer()
 
         val fragments = arrayListOf (
-                createWatchListScreen(),
                 createCurrencyListScreen(),
-                createPostListScreen(),
-                createSettingsScreen()
+                createWatchListScreen(),
+                createPostListScreen()
         )
 
         initViewPager(fragments)
 
         main_add_container.setOnClickListener {
-            main_view_pager.currentItem = 1
+            main_view_pager.currentItem = 0
         }
 
         main_menu.setOnClickListener {
@@ -283,8 +282,8 @@ class MainActivity :
     }
 
     private fun getNavigationItemId(position: Int): Int = when (position) {
-        0 -> R.id.navigation_watchlist
-        1 -> R.id.navigation_currencies
+        0 -> R.id.navigation_currencies
+        1 -> R.id.navigation_watchlist
         2 -> R.id.navigation_news
         else -> R.id.navigation_watchlist
     }
@@ -299,7 +298,7 @@ class MainActivity :
 
     override fun onClick(v: View?) {
         when(v){
-            drawer_add_watchlist -> drawerItemClick { main_view_pager.currentItem = 1 }
+            drawer_add_watchlist -> drawerItemClick { main_view_pager.currentItem = 0 }
             drawer_favorite -> drawerItemClick { PickFavoriteActivity.start(this) }
             drawer_contact_us -> drawerItemClick { ShareUtils.contactUs(this) }
             drawer_rate_us -> drawerItemClick {
