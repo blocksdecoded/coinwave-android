@@ -4,6 +4,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import androidx.annotation.ColorInt
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.fragment.app.Fragment
@@ -12,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import com.blocksdecoded.coinwave.R
+import com.blocksdecoded.coinwave.data.ipfs.ServiceExchangeApi
 import com.blocksdecoded.coinwave.domain.UseCaseProvider
 import com.blocksdecoded.coinwave.util.CryptoRateUtil
 import com.blocksdecoded.coinwave.util.SFProTextTypeface
@@ -33,6 +35,8 @@ import com.blocksdecoded.rateus.base.RateUsDialogContract
 import com.blocksdecoded.rateus.base.RateUsListener
 import com.blocksdecoded.utils.*
 import com.blocksdecoded.utils.extensions.setConstraintTopMargin
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.drawer_content.*
 import kotlinx.android.synthetic.main.content_main.*

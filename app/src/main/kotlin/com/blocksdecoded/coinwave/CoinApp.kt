@@ -1,10 +1,9 @@
 package com.blocksdecoded.coinwave
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import androidx.multidex.MultiDex
-import com.crashlytics.android.Crashlytics
-import io.fabric.sdk.android.Fabric
 
 // Created by askar on 6/7/18.
 class CoinApp: Application() {
@@ -19,10 +18,11 @@ class CoinApp: Application() {
         MultiDex.install(this)
     }
 
+    @SuppressLint("CheckResult")
     override fun onCreate() {
         super.onCreate()
         INSTANCE = this
 
-        Fabric.with(this, Crashlytics())
+//        Fabric.with(this, Crashlytics())
     }
 }
