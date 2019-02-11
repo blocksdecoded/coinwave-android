@@ -76,9 +76,9 @@ open class WatchListFragment :
 
     private val mChartListener = object: ChartListener(){
         override fun onValueSelected(e: Entry?, h: Highlight?) {
-            if (mPickedContainer?.visibility != View.VISIBLE){
-                mPickedContainer?.alpha = 0f
-                mPickedContainer?.animate()
+            if (mPickedContainer.visibility != View.VISIBLE){
+                mPickedContainer.alpha = 0f
+                mPickedContainer.animate()
                         ?.setDuration(300L)
                         ?.alpha(1f)
                         ?.withStartAction { mPickedContainer.visible() }
@@ -86,12 +86,12 @@ open class WatchListFragment :
             }
 
             val date = Date(e?.x?.toLong()?:0L)
-            mPickedPrice?.text = "${date.toMediumFormat()} ${date.toHourFormat()}\n\$${(e?.y ?: 0f).format()}"
+            mPickedPrice.text = "${date.toMediumFormat()} ${date.toHourFormat()}\n\$${(e?.y ?: 0f).format()}"
         }
 
         override fun onChartGestureEnd(me: MotionEvent?, lastPerformedGesture: ChartTouchListener.ChartGesture?) {
             Handler().postDelayed({
-                mPickedContainer?.animate()
+                mPickedContainer.animate()
                         ?.setDuration(300L)
                         ?.alpha(0f)
                         ?.withEndAction { mPickedContainer.invisible() }
@@ -99,7 +99,6 @@ open class WatchListFragment :
             }, 200)
         }
         override fun onChartSingleTapped(me: MotionEvent?) {
-            Log.d("ololo", "Chart single tap")
             activity?.also {
                 PickFavoriteActivity.start(it)
             }

@@ -17,22 +17,6 @@ import com.blocksdecoded.utils.outRightTransition
 class PickFavoriteActivity: SwipeableActivity() {
     private var mPresenter: PickFavoriteContract.Presenter? = null
 
-    companion object {
-        fun start(context: Context) {
-            context.startActivity(intent(context))
-
-            if(context is Activity){
-                context.inRightTransition()
-            }
-        }
-
-        fun intent(context: Context): Intent {
-            val intent = Intent(context, PickFavoriteActivity::class.java)
-
-            return intent
-        }
-    }
-
     override fun onBackPressed() {
         super.onBackPressed()
         outRightTransition()
@@ -61,5 +45,17 @@ class PickFavoriteActivity: SwipeableActivity() {
                     UseCaseProvider.getCurrencyListUseCases(applicationContext)
             )
         }
+    }
+
+    companion object {
+        fun start(context: Context) {
+            context.startActivity(intent(context))
+
+            if(context is Activity){
+                context.inRightTransition()
+            }
+        }
+
+        fun intent(context: Context): Intent = Intent(context, PickFavoriteActivity::class.java)
     }
 }
