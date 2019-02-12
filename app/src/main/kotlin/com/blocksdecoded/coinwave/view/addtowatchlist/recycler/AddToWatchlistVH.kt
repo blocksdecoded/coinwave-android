@@ -22,6 +22,7 @@ class AddToWatchlistVH(
 
     init {
         itemView.setOnClickListener { mListener.onClick(adapterPosition) }
+        mWatchIcon.setOnClickListener { mListener.onWatchClick(adapterPosition) }
     }
 
     fun onBind(coin: CurrencyEntity) {

@@ -37,10 +37,6 @@ class AddToWatchlistFragment : BaseMVPFragment<AddToWatchlistContract.Presenter>
         mRecycler.adapter = mAdapter
     }
 
-    override fun showCurrencies(currencies: List<CurrencyEntity>) {
-        mAdapter?.setCoins(currencies)
-    }
-
     //region ViewHolder
 
     override fun onClick(position: Int) {
@@ -49,6 +45,18 @@ class AddToWatchlistFragment : BaseMVPFragment<AddToWatchlistContract.Presenter>
 
     override fun onWatchClick(position: Int) {
         mPresenter?.onCurrencyWatch(position)
+    }
+
+    //endregion
+
+    //region Contract
+
+    override fun showCurrencies(currencies: List<CurrencyEntity>) {
+        mAdapter?.setCoins(currencies)
+    }
+
+    override fun updateCurrency(currencyEntity: CurrencyEntity) {
+        mAdapter?.updateItem(currencyEntity)
     }
 
     //endregion

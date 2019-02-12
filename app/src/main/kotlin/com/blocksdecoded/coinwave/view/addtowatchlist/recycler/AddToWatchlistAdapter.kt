@@ -4,6 +4,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.data.model.CurrencyEntity
+import com.blocksdecoded.coinwave.util.addSortedByRank
 import com.blocksdecoded.utils.inflate
 
 /**
@@ -29,5 +30,21 @@ class AddToWatchlistAdapter(
         this.coins.clear()
         this.coins.addAll(coins)
         notifyDataSetChanged()
+    }
+
+    private fun findItem(id: Int, onFind: (index: Int) -> Unit){
+        onFind.invoke(coins.indexOfFirst { it.id == id })
+    }
+
+    fun updateItem(currency: CurrencyEntity){
+        findItem(currency.id) {
+            if(it >= 0){
+                coins[it] = currency
+                notifyItemChanged(it)
+            } else {
+                coins.addSortedByRank(currency)
+                notifyDataSetChanged()
+            }
+        }
     }
 }
