@@ -36,11 +36,9 @@ class PostRemoteDataSource: BaseRetrofitDataSource(), PostDataSource {
             options["last_item_datetime"] = date
         }
 
-        val call = mClient.getPosts(options)
-
-        return call.getResult().mapOnSuccess { postResponse ->
-            postResponse.posts
-        }
+        return mClient.getPosts(options)
+                .getResult()
+                .mapOnSuccess { it.posts }
     }
 
     override fun getPost(id: Int): PublisherPost? {

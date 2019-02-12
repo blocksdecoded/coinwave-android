@@ -29,13 +29,12 @@ class PostRepository(
 
     //region Contract
 
-    override suspend fun getPosts(date: String): Result<List<PublisherPost>>? {
-        return mRemote?.getPosts(date)
-                ?.mapOnSuccess {
-                    it.forEach { mCache[it.id] = it }
-                    it
-                }
-    }
+    override suspend fun getPosts(date: String): Result<List<PublisherPost>>? =
+            mRemote?.getPosts(date)
+                    ?.mapOnSuccess {
+                        it.forEach { mCache[it.id] = it }
+                        it
+                    }
 
     override fun getPost(id: Int): PublisherPost? = mCache[id]
 

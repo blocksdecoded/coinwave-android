@@ -2,36 +2,32 @@ package com.blocksdecoded.coinwave.data.crypto
 
 import com.blocksdecoded.utils.coroutine.model.Result
 import com.blocksdecoded.coinwave.data.EmptyCache
-import com.blocksdecoded.coinwave.data.crypto.network.CryptoConfig
-import com.blocksdecoded.coinwave.data.crypto.network.CryptoNetworkClient
+import com.blocksdecoded.coinwave.data.cache.CoinCache
+import com.blocksdecoded.coinwave.data.crypto.remote.CurrencyApiClient
 import com.blocksdecoded.coinwave.data.model.CurrencyDataResponse
 import com.blocksdecoded.coinwave.data.model.CurrencyEntity
 import com.blocksdecoded.coinwave.data.watchlist.WatchlistSourceContract
 import com.blocksdecoded.utils.coroutine.model.mapOnSuccess
 import com.blocksdecoded.utils.coroutine.model.onError
 import com.blocksdecoded.utils.coroutine.model.onSuccess
-import com.blocksdecoded.utils.retrofit.BaseRetrofitDataSource
 
 // Created by askar on 7/19/18.
-class CurrencyRemoteSouce(
+class CurrencyRepository(
         private val mWatchlistSource: WatchlistSourceContract
-): BaseRetrofitDataSource(), CurrencySourceContract {
+): CurrencySourceContract {
     private var mCached: CurrencyDataResponse? = null
     private val mObservers = hashSetOf<CurrencyUpdateObserver>()
-
-    private val mClient= getRetrofitClient(
-            CryptoConfig.BASE_URL,
-            CryptoNetworkClient::class.java
-    )
 
     companion object {
         private const val NETWORK_PAGE_SIZE = 100
         private const val CURRENT_PAGE = 0
-        private var INSTANCE: CurrencyRemoteSouce? = null
+        private var INSTANCE: CurrencyRepository? = null
 
-        fun getInstance(watchlist: WatchlistSourceContract): CurrencySourceContract {
+        fun getInstance(
+                watchlist: WatchlistSourceContract
+        ): CurrencySourceContract {
             if (INSTANCE == null){
-                INSTANCE = CurrencyRemoteSouce(watchlist)
+                INSTANCE = CurrencyRepository(watchlist)
             }
             return INSTANCE!!
         }
@@ -100,7 +96,7 @@ class CurrencyRemoteSouce(
 
     override suspend fun getAllCurrencies(skipCache: Boolean): Result<CurrencyDataResponse> =
             if (skipCache){
-                mClient.getCurrencies(NETWORK_PAGE_SIZE).getResult()
+                CurrencyApiClient.getCurrencies(NETWORK_PAGE_SIZE)
                         .onSuccess { setCache(it.data) }
                         .onError { mCached?.let { setCache(it) } }
                         .mapOnSuccess { it.data }
@@ -121,8 +117,7 @@ class CurrencyRemoteSouce(
                         else -> ",$i"
                     }
                 }
-
-                mClient.getCurrencies(NETWORK_PAGE_SIZE, ids).getResult()
+                CurrencyApiClient.getCurrencies(NETWORK_PAGE_SIZE, ids)
                         .onSuccess { setCache(it.data) }
                         .onError { mCached?.let { setCache(it) } }
                         .mapOnSuccess { it.data }

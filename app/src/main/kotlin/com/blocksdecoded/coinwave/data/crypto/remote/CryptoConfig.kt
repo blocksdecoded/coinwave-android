@@ -1,4 +1,4 @@
-package com.blocksdecoded.coinwave.data.crypto.network
+package com.blocksdecoded.coinwave.data.crypto.remote
 
 import com.blocksdecoded.coinwave.BuildConfig
 

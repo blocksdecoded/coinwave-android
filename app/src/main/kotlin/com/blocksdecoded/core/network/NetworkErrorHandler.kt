@@ -15,7 +15,7 @@ class NetworkErrorHandler(private val mContext: Context?) {
 
 		fun getInstance(context: Context? = null): NetworkErrorHandler?{
 			if (context != null && INSTANCE == null)
-				INSTANCE = NetworkErrorHandler(context)
+				INSTANCE = NetworkErrorHandler(context.applicationContext)
 
 			if (context == null && INSTANCE == null)
 				Log.e("ololo", "Try get network error handler without context")
