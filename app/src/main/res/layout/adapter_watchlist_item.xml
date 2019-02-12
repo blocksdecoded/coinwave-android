@@ -27,7 +27,7 @@
             android:maxLines="1"
             android:ellipsize="end"
             android:layout_marginTop="12dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="12dp"
             android:alpha="0.5"
             app:ftv_typeface="light"/>
 
@@ -46,7 +46,7 @@
             android:textSize="20sp"
             android:textColor="@color/white"
             android:layout_marginBottom="12dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="12dp"
             app:ftv_typeface="bold"/>
 
         <ImageView
