@@ -2,7 +2,6 @@ package com.blocksdecoded.coinwave.data.crypto
 
 import com.blocksdecoded.utils.coroutine.model.Result
 import com.blocksdecoded.coinwave.data.EmptyCache
-import com.blocksdecoded.coinwave.data.cache.CoinCache
 import com.blocksdecoded.coinwave.data.crypto.remote.CurrencyApiClient
 import com.blocksdecoded.coinwave.data.model.CurrencyDataResponse
 import com.blocksdecoded.coinwave.data.model.CurrencyEntity
@@ -48,31 +47,23 @@ class CurrencyRepository(
         }
     }
 
-    private fun notifyAdded(currencyEntity: CurrencyEntity) {
-        mObservers.forEach { it.onAdded(currencyEntity) }
-    }
+    private fun notifyAdded(currencyEntity: CurrencyEntity) =
+            mObservers.forEach { it.onAdded(currencyEntity) }
 
-    private fun notifyRemoved(currencyEntity: CurrencyEntity) {
-        mObservers.forEach { it.onRemoved(currencyEntity) }
-    }
+    private fun notifyRemoved(currencyEntity: CurrencyEntity) =
+            mObservers.forEach { it.onRemoved(currencyEntity) }
 
-    private fun findCurrency(id: Int, onFind: (currency: CurrencyEntity) -> Unit): Boolean {
-        val currency = mCached?.coins?.first { it.id == id }
-        return if(currency != null){
-            onFind.invoke(currency)
-            true
-        } else {
-            false
-        }
-    }
+    private fun findCurrency(id: Int, onFind: (currency: CurrencyEntity) -> Unit): Boolean =
+            mCached?.coins?.first { it.id == id }?.let {
+                onFind.invoke(it)
+                true
+            } ?: false
 
     //endregion
 
     //region Contract
 
-    override fun getCurrency(id: Int): CurrencyEntity? {
-        return mCached?.coins?.first { it.id == id }
-    }
+    override fun getCurrency(id: Int): CurrencyEntity? = mCached?.coins?.first { it.id == id }
 
     override fun addCurrencyObserver(observer: CurrencyUpdateObserver) {
         mObservers.add(observer)
@@ -101,11 +92,9 @@ class CurrencyRepository(
                         .onError { mCached?.let { setCache(it) } }
                         .mapOnSuccess { it.data }
             } else {
-                if (mCached != null){
-                    Result.Success(mCached!!)
-                } else {
-                    Result.Error(EmptyCache("Cache is empty"))
-                }
+                mCached?.let {
+                    Result.Success(it)
+                } ?: Result.Error(EmptyCache("Cache is empty"))
             }
 
     override suspend fun getWatchlist(skipCache: Boolean): Result<CurrencyDataResponse> =
@@ -122,11 +111,9 @@ class CurrencyRepository(
                         .onError { mCached?.let { setCache(it) } }
                         .mapOnSuccess { it.data }
             } else {
-                if (mCached != null){
-                    Result.Success(mCached!!)
-                } else {
-                    Result.Error(EmptyCache("Cache is empty"))
-                }
+                mCached?.let {
+                    Result.Success(it)
+                } ?: Result.Error(EmptyCache("Cache is empty"))
             }
 
     //endregion

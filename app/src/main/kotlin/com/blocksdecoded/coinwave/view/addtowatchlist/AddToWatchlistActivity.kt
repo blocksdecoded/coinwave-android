@@ -3,6 +3,11 @@ package com.blocksdecoded.coinwave.view.addtowatchlist
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
+import com.blocksdecoded.coinwave.domain.UseCaseProvider
+import com.blocksdecoded.coinwave.view.currency.CurrencyActivity
+import com.blocksdecoded.coinwave.view.currency.CurrencyFragment
+import com.blocksdecoded.coinwave.view.currency.CurrencyPresenter
 import com.blocksdecoded.core.SwipeableActivity
 import com.blocksdecoded.utils.inRightTransition
 import com.blocksdecoded.utils.outRightTransition
@@ -13,6 +18,8 @@ import com.blocksdecoded.utils.outRightTransition
  */
 class AddToWatchlistActivity: SwipeableActivity() {
 
+    private var mPresenter: AddToWatchlistContract.Presenter? = null
+
     override fun onBackPressed() {
         super.onBackPressed()
         outRightTransition()
@@ -22,6 +29,28 @@ class AddToWatchlistActivity: SwipeableActivity() {
         super.finish()
         outRightTransition()
     }
+
+    //region Lifecycle
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        if (savedInstanceState == null) {
+            val fragment = AddToWatchlistFragment.newInstance()
+
+            supportFragmentManager
+                    .beginTransaction()
+                    .add(android.R.id.content, fragment)
+                    .commit()
+
+            mPresenter = AddToWatchlistPresenter(
+                    fragment,
+                    UseCaseProvider.getCurrencyListUseCases(applicationContext)
+            )
+        }
+    }
+
+    //endregion
 
     companion object {
         fun start(context: Context) {

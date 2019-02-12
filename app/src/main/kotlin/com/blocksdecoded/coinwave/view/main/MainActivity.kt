@@ -17,6 +17,7 @@ import com.blocksdecoded.coinwave.data.ipfs.ServiceExchangeApi
 import com.blocksdecoded.coinwave.domain.UseCaseProvider
 import com.blocksdecoded.coinwave.util.CryptoRateUtil
 import com.blocksdecoded.coinwave.util.SFProTextTypeface
+import com.blocksdecoded.coinwave.view.addtowatchlist.AddToWatchlistActivity
 import com.blocksdecoded.coinwave.view.currencylist.CurrencyListContract
 import com.blocksdecoded.coinwave.view.currencylist.CurrencyListFragment
 import com.blocksdecoded.coinwave.view.currencylist.CurrencyListPresenter
@@ -302,7 +303,7 @@ class MainActivity :
 
     override fun onClick(v: View?) {
         when(v){
-            drawer_add_watchlist -> drawerItemClick { main_view_pager.currentItem = 0 }
+            drawer_add_watchlist -> drawerItemClick { AddToWatchlistActivity.start(this) }
             drawer_favorite -> drawerItemClick { PickFavoriteActivity.start(this) }
             drawer_contact_us -> drawerItemClick { ShareUtils.contactUs(this) }
             drawer_rate_us -> drawerItemClick {

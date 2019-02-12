@@ -1,4 +1,4 @@
-package com.blocksdecoded.coinwave.data.cache
+package com.blocksdecoded.coinwave.data.crypto.cache
 
 import com.blocksdecoded.coinwave.data.crypto.CurrencyUpdateObserver
 import com.blocksdecoded.coinwave.data.model.CurrencyEntity
@@ -19,12 +19,10 @@ object CoinCacheStorage: CoinCache {
         mObservers.forEach { it.onUpdated(coins) }
     }
 
-    override fun addCacheObserver() {
+    override fun addObserver(observer: CoinCache.CacheObserver) {
 
     }
 
-    override fun removeCacheObserver() {
-
+    override fun removeObserver(observer: CoinCache.CacheObserver) {
     }
-
 }

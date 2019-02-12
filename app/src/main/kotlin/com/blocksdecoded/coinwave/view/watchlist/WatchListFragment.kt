@@ -74,6 +74,20 @@ open class WatchListFragment :
 
     private var mActiveDialog: Dialog? = null
 
+    //region Chart card
+
+    @BindView(R.id.fragment_watchlist_chart)
+    lateinit var mChart: LineChart
+
+    @BindView(R.id.watchlist_chart_picked_container)
+    lateinit var mPickedContainer: View
+    @BindView(R.id.watchlist_chart_picked)
+    lateinit var mPickedPrice: TextView
+    @BindView(R.id.fragment_watchlist_chart_progress)
+    lateinit var mProgress: View
+
+    //endregion
+
     private val mChartListener = object: ChartListener(){
         override fun onValueSelected(e: Entry?, h: Highlight?) {
             if (mPickedContainer.visibility != View.VISIBLE){
@@ -105,19 +119,7 @@ open class WatchListFragment :
         }
     }
 
-    //region Chart card
-
-    @BindView(R.id.fragment_watchlist_chart)
-    lateinit var mChart: LineChart
-
-    @BindView(R.id.watchlist_chart_picked_container)
-    lateinit var mPickedContainer: View
-    @BindView(R.id.watchlist_chart_picked)
-    lateinit var mPickedPrice: TextView
-    @BindView(R.id.fragment_watchlist_chart_progress)
-    lateinit var mProgress: View
-
-    //endregion
+    //region Lifecycle
 
     override fun onPause() {
         super.onPause()
@@ -145,6 +147,8 @@ open class WatchListFragment :
 
         mChart.init(mChartListener)
     }
+
+    //endregion
 
     //region ViewHolder
 

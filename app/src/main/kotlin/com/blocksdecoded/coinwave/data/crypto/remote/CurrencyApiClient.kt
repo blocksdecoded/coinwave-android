@@ -44,11 +44,15 @@ internal object CurrencyApiClient {
         mClient = retrofit.create(CurrencyNetworkClient::class.java)
     }
 
+    //region Public
+
     suspend fun getCurrencies(pageSize: Int): Result<CurrencyListResponse> =
             mClient.getCurrencies(pageSize).getResult()
 
     suspend fun getCurrencies(pageSize: Int, ids: String): Result<CurrencyListResponse> =
             mClient.getCurrencies(pageSize, ids).getResult()
+
+    //endregion
 
     private interface CurrencyNetworkClient {
         @GET(CryptoConfig.CURRENCIES_PATH)
