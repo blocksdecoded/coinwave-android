@@ -1,9 +1,35 @@
 <resources>
     <string name="app_name">CoinWave</string>
     <string name="const_app_name">CoinWave</string>
+
+    <!--Menu-->
+    <string name="menu">Menu</string>
+    <string name="pick_favorite_currency">Pick favorite currency</string>
+    <string name="share_this_app">Share this app</string>
+    <string name="rate_us">Rate us</string>
+    <string name="contact_us">Contact us</string>
     <string name="small_size">Small size</string>
     <string name="medium_size">Medium size</string>
     <string name="big_size">Big size</string>
-    <string name="cryptocurrency">Cryptocurrency</string>
-    <string name="read_more">Read more</string>
+
+    <!--Messages-->
+    <string name="message_watchlist_is_empty">Watchlist is empty</string>
+    <string name="message_connection_error">Connection Error. Please check your internet and press</string>
+
+    <!--Buttons-->
+    <string name="btn_go_to_website">GO TO WEBSITE</string>
+    <string name="btn_retry">Retry</string>
+    <string name="btn_read_more">Read more</string>
+
+    <!--Titles-->
+    <string name="title_cryptocurrency">Cryptocurrency</string>
+    <string name="title_pick_favorite">Pick favorite</string>
+    <string name="title_add_to_watchlist">Add to watchlist</string>
+    <string name="name">Name</string>
+    <string name="market_cap">Market Cap</string>
+    <string name="volume_24h">Volume(24h)</string>
+    <string name="price_24h">Price(24h)</string>
+    <string name="title_currencies">Currencies</string>
+    <string name="title_watchlist">Watchlist</string>
+    <string name="title_news">News</string>
 </resources>

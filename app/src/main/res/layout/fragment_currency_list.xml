@@ -30,10 +30,10 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
-                android:text="@string/cryptocurrency"
+                android:text="@string/title_cryptocurrency"
                 app:ftv_typeface="medium"
                 android:textColor="@color/white"
-                android:textSize="26sp" />
+                android:textSize="@dimen/big_title_text_size" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.appbar.AppBarLayout>
 

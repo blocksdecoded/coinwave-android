@@ -4,15 +4,15 @@
     <item
         android:id="@+id/navigation_currencies"
         android:icon="@drawable/ic_currencies"
-        android:title="Currencies" />
+        android:title="@string/title_currencies" />
 
     <item
         android:id="@+id/navigation_watchlist"
         android:icon="@drawable/ic_watchlist"
-        android:title="Watchlist" />
+        android:title="@string/title_watchlist" />
 
     <item
         android:id="@+id/navigation_news"
         android:icon="@drawable/ic_news"
-        android:title="News" />
+        android:title="@string/title_news" />
 </menu>

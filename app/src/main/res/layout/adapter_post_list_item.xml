@@ -74,7 +74,7 @@
                 android:paddingBottom="10dp"
                 android:paddingLeft="18dp"
                 android:paddingRight="26dp"
-                android:text="@string/read_more"
+                android:text="@string/btn_read_more"
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:background="@drawable/card_gradient_bg"/>

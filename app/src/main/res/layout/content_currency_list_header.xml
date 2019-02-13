@@ -13,7 +13,7 @@
         android:paddingTop="@dimen/header_content_padding"
         android:paddingBottom="@dimen/header_content_padding"
         android:paddingLeft="20dp"
-        android:text="Name"
+        android:text="@string/name"
         android:textSize="13sp"
         android:textColor="@color/light_text"
         app:ftv_typeface="light"/>
@@ -25,7 +25,7 @@
         android:layout_weight="0.9"
         android:gravity="center"
         android:textColor="@color/light_text"
-        android:text="Market Cap"
+        android:text="@string/market_cap"
         android:textSize="13sp"
         app:ftv_typeface="light"/>
 
@@ -36,7 +36,7 @@
         android:layout_weight="0.9"
         android:gravity="center"
         android:textColor="@color/light_text"
-        android:text="Volume(24h)"
+        android:text="@string/volume_24h"
         android:textSize="13sp"
         app:ftv_typeface="light"/>
 
@@ -48,7 +48,7 @@
         android:gravity="right"
         android:paddingRight="20dp"
         android:textColor="@color/light_text"
-        android:text="Price(24h)"
+        android:text="@string/price_24h"
         android:textSize="13sp"
         app:ftv_typeface="light"/>
 

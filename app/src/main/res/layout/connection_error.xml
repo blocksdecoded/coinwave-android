@@ -13,7 +13,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintVertical_bias="0.43"
-        android:text="Connection Error.\nPlease check your internet and press"
+        android:text="@string/message_connection_error"
         android:textColor="@color/light_text"
         android:gravity="center"/>
 
@@ -28,7 +28,7 @@
         android:paddingRight="24dp"
         android:paddingTop="12dp"
         android:paddingBottom="12dp"
-        android:text="Retry"
+        android:text="@string/btn_retry"
         android:textColor="@color/light_blue"
         android:background="?selectableItemBackground"/>
 

@@ -50,7 +50,7 @@
             app:layout_constraintLeft_toRightOf="@+id/drawer_close_menu"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="4dp"
-            android:text="Menu"
+            android:text="@string/menu"
             android:paddingLeft="0dp"
             app:ftv_typeface="light"/>
 
@@ -60,7 +60,7 @@
             android:theme="@style/AppTheme.DrawerMenuItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Pick favorite currency"
+            android:text="@string/pick_favorite_currency"
             app:layout_constraintTop_toBottomOf="@+id/drawer_close_menu"
             app:ftv_typeface="light"/>
 
@@ -88,7 +88,7 @@
             android:theme="@style/AppTheme.DrawerMenuItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add to watchlist"
+            android:text="@string/title_add_to_watchlist"
             app:layout_constraintTop_toBottomOf="@+id/drawer_favorite"
             app:ftv_typeface="light"/>
 
@@ -116,7 +116,7 @@
             android:theme="@style/AppTheme.DrawerMenuItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Share this app"
+            android:text="@string/share_this_app"
             app:layout_constraintTop_toBottomOf="@+id/drawer_add_watchlist"
             app:ftv_typeface="light"/>
 
@@ -144,7 +144,7 @@
             android:theme="@style/AppTheme.DrawerMenuItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Rate us"
+            android:text="@string/rate_us"
             app:layout_constraintTop_toBottomOf="@+id/drawer_share_this_app"
             app:ftv_typeface="light"/>
 
@@ -172,7 +172,7 @@
             android:theme="@style/AppTheme.DrawerMenuItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Contact us"
+            android:text="@string/contact_us"
             app:layout_constraintTop_toBottomOf="@+id/drawer_rate_us"
             app:ftv_typeface="light"/>
 
