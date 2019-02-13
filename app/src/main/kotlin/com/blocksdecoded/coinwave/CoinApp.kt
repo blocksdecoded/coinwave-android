@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import androidx.multidex.MultiDex
+import com.squareup.leakcanary.LeakCanary
 
 // Created by askar on 6/7/18.
 class CoinApp: Application() {
@@ -23,6 +24,12 @@ class CoinApp: Application() {
         super.onCreate()
         INSTANCE = this
 
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return
+        }
+        LeakCanary.install(this)
 //        Fabric.with(this, Crashlytics())
     }
 }

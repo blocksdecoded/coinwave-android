@@ -21,8 +21,8 @@ class AddToWatchlistVH(
     private val mWatchIcon: ImageView = itemView.findViewById(R.id.adapter_watchlist_item_star)
 
     init {
-        itemView.setOnClickListener { mListener.onClick(adapterPosition) }
-        mWatchIcon.setOnClickListener { mListener.onWatchClick(adapterPosition) }
+        itemView.setOnClickListener { mListener.onWatchClick(adapterPosition) }
+//        mWatchIcon.setOnClickListener { mListener.onWatchClick(adapterPosition) }
     }
 
     fun onBind(coin: CurrencyEntity) {

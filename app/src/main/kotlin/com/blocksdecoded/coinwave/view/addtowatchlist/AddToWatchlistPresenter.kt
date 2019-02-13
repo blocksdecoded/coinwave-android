@@ -42,11 +42,13 @@ class AddToWatchlistPresenter(
     private fun updateCurrencyWatch(position: Int) {
         if (cached.isValidIndex(position)) {
             cached[position].isSaved = !cached[position].isSaved
+
             if (cached[position].isSaved) {
                 mCurrencyListUseCases.saveCurrency(cached[position].id)
             } else {
                 mCurrencyListUseCases.removeCurrency(cached[position].id)
             }
+
             mView?.updateCurrency(cached[position])
         }
     }
