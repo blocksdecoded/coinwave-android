@@ -56,7 +56,7 @@
             android:textColor="@color/white"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="12dp"
-            android:layout_marginLeft="4dp"
+            android:layout_marginLeft="6dp"
             app:ftv_typeface="bold"/>
 
         <ImageView
