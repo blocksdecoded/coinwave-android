@@ -6,6 +6,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.data.model.CurrencyEntity
+import com.blocksdecoded.coinwave.util.loadIcon
 
 /**
  * Created by askar on 2/12/19
@@ -19,6 +20,7 @@ class AddToWatchlistVH(
     private val nameTextView: TextView = itemView.findViewById(R.id.adapter_watchlist_item_name)
     private val symbolTextView: TextView = itemView.findViewById(R.id.adapter_watchlist_item_symbol)
     private val mWatchIcon: ImageView = itemView.findViewById(R.id.adapter_watchlist_item_star)
+    private val coinIcon: ImageView = itemView.findViewById(R.id.adapter_watchlist_item_icon)
 
     init {
         itemView.setOnClickListener { mListener.onWatchClick(adapterPosition) }
@@ -29,6 +31,7 @@ class AddToWatchlistVH(
         nameTextView.text = coin.name
         symbolTextView.text = coin.symbol
 
+        coinIcon.loadIcon(coin)
         mWatchIcon.setImageResource(if (coin.isSaved) R.drawable.ic_star_filled else R.drawable.ic_star_border)
     }
 

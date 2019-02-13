@@ -32,22 +32,31 @@
             android:alpha="0.5"
             app:ftv_typeface="light"/>
 
+        <ImageView
+            android:id="@+id/adapter_watchlist_item_icon"
+            android:layout_width="16dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="@+id/adapter_watchlist_item_symbol"
+            app:layout_constraintBottom_toBottomOf="@+id/adapter_watchlist_item_symbol"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginLeft="12dp"/>
+
         <com.blocksdecoded.coinwave.view.widgets.FontTextView
             android:id="@+id/adapter_watchlist_item_symbol"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/adapter_watchlist_item_name"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/adapter_watchlist_item_icon"
             app:layout_constraintBottom_toBottomOf="@+id/adapter_watchlist_item_star"
             app:layout_constraintRight_toLeftOf="@+id/adapter_watchlist_item_star"
-            android:layout_marginTop="4dp"
             android:text="BTC"
             android:maxLines="1"
             android:ellipsize="end"
             android:textSize="20sp"
             android:textColor="@color/white"
+            android:layout_marginTop="4dp"
             android:layout_marginBottom="12dp"
-            android:layout_marginLeft="12dp"
+            android:layout_marginLeft="4dp"
             app:ftv_typeface="bold"/>
 
         <ImageView
