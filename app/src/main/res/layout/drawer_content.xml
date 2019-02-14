@@ -196,4 +196,51 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/drawer_company_icon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            app:layout_constraintRight_toLeftOf="@+id/drawer_company_title"
+            app:layout_constraintTop_toTopOf="@+id/drawer_company_title"
+            app:layout_constraintBottom_toBottomOf="@+id/drawer_company_title"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            android:layout_marginRight="4dp"
+            android:src="@drawable/ic_blocks_decoded_small"
+            android:alpha="0.6"/>
+
+        <com.blocksdecoded.coinwave.view.widgets.FontTextView
+            android:id="@+id/drawer_company_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/drawer_app_version"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="8dp"
+            android:text="Blocks Decoded"
+            android:alpha="0.7"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:ftv_typeface="light"/>
+
+        <com.blocksdecoded.coinwave.view.widgets.FontTextView
+            android:id="@+id/drawer_app_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.9"
+            android:text="v1.0.0"
+            android:alpha="0.6"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:ftv_typeface="light"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </LinearLayout>

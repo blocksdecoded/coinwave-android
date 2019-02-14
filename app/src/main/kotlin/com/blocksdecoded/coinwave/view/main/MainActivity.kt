@@ -11,6 +11,7 @@ import androidx.core.view.GravityCompat
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import com.blocksdecoded.coinwave.BuildConfig
 import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.domain.UseCaseProvider
 import com.blocksdecoded.coinwave.util.CryptoRateUtil
@@ -96,6 +97,8 @@ class MainActivity :
                 })
 
         updateStatusBar()
+
+        setVersionInfo()
     }
 
     override fun onPause() {
@@ -173,7 +176,7 @@ class MainActivity :
 
     //region Init
 
-    private fun init(){
+    private fun init() {
         initNavigationDrawer()
 
         val fragments = arrayListOf (
@@ -190,6 +193,14 @@ class MainActivity :
 
         main_menu.setOnClickListener {
             openDrawer()
+        }
+    }
+
+    private fun setVersionInfo() {
+        drawer_app_version.text = if (BuildConfig.DEBUG) {
+            "v${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
+        } else {
+            "v${BuildConfig.VERSION_NAME}"
         }
     }
 
@@ -229,7 +240,7 @@ class MainActivity :
 
     //endregion
 
-    private fun initNavigationDrawer(){
+    private fun initNavigationDrawer() {
         drawer_add_watchlist.setOnClickListener(this)
         drawer_contact_us.setOnClickListener(this)
         drawer_favorite.setOnClickListener(this)
@@ -256,7 +267,7 @@ class MainActivity :
         })
     }
 
-    private fun initViewPager(fragments: ArrayList<Fragment>){
+    private fun initViewPager(fragments: ArrayList<Fragment>) {
         main_nav_view.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         main_nav_view.enableAnimation(false)
         main_nav_view.isItemHorizontalTranslationEnabled = false

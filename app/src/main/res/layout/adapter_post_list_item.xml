@@ -21,7 +21,7 @@
             android:layout_marginRight="24dp"
             android:layout_marginTop="32dp"
             android:layout_marginBottom="32dp"
-            android:src="@drawable/ic_blocks_decoded"
+            android:src="@drawable/ic_blocks_decoded_big"
             android:alpha="0.3"/>
 
         <ImageView
