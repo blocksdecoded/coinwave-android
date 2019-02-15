@@ -44,6 +44,10 @@ internal object CurrencyApiClient {
         mClient = retrofit.create(CurrencyNetworkClient::class.java)
     }
 
+    private fun reinitClient() {
+
+    }
+
     //region Public
 
     suspend fun getCurrencies(pageSize: Int): Result<CurrencyListResponse> =

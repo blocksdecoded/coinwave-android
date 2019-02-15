@@ -4,6 +4,7 @@ import android.content.ComponentName
 import android.graphics.Color
 import android.net.Uri
 import android.util.DisplayMetrics
+import android.util.Log
 import android.view.View
 import androidx.browser.customtabs.CustomTabsClient
 import androidx.browser.customtabs.CustomTabsIntent
@@ -24,6 +25,7 @@ import com.blocksdecoded.utils.DimenUtils
 import com.blocksdecoded.utils.customtabs.CustomTabsUtil
 import com.blocksdecoded.utils.extensions.setConstraintTopMargin
 import com.blocksdecoded.utils.hide
+import com.blocksdecoded.utils.logD
 import com.blocksdecoded.utils.visible
 import kotlin.math.roundToInt
 
