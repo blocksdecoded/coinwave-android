@@ -14,7 +14,7 @@ import com.blocksdecoded.utils.outRightTransition
 // Created by askar on 7/24/18.
 class CurrencyActivity: SwipeableActivity() {
     companion object {
-        private val CURRENCY_ID_FIELD = "currency_id"
+        private const val EXTRA_COIN_ID = "currency_id"
 
         fun start(context: Context, clientId: Int) {
             context.startActivity(intent(context, clientId))
@@ -27,12 +27,12 @@ class CurrencyActivity: SwipeableActivity() {
         fun intent(context: Context, clientId: Int): Intent {
             val intent = Intent(context, CurrencyActivity::class.java)
 
-            intent.putExtra(CURRENCY_ID_FIELD, clientId)
+            intent.putExtra(EXTRA_COIN_ID, clientId)
 
             return intent
         }
 
-        fun getIdFromIntent(intent: Intent): Int = intent.getIntExtra(CURRENCY_ID_FIELD, -1)
+        fun getIdFromIntent(intent: Intent): Int = intent.getIntExtra(EXTRA_COIN_ID, -1)
     }
 
     override fun onBackPressed() {
