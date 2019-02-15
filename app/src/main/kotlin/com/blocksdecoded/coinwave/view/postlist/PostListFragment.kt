@@ -1,10 +1,13 @@
 package com.blocksdecoded.coinwave.view.postlist
 
+import android.content.ComponentName
 import android.graphics.Color
 import android.net.Uri
 import android.util.DisplayMetrics
 import android.view.View
+import androidx.browser.customtabs.CustomTabsClient
 import androidx.browser.customtabs.CustomTabsIntent
+import androidx.browser.customtabs.CustomTabsServiceConnection
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +21,7 @@ import com.blocksdecoded.coinwave.data.post.model.PublisherPost
 import com.blocksdecoded.coinwave.view.postlist.recycler.deprecated.PostListAdapter
 import com.blocksdecoded.coinwave.view.postlist.recycler.PostListViewHolder
 import com.blocksdecoded.utils.DimenUtils
+import com.blocksdecoded.utils.customtabs.CustomTabsUtil
 import com.blocksdecoded.utils.extensions.setConstraintTopMargin
 import com.blocksdecoded.utils.hide
 import com.blocksdecoded.utils.visible
@@ -36,6 +40,7 @@ open class PostListFragment :
     override var mPresenter: PostListContract.Presenter? = null
     override val layoutId: Int = R.layout.fragment_post_list
 
+    var mAdapter: PostListAdapter? = null
     @BindView(R.id.fragment_post_list_recycler)
     lateinit var mRecycler: RecyclerView
     @BindView(R.id.fragment_post_list_swipe_refresh)
@@ -50,12 +55,34 @@ open class PostListFragment :
         }
     }
 
-    var mAdapter: PostListAdapter? = null
+    private var mTabServiceConnection = object : CustomTabsServiceConnection() {
+        override fun onCustomTabsServiceConnected(name: ComponentName?, client: CustomTabsClient?) {
+            mClient = client
+            mClient?.warmup(0L)
+            mClient?.newSession(null)
+        }
+
+        override fun onServiceDisconnected(name: ComponentName?) {
+            mClient = null
+        }
+    }
+    private var mClient: CustomTabsClient? = null
+
+    //region Lifecycle
+
+    override fun onStart() {
+        super.onStart()
+        context?.also {
+            CustomTabsUtil.bindToService(it, mTabServiceConnection)
+        }
+    }
+
+    //endregion
 
     //region Init
 
     override fun initView(rootView: View) {
-        initRecycler(rootView)
+        initRecycler()
 
         context?.also {
             mMenuBtn.setConstraintTopMargin(DimenUtils.getStatusBarHeight(it) + (mMenuBtn.layoutParams as ConstraintLayout.LayoutParams).topMargin)
@@ -66,7 +93,7 @@ open class PostListFragment :
         }
     }
 
-    private fun initRecycler(rootView: View?) {
+    private fun initRecycler() {
         var postHeight = 0
         activity?.also {
             val metrics = DisplayMetrics()
@@ -111,10 +138,6 @@ open class PostListFragment :
                     .build()
                     .launchUrl(it, Uri.parse(url))
         }
-
-//        activity?.also {
-//            PostActivity.start(it, postId)
-//        }
     }
 
     override fun showLoading() {

@@ -19,6 +19,7 @@ class CurrencyRepository(
 
     companion object {
         private const val NETWORK_PAGE_SIZE = 100
+        private const val BD_PAGE_SIZE = 20
         private const val CURRENT_PAGE = 0
         private var INSTANCE: CurrencyRepository? = null
 
