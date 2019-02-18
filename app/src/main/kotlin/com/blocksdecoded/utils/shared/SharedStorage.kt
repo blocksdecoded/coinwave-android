@@ -39,7 +39,7 @@ class SharedStorage (
                     Context.MODE_PRIVATE
             )
 
-    private fun editPreference(body: (SharedPreferences.Editor) -> Unit){
+    private fun editPreference(body: (SharedPreferences.Editor) -> Unit) {
         mSharedPreferences?.edit()?.apply {
             try {
                 body.invoke(this)
