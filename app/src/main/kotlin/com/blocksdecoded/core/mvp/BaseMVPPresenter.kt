@@ -1,5 +1,6 @@
 package com.blocksdecoded.core.mvp
 
+import androidx.annotation.CallSuper
 import com.blocksdecoded.utils.Lg
 
 abstract class BaseMVPPresenter<T>(
@@ -22,6 +23,7 @@ abstract class BaseMVPPresenter<T>(
         }
     }
 
+    @CallSuper
     override fun detachView() {
         try{
             if (mView != null && mView is BaseMVPContract.View<*>){
@@ -42,6 +44,7 @@ abstract class BaseMVPPresenter<T>(
 	override fun onPause() {
 	}
 
+    @CallSuper
 	override fun onDestroy() {
 		mView = null
 	}

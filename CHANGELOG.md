@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ###Added
 - Side menu company and version info
+
 ###Changed
 - Nav bar color
 

@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.CallSuper
+import androidx.fragment.app.Fragment
 import butterknife.ButterKnife
 import butterknife.Unbinder
 import com.blocksdecoded.utils.inflate
 import com.blocksdecoded.utils.showShortToast
 
-abstract class BaseMVPFragment<T>: androidx.fragment.app.Fragment(), BaseMVPContract.View<T> {
+abstract class BaseMVPFragment<T>: Fragment(), BaseMVPContract.View<T> {
     abstract var mPresenter: T?
     abstract val layoutId: Int
 
@@ -26,24 +28,28 @@ abstract class BaseMVPFragment<T>: androidx.fragment.app.Fragment(), BaseMVPCont
 
     abstract fun initView(rootView: View)
 
+    @CallSuper
 	override fun onResume() {
 		super.onResume()
 		if (mPresenter is BaseMVPContract.Presenter<*>)
 			(mPresenter as BaseMVPContract.Presenter<*>).onResume()
 	}
 
+    @CallSuper
 	override fun onPause() {
 		super.onPause()
 		if (mPresenter is BaseMVPContract.Presenter<*>)
 			(mPresenter as BaseMVPContract.Presenter<*>).onPause()
 	}
 
+    @CallSuper
 	override fun onDestroy() {
 		super.onDestroy()
 		if (mPresenter is BaseMVPContract.Presenter<*>)
 			(mPresenter as BaseMVPContract.Presenter<*>).onDestroy()
 	}
 
+    @CallSuper
 	override fun onDestroyView() {
 		super.onDestroyView()
 		if (mPresenter is BaseMVPContract.Presenter<*>)
@@ -56,6 +62,7 @@ abstract class BaseMVPFragment<T>: androidx.fragment.app.Fragment(), BaseMVPCont
 
     override fun isActive(): Boolean = isAdded
 
+    @CallSuper
     override fun setPresenter(presenter: T) {
         mPresenter = presenter
         if (mPresenter is BaseMVPContract.Presenter<*>)
@@ -66,6 +73,7 @@ abstract class BaseMVPFragment<T>: androidx.fragment.app.Fragment(), BaseMVPCont
 		activity?.finish()
 	}
 
+    @CallSuper
     override fun clearPresenter() {
         mPresenter = null
     }
