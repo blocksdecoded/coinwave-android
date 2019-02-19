@@ -39,7 +39,7 @@
 
         <com.blocksdecoded.coinwave.view.widgets.FontTextView
             android:id="@+id/adapter_post_item_title"
-            android:layout_marginRight="30dp"
+            android:layout_marginRight="16dp"
             android:layout_marginLeft="34dp"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"
@@ -76,7 +76,7 @@
                 android:paddingRight="26dp"
                 android:text="@string/btn_read_more"
                 android:textColor="@color/black"
-                android:textSize="15sp"
+                android:textSize="14sp"
                 android:background="@drawable/card_gradient_bg"/>
 
             <ImageView
@@ -84,6 +84,7 @@
                 android:layout_height="9dp"
                 android:src="@drawable/ic_right_arrow_dark"
                 android:layout_gravity="right|center"
+                android:layout_marginTop="1dp"
                 android:layout_marginRight="12dp"/>
 
         </androidx.cardview.widget.CardView>

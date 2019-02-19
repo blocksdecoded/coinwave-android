@@ -74,9 +74,9 @@ open class PostListFragment :
 
     override fun onStart() {
         super.onStart()
-        context?.also {
-            CustomTabsUtil.bindToService(it, mTabServiceConnection)
-        }
+//        context?.also {
+//            CustomTabsUtil.bindToService(it, mTabServiceConnection)
+//        }
     }
 
     //endregion
