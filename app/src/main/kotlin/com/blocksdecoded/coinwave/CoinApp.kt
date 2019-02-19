@@ -23,13 +23,14 @@ class CoinApp: Application() {
     @SuppressLint("CheckResult")
     override fun onCreate() {
         super.onCreate()
-        INSTANCE = this
 
         if (LeakCanary.isInAnalyzerProcess(this)) {
             // This process is dedicated to LeakCanary for heap analysis.
             // You should not init your app in this process.
             return
         }
+
+        INSTANCE = this
         LeakCanary.install(this)
 
         FirebaseApp.initializeApp(this)
