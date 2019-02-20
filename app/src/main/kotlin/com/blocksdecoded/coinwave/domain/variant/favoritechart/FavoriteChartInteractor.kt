@@ -14,7 +14,6 @@ import com.blocksdecoded.utils.coroutine.model.Result
  * with Android Studio
  */
 class FavoriteChartInteractor(
-        private val appExecutors: AppExecutors,
         private val mChartsUseCases: ChartsUseCases,
         private val mFavoriteUseCases: FavoriteUseCases,
         private val mCurrencyUseCases: CurrencyListUseCases

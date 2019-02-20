@@ -17,18 +17,15 @@ import com.blocksdecoded.utils.shared.SharedStorage
 // Created by askar on 7/19/18.
 object UseCaseProvider {
     fun getCurrencyListUseCases(context: Context): CurrencyListUseCases = CurrencyListInteractor(
-            AppExecutors.getInstance(),
             ServiceProvider.getCurrencyService(context)
     )
 
     fun getChartsInteractor(context: Context): ChartsUseCases = ChartsInteractor(
-            AppExecutors.getInstance(),
             ServiceProvider.getCurrencyService(context),
             ServiceProvider.getChartsService()
     )
 
     fun getPostUseCases(): PostUseCases = PostInteractor(
-            AppExecutors.getInstance(),
             ServiceProvider.getPostService()
     )
 
@@ -37,7 +34,6 @@ object UseCaseProvider {
     )
 
     fun getFavoriteChartUseVariant(context: Context): FavoriteChartUseVariant = FavoriteChartInteractor(
-            AppExecutors.getInstance(),
             getChartsInteractor(context),
             getFavoriteUseCases(context),
             getCurrencyListUseCases(context)

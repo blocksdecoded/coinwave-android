@@ -12,7 +12,6 @@ import kotlinx.coroutines.withContext
  * with Android Studio
  */
 class PostInteractor(
-        private val appExecutors: AppExecutors,
         private val mPostsSource: PostDataSource
 ): PostUseCases {
     private var date = ""
@@ -25,14 +24,14 @@ class PostInteractor(
         }
     }
 
-    override suspend fun getPosts(): Result<List<PublisherPost>>? = withContext(appExecutors.networkContext) {
+    override suspend fun getPosts(): Result<List<PublisherPost>>? = withContext(AppExecutors.networkContext) {
         date = ""
         mPostsSource.getPosts(date)?.onSuccess {
             updateLastDate(it)
         }
     }
 
-    override suspend fun getNextPosts(): Result<List<PublisherPost>>? = withContext(appExecutors.networkContext) {
+    override suspend fun getNextPosts(): Result<List<PublisherPost>>? = withContext(AppExecutors.networkContext) {
         mPostsSource.getPosts(date)?.onSuccess {
             updateLastDate(it)
         }

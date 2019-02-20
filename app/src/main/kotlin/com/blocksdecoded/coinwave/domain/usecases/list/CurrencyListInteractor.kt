@@ -10,10 +10,9 @@ import kotlinx.coroutines.withContext
 
 // Created by askar on 7/19/18.
 class CurrencyListInteractor(
-        private val appExecutors: AppExecutors,
         private val mCryptoService: CurrencySourceContract
 ): CurrencyListUseCases {
-    override suspend fun getCryptoList(skipCache: Boolean): Result<List<CurrencyEntity>> = withContext(appExecutors.ioContext) {
+    override suspend fun getCryptoList(skipCache: Boolean): Result<List<CurrencyEntity>> = withContext(AppExecutors.ioContext) {
         mCryptoService.getAllCurrencies(skipCache)
                 .mapOnSuccess { it.coins }
     }

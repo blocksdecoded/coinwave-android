@@ -16,7 +16,6 @@ import com.blocksdecoded.coinwave.data.chart.model.ChartPeriod as RequestChartPe
 
 // Created by askar on 7/25/18.
 class ChartsInteractor(
-        private val appExecutors: AppExecutors,
         private val mCryptoService: CurrencySourceContract,
         private val mChartsService: ChartsSourceContract
 ): ChartsUseCases {
@@ -48,7 +47,7 @@ class ChartsInteractor(
         }
     }
 
-    override suspend fun getChartData(currencyId: Int, period: ChartPeriod): Result<ChartData> = withContext(appExecutors.ioContext) {
+    override suspend fun getChartData(currencyId: Int, period: ChartPeriod): Result<ChartData> = withContext(AppExecutors.ioContext) {
         if (mCachedId != currencyId) {
             mCachedId = currencyId
             cachedChart.clear()
