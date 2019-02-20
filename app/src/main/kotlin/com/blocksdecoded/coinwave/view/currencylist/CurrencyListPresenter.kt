@@ -99,8 +99,8 @@ class CurrencyListPresenter(
     }
 
     override fun deleteCurrency(position: Int) {
-        if(mCachedData.isValidIndex(position)){
-            if(mCachedData[position].isSaved){
+        if(mCachedData.isValidIndex(position)) {
+            if(mCachedData[position].isSaved) {
                 mView?.showMessage("${mCachedData[position].name} removed from Watchlist")
                 mCurrencyListUseCases.removeCurrency(mCachedData[position].id)
             }
@@ -108,7 +108,7 @@ class CurrencyListPresenter(
     }
 
     override fun onCurrencyClick(position: Int) {
-        if(mCachedData.isValidIndex(position)){
+        if(mCachedData.isValidIndex(position)) {
             mView?.openCurrencyScreen(mCachedData[position].id)
         }
     }

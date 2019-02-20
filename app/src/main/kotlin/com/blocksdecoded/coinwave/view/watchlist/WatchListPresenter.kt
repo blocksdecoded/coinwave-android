@@ -1,5 +1,6 @@
 package com.blocksdecoded.coinwave.view.watchlist
 
+import android.util.Log
 import com.blocksdecoded.core.mvp.BaseMVPPresenter
 import com.blocksdecoded.coinwave.data.NetworkException
 import com.blocksdecoded.coinwave.data.crypto.CurrencyUpdateObserver
@@ -13,6 +14,7 @@ import com.blocksdecoded.utils.coroutine.launchSilent
 import com.blocksdecoded.utils.coroutine.model.onError
 import com.blocksdecoded.utils.coroutine.model.onSuccess
 import com.blocksdecoded.utils.isValidIndex
+import com.blocksdecoded.utils.logD
 import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
 
@@ -53,11 +55,15 @@ class WatchListPresenter(
 
         mFavoriteChartUseVariant.getCurrency()?.onSuccess {
             mView?.showFavoriteCurrency(it)
+        }?.onError {
+            logD("Failed to fetch favorite")
         }
 
         mFavoriteChartUseVariant.getChart()?.onSuccess {
             mView?.hideFavoriteLoading()
             mView?.showFavoriteChart(it)
+        }?.onError {
+            logD("Failed to fetch favorite chart")
         }
     }
 
@@ -84,8 +90,12 @@ class WatchListPresenter(
     private fun getCurrencies(skipCache: Boolean) = launchSilent(uiContext){
         mView?.showLoading()
         mCurrencyListUseCases.getCryptoList(skipCache)
-                .onSuccess { setCache(it) }
+                .onSuccess {
+                    mView?.hideLoading()
+                    setCache(it)
+                }
                 .onError {
+                    mView?.hideLoading()
                     when(it){
                         is NetworkException -> {
                             mView?.showNetworkError(mCachedData.isEmpty())

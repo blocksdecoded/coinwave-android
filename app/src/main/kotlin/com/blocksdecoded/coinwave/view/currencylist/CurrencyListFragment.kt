@@ -152,6 +152,7 @@ open class CurrencyListFragment :
     override fun showLoading() {
         mSwipeRefreshLayout?.isRefreshing = true
         mErrorContainer.hide()
+        mRecycler.hide()
         mListHeader.hide()
     }
 

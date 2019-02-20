@@ -32,6 +32,8 @@ interface WatchListContract {
 
         fun showLoading()
 
+        fun hideLoading()
+
     }
 
     interface Presenter : BaseMVPContract.Presenter<View> {

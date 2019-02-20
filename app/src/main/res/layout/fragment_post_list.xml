@@ -45,7 +45,7 @@
         <include
             android:id="@+id/fragment_post_list_error"
             layout="@layout/connection_error"
-            android:visibility="gone"/>
+            android:visibility="visible"/>
         
     </androidx.constraintlayout.widget.ConstraintLayout>
 

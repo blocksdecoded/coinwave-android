@@ -36,10 +36,6 @@ open class WatchListFragment :
         WatchListContract.View,
         WatchlistViewHolder.CurrencyVHClickListener {
 
-    companion object {
-        fun newInstance(): WatchListFragment = WatchListFragment()
-    }
-
     override var mPresenter: WatchListContract.Presenter? = null
     override val layoutId: Int = R.layout.fragment_watchlist
 
@@ -259,6 +255,10 @@ open class WatchListFragment :
         mRecycler?.hide()
     }
 
+    override fun hideLoading() {
+        mSwipeRefreshLayout?.isRefreshing = false
+    }
+
     override fun showNetworkError(hideList: Boolean) {
         mSwipeRefreshLayout?.isRefreshing = false
 
@@ -279,4 +279,8 @@ open class WatchListFragment :
     }
 
     //endregion
+
+    companion object {
+        fun newInstance(): WatchListFragment = WatchListFragment()
+    }
 }
