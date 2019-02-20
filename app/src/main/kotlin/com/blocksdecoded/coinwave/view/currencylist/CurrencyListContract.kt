@@ -19,6 +19,8 @@ interface CurrencyListContract {
         fun showNetworkError(hideList: Boolean)
 
         fun showLoading()
+
+        fun hideLoading()
     }
 
     interface Presenter : BaseMVPContract.Presenter<View> {

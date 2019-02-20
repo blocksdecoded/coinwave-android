@@ -33,6 +33,8 @@ open class CurrencyListFragment :
     lateinit var mErrorContainer: View
     @BindView(R.id.connection_error_retry)
     lateinit var mRetry: View
+    @BindView(R.id.fragment_currency_list_header)
+    lateinit var mListHeader: View
 
     @BindView(R.id.fragment_currency_list_title)
     lateinit var mTitle: TextView
@@ -44,21 +46,6 @@ open class CurrencyListFragment :
     fun onClick(view: View) {
         when (view.id) {
             R.id.currency_menu -> mPresenter?.onMenuClick()
-        }
-    }
-
-    companion object {
-        private val TITLE_KEY = "list_title"
-
-        fun newInstance(
-                title: String
-        ): CurrencyListFragment = CurrencyListFragment().apply {
-            arguments = Bundle()
-            arguments?.putString(TITLE_KEY, title)
-        }
-
-        fun getTitle(arguments: Bundle?): String{
-            return arguments?.getString(TITLE_KEY)?:""
         }
     }
 
@@ -137,8 +124,8 @@ open class CurrencyListFragment :
     }
 
     override fun showCurrencies(currencies: List<CurrencyEntity>) {
-        mSwipeRefreshLayout?.isRefreshing = false
         mRecycler.visible()
+        mListHeader.visible()
         mErrorContainer.hide()
         mRecycler?.post {
             mAdapter?.setItems(currencies)
@@ -146,21 +133,42 @@ open class CurrencyListFragment :
     }
 
     override fun showNetworkError(hideList: Boolean) {
-        mSwipeRefreshLayout?.isRefreshing = false
         if(hideList){
+            mListHeader.hide()
             mRecycler.hide()
             mErrorContainer.visible()
         } else {
             showShortToast(context, "Can't refresh currencies.\nPlease check internet connection and try again.")
+            mListHeader.visible()
             mRecycler.visible()
             mErrorContainer.hide()
         }
     }
 
+    override fun hideLoading() {
+        mSwipeRefreshLayout?.isRefreshing = false
+    }
+
     override fun showLoading() {
         mSwipeRefreshLayout?.isRefreshing = true
         mErrorContainer.hide()
+        mListHeader.hide()
     }
 
     //endregion
+
+    companion object {
+        private val TITLE_KEY = "list_title"
+
+        fun newInstance(
+                title: String
+        ): CurrencyListFragment = CurrencyListFragment().apply {
+            arguments = Bundle()
+            arguments?.putString(TITLE_KEY, title)
+        }
+
+        fun getTitle(arguments: Bundle?): String{
+            return arguments?.getString(TITLE_KEY)?:""
+        }
+    }
 }

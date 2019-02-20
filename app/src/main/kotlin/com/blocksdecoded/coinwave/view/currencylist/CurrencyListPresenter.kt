@@ -8,6 +8,7 @@ import com.blocksdecoded.coinwave.util.findCurrency
 import com.blocksdecoded.coinwave.view.main.MenuClickListener
 import com.blocksdecoded.utils.coroutine.launchSilent
 import com.blocksdecoded.utils.coroutine.model.onError
+import com.blocksdecoded.utils.coroutine.model.onSuccess
 import com.blocksdecoded.utils.isValidIndex
 import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
@@ -59,7 +60,11 @@ class CurrencyListPresenter(
     private fun getCurrencies() = launchSilent(uiContext){
         mView?.showLoading()
         mCurrencyListUseCases.getCryptoList(true)
-                .onError { mView?.showNetworkError(mCachedData.isEmpty()) }
+                .onSuccess { mView?.hideLoading() }
+                .onError {
+                    mView?.hideLoading()
+                    mView?.showNetworkError(mCachedData.isEmpty())
+                }
     }
 
     //endregion
