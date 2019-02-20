@@ -49,7 +49,11 @@ class PostListPresenter(
                     mView?.stopLoading()
                     mView?.showPosts(it)
                 }
-                ?.onError { Lg.d(it.message) }
+                ?.onError {
+                    mView?.stopLoading()
+                    mView?.showLoadingError()
+                    Lg.d("Posts loading error ${it.message}")
+                }
     }
 
     override fun getNextPosts()  = launchSilent(ui){

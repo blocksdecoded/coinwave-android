@@ -50,10 +50,18 @@ open class PostListFragment :
     @BindView(R.id.post_menu)
     lateinit var mMenuBtn: View
 
-    @OnClick(R.id.post_menu)
+    @BindView(R.id.fragment_post_list_error)
+    lateinit var mErrorView: View
+
+    @OnClick(
+            R.id.post_menu,
+            R.id.connection_error_retry
+    )
     fun onClick(view: View) {
         when(view.id) {
             R.id.post_menu -> mPresenter?.onMenuClick()
+
+            R.id.connection_error_retry -> mPresenter?.getPosts()
         }
     }
 
@@ -138,6 +146,7 @@ open class PostListFragment :
 
     override fun showLoading() {
         mSwipeRefresh.isRefreshing = true
+        mErrorView.hide()
         mRecycler.hide()
     }
 
@@ -152,6 +161,12 @@ open class PostListFragment :
 
     override fun nextPosts(posts: List<PublisherPost>) {
         mAdapter?.addItems(posts)
+    }
+
+    override fun showLoadingError() {
+        mSwipeRefresh.isRefreshing = false
+        mRecycler.hide()
+        mErrorView.visible()
     }
 
     //endregion
