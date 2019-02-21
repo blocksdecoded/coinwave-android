@@ -4,6 +4,7 @@ import com.blocksdecoded.coinwave.data.model.CurrencyEntity
 import com.blocksdecoded.coinwave.domain.usecases.list.CurrencyListUseCases
 import com.blocksdecoded.core.mvp.BaseMVPPresenter
 import com.blocksdecoded.utils.coroutine.launchSilent
+import com.blocksdecoded.utils.coroutine.model.onError
 import com.blocksdecoded.utils.coroutine.model.onSuccess
 import com.blocksdecoded.utils.isValidIndex
 import kotlinx.coroutines.Dispatchers
@@ -39,6 +40,10 @@ class AddToWatchlistPresenter(
         mView?.showCurrencies(coins)
     }
 
+    private fun showError(e: Throwable){
+        mView?.showLoadingError()
+    }
+
     private fun updateCurrencyWatch(position: Int) {
         if (cached.isValidIndex(position)) {
             cached[position].isSaved = !cached[position].isSaved
@@ -57,7 +62,10 @@ class AddToWatchlistPresenter(
 
     //region Contract
 
-    override fun getCurrencies() {
+    override fun getCurrencies() = launchSilent(uiContext) {
+        mCurrencyListUseCases.getCryptoList(false)
+                .onSuccess(::updateCache)
+                .onError(::showError)
     }
 
     override fun onCurrencyClick(position: Int) {

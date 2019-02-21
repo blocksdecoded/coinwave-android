@@ -2,7 +2,6 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -63,7 +62,6 @@
             <include layout="@layout/connection_error" />
         </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-    
     
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/add_to_watchlist_recycler"

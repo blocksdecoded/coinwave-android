@@ -24,13 +24,13 @@ class AddToWatchlistFragment : BaseMVPFragment<AddToWatchlistContract.Presenter>
 
     @OnClick(
             R.id.back,
-            R.id.retry
+            R.id.connection_error_retry
     )
     fun onClick(view: View) {
         when (view.id) {
             R.id.back -> finishView()
 
-            R.id.retry -> mPresenter?.getCurrencies()
+            R.id.connection_error_retry -> mPresenter?.getCurrencies()
         }
     }
 
@@ -64,6 +64,7 @@ class AddToWatchlistFragment : BaseMVPFragment<AddToWatchlistContract.Presenter>
     }
 
     override fun showLoadingError() {
+
     }
 
     //endregion

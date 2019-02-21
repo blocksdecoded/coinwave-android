@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import butterknife.ButterKnife
 import butterknife.Unbinder
 import com.blocksdecoded.utils.inflate
+import com.blocksdecoded.utils.logE
 import com.blocksdecoded.utils.showShortToast
 
 abstract class BaseMVPFragment<T> : Fragment(), BaseMVPContract.View<T> {
@@ -24,6 +25,7 @@ abstract class BaseMVPFragment<T> : Fragment(), BaseMVPContract.View<T> {
             initView(it)
         }
     } catch (e: Exception) {
+        logE(e)
         null
     }
 
