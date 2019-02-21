@@ -4,71 +4,41 @@ import com.blocksdecoded.coinwave.BuildConfig
 import com.blocksdecoded.coinwave.data.model.ChartPeriodEnum
 import com.blocksdecoded.coinwave.data.crypto.remote.model.ChartResponse
 import com.blocksdecoded.coinwave.data.model.CurrencyListResponse
+import com.blocksdecoded.core.network.CoreApiClient
 import com.blocksdecoded.utils.coroutine.model.Result
-import com.blocksdecoded.utils.coroutine.model.getResult
-import com.google.gson.GsonBuilder
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
-import java.util.concurrent.TimeUnit
 
 /**
  * Created by askar on 2/12/19
  * with Android Studio
  */
-internal object CurrencyApiClient {
+internal object CurrencyApiClient : CoreApiClient(), CurrencyClient {
     private val mClient: CurrencyNetworkClient
 
     init {
-        val logger = HttpLoggingInterceptor()
-        logger.level = HttpLoggingInterceptor.Level.BASIC
-
-        val httpClient = OkHttpClient.Builder()
-        httpClient.addInterceptor(logger)
-        httpClient.connectTimeout(60, TimeUnit.SECONDS)
-        httpClient.readTimeout(60, TimeUnit.SECONDS)
-
-        val gsonBuilder = GsonBuilder()
-        gsonBuilder.setLenient()
-        val gson = gsonBuilder.create()
-
-        val retrofit = Retrofit.Builder()
-                .baseUrl(CurrencyNetworkClient.BASE_URL)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .client(httpClient.build())
-                .build()
-
-        mClient = retrofit.create(CurrencyNetworkClient::class.java)
+        mClient = getRetrofitClient(
+                CurrencyNetworkClient.BASE_URL,
+                CurrencyNetworkClient::class.java
+        )
     }
 
     //region Public
 
-    suspend fun getCurrencies(pageSize: Int): Result<CurrencyListResponse> =
+    override suspend fun getCurrencies(pageSize: Int): Result<CurrencyListResponse> =
             mClient.getCurrencies(pageSize).getResult()
 
-    suspend fun getCurrencies(pageSize: Int, ids: String): Result<CurrencyListResponse> =
+    override suspend fun getCurrencies(pageSize: Int, ids: String): Result<CurrencyListResponse> =
             mClient.getCurrencies(pageSize, ids).getResult()
 
-    suspend fun getHistory(chartName: String, period: ChartPeriodEnum): Result<ChartResponse> =
+    override suspend fun getHistory(chartName: String, period: ChartPeriodEnum): Result<ChartResponse> =
             mClient.getChartForTime(chartName, period.displayName).getResult()
 
     //endregion
 
     private interface CurrencyNetworkClient {
-        companion object {
-            const val BASE_URL = BuildConfig.API_CURRENCY
-
-            private const val PREFIX_PATH = "/ipns/QmURdeZbZxv3qwP6NRtH1WGRbcY4eiZsG4rEyDtFa2vgwW"
-            private const val CURRENCIES_PATH = "$PREFIX_PATH/index.json"
-            private const val HISTORY_PATH = "$PREFIX_PATH/coin"
-        }
 
         @GET(CURRENCIES_PATH)
         fun getCurrencies(@Query("limit") limit: Int): Call<CurrencyListResponse>
@@ -79,10 +49,18 @@ internal object CurrencyApiClient {
             @Query("ids") ids: String
         ): Call<CurrencyListResponse>
 
-        @GET("${HISTORY_PATH}/{coin}/history/{period}/index.json")
+        @GET("$HISTORY_PATH/{coin}/history/{period}/index.json")
         fun getChartForTime(
             @Path("coin") currency: String,
             @Path("period") period: String
         ): Call<ChartResponse>
+
+        companion object {
+            const val BASE_URL = BuildConfig.API_CURRENCY
+
+            private const val PREFIX_PATH = "/ipns/QmURdeZbZxv3qwP6NRtH1WGRbcY4eiZsG4rEyDtFa2vgwW"
+            private const val CURRENCIES_PATH = "$PREFIX_PATH/index.json"
+            private const val HISTORY_PATH = "$PREFIX_PATH/coin"
+        }
     }
 }

@@ -58,7 +58,6 @@ class AddToWatchlistPresenter(
     //region Contract
 
     override fun getCurrencies() {
-
     }
 
     override fun onCurrencyClick(position: Int) {

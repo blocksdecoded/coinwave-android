@@ -2,7 +2,7 @@ package com.blocksdecoded.coinwave.data.crypto
 
 import com.blocksdecoded.utils.coroutine.model.Result
 import com.blocksdecoded.coinwave.data.EmptyCache
-import com.blocksdecoded.coinwave.data.crypto.remote.CurrencyApiClient
+import com.blocksdecoded.coinwave.data.crypto.remote.CurrencyClient
 import com.blocksdecoded.coinwave.data.model.CurrencyDataResponse
 import com.blocksdecoded.coinwave.data.model.CurrencyEntity
 import com.blocksdecoded.coinwave.data.watchlist.WatchlistSourceContract
@@ -12,6 +12,7 @@ import com.blocksdecoded.utils.coroutine.model.onSuccess
 
 // Created by askar on 7/19/18.
 class CurrencyRepository(
+    private val mCurrencyClient: CurrencyClient,
     private val mWatchlistSource: WatchlistSourceContract
 ) : CurrencySourceContract {
     private var mCached: CurrencyDataResponse? = null
@@ -20,14 +21,14 @@ class CurrencyRepository(
     companion object {
         private const val NETWORK_PAGE_SIZE = 100
         private const val BD_PAGE_SIZE = 20
-        private const val CURRENT_PAGE = 0
         private var INSTANCE: CurrencyRepository? = null
 
         fun getInstance(
+            currencyClient: CurrencyClient,
             watchlist: WatchlistSourceContract
         ): CurrencySourceContract {
             if (INSTANCE == null) {
-                INSTANCE = CurrencyRepository(watchlist)
+                INSTANCE = CurrencyRepository(currencyClient, watchlist)
             }
             return INSTANCE!!
         }
@@ -88,7 +89,7 @@ class CurrencyRepository(
 
     override suspend fun getAllCurrencies(skipCache: Boolean): Result<CurrencyDataResponse> =
             if (skipCache) {
-                CurrencyApiClient.getCurrencies(NETWORK_PAGE_SIZE)
+                mCurrencyClient.getCurrencies(NETWORK_PAGE_SIZE)
                         .onSuccess { setCache(it.data) }
                         .onError { mCached?.let { setCache(it) } }
                         .mapOnSuccess { it.data }
@@ -107,7 +108,7 @@ class CurrencyRepository(
                         else -> ",$i"
                     }
                 }
-                CurrencyApiClient.getCurrencies(NETWORK_PAGE_SIZE, ids)
+                mCurrencyClient.getCurrencies(NETWORK_PAGE_SIZE, ids)
                         .onSuccess { setCache(it.data) }
                         .onError { mCached?.let { setCache(it) } }
                         .mapOnSuccess { it.data }

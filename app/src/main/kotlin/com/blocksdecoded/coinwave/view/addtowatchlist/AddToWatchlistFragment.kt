@@ -64,7 +64,6 @@ class AddToWatchlistFragment : BaseMVPFragment<AddToWatchlistContract.Presenter>
     }
 
     override fun showLoadingError() {
-
     }
 
     //endregion
