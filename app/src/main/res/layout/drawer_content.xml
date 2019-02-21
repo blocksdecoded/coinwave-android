@@ -200,6 +200,15 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        
+        <View
+            android:id="@+id/drawer_company_selectable"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintLeft_toLeftOf="@+id/drawer_company_icon"
+            app:layout_constraintTop_toTopOf="@+id/drawer_company_icon"
+            app:layout_constraintBottom_toBottomOf="@+id/drawer_app_version"
+            app:layout_constraintRight_toRightOf="@+id/drawer_company_title" />
         <ImageView
             android:id="@+id/drawer_company_icon"
             android:layout_width="20dp"

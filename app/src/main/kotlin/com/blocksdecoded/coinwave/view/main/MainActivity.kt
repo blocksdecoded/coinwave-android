@@ -34,6 +34,7 @@ import com.blocksdecoded.coinwave.view.widgets.PagerAdapter
 import com.blocksdecoded.rateus.base.RateUsDialogContract
 import com.blocksdecoded.rateus.base.RateUsListener
 import com.blocksdecoded.utils.*
+import com.blocksdecoded.utils.customtabs.CustomTabsUtil
 import com.blocksdecoded.utils.extensions.setConstraintTopMargin
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.drawer_content.*
@@ -247,6 +248,7 @@ class MainActivity :
         drawer_rate_us.setOnClickListener(this)
         drawer_share_this_app.setOnClickListener(this)
         drawer_close_menu.setOnClickListener(this)
+        drawer_company_selectable.setOnClickListener(this)
 
         drawer_top_container.setConstraintTopMargin(DimenUtils.getStatusBarHeight(this))
 
@@ -320,6 +322,7 @@ class MainActivity :
             }
             drawer_share_this_app -> drawerItemClick { ShareUtils.shareApp(this) }
             drawer_close_menu -> closeDrawer()
+            drawer_company_selectable -> CustomTabsUtil.openUrl(this, "https://blocksdecoded.com/")
         }
     }
 
