@@ -45,7 +45,26 @@
                 android:textSize="@dimen/small_title_text_size" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.appbar.AppBarLayout>
-
+    
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/connection_error_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+    
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintVertical_bias="0.35">
+            <include layout="@layout/connection_error" />
+        </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    
+    
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/add_to_watchlist_recycler"
         android:layout_width="match_parent"

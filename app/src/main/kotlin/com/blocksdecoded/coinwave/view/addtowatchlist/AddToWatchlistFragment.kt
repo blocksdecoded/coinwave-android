@@ -22,10 +22,15 @@ class AddToWatchlistFragment : BaseMVPFragment<AddToWatchlistContract.Presenter>
     @BindView(R.id.add_to_watchlist_recycler)
     lateinit var mRecycler: RecyclerView
 
-    @OnClick(R.id.back)
+    @OnClick(
+            R.id.back,
+            R.id.retry
+    )
     fun onClick(view: View) {
         when (view.id) {
             R.id.back -> finishView()
+
+            R.id.retry -> mPresenter?.getCurrencies()
         }
     }
 
@@ -56,6 +61,10 @@ class AddToWatchlistFragment : BaseMVPFragment<AddToWatchlistContract.Presenter>
 
     override fun updateCurrency(currencyEntity: CurrencyEntity) {
         mAdapter?.updateItem(currencyEntity)
+    }
+
+    override fun showLoadingError() {
+
     }
 
     //endregion

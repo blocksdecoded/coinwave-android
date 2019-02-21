@@ -1,5 +1,6 @@
 package com.blocksdecoded.coinwave.data.crypto.remote
 
+import com.blocksdecoded.coinwave.BuildConfig
 import com.blocksdecoded.coinwave.data.model.ChartPeriodEnum
 import com.blocksdecoded.coinwave.data.crypto.remote.model.ChartResponse
 import com.blocksdecoded.coinwave.data.model.CurrencyListResponse
@@ -38,7 +39,7 @@ internal object CurrencyApiClient {
         val gson = gsonBuilder.create()
 
         val retrofit = Retrofit.Builder()
-                .baseUrl(CryptoConfig.BASE_URL)
+                .baseUrl(CurrencyNetworkClient.BASE_URL)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(httpClient.build())
@@ -61,16 +62,24 @@ internal object CurrencyApiClient {
     //endregion
 
     private interface CurrencyNetworkClient {
-        @GET(CryptoConfig.CURRENCIES_PATH)
+        companion object {
+            const val BASE_URL = BuildConfig.API_CURRENCY
+
+            private const val PREFIX_PATH = "/ipns/QmURdeZbZxv3qwP6NRtH1WGRbcY4eiZsG4rEyDtFa2vgwW"
+            private const val CURRENCIES_PATH = "$PREFIX_PATH/index.json"
+            private const val HISTORY_PATH = "$PREFIX_PATH/coin"
+        }
+
+        @GET(CURRENCIES_PATH)
         fun getCurrencies(@Query("limit") limit: Int): Call<CurrencyListResponse>
 
-        @GET(CryptoConfig.CURRENCIES_PATH)
+        @GET(CURRENCIES_PATH)
         fun getCurrencies(
             @Query("limit") limit: Int,
             @Query("ids") ids: String
         ): Call<CurrencyListResponse>
 
-        @GET("${CryptoConfig.HISTORY_PATH}/{coin}/history/{period}/index.json")
+        @GET("${HISTORY_PATH}/{coin}/history/{period}/index.json")
         fun getChartForTime(
             @Path("coin") currency: String,
             @Path("period") period: String
