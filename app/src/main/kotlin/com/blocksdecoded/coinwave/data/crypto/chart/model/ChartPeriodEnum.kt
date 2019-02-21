@@ -1,11 +1,11 @@
-package com.blocksdecoded.coinwave.data.chart.model
+package com.blocksdecoded.coinwave.data.crypto.chart.model
 
 /**
  * Created by askar on 1/30/19
  * with Android Studio
  */
-enum class ChartPeriod(
-        val representation: String
+enum class ChartPeriodEnum(
+        val displayName: String
 ) {
     DAY("24h"),
     WEEK("7d"),

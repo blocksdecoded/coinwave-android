@@ -10,7 +10,7 @@ import java.io.IOException
 import java.io.InputStream
 
 /**
- * Decodes an SVG internal representation from an [InputStream].
+ * Decodes an SVG internal name from an [InputStream].
  */
 class SvgDecoder : ResourceDecoder<InputStream, SVG> {
 

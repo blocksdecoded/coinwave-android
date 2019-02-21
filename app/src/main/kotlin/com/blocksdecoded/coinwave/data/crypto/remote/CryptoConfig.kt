@@ -6,8 +6,6 @@ import com.blocksdecoded.coinwave.BuildConfig
 object CryptoConfig {
     const val BASE_URL = BuildConfig.API_CURRENCY
 
-    const val API_VERSION = "/v1"
-    const val PUBLIC = "/public"
-    const val COINS_PATH = "/coins"
-    const val CURRENCIES_PATH = "$API_VERSION$PUBLIC$COINS_PATH"
+    const val CURRENCIES_PATH = "/index.json"
+    const val HISTORY_PATH = "/coin"
 }

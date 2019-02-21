@@ -1,4 +1,4 @@
-package com.blocksdecoded.coinwave.data.chart.network.model
+package com.blocksdecoded.coinwave.data.crypto.remote.model
 
 import com.blocksdecoded.coinwave.data.model.ChartDataEntry
 

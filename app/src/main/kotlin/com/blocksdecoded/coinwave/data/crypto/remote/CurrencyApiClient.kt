@@ -1,5 +1,7 @@
 package com.blocksdecoded.coinwave.data.crypto.remote
 
+import com.blocksdecoded.coinwave.data.crypto.chart.model.ChartPeriodEnum
+import com.blocksdecoded.coinwave.data.crypto.remote.model.ChartResponse
 import com.blocksdecoded.coinwave.data.model.CurrencyListResponse
 import com.blocksdecoded.utils.coroutine.model.Result
 import com.blocksdecoded.utils.coroutine.model.getResult
@@ -11,6 +13,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 import java.util.concurrent.TimeUnit
 
@@ -44,10 +47,6 @@ internal object CurrencyApiClient {
         mClient = retrofit.create(CurrencyNetworkClient::class.java)
     }
 
-    private fun reinitClient() {
-
-    }
-
     //region Public
 
     suspend fun getCurrencies(pageSize: Int): Result<CurrencyListResponse> =
@@ -55,6 +54,9 @@ internal object CurrencyApiClient {
 
     suspend fun getCurrencies(pageSize: Int, ids: String): Result<CurrencyListResponse> =
             mClient.getCurrencies(pageSize, ids).getResult()
+
+    suspend fun getHistory(chartName: String, period: ChartPeriodEnum): Result<ChartResponse> =
+            mClient.getChartForTime(chartName, period.displayName).getResult()
 
     //endregion
 
@@ -67,5 +69,11 @@ internal object CurrencyApiClient {
                 @Query("limit") limit: Int,
                 @Query("ids") ids: String
         ): Call<CurrencyListResponse>
+
+        @GET("${CryptoConfig.HISTORY_PATH}/{coin}/history/{period}/index.json")
+        fun getChartForTime(
+                @Path("coin") currency: String,
+                @Path("period") period: String
+        ): Call<ChartResponse>
     }
 }

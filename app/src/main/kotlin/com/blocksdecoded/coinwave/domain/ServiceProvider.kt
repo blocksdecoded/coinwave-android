@@ -1,8 +1,8 @@
 package com.blocksdecoded.coinwave.domain
 
 import android.content.Context
-import com.blocksdecoded.coinwave.data.chart.ChartsService
-import com.blocksdecoded.coinwave.data.chart.ChartsSourceContract
+import com.blocksdecoded.coinwave.data.crypto.chart.ChartsService
+import com.blocksdecoded.coinwave.data.crypto.chart.ChartsSourceContract
 import com.blocksdecoded.coinwave.data.crypto.CurrencyRepository
 import com.blocksdecoded.coinwave.data.crypto.CurrencySourceContract
 import com.blocksdecoded.coinwave.data.post.PostDataSource
@@ -20,7 +20,7 @@ object ServiceProvider {
             PostRemoteDataSource.getInstance()
     )
 
-    fun getChartsService(): ChartsSourceContract = ChartsService.getInstance()
+    fun getChartsService(): ChartsSourceContract = ChartsService
 
     fun getCurrencyService(context: Context): CurrencySourceContract =
             CurrencyRepository.getInstance(getWatchlistService(context))

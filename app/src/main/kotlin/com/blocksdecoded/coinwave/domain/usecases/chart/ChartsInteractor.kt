@@ -3,7 +3,7 @@ package com.blocksdecoded.coinwave.domain.usecases.chart
 import com.blocksdecoded.utils.coroutine.model.Result
 import com.blocksdecoded.coinwave.data.EmptyCache
 import com.blocksdecoded.coinwave.data.NetworkException
-import com.blocksdecoded.coinwave.data.chart.ChartsSourceContract
+import com.blocksdecoded.coinwave.data.crypto.chart.ChartsSourceContract
 import com.blocksdecoded.coinwave.data.crypto.CurrencySourceContract
 import com.blocksdecoded.coinwave.data.model.ChartData
 import com.blocksdecoded.coinwave.domain.usecases.chart.ChartsUseCases.ChartPeriod
@@ -12,7 +12,7 @@ import com.blocksdecoded.utils.coroutine.AppExecutors
 import kotlinx.coroutines.withContext
 import kotlin.collections.HashMap
 
-import com.blocksdecoded.coinwave.data.chart.model.ChartPeriod as RequestChartPeriod
+import com.blocksdecoded.coinwave.data.crypto.chart.model.ChartPeriodEnum as RequestChartPeriod
 
 // Created by askar on 7/25/18.
 class ChartsInteractor(
@@ -56,7 +56,7 @@ class ChartsInteractor(
         if (cachedChart[period.toString()] == null){
             val currency = mCryptoService.getCurrency(currencyId)
             if(currency != null){
-                val result = mChartsService.getChart(currencyId.toString(), getRequestPeriod(period))
+                val result = mChartsService.getChart(currency.symbol, getRequestPeriod(period))
                 when(result){
                     is Result.Success -> {
                         cachedChart[period.toString()] = result.data
