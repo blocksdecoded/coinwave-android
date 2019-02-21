@@ -6,7 +6,6 @@ import com.blocksdecoded.coinwave.data.model.CurrencyEntity
 import com.blocksdecoded.coinwave.domain.usecases.chart.ChartsUseCases
 import com.blocksdecoded.coinwave.domain.usecases.favorite.FavoriteUseCases
 import com.blocksdecoded.coinwave.domain.usecases.list.CurrencyListUseCases
-import com.blocksdecoded.utils.coroutine.AppExecutors
 import com.blocksdecoded.utils.coroutine.model.Result
 
 /**
@@ -18,11 +17,6 @@ class FavoriteChartInteractor(
         private val mFavoriteUseCases: FavoriteUseCases,
         private val mCurrencyUseCases: CurrencyListUseCases
 ): FavoriteChartUseVariant {
-
-    companion object {
-        private val CHART_PERIOD = ChartsUseCases.ChartPeriod.TODAY
-    }
-
     override suspend fun getChart(): Result<ChartData>? {
         return mChartsUseCases.getChartData(mFavoriteUseCases.getId(), CHART_PERIOD)
     }
@@ -35,5 +29,10 @@ class FavoriteChartInteractor(
         } else {
             Result.Error(Resources.NotFoundException())
         }
+    }
+
+    companion object {
+        @JvmStatic
+        private val CHART_PERIOD = ChartsUseCases.ChartPeriod.TODAY
     }
 }

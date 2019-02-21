@@ -22,19 +22,6 @@ class ChartsInteractor(
     private var mCachedId: Int = -1
     private var cachedChart: HashMap<String, ChartData> = HashMap()
 
-    private fun getChartPeriodTime(period: ChartPeriod): Long{
-        val day = 1000 * 60 * 60 * 24L
-        return when(period){
-            TODAY -> day
-            WEEK -> day * 7
-            MONTH_1 -> day * 30
-            MONTH_3 -> day * 90
-            MONTH_6 -> day * 180
-            YEAR -> day * 365
-            ALL -> 0
-        }
-    }
-
     private fun getRequestPeriod(period: ChartPeriod): RequestChartPeriod {
         return when (period) {
             TODAY -> RequestChartPeriod.DAY

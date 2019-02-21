@@ -11,9 +11,9 @@ import kotlinx.coroutines.withContext
  * Created by askar on 11/19/18
  * with Android Studio
  */
-class PostInteractor(
+class PostsInteractor(
         private val mPostsSource: PostDataSource
-): PostUseCases {
+): PostsUseCases {
     private var date = ""
 
     private fun updateLastDate(posts: List<PublisherPost>){
@@ -37,7 +37,5 @@ class PostInteractor(
         }
     }
 
-    override suspend fun getPost(id: Int): PublisherPost? {
-        return mPostsSource.getPost(id)
-    }
+    override suspend fun getPost(id: Int): PublisherPost? = mPostsSource.getPost(id)
 }

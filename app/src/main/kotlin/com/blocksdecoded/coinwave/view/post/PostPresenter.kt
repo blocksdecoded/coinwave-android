@@ -1,14 +1,14 @@
 package com.blocksdecoded.coinwave.view.post
 
 import com.blocksdecoded.core.mvp.BaseMVPPresenter
-import com.blocksdecoded.coinwave.domain.usecases.postlist.PostUseCases
+import com.blocksdecoded.coinwave.domain.usecases.postlist.PostsUseCases
 import com.blocksdecoded.utils.coroutine.launchSilent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainCoroutineDispatcher
 
 class PostPresenter(
         view: PostContract.View?,
-        private val mPostUseCases: PostUseCases,
+        private val mPostUseCases: PostsUseCases,
         private val ui: MainCoroutineDispatcher = Dispatchers.Main
 ) : BaseMVPPresenter<PostContract.View>(view), PostContract.Presenter {
     override fun attachView(view: PostContract.View) {
