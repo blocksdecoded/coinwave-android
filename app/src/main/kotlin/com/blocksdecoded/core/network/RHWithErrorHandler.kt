@@ -20,7 +20,7 @@ interface RHWithErrorHandler<T> : Callback<T> {
     }
 
     override fun onResponse(call: Call<T>?, response: Response<T>?): Unit = if (response != null) {
-        Lg.d(call?.request()?.url().toString() + ", code is " + response.code())
+//        Lg.d(call?.request()?.url().toString() + ", code is " + response.code())
         when (response.code()) {
             in 200..300 -> { val result = response.body()
                 if (result != null) {

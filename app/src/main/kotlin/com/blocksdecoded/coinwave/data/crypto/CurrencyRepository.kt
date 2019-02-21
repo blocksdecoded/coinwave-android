@@ -18,6 +18,18 @@ class CurrencyRepository(
     private var mCached: CurrencyDataResponse? = null
     private val mObservers = hashSetOf<CurrencyUpdateObserver>()
 
+    private val watchlistIds: String
+        get() {
+            var ids = ""
+            mWatchlistSource.getAll().forEachIndexed { index, i ->
+                ids += when (index) {
+                    0 -> "$i"
+                    else -> ",$i"
+                }
+            }
+            return ids
+        }
+
     companion object {
         private const val NETWORK_PAGE_SIZE = 100
         private const val BD_PAGE_SIZE = 20
@@ -61,6 +73,8 @@ class CurrencyRepository(
                 true
             } ?: false
 
+
+
     //endregion
 
     //region Contract
@@ -101,14 +115,7 @@ class CurrencyRepository(
 
     override suspend fun getWatchlist(skipCache: Boolean): Result<CurrencyDataResponse> =
             if (skipCache) {
-                var ids = ""
-                mWatchlistSource.getAll().forEachIndexed { index, i ->
-                    ids += when (index) {
-                        0 -> "$i"
-                        else -> ",$i"
-                    }
-                }
-                mCurrencyClient.getCurrencies(NETWORK_PAGE_SIZE, ids)
+                mCurrencyClient.getCurrencies(NETWORK_PAGE_SIZE, watchlistIds)
                         .onSuccess { setCache(it.data) }
                         .onError { mCached?.let { setCache(it) } }
                         .mapOnSuccess { it.data }

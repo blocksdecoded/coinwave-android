@@ -1,6 +1,7 @@
 package com.blocksdecoded.core.mvp
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -56,6 +57,10 @@ abstract class BaseMVPFragment<T> : Fragment(), BaseMVPContract.View<T> {
             (mPresenter as BaseMVPContract.Presenter<*>).onDestroy()
 
         mUnbinder?.unbind()
+    }
+
+    override fun onDetach() {
+        super.onDetach()
     }
 
     //region Base Contract

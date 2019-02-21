@@ -27,7 +27,7 @@ ext {
             robolectric     : '3.8',
             assertj         : '1.2.0',
             powerMock       : '1.6.6',
-            leakcanary      : '1.5.4',
+            leakcanary      : '1.6.3',
             stethOkhttp     : '1.5.0',
             multiDex        : '1.0.3',
             mockitoKotlin   : '1.5.0'
@@ -114,7 +114,10 @@ ext {
             testRules           : "com.android.support.test:rules:$versions.testRunner"
     ] + mockito
 
-    leakCannary = "com.squareup.leakcanary:leakcanary-android:1.5.1"
+    leakCannary = "com.squareup.leakcanary:leakcanary-android:1.6.3"
+    leakCanaryFragment = 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.3'
+    noOpLeakCannary = 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'
+
     timber = "com.jakewharton.timber:timber:$versions.timber"
     sherlock = "com.github.ajitsing:sherlock:$versions.sherlock"
 
@@ -136,8 +139,9 @@ ext {
     coroutineLibs = coroutineDeps.values()
     otherLibs = [butterKnife, timber, dagger, glide]
 
-    debugLibs = onlyDebug.values() + leakCannary
-    releaseLibs = onlyRelease.values() + leakCannary
+    debugLibs = onlyDebug.values() + leakCannary + leakCanaryFragment
+    releaseLibs = onlyRelease.values() + noOpLeakCannary
+
     annotationProcessorLibs = [butterKnifeCompiler, daggerCompiler, glideCompiler]
 
     unitTestLibs = unitTest.values() + leakCannary

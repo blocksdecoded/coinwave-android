@@ -33,8 +33,8 @@ class CoinApp : Application() {
         INSTANCE = this
         LeakCanary.install(this)
 
-        FirebaseApp.initializeApp(this)
-        FRCUtil.initConfigs()
+//        FirebaseApp.initializeApp(this)
+//        FRCUtil.initConfigs()
 
 //        Fabric.with(this, Crashlytics())
     }
