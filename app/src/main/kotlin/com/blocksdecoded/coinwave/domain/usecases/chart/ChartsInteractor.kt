@@ -12,7 +12,7 @@ import com.blocksdecoded.utils.coroutine.AppExecutors
 import kotlinx.coroutines.withContext
 import kotlin.collections.HashMap
 
-import com.blocksdecoded.coinwave.data.crypto.chart.model.ChartPeriodEnum as RequestChartPeriod
+import com.blocksdecoded.coinwave.data.model.ChartPeriodEnum as RequestChartPeriod
 
 // Created by askar on 7/25/18.
 class ChartsInteractor(

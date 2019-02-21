@@ -1,4 +1,4 @@
-package com.blocksdecoded.coinwave.data.crypto.chart.model
+package com.blocksdecoded.coinwave.data.model
 
 /**
  * Created by askar on 1/30/19

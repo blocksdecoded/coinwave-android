@@ -1,6 +1,6 @@
 package com.blocksdecoded.coinwave.data.crypto.chart
 
-import com.blocksdecoded.coinwave.data.crypto.chart.model.ChartPeriodEnum
+import com.blocksdecoded.coinwave.data.model.ChartPeriodEnum
 import com.blocksdecoded.utils.coroutine.model.Result
 import com.blocksdecoded.coinwave.data.model.ChartData
 
