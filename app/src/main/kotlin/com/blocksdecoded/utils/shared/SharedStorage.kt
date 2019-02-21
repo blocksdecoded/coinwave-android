@@ -4,23 +4,23 @@ import android.content.Context
 import android.content.SharedPreferences
 
 // Created by askar on 5/31/18.
-class SharedStorage (
-        context: Context,
-        private var mSharedFileName: String = "shared_prefs"
-): SharedContract {
+class SharedStorage(
+    context: Context,
+    private var mSharedFileName: String = "shared_prefs"
+) : SharedContract {
 
     companion object {
         private var INSTANCE: SharedContract? = null
 
         fun getInstance(context: Context): SharedContract {
-            if (INSTANCE == null){
+            if (INSTANCE == null) {
                 INSTANCE = SharedStorage(context)
             }
 
             return INSTANCE!!
         }
 
-        fun destroyInstance(){
+        fun destroyInstance() {
             INSTANCE = null
         }
     }
@@ -43,8 +43,7 @@ class SharedStorage (
         mSharedPreferences?.edit()?.apply {
             try {
                 body.invoke(this)
-            } catch (e: Exception){
-
+            } catch (e: Exception) {
             }
         }?.apply()
     }
@@ -60,7 +59,7 @@ class SharedStorage (
 
     override fun <T> setPreference(key: String, value: T) {
         editPreference {
-            when(value) {
+            when (value) {
                 is String -> { it.putString(key, value as String) }
                 is Float -> { it.putFloat(key, value as Float) }
                 is Int -> { it.putInt(key, value as Int) }
@@ -74,7 +73,7 @@ class SharedStorage (
     override fun <T> getPreference(key: String, defValue: T): T {
         try {
             mSharedPreferences?.let {
-                return when(defValue) {
+                return when (defValue) {
                     is String -> { it.getString(key, defValue as String) }
                     is Float -> { it.getFloat(key, defValue as Float) }
                     is Int -> { it.getInt(key, defValue as Int) }
@@ -86,7 +85,6 @@ class SharedStorage (
                 } as T
             }
         } catch (e: Exception) {
-
         }
 
         return defValue

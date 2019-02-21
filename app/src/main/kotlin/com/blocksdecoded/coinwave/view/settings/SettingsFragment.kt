@@ -9,6 +9,5 @@ class SettingsFragment : BaseMVPFragment<SettingsContract.Presenter>(), Settings
     override val layoutId: Int = R.layout.fragment_settings
 
     override fun initView(rootView: View) {
-
     }
 }

@@ -1,13 +1,9 @@
 package com.blocksdecoded.coinwave.view.postlist
 
 import android.content.ComponentName
-import android.graphics.Color
-import android.net.Uri
 import android.util.DisplayMetrics
-import android.util.Log
 import android.view.View
 import androidx.browser.customtabs.CustomTabsClient
-import androidx.browser.customtabs.CustomTabsIntent
 import androidx.browser.customtabs.CustomTabsServiceConnection
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,7 +21,6 @@ import com.blocksdecoded.utils.DimenUtils
 import com.blocksdecoded.utils.customtabs.CustomTabsUtil
 import com.blocksdecoded.utils.extensions.setConstraintTopMargin
 import com.blocksdecoded.utils.hide
-import com.blocksdecoded.utils.logD
 import com.blocksdecoded.utils.visible
 import kotlin.math.roundToInt
 
@@ -33,8 +28,7 @@ open class PostListFragment :
         BaseMVPFragment<PostListContract.Presenter>(),
         PostListContract.View,
         PostListViewHolder.PostVHCLickListener,
-        LoadNextListener
-{
+        LoadNextListener {
     companion object {
         fun newInstance() = PostListFragment()
     }
@@ -58,7 +52,7 @@ open class PostListFragment :
             R.id.connection_error_retry
     )
     fun onClick(view: View) {
-        when(view.id) {
+        when (view.id) {
             R.id.post_menu -> mPresenter?.onMenuClick()
 
             R.id.connection_error_retry -> mPresenter?.getPosts()

@@ -10,12 +10,12 @@ import com.blocksdecoded.utils.retrofit.BaseRetrofitDataSource
  * Created by askar on 11/19/18
  * with Android Studio
  */
-class PostRemoteDataSource: BaseRetrofitDataSource(), PostDataSource {
+class PostRemoteDataSource : BaseRetrofitDataSource(), PostDataSource {
 
     companion object {
         private var INSTANCE: PostDataSource? = null
 
-        fun getInstance(): PostDataSource{
+        fun getInstance(): PostDataSource {
             if (INSTANCE == null)
                 INSTANCE = PostRemoteDataSource()
             return INSTANCE!!
@@ -41,9 +41,7 @@ class PostRemoteDataSource: BaseRetrofitDataSource(), PostDataSource {
                 .mapOnSuccess { it.posts }
     }
 
-    override fun getPost(id: Int): PublisherPost? {
-        return null
-    }
+    override fun getPost(id: Int): PublisherPost? = null
 
     //endregion
 }

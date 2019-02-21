@@ -25,11 +25,12 @@ import android.util.Log
 private val DEFAULT_ANIMATION_DURATION = 400
 
 fun View.generateBackgroundWithShadow(
-        @ColorRes backgroundColor: Int,
-        @DimenRes cornerRadius: Int,
-        @ColorRes shadowColor: Int,
-        @DimenRes elevation: Int,
-        shadowGravity: Int): Drawable {
+    @ColorRes backgroundColor: Int,
+    @DimenRes cornerRadius: Int,
+    @ColorRes shadowColor: Int,
+    @DimenRes elevation: Int,
+    shadowGravity: Int
+): Drawable {
     val cornerRadiusValue = this.context.resources.getDimension(cornerRadius)
     val elevationValue = this.context.resources.getDimension(elevation).toInt()
     val shadowColorValue = ContextCompat.getColor(this.context, shadowColor)
@@ -98,20 +99,20 @@ fun View.generateBackgroundWithShadow(
 }
 
 fun View.animateAlpha(
-        from: Float = -1f,
-        to: Float,
-        duration: Int = DEFAULT_ANIMATION_DURATION,
-        onEnd: (() -> Unit)? = null
-){
+    from: Float = -1f,
+    to: Float,
+    duration: Int = DEFAULT_ANIMATION_DURATION,
+    onEnd: (() -> Unit)? = null
+) {
     this.clearAnimation()
-    if (from >= 0f){
+    if (from >= 0f) {
         alpha = from
     }
     animate()
             .alpha(to)
             .setDuration(duration.toLong())
             .setInterpolator(DecelerateInterpolator())
-            .setListener(object : Animator.AnimatorListener{
+            .setListener(object : Animator.AnimatorListener {
                 override fun onAnimationRepeat(animation: Animator?) {
                 }
 
@@ -129,7 +130,7 @@ fun View.animateAlpha(
 }
 
 @SuppressLint("RestrictedApi")
-fun BottomNavigationView.removeShiftMode(){
+fun BottomNavigationView.removeShiftMode() {
     val menuView = this.getChildAt(0) as BottomNavigationMenuView
     try {
         val shiftingMode = menuView::class.java.getDeclaredField("mShiftingMode")
@@ -147,6 +148,4 @@ fun BottomNavigationView.removeShiftMode(){
     } catch (e: IllegalAccessException) {
         Log.e("ERROR ILLEGAL ALG", "Unable to change value of shift mode")
     }
-
 }
-

@@ -15,14 +15,14 @@ import com.blocksdecoded.utils.outRightTransition
  * with Android Studio
  */
 
-class PostActivity: SwipeableActivity(){
+class PostActivity : SwipeableActivity() {
     companion object {
         private val POST_ID_FIELD = "currency_id"
 
         fun start(context: Context, postId: Int) {
             context.startActivity(intent(context, postId))
 
-            if(context is Activity){
+            if (context is Activity) {
                 context.inRightTransition()
             }
         }

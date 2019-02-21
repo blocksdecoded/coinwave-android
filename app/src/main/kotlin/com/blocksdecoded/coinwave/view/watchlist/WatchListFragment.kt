@@ -5,7 +5,6 @@ import android.os.Handler
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.widget.TextView
@@ -84,9 +83,9 @@ open class WatchListFragment :
 
     //endregion
 
-    private val mChartListener = object: ChartListener(){
+    private val mChartListener = object : ChartListener() {
         override fun onValueSelected(e: Entry?, h: Highlight?) {
-            if (mPickedContainer.visibility != View.VISIBLE){
+            if (mPickedContainer.visibility != View.VISIBLE) {
                 mPickedContainer.alpha = 0f
                 mPickedContainer.animate()
                         ?.setDuration(300L)
@@ -95,7 +94,7 @@ open class WatchListFragment :
                         ?.start()
             }
 
-            val date = Date(e?.x?.toLong()?:0L)
+            val date = Date(e?.x?.toLong() ?: 0L)
             mPickedPrice.text = "${date.toMediumFormat()} ${date.toHourFormat()}\n\$${(e?.y ?: 0f).format()}"
         }
 
@@ -178,7 +177,7 @@ open class WatchListFragment :
 //            mPriceChange.text = "${if (it > 0) "+" else ""}$it%"
 
             context?.also { context ->
-                val color: Int = if(it > 0f){
+                val color: Int = if (it > 0f) {
 //                mPriceChangeIcon.setImageResource(R.drawable.ic_arrow_up_green)
                     ResourceUtil.getColor(context, R.color.green)
                 } else {
@@ -262,7 +261,7 @@ open class WatchListFragment :
     override fun showNetworkError(hideList: Boolean) {
         mSwipeRefreshLayout?.isRefreshing = false
 
-        if(hideList){
+        if (hideList) {
             mErrorContainer.visible()
             mRecycler.hide()
         } else {

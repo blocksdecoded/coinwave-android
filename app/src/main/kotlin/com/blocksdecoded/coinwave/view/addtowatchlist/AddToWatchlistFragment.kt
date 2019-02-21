@@ -1,7 +1,6 @@
 package com.blocksdecoded.coinwave.view.addtowatchlist
 
 import android.view.View
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import butterknife.BindView
@@ -25,7 +24,7 @@ class AddToWatchlistFragment : BaseMVPFragment<AddToWatchlistContract.Presenter>
 
     @OnClick(R.id.back)
     fun onClick(view: View) {
-        when(view.id) {
+        when (view.id) {
             R.id.back -> finishView()
         }
     }

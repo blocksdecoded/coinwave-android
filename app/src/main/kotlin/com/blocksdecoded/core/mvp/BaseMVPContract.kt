@@ -1,29 +1,29 @@
 package com.blocksdecoded.core.mvp
 
 interface BaseMVPContract {
-	interface View<in T>{
-		fun setPresenter(presenter: T)
+    interface View<in T> {
+        fun setPresenter(presenter: T)
 
         fun clearPresenter()
 
-		fun isActive(): Boolean
+        fun isActive(): Boolean
 
-		fun finishView()
+        fun finishView()
 
         fun showMessage(message: String)
-	}
+    }
 
-	interface Presenter<in T>{
+    interface Presenter<in T> {
         fun attachView(view: T)
 
         fun detachView()
 
-		fun onStart()
+        fun onStart()
 
-		fun onResume()
+        fun onResume()
 
-		fun onPause()
+        fun onPause()
 
-		fun onDestroy()
-	}
+        fun onDestroy()
+    }
 }

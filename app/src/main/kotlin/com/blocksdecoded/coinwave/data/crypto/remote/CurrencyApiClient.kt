@@ -66,14 +66,14 @@ internal object CurrencyApiClient {
 
         @GET(CryptoConfig.CURRENCIES_PATH)
         fun getCurrencies(
-                @Query("limit") limit: Int,
-                @Query("ids") ids: String
+            @Query("limit") limit: Int,
+            @Query("ids") ids: String
         ): Call<CurrencyListResponse>
 
         @GET("${CryptoConfig.HISTORY_PATH}/{coin}/history/{period}/index.json")
         fun getChartForTime(
-                @Path("coin") currency: String,
-                @Path("period") period: String
+            @Path("coin") currency: String,
+            @Path("period") period: String
         ): Call<ChartResponse>
     }
 }

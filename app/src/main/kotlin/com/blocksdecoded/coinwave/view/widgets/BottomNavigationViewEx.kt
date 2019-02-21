@@ -59,7 +59,7 @@ class BottomNavigationViewEx : BottomNavigationView {
         private BottomNavigationItemView[] mButtons;
 
         3. get menu and traverse it to get the checked one
-         */// 2. get mButtons
+         */ // 2. get mButtons
     // 3. get menu and traverse it to get the checked one
     val currentItem: Int
         get() {
@@ -144,7 +144,7 @@ class BottomNavigationViewEx : BottomNavigationView {
                     mMenuView.javaClass,
                     mMenuView,
                     "itemHeight"
-                )?:0
+                ) ?: 0
             }
             return height
         }
@@ -258,7 +258,6 @@ class BottomNavigationViewEx : BottomNavigationView {
                 // if not visitable, set font size to 0
                 mLargeLabel!!.setTextSize(TypedValue.COMPLEX_UNIT_PX, 0f)
                 mSmallLabel!!.setTextSize(TypedValue.COMPLEX_UNIT_PX, 0f)
-
             } else {
                 // if not record the font size, we need do nothing.
                 if (!visibilityTextSizeRecord)
@@ -284,7 +283,6 @@ class BottomNavigationViewEx : BottomNavigationView {
             // change mItemHeight
             //            System.out.println("mLargeLabel.getMeasuredHeight():" + getFontHeight(mSmallLabelSize));
             setItemHeight(mItemHeight - getFontHeight(mSmallLabelSize))
-
         } else {
             // if not record the mItemHeight, we need do nothing.
             if (!visibilityHeightRecord)
@@ -358,7 +356,6 @@ class BottomNavigationViewEx : BottomNavigationView {
                 //                mLargeLabelSize = mLargeLabel.getTextSize();
                 //                System.out.println("mLargeLabel:" + mLargeLabelSize);
                 // debug end
-
             } else {
                 // haven't change the value. It means it was the first call this method. So nothing need to do.
                 if (!animationRecord)
@@ -586,8 +583,8 @@ class BottomNavigationViewEx : BottomNavigationView {
      * set item ImageView size which at position
      *
      * @param position position start from 0
-     * @param width    in dp
-     * @param height   in dp
+     * @param width in dp
+     * @param height in dp
      */
     fun setIconSizeAt(position: Int, width: Float, height: Float): BottomNavigationViewEx {
         val icon = getIconAt(position)
@@ -604,7 +601,7 @@ class BottomNavigationViewEx : BottomNavigationView {
     /**
      * set all item ImageView size
      *
-     * @param width  in dp
+     * @param width in dp
      * @param height in dp
      */
     fun setIconSize(width: Float, height: Float): BottomNavigationViewEx {
@@ -618,7 +615,7 @@ class BottomNavigationViewEx : BottomNavigationView {
     /**
      * set all item ImageView size
      *
-     * @param dpSize  in dp
+     * @param dpSize in dp
      */
     fun setIconSize(dpSize: Float): BottomNavigationViewEx {
         itemIconSize = dp2px(context, dpSize)
@@ -677,7 +674,7 @@ class BottomNavigationViewEx : BottomNavigationView {
      * get private filed in this specific object
      *
      * @param targetClass
-     * @param instance    the filed owner
+     * @param instance the filed owner
      * @param fieldName
      * @param <T>
      * @return field if success, null otherwise.
@@ -700,7 +697,7 @@ class BottomNavigationViewEx : BottomNavigationView {
      * change the field value
      *
      * @param targetClass
-     * @param instance    the filed owner
+     * @param instance the filed owner
      * @param fieldName
      * @param value
      */
@@ -714,7 +711,6 @@ class BottomNavigationViewEx : BottomNavigationView {
         } catch (e: IllegalAccessException) {
             e.printStackTrace()
         }
-
     }
 
     /**
@@ -785,8 +781,11 @@ class BottomNavigationViewEx : BottomNavigationView {
 
         override fun onPageScrollStateChanged(state: Int) {}
 
-        override fun onPageScrolled(position: Int, positionOffset: Float,
-                                    positionOffsetPixels: Int) {
+        override fun onPageScrolled(
+            position: Int,
+            positionOffset: Float,
+            positionOffsetPixels: Int
+        ) {
         }
 
         override fun onPageSelected(position: Int) {
@@ -802,9 +801,8 @@ class BottomNavigationViewEx : BottomNavigationView {
      */
     private class MyOnNavigationItemSelectedListener internal constructor(viewPager: androidx.viewpager.widget.ViewPager, bnve: BottomNavigationViewEx, private val smoothScroll: Boolean, private var listener: BottomNavigationView.OnNavigationItemSelectedListener?) : BottomNavigationView.OnNavigationItemSelectedListener {
         private val viewPagerRef: WeakReference<androidx.viewpager.widget.ViewPager>
-        private val items: SparseIntArray// used for change ViewPager selected item
+        private val items: SparseIntArray // used for change ViewPager selected item
         private var previousPosition = -1
-
 
         init {
             this.viewPagerRef = WeakReference(viewPager)
@@ -851,7 +849,6 @@ class BottomNavigationViewEx : BottomNavigationView {
 
             return true
         }
-
     }
 
     fun enableShiftingMode(position: Int, enable: Boolean): BottomNavigationViewEx {
@@ -934,5 +931,4 @@ class BottomNavigationViewEx : BottomNavigationView {
             return (dpValue * scale + 0.5f).toInt()
         }
     }
-
 }

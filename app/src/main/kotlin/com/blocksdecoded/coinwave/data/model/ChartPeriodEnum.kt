@@ -5,7 +5,7 @@ package com.blocksdecoded.coinwave.data.model
  * with Android Studio
  */
 enum class ChartPeriodEnum(
-        val displayName: String
+    val displayName: String
 ) {
     DAY("24h"),
     WEEK("7d"),

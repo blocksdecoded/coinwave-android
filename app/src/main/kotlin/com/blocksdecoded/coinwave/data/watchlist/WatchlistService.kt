@@ -6,8 +6,8 @@ import kotlinx.coroutines.async
 
 // Created by askar on 7/20/18.
 class WatchlistService(
-        private val mSharedStorage: SharedContract
-): WatchlistSourceContract {
+    private val mSharedStorage: SharedContract
+) : WatchlistSourceContract {
     private var mInitialized = false
     private val SAVED_CURRENCIES = "saved_currencies"
     private val saveDelimiter = ","
@@ -17,22 +17,22 @@ class WatchlistService(
     companion object {
         private var INSTANCE: WatchlistService? = null
 
-        fun getInstance(sharedStorage: SharedContract): WatchlistSourceContract{
-            if(INSTANCE == null){
+        fun getInstance(sharedStorage: SharedContract): WatchlistSourceContract {
+            if (INSTANCE == null) {
                 INSTANCE = WatchlistService(sharedStorage)
             }
             return INSTANCE!!
         }
 
-        fun destroyInstance(){
+        fun destroyInstance() {
             INSTANCE = null
         }
     }
 
     //region Private
 
-    private fun fetchData(){
-        if(!mInitialized){
+    private fun fetchData() {
+        if (!mInitialized) {
             mInitialized = true
             mSavedCache = load()
             mSharedStorage.getPreference(SAVED_CURRENCIES, hashSetOf<String>())

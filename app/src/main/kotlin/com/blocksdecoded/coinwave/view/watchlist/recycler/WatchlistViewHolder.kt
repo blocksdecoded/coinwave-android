@@ -14,9 +14,9 @@ import com.blocksdecoded.utils.visible
 
 // Created by askar on 7/19/18.
 class WatchlistViewHolder(
-        view: View,
-        private val mListener: CurrencyVHClickListener
-): androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
+    view: View,
+    private val mListener: CurrencyVHClickListener
+) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
     private val mSymbolIcon: ImageView = itemView.findViewById(R.id.adapter_currency_icon)
     private val mSymbol: TextView = itemView.findViewById(R.id.adapter_currency_symbol)
     private val mMarketCap: TextView = itemView.findViewById(R.id.adapter_currency_market_cap)
@@ -30,7 +30,7 @@ class WatchlistViewHolder(
         itemView.setOnClickListener { mListener.onClick(adapterPosition) }
     }
 
-    fun onBind(currency: CurrencyEntity){
+    fun onBind(currency: CurrencyEntity) {
         mSymbol.text = "${currency.symbol}"
         mMarketCap.text = "$${FormatUtil.withSuffix(currency.getMarketCap()!!)}"
         mVolume.text = "$${FormatUtil.withSuffix(currency.getDailyVolume()!!)}"
@@ -43,11 +43,11 @@ class WatchlistViewHolder(
         mSymbolIcon.loadIcon(currency)
     }
 
-    private fun configPriceChanges(currency: CurrencyEntity){
+    private fun configPriceChanges(currency: CurrencyEntity) {
         currency.getPriceChange()?.let {
             mPriceChange.text = "${if (it > 0) "+" else ""}$it%"
 
-            val color: Int = if(it > 0f){
+            val color: Int = if (it > 0f) {
                 mPriceChangeIcon.setImageResource(R.drawable.ic_arrow_up_green)
                 ResourceUtil.getColor(itemView.context, R.color.green)
             } else {
@@ -60,14 +60,14 @@ class WatchlistViewHolder(
         }
     }
 
-    private fun setupDividers(){
-        when(adapterPosition){
+    private fun setupDividers() {
+        when (adapterPosition) {
             0 -> mTopDivider.visible()
             else -> mTopDivider.hide()
         }
     }
 
-    interface CurrencyVHClickListener{
+    interface CurrencyVHClickListener {
         fun onClick(position: Int)
 
         fun onPick(position: Int)

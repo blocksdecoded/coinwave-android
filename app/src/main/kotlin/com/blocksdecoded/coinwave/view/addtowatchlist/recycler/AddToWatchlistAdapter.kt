@@ -12,8 +12,8 @@ import com.blocksdecoded.utils.inflate
  * with Android Studio
  */
 class AddToWatchlistAdapter(
-        private val coins: ArrayList<CurrencyEntity> = arrayListOf(),
-        private val listener: AddToWatchlistVH.WatchlistVHClickListener
+    private val coins: ArrayList<CurrencyEntity> = arrayListOf(),
+    private val listener: AddToWatchlistVH.WatchlistVHClickListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
             AddToWatchlistVH(parent.inflate(R.layout.adapter_watchlist_item)!!, listener)
@@ -32,13 +32,13 @@ class AddToWatchlistAdapter(
         notifyDataSetChanged()
     }
 
-    private fun findItem(id: Int, onFind: (index: Int) -> Unit){
+    private fun findItem(id: Int, onFind: (index: Int) -> Unit) {
         onFind.invoke(coins.indexOfFirst { it.id == id })
     }
 
-    fun updateItem(currency: CurrencyEntity){
+    fun updateItem(currency: CurrencyEntity) {
         findItem(currency.id) {
-            if(it >= 0){
+            if (it >= 0) {
                 coins[it] = currency
                 notifyItemChanged(it)
             } else {

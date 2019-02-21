@@ -1,6 +1,5 @@
 package com.blocksdecoded.coinwave.data.crypto.cache
 
-import com.blocksdecoded.coinwave.data.crypto.CurrencyUpdateObserver
 import com.blocksdecoded.coinwave.data.model.CurrencyEntity
 
 /**
@@ -14,7 +13,5 @@ interface CoinCache {
 
     fun removeObserver(observer: CacheObserver)
 
-    interface CacheObserver {
-
-    }
+    interface CacheObserver
 }

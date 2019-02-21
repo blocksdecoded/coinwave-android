@@ -17,23 +17,23 @@ import com.blocksdecoded.utils.ResourceUtil
 import com.blocksdecoded.utils.isValidIndex
 
 // Created by askar on 7/23/18.
-fun List<CurrencyEntity>.findCurrency(currencyEntity: CurrencyEntity, body: ((index: Int) -> Unit)? = null): Int{
+fun List<CurrencyEntity>.findCurrency(currencyEntity: CurrencyEntity, body: ((index: Int) -> Unit)? = null): Int {
     val index = this.indexOfFirst { it.id == currencyEntity.id }
-    if(this.isValidIndex(index)){
+    if (this.isValidIndex(index)) {
         body?.invoke(index)
     }
     return index
 }
 
-fun ArrayList<CurrencyEntity>.addSortedByRank(currencyEntity: CurrencyEntity){
+fun ArrayList<CurrencyEntity>.addSortedByRank(currencyEntity: CurrencyEntity) {
     this.add(currencyEntity)
     this.sortBy { it.rank }
 }
 
-fun TextView.setChangedPercent(percent: Float){
+fun TextView.setChangedPercent(percent: Float) {
     text = "${if (percent > 0) "+" else ""}$percent%"
     this.setTextColor(
-            if(percent >= 0f){
+            if (percent >= 0f) {
                 ResourceUtil.getColor(this.context, R.color.green)
             } else {
                 ResourceUtil.getColor(this.context, R.color.red)
@@ -42,9 +42,9 @@ fun TextView.setChangedPercent(percent: Float){
 }
 
 fun LineChart.loadChartData(
-        data: ChartData,
-        @ColorRes color: Int,
-        @DrawableRes backgroundDrawable: Int
+    data: ChartData,
+    @ColorRes color: Int,
+    @DrawableRes backgroundDrawable: Int
 ) {
     this.resetZoom()
     this.zoomOut()
@@ -86,7 +86,7 @@ fun LineChart.init(listener: ChartListener) {
     this.axisRight?.isEnabled = false
     this.xAxis?.isEnabled = false
     this.setBorderWidth(0f)
-    this.setViewPortOffsets(0f,50f,0f,50f)
+    this.setViewPortOffsets(0f, 50f, 0f, 50f)
     this.setOnChartValueSelectedListener(listener)
     this.onChartGestureListener = listener
 }

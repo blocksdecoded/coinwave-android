@@ -16,9 +16,9 @@ import com.blocksdecoded.coinwave.data.model.ChartPeriodEnum as RequestChartPeri
 
 // Created by askar on 7/25/18.
 class ChartsInteractor(
-        private val mCryptoService: CurrencySourceContract,
-        private val mChartsService: ChartsSourceContract
-): ChartsUseCases {
+    private val mCryptoService: CurrencySourceContract,
+    private val mChartsService: ChartsSourceContract
+) : ChartsUseCases {
     private var mCachedId: Int = -1
     private var cachedChart: HashMap<String, ChartData> = HashMap()
 
@@ -40,11 +40,11 @@ class ChartsInteractor(
             cachedChart.clear()
         }
 
-        if (cachedChart[period.toString()] == null){
+        if (cachedChart[period.toString()] == null) {
             val currency = mCryptoService.getCurrency(currencyId)
-            if(currency != null){
+            if (currency != null) {
                 val result = mChartsService.getChart(currency.symbol, getRequestPeriod(period))
-                when(result){
+                when (result) {
                     is Result.Success -> {
                         cachedChart[period.toString()] = result.data
                         Result.Success(result.data)

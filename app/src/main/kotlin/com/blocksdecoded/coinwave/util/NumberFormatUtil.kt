@@ -17,7 +17,7 @@ object FormatUtil {
                 "kmbtpe"[exp - 1])
     }
 
-    private fun cleanDouble(double: Double): Double{
+    private fun cleanDouble(double: Double): Double {
         return try {
             decimalFormat.format(double).replace(",", "").toDouble()
         } catch (e: Exception) {
@@ -31,11 +31,11 @@ object FormatUtil {
         float
     }
 
-    fun formatFloatString(float: Float): String{
-        return if (cleanFloat(float) == float.roundToInt().toFloat()){
+    fun formatFloatString(float: Float): String {
+        return if (cleanFloat(float) == float.roundToInt().toFloat()) {
             defaultFormat.format(float)
         } else {
-            if(float < 10f){
+            if (float < 10f) {
                 smallDecimalFormat.format(float)
             } else {
                 decimalFormat.format(float)
@@ -44,6 +44,6 @@ object FormatUtil {
     }
 }
 
-fun Float.format(): String{
+fun Float.format(): String {
     return FormatUtil.formatFloatString(this)
 }

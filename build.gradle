@@ -36,6 +36,8 @@ allprojects {
         jcenter()
         mavenCentral()
         maven { url 'https://jitpack.io' }
+
+        apply from: "$rootDir/ktlint.gradle"
     }
 }
 

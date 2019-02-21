@@ -14,7 +14,7 @@ import com.blocksdecoded.utils.outRightTransition
  * Created by askar on 11/24/18
  * with Android Studio
  */
-class PickFavoriteActivity: SwipeableActivity() {
+class PickFavoriteActivity : SwipeableActivity() {
     private var mPresenter: PickFavoriteContract.Presenter? = null
 
     override fun onBackPressed() {
@@ -51,7 +51,7 @@ class PickFavoriteActivity: SwipeableActivity() {
         fun start(context: Context) {
             context.startActivity(intent(context))
 
-            if(context is Activity){
+            if (context is Activity) {
                 context.inRightTransition()
             }
         }

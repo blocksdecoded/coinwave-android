@@ -7,6 +7,6 @@ import com.blocksdecoded.coinwave.data.model.ChartDataEntry
  * with Android Studio
  */
 data class ChartListResponse(
-        val change: String,
-        val history: List<ChartDataEntry>
+    val change: String,
+    val history: List<ChartDataEntry>
 )

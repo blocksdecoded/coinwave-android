@@ -8,10 +8,9 @@ import android.util.Base64InputStream
 import java.io.*
 import java.nio.charset.Charset
 
-
 // Created by askar on 6/8/18.
 class ObjectSerializer {
-    fun convertToString(source: Serializable): String?{
+    fun convertToString(source: Serializable): String? {
         try {
             val baos = ByteArrayOutputStream()
             val oos = ObjectOutputStream(
@@ -26,7 +25,7 @@ class ObjectSerializer {
         return null
     }
 
-    fun <T>convertToObject(source: String): T?{
+    fun <T> convertToObject(source: String): T? {
         try {
             return ObjectInputStream(Base64InputStream(
                     ByteArrayInputStream(source.toByteArray(Charset.forName("UTF-8"))), NO_PADDING or NO_WRAP)

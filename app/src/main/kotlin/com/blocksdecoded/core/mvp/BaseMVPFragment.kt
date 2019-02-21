@@ -11,7 +11,7 @@ import butterknife.Unbinder
 import com.blocksdecoded.utils.inflate
 import com.blocksdecoded.utils.showShortToast
 
-abstract class BaseMVPFragment<T>: Fragment(), BaseMVPContract.View<T> {
+abstract class BaseMVPFragment<T> : Fragment(), BaseMVPContract.View<T> {
     abstract var mPresenter: T?
     abstract val layoutId: Int
 
@@ -29,34 +29,34 @@ abstract class BaseMVPFragment<T>: Fragment(), BaseMVPContract.View<T> {
     abstract fun initView(rootView: View)
 
     @CallSuper
-	override fun onResume() {
-		super.onResume()
-		if (mPresenter is BaseMVPContract.Presenter<*>)
-			(mPresenter as BaseMVPContract.Presenter<*>).onResume()
-	}
+    override fun onResume() {
+        super.onResume()
+        if (mPresenter is BaseMVPContract.Presenter<*>)
+            (mPresenter as BaseMVPContract.Presenter<*>).onResume()
+    }
 
     @CallSuper
-	override fun onPause() {
-		super.onPause()
-		if (mPresenter is BaseMVPContract.Presenter<*>)
-			(mPresenter as BaseMVPContract.Presenter<*>).onPause()
-	}
+    override fun onPause() {
+        super.onPause()
+        if (mPresenter is BaseMVPContract.Presenter<*>)
+            (mPresenter as BaseMVPContract.Presenter<*>).onPause()
+    }
 
     @CallSuper
-	override fun onDestroy() {
-		super.onDestroy()
-		if (mPresenter is BaseMVPContract.Presenter<*>)
-			(mPresenter as BaseMVPContract.Presenter<*>).onDestroy()
-	}
+    override fun onDestroy() {
+        super.onDestroy()
+        if (mPresenter is BaseMVPContract.Presenter<*>)
+            (mPresenter as BaseMVPContract.Presenter<*>).onDestroy()
+    }
 
     @CallSuper
-	override fun onDestroyView() {
-		super.onDestroyView()
-		if (mPresenter is BaseMVPContract.Presenter<*>)
-			(mPresenter as BaseMVPContract.Presenter<*>).onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
+        if (mPresenter is BaseMVPContract.Presenter<*>)
+            (mPresenter as BaseMVPContract.Presenter<*>).onDestroy()
 
         mUnbinder?.unbind()
-	}
+    }
 
     //region Base Contract
 
@@ -69,9 +69,9 @@ abstract class BaseMVPFragment<T>: Fragment(), BaseMVPContract.View<T> {
             (mPresenter as BaseMVPContract.Presenter<*>).onStart()
     }
 
-	override fun finishView() {
-		activity?.finish()
-	}
+    override fun finishView() {
+        activity?.finish()
+    }
 
     @CallSuper
     override fun clearPresenter() {
@@ -84,7 +84,7 @@ abstract class BaseMVPFragment<T>: Fragment(), BaseMVPContract.View<T> {
 
     //endregion
 
-    fun runOnUi(body: () -> Unit){
+    fun runOnUi(body: () -> Unit) {
         activity?.runOnUiThread { body.invoke() }
     }
 }

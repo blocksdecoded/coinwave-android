@@ -9,13 +9,13 @@ import com.blocksdecoded.core.SingleLiveEvent
  * Created by askar on 2/8/19
  * with Android Studio
  */
-class PostsViewModel: ViewModel() {
+class PostsViewModel : ViewModel() {
 
-    //Data
+    // Data
     val postsLiveData = MutableLiveData<ArrayList<PublisherPost>>()
     val loadingLiveData = MutableLiveData<Boolean>()
 
-    //Events
+    // Events
     val openPostEvent = SingleLiveEvent<String>()
 
     fun onPostClick(position: Int) {
@@ -24,7 +24,5 @@ class PostsViewModel: ViewModel() {
     }
 
     fun getNextPosts() {
-
     }
-
 }

@@ -12,13 +12,13 @@ import kotlinx.coroutines.withContext
  * with Android Studio
  */
 class PostsInteractor(
-        private val mPostsSource: PostDataSource
-): PostsUseCases {
+    private val mPostsSource: PostDataSource
+) : PostsUseCases {
     private var date = ""
 
-    private fun updateLastDate(posts: List<PublisherPost>){
+    private fun updateLastDate(posts: List<PublisherPost>) {
         date = if (posts.isNotEmpty()) {
-            posts.last().date?:""
+            posts.last().date ?: ""
         } else {
             ""
         }

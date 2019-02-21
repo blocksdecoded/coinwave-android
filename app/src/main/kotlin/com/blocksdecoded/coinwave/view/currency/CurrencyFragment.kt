@@ -27,8 +27,7 @@ import java.util.*
 
 open class CurrencyFragment :
         BaseMVPFragment<CurrencyContract.Presenter>(),
-        CurrencyContract.View
-{
+        CurrencyContract.View {
     companion object {
         fun newInstance(): CurrencyFragment = CurrencyFragment()
     }
@@ -77,7 +76,7 @@ open class CurrencyFragment :
 
     private val mChartListener = object : ChartListener() {
         override fun onValueSelected(e: Entry?, h: Highlight?) {
-            if (mPickedContainer.visibility != View.VISIBLE){
+            if (mPickedContainer.visibility != View.VISIBLE) {
                 mPickedContainer.alpha = 0f
                 mPickedContainer.animate()
                         ?.setDuration(300L)
@@ -86,7 +85,7 @@ open class CurrencyFragment :
                         ?.start()
             }
 
-            val date = Date(e?.x?.toLong()?:0L)
+            val date = Date(e?.x?.toLong() ?: 0L)
             mPickedPrice.text = "${date.toMediumFormat()} ${date.toHourFormat()}\n\$${(e?.y ?: 0f).format()}"
         }
 
@@ -107,8 +106,8 @@ open class CurrencyFragment :
     }
 
     @OnClick(R.id.currency_graph_icon, R.id.back, R.id.fragment_currency_add_to_watchlist)
-    fun onClick(view: View){
-        when(view.id) {
+    fun onClick(view: View) {
+        when (view.id) {
             R.id.currency_graph_icon -> mPresenter?.onGoToWebsiteClick()
             R.id.back -> finishView()
             R.id.fragment_currency_add_to_watchlist -> mPresenter?.onWatchingClick()
@@ -120,7 +119,7 @@ open class CurrencyFragment :
             mScrollContainer.mScrollable = value
         }
 
-    override fun initView(rootView: View){
+    override fun initView(rootView: View) {
         mChartPeriods.addClickListener { mPresenter?.onPeriodChanged(it) }
 
         mChart.init(mChartListener)
@@ -132,7 +131,7 @@ open class CurrencyFragment :
             R.drawable.dark_chart_bg
     )
 
-    private fun showCurrencyInfo(currencyEntity: CurrencyEntity){
+    private fun showCurrencyInfo(currencyEntity: CurrencyEntity) {
         mIcon.loadIcon(currencyEntity)
         mName.text = currencyEntity.name
         mSymbol.text = currencyEntity.symbol
@@ -158,8 +157,8 @@ open class CurrencyFragment :
         setWatchedIcon(currencyEntity.isSaved)
     }
 
-    private fun setWatchedIcon(watched: Boolean){
-        if (watched){
+    private fun setWatchedIcon(watched: Boolean) {
+        if (watched) {
             mWatchlist.setImageResource(R.drawable.ic_star_filled)
         } else {
             mWatchlist.setImageResource(R.drawable.ic_star_border)

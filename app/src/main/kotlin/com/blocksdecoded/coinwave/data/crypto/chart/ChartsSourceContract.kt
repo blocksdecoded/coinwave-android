@@ -7,7 +7,7 @@ import com.blocksdecoded.coinwave.data.model.ChartData
 // Created by askar on 7/25/18.
 interface ChartsSourceContract {
     suspend fun getChart(
-            chartName: String,
-            period: ChartPeriodEnum = ChartPeriodEnum.DAY
+        chartName: String,
+        period: ChartPeriodEnum = ChartPeriodEnum.DAY
     ): Result<ChartData>
 }

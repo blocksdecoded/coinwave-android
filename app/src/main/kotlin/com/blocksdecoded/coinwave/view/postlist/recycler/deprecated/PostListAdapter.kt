@@ -17,10 +17,10 @@ import com.blocksdecoded.utils.setHeight
  */
 @Deprecated("Use newer PagedPostListAdapter")
 class PostListAdapter(
-        private var mItems: ArrayList<PublisherPost>,
-        private val mListener: PostListViewHolder.PostVHCLickListener,
-        private val mLoadNextListener: LoadNextListener,
-        private val mPostHeight: Int
+    private var mItems: ArrayList<PublisherPost>,
+    private val mListener: PostListViewHolder.PostVHCLickListener,
+    private val mLoadNextListener: LoadNextListener,
+    private val mPostHeight: Int
 ) : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>(),
         ListFooterViewHolder.ClickListener {
 
@@ -35,7 +35,7 @@ class PostListAdapter(
 
     //region Override
 
-    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder = when(p1) {
+    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder = when (p1) {
         1 -> PostListViewHolder(p0.inflate(R.layout.adapter_post_list_item)!!, mListener).apply {
             setHeight(mPostHeight)
         }
@@ -47,8 +47,8 @@ class PostListAdapter(
     }
 
     override fun onBindViewHolder(p0: androidx.recyclerview.widget.RecyclerView.ViewHolder, p1: Int) {
-        if (mItems.isValidIndex(p1)){
-            when(p0) {
+        if (mItems.isValidIndex(p1)) {
+            when (p0) {
                 is PostListViewHolder -> p0.onBind(mItems[p1])
                 is ListFooterViewHolder -> {
                     mFooterView = p0
@@ -87,7 +87,6 @@ class PostListAdapter(
     }
 
     override fun onFooterClick(v: View, position: Int) {
-
     }
 
     //region Public
@@ -99,7 +98,7 @@ class PostListAdapter(
         notifyDataSetChanged()
     }
 
-    fun addItems(posts: List<PublisherPost>){
+    fun addItems(posts: List<PublisherPost>) {
         mAlreadyLoading = false
         mItems.addAll(posts)
         notifyDataSetChanged()

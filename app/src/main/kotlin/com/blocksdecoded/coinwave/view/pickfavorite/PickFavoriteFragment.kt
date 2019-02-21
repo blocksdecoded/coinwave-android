@@ -14,8 +14,7 @@ import com.blocksdecoded.coinwave.view.currencylist.recycler.CurrencyListViewHol
 class PickFavoriteFragment :
         BaseMVPFragment<PickFavoriteContract.Presenter>(),
         PickFavoriteContract.View,
-        CurrencyListViewHolder.CurrencyVHClickListener
-{
+        CurrencyListViewHolder.CurrencyVHClickListener {
     companion object {
         fun newInstance(): PickFavoriteFragment = PickFavoriteFragment()
     }
@@ -28,8 +27,8 @@ class PickFavoriteFragment :
     private var mAdapter: CurrencyListAdapter? = null
 
     @OnClick(R.id.back)
-    fun onClick(view: View){
-        when(view.id) {
+    fun onClick(view: View) {
+        when (view.id) {
             R.id.back -> finishView()
         }
     }

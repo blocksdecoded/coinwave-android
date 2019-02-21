@@ -11,10 +11,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
 
 class PickFavoritePresenter(
-        view: PickFavoriteContract.View?,
-        private val mFavoriteUseCases: FavoriteUseCases,
-        private val mCurrencyListUseCases: CurrencyListUseCases,
-        private val uiContext: CoroutineContext = Dispatchers.Main
+    view: PickFavoriteContract.View?,
+    private val mFavoriteUseCases: FavoriteUseCases,
+    private val mCurrencyListUseCases: CurrencyListUseCases,
+    private val uiContext: CoroutineContext = Dispatchers.Main
 ) : BaseMVPPresenter<PickFavoriteContract.View>(view), PickFavoriteContract.Presenter {
 
     private var mCachedData = arrayListOf<CurrencyEntity>()
@@ -35,13 +35,13 @@ class PickFavoritePresenter(
 
     //region Private
 
-    private fun updateCache(currencies: List<CurrencyEntity>){
+    private fun updateCache(currencies: List<CurrencyEntity>) {
         mCachedData.clear()
         mCachedData.addAll(currencies)
         mView?.showCurrencies(mCachedData)
     }
 
-    private fun getCurrencies() = launchSilent(uiContext){
+    private fun getCurrencies() = launchSilent(uiContext) {
         mCurrencyListUseCases.getCryptoList(false)
                 .onSuccess { updateCache(it) }
     }
@@ -51,7 +51,7 @@ class PickFavoritePresenter(
     //region Contract
 
     override fun onCurrencyClick(position: Int) {
-        if (mCachedData.isValidIndex(position)){
+        if (mCachedData.isValidIndex(position)) {
             mFavoriteUseCases.setId(mCachedData[position].id)
             mView?.showMessage("Favorite saved.")
             mView?.finishView()

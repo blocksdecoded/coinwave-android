@@ -9,7 +9,7 @@ import java.io.IOException
 import java.nio.charset.Charset
 
 // Created by askar on 6/8/18.
-class IOService(context: Context): IOContract {
+class IOService(context: Context) : IOContract {
 
     private var assets: AssetManager? = null
     private var filesDir: File? = null
@@ -22,13 +22,13 @@ class IOService(context: Context): IOContract {
     companion object {
         private var INSTANCE: IOService? = null
 
-        fun getInstance(context: Context): IOContract{
+        fun getInstance(context: Context): IOContract {
             if (INSTANCE == null)
                 INSTANCE = IOService(context)
             return INSTANCE!!
         }
 
-        fun destroyInstance(){
+        fun destroyInstance() {
             INSTANCE?.assets = null
             INSTANCE = null
         }
@@ -38,7 +38,7 @@ class IOService(context: Context): IOContract {
         val `is` = assets?.open(name)
         val size = `is`?.available()
         var buffer: ByteArray? = null
-        if (size != null){
+        if (size != null) {
             buffer = ByteArray(size)
             `is`.read(buffer)
             `is`.close()
@@ -67,7 +67,7 @@ class IOService(context: Context): IOContract {
         }
 
         ""
-    } catch (e: Exception){
+    } catch (e: Exception) {
         e.printStackTrace()
         ""
     }
@@ -76,7 +76,6 @@ class IOService(context: Context): IOContract {
 
     override fun saveBitmap(bitmap: Bitmap, path: String): String {
         try {
-
         } catch (e: IOException) {
             e.printStackTrace()
         }

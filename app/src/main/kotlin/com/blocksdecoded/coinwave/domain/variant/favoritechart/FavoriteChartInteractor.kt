@@ -13,10 +13,10 @@ import com.blocksdecoded.utils.coroutine.model.Result
  * with Android Studio
  */
 class FavoriteChartInteractor(
-        private val mChartsUseCases: ChartsUseCases,
-        private val mFavoriteUseCases: FavoriteUseCases,
-        private val mCurrencyUseCases: CurrencyListUseCases
-): FavoriteChartUseVariant {
+    private val mChartsUseCases: ChartsUseCases,
+    private val mFavoriteUseCases: FavoriteUseCases,
+    private val mCurrencyUseCases: CurrencyListUseCases
+) : FavoriteChartUseVariant {
     override suspend fun getChart(): Result<ChartData>? {
         return mChartsUseCases.getChartData(mFavoriteUseCases.getId(), CHART_PERIOD)
     }

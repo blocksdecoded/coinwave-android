@@ -4,11 +4,11 @@ import android.animation.ValueAnimator
 
 // Created by askar on 5/24/18.
 
-fun androidx.recyclerview.widget.RecyclerView.ViewHolder.updateHeight(height: Int, animated: Boolean = false){
-    if (animated){
+fun androidx.recyclerview.widget.RecyclerView.ViewHolder.updateHeight(height: Int, animated: Boolean = false) {
+    if (animated) {
         val start = this.itemView.layoutParams.height
 
-        if (start == height){
+        if (start == height) {
             setHeight(height)
             return
         }
@@ -27,6 +27,6 @@ fun androidx.recyclerview.widget.RecyclerView.ViewHolder.updateHeight(height: In
     }
 }
 
-fun androidx.recyclerview.widget.RecyclerView.ViewHolder.setHeight(height: Int){
+fun androidx.recyclerview.widget.RecyclerView.ViewHolder.setHeight(height: Int) {
     this.itemView.layoutParams.height = height
 }

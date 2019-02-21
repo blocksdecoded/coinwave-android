@@ -27,7 +27,7 @@ object PostBgUtil {
         val g = random.nextInt(MIN_COLOR..MAX_COLOR)
         val b = random.nextInt(MIN_COLOR..MAX_COLOR)
 
-        return getGradientDrawable (
+        return getGradientDrawable(
                 Color.rgb(r.minusPercent(), g.minusPercent(), b.minusPercent()),
                 Color.rgb(r, g, b)
         )
@@ -35,7 +35,7 @@ object PostBgUtil {
 
     private fun Int.minusPercent(percent: Float = 0.5f): Int = (this - (this * percent)).toInt()
 
-    private fun getGradientDrawable(start: Int, end: Int): Drawable{
+    private fun getGradientDrawable(start: Int, end: Int): Drawable {
         val gd = GradientDrawable(
                 GradientDrawable.Orientation.TOP_BOTTOM,
                 intArrayOf(start, end))

@@ -4,13 +4,13 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
 
-class NonSwipeableViewPager: androidx.viewpager.widget.ViewPager {
+class NonSwipeableViewPager : androidx.viewpager.widget.ViewPager {
 
-    constructor(context: Context) : super(context){
+    constructor(context: Context) : super(context) {
         setScroller()
     }
 
-    constructor(context: Context, attrs: AttributeSet?): super(context, attrs){
+    constructor(context: Context, attrs: AttributeSet?): super(context, attrs) {
         setScroller()
     }
 
@@ -23,7 +23,6 @@ class NonSwipeableViewPager: androidx.viewpager.widget.ViewPager {
         } catch (e: Exception) {
             e.printStackTrace()
         }
-
     }
 
     override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
@@ -33,5 +32,4 @@ class NonSwipeableViewPager: androidx.viewpager.widget.ViewPager {
     override fun onTouchEvent(ev: MotionEvent?): Boolean {
         return false
     }
-
 }

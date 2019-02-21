@@ -4,9 +4,9 @@ import android.content.Context
 import android.view.animation.DecelerateInterpolator
 import android.widget.Scroller
 
-class SmoothScroller: Scroller {
+class SmoothScroller : Scroller {
 
-    constructor(context: Context?, scrollTime: Int = 250): super(context, DecelerateInterpolator()){
+    constructor(context: Context?, scrollTime: Int = 250): super(context, DecelerateInterpolator()) {
         SCROLL_TIME = scrollTime
     }
 

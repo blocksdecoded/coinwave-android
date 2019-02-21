@@ -12,8 +12,8 @@ import com.blocksdecoded.utils.coroutine.model.onSuccess
 
 // Created by askar on 7/19/18.
 class CurrencyRepository(
-        private val mWatchlistSource: WatchlistSourceContract
-): CurrencySourceContract {
+    private val mWatchlistSource: WatchlistSourceContract
+) : CurrencySourceContract {
     private var mCached: CurrencyDataResponse? = null
     private val mObservers = hashSetOf<CurrencyUpdateObserver>()
 
@@ -24,9 +24,9 @@ class CurrencyRepository(
         private var INSTANCE: CurrencyRepository? = null
 
         fun getInstance(
-                watchlist: WatchlistSourceContract
+            watchlist: WatchlistSourceContract
         ): CurrencySourceContract {
-            if (INSTANCE == null){
+            if (INSTANCE == null) {
                 INSTANCE = CurrencyRepository(watchlist)
             }
             return INSTANCE!!
@@ -87,7 +87,7 @@ class CurrencyRepository(
     }
 
     override suspend fun getAllCurrencies(skipCache: Boolean): Result<CurrencyDataResponse> =
-            if (skipCache){
+            if (skipCache) {
                 CurrencyApiClient.getCurrencies(NETWORK_PAGE_SIZE)
                         .onSuccess { setCache(it.data) }
                         .onError { mCached?.let { setCache(it) } }
@@ -99,7 +99,7 @@ class CurrencyRepository(
             }
 
     override suspend fun getWatchlist(skipCache: Boolean): Result<CurrencyDataResponse> =
-            if (skipCache){
+            if (skipCache) {
                 var ids = ""
                 mWatchlistSource.getAll().forEachIndexed { index, i ->
                     ids += when (index) {

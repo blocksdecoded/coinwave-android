@@ -1,6 +1,5 @@
 package com.blocksdecoded.coinwave.view.watchlist
 
-import android.util.Log
 import com.blocksdecoded.core.mvp.BaseMVPPresenter
 import com.blocksdecoded.coinwave.data.NetworkException
 import com.blocksdecoded.coinwave.data.crypto.CurrencyUpdateObserver
@@ -19,26 +18,26 @@ import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
 
 class WatchListPresenter(
-        view: WatchListContract.View?,
-        private val mMenuListener: MenuClickListener,
-        private val mCurrencyListUseCases: CurrencyListUseCases,
-        private val mFavoriteChartUseVariant: FavoriteChartUseVariant,
-        private val uiContext: CoroutineContext = Dispatchers.Main
+    view: WatchListContract.View?,
+    private val mMenuListener: MenuClickListener,
+    private val mCurrencyListUseCases: CurrencyListUseCases,
+    private val mFavoriteChartUseVariant: FavoriteChartUseVariant,
+    private val uiContext: CoroutineContext = Dispatchers.Main
 ) : BaseMVPPresenter<WatchListContract.View>(view), WatchListContract.Presenter {
     private var mCachedData = arrayListOf<CurrencyEntity>()
 
-    private val mCurrenciesObserver = object: CurrencyUpdateObserver {
-        override fun onAdded(currencyEntity: CurrencyEntity) = launchSilent(uiContext){
+    private val mCurrenciesObserver = object : CurrencyUpdateObserver {
+        override fun onAdded(currencyEntity: CurrencyEntity) = launchSilent(uiContext) {
             mView?.updateCurrency(updateCurrency(currencyEntity), currencyEntity)
         }
 
-        override fun onUpdated(currencies: List<CurrencyEntity>) = launchSilent(uiContext){
+        override fun onUpdated(currencies: List<CurrencyEntity>) = launchSilent(uiContext) {
             setCache(currencies)
         }
 
-        override fun onRemoved(currencyEntity: CurrencyEntity) = launchSilent(uiContext){
+        override fun onRemoved(currencyEntity: CurrencyEntity) = launchSilent(uiContext) {
             mView?.deleteCurrency(removeCurrency(currencyEntity))
-            if(mCachedData.isEmpty()) mView?.showEmpty()
+            if (mCachedData.isEmpty()) mView?.showEmpty()
         }
     }
 
@@ -49,7 +48,7 @@ class WatchListPresenter(
         mCachedData.addAll(currencies.filter { it.isSaved })
         mView?.showCurrencies(mCachedData)
 
-        if(mCachedData.isEmpty()) mView?.showEmpty()
+        if (mCachedData.isEmpty()) mView?.showEmpty()
 
         mView?.showFavoriteLoading()
 
@@ -67,14 +66,13 @@ class WatchListPresenter(
         }
     }
 
-    private fun searchCurrency(currencyEntity: CurrencyEntity ,body: ((index: Int) -> Unit)? = null): Int =
+    private fun searchCurrency(currencyEntity: CurrencyEntity, body: ((index: Int) -> Unit)? = null): Int =
             mCachedData.findCurrency(currencyEntity, body)
 
     private fun updateCurrency(currencyEntity: CurrencyEntity): Int {
         val index = searchCurrency(currencyEntity)
 
-        if(index >= 0){
-
+        if (index >= 0) {
         } else {
             mCachedData.addSortedByRank(currencyEntity)
         }
@@ -87,7 +85,7 @@ class WatchListPresenter(
                 mCachedData.removeAt(it)
             }
 
-    private fun getCurrencies(skipCache: Boolean) = launchSilent(uiContext){
+    private fun getCurrencies(skipCache: Boolean) = launchSilent(uiContext) {
         mView?.showLoading()
         mCurrencyListUseCases.getCryptoList(skipCache)
                 .onSuccess {
@@ -96,7 +94,7 @@ class WatchListPresenter(
                 }
                 .onError {
                     mView?.hideLoading()
-                    when(it){
+                    when (it) {
                         is NetworkException -> {
                             mView?.showNetworkError(mCachedData.isEmpty())
                         }
@@ -129,12 +127,11 @@ class WatchListPresenter(
     }
 
     override fun onCurrencyPick(position: Int) {
-
     }
 
     override fun deleteCurrency(position: Int) {
-        if(mCachedData.isValidIndex(position)){
-            if(mCachedData[position].isSaved){
+        if (mCachedData.isValidIndex(position)) {
+            if (mCachedData[position].isSaved) {
                 mView?.showMessage("${mCachedData[position].name} removed from Watchlist")
                 mCurrencyListUseCases.removeCurrency(mCachedData[position].id)
             }
@@ -142,7 +139,7 @@ class WatchListPresenter(
     }
 
     override fun onCurrencyClick(position: Int) {
-        if(mCachedData.isValidIndex(position)){
+        if (mCachedData.isValidIndex(position)) {
             mView?.openCurrencyScreen(mCachedData[position].id)
         }
     }

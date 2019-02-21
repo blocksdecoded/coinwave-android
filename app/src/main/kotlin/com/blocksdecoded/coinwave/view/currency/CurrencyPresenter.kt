@@ -12,10 +12,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
 
 class CurrencyPresenter(
-        view: CurrencyContract.View?,
-        private val mChartsUseCases: ChartsUseCases,
-        private val mCurrencyListUseCases: CurrencyListUseCases,
-        private val uiContext: CoroutineContext = Dispatchers.Main
+    view: CurrencyContract.View?,
+    private val mChartsUseCases: ChartsUseCases,
+    private val mCurrencyListUseCases: CurrencyListUseCases,
+    private val uiContext: CoroutineContext = Dispatchers.Main
 ) : BaseMVPPresenter<CurrencyContract.View>(view), CurrencyContract.Presenter {
     private var mCached: CurrencyEntity? = null
 
@@ -30,7 +30,7 @@ class CurrencyPresenter(
         injectSelfToView()
     }
 
-    override fun fetchCurrencyData(id: Int) = launchSilent(uiContext){
+    override fun fetchCurrencyData(id: Int) = launchSilent(uiContext) {
         mCached = mCurrencyListUseCases.getCurrency(id)
         mCached?.let {
             mView?.showCurrencyData(it)
@@ -41,9 +41,9 @@ class CurrencyPresenter(
                 .onError { mView?.showMessage("Chart load error") }
     }
 
-    override fun onPeriodChanged(position: Int) = launchSilent(uiContext){
+    override fun onPeriodChanged(position: Int) = launchSilent(uiContext) {
         mCached?.let {
-            val period = when(position){
+            val period = when (position) {
                 0 -> TODAY
                 1 -> WEEK
                 2 -> MONTH_1
@@ -61,7 +61,7 @@ class CurrencyPresenter(
     override fun onWatchingClick() {
         mCached?.let {
             mView?.setWatched(it.isSaved.not())
-            if(it.isSaved){
+            if (it.isSaved) {
                 mCurrencyListUseCases.removeCurrency(it.id)
                 it.isSaved = false
             } else {

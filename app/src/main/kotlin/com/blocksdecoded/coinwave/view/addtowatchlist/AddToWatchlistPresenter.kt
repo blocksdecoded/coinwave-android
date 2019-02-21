@@ -10,10 +10,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
 
 class AddToWatchlistPresenter(
-        view: AddToWatchlistContract.View?,
-        private val mCurrencyListUseCases: CurrencyListUseCases,
-        private val uiContext: CoroutineContext = Dispatchers.Main
- ) : BaseMVPPresenter<AddToWatchlistContract.View>(view), AddToWatchlistContract.Presenter {
+    view: AddToWatchlistContract.View?,
+    private val mCurrencyListUseCases: CurrencyListUseCases,
+    private val uiContext: CoroutineContext = Dispatchers.Main
+) : BaseMVPPresenter<AddToWatchlistContract.View>(view), AddToWatchlistContract.Presenter {
 
     private var cached = arrayListOf<CurrencyEntity>()
 

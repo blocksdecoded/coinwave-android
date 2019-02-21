@@ -10,7 +10,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withC
  * with Android Studio
  */
 
-fun ImageView.loadSvg(url: String){
+fun ImageView.loadSvg(url: String) {
     val requestBuilder = GlideApp.with(this)
             .`as`(PictureDrawable::class.java)
             .transition(withCrossFade())

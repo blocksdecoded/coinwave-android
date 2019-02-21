@@ -10,13 +10,13 @@ import java.text.SimpleDateFormat
  */
 
 data class PublisherPost(
-        @SerializedName("ID") var id: Int,
-        @SerializedName("post_date") var date: String?,
-        @SerializedName("post_title") var title: String?,
-        @SerializedName("author") var author: String?,
-        @SerializedName("html") var html: String?,
-        @SerializedName("url") var url: String?,
-        @SerializedName("featured_image") var image: PublisherImage?
+    @SerializedName("ID") var id: Int,
+    @SerializedName("post_date") var date: String?,
+    @SerializedName("post_title") var title: String?,
+    @SerializedName("author") var author: String?,
+    @SerializedName("html") var html: String?,
+    @SerializedName("url") var url: String?,
+    @SerializedName("featured_image") var image: PublisherImage?
 ) {
 
     companion object {

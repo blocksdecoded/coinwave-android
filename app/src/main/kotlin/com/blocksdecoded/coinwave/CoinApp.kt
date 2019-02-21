@@ -8,7 +8,7 @@ import com.google.firebase.FirebaseApp
 import com.squareup.leakcanary.LeakCanary
 
 // Created by askar on 6/7/18.
-class CoinApp: Application() {
+class CoinApp : Application() {
 
     companion object {
         var INSTANCE: Application? = null

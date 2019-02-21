@@ -5,7 +5,7 @@ import com.blocksdecoded.coinwave.data.model.ChartData
 
 // Created by askar on 7/25/18.
 interface ChartsUseCases {
-    enum class ChartPeriod{
+    enum class ChartPeriod {
         TODAY,
         WEEK,
         MONTH_1,

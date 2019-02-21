@@ -16,10 +16,10 @@ import kotlin.coroutines.EmptyCoroutineContext
  * ```
  */
 fun launchSilent(
-        context: CoroutineContext = Dispatchers.Default,
-        start: CoroutineStart = CoroutineStart.DEFAULT,
-        parent: Job? = null,
-        block: suspend CoroutineScope.() -> Unit
+    context: CoroutineContext = Dispatchers.Default,
+    start: CoroutineStart = CoroutineStart.DEFAULT,
+    parent: Job? = null,
+    block: suspend CoroutineScope.() -> Unit
 ) {
     GlobalScope.launch(context, start, block = block)
 }

@@ -7,8 +7,8 @@ import com.blocksdecoded.utils.shared.SharedContract
  * with Android Studio
  */
 class FavoriteInteractor(
-        private val mSharedStorage: SharedContract
-): FavoriteUseCases {
+    private val mSharedStorage: SharedContract
+) : FavoriteUseCases {
 
     companion object {
         private const val FAVORITE_ID_KEY = "favorite_id_key"

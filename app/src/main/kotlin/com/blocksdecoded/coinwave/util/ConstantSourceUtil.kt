@@ -8,10 +8,9 @@ import com.blocksdecoded.utils.glide.GlideApp
 import com.blocksdecoded.utils.logE
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 
-
 // Created by askar on 7/23/18.
 object ConstantSourceUtil {
-    fun getIconUrl(currencyEntity: CurrencyEntity): String{
+    fun getIconUrl(currencyEntity: CurrencyEntity): String {
         return "https://s2.coinmarketcap.com/static/img/coins/32x32/${currencyEntity.id}.png"
     }
 }

@@ -7,7 +7,7 @@ import com.blocksdecoded.coinwave.data.model.CurrencyEntity
  * Created by askar on 2/9/19
  * with Android Studio
  */
-object CoinCacheStorage: CoinCache {
+object CoinCacheStorage : CoinCache {
     private val mCache = HashMap<Int, CurrencyEntity>()
     private val mObservers = hashSetOf<CurrencyUpdateObserver>()
 
@@ -20,7 +20,6 @@ object CoinCacheStorage: CoinCache {
     }
 
     override fun addObserver(observer: CoinCache.CacheObserver) {
-
     }
 
     override fun removeObserver(observer: CoinCache.CacheObserver) {

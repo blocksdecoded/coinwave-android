@@ -13,41 +13,41 @@ import com.blocksdecoded.utils.inflate
 /**
  * Created by Tameki on 2/9/18.
  */
-class OptionSelectorView: LinearLayout, View.OnClickListener {
-	private var mOptions = arrayListOf("first", "second")
-	
-	private var mSelectedBackground = android.R.attr.selectableItemBackground
-	private var mDefaultBackground = android.R.attr.selectableItemBackground
-	
-	private var mSelectedTextColor = R.color.white
-	private var mDefaultTextColor = R.color.light_grey
-	
-	private var mListener: ((number: Int) -> Unit)? = null
-	private var mNumberViews = HashMap<Int, View>()
-	
-	constructor(context: Context): super(context)
-	
-	constructor(context: Context, attributeSet: AttributeSet): super(context, attributeSet){
-		val a = context.theme.obtainStyledAttributes(
-				attributeSet,
-				R.styleable.OptionSelectorView,
-				0, 0
-		)
-		
-		try {
-			mSelectedTextColor = a.getInt(R.styleable.OptionSelectorView_selectedTextColor, R.color.green)
-			mDefaultTextColor = a.getInt(R.styleable.OptionSelectorView_defaultTextColor, R.color.light_text)
+class OptionSelectorView : LinearLayout, View.OnClickListener {
+    private var mOptions = arrayListOf("first", "second")
+
+    private var mSelectedBackground = android.R.attr.selectableItemBackground
+    private var mDefaultBackground = android.R.attr.selectableItemBackground
+
+    private var mSelectedTextColor = R.color.white
+    private var mDefaultTextColor = R.color.light_grey
+
+    private var mListener: ((number: Int) -> Unit)? = null
+    private var mNumberViews = HashMap<Int, View>()
+
+    constructor(context: Context): super(context)
+
+    constructor(context: Context, attributeSet: AttributeSet): super(context, attributeSet) {
+        val a = context.theme.obtainStyledAttributes(
+                attributeSet,
+                R.styleable.OptionSelectorView,
+                0, 0
+        )
+
+        try {
+            mSelectedTextColor = a.getInt(R.styleable.OptionSelectorView_selectedTextColor, R.color.green)
+            mDefaultTextColor = a.getInt(R.styleable.OptionSelectorView_defaultTextColor, R.color.light_text)
 
             mOptions.clear()
             mOptions.addAll(a.getString(R.styleable.OptionSelectorView_osv_options).split(","))
 
-			inflateViews(mOptions)
-		} finally {
-			a.recycle()
-		}
-	}
+            inflateViews(mOptions)
+        } finally {
+            a.recycle()
+        }
+    }
 
-	private fun inflateViews(options: ArrayList<String>){
+    private fun inflateViews(options: ArrayList<String>) {
         mNumberViews.clear()
 
         options.forEachIndexed { index, it ->
@@ -58,37 +58,37 @@ class OptionSelectorView: LinearLayout, View.OnClickListener {
 
             view.setOnClickListener(this)
         }
-		
-		setSelectedView(0)
-	}
 
-    fun setOptions(options: ArrayList<String>){
+        setSelectedView(0)
+    }
+
+    fun setOptions(options: ArrayList<String>) {
         mOptions.clear()
         mOptions.addAll(options)
         inflateViews(mOptions)
     }
-	
-	private fun selectView(view: View){
-		deselectAll()
-		
-		if (view is TextView){
-			view.setTextColor(ResourceUtil.getColor(context, mSelectedTextColor))
-		}
-	}
-	
-	private fun setDefaultView(view: View){
-		if (view is TextView){
-			view.setTextColor(ResourceUtil.getColor(context, mDefaultTextColor))
-		}
-	}
-	
-	private fun deselectAll(){
-		mNumberViews.values.forEach { setDefaultView(it) }
-	}
 
-    private fun onViewInteract(v: View?){
-        v?.let{
-            if (it is TextView){
+    private fun selectView(view: View) {
+        deselectAll()
+
+        if (view is TextView) {
+            view.setTextColor(ResourceUtil.getColor(context, mSelectedTextColor))
+        }
+    }
+
+    private fun setDefaultView(view: View) {
+        if (view is TextView) {
+            view.setTextColor(ResourceUtil.getColor(context, mDefaultTextColor))
+        }
+    }
+
+    private fun deselectAll() {
+        mNumberViews.values.forEach { setDefaultView(it) }
+    }
+
+    private fun onViewInteract(v: View?) {
+        v?.let {
+            if (it is TextView) {
                 it.text?.let { text ->
                     val index = mOptions.indexOfFirst { it == text }
                     setSelectedView(index)
@@ -97,16 +97,16 @@ class OptionSelectorView: LinearLayout, View.OnClickListener {
             }
         }
     }
-	
-	fun setSelectedView(value: Int){
-		mNumberViews[value]?.let {
-			selectView(it)
-		}
-	}
-	
-	fun addClickListener(listener: (position: Int) -> Unit){
-		mListener = listener
-	}
+
+    fun setSelectedView(value: Int) {
+        mNumberViews[value]?.let {
+            selectView(it)
+        }
+    }
+
+    fun addClickListener(listener: (position: Int) -> Unit) {
+        mListener = listener
+    }
 
     override fun onClick(v: View?) {
         Lg.d("View click $v")

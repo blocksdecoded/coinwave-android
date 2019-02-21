@@ -28,14 +28,14 @@ object PermissionUtil {
     //region Public
 
     fun requestPermission(
-            activity: Activity,
-            permission: String,
-            title: String,
-            description: String,
-            onGranted: () -> Unit,
-            onDenied: () -> Unit,
-            onDialog: (dialog: Dialog) -> Unit
-    ){
+        activity: Activity,
+        permission: String,
+        title: String,
+        description: String,
+        onGranted: () -> Unit,
+        onDenied: () -> Unit,
+        onDialog: (dialog: Dialog) -> Unit
+    ) {
         if (checkPermissionExist(activity, arrayListOf(permission))) {
             onGranted.invoke()
         } else {
@@ -87,7 +87,7 @@ object PermissionUtil {
         onGranted: () -> Unit,
         onDenied: () -> Unit,
         onDialog: (dialog: Dialog) -> Unit
-    ){
+    ) {
         if (checkPermissionExist(activity, permissions)) {
             onGranted.invoke()
         } else {
@@ -140,7 +140,7 @@ object PermissionUtil {
     private fun checkPermissionExist(activity: Activity, permissions: ArrayList<String>): Boolean = try {
         var granted = true
         permissions.forEach {
-            if (ContextCompat.checkSelfPermission(activity, it) != PackageManager.PERMISSION_GRANTED){
+            if (ContextCompat.checkSelfPermission(activity, it) != PackageManager.PERMISSION_GRANTED) {
                 granted = false
             }
         }
@@ -150,12 +150,12 @@ object PermissionUtil {
     }
 
     private fun showDescriptionDialog(
-            activity: Activity,
-            title: String,
-            description: String,
-            onPositive: () -> Unit,
-            onNegative: () -> Unit
-    ) : Dialog? = try {
+        activity: Activity,
+        title: String,
+        description: String,
+        onPositive: () -> Unit,
+        onNegative: () -> Unit
+    ): Dialog? = try {
         val builder = AlertDialog.Builder(activity)
         builder.setTitle(title)
         builder.setMessage("$description\n\nThis app needs permission to use this feature.")
@@ -172,7 +172,7 @@ object PermissionUtil {
         null
     }
 
-    private fun showSettingsDialog(activity: Activity, title: String, description: String) : Dialog? = try {
+    private fun showSettingsDialog(activity: Activity, title: String, description: String): Dialog? = try {
         val builder = AlertDialog.Builder(activity)
         builder.setTitle(title)
         builder.setMessage("$description\n\nThis app needs permission to use this feature. You can grant them in app settings.")
@@ -193,7 +193,6 @@ object PermissionUtil {
         intent.data = uri
         activity.startActivityForResult(intent, 101)
     } catch (e: Exception) {
-
     }
 
     //endregion

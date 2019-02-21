@@ -133,7 +133,7 @@ open class CurrencyListFragment :
     }
 
     override fun showNetworkError(hideList: Boolean) {
-        if(hideList){
+        if (hideList) {
             mListHeader.hide()
             mRecycler.hide()
             mErrorContainer.visible()
@@ -162,14 +162,14 @@ open class CurrencyListFragment :
         private val TITLE_KEY = "list_title"
 
         fun newInstance(
-                title: String
+            title: String
         ): CurrencyListFragment = CurrencyListFragment().apply {
             arguments = Bundle()
             arguments?.putString(TITLE_KEY, title)
         }
 
-        fun getTitle(arguments: Bundle?): String{
-            return arguments?.getString(TITLE_KEY)?:""
+        fun getTitle(arguments: Bundle?): String {
+            return arguments?.getString(TITLE_KEY) ?: ""
         }
     }
 }

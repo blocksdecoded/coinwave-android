@@ -12,14 +12,14 @@ import com.blocksdecoded.utils.inRightTransition
 import com.blocksdecoded.utils.outRightTransition
 
 // Created by askar on 7/24/18.
-class CurrencyActivity: SwipeableActivity() {
+class CurrencyActivity : SwipeableActivity() {
     companion object {
         private const val EXTRA_COIN_ID = "currency_id"
 
         fun start(context: Context, clientId: Int) {
             context.startActivity(intent(context, clientId))
 
-            if(context is Activity){
+            if (context is Activity) {
                 context.inRightTransition()
             }
         }

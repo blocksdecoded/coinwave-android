@@ -46,11 +46,11 @@ abstract class BaseRetrofitDataSource {
     }
 
     fun <T> getRetrofitClient(
-            baseUrl: String,
-            client: Class<T>
+        baseUrl: String,
+        client: Class<T>
     ): T = getRetrofit(baseUrl).create(client)
 
-    suspend fun <T: Any> Call<T>.getResult(): Result<T> = suspendCoroutine {
+    suspend fun <T : Any> Call<T>.getResult(): Result<T> = suspendCoroutine {
         enqueue(object : RHWithErrorHandler<T> {
             override fun onSuccess(result: T) {
                 it.resume(Result.Success(result))

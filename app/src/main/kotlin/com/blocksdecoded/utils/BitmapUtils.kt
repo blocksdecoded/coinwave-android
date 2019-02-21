@@ -45,17 +45,17 @@ object BitmapUtils {
         }
     }
 
-    fun compress(source: Bitmap, size: Int): Bitmap{
+    fun compress(source: Bitmap, size: Int): Bitmap {
         val outWidth: Int
         val outHeight: Int
 
         val inWidth = source.width
         val inHeight = source.height
 
-        if (inWidth > inHeight){
+        if (inWidth > inHeight) {
             outWidth = size
             outHeight = (inHeight * size) / inWidth
-        }else{
+        } else {
             outHeight = size
             outWidth = (inWidth * size) / inHeight
         }
@@ -63,8 +63,8 @@ object BitmapUtils {
         return Bitmap.createScaledBitmap(source, outWidth, outHeight, true)
     }
 
-	fun getThumbJPEG(source: Bitmap, quality: Int = THUMB_QUALITY): ByteArray =
-			bitmapToJPEG(compress(source, THUMB_SIZE), quality)
+    fun getThumbJPEG(source: Bitmap, quality: Int = THUMB_QUALITY): ByteArray =
+            bitmapToJPEG(compress(source, THUMB_SIZE), quality)
 
     fun bitmapToJPEG(source: Bitmap, quality: Int = JPEG_QUALITY): ByteArray {
         val stream = ByteArrayOutputStream()
@@ -73,7 +73,7 @@ object BitmapUtils {
         return stream.toByteArray()
     }
 
-    fun bitmapFromView(context: Context, view: View): Bitmap{
+    fun bitmapFromView(context: Context, view: View): Bitmap {
         val displayMetrics = DisplayMetrics()
         (context as Activity).windowManager.defaultDisplay.getMetrics(displayMetrics)
 
@@ -92,28 +92,28 @@ object BitmapUtils {
         return bitmap
     }
 
-	fun getMapboxCenterIcon(context: Context, view: View): Bitmap {
-		val source = bitmapFromView(context, view)
-		return mapboxHeightHackIcon(source)
-	}
+    fun getMapboxCenterIcon(context: Context, view: View): Bitmap {
+        val source = bitmapFromView(context, view)
+        return mapboxHeightHackIcon(source)
+    }
 
-	fun mapboxWidthHackIcon(icon: Bitmap): Bitmap {
-		val loc_img = Bitmap.createBitmap(icon.width * 2, icon.height, Bitmap.Config.ARGB_8888)
-		val bitmapCanvas = Canvas(loc_img)
-		val tempBitmap = icon.copy(Bitmap.Config.ARGB_8888, false)
-		bitmapCanvas.drawBitmap(tempBitmap, 0f, 0f, null)
-		return loc_img
-	}
+    fun mapboxWidthHackIcon(icon: Bitmap): Bitmap {
+        val loc_img = Bitmap.createBitmap(icon.width * 2, icon.height, Bitmap.Config.ARGB_8888)
+        val bitmapCanvas = Canvas(loc_img)
+        val tempBitmap = icon.copy(Bitmap.Config.ARGB_8888, false)
+        bitmapCanvas.drawBitmap(tempBitmap, 0f, 0f, null)
+        return loc_img
+    }
 
-	fun mapboxHeightHackIcon(icon: Bitmap): Bitmap {
-		val loc_img = Bitmap.createBitmap(icon.width, icon.height * 2, Bitmap.Config.ARGB_8888)
-		val bitmapCanvas = Canvas(loc_img)
-		val tempBitmap = icon.copy(Bitmap.Config.ARGB_8888, false)
-		bitmapCanvas.drawBitmap(tempBitmap, 0f, 0f, null)
-		return loc_img
-	}
+    fun mapboxHeightHackIcon(icon: Bitmap): Bitmap {
+        val loc_img = Bitmap.createBitmap(icon.width, icon.height * 2, Bitmap.Config.ARGB_8888)
+        val bitmapCanvas = Canvas(loc_img)
+        val tempBitmap = icon.copy(Bitmap.Config.ARGB_8888, false)
+        bitmapCanvas.drawBitmap(tempBitmap, 0f, 0f, null)
+        return loc_img
+    }
 
-    fun blurBitmap(image: Bitmap, context: Context): Bitmap{
+    fun blurBitmap(image: Bitmap, context: Context): Bitmap {
         val width = Math.round(image.width * BITMAP_SCALE)
         val height = Math.round(image.height * BITMAP_SCALE)
 

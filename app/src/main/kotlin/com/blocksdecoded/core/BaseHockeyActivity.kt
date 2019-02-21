@@ -1,16 +1,16 @@
-//package com.makeuseof.core
+// package com.makeuseof.core
 //
-//import android.os.Bundle
-//import android.support.v7.app.AppCompatActivity
-//import android.content.pm.PackageManager
-//import com.makeuseof.invoiceapp.BuildConfig
-//import net.hockeyapp.android.CrashManager
-//import net.hockeyapp.android.CrashManagerListener
-//import net.hockeyapp.android.UpdateManager
+// import android.os.Bundle
+// import android.support.v7.app.AppCompatActivity
+// import android.content.pm.PackageManager
+// import com.makeuseof.invoiceapp.BuildConfig
+// import net.hockeyapp.android.CrashManager
+// import net.hockeyapp.android.CrashManagerListener
+// import net.hockeyapp.android.UpdateManager
 //
 //
-//// Created by askar on 6/6/18.
-//open class BaseHockeyActivity: AppCompatActivity() {
+// // Created by askar on 6/6/18.
+// open class BaseHockeyActivity: AppCompatActivity() {
 //
 //    override fun onCreate(savedInstanceState: Bundle?) {
 //        super.onCreate(savedInstanceState)
@@ -46,7 +46,7 @@
 //                    }
 //                })
 //            } catch (e: Exception) {
-////                Lg.d(e.message)
+// //                Lg.d(e.message)
 //                e.printStackTrace()
 //            }
 //        }
@@ -64,4 +64,4 @@
 //            UpdateManager.unregister()
 //        }
 //    }
-//}
+// }

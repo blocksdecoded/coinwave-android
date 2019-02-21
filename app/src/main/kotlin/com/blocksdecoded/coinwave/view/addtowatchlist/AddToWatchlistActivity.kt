@@ -5,9 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.blocksdecoded.coinwave.domain.UseCaseProvider
-import com.blocksdecoded.coinwave.view.currency.CurrencyActivity
-import com.blocksdecoded.coinwave.view.currency.CurrencyFragment
-import com.blocksdecoded.coinwave.view.currency.CurrencyPresenter
 import com.blocksdecoded.core.SwipeableActivity
 import com.blocksdecoded.utils.inRightTransition
 import com.blocksdecoded.utils.outRightTransition
@@ -16,7 +13,7 @@ import com.blocksdecoded.utils.outRightTransition
  * Created by askar on 2/11/19
  * with Android Studio
  */
-class AddToWatchlistActivity: SwipeableActivity() {
+class AddToWatchlistActivity : SwipeableActivity() {
 
     private var mPresenter: AddToWatchlistContract.Presenter? = null
 
@@ -56,7 +53,7 @@ class AddToWatchlistActivity: SwipeableActivity() {
         fun start(context: Context) {
             context.startActivity(intent(context))
 
-            if(context is Activity){
+            if (context is Activity) {
                 context.inRightTransition()
             }
         }

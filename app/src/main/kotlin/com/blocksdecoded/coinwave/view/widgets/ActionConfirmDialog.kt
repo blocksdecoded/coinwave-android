@@ -13,8 +13,8 @@ import com.blocksdecoded.coinwave.R
 
 // Created by askar on 7/3/18.
 class ActionConfirmDialog(
-        context: Context
-): Dialog(context), View.OnClickListener {
+    context: Context
+) : Dialog(context), View.OnClickListener {
     private var mConfirmButton: TextView? = null
     private var mCancelButton: TextView? = null
     private var mTitle: TextView? = null
@@ -32,22 +32,22 @@ class ActionConfirmDialog(
 
     //region Builder
 
-    fun showDialog(): ActionConfirmDialog{
+    fun showDialog(): ActionConfirmDialog {
         show()
         return this
     }
 
-    fun setTitle(text: String): ActionConfirmDialog{
+    fun setTitle(text: String): ActionConfirmDialog {
         mTitleText = text
         return this
     }
 
-    fun setConfirmText(text: String): ActionConfirmDialog{
+    fun setConfirmText(text: String): ActionConfirmDialog {
         mConfirmText = text
         return this
     }
 
-    fun setCancelText(text: String): ActionConfirmDialog{
+    fun setCancelText(text: String): ActionConfirmDialog {
         mCancelText = text
         return this
     }
@@ -81,7 +81,7 @@ class ActionConfirmDialog(
         window.attributes.width = WindowManager.LayoutParams.MATCH_PARENT
     }
 
-    private fun initView(){
+    private fun initView() {
         mTitle = findViewById(R.id.dialog_delete_title)
         mConfirmButton = findViewById(R.id.dialog_delete_confirm)
         mCancelButton = findViewById(R.id.dialog_delete_cancel)
@@ -104,7 +104,7 @@ class ActionConfirmDialog(
     }
 
     override fun onClick(v: View?) {
-        when(v){
+        when (v) {
             mConfirmButton -> mConfirmListener?.invoke(this)
 
             mCancelButton -> mCancelListener?.invoke(this)

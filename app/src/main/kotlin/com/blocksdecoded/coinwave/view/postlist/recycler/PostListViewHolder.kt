@@ -17,9 +17,9 @@ import com.blocksdecoded.coinwave.view.postlist.util.setRandomBg
  * with Android Studio
  */
 class PostListViewHolder(
-        view: View,
-        private val mListener: PostVHCLickListener
-): RecyclerView.ViewHolder(view) {
+    view: View,
+    private val mListener: PostVHCLickListener
+) : RecyclerView.ViewHolder(view) {
     @BindView(R.id.adapter_post_item_image)
     lateinit var mImage: ImageView
     @BindView(R.id.adapter_post_item_title)
@@ -40,7 +40,7 @@ class PostListViewHolder(
         ButterKnife.bind(this, view)
     }
 
-    fun onBind(post: PublisherPost){
+    fun onBind(post: PublisherPost) {
         itemView.setRandomBg(adapterPosition)
 
         mTitle.text = post.title
@@ -54,7 +54,7 @@ class PostListViewHolder(
         }
     }
 
-    interface PostVHCLickListener{
+    interface PostVHCLickListener {
         fun onClick(position: Int)
     }
 }

@@ -4,29 +4,29 @@ import androidx.annotation.CallSuper
 import com.blocksdecoded.utils.Lg
 
 abstract class BaseMVPPresenter<T>(
-        var mView: T?
-): BaseMVPContract.Presenter<T> {
+    var mView: T?
+) : BaseMVPContract.Presenter<T> {
 
-	init {
-		injectSelfToView()
-	}
+    init {
+        injectSelfToView()
+    }
 
-    fun injectSelfToView(){
-        try{
+    fun injectSelfToView() {
+        try {
             @Suppress("LeakingThis")
-            if (mView != null && mView is BaseMVPContract.View<*>){
+            if (mView != null && mView is BaseMVPContract.View<*>) {
                 @Suppress("LeakingThis")
                 (mView as BaseMVPContract.View<BaseMVPContract.Presenter<*>>).setPresenter(this)
             }
-        }catch (e: Exception){
+        } catch (e: Exception) {
             Lg.d(e.message)
         }
     }
 
     @CallSuper
     override fun detachView() {
-        try{
-            if (mView != null && mView is BaseMVPContract.View<*>){
+        try {
+            if (mView != null && mView is BaseMVPContract.View<*>) {
                 (mView as BaseMVPContract.View<BaseMVPContract.Presenter<*>>).clearPresenter()
             }
         } catch (e: Exception) {
@@ -36,16 +36,16 @@ abstract class BaseMVPPresenter<T>(
     }
 
     override fun onStart() {
-	}
+    }
 
-	override fun onResume() {
-	}
+    override fun onResume() {
+    }
 
-	override fun onPause() {
-	}
+    override fun onPause() {
+    }
 
     @CallSuper
-	override fun onDestroy() {
-		mView = null
-	}
+    override fun onDestroy() {
+        mView = null
+    }
 }

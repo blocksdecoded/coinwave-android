@@ -31,7 +31,7 @@ inline fun <T : Any, R : Any> Result<T>.mapOnSuccess(map: (T) -> R) = when (this
     is Error -> this
 }
 
-suspend fun <T: Any> Call<T>.getResult(): Result<T> = suspendCoroutine {
+suspend fun <T : Any> Call<T>.getResult(): Result<T> = suspendCoroutine {
         enqueue(object : RHWithErrorHandler<T> {
             override fun onSuccess(result: T) {
                 it.resume(Result.Success(result))

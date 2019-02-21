@@ -13,9 +13,9 @@ import com.blocksdecoded.coinwave.util.loadIcon
  * with Android Studio
  */
 class AddToWatchlistVH(
-        view: View,
-        private val mListener: WatchlistVHClickListener
-): RecyclerView.ViewHolder(view) {
+    view: View,
+    private val mListener: WatchlistVHClickListener
+) : RecyclerView.ViewHolder(view) {
 
     private val nameTextView: TextView = itemView.findViewById(R.id.adapter_watchlist_item_name)
     private val symbolTextView: TextView = itemView.findViewById(R.id.adapter_watchlist_item_symbol)

@@ -5,13 +5,12 @@ import android.os.Bundle
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.blocksdecoded.utils.logE
 
-
 // Created by askar on 11/15/18.
 object GoogleAnalytics : AnalyticsContract {
 
     private var mFirebaseAnalytics: FirebaseAnalytics? = null
 
-    fun initAnalytics(context: Context){
+    fun initAnalytics(context: Context) {
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(context)
     }
 

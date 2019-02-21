@@ -5,6 +5,6 @@ package com.blocksdecoded.coinwave.data.crypto.remote.model
  * with Android Studio
  */
 data class ChartResponse(
-        val status: String,
-        val data: ChartListResponse
+    val status: String,
+    val data: ChartListResponse
 )

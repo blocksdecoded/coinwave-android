@@ -123,7 +123,7 @@ open class PostFragment : BaseMVPFragment<PostContract.Presenter>(), PostContrac
         mPost = post
         var postBody: String = post.html ?: return
 
-        if (!getTextClassNameForBody(this).isEmpty()){
+        if (!getTextClassNameForBody(this).isEmpty()) {
             postBody = postBody.replace("<body", "<body class=\"" + getTextClassNameForBody(this) + "\"")
         }
         postBody = postBody.replace("class=\"article__poster\"", String.format("class=\"article__poster\" onClick=\"muo_android.clickImage('%s');return false;\"", post.image?.featured))

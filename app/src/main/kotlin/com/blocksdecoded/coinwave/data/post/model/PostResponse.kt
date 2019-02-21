@@ -7,5 +7,5 @@ import com.google.gson.annotations.SerializedName
  * with Android Studio
  */
 data class PostResponse(
-        @SerializedName("posts") val posts: List<PublisherPost>
+    @SerializedName("posts") val posts: List<PublisherPost>
 )

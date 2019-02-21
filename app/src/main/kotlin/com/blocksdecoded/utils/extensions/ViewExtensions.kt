@@ -13,5 +13,4 @@ fun View.setConstraintTopMargin(value: Int) = try {
     params.topMargin = value
     layoutParams = params
 } catch (e: Exception) {
-
 }

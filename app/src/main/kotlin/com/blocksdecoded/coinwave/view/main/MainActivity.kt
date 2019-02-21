@@ -70,12 +70,12 @@ class MainActivity :
     }
 
     override fun onBackPressed() {
-        if (drawer_layout.isDrawerOpen(GravityCompat.START)){
+        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             closeDrawer()
         } else {
-            when(main_view_pager.currentItem){
+            when (main_view_pager.currentItem) {
                 0 -> super.onBackPressed()
-                else -> {main_view_pager.currentItem = 0}
+                else -> { main_view_pager.currentItem = 0 }
             }
         }
     }
@@ -159,7 +159,7 @@ class MainActivity :
             val flags = if (drawerOpen) {
                 0
             } else {
-                when(main_view_pager.currentItem) {
+                when (main_view_pager.currentItem) {
                     0, 2 -> 0
                     else -> View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
                 }
@@ -179,7 +179,7 @@ class MainActivity :
     private fun init() {
         initNavigationDrawer()
 
-        val fragments = arrayListOf (
+        val fragments = arrayListOf(
                 createCurrencyListScreen(),
                 createWatchListScreen(),
                 createPostListScreen()
@@ -250,7 +250,7 @@ class MainActivity :
 
         drawer_top_container.setConstraintTopMargin(DimenUtils.getStatusBarHeight(this))
 
-        drawer_layout.addDrawerListener(object : androidx.drawerlayout.widget.DrawerLayout.DrawerListener{
+        drawer_layout.addDrawerListener(object : androidx.drawerlayout.widget.DrawerLayout.DrawerListener {
             override fun onDrawerStateChanged(p0: Int) {
             }
 
@@ -278,7 +278,7 @@ class MainActivity :
         main_view_pager.adapter = adapter
         main_view_pager.offscreenPageLimit = 4
 
-        main_view_pager.addOnPageChangeListener(object : androidx.viewpager.widget.ViewPager.OnPageChangeListener{
+        main_view_pager.addOnPageChangeListener(object : androidx.viewpager.widget.ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) = Unit
 
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
@@ -290,7 +290,6 @@ class MainActivity :
                 updateStatusBar()
             }
         })
-
     }
 
     private fun getNavigationItemId(position: Int): Int = when (position) {
@@ -309,7 +308,7 @@ class MainActivity :
     }
 
     override fun onClick(v: View?) {
-        when(v){
+        when (v) {
             drawer_add_watchlist -> drawerItemClick { AddToWatchlistActivity.start(this) }
             drawer_favorite -> drawerItemClick { PickFavoriteActivity.start(this) }
             drawer_contact_us -> drawerItemClick { ShareUtils.contactUs(this) }
@@ -324,7 +323,7 @@ class MainActivity :
         }
     }
 
-    private inline fun drawerItemClick(body: () -> Unit){
+    private inline fun drawerItemClick(body: () -> Unit) {
         body.invoke()
         closeDrawer()
     }
@@ -333,11 +332,11 @@ class MainActivity :
 
     //region Navigation Drawer
 
-    private fun openDrawer(){
+    private fun openDrawer() {
         drawer_layout.openDrawer(GravityCompat.START)
     }
 
-    private fun closeDrawer(delay: Long = 0L){
+    private fun closeDrawer(delay: Long = 0L) {
         Handler().postDelayed({
             drawer_layout.closeDrawer(GravityCompat.START)
         }, delay)

@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName
  */
 
 data class PublisherImage(
-        @SerializedName("featured") var featured: String?,
-        @SerializedName("thumb") var thumb: String?,
-        @SerializedName("middle") var middle: String?
+    @SerializedName("featured") var featured: String?,
+    @SerializedName("thumb") var thumb: String?,
+    @SerializedName("middle") var middle: String?
 )

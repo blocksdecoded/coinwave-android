@@ -11,7 +11,7 @@ import android.widget.Toast
  * Created by Tameki on 2/5/18.
  */
 
-fun showSnack(view: View, text: String){
+fun showSnack(view: View, text: String) {
     Snackbar.make(
             view,
             text,
@@ -26,10 +26,10 @@ fun showShortToast(context: Context?, text: String) = showToast(context, text, T
 
 fun showLongToast(context: Context?, text: String) = showToast(context, text, Toast.LENGTH_LONG)
 
-private fun showToast(context: Context?, text: String, length: Int){
-	context?.let {
-		Toast.makeText(it, text, length).show()
-	}
+private fun showToast(context: Context?, text: String, length: Int) {
+    context?.let {
+        Toast.makeText(it, text, length).show()
+    }
 }
 
 fun isAppIsInBackground(context: Context): Boolean {

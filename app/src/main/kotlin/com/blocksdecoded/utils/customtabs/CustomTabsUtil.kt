@@ -5,7 +5,6 @@ import android.graphics.Color
 import android.net.Uri
 import androidx.browser.customtabs.CustomTabsClient
 import androidx.browser.customtabs.CustomTabsIntent
-import androidx.browser.customtabs.CustomTabsService
 import androidx.browser.customtabs.CustomTabsServiceConnection
 import com.blocksdecoded.coinwave.R
 
@@ -20,16 +19,14 @@ object CustomTabsUtil {
     fun bindToService(context: Context, connection: CustomTabsServiceConnection) = try {
         CustomTabsClient.bindCustomTabsService(context, CUSTOM_TAB_PACKAGE_NAME, connection)
     } catch (e: Exception) {
-
     }
 
     fun unbindFromService() {
-
     }
 
     fun openUrl(
-            context: Context,
-            url: String
+        context: Context,
+        url: String
     ) {
         CustomTabsIntent
                 .Builder()
@@ -39,5 +36,4 @@ object CustomTabsUtil {
                 .build()
                 .launchUrl(context, Uri.parse(url))
     }
-
 }

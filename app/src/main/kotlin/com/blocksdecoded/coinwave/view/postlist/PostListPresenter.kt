@@ -11,10 +11,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainCoroutineDispatcher
 
 class PostListPresenter(
-        view: PostListContract.View?,
-        private val mMenuListener: MenuClickListener,
-        private val mPostUseCases: PostsUseCases,
-        private val ui: MainCoroutineDispatcher = Dispatchers.Main
+    view: PostListContract.View?,
+    private val mMenuListener: MenuClickListener,
+    private val mPostUseCases: PostsUseCases,
+    private val ui: MainCoroutineDispatcher = Dispatchers.Main
 ) : BaseMVPPresenter<PostListContract.View>(view), PostListContract.Presenter {
 
     private var mInitialized = false
@@ -34,7 +34,7 @@ class PostListPresenter(
 
     //region Contract
 
-    override fun onPostClick(id: Int) = launchSilent(ui){
+    override fun onPostClick(id: Int) = launchSilent(ui) {
         mPostUseCases.getPost(id)?.also {
             it.url?.also {
                 mView?.openPost(it)
@@ -56,7 +56,7 @@ class PostListPresenter(
                 }
     }
 
-    override fun getNextPosts()  = launchSilent(ui){
+    override fun getNextPosts() = launchSilent(ui) {
         mPostUseCases.getNextPosts()
                 ?.onSuccess { mView?.nextPosts(it) }
     }
