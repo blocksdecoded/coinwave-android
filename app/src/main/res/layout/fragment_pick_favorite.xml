@@ -42,12 +42,39 @@
                 android:textSize="@dimen/small_title_text_size" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.appbar.AppBarLayout>
-
+    
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fragment_pick_favorite_error_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+        
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintVertical_bias="0.35">
+            <include layout="@layout/partial_connection_error" />
+        </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
+        
+        <ProgressBar
+            android:id="@+id/fragment_pick_favorite_progress"
+            android:layout_width="@dimen/progressBar_small"
+            android:layout_height="@dimen/progressBar_small"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="24dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+        
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/fragment_pick_favorite_recycler"
             android:layout_width="match_parent"

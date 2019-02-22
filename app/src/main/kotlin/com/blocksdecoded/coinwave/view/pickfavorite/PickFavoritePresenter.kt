@@ -5,6 +5,8 @@ import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.domain.usecases.favorite.FavoriteUseCases
 import com.blocksdecoded.coinwave.domain.usecases.coins.CoinsUseCases
 import com.blocksdecoded.utils.coroutine.launchSilent
+import com.blocksdecoded.utils.coroutine.model.onError
+import com.blocksdecoded.utils.coroutine.model.onResult
 import com.blocksdecoded.utils.coroutine.model.onSuccess
 import com.blocksdecoded.utils.isValidIndex
 import kotlinx.coroutines.Dispatchers
@@ -42,8 +44,17 @@ class PickFavoritePresenter(
     }
 
     private fun getCoins() = launchSilent(uiContext) {
+        mView?.hideError()
+        mView?.showLoading()
         mCoinsUseCases.getCoins(false)
-                .onSuccess { updateCache(it) }
+                .onSuccess {
+                    mView?.hideLoading()
+                    updateCache(it)
+                }
+                .onError {
+                    mView?.hideLoading()
+                    mView?.showError()
+                }
     }
 
     //endregion
@@ -56,6 +67,10 @@ class PickFavoritePresenter(
             mView?.showMessage("Favorite saved.")
             mView?.finishView()
         }
+    }
+
+    override fun onRetryClick() {
+        getCoins()
     }
 
     //endregion

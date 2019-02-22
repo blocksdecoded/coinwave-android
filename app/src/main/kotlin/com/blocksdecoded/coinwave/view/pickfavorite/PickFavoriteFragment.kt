@@ -10,6 +10,8 @@ import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.view.coinslist.recycler.CoinsListAdapter
 import com.blocksdecoded.coinwave.view.coinslist.recycler.CoinsListVH
+import com.blocksdecoded.utils.hide
+import com.blocksdecoded.utils.visible
 
 class PickFavoriteFragment :
         BaseMVPFragment<PickFavoriteContract.Presenter>(),
@@ -26,10 +28,22 @@ class PickFavoriteFragment :
     @JvmField var mRecycler: RecyclerView? = null
     private var mAdapter: CoinsListAdapter? = null
 
-    @OnClick(R.id.back)
+    @BindView(R.id.fragment_pick_favorite_header)
+    lateinit var mHeader: View
+    @BindView(R.id.fragment_pick_favorite_error_container)
+    lateinit var mErrorContainer: View
+    @BindView(R.id.fragment_pick_favorite_progress)
+    lateinit var mProgress: View
+
+    @OnClick(
+            R.id.back,
+            R.id.connection_error_retry
+    )
     fun onClick(view: View) {
         when (view.id) {
             R.id.back -> finishView()
+
+            R.id.connection_error_retry -> mPresenter?.onRetryClick()
         }
     }
 
@@ -54,11 +68,33 @@ class PickFavoriteFragment :
     override fun onPick(position: Int) {
     }
 
+    override fun showError() {
+        mHeader.hide()
+        mRecycler.hide()
+        mErrorContainer.visible()
+    }
+
+    override fun hideError() {
+        mErrorContainer.hide()
+    }
+
+    override fun showLoading() {
+        mRecycler.hide()
+        mHeader.hide()
+        mProgress.visible()
+    }
+
+    override fun hideLoading() {
+        mProgress.hide()
+    }
+
     //endregion
 
     //region Contract
 
     override fun showCoins(coins: List<CoinEntity>) {
+        mHeader.visible()
+        mRecycler.visible()
         mAdapter?.setItems(coins)
     }
 
