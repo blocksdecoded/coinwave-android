@@ -57,7 +57,7 @@
 
         <include
             android:id="@+id/fragment_pick_favorite_header"
-            layout="@layout/content_currency_list_header" />
+            layout="@layout/partial_coins_header" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

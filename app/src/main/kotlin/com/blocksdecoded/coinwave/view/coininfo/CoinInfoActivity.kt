@@ -1,4 +1,4 @@
-package com.blocksdecoded.coinwave.view.currency
+package com.blocksdecoded.coinwave.view.coininfo
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -12,9 +12,35 @@ import com.blocksdecoded.utils.inRightTransition
 import com.blocksdecoded.utils.outRightTransition
 
 // Created by askar on 7/24/18.
-class CurrencyActivity : SwipeableActivity() {
+class CoinInfoActivity : SwipeableActivity() {
+
+    private var mPresenter: CoinInfoContract.Presenter? = null
+
+    @SuppressLint("CommitTransaction")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        NetworkErrorHandler.getInstance(applicationContext)
+
+        if (savedInstanceState == null) {
+            val fragment = CoinInfoFragment.newInstance()
+
+            supportFragmentManager
+                    .beginTransaction()
+                    .add(android.R.id.content, fragment)
+                    .commit()
+
+            mPresenter = CoinInfoPresenter(
+                    fragment,
+                    UseCaseProvider.getChartsInteractor(this),
+                    UseCaseProvider.getCoinsUseCases(this)
+            )
+
+            mPresenter?.fetchCurrencyData(getIdFromIntent(intent))
+        }
+    }
+
     companion object {
-        private const val EXTRA_COIN_ID = "currency_id"
+        private const val EXTRA_COIN_ID = "coin_id"
 
         fun start(context: Context, clientId: Int) {
             context.startActivity(intent(context, clientId))
@@ -25,7 +51,7 @@ class CurrencyActivity : SwipeableActivity() {
         }
 
         fun intent(context: Context, clientId: Int): Intent {
-            val intent = Intent(context, CurrencyActivity::class.java)
+            val intent = Intent(context, CoinInfoActivity::class.java)
 
             intent.putExtra(EXTRA_COIN_ID, clientId)
 
@@ -43,30 +69,5 @@ class CurrencyActivity : SwipeableActivity() {
     override fun finish() {
         super.finish()
         outRightTransition()
-    }
-
-    private var mPresenter: CurrencyContract.Presenter? = null
-
-    @SuppressLint("CommitTransaction")
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        NetworkErrorHandler.getInstance(applicationContext)
-
-        if (savedInstanceState == null) {
-            val fragment = CurrencyFragment.newInstance()
-
-            supportFragmentManager
-                    .beginTransaction()
-                    .add(android.R.id.content, fragment)
-                    .commit()
-
-            mPresenter = CurrencyPresenter(
-                    fragment,
-                    UseCaseProvider.getChartsInteractor(this),
-                    UseCaseProvider.getCurrencyListUseCases(this)
-            )
-
-            mPresenter?.fetchCurrencyData(getIdFromIntent(intent))
-        }
     }
 }

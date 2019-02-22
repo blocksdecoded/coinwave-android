@@ -10,23 +10,23 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.data.model.ChartData
-import com.blocksdecoded.coinwave.data.model.CurrencyEntity
+import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.view.widgets.chart.ChartListener
 import com.blocksdecoded.utils.Lg
 import com.blocksdecoded.utils.ResourceUtil
 import com.blocksdecoded.utils.isValidIndex
 
 // Created by askar on 7/23/18.
-fun List<CurrencyEntity>.findCurrency(currencyEntity: CurrencyEntity, body: ((index: Int) -> Unit)? = null): Int {
-    val index = this.indexOfFirst { it.id == currencyEntity.id }
+fun List<CoinEntity>.findCurrency(coinEntity: CoinEntity, body: ((index: Int) -> Unit)? = null): Int {
+    val index = this.indexOfFirst { it.id == coinEntity.id }
     if (this.isValidIndex(index)) {
         body?.invoke(index)
     }
     return index
 }
 
-fun ArrayList<CurrencyEntity>.addSortedByRank(currencyEntity: CurrencyEntity) {
-    this.add(currencyEntity)
+fun ArrayList<CoinEntity>.addSortedByRank(coinEntity: CoinEntity) {
+    this.add(coinEntity)
     this.sortBy { it.rank }
 }
 

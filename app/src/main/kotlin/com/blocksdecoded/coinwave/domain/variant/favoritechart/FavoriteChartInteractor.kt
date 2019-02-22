@@ -2,10 +2,10 @@ package com.blocksdecoded.coinwave.domain.variant.favoritechart
 
 import android.content.res.Resources
 import com.blocksdecoded.coinwave.data.model.ChartData
-import com.blocksdecoded.coinwave.data.model.CurrencyEntity
+import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.domain.usecases.chart.ChartsUseCases
 import com.blocksdecoded.coinwave.domain.usecases.favorite.FavoriteUseCases
-import com.blocksdecoded.coinwave.domain.usecases.list.CurrencyListUseCases
+import com.blocksdecoded.coinwave.domain.usecases.coins.CoinsUseCases
 import com.blocksdecoded.utils.coroutine.model.Result
 
 /**
@@ -15,14 +15,14 @@ import com.blocksdecoded.utils.coroutine.model.Result
 class FavoriteChartInteractor(
     private val mChartsUseCases: ChartsUseCases,
     private val mFavoriteUseCases: FavoriteUseCases,
-    private val mCurrencyUseCases: CurrencyListUseCases
+    private val mCurrencyUseCases: CoinsUseCases
 ) : FavoriteChartUseVariant {
     override suspend fun getChart(): Result<ChartData>? {
         return mChartsUseCases.getChartData(mFavoriteUseCases.getId(), CHART_PERIOD)
     }
 
-    override suspend fun getCurrency(): Result<CurrencyEntity>? {
-        val entity = mCurrencyUseCases.getCurrency(mFavoriteUseCases.getId())
+    override suspend fun getCurrency(): Result<CoinEntity>? {
+        val entity = mCurrencyUseCases.getCoin(mFavoriteUseCases.getId())
 
         return if (entity != null) {
             Result.Success(entity)

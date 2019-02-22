@@ -5,7 +5,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.blocksdecoded.coinwave.R
-import com.blocksdecoded.coinwave.data.model.CurrencyEntity
+import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.util.loadIcon
 
 /**
@@ -27,7 +27,7 @@ class AddToWatchlistVH(
 //        mWatchIcon.setOnClickListener { mListener.onWatchClick(adapterPosition) }
     }
 
-    fun onBind(coin: CurrencyEntity) {
+    fun onBind(coin: CoinEntity) {
         nameTextView.text = coin.name
         symbolTextView.text = coin.symbol
 

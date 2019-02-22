@@ -60,7 +60,7 @@
             android:theme="@style/AppTheme.DrawerMenuItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/pick_favorite_currency"
+            android:text="@string/pick_favorite_coin"
             app:layout_constraintTop_toBottomOf="@+id/drawer_close_menu"
             app:ftv_typeface="light"/>
 

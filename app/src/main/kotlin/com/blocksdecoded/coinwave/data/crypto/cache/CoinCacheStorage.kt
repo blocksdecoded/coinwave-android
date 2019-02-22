@@ -1,20 +1,20 @@
 package com.blocksdecoded.coinwave.data.crypto.cache
 
-import com.blocksdecoded.coinwave.data.crypto.CurrencyUpdateObserver
-import com.blocksdecoded.coinwave.data.model.CurrencyEntity
+import com.blocksdecoded.coinwave.data.crypto.CoinsUpdateObserver
+import com.blocksdecoded.coinwave.data.model.CoinEntity
 
 /**
  * Created by askar on 2/9/19
  * with Android Studio
  */
 object CoinCacheStorage : CoinCache {
-    private val mCache = HashMap<Int, CurrencyEntity>()
-    private val mObservers = hashSetOf<CurrencyUpdateObserver>()
+    private val mCache = HashMap<Int, CoinEntity>()
+    private val mObservers = hashSetOf<CoinsUpdateObserver>()
 
-    override fun setCache(coins: List<CurrencyEntity>) {
-        coins.forEach { currency ->
-            mCache[currency.id] = currency
-            mObservers.forEach { it.onAdded(currency) }
+    override fun setCache(coins: List<CoinEntity>) {
+        coins.forEach { coin ->
+            mCache[coin.id] = coin
+            mObservers.forEach { it.onAdded(coin) }
         }
         mObservers.forEach { it.onUpdated(coins) }
     }

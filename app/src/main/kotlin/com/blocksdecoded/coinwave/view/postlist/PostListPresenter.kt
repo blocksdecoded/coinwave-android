@@ -3,7 +3,7 @@ package com.blocksdecoded.coinwave.view.postlist
 import com.blocksdecoded.utils.coroutine.model.onError
 import com.blocksdecoded.utils.coroutine.model.onSuccess
 import com.blocksdecoded.core.mvp.BaseMVPPresenter
-import com.blocksdecoded.coinwave.domain.usecases.postlist.PostsUseCases
+import com.blocksdecoded.coinwave.domain.usecases.posts.PostsUseCases
 import com.blocksdecoded.coinwave.view.main.MenuClickListener
 import com.blocksdecoded.utils.Lg
 import com.blocksdecoded.utils.coroutine.launchSilent

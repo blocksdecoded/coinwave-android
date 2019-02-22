@@ -5,22 +5,22 @@ import com.blocksdecoded.coinwave.domain.usecases.chart.ChartsUseCases
 import com.blocksdecoded.coinwave.domain.usecases.chart.ChartsInteractor
 import com.blocksdecoded.coinwave.domain.usecases.favorite.FavoriteInteractor
 import com.blocksdecoded.coinwave.domain.usecases.favorite.FavoriteUseCases
-import com.blocksdecoded.coinwave.domain.usecases.list.CurrencyListInteractor
-import com.blocksdecoded.coinwave.domain.usecases.list.CurrencyListUseCases
-import com.blocksdecoded.coinwave.domain.usecases.postlist.PostsInteractor
-import com.blocksdecoded.coinwave.domain.usecases.postlist.PostsUseCases
+import com.blocksdecoded.coinwave.domain.usecases.coins.CoinsInteractor
+import com.blocksdecoded.coinwave.domain.usecases.coins.CoinsUseCases
+import com.blocksdecoded.coinwave.domain.usecases.posts.PostsInteractor
+import com.blocksdecoded.coinwave.domain.usecases.posts.PostsUseCases
 import com.blocksdecoded.coinwave.domain.variant.favoritechart.FavoriteChartInteractor
 import com.blocksdecoded.coinwave.domain.variant.favoritechart.FavoriteChartUseVariant
 import com.blocksdecoded.utils.shared.SharedStorage
 
 // Created by askar on 7/19/18.
 object UseCaseProvider {
-    fun getCurrencyListUseCases(context: Context): CurrencyListUseCases = CurrencyListInteractor(
-            SourceProvider.getCurrencySource(context)
+    fun getCoinsUseCases(context: Context): CoinsUseCases = CoinsInteractor(
+            SourceProvider.getCoinsSource(context)
     )
 
     fun getChartsInteractor(context: Context): ChartsUseCases = ChartsInteractor(
-            SourceProvider.getCurrencySource(context),
+            SourceProvider.getCoinsSource(context),
             SourceProvider.getChartsSource()
     )
 
@@ -35,6 +35,6 @@ object UseCaseProvider {
     fun getFavoriteChartUseVariant(context: Context): FavoriteChartUseVariant = FavoriteChartInteractor(
             getChartsInteractor(context),
             getFavoriteUseCases(context),
-            getCurrencyListUseCases(context)
+            getCoinsUseCases(context)
     )
 }

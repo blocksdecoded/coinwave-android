@@ -3,7 +3,7 @@ package com.blocksdecoded.coinwave.data.model
 import com.google.gson.annotations.SerializedName
 
 // Created by askar on 7/19/18.
-data class CurrencyEntity(
+data class CoinEntity(
     @SerializedName("id") val id: Int,
     @SerializedName("name") val name: String,
     @SerializedName("symbol") val symbol: String,

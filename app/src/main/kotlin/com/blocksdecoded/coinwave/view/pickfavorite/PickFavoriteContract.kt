@@ -1,15 +1,15 @@
 package com.blocksdecoded.coinwave.view.pickfavorite
 
 import com.blocksdecoded.core.mvp.BaseMVPContract
-import com.blocksdecoded.coinwave.data.model.CurrencyEntity
+import com.blocksdecoded.coinwave.data.model.CoinEntity
 
 interface PickFavoriteContract {
 
     interface View : BaseMVPContract.View<Presenter> {
-        fun showCurrencies(currencies: List<CurrencyEntity>)
+        fun showCoins(coins: List<CoinEntity>)
     }
 
     interface Presenter : BaseMVPContract.Presenter<View> {
-        fun onCurrencyClick(position: Int)
+        fun onCoinClick(position: Int)
     }
 }

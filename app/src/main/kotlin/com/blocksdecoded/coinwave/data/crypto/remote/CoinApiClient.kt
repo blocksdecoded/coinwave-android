@@ -2,8 +2,8 @@ package com.blocksdecoded.coinwave.data.crypto.remote
 
 import com.blocksdecoded.coinwave.BuildConfig
 import com.blocksdecoded.coinwave.data.model.ChartPeriodEnum
-import com.blocksdecoded.coinwave.data.crypto.remote.model.ChartResponse
-import com.blocksdecoded.coinwave.data.model.CurrencyListResponse
+import com.blocksdecoded.coinwave.data.crypto.remote.model.HistoryResponse
+import com.blocksdecoded.coinwave.data.model.CoinsResponse
 import com.blocksdecoded.core.network.CoreApiClient
 import com.blocksdecoded.utils.coroutine.model.Result
 import retrofit2.Call
@@ -15,7 +15,7 @@ import retrofit2.http.Query
  * Created by askar on 2/12/19
  * with Android Studio
  */
-internal object CurrencyApiClient : CoreApiClient(), CurrencyClient {
+internal object CoinApiClient : CoreApiClient(), CoinClient {
     private val mClient: CurrencyNetworkClient
 
     init {
@@ -27,39 +27,39 @@ internal object CurrencyApiClient : CoreApiClient(), CurrencyClient {
 
     //region Public
 
-    override suspend fun getCurrencies(pageSize: Int): Result<CurrencyListResponse> =
-            mClient.getCurrencies(pageSize).getResult()
+    override suspend fun getCoins(pageSize: Int): Result<CoinsResponse> =
+            mClient.getCoins(pageSize).getResult()
 
-    override suspend fun getCurrencies(pageSize: Int, ids: String): Result<CurrencyListResponse> =
-            mClient.getCurrencies(pageSize, ids).getResult()
+    override suspend fun getCoins(pageSize: Int, ids: String): Result<CoinsResponse> =
+            mClient.getCoins(pageSize, ids).getResult()
 
-    override suspend fun getHistory(chartName: String, period: ChartPeriodEnum): Result<ChartResponse> =
+    override suspend fun getHistory(chartName: String, period: ChartPeriodEnum): Result<HistoryResponse> =
             mClient.getChartForTime(chartName, period.displayName).getResult()
 
     //endregion
 
     private interface CurrencyNetworkClient {
 
-        @GET(CURRENCIES_PATH)
-        fun getCurrencies(@Query("limit") limit: Int): Call<CurrencyListResponse>
+        @GET(COINS_PATH)
+        fun getCoins(@Query("limit") limit: Int): Call<CoinsResponse>
 
-        @GET(CURRENCIES_PATH)
-        fun getCurrencies(
+        @GET(COINS_PATH)
+        fun getCoins(
             @Query("limit") limit: Int,
             @Query("ids") ids: String
-        ): Call<CurrencyListResponse>
+        ): Call<CoinsResponse>
 
         @GET("$HISTORY_PATH/{coin}/history/{period}/index.json")
         fun getChartForTime(
-            @Path("coin") currency: String,
+            @Path("coin") coin: String,
             @Path("period") period: String
-        ): Call<ChartResponse>
+        ): Call<HistoryResponse>
 
         companion object {
             const val BASE_URL = BuildConfig.API_CURRENCY
 
             private const val PREFIX_PATH = "/ipns/QmURdeZbZxv3qwP6NRtH1WGRbcY4eiZsG4rEyDtFa2vgwW"
-            private const val CURRENCIES_PATH = "$PREFIX_PATH/index.json"
+            private const val COINS_PATH = "$PREFIX_PATH/index.json"
             private const val HISTORY_PATH = "$PREFIX_PATH/coin"
         }
     }

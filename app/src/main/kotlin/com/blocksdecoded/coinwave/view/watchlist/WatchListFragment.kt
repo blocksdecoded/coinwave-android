@@ -17,11 +17,11 @@ import com.github.mikephil.charting.listener.ChartTouchListener
 import com.blocksdecoded.core.mvp.BaseMVPFragment
 import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.data.model.ChartData
-import com.blocksdecoded.coinwave.data.model.CurrencyEntity
+import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.util.format
 import com.blocksdecoded.coinwave.util.init
 import com.blocksdecoded.coinwave.util.loadChartData
-import com.blocksdecoded.coinwave.view.currency.CurrencyActivity
+import com.blocksdecoded.coinwave.view.coininfo.CoinInfoActivity
 import com.blocksdecoded.coinwave.view.pickfavorite.PickFavoriteActivity
 import com.blocksdecoded.coinwave.view.watchlist.recycler.WatchlistAdapter
 import com.blocksdecoded.coinwave.view.watchlist.recycler.WatchlistViewHolder
@@ -129,11 +129,11 @@ open class WatchListFragment :
         mAdapter = WatchlistAdapter(arrayListOf(), this)
 
         mRetry.setOnClickListener {
-            mPresenter?.getCurrencyList()
+            mPresenter?.getCoins()
         }
 
         mSwipeRefreshLayout.setOnRefreshListener {
-            mPresenter?.getCurrencyList()
+            mPresenter?.getCoins()
         }
 
         val lm = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
@@ -148,11 +148,11 @@ open class WatchListFragment :
     //region ViewHolder
 
     override fun onPick(position: Int) {
-        mPresenter?.onCurrencyPick(position)
+        mPresenter?.onCoinPick(position)
     }
 
     override fun onClick(position: Int) {
-        mPresenter?.onCurrencyClick(position)
+        mPresenter?.onCoinClick(position)
     }
 
     //endregion
@@ -169,11 +169,11 @@ open class WatchListFragment :
 
     //region Contract
 
-    override fun showFavoriteCurrency(currency: CurrencyEntity) {
-        mFavoriteName?.text = "${currency.symbol}"
-        mFavoritePrice?.text = "$${currency.getPrice()?.format()}"
+    override fun showFavoriteCoin(coin: CoinEntity) {
+        mFavoriteName?.text = "${coin.symbol}"
+        mFavoritePrice?.text = "$${coin.getPrice()?.format()}"
 
-        currency.getPriceChange()?.let {
+        coin.getPriceChange()?.let {
 //            mPriceChange.text = "${if (it > 0) "+" else ""}$it%"
 
             context?.also { context ->
@@ -205,45 +205,45 @@ open class WatchListFragment :
         mChart.visible()
     }
 
-    override fun openCurrencyScreen(id: Int) {
+    override fun openCoinInfo(id: Int) {
         activity?.let {
-            CurrencyActivity.start(it, id)
+            CoinInfoActivity.start(it, id)
         }
     }
 
-    override fun showDeleteConfirm(currencyEntity: CurrencyEntity, position: Int) {
+    override fun showDeleteConfirm(coinEntity: CoinEntity, position: Int) {
         activity?.let {
             mActiveDialog = ActionConfirmDialog(it)
                     .setCancelListener { it.dismiss() }
-                    .setTitle("Remove ${currencyEntity.name} from Watchlist?")
+                    .setTitle("Remove ${coinEntity.name} from Watchlist?")
                     .setConfirmText("Remove")
                     .setConfirmListener {
                         it.dismiss()
-                        mPresenter?.deleteCurrency(position)
+                        mPresenter?.deleteCoin(position)
                     }.setDismissListener {
                         mActiveDialog = null
                     }.showDialog()
         }
     }
 
-    override fun updateCurrency(position: Int, currencyEntity: CurrencyEntity) {
+    override fun updateCoin(position: Int, coinEntity: CoinEntity) {
         mRecycler.visible()
         mEmptyText.hide()
-        mAdapter?.updateItem(currencyEntity)
+        mAdapter?.updateItem(coinEntity)
     }
 
-    override fun deleteCurrency(position: Int) {
+    override fun deleteCoin(position: Int) {
         mRecycler.visible()
         mAdapter?.deleteItemAt(position)
     }
 
-    override fun showCurrencies(currencies: List<CurrencyEntity>) {
+    override fun showCoins(coins: List<CoinEntity>) {
         mSwipeRefreshLayout?.isRefreshing = false
         mRecycler.visible()
         mErrorContainer.hide()
         mEmptyText.hide()
         mRecycler?.post {
-            mAdapter?.setItems(currencies)
+            mAdapter?.setItems(coins)
         }
     }
 

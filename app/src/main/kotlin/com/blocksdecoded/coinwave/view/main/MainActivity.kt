@@ -17,9 +17,9 @@ import com.blocksdecoded.coinwave.domain.UseCaseProvider
 import com.blocksdecoded.coinwave.util.CryptoRateUtil
 import com.blocksdecoded.coinwave.util.SFProTextTypeface
 import com.blocksdecoded.coinwave.view.addtowatchlist.AddToWatchlistActivity
-import com.blocksdecoded.coinwave.view.currencylist.CurrencyListContract
-import com.blocksdecoded.coinwave.view.currencylist.CurrencyListFragment
-import com.blocksdecoded.coinwave.view.currencylist.CurrencyListPresenter
+import com.blocksdecoded.coinwave.view.coinslist.CoinsListContract
+import com.blocksdecoded.coinwave.view.coinslist.CoinsListFragment
+import com.blocksdecoded.coinwave.view.coinslist.CoinsListPresenter
 import com.blocksdecoded.coinwave.view.pickfavorite.PickFavoriteActivity
 import com.blocksdecoded.coinwave.view.postlist.PostListContract
 import com.blocksdecoded.coinwave.view.postlist.PostListFragment
@@ -46,7 +46,7 @@ class MainActivity :
         MenuClickListener {
 
     private var mWatchListPresenter: WatchListContract.Presenter? = null
-    private var mCurrencyListPresenter: CurrencyListContract.Presenter? = null
+    private var mCoinsListPresenter: CoinsListContract.Presenter? = null
     private var mPostListPresenter: PostListContract.Presenter? = null
     private var mSettingsPresenter: SettingsContract.Presenter? = null
 
@@ -211,17 +211,17 @@ class MainActivity :
         mWatchListPresenter = WatchListPresenter(
                 it,
                 this,
-                UseCaseProvider.getCurrencyListUseCases(applicationContext),
+                UseCaseProvider.getCoinsUseCases(applicationContext),
                 UseCaseProvider.getFavoriteChartUseVariant(applicationContext)
         )
     }
 
     private fun createCurrencyListScreen(): Fragment =
-            CurrencyListFragment.newInstance(getString(R.string.title_cryptocurrency)).also {
-                mCurrencyListPresenter = CurrencyListPresenter(
+            CoinsListFragment.newInstance(getString(R.string.title_cryptocoin)).also {
+                mCoinsListPresenter = CoinsListPresenter(
                         it,
                         this,
-                        UseCaseProvider.getCurrencyListUseCases(applicationContext)
+                        UseCaseProvider.getCoinsUseCases(applicationContext)
                 )
             }
 

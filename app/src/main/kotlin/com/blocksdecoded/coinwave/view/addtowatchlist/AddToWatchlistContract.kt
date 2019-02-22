@@ -1,25 +1,25 @@
 package com.blocksdecoded.coinwave.view.addtowatchlist
 
-import com.blocksdecoded.coinwave.data.model.CurrencyEntity
+import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.core.mvp.BaseMVPContract
 
 interface AddToWatchlistContract {
 
     interface View : BaseMVPContract.View<Presenter> {
-        fun showCurrencies(currencies: List<CurrencyEntity>)
+        fun showCoins(coins: List<CoinEntity>)
 
         fun hideLoadingError()
 
         fun showLoadingError()
 
-        fun updateCurrency(currencyEntity: CurrencyEntity)
+        fun updateCoin(coinEntity: CoinEntity)
     }
 
     interface Presenter : BaseMVPContract.Presenter<View> {
-        fun onCurrencyClick(position: Int)
+        fun onCoinClick(position: Int)
 
-        fun onCurrencyWatch(position: Int)
+        fun onCoinWatch(position: Int)
 
-        fun getCurrencies()
+        fun getCoins()
     }
 }

@@ -36,10 +36,10 @@ class PostListAdapter(
     //region Override
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder = when (p1) {
-        1 -> PostListViewHolder(p0.inflate(R.layout.adapter_post_list_item)!!, mListener).apply {
+        1 -> PostListViewHolder(p0.inflate(R.layout.item_post)!!, mListener).apply {
             setHeight(mPostHeight)
         }
-        else -> ListFooterViewHolder(p0.inflate(R.layout.adapter_list_footer)!!, this)
+        else -> ListFooterViewHolder(p0.inflate(R.layout.item_footer)!!, this)
     }
 
     override fun getItemCount(): Int {

@@ -1,7 +1,7 @@
 package com.blocksdecoded.coinwave.domain.variant.favoritechart
 
 import com.blocksdecoded.coinwave.data.model.ChartData
-import com.blocksdecoded.coinwave.data.model.CurrencyEntity
+import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.utils.coroutine.model.Result
 
 /**
@@ -11,5 +11,5 @@ import com.blocksdecoded.utils.coroutine.model.Result
 interface FavoriteChartUseVariant {
     suspend fun getChart(): Result<ChartData>?
 
-    suspend fun getCurrency(): Result<CurrencyEntity>?
+    suspend fun getCurrency(): Result<CoinEntity>?
 }

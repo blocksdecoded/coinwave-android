@@ -1,7 +1,7 @@
 package com.blocksdecoded.coinwave.view.post
 
 import com.blocksdecoded.core.mvp.BaseMVPPresenter
-import com.blocksdecoded.coinwave.domain.usecases.postlist.PostsUseCases
+import com.blocksdecoded.coinwave.domain.usecases.posts.PostsUseCases
 import com.blocksdecoded.utils.coroutine.launchSilent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainCoroutineDispatcher

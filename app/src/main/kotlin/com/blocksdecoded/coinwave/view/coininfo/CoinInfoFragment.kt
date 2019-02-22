@@ -1,4 +1,4 @@
-package com.blocksdecoded.coinwave.view.currency
+package com.blocksdecoded.coinwave.view.coininfo
 
 import android.graphics.Color
 import android.net.Uri
@@ -17,7 +17,7 @@ import com.github.mikephil.charting.listener.ChartTouchListener
 import com.blocksdecoded.core.mvp.BaseMVPFragment
 import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.data.model.ChartData
-import com.blocksdecoded.coinwave.data.model.CurrencyEntity
+import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.util.*
 import com.blocksdecoded.coinwave.view.widgets.LockableScrollView
 import com.blocksdecoded.coinwave.view.widgets.OptionSelectorView
@@ -25,53 +25,53 @@ import com.blocksdecoded.coinwave.view.widgets.chart.ChartListener
 import com.blocksdecoded.utils.*
 import java.util.*
 
-open class CurrencyFragment :
-        BaseMVPFragment<CurrencyContract.Presenter>(),
-        CurrencyContract.View {
+open class CoinInfoFragment :
+        BaseMVPFragment<CoinInfoContract.Presenter>(),
+        CoinInfoContract.View {
     companion object {
-        fun newInstance(): CurrencyFragment = CurrencyFragment()
+        fun newInstance(): CoinInfoFragment = CoinInfoFragment()
     }
 
-    override var mPresenter: CurrencyContract.Presenter? = null
-    override val layoutId: Int = R.layout.fragment_currency_info
+    override var mPresenter: CoinInfoContract.Presenter? = null
+    override val layoutId: Int = R.layout.fragment_coin_info
 
-    @BindView(R.id.fragment_currency_chart)
+    @BindView(R.id.fragment_coin_chart)
     lateinit var mChart: LineChart
 
-    @BindView(R.id.currency_scroll_container)
+    @BindView(R.id.coin_scroll_container)
     lateinit var mScrollContainer: LockableScrollView
-    @BindView(R.id.fragment_currency_add_to_watchlist)
+    @BindView(R.id.fragment_coin_add_to_watchlist)
     lateinit var mWatchlist: ImageView
-    @BindView(R.id.fragment_currency_info_icon)
+    @BindView(R.id.fragment_coin_info_icon)
     lateinit var mIcon: ImageView
-    @BindView(R.id.fragment_currency_info_name)
+    @BindView(R.id.fragment_coin_info_name)
     lateinit var mName: TextView
-    @BindView(R.id.fragment_currency_info_symbol)
+    @BindView(R.id.fragment_coin_info_symbol)
     lateinit var mSymbol: TextView
-    @BindView(R.id.currency_price)
+    @BindView(R.id.coin_price)
     lateinit var mPrice: TextView
-    @BindView(R.id.currency_market_cap)
+    @BindView(R.id.coin_market_cap)
     lateinit var mMarketCap: TextView
-    @BindView(R.id.currency_volume_24h)
+    @BindView(R.id.coin_volume_24h)
     lateinit var mVolume24h: TextView
-    @BindView(R.id.currency_available_supply)
+    @BindView(R.id.coin_available_supply)
     lateinit var mAvailableSupply: TextView
-    @BindView(R.id.currency_total_supply)
+    @BindView(R.id.coin_total_supply)
     lateinit var mTotalSupply: TextView
-    @BindView(R.id.currency_change_1h)
+    @BindView(R.id.coin_change_1h)
     lateinit var mChange1h: TextView
-    @BindView(R.id.currency_change_1d)
+    @BindView(R.id.coin_change_1d)
     lateinit var mChange1d: TextView
-    @BindView(R.id.currency_change_1w)
+    @BindView(R.id.coin_change_1w)
     lateinit var mChange1w: TextView
 
-    @BindView(R.id.currency_chart_picked_container)
+    @BindView(R.id.coin_chart_picked_container)
     lateinit var mPickedContainer: View
-    @BindView(R.id.currency_chart_picked)
+    @BindView(R.id.coin_chart_picked)
     lateinit var mPickedPrice: TextView
-    @BindView(R.id.fragment_currency_progress)
+    @BindView(R.id.fragment_coin_progress)
     lateinit var mProgress: View
-    @BindView(R.id.currency_chart_period)
+    @BindView(R.id.coin_chart_period)
     lateinit var mChartPeriods: OptionSelectorView
 
     private val mChartListener = object : ChartListener() {
@@ -105,12 +105,12 @@ open class CurrencyFragment :
         }
     }
 
-    @OnClick(R.id.currency_graph_icon, R.id.back, R.id.fragment_currency_add_to_watchlist)
+    @OnClick(R.id.coin_graph_icon, R.id.back, R.id.fragment_coin_add_to_watchlist)
     fun onClick(view: View) {
         when (view.id) {
-            R.id.currency_graph_icon -> mPresenter?.onGoToWebsiteClick()
+            R.id.coin_graph_icon -> mPresenter?.onGoToWebsiteClick()
             R.id.back -> finishView()
-            R.id.fragment_currency_add_to_watchlist -> mPresenter?.onWatchingClick()
+            R.id.fragment_coin_add_to_watchlist -> mPresenter?.onWatchingClick()
         }
     }
     var mScrollEnabled = true
@@ -131,30 +131,30 @@ open class CurrencyFragment :
             R.drawable.dark_chart_bg
     )
 
-    private fun showCurrencyInfo(currencyEntity: CurrencyEntity) {
-        mIcon.loadIcon(currencyEntity)
-        mName.text = currencyEntity.name
-        mSymbol.text = currencyEntity.symbol
-        mPrice.text = "$${currencyEntity.getPrice()?.format()}"
-        mMarketCap.text = "$${currencyEntity.getMarketCap()?.format()}"
-        mVolume24h.text = "$${currencyEntity.getDailyVolume()?.format()}"
-        mAvailableSupply.text = currencyEntity.circulatingSupply.format()
-        mTotalSupply.text = currencyEntity.totalSupply.format()
+    private fun showCurrencyInfo(coinEntity: CoinEntity) {
+        mIcon.loadIcon(coinEntity)
+        mName.text = coinEntity.name
+        mSymbol.text = coinEntity.symbol
+        mPrice.text = "$${coinEntity.getPrice()?.format()}"
+        mMarketCap.text = "$${coinEntity.getMarketCap()?.format()}"
+        mVolume24h.text = "$${coinEntity.getDailyVolume()?.format()}"
+        mAvailableSupply.text = coinEntity.circulatingSupply.format()
+        mTotalSupply.text = coinEntity.totalSupply.format()
 
         mChange1d.hide()
         mChange1w.hide()
-        mChange1h.setChangedPercent(currencyEntity.priceChange)
-//        currencyEntity.getUsdQuotes()?.hourChange?.let{
+        mChange1h.setChangedPercent(coinEntity.priceChange)
+//        coinEntity.getUsdQuotes()?.hourChange?.let{
 //            mChange1h?.setChangedPercent(it)
 //        }
-//        currencyEntity.getUsdQuotes()?.dayChange?.let{
+//        coinEntity.getUsdQuotes()?.dayChange?.let{
 //            mChange1d?.setChangedPercent(it)
 //        }
-//        currencyEntity.getUsdQuotes()?.weekChange?.let{
+//        coinEntity.getUsdQuotes()?.weekChange?.let{
 //            mChange1w?.setChangedPercent(it)
 //        }
 
-        setWatchedIcon(currencyEntity.isSaved)
+        setWatchedIcon(coinEntity.isSaved)
     }
 
     private fun setWatchedIcon(watched: Boolean) {
@@ -189,8 +189,8 @@ open class CurrencyFragment :
         showData(chartData)
     }
 
-    override fun showCurrencyData(currencyEntity: CurrencyEntity) {
-        showCurrencyInfo(currencyEntity)
+    override fun showCurrencyData(coinEntity: CoinEntity) {
+        showCurrencyInfo(coinEntity)
     }
 
     override fun showChartLoading() {

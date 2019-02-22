@@ -1,34 +1,22 @@
-package com.blocksdecoded.coinwave.view.watchlist
+package com.blocksdecoded.coinwave.view.coinslist
 
 import com.blocksdecoded.core.mvp.BaseMVPContract
-import com.blocksdecoded.coinwave.data.model.ChartData
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 
-interface WatchListContract {
+interface CoinsListContract {
 
     interface View : BaseMVPContract.View<Presenter> {
-
         fun showCoins(coins: List<CoinEntity>)
-
-        fun showFavoriteCoin(coin: CoinEntity)
-
-        fun showFavoriteChart(chartData: ChartData)
-
-        fun showFavoriteLoading()
-
-        fun hideFavoriteLoading()
 
         fun updateCoin(position: Int, coinEntity: CoinEntity)
 
         fun deleteCoin(position: Int)
 
-        fun showNetworkError(hideList: Boolean)
-
         fun openCoinInfo(id: Int)
 
         fun showDeleteConfirm(coinEntity: CoinEntity, position: Int)
 
-        fun showEmpty()
+        fun showNetworkError(hideList: Boolean)
 
         fun showLoading()
 

@@ -7,14 +7,14 @@ import butterknife.BindView
 import butterknife.OnClick
 import com.blocksdecoded.core.mvp.BaseMVPFragment
 import com.blocksdecoded.coinwave.R
-import com.blocksdecoded.coinwave.data.model.CurrencyEntity
-import com.blocksdecoded.coinwave.view.currencylist.recycler.CurrencyListAdapter
-import com.blocksdecoded.coinwave.view.currencylist.recycler.CurrencyListViewHolder
+import com.blocksdecoded.coinwave.data.model.CoinEntity
+import com.blocksdecoded.coinwave.view.coinslist.recycler.CoinsListAdapter
+import com.blocksdecoded.coinwave.view.coinslist.recycler.CoinsListVH
 
 class PickFavoriteFragment :
         BaseMVPFragment<PickFavoriteContract.Presenter>(),
         PickFavoriteContract.View,
-        CurrencyListViewHolder.CurrencyVHClickListener {
+        CoinsListVH.CoinVHListener {
     companion object {
         fun newInstance(): PickFavoriteFragment = PickFavoriteFragment()
     }
@@ -24,7 +24,7 @@ class PickFavoriteFragment :
 
     @BindView(R.id.fragment_pick_favorite_recycler)
     @JvmField var mRecycler: RecyclerView? = null
-    private var mAdapter: CurrencyListAdapter? = null
+    private var mAdapter: CoinsListAdapter? = null
 
     @OnClick(R.id.back)
     fun onClick(view: View) {
@@ -36,7 +36,7 @@ class PickFavoriteFragment :
     //region Lifecycle
 
     override fun initView(rootView: View) {
-        mAdapter = CurrencyListAdapter(arrayListOf(), this)
+        mAdapter = CoinsListAdapter(arrayListOf(), this)
 
         val lm = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         mRecycler?.layoutManager = lm
@@ -48,7 +48,7 @@ class PickFavoriteFragment :
     //region Click
 
     override fun onClick(position: Int) {
-        mPresenter?.onCurrencyClick(position)
+        mPresenter?.onCoinClick(position)
     }
 
     override fun onPick(position: Int) {
@@ -58,8 +58,8 @@ class PickFavoriteFragment :
 
     //region Contract
 
-    override fun showCurrencies(currencies: List<CurrencyEntity>) {
-        mAdapter?.setItems(currencies)
+    override fun showCoins(coins: List<CoinEntity>) {
+        mAdapter?.setItems(coins)
     }
 
     //endregion

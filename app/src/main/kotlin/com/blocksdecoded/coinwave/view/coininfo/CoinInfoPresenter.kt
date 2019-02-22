@@ -1,23 +1,23 @@
-package com.blocksdecoded.coinwave.view.currency
+package com.blocksdecoded.coinwave.view.coininfo
 
 import com.blocksdecoded.core.mvp.BaseMVPPresenter
-import com.blocksdecoded.coinwave.data.model.CurrencyEntity
+import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.domain.usecases.chart.ChartsUseCases
 import com.blocksdecoded.coinwave.domain.usecases.chart.ChartsUseCases.ChartPeriod.*
-import com.blocksdecoded.coinwave.domain.usecases.list.CurrencyListUseCases
+import com.blocksdecoded.coinwave.domain.usecases.coins.CoinsUseCases
 import com.blocksdecoded.utils.coroutine.launchSilent
 import com.blocksdecoded.utils.coroutine.model.onError
 import com.blocksdecoded.utils.coroutine.model.onSuccess
 import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
 
-class CurrencyPresenter(
-    view: CurrencyContract.View?,
+class CoinInfoPresenter(
+    view: CoinInfoContract.View?,
     private val mChartsUseCases: ChartsUseCases,
-    private val mCurrencyListUseCases: CurrencyListUseCases,
+    private val mCoinsUseCases: CoinsUseCases,
     private val uiContext: CoroutineContext = Dispatchers.Main
-) : BaseMVPPresenter<CurrencyContract.View>(view), CurrencyContract.Presenter {
-    private var mCached: CurrencyEntity? = null
+) : BaseMVPPresenter<CoinInfoContract.View>(view), CoinInfoContract.Presenter {
+    private var mCached: CoinEntity? = null
 
     override fun onGoToWebsiteClick() {
         mCached?.let {
@@ -25,13 +25,13 @@ class CurrencyPresenter(
         }
     }
 
-    override fun attachView(view: CurrencyContract.View) {
+    override fun attachView(view: CoinInfoContract.View) {
         mView = view
         injectSelfToView()
     }
 
     override fun fetchCurrencyData(id: Int) = launchSilent(uiContext) {
-        mCached = mCurrencyListUseCases.getCurrency(id)
+        mCached = mCoinsUseCases.getCoin(id)
         mCached?.let {
             mView?.showCurrencyData(it)
         }
@@ -62,10 +62,10 @@ class CurrencyPresenter(
         mCached?.let {
             mView?.setWatched(it.isSaved.not())
             if (it.isSaved) {
-                mCurrencyListUseCases.removeCurrency(it.id)
+                mCoinsUseCases.removeCoin(it.id)
                 it.isSaved = false
             } else {
-                mCurrencyListUseCases.saveCurrency(it.id)
+                mCoinsUseCases.saveCoin(it.id)
                 it.isSaved = true
             }
         }

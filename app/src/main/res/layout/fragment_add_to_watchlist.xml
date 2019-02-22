@@ -29,7 +29,7 @@
                 android:padding="13dp"/>
 
             <com.blocksdecoded.coinwave.view.widgets.FontTextView
-                android:id="@+id/fragment_currency_list_title"
+                android:id="@+id/fragment_coin_list_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
@@ -59,7 +59,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintVertical_bias="0.35">
-            <include layout="@layout/connection_error" />
+            <include layout="@layout/partial_connection_error" />
         </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
     

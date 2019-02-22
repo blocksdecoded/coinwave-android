@@ -1,4 +1,4 @@
-package com.blocksdecoded.coinwave.view.currencylist
+package com.blocksdecoded.coinwave.view.coinslist
 
 import android.app.Dialog
 import android.os.Bundle
@@ -11,41 +11,41 @@ import butterknife.BindView
 import butterknife.OnClick
 import com.blocksdecoded.core.mvp.BaseMVPFragment
 import com.blocksdecoded.coinwave.R
-import com.blocksdecoded.coinwave.data.model.CurrencyEntity
-import com.blocksdecoded.coinwave.view.currency.CurrencyActivity
-import com.blocksdecoded.coinwave.view.currencylist.recycler.CurrencyListAdapter
-import com.blocksdecoded.coinwave.view.currencylist.recycler.CurrencyListViewHolder
+import com.blocksdecoded.coinwave.data.model.CoinEntity
+import com.blocksdecoded.coinwave.view.coininfo.CoinInfoActivity
+import com.blocksdecoded.coinwave.view.coinslist.recycler.CoinsListAdapter
+import com.blocksdecoded.coinwave.view.coinslist.recycler.CoinsListVH
 import com.blocksdecoded.coinwave.view.widgets.ActionConfirmDialog
 import com.blocksdecoded.utils.*
 
-open class CurrencyListFragment :
-        BaseMVPFragment<CurrencyListContract.Presenter>(),
-        CurrencyListContract.View,
-        CurrencyListViewHolder.CurrencyVHClickListener {
-    override var mPresenter: CurrencyListContract.Presenter? = null
-    override val layoutId: Int = R.layout.fragment_currency_list
+open class CoinsListFragment :
+        BaseMVPFragment<CoinsListContract.Presenter>(),
+        CoinsListContract.View,
+        CoinsListVH.CoinVHListener {
+    override var mPresenter: CoinsListContract.Presenter? = null
+    override val layoutId: Int = R.layout.fragment_coins_list
 
-    @BindView(R.id.fragment_currency_list_recycler)
+    @BindView(R.id.fragment_coin_list_recycler)
     lateinit var mRecycler: RecyclerView
-    @BindView(R.id.fragment_currency_list_refresh)
+    @BindView(R.id.fragment_coin_list_refresh)
     lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
-    @BindView(R.id.fragment_currency_list_error)
+    @BindView(R.id.fragment_coin_list_error)
     lateinit var mErrorContainer: View
     @BindView(R.id.connection_error_retry)
     lateinit var mRetry: View
-    @BindView(R.id.fragment_currency_list_header)
+    @BindView(R.id.fragment_coin_list_header)
     lateinit var mListHeader: View
 
-    @BindView(R.id.fragment_currency_list_title)
+    @BindView(R.id.fragment_coin_list_title)
     lateinit var mTitle: TextView
 
-    private var mAdapter: CurrencyListAdapter? = null
+    private var mAdapter: CoinsListAdapter? = null
     private var mActiveDialog: Dialog? = null
 
-    @OnClick(R.id.currency_menu)
+    @OnClick(R.id.coin_menu)
     fun onClick(view: View) {
         when (view.id) {
-            R.id.currency_menu -> mPresenter?.onMenuClick()
+            R.id.coin_menu -> mPresenter?.onMenuClick()
         }
     }
 
@@ -63,14 +63,14 @@ open class CurrencyListFragment :
 
         mTitle?.text = getTitle(arguments)
 
-        mAdapter = CurrencyListAdapter(arrayListOf(), this)
+        mAdapter = CoinsListAdapter(arrayListOf(), this)
 
         mRetry?.setOnClickListener {
-            mPresenter?.getCurrencyList()
+            mPresenter?.getCoins()
         }
 
         mSwipeRefreshLayout?.setOnRefreshListener {
-            mPresenter?.getCurrencyList()
+            mPresenter?.getCoins()
         }
 
         val lm = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
@@ -83,52 +83,52 @@ open class CurrencyListFragment :
     //region ViewHolder
 
     override fun onPick(position: Int) {
-        mPresenter?.onCurrencyPick(position)
+        mPresenter?.onCoinPick(position)
     }
 
     override fun onClick(position: Int) {
-        mPresenter?.onCurrencyClick(position)
+        mPresenter?.onCoinClick(position)
     }
 
     //endregion
 
     //region Contract
 
-    override fun openCurrencyScreen(id: Int) {
+    override fun openCoinInfo(id: Int) {
         activity?.let {
-            CurrencyActivity.start(it, id)
+            CoinInfoActivity.start(it, id)
         }
     }
 
-    override fun showDeleteConfirm(currencyEntity: CurrencyEntity, position: Int) {
+    override fun showDeleteConfirm(coinEntity: CoinEntity, position: Int) {
         activity?.let {
             mActiveDialog = ActionConfirmDialog(it)
                     .setCancelListener { it.dismiss() }
-                    .setTitle("Remove ${currencyEntity.name} from Watchlist?")
+                    .setTitle("Remove ${coinEntity.name} from Watchlist?")
                     .setConfirmText("Remove")
                     .setConfirmListener {
                         it.dismiss()
-                        mPresenter?.deleteCurrency(position)
+                        mPresenter?.deleteCoin(position)
                     }.setDismissListener {
                         mActiveDialog = null
                     }.showDialog()
         }
     }
 
-    override fun updateCurrency(position: Int, currencyEntity: CurrencyEntity) {
-        mAdapter?.updateItem(currencyEntity)
+    override fun updateCoin(position: Int, coinEntity: CoinEntity) {
+        mAdapter?.updateItem(coinEntity)
     }
 
-    override fun deleteCurrency(position: Int) {
+    override fun deleteCoin(position: Int) {
         mAdapter?.deleteItem(position)
     }
 
-    override fun showCurrencies(currencies: List<CurrencyEntity>) {
+    override fun showCoins(coins: List<CoinEntity>) {
         mRecycler.visible()
         mListHeader.visible()
         mErrorContainer.hide()
         mRecycler?.post {
-            mAdapter?.setItems(currencies)
+            mAdapter?.setItems(coins)
         }
     }
 
@@ -163,7 +163,7 @@ open class CurrencyListFragment :
 
         fun newInstance(
             title: String
-        ): CurrencyListFragment = CurrencyListFragment().apply {
+        ): CoinsListFragment = CoinsListFragment().apply {
             arguments = Bundle()
             arguments?.putString(TITLE_KEY, title)
         }

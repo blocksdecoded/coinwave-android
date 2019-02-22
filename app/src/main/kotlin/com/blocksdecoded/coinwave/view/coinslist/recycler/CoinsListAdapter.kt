@@ -1,45 +1,45 @@
-package com.blocksdecoded.coinwave.view.currencylist.recycler
+package com.blocksdecoded.coinwave.view.coinslist.recycler
 
 import android.view.ViewGroup
 import com.blocksdecoded.coinwave.R
-import com.blocksdecoded.coinwave.data.model.CurrencyEntity
+import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.util.findCurrency
 import com.blocksdecoded.utils.inflate
 import com.blocksdecoded.utils.isValidIndex
 
 // Created by askar on 7/19/18.
-class CurrencyListAdapter(
-    private var mItems: ArrayList<CurrencyEntity>,
-    private val mListener: CurrencyListViewHolder.CurrencyVHClickListener
+class CoinsListAdapter(
+    private var mCoins: ArrayList<CoinEntity>,
+    private val mListener: CoinsListVH.CoinVHListener
 ) : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
-        return CurrencyListViewHolder(parent.inflate(R.layout.adapter_currency_item)!!, mListener)
+        return CoinsListVH(parent.inflate(R.layout.item_coin)!!, mListener)
     }
 
-    override fun getItemCount(): Int = mItems.size
+    override fun getItemCount(): Int = mCoins.size
 
     override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is CurrencyListViewHolder -> holder.onBind(mItems[position])
+            is CoinsListVH -> holder.onBind(mCoins[position])
         }
     }
 
-    fun setItems(currencies: List<CurrencyEntity>) {
-        mItems.clear()
-        mItems.addAll(currencies)
+    fun setItems(coins: List<CoinEntity>) {
+        mCoins.clear()
+        mCoins.addAll(coins)
         notifyDataSetChanged()
     }
 
     fun deleteItem(position: Int) {
-        if (mItems.isValidIndex(position)) {
-            mItems.removeAt(position)
+        if (mCoins.isValidIndex(position)) {
+            mCoins.removeAt(position)
             notifyItemRemoved(position)
         }
     }
 
-    fun updateItem(currency: CurrencyEntity) {
-        mItems.findCurrency(currency) {
-            mItems[it] = currency
+    fun updateItem(coin: CoinEntity) {
+        mCoins.findCurrency(coin) {
+            mCoins[it] = coin
             notifyItemChanged(it)
         }
     }

@@ -3,7 +3,7 @@ package com.blocksdecoded.coinwave.view.addtowatchlist.recycler
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.blocksdecoded.coinwave.R
-import com.blocksdecoded.coinwave.data.model.CurrencyEntity
+import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.util.addSortedByRank
 import com.blocksdecoded.utils.inflate
 
@@ -12,11 +12,11 @@ import com.blocksdecoded.utils.inflate
  * with Android Studio
  */
 class AddToWatchlistAdapter(
-    private val coins: ArrayList<CurrencyEntity> = arrayListOf(),
+    private val coins: ArrayList<CoinEntity> = arrayListOf(),
     private val listener: AddToWatchlistVH.WatchlistVHClickListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
-            AddToWatchlistVH(parent.inflate(R.layout.adapter_watchlist_item)!!, listener)
+            AddToWatchlistVH(parent.inflate(R.layout.item_watchlist)!!, listener)
 
     override fun getItemCount(): Int = coins.size
 
@@ -26,7 +26,7 @@ class AddToWatchlistAdapter(
         }
     }
 
-    fun setCoins(coins: List<CurrencyEntity>) {
+    fun setCoins(coins: List<CoinEntity>) {
         this.coins.clear()
         this.coins.addAll(coins)
         notifyDataSetChanged()
@@ -36,13 +36,13 @@ class AddToWatchlistAdapter(
         onFind.invoke(coins.indexOfFirst { it.id == id })
     }
 
-    fun updateItem(currency: CurrencyEntity) {
-        findItem(currency.id) {
+    fun updateItem(coin: CoinEntity) {
+        findItem(coin.id) {
             if (it >= 0) {
-                coins[it] = currency
+                coins[it] = coin
                 notifyItemChanged(it)
             } else {
-                coins.addSortedByRank(currency)
+                coins.addSortedByRank(coin)
                 notifyDataSetChanged()
             }
         }

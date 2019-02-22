@@ -17,7 +17,7 @@ import com.blocksdecoded.utils.outRightTransition
 
 class PostActivity : SwipeableActivity() {
     companion object {
-        private val POST_ID_FIELD = "currency_id"
+        private val POST_ID_FIELD = "coin_id"
 
         fun start(context: Context, postId: Int) {
             context.startActivity(intent(context, postId))

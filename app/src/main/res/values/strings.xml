@@ -4,7 +4,7 @@
 
     <!--Menu-->
     <string name="menu">Menu</string>
-    <string name="pick_favorite_currency">Pick favorite currency</string>
+    <string name="pick_favorite_coin">Pick favorite coin</string>
     <string name="share_this_app">Share this app</string>
     <string name="rate_us">Rate us</string>
     <string name="contact_us">Contact us</string>
@@ -22,7 +22,7 @@
     <string name="btn_read_more">Read more</string>
 
     <!--Titles-->
-    <string name="title_cryptocurrency">Cryptocurrency</string>
+    <string name="title_cryptocoin">Cryptocoin</string>
     <string name="title_pick_favorite">Pick favorite</string>
     <string name="title_add_to_watchlist">Add to watchlist</string>
     <string name="name">Name</string>

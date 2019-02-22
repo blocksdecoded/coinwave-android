@@ -1,15 +1,13 @@
 package com.blocksdecoded.coinwave.data.watchlist
 
 import com.blocksdecoded.utils.shared.SharedContract
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
 
 // Created by askar on 7/20/18.
 class WatchlistService(
     private val mSharedStorage: SharedContract
 ) : WatchlistSourceContract {
     private var mInitialized = false
-    private val SAVED_CURRENCIES = "saved_currencies"
+    private val SAVED_COINS = "saved_coins"
     private val saveDelimiter = ","
 
     private var mSavedCache = arrayListOf<Int>()
@@ -35,22 +33,22 @@ class WatchlistService(
         if (!mInitialized) {
             mInitialized = true
             mSavedCache = load()
-            mSharedStorage.getPreference(SAVED_CURRENCIES, hashSetOf<String>())
+            mSharedStorage.getPreference(SAVED_COINS, hashSetOf<String>())
         }
     }
 
-    private fun save(ids: ArrayList<Int>) = GlobalScope.async {
+    private fun save(ids: ArrayList<Int>) {
         var save = ""
 
         ids.forEachIndexed { index, i ->
             save += "$i${if (index == ids.size - 1) "" else saveDelimiter}"
         }
 
-        mSharedStorage.setPreference(SAVED_CURRENCIES, save)
+        mSharedStorage.setPreference(SAVED_COINS, save)
     }
 
     private fun load(): ArrayList<Int> = try {
-        val saved = mSharedStorage.getPreference(SAVED_CURRENCIES, "")
+        val saved = mSharedStorage.getPreference(SAVED_COINS, "")
         val result = arrayListOf<Int>()
         result.addAll(saved.split(saveDelimiter).map { it.toInt() })
         result

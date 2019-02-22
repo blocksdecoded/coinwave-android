@@ -1,7 +1,7 @@
 package com.blocksdecoded.coinwave.view.addtowatchlist
 
-import com.blocksdecoded.coinwave.data.model.CurrencyEntity
-import com.blocksdecoded.coinwave.domain.usecases.list.CurrencyListUseCases
+import com.blocksdecoded.coinwave.data.model.CoinEntity
+import com.blocksdecoded.coinwave.domain.usecases.coins.CoinsUseCases
 import com.blocksdecoded.core.mvp.BaseMVPPresenter
 import com.blocksdecoded.utils.coroutine.launchSilent
 import com.blocksdecoded.utils.coroutine.model.onError
@@ -12,11 +12,11 @@ import kotlin.coroutines.CoroutineContext
 
 class AddToWatchlistPresenter(
     view: AddToWatchlistContract.View?,
-    private val mCurrencyListUseCases: CurrencyListUseCases,
+    private val mCoinsUseCases: CoinsUseCases,
     private val uiContext: CoroutineContext = Dispatchers.Main
 ) : BaseMVPPresenter<AddToWatchlistContract.View>(view), AddToWatchlistContract.Presenter {
 
-    private var cached = arrayListOf<CurrencyEntity>()
+    private var cached = arrayListOf<CoinEntity>()
 
     override fun attachView(view: AddToWatchlistContract.View) {
         mView = view
@@ -27,17 +27,17 @@ class AddToWatchlistPresenter(
 
     override fun onResume() {
         super.onResume()
-        getCurrencies()
+        getCoins()
     }
 
     //endregion
 
     //region Private
 
-    private fun updateCache(coins: List<CurrencyEntity>) {
+    private fun updateCache(coins: List<CoinEntity>) {
         cached.clear()
         cached.addAll(coins)
-        mView?.showCurrencies(coins)
+        mView?.showCoins(coins)
     }
 
     private fun showError(e: Throwable) {
@@ -49,12 +49,12 @@ class AddToWatchlistPresenter(
             cached[position].isSaved = !cached[position].isSaved
 
             if (cached[position].isSaved) {
-                mCurrencyListUseCases.saveCurrency(cached[position].id)
+                mCoinsUseCases.saveCoin(cached[position].id)
             } else {
-                mCurrencyListUseCases.removeCurrency(cached[position].id)
+                mCoinsUseCases.removeCoin(cached[position].id)
             }
 
-            mView?.updateCurrency(cached[position])
+            mView?.updateCoin(cached[position])
         }
     }
 
@@ -62,18 +62,18 @@ class AddToWatchlistPresenter(
 
     //region Contract
 
-    override fun getCurrencies() = launchSilent(uiContext) {
+    override fun getCoins() = launchSilent(uiContext) {
         mView?.hideLoadingError()
-        mCurrencyListUseCases.getCryptoList(false)
+        mCoinsUseCases.getCoins(false)
                 .onSuccess(::updateCache)
                 .onError(::showError)
     }
 
-    override fun onCurrencyClick(position: Int) {
+    override fun onCoinClick(position: Int) {
         updateCurrencyWatch(position)
     }
 
-    override fun onCurrencyWatch(position: Int) {
+    override fun onCoinWatch(position: Int) {
         updateCurrencyWatch(position)
     }
 

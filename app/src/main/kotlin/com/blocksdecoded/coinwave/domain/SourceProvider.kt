@@ -3,9 +3,9 @@ package com.blocksdecoded.coinwave.domain
 import android.content.Context
 import com.blocksdecoded.coinwave.data.crypto.chart.ChartsService
 import com.blocksdecoded.coinwave.data.crypto.chart.ChartsSourceContract
-import com.blocksdecoded.coinwave.data.crypto.CurrencyRepository
-import com.blocksdecoded.coinwave.data.crypto.CurrencySourceContract
-import com.blocksdecoded.coinwave.data.crypto.remote.CurrencyApiClient
+import com.blocksdecoded.coinwave.data.crypto.CoinsRepository
+import com.blocksdecoded.coinwave.data.crypto.CoinsDataSource
+import com.blocksdecoded.coinwave.data.crypto.remote.CoinApiClient
 import com.blocksdecoded.coinwave.data.post.PostDataSource
 import com.blocksdecoded.coinwave.data.post.PostRepository
 import com.blocksdecoded.coinwave.data.post.remote.PostRemoteDataSource
@@ -22,9 +22,9 @@ object SourceProvider {
 
     fun getChartsSource(): ChartsSourceContract = ChartsService
 
-    fun getCurrencySource(context: Context): CurrencySourceContract =
-            CurrencyRepository.getInstance(
-                    CurrencyApiClient,
+    fun getCoinsSource(context: Context): CoinsDataSource =
+            CoinsRepository.getInstance(
+                    CoinApiClient,
                     getWatchlistSource(context)
             )
 

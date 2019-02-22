@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import butterknife.BindView
 import butterknife.OnClick
 import com.blocksdecoded.coinwave.R
-import com.blocksdecoded.coinwave.data.model.CurrencyEntity
+import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.view.addtowatchlist.recycler.AddToWatchlistAdapter
 import com.blocksdecoded.coinwave.view.addtowatchlist.recycler.AddToWatchlistVH
 import com.blocksdecoded.core.mvp.BaseMVPFragment
@@ -34,7 +34,7 @@ class AddToWatchlistFragment : BaseMVPFragment<AddToWatchlistContract.Presenter>
         when (view.id) {
             R.id.back -> finishView()
 
-            R.id.connection_error_retry -> mPresenter?.getCurrencies()
+            R.id.connection_error_retry -> mPresenter?.getCoins()
         }
     }
 
@@ -48,24 +48,24 @@ class AddToWatchlistFragment : BaseMVPFragment<AddToWatchlistContract.Presenter>
     //region ViewHolder
 
     override fun onClick(position: Int) {
-        mPresenter?.onCurrencyClick(position)
+        mPresenter?.onCoinClick(position)
     }
 
     override fun onWatchClick(position: Int) {
-        mPresenter?.onCurrencyWatch(position)
+        mPresenter?.onCoinWatch(position)
     }
 
     //endregion
 
     //region Contract
 
-    override fun showCurrencies(currencies: List<CurrencyEntity>) {
+    override fun showCoins(coins: List<CoinEntity>) {
         mRecycler.visible()
-        mAdapter?.setCoins(currencies)
+        mAdapter?.setCoins(coins)
     }
 
-    override fun updateCurrency(currencyEntity: CurrencyEntity) {
-        mAdapter?.updateItem(currencyEntity)
+    override fun updateCoin(coinEntity: CoinEntity) {
+        mAdapter?.updateItem(coinEntity)
     }
 
     override fun hideLoadingError() {

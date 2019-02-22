@@ -1,21 +1,21 @@
 package com.blocksdecoded.coinwave.data.crypto
 
 import com.blocksdecoded.utils.coroutine.model.Result
-import com.blocksdecoded.coinwave.data.crypto.remote.CurrencyClient
-import com.blocksdecoded.coinwave.data.model.CurrencyDataResponse
-import com.blocksdecoded.coinwave.data.model.CurrencyEntity
+import com.blocksdecoded.coinwave.data.crypto.remote.CoinClient
+import com.blocksdecoded.coinwave.data.model.CoinsDataResponse
+import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.data.watchlist.WatchlistSourceContract
 import com.blocksdecoded.utils.coroutine.model.mapOnSuccess
 import com.blocksdecoded.utils.coroutine.model.onError
 import com.blocksdecoded.utils.coroutine.model.onSuccess
 
 // Created by askar on 7/19/18.
-class CurrencyRepository(
-    private val mCurrencyClient: CurrencyClient,
+class CoinsRepository(
+    private val mCoinsClient: CoinClient,
     private val mWatchlistSource: WatchlistSourceContract
-) : CurrencySourceContract {
-    private var mCached: CurrencyDataResponse? = null
-    private val mObservers = hashSetOf<CurrencyUpdateObserver>()
+) : CoinsDataSource {
+    private var mCached: CoinsDataResponse? = null
+    private val mObservers = hashSetOf<CoinsUpdateObserver>()
 
     private val watchlistIds: String
         get() {
@@ -33,38 +33,38 @@ class CurrencyRepository(
 
     //region Calls
 
-    private suspend fun currenciesRequest(): Result<CurrencyDataResponse> =
-            mCurrencyClient.getCurrencies(NETWORK_PAGE_SIZE)
+    private suspend fun coinsRequest(): Result<CoinsDataResponse> =
+            mCoinsClient.getCoins(NETWORK_PAGE_SIZE)
                 .onSuccess { setCache(it.data) }
                 .onError { mCached?.let { setCache(it) } }
                 .mapOnSuccess { it.data }
 
-    private suspend fun watchlistRequest(): Result<CurrencyDataResponse> =
-            mCurrencyClient.getCurrencies(NETWORK_PAGE_SIZE, watchlistIds)
+    private suspend fun watchlistRequest(): Result<CoinsDataResponse> =
+            mCoinsClient.getCoins(NETWORK_PAGE_SIZE, watchlistIds)
                     .mapOnSuccess { it.data }
 
     //endregion
 
-    private fun setCache(data: CurrencyDataResponse) {
+    private fun setCache(data: CoinsDataResponse) {
         markSaved(data.coins)
         mCached = data
         mObservers.forEach { it.onUpdated(data.coins) }
     }
 
-    private fun markSaved(currencies: List<CurrencyEntity>) {
+    private fun markSaved(coins: List<CoinEntity>) {
         val saved = mWatchlistSource.getAll()
-        currencies.forEach {
+        coins.forEach {
             it.isSaved = saved.contains(it.id)
         }
     }
 
-    private fun notifyAdded(currencyEntity: CurrencyEntity) =
-            mObservers.forEach { it.onAdded(currencyEntity) }
+    private fun notifyAdded(coinEntity: CoinEntity) =
+            mObservers.forEach { it.onAdded(coinEntity) }
 
-    private fun notifyRemoved(currencyEntity: CurrencyEntity) =
-            mObservers.forEach { it.onRemoved(currencyEntity) }
+    private fun notifyRemoved(coinEntity: CoinEntity) =
+            mObservers.forEach { it.onRemoved(coinEntity) }
 
-    private fun findCurrency(id: Int, onFind: (currency: CurrencyEntity) -> Unit): Boolean =
+    private fun findCoin(id: Int, onFind: (coin: CoinEntity) -> Unit): Boolean =
             mCached?.coins?.first { it.id == id }?.let {
                 onFind.invoke(it)
                 true
@@ -74,38 +74,38 @@ class CurrencyRepository(
 
     //region Contract
 
-    override fun getCurrency(id: Int): CurrencyEntity? = mCached?.coins?.first { it.id == id }
+    override fun getCoin(id: Int): CoinEntity? = mCached?.coins?.first { it.id == id }
 
-    override fun addCurrencyObserver(observer: CurrencyUpdateObserver) {
+    override fun addCoinObserver(observer: CoinsUpdateObserver) {
         mObservers.add(observer)
     }
 
-    override fun removeCurrencyObserver(observer: CurrencyUpdateObserver) {
+    override fun removeCoinObserver(observer: CoinsUpdateObserver) {
         mObservers.remove(observer)
     }
 
-    override fun saveCurrency(id: Int): Boolean = findCurrency(id) {
+    override fun saveCoin(id: Int): Boolean = findCoin(id) {
         mWatchlistSource.addId(id)
         it.isSaved = true
         notifyAdded(it)
     }
 
-    override fun removeCurrency(id: Int): Boolean = findCurrency(id) {
+    override fun removeCoin(id: Int): Boolean = findCoin(id) {
         mWatchlistSource.deleteId(id)
         it.isSaved = false
         notifyRemoved(it)
     }
 
-    override suspend fun getAllCurrencies(skipCache: Boolean): Result<CurrencyDataResponse> =
+    override suspend fun getAllCoins(skipCache: Boolean): Result<CoinsDataResponse> =
             if (skipCache) {
-                currenciesRequest()
+                coinsRequest()
             } else {
                 mCached?.let {
                     Result.Success(it)
-                } ?: currenciesRequest()
+                } ?: coinsRequest()
             }
 
-    override suspend fun getWatchlist(skipCache: Boolean): Result<CurrencyDataResponse> =
+    override suspend fun getWatchlist(skipCache: Boolean): Result<CoinsDataResponse> =
             if (skipCache) {
                 watchlistRequest()
             } else {
@@ -119,14 +119,14 @@ class CurrencyRepository(
     companion object {
         private const val NETWORK_PAGE_SIZE = 100
         private const val BD_PAGE_SIZE = 20
-        private var INSTANCE: CurrencyRepository? = null
+        private var INSTANCE: CoinsRepository? = null
 
         fun getInstance(
-            currencyClient: CurrencyClient,
+            coinClient: CoinClient,
             watchlist: WatchlistSourceContract
-        ): CurrencySourceContract {
+        ): CoinsDataSource {
             if (INSTANCE == null) {
-                INSTANCE = CurrencyRepository(currencyClient, watchlist)
+                INSTANCE = CoinsRepository(coinClient, watchlist)
             }
             return INSTANCE!!
         }

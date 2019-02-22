@@ -1,9 +1,9 @@
 package com.blocksdecoded.coinwave.view.pickfavorite
 
 import com.blocksdecoded.core.mvp.BaseMVPPresenter
-import com.blocksdecoded.coinwave.data.model.CurrencyEntity
+import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.domain.usecases.favorite.FavoriteUseCases
-import com.blocksdecoded.coinwave.domain.usecases.list.CurrencyListUseCases
+import com.blocksdecoded.coinwave.domain.usecases.coins.CoinsUseCases
 import com.blocksdecoded.utils.coroutine.launchSilent
 import com.blocksdecoded.utils.coroutine.model.onSuccess
 import com.blocksdecoded.utils.isValidIndex
@@ -13,11 +13,11 @@ import kotlin.coroutines.CoroutineContext
 class PickFavoritePresenter(
     view: PickFavoriteContract.View?,
     private val mFavoriteUseCases: FavoriteUseCases,
-    private val mCurrencyListUseCases: CurrencyListUseCases,
+    private val mCoinsUseCases: CoinsUseCases,
     private val uiContext: CoroutineContext = Dispatchers.Main
 ) : BaseMVPPresenter<PickFavoriteContract.View>(view), PickFavoriteContract.Presenter {
 
-    private var mCachedData = arrayListOf<CurrencyEntity>()
+    private var mCachedData = arrayListOf<CoinEntity>()
 
     override fun attachView(view: PickFavoriteContract.View) {
         mView = view
@@ -28,21 +28,21 @@ class PickFavoritePresenter(
 
     override fun onResume() {
         super.onResume()
-        getCurrencies()
+        getCoins()
     }
 
     //endregion
 
     //region Private
 
-    private fun updateCache(currencies: List<CurrencyEntity>) {
+    private fun updateCache(coins: List<CoinEntity>) {
         mCachedData.clear()
-        mCachedData.addAll(currencies)
-        mView?.showCurrencies(mCachedData)
+        mCachedData.addAll(coins)
+        mView?.showCoins(mCachedData)
     }
 
-    private fun getCurrencies() = launchSilent(uiContext) {
-        mCurrencyListUseCases.getCryptoList(false)
+    private fun getCoins() = launchSilent(uiContext) {
+        mCoinsUseCases.getCoins(false)
                 .onSuccess { updateCache(it) }
     }
 
@@ -50,7 +50,7 @@ class PickFavoritePresenter(
 
     //region Contract
 
-    override fun onCurrencyClick(position: Int) {
+    override fun onCoinClick(position: Int) {
         if (mCachedData.isValidIndex(position)) {
             mFavoriteUseCases.setId(mCachedData[position].id)
             mView?.showMessage("Favorite saved.")

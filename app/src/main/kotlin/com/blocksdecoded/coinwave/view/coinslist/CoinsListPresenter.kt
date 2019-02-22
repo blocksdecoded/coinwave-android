@@ -1,30 +1,26 @@
-package com.blocksdecoded.coinwave.view.watchlist
+package com.blocksdecoded.coinwave.view.coinslist
 
 import com.blocksdecoded.core.mvp.BaseMVPPresenter
-import com.blocksdecoded.coinwave.data.NetworkException
 import com.blocksdecoded.coinwave.data.crypto.CoinsUpdateObserver
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.domain.usecases.coins.CoinsUseCases
-import com.blocksdecoded.coinwave.domain.variant.favoritechart.FavoriteChartUseVariant
-import com.blocksdecoded.coinwave.util.addSortedByRank
 import com.blocksdecoded.coinwave.util.findCurrency
 import com.blocksdecoded.coinwave.view.main.MenuClickListener
 import com.blocksdecoded.utils.coroutine.launchSilent
 import com.blocksdecoded.utils.coroutine.model.onError
 import com.blocksdecoded.utils.coroutine.model.onSuccess
 import com.blocksdecoded.utils.isValidIndex
-import com.blocksdecoded.utils.logD
 import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
 
-class WatchListPresenter(
-    view: WatchListContract.View?,
+class CoinsListPresenter(
+    view: CoinsListContract.View?,
     private val mMenuListener: MenuClickListener,
     private val mCoinsUseCases: CoinsUseCases,
-    private val mFavoriteChartUseVariant: FavoriteChartUseVariant,
     private val uiContext: CoroutineContext = Dispatchers.Main
-) : BaseMVPPresenter<WatchListContract.View>(view), WatchListContract.Presenter {
+) : BaseMVPPresenter<CoinsListContract.View>(view), CoinsListContract.Presenter {
     private var mCachedData = arrayListOf<CoinEntity>()
+    private var mInitialized = false
 
     private val mCurrenciesObserver = object : CoinsUpdateObserver {
         override fun onAdded(coinEntity: CoinEntity) = launchSilent(uiContext) {
@@ -32,73 +28,42 @@ class WatchListPresenter(
         }
 
         override fun onUpdated(coins: List<CoinEntity>) = launchSilent(uiContext) {
-            setCache(coins)
+            updateCache(coins)
         }
 
         override fun onRemoved(coinEntity: CoinEntity) = launchSilent(uiContext) {
-            mView?.deleteCoin(removeCurrency(coinEntity))
-            if (mCachedData.isEmpty()) mView?.showEmpty()
+            mView?.updateCoin(updateCurrency(coinEntity), coinEntity)
         }
     }
 
     //region Private
 
-    private fun setCache(coins: List<CoinEntity>) = launchSilent(uiContext) {
-        mCachedData.clear()
-        mCachedData.addAll(coins.filter { it.isSaved })
-        mView?.showCoins(mCachedData)
-
-        if (mCachedData.isEmpty()) mView?.showEmpty()
-
-        mView?.showFavoriteLoading()
-
-        mFavoriteChartUseVariant.getCurrency()?.onSuccess {
-            mView?.showFavoriteCoin(it)
-        }?.onError {
-            logD("Failed to fetch favorite")
-        }
-
-        mFavoriteChartUseVariant.getChart()?.onSuccess {
-            mView?.hideFavoriteLoading()
-            mView?.showFavoriteChart(it)
-        }?.onError {
-            logD("Failed to fetch favorite chart")
-        }
-    }
-
-    private fun searchCurrency(coinEntity: CoinEntity, body: ((index: Int) -> Unit)? = null): Int =
+    private fun searchCurrency(coinEntity: CoinEntity, body: (index: Int) -> Unit): Int =
             mCachedData.findCurrency(coinEntity, body)
 
-    private fun updateCurrency(coinEntity: CoinEntity): Int {
-        val index = searchCurrency(coinEntity)
-
-        if (index >= 0) {
-        } else {
-            mCachedData.addSortedByRank(coinEntity)
-        }
-
-        return 0
-    }
+    private fun updateCurrency(coinEntity: CoinEntity): Int =
+            searchCurrency(coinEntity) {
+                mCachedData[it] = coinEntity
+            }
 
     private fun removeCurrency(coinEntity: CoinEntity): Int =
             searchCurrency(coinEntity) {
                 mCachedData.removeAt(it)
             }
 
-    private fun getCurrencies(skipCache: Boolean) = launchSilent(uiContext) {
+    private fun updateCache(coins: List<CoinEntity>) {
+        mCachedData.clear()
+        mCachedData.addAll(coins)
+        mView?.showCoins(mCachedData)
+    }
+
+    private fun getCurrencies() = launchSilent(uiContext) {
         mView?.showLoading()
-        mCoinsUseCases.getCoins(skipCache)
-                .onSuccess {
-                    mView?.hideLoading()
-                    setCache(it)
-                }
+        mCoinsUseCases.getCoins(true)
+                .onSuccess { mView?.hideLoading() }
                 .onError {
                     mView?.hideLoading()
-                    when (it) {
-                        is NetworkException -> {
-                            mView?.showNetworkError(mCachedData.isEmpty())
-                        }
-                    }
+                    mView?.showNetworkError(mCachedData.isEmpty())
                 }
     }
 
@@ -106,7 +71,16 @@ class WatchListPresenter(
 
     //region Contract
 
-    override fun attachView(view: WatchListContract.View) {
+    override fun onResume() {
+        super.onResume()
+        mCoinsUseCases.addObserver(mCurrenciesObserver)
+        if (!mInitialized) {
+            mInitialized = true
+            getCurrencies()
+        }
+    }
+
+    override fun attachView(view: CoinsListContract.View) {
         mView = view
         injectSelfToView()
     }
@@ -116,14 +90,8 @@ class WatchListPresenter(
         mCoinsUseCases.removeObserver(mCurrenciesObserver)
     }
 
-    override fun onResume() {
-        super.onResume()
-        mCoinsUseCases.addObserver(mCurrenciesObserver)
-        getCurrencies(false)
-    }
-
     override fun getCoins() {
-        getCurrencies(true)
+        getCurrencies()
     }
 
     override fun onCoinPick(position: Int) {

@@ -1,4 +1,4 @@
-package com.blocksdecoded.coinwave.domain.usecases.postlist
+package com.blocksdecoded.coinwave.domain.usecases.posts
 
 import com.blocksdecoded.utils.coroutine.model.Result
 import com.blocksdecoded.coinwave.data.post.PostDataSource
