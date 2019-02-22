@@ -1,6 +1,5 @@
 package com.blocksdecoded.coinwave.view.addtowatchlist
 
-import android.util.Log
 import com.blocksdecoded.coinwave.data.model.CurrencyEntity
 import com.blocksdecoded.coinwave.domain.usecases.list.CurrencyListUseCases
 import com.blocksdecoded.core.mvp.BaseMVPPresenter
@@ -41,7 +40,7 @@ class AddToWatchlistPresenter(
         mView?.showCurrencies(coins)
     }
 
-    private fun showError(e: Throwable){
+    private fun showError(e: Throwable) {
         mView?.showLoadingError()
     }
 

@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import androidx.multidex.MultiDex
-import com.google.firebase.FirebaseApp
 import com.squareup.leakcanary.LeakCanary
 
 // Created by askar on 6/7/18.

@@ -1,7 +1,6 @@
 package com.blocksdecoded.coinwave.data.crypto
 
 import com.blocksdecoded.utils.coroutine.model.Result
-import com.blocksdecoded.coinwave.data.EmptyCache
 import com.blocksdecoded.coinwave.data.crypto.remote.CurrencyClient
 import com.blocksdecoded.coinwave.data.model.CurrencyDataResponse
 import com.blocksdecoded.coinwave.data.model.CurrencyEntity
@@ -32,17 +31,16 @@ class CurrencyRepository(
 
     //region Private
 
-
     //region Calls
 
-    private suspend fun currenciesRequest(): Result<CurrencyDataResponse>
-            = mCurrencyClient.getCurrencies(NETWORK_PAGE_SIZE)
+    private suspend fun currenciesRequest(): Result<CurrencyDataResponse> =
+            mCurrencyClient.getCurrencies(NETWORK_PAGE_SIZE)
                 .onSuccess { setCache(it.data) }
                 .onError { mCached?.let { setCache(it) } }
                 .mapOnSuccess { it.data }
 
-    private suspend fun watchlistRequest(): Result<CurrencyDataResponse>
-            = mCurrencyClient.getCurrencies(NETWORK_PAGE_SIZE, watchlistIds)
+    private suspend fun watchlistRequest(): Result<CurrencyDataResponse> =
+            mCurrencyClient.getCurrencies(NETWORK_PAGE_SIZE, watchlistIds)
                     .mapOnSuccess { it.data }
 
     //endregion
@@ -124,8 +122,8 @@ class CurrencyRepository(
         private var INSTANCE: CurrencyRepository? = null
 
         fun getInstance(
-                currencyClient: CurrencyClient,
-                watchlist: WatchlistSourceContract
+            currencyClient: CurrencyClient,
+            watchlist: WatchlistSourceContract
         ): CurrencySourceContract {
             if (INSTANCE == null) {
                 INSTANCE = CurrencyRepository(currencyClient, watchlist)
