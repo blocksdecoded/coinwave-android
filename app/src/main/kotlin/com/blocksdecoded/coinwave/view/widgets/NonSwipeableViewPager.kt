@@ -10,7 +10,7 @@ class NonSwipeableViewPager : androidx.viewpager.widget.ViewPager {
         setScroller()
     }
 
-    constructor(context: Context, attrs: AttributeSet?): super(context, attrs) {
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
         setScroller()
     }
 

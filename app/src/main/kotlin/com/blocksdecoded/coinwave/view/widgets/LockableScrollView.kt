@@ -10,8 +10,8 @@ import android.widget.ScrollView
  * with Android Studio
  */
 class LockableScrollView : ScrollView {
-    constructor(context: Context): super(context)
-    constructor(context: Context, attributeSet: AttributeSet): super(context, attributeSet)
+    constructor(context: Context) : super(context)
+    constructor(context: Context, attributeSet: AttributeSet) : super(context, attributeSet)
 
     var mScrollable = true
 

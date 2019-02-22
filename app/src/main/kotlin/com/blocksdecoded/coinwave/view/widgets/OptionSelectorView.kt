@@ -25,9 +25,9 @@ class OptionSelectorView : LinearLayout, View.OnClickListener {
     private var mListener: ((number: Int) -> Unit)? = null
     private var mNumberViews = HashMap<Int, View>()
 
-    constructor(context: Context): super(context)
+    constructor(context: Context) : super(context)
 
-    constructor(context: Context, attributeSet: AttributeSet): super(context, attributeSet) {
+    constructor(context: Context, attributeSet: AttributeSet) : super(context, attributeSet) {
         val a = context.theme.obtainStyledAttributes(
                 attributeSet,
                 R.styleable.OptionSelectorView,

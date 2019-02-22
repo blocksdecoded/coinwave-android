@@ -8,7 +8,6 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.lifecycle.Lifecycle
 import butterknife.BindView
 import butterknife.OnClick
 import com.github.mikephil.charting.charts.LineChart
@@ -203,6 +202,7 @@ open class CoinInfoFragment :
 
     override fun showChartError() {
         mChartErrorImage.visible()
+        mChart.hide()
     }
 
     override fun hideChartError() {

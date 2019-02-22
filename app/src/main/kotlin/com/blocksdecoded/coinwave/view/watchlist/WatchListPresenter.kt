@@ -1,7 +1,6 @@
 package com.blocksdecoded.coinwave.view.watchlist
 
 import com.blocksdecoded.core.mvp.BaseMVPPresenter
-import com.blocksdecoded.coinwave.data.NetworkException
 import com.blocksdecoded.coinwave.data.crypto.CoinsUpdateObserver
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.domain.usecases.coins.CoinsUseCases
@@ -40,6 +39,26 @@ class WatchListPresenter(
         }
     }
 
+    //region Lifecycle
+
+    override fun attachView(view: WatchListContract.View) {
+        mView = view
+        injectSelfToView()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mCoinsUseCases.removeObserver(mCurrenciesObserver)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mCoinsUseCases.addObserver(mCurrenciesObserver)
+        getCurrencies(false)
+    }
+
+    //endregion
+
     //region Private
 
     private fun setCache(coins: List<CoinEntity>) = launchSilent(uiContext) {
@@ -56,12 +75,7 @@ class WatchListPresenter(
         mView?.showFavoriteLoading()
         mView?.hideFavoriteError()
 
-        mFavoriteChartUseVariant.getCoin()
-                ?.onSuccess {
-                    mView?.showFavoriteCoin(it)
-                }?.onError {
-
-                }
+        mFavoriteChartUseVariant.getCoin()?.onSuccess { mView?.showFavoriteCoin(it) }
 
         mFavoriteChartUseVariant.getChart()
                 ?.onSuccess {
@@ -100,13 +114,13 @@ class WatchListPresenter(
         mCoinsUseCases.getCoins(skipCache)
                 .onSuccess {
                     mView?.hideLoading()
-                    setCache(it)
                 }
                 .onError {
                     mView?.hideLoading()
                     mView?.showError(mCachedData.isEmpty())
 
                     if (mCachedData.isEmpty()) {
+                        mView?.hideFavoriteLoading()
                         mView?.showFavoriteError()
                     }
                 }
@@ -115,22 +129,6 @@ class WatchListPresenter(
     //endregion
 
     //region Contract
-
-    override fun attachView(view: WatchListContract.View) {
-        mView = view
-        injectSelfToView()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        mCoinsUseCases.removeObserver(mCurrenciesObserver)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        mCoinsUseCases.addObserver(mCurrenciesObserver)
-        getCurrencies(false)
-    }
 
     override fun getCoins() {
         getCurrencies(true)

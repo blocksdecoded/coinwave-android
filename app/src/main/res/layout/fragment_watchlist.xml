@@ -89,11 +89,58 @@
                 <include
                     android:id="@+id/fragment_watchlist_header"
                     layout="@layout/partial_coins_header" />
-
-                <include
+    
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/fragment_watchlist_error"
-                    layout="@layout/partial_connection_error"
-                    android:visibility="gone"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent">
+        
+                    <com.blocksdecoded.coinwave.view.widgets.FontTextView
+                        android:id="@+id/connection_error_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintVertical_bias="0.00"
+                        android:layout_marginTop="28dp"
+                        android:text="@string/message_connection_error"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:gravity="center"/>
+        
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintLeft_toLeftOf="@+id/connection_error_title"
+                        app:layout_constraintRight_toRightOf="@+id/connection_error_title"
+                        app:layout_constraintTop_toBottomOf="@+id/connection_error_title"
+                        app:cardUseCompatPadding="true"
+                        android:layout_marginTop="16dp"
+                        app:cardElevation="8dp"
+                        app:cardCornerRadius="8dp">
+            
+                        <com.blocksdecoded.coinwave.view.widgets.FontTextView
+                            android:id="@+id/connection_error_retry"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="24dp"
+                            android:paddingRight="24dp"
+                            android:paddingTop="12dp"
+                            android:paddingBottom="12dp"
+                            android:text="@string/btn_retry"
+                            android:textColor="@color/main_dark"
+                            android:background="@drawable/card_gradient_bg"
+                            android:textSize="14sp"
+                            android:letterSpacing="0.15"
+                            app:ftv_typeface="semibold"/>
+        
+                    </androidx.cardview.widget.CardView>
+    
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

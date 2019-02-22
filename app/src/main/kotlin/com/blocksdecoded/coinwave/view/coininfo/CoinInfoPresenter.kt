@@ -53,7 +53,6 @@ class CoinInfoPresenter(
 
             fetchChartData(id)
         }
-
     }
 
     override fun onPeriodChanged(position: Int) = launchSilent(uiContext) {

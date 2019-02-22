@@ -1,6 +1,5 @@
 package com.blocksdecoded.coinwave.view.watchlist
 
-import android.app.Dialog
 import android.os.Handler
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,7 +24,6 @@ import com.blocksdecoded.coinwave.view.coininfo.CoinInfoActivity
 import com.blocksdecoded.coinwave.view.pickfavorite.PickFavoriteActivity
 import com.blocksdecoded.coinwave.view.watchlist.recycler.WatchlistAdapter
 import com.blocksdecoded.coinwave.view.watchlist.recycler.WatchlistViewHolder
-import com.blocksdecoded.coinwave.view.widgets.ActionConfirmDialog
 import com.blocksdecoded.coinwave.view.widgets.chart.ChartListener
 import com.blocksdecoded.utils.*
 import java.util.*
@@ -61,8 +59,6 @@ open class WatchListFragment :
     lateinit var mFavoriteName: TextView
     @BindView(R.id.fragment_watchlist_favorite_price)
     lateinit var mFavoritePrice: TextView
-
-    private var mActiveDialog: Dialog? = null
 
     //region Chart card
 
@@ -117,11 +113,6 @@ open class WatchListFragment :
     }
 
     //region Lifecycle
-
-    override fun onPause() {
-        super.onPause()
-        mActiveDialog?.dismiss()
-    }
 
     override fun initView(rootView: View) {
         context?.also {
@@ -261,6 +252,7 @@ open class WatchListFragment :
     }
 
     override fun showFavoriteError() {
+        mChart.hide()
         mErrorIcon.visible()
     }
 

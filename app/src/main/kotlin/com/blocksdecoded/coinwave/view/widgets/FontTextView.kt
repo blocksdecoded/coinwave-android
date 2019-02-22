@@ -10,11 +10,11 @@ import com.blocksdecoded.coinwave.util.*
  * Created by Tameki on 2/19/18.
  */
 class FontTextView : TextView {
-    constructor(context: Context): super(context) {
+    constructor(context: Context) : super(context) {
         setTypeface(2)
     }
 
-    constructor(context: Context, attributeSet: AttributeSet): super(context, attributeSet) {
+    constructor(context: Context, attributeSet: AttributeSet) : super(context, attributeSet) {
         val a = context.theme.obtainStyledAttributes(
                 attributeSet,
                 R.styleable.FontTextView,
