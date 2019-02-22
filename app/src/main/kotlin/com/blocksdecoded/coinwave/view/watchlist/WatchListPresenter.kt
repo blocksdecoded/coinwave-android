@@ -111,9 +111,11 @@ class WatchListPresenter(
         if (mCachedData.isEmpty()) {
             mView?.showFavoriteLoading()
         }
+
         mCoinsUseCases.getCoins(skipCache)
                 .onSuccess {
                     mView?.hideLoading()
+                    setCache(it)
                 }
                 .onError {
                     mView?.hideLoading()
