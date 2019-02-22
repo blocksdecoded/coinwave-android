@@ -17,11 +17,10 @@ class FavoriteChartInteractor(
     private val mFavoriteUseCases: FavoriteUseCases,
     private val mCoinsUseCases: CoinsUseCases
 ) : FavoriteChartUseVariant {
-    override suspend fun getChart(): Result<ChartData>? {
-        return mChartsUseCases.getChartData(mFavoriteUseCases.getId(), CHART_PERIOD)
-    }
+    override suspend fun getChart(): Result<ChartData>? =
+            mChartsUseCases.getChartData(mFavoriteUseCases.getId(), CHART_PERIOD)
 
-    override suspend fun getCurrency(): Result<CoinEntity>? {
+    override suspend fun getCoin(): Result<CoinEntity>? {
         val entity = mCoinsUseCases.getCoin(mFavoriteUseCases.getId())
 
         return if (entity != null) {

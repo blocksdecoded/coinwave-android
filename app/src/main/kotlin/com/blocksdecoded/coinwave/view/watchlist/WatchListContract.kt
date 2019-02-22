@@ -18,6 +18,10 @@ interface WatchListContract {
 
         fun hideFavoriteLoading()
 
+        fun showFavoriteError()
+
+        fun hideFavoriteError()
+
         fun updateCoin(position: Int, coinEntity: CoinEntity)
 
         fun deleteCoin(position: Int)

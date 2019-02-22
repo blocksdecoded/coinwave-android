@@ -11,5 +11,5 @@ import com.blocksdecoded.utils.coroutine.model.Result
 interface FavoriteChartUseVariant {
     suspend fun getChart(): Result<ChartData>?
 
-    suspend fun getCurrency(): Result<CoinEntity>?
+    suspend fun getCoin(): Result<CoinEntity>?
 }

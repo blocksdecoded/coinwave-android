@@ -192,17 +192,6 @@ open class WatchListFragment :
         showChartData(chartData)
     }
 
-    override fun showFavoriteLoading() {
-        mErrorIcon.hide()
-        mProgress.visible()
-        mChart.hide()
-    }
-
-    override fun hideFavoriteLoading() {
-        mProgress.hide()
-        mChart.visible()
-    }
-
     override fun openCoinInfo(id: Int) {
         activity?.let {
             CoinInfoActivity.start(it, id)
@@ -243,8 +232,8 @@ open class WatchListFragment :
 
     override fun showError(hideList: Boolean) {
         mSwipeRefreshLayout?.isRefreshing = false
+
         if (hideList) {
-            mErrorIcon.visible()
             mErrorContainer.visible()
             mRecycler.hide()
         } else {
@@ -258,6 +247,25 @@ open class WatchListFragment :
         mSwipeRefreshLayout?.isRefreshing = true
         mEmptyText.hide()
         mErrorContainer.hide()
+    }
+
+    override fun showFavoriteLoading() {
+        mErrorIcon.hide()
+        mProgress.visible()
+        mChart.hide()
+    }
+
+    override fun hideFavoriteLoading() {
+        mProgress.hide()
+        mChart.visible()
+    }
+
+    override fun showFavoriteError() {
+        mErrorIcon.visible()
+    }
+
+    override fun hideFavoriteError() {
+        mErrorIcon.hide()
     }
 
     //endregion

@@ -176,7 +176,8 @@
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="@+id/fragment_watchlist_chart"/>
+                        app:layout_constraintBottom_toBottomOf="@+id/fragment_watchlist_chart"
+                        android:visibility="gone"/>
                     
                     <ImageView
                         android:id="@+id/fragment_watchlist_error_icon"

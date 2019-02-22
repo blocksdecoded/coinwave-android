@@ -13,7 +13,6 @@ import com.blocksdecoded.utils.coroutine.launchSilent
 import com.blocksdecoded.utils.coroutine.model.onError
 import com.blocksdecoded.utils.coroutine.model.onSuccess
 import com.blocksdecoded.utils.isValidIndex
-import com.blocksdecoded.utils.logD
 import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
 
@@ -50,20 +49,28 @@ class WatchListPresenter(
 
         if (mCachedData.isEmpty()) mView?.showEmpty()
 
+        loadFavorite()
+    }
+
+    private suspend fun loadFavorite() {
         mView?.showFavoriteLoading()
+        mView?.hideFavoriteError()
 
-        mFavoriteChartUseVariant.getCurrency()?.onSuccess {
-            mView?.showFavoriteCoin(it)
-        }?.onError {
-            logD("Failed to fetch favorite")
-        }
+        mFavoriteChartUseVariant.getCoin()
+                ?.onSuccess {
+                    mView?.showFavoriteCoin(it)
+                }?.onError {
 
-        mFavoriteChartUseVariant.getChart()?.onSuccess {
-            mView?.hideFavoriteLoading()
-            mView?.showFavoriteChart(it)
-        }?.onError {
-            logD("Failed to fetch favorite chart")
-        }
+                }
+
+        mFavoriteChartUseVariant.getChart()
+                ?.onSuccess {
+                    mView?.hideFavoriteLoading()
+                    mView?.showFavoriteChart(it)
+                }?.onError {
+                    mView?.hideFavoriteLoading()
+                    mView?.showFavoriteError()
+                }
     }
 
     private fun searchCurrency(coinEntity: CoinEntity, body: ((index: Int) -> Unit)? = null): Int =
@@ -87,6 +94,9 @@ class WatchListPresenter(
 
     private fun getCurrencies(skipCache: Boolean) = launchSilent(uiContext) {
         mView?.showLoading()
+        if (mCachedData.isEmpty()) {
+            mView?.showFavoriteLoading()
+        }
         mCoinsUseCases.getCoins(skipCache)
                 .onSuccess {
                     mView?.hideLoading()
@@ -94,10 +104,10 @@ class WatchListPresenter(
                 }
                 .onError {
                     mView?.hideLoading()
-                    when (it) {
-                        is NetworkException -> {
-                            mView?.showError(mCachedData.isEmpty())
-                        }
+                    mView?.showError(mCachedData.isEmpty())
+
+                    if (mCachedData.isEmpty()) {
+                        mView?.showFavoriteError()
                     }
                 }
     }
