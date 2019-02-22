@@ -1,5 +1,6 @@
 package com.blocksdecoded.coinwave.view.addtowatchlist
 
+import android.util.Log
 import com.blocksdecoded.coinwave.data.model.CurrencyEntity
 import com.blocksdecoded.coinwave.domain.usecases.list.CurrencyListUseCases
 import com.blocksdecoded.core.mvp.BaseMVPPresenter
@@ -25,9 +26,9 @@ class AddToWatchlistPresenter(
 
     //region Lifecycle
 
-    override fun onResume() = launchSilent(uiContext) {
+    override fun onResume() {
         super.onResume()
-        mCurrencyListUseCases.getCryptoList(false).onSuccess(::updateCache)
+        getCurrencies()
     }
 
     //endregion
@@ -63,6 +64,7 @@ class AddToWatchlistPresenter(
     //region Contract
 
     override fun getCurrencies() = launchSilent(uiContext) {
+        mView?.hideLoadingError()
         mCurrencyListUseCases.getCryptoList(false)
                 .onSuccess(::updateCache)
                 .onError(::showError)

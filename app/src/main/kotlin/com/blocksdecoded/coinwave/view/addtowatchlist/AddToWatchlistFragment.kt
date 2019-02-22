@@ -10,6 +10,8 @@ import com.blocksdecoded.coinwave.data.model.CurrencyEntity
 import com.blocksdecoded.coinwave.view.addtowatchlist.recycler.AddToWatchlistAdapter
 import com.blocksdecoded.coinwave.view.addtowatchlist.recycler.AddToWatchlistVH
 import com.blocksdecoded.core.mvp.BaseMVPFragment
+import com.blocksdecoded.utils.hide
+import com.blocksdecoded.utils.visible
 
 class AddToWatchlistFragment : BaseMVPFragment<AddToWatchlistContract.Presenter>(),
         AddToWatchlistContract.View,
@@ -19,6 +21,8 @@ class AddToWatchlistFragment : BaseMVPFragment<AddToWatchlistContract.Presenter>
 
     private var mAdapter: AddToWatchlistAdapter? = null
 
+    @BindView(R.id.connection_error_container)
+    lateinit var mErrorContainer: View
     @BindView(R.id.add_to_watchlist_recycler)
     lateinit var mRecycler: RecyclerView
 
@@ -56,6 +60,7 @@ class AddToWatchlistFragment : BaseMVPFragment<AddToWatchlistContract.Presenter>
     //region Contract
 
     override fun showCurrencies(currencies: List<CurrencyEntity>) {
+        mRecycler.visible()
         mAdapter?.setCoins(currencies)
     }
 
@@ -63,8 +68,13 @@ class AddToWatchlistFragment : BaseMVPFragment<AddToWatchlistContract.Presenter>
         mAdapter?.updateItem(currencyEntity)
     }
 
-    override fun showLoadingError() {
+    override fun hideLoadingError() {
+        mErrorContainer.hide()
+    }
 
+    override fun showLoadingError() {
+        mRecycler.hide()
+        mErrorContainer.visible()
     }
 
     //endregion

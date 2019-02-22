@@ -8,6 +8,8 @@ interface AddToWatchlistContract {
     interface View : BaseMVPContract.View<Presenter> {
         fun showCurrencies(currencies: List<CurrencyEntity>)
 
+        fun hideLoadingError()
+
         fun showLoadingError()
 
         fun updateCurrency(currencyEntity: CurrencyEntity)

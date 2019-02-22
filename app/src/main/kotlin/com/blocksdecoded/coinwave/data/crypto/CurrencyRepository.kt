@@ -30,23 +30,22 @@ class CurrencyRepository(
             return ids
         }
 
-    companion object {
-        private const val NETWORK_PAGE_SIZE = 100
-        private const val BD_PAGE_SIZE = 20
-        private var INSTANCE: CurrencyRepository? = null
-
-        fun getInstance(
-            currencyClient: CurrencyClient,
-            watchlist: WatchlistSourceContract
-        ): CurrencySourceContract {
-            if (INSTANCE == null) {
-                INSTANCE = CurrencyRepository(currencyClient, watchlist)
-            }
-            return INSTANCE!!
-        }
-    }
-
     //region Private
+
+
+    //region Calls
+
+    private suspend fun currenciesRequest(): Result<CurrencyDataResponse>
+            = mCurrencyClient.getCurrencies(NETWORK_PAGE_SIZE)
+                .onSuccess { setCache(it.data) }
+                .onError { mCached?.let { setCache(it) } }
+                .mapOnSuccess { it.data }
+
+    private suspend fun watchlistRequest(): Result<CurrencyDataResponse>
+            = mCurrencyClient.getCurrencies(NETWORK_PAGE_SIZE, watchlistIds)
+                    .mapOnSuccess { it.data }
+
+    //endregion
 
     private fun setCache(data: CurrencyDataResponse) {
         markSaved(data.coins)
@@ -72,8 +71,6 @@ class CurrencyRepository(
                 onFind.invoke(it)
                 true
             } ?: false
-
-
 
     //endregion
 
@@ -103,27 +100,37 @@ class CurrencyRepository(
 
     override suspend fun getAllCurrencies(skipCache: Boolean): Result<CurrencyDataResponse> =
             if (skipCache) {
-                mCurrencyClient.getCurrencies(NETWORK_PAGE_SIZE)
-                        .onSuccess { setCache(it.data) }
-                        .onError { mCached?.let { setCache(it) } }
-                        .mapOnSuccess { it.data }
+                currenciesRequest()
             } else {
                 mCached?.let {
                     Result.Success(it)
-                } ?: Result.Error(EmptyCache("Cache is empty"))
+                } ?: currenciesRequest()
             }
 
     override suspend fun getWatchlist(skipCache: Boolean): Result<CurrencyDataResponse> =
             if (skipCache) {
-                mCurrencyClient.getCurrencies(NETWORK_PAGE_SIZE, watchlistIds)
-                        .onSuccess { setCache(it.data) }
-                        .onError { mCached?.let { setCache(it) } }
-                        .mapOnSuccess { it.data }
+                watchlistRequest()
             } else {
                 mCached?.let {
                     Result.Success(it)
-                } ?: Result.Error(EmptyCache("Cache is empty"))
+                } ?: watchlistRequest()
             }
 
     //endregion
+
+    companion object {
+        private const val NETWORK_PAGE_SIZE = 100
+        private const val BD_PAGE_SIZE = 20
+        private var INSTANCE: CurrencyRepository? = null
+
+        fun getInstance(
+                currencyClient: CurrencyClient,
+                watchlist: WatchlistSourceContract
+        ): CurrencySourceContract {
+            if (INSTANCE == null) {
+                INSTANCE = CurrencyRepository(currencyClient, watchlist)
+            }
+            return INSTANCE!!
+        }
+    }
 }
