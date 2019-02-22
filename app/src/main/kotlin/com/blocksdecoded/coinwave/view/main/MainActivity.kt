@@ -322,7 +322,7 @@ class MainActivity :
             }
             drawer_share_this_app -> drawerItemClick { ShareUtils.shareApp(this) }
             drawer_close_menu -> closeDrawer()
-            drawer_company_selectable -> CustomTabsUtil.openUrl(this, "https://blocksdecoded.com/")
+            drawer_company_selectable -> CustomTabsUtil.openUrl(this, BuildConfig.COMPANY_URL)
         }
     }
 
