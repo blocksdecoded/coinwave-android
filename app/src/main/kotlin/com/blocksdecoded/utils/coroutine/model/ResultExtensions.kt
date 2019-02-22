@@ -14,6 +14,12 @@ import kotlin.coroutines.suspendCoroutine
  * with Android Studio
  */
 
+inline fun <T : Any> Result<T>.onResult(action: (Result<T>) -> Unit): Result<T> {
+    action.invoke(this)
+
+    return this
+}
+
 inline fun <T : Any> Result<T>.onSuccess(action: (T) -> Unit): Result<T> {
     if (this is Success) action(data)
 

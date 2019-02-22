@@ -96,7 +96,7 @@ class WatchListPresenter(
                     mView?.hideLoading()
                     when (it) {
                         is NetworkException -> {
-                            mView?.showNetworkError(mCachedData.isEmpty())
+                            mView?.showError(mCachedData.isEmpty())
                         }
                     }
                 }

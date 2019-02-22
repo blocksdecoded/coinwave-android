@@ -15,14 +15,14 @@ import com.blocksdecoded.utils.coroutine.model.Result
 class FavoriteChartInteractor(
     private val mChartsUseCases: ChartsUseCases,
     private val mFavoriteUseCases: FavoriteUseCases,
-    private val mCurrencyUseCases: CoinsUseCases
+    private val mCoinsUseCases: CoinsUseCases
 ) : FavoriteChartUseVariant {
     override suspend fun getChart(): Result<ChartData>? {
         return mChartsUseCases.getChartData(mFavoriteUseCases.getId(), CHART_PERIOD)
     }
 
     override suspend fun getCurrency(): Result<CoinEntity>? {
-        val entity = mCurrencyUseCases.getCoin(mFavoriteUseCases.getId())
+        val entity = mCoinsUseCases.getCoin(mFavoriteUseCases.getId())
 
         return if (entity != null) {
             Result.Success(entity)

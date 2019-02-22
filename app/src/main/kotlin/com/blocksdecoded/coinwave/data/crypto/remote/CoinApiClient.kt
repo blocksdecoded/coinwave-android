@@ -58,7 +58,7 @@ internal object CoinApiClient : CoreApiClient(), CoinClient {
         companion object {
             const val BASE_URL = BuildConfig.API_COINS
 
-            private const val PREFIX_PATH = "/ipns/QmURdeZbZxv3qwP6NRtH1WGRbcY4eiZsG4rEyDtFa2vgwW"
+            private const val PREFIX_PATH = "/ipns/QmT3qT84rdZ9tkUssYLNkKbPcFTkutFy2S8uizvKWQbTMg"
             private const val COINS_PATH = "$PREFIX_PATH/index.json"
             private const val HISTORY_PATH = "$PREFIX_PATH/coin"
         }

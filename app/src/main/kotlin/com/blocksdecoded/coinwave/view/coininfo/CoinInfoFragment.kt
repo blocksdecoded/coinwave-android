@@ -8,6 +8,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.Lifecycle
 import butterknife.BindView
 import butterknife.OnClick
 import com.github.mikephil.charting.charts.LineChart
@@ -28,10 +29,6 @@ import java.util.*
 open class CoinInfoFragment :
         BaseMVPFragment<CoinInfoContract.Presenter>(),
         CoinInfoContract.View {
-    companion object {
-        fun newInstance(): CoinInfoFragment = CoinInfoFragment()
-    }
-
     override var mPresenter: CoinInfoContract.Presenter? = null
     override val layoutId: Int = R.layout.fragment_coin_info
 
@@ -65,6 +62,8 @@ open class CoinInfoFragment :
     @BindView(R.id.coin_change_1w)
     lateinit var mChange1w: TextView
 
+    @BindView(R.id.fragment_coin_chart_error)
+    lateinit var mChartErrorImage: View
     @BindView(R.id.coin_chart_picked_container)
     lateinit var mPickedContainer: View
     @BindView(R.id.coin_chart_picked)
@@ -193,10 +192,26 @@ open class CoinInfoFragment :
         showCurrencyInfo(coinEntity)
     }
 
-    override fun showChartLoading() {
+    override fun showLoading() {
         mProgress.visible()
         mChart.invisible()
     }
 
+    override fun hideLoading() {
+        mProgress.hide()
+    }
+
+    override fun showChartError() {
+        mChartErrorImage.visible()
+    }
+
+    override fun hideChartError() {
+        mChartErrorImage.hide()
+    }
+
     //endregion
+
+    companion object {
+        fun newInstance(): CoinInfoFragment = CoinInfoFragment()
+    }
 }

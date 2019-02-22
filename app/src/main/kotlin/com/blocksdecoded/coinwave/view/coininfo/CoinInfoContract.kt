@@ -15,7 +15,13 @@ interface CoinInfoContract {
 
         fun openSite(url: String)
 
-        fun showChartLoading()
+        fun showLoading()
+
+        fun hideLoading()
+
+        fun showChartError()
+
+        fun hideChartError()
     }
 
     interface Presenter : BaseMVPContract.Presenter<View> {

@@ -51,6 +51,8 @@ open class WatchListFragment :
     lateinit var mErrorContainer: View
     @BindView(R.id.connection_error_retry)
     lateinit var mRetry: View
+    @BindView(R.id.fragment_watchlist_error_icon)
+    lateinit var mErrorIcon: View
 
     @BindView(R.id.fragment_watchlist_container)
     lateinit var mContainer: View
@@ -59,13 +61,6 @@ open class WatchListFragment :
     lateinit var mFavoriteName: TextView
     @BindView(R.id.fragment_watchlist_favorite_price)
     lateinit var mFavoritePrice: TextView
-
-    @OnClick(R.id.watchlist_menu)
-    fun onClick(view: View) {
-        when (view.id) {
-            R.id.watchlist_menu -> mPresenter?.onMenuClick()
-        }
-    }
 
     private var mActiveDialog: Dialog? = null
 
@@ -82,6 +77,13 @@ open class WatchListFragment :
     lateinit var mProgress: View
 
     //endregion
+
+    @OnClick(R.id.watchlist_menu)
+    fun onClick(view: View) {
+        when (view.id) {
+            R.id.watchlist_menu -> mPresenter?.onMenuClick()
+        }
+    }
 
     private val mChartListener = object : ChartListener() {
         override fun onValueSelected(e: Entry?, h: Highlight?) {
@@ -170,23 +172,18 @@ open class WatchListFragment :
     //region Contract
 
     override fun showFavoriteCoin(coin: CoinEntity) {
-        mFavoriteName?.text = "${coin.symbol}"
+        mFavoriteName?.text = coin.symbol
         mFavoritePrice?.text = "$${coin.getPrice()?.format()}"
 
         coin.getPriceChange()?.let {
-//            mPriceChange.text = "${if (it > 0) "+" else ""}$it%"
-
             context?.also { context ->
                 val color: Int = if (it > 0f) {
-//                mPriceChangeIcon.setImageResource(R.drawable.ic_arrow_up_green)
                     ResourceUtil.getColor(context, R.color.green)
                 } else {
-//                mPriceChangeIcon.setImageResource(R.drawable.ic_arrow_down_red)
                     ResourceUtil.getColor(context, R.color.red)
                 }
 
                 mFavoritePrice?.setTextColor(color)
-//                mPriceChange.setTextColor(color)
             }
         }
     }
@@ -196,6 +193,7 @@ open class WatchListFragment :
     }
 
     override fun showFavoriteLoading() {
+        mErrorIcon.hide()
         mProgress.visible()
         mChart.hide()
     }
@@ -208,21 +206,6 @@ open class WatchListFragment :
     override fun openCoinInfo(id: Int) {
         activity?.let {
             CoinInfoActivity.start(it, id)
-        }
-    }
-
-    override fun showDeleteConfirm(coinEntity: CoinEntity, position: Int) {
-        activity?.let {
-            mActiveDialog = ActionConfirmDialog(it)
-                    .setCancelListener { it.dismiss() }
-                    .setTitle("Remove ${coinEntity.name} from Watchlist?")
-                    .setConfirmText("Remove")
-                    .setConfirmListener {
-                        it.dismiss()
-                        mPresenter?.deleteCoin(position)
-                    }.setDismissListener {
-                        mActiveDialog = null
-                    }.showDialog()
         }
     }
 
@@ -258,10 +241,10 @@ open class WatchListFragment :
         mSwipeRefreshLayout?.isRefreshing = false
     }
 
-    override fun showNetworkError(hideList: Boolean) {
+    override fun showError(hideList: Boolean) {
         mSwipeRefreshLayout?.isRefreshing = false
-
         if (hideList) {
+            mErrorIcon.visible()
             mErrorContainer.visible()
             mRecycler.hide()
         } else {

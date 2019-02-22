@@ -22,11 +22,9 @@ interface WatchListContract {
 
         fun deleteCoin(position: Int)
 
-        fun showNetworkError(hideList: Boolean)
-
         fun openCoinInfo(id: Int)
 
-        fun showDeleteConfirm(coinEntity: CoinEntity, position: Int)
+        fun showError(hideList: Boolean)
 
         fun showEmpty()
 

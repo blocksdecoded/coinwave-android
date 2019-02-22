@@ -19,6 +19,22 @@ class CoinInfoPresenter(
 ) : BaseMVPPresenter<CoinInfoContract.View>(view), CoinInfoContract.Presenter {
     private var mCached: CoinEntity? = null
 
+    private suspend fun fetchChartData(id: Int, periodEnum: ChartsUseCases.ChartPeriod = TODAY) {
+        mView?.hideChartError()
+        mView?.showLoading()
+        mChartsUseCases.getChartData(id, periodEnum)
+                .onSuccess {
+                    mView?.hideLoading()
+                    mView?.hideChartError()
+                    mView?.showChartData(it)
+                }
+                .onError {
+                    mView?.hideLoading()
+                    mView?.showChartError()
+                    mView?.showMessage("Chart load error")
+                }
+    }
+
     override fun onGoToWebsiteClick() {
         mCached?.let {
             mView?.openSite(it.websiteSlug)
@@ -34,11 +50,10 @@ class CoinInfoPresenter(
         mCached = mCoinsUseCases.getCoin(id)
         mCached?.let {
             mView?.showCurrencyData(it)
+
+            fetchChartData(id)
         }
-        mView?.showChartLoading()
-        mChartsUseCases.getChartData(id)
-                .onSuccess { mView?.showChartData(it) }
-                .onError { mView?.showMessage("Chart load error") }
+
     }
 
     override fun onPeriodChanged(position: Int) = launchSilent(uiContext) {
@@ -51,10 +66,8 @@ class CoinInfoPresenter(
                 4 -> ALL
                 else -> TODAY
             }
-            mView?.showChartLoading()
-            mChartsUseCases.getChartData(it.id, period)
-                    .onSuccess { mView?.showChartData(it) }
-                    .onError { mView?.showMessage("Chart load error") }
+
+            fetchChartData(it.id, period)
         }
     }
 
