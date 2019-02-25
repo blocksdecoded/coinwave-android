@@ -102,7 +102,7 @@ open class PostListFragment :
         activity?.also {
             val metrics = DisplayMetrics()
             it.windowManager.defaultDisplay.getMetrics(metrics)
-            postHeight = (metrics.heightPixels * 0.3).roundToInt()
+            postHeight = (metrics.heightPixels * 0.27).roundToInt()
         }
 
         mAdapter = PostListAdapter(arrayListOf(), this, this, postHeight)
