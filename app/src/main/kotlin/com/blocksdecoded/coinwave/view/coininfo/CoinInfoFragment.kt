@@ -126,7 +126,7 @@ open class CoinInfoFragment :
     private fun showData(data: ChartData) = mChart.loadChartData(
             data,
             R.color.black,
-            R.drawable.dark_chart_bg
+            R.drawable.bg_dark_chart
     )
 
     private fun showCurrencyInfo(coinEntity: CoinEntity) {

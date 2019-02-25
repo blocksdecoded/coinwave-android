@@ -30,7 +30,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:background="@drawable/round_light_selectable_bg"
+                android:background="@drawable/bg_round_light_selectable"
                 android:src="@drawable/ic_left_arrow"
                 android:layout_marginLeft="12dp"
                 android:padding="13dp"/>
@@ -42,7 +42,7 @@
                 app:layout_constraintTop_toTopOf="@+id/fragment_coin_info_name"
                 app:layout_constraintBottom_toBottomOf="@+id/fragment_coin_info_name"
                 app:layout_constraintRight_toLeftOf="@+id/fragment_coin_info_name"
-                android:src="@drawable/circle_red_bg"
+                android:src="@drawable/bg_circle_red"
                 android:layout_marginRight="8dp"/>
 
             <com.blocksdecoded.coinwave.view.widgets.FontTextView
@@ -84,7 +84,7 @@
                 android:layout_marginRight="12dp"
                 android:padding="9dp"
                 android:visibility="gone"
-                android:background="@drawable/round_light_selectable_bg"/>
+                android:background="@drawable/bg_round_light_selectable"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -106,7 +106,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/card_gradient_bg">
+            android:background="@drawable/bg_card_gradient">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/coin_chart_picked_container"

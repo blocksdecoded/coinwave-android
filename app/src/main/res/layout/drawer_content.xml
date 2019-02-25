@@ -218,7 +218,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/drawer_company_title"
             app:layout_constraintHorizontal_chainStyle="packed"
             android:layout_marginRight="4dp"
-            android:src="@drawable/ic_blocks_decoded_small"
+            android:src="@drawable/img_blocks_decoded_small"
             android:alpha="0.6"/>
 
         <com.blocksdecoded.coinwave.view.widgets.FontTextView

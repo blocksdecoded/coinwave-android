@@ -48,7 +48,7 @@
             app:ftv_typeface="bold"
             android:textColor="@color/white"
             android:textSize="13.5sp"
-            android:background="@drawable/circle_red_bg"/>
+            android:background="@drawable/bg_circle_red"/>
 
         <com.blocksdecoded.coinwave.view.widgets.FontTextView
             android:id="@+id/dialog_delete_cancel"

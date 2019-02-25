@@ -155,7 +155,7 @@ open class WatchListFragment :
     private fun showChartData(data: ChartData) = mChart.loadChartData(
             data,
             R.color.blue_green,
-            R.drawable.green_chart_bg
+            R.drawable.bg_green_chart
     )
 
     //endregion
@@ -203,21 +203,20 @@ open class WatchListFragment :
     override fun showCoins(coins: List<CoinEntity>) {
         mSwipeRefreshLayout?.isRefreshing = false
         mRecycler.visible()
-        mErrorContainer.hide()
-        mEmptyText.hide()
         mRecycler?.post {
             mAdapter?.setItems(coins)
         }
     }
 
     override fun showEmpty() {
-        mSwipeRefreshLayout?.isRefreshing = false
-        mErrorContainer.hide()
         mEmptyText.visible()
-        mRecycler?.hide()
     }
 
-    override fun hideLoading() {
+    override fun hideEmpty() {
+        mEmptyText.hide()
+    }
+
+    override fun hideCoinsLoading() {
         mSwipeRefreshLayout?.isRefreshing = false
     }
 
@@ -234,7 +233,7 @@ open class WatchListFragment :
         }
     }
 
-    override fun showLoading() {
+    override fun showCoinsLoading() {
         mSwipeRefreshLayout?.isRefreshing = true
         mEmptyText.hide()
         mErrorContainer.hide()

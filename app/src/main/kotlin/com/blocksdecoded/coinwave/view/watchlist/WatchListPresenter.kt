@@ -107,18 +107,18 @@ class WatchListPresenter(
             }
 
     private fun getCurrencies(skipCache: Boolean) = launchSilent(uiContext) {
-        mView?.showLoading()
+        mView?.showCoinsLoading()
         if (mCachedData.isEmpty()) {
             mView?.showFavoriteLoading()
         }
 
         mCoinsUseCases.getCoins(skipCache)
                 .onSuccess {
-                    mView?.hideLoading()
+                    mView?.hideCoinsLoading()
                     setCache(it)
                 }
                 .onError {
-                    mView?.hideLoading()
+                    mView?.hideCoinsLoading()
                     mView?.showError(mCachedData.isEmpty())
 
                     if (mCachedData.isEmpty()) {

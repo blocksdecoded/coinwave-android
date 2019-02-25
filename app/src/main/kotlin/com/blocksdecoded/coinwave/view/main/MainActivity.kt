@@ -217,7 +217,7 @@ class MainActivity :
     }
 
     private fun createCurrencyListScreen(): Fragment =
-            CoinsListFragment.newInstance(getString(R.string.title_cryptocoin)).also {
+            CoinsListFragment.newInstance(getString(R.string.title_cryptocurrency)).also {
                 mCoinsListPresenter = CoinsListPresenter(
                         it,
                         this,

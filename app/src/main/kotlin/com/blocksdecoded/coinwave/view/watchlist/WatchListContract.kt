@@ -14,14 +14,6 @@ interface WatchListContract {
 
         fun showFavoriteChart(chartData: ChartData)
 
-        fun showFavoriteLoading()
-
-        fun hideFavoriteLoading()
-
-        fun showFavoriteError()
-
-        fun hideFavoriteError()
-
         fun updateCoin(position: Int, coinEntity: CoinEntity)
 
         fun deleteCoin(position: Int)
@@ -32,9 +24,19 @@ interface WatchListContract {
 
         fun showEmpty()
 
-        fun showLoading()
+        fun hideEmpty()
 
-        fun hideLoading()
+        fun showCoinsLoading()
+
+        fun hideCoinsLoading()
+
+        fun showFavoriteLoading()
+
+        fun hideFavoriteLoading()
+
+        fun showFavoriteError()
+
+        fun hideFavoriteError()
     }
 
     interface Presenter : BaseMVPContract.Presenter<View> {
