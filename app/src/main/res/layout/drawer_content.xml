@@ -50,7 +50,7 @@
             app:layout_constraintLeft_toRightOf="@+id/drawer_close_menu"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="4dp"
-            android:text="@string/menu"
+            android:text="@string/title_menu"
             android:paddingLeft="0dp"
             app:ftv_typeface="light"/>
 
@@ -60,7 +60,7 @@
             android:theme="@style/AppTheme.DrawerMenuItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/pick_favorite_coin"
+            android:text="@string/action_pick_favorite_coin"
             app:layout_constraintTop_toBottomOf="@+id/drawer_close_menu"
             app:ftv_typeface="light"/>
 
@@ -116,7 +116,7 @@
             android:theme="@style/AppTheme.DrawerMenuItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/share_this_app"
+            android:text="@string/action_share_this_app"
             app:layout_constraintTop_toBottomOf="@+id/drawer_add_watchlist"
             app:ftv_typeface="light"/>
 
@@ -144,7 +144,7 @@
             android:theme="@style/AppTheme.DrawerMenuItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/rate_us"
+            android:text="@string/action_rate_us"
             app:layout_constraintTop_toBottomOf="@+id/drawer_share_this_app"
             app:ftv_typeface="light"/>
 
@@ -172,7 +172,7 @@
             android:theme="@style/AppTheme.DrawerMenuItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/contact_us"
+            android:text="@string/action_contact_us"
             app:layout_constraintTop_toBottomOf="@+id/drawer_rate_us"
             app:ftv_typeface="light"/>
 

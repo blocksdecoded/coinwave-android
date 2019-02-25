@@ -7,19 +7,19 @@
 
     <item
         android:id="@+id/action_text_format_small"
-        android:title="@string/small_size"
+        android:title="@string/action_small_size"
         app:showAsAction="never"
         />
 
     <item
         android:id="@+id/action_text_format_medium"
-        android:title="@string/medium_size"
+        android:title="@string/action_medium_size"
         app:showAsAction="never"
         />
 
     <item
         android:id="@+id/action_text_format_big"
-        android:title="@string/big_size"
+        android:title="@string/action_big_size"
         app:showAsAction="never"
         />
 </menu>

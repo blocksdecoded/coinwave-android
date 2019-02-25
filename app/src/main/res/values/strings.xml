@@ -3,14 +3,13 @@
     <string name="const_app_name">CoinWave</string>
 
     <!--Menu-->
-    <string name="menu">Menu</string>
-    <string name="pick_favorite_coin">Pick favorite coin</string>
-    <string name="share_this_app">Share this app</string>
-    <string name="rate_us">Rate us</string>
-    <string name="contact_us">Contact us</string>
-    <string name="small_size">Small size</string>
-    <string name="medium_size">Medium size</string>
-    <string name="big_size">Big size</string>
+    <string name="action_pick_favorite_coin">Pick favorite coin</string>
+    <string name="action_share_this_app">Share this app</string>
+    <string name="action_rate_us">Rate us</string>
+    <string name="action_contact_us">Contact us</string>
+    <string name="action_small_size">Small size</string>
+    <string name="action_medium_size">Medium size</string>
+    <string name="action_big_size">Big size</string>
 
     <!--Messages-->
     <string name="message_watchlist_is_empty">Watchlist is empty</string>
@@ -21,14 +20,17 @@
     <string name="btn_retry">Retry</string>
     <string name="btn_read_more">Read more</string>
 
+    <!--Fields-->
+    <string name="coin_name_field">Name</string>
+    <string name="coin_market_cap_field">Market Cap</string>
+    <string name="coin_24h_volume_field">Volume(24h)</string>
+    <string name="coin_24h_price_field">Price(24h)</string>
+    
     <!--Titles-->
+    <string name="title_menu">Menu</string>
     <string name="title_cryptocurrency">Cryptocurrency</string>
     <string name="title_pick_favorite">Pick favorite</string>
     <string name="title_add_to_watchlist">Add to watchlist</string>
-    <string name="name">Name</string>
-    <string name="market_cap">Market Cap</string>
-    <string name="volume_24h">Volume(24h)</string>
-    <string name="price_24h">Price(24h)</string>
     <string name="title_currencies">Currencies</string>
     <string name="title_watchlist">Watchlist</string>
     <string name="title_news">News</string>
