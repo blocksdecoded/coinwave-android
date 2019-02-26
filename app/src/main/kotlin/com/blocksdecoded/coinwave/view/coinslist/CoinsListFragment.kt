@@ -76,6 +76,7 @@ open class CoinsListFragment :
         val lm = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         mRecycler?.layoutManager = lm
         mRecycler?.adapter = mAdapter
+        mRecycler.setHasFixedSize(true)
     }
 
     //endregion

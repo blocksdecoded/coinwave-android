@@ -105,6 +105,7 @@ open class PostListFragment :
             postHeight = (metrics.heightPixels * 0.27).roundToInt()
         }
 
+        mRecycler.setHasFixedSize(true)
         mAdapter = PostListAdapter(arrayListOf(), this, this, postHeight)
         mRecycler.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         mRecycler.adapter = mAdapter

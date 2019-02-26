@@ -129,6 +129,7 @@ open class WatchListFragment :
             mPresenter?.getCoins()
         }
 
+        mRecycler.setHasFixedSize(true)
         val lm = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         mRecycler.layoutManager = lm
         mRecycler.adapter = mAdapter

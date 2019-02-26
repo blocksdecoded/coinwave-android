@@ -52,6 +52,7 @@ class PickFavoriteFragment :
     override fun initView(rootView: View) {
         mAdapter = CoinsListAdapter(arrayListOf(), this)
 
+        mRecycler?.setHasFixedSize(true)
         val lm = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         mRecycler?.layoutManager = lm
         mRecycler?.adapter = mAdapter

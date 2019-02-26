@@ -41,6 +41,7 @@ class AddToWatchlistFragment : BaseMVPFragment<AddToWatchlistContract.Presenter>
     override fun initView(rootView: View) {
         mAdapter = AddToWatchlistAdapter(listener = this)
 
+        mRecycler.setHasFixedSize(true)
         mRecycler.layoutManager = StaggeredGridLayoutManager(2, RecyclerView.VERTICAL)
         mRecycler.adapter = mAdapter
     }
