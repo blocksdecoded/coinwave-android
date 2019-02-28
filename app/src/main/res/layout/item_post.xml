@@ -35,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/black"
-            android:alpha="0.3" />
+            android:alpha="0.4" />
 
         <com.blocksdecoded.coinwave.view.widgets.FontTextView
             android:id="@+id/adapter_post_item_title"

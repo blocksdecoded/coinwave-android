@@ -199,7 +199,7 @@ class MainActivity :
 
     private fun setVersionInfo() {
         drawer_app_version.text = if (BuildConfig.DEBUG) {
-            "v${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
+            "v${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})\ndebug"
         } else {
             "v${BuildConfig.VERSION_NAME}"
         }
