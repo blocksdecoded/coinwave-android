@@ -43,14 +43,16 @@
         <item name="android:layout_marginLeft">20dp</item>
         <item name="android:paddingTop">12dp</item>
         <item name="android:paddingBottom">12dp</item>
-        <item name="android:textColor">@color/light_text</item>
+        <item name="android:textColor">#747679</item>
+        <item name="android:textSize">15sp</item>
         <item name="ftv_typeface">light</item>
     </style>
 
     <style name="AppTheme.FieldValue">
-        <item name="android:textColor">@color/light_text</item>
+        <item name="android:textColor">#1b242a</item>
         <item name="android:layout_marginRight">20dp</item>
-        <item name="ftv_typeface">light</item>
+        <item name="android:textSize">15sp</item>
+        <item name="ftv_typeface">regular</item>
     </style>
 
     <style name="AppTheme.DrawerMenuItem">
