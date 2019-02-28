@@ -117,7 +117,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/action_share_this_app"
-            app:layout_constraintTop_toBottomOf="@+id/drawer_add_watchlist"
+            app:layout_constraintTop_toBottomOf="@+id/drawer_rate_us"
             app:ftv_typeface="light"/>
 
         <ImageView
@@ -145,7 +145,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/action_rate_us"
-            app:layout_constraintTop_toBottomOf="@+id/drawer_share_this_app"
+            app:layout_constraintTop_toBottomOf="@+id/drawer_contact_us"
             app:ftv_typeface="light"/>
 
         <ImageView
@@ -173,7 +173,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/action_contact_us"
-            app:layout_constraintTop_toBottomOf="@+id/drawer_rate_us"
+            app:layout_constraintTop_toBottomOf="@+id/drawer_add_watchlist"
             app:ftv_typeface="light"/>
 
         <ImageView
