@@ -32,7 +32,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:background="@drawable/bg_round_light_selectable"
                 android:src="@drawable/ic_left_arrow"
-                android:layout_marginLeft="12dp"
+                android:layout_marginLeft="1dp"
                 android:padding="13dp"/>
 
             <ImageView
