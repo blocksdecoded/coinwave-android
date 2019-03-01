@@ -41,7 +41,8 @@
         app:cardUseCompatPadding="true"
         android:layout_marginTop="16dp"
         app:cardElevation="8dp"
-        app:cardCornerRadius="8dp">
+        app:cardCornerRadius="8dp"
+        android:stateListAnimator="@drawable/button_state_animation">
     
         <com.blocksdecoded.coinwave.view.widgets.FontTextView
             android:layout_width="wrap_content"

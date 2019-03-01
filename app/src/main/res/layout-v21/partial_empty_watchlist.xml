@@ -1,48 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_watchlist_error"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <ImageView
-        android:id="@+id/connection_error_image"
+    
+    <com.blocksdecoded.coinwave.view.widgets.FontTextView
+        android:id="@+id/partial_watchlist_empty_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.2"
-        android:src="@drawable/ic_error"/>
-    
-    <com.blocksdecoded.coinwave.view.widgets.FontTextView
-        android:id="@+id/connection_error_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/connection_error_image"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintVertical_bias="0.00"
         android:layout_marginTop="28dp"
-        android:text="@string/message_connection_error"
+        android:text="@string/message_watchlist_is_empty"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="@dimen/message_title_text"
         android:gravity="center"/>
-
+    
     <androidx.cardview.widget.CardView
-            android:id="@+id/connection_error_retry"
-            android:layout_width="wrap_content"
+            android:id="@+id/partial_watchlist_empty_add"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="@+id/connection_error_title"
-        app:layout_constraintRight_toRightOf="@+id/connection_error_title"
-        app:layout_constraintTop_toBottomOf="@+id/connection_error_title"
+        app:layout_constraintLeft_toLeftOf="@+id/partial_watchlist_empty_title"
+        app:layout_constraintRight_toRightOf="@+id/partial_watchlist_empty_title"
+        app:layout_constraintTop_toBottomOf="@+id/partial_watchlist_empty_title"
         app:cardUseCompatPadding="true"
         android:layout_marginTop="16dp"
         app:cardElevation="8dp"
-        app:cardCornerRadius="8dp">
-    
+        app:cardCornerRadius="8dp"
+        android:stateListAnimator="@drawable/button_state_animation">
+        
         <com.blocksdecoded.coinwave.view.widgets.FontTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -50,13 +43,13 @@
             android:paddingRight="24dp"
             android:paddingTop="12dp"
             android:paddingBottom="12dp"
-            android:text="@string/btn_retry"
+            android:text="@string/btn_add_coin"
             android:textColor="@color/main_dark"
             android:background="@drawable/bg_green_gradient"
-            android:textSize="14sp"
+            android:textSize="@dimen/message_button_text"
             android:letterSpacing="0.15"
             app:ftv_typeface="semibold"/>
-        
+    
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

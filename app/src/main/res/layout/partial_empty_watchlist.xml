@@ -24,6 +24,7 @@
         android:gravity="center"/>
     
     <androidx.cardview.widget.CardView
+            android:id="@+id/partial_watchlist_empty_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="@+id/partial_watchlist_empty_title"
@@ -35,7 +36,6 @@
         app:cardCornerRadius="8dp">
         
         <com.blocksdecoded.coinwave.view.widgets.FontTextView
-            android:id="@+id/partial_watchlist_empty_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="24dp"
