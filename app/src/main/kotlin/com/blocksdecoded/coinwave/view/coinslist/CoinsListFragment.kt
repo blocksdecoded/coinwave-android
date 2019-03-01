@@ -139,7 +139,7 @@ open class CoinsListFragment :
             mRecycler.hide()
             mErrorContainer.visible()
         } else {
-            showShortToast(context, "Can't refresh currencies.\nPlease check internet connection and try again.")
+            showShortToast(context, getString(R.string.message_connection_error))
             mListHeader.visible()
             mRecycler.visible()
             mErrorContainer.hide()

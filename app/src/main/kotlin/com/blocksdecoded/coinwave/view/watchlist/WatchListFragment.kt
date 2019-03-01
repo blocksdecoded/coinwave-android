@@ -238,13 +238,14 @@ open class WatchListFragment :
 
     override fun showError(hideList: Boolean) {
         mSwipeRefreshLayout?.isRefreshing = false
+        mEmptyContainer.hide()
 
         if (hideList) {
             mErrorContainer.visible()
             mListHeader.hide()
             mRecycler.hide()
         } else {
-            showShortToast(context, "Can't refresh currencies.\nPlease check internet connection and try again.")
+            showShortToast(context, getString(R.string.message_connection_error))
             mErrorContainer.hide()
             mListHeader.visible()
             mRecycler.visible()
