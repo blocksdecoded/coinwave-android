@@ -8,11 +8,14 @@ import com.blocksdecoded.coinwave.data.watchlist.WatchlistSourceContract
 import com.blocksdecoded.utils.coroutine.model.mapOnSuccess
 import com.blocksdecoded.utils.coroutine.model.onError
 import com.blocksdecoded.utils.coroutine.model.onSuccess
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 
 // Created by askar on 7/19/18.
 class CoinsRepository(
     private val mCoinsClient: CoinClient,
-    private val mWatchlistSource: WatchlistSourceContract
+    private val mWatchlistSource: WatchlistSourceContract,
+    private val mLocalSource: CoinsDataSource
 ) : CoinsDataSource {
     private var mCached: CoinsDataResponse? = null
     private val mObservers = hashSetOf<CoinsUpdateObserver>()
@@ -29,15 +32,26 @@ class CoinsRepository(
             return ids
         }
 
+    init {
+        GlobalScope.async {
+            mLocalSource.getAllCoins(false)
+                .onSuccess { mCached = it }
+        }
+    }
+
     //region Private
 
     //region Calls
 
-    private suspend fun coinsRequest(): Result<CoinsDataResponse> =
-            mCoinsClient.getCoins(NETWORK_PAGE_SIZE)
-                .onSuccess { setCache(it.data) }
-                .onError { mCached?.let { setCache(it) } }
-                .mapOnSuccess { it.data }
+    private suspend fun coinsRequest(): Result<CoinsDataResponse> {
+        return mCoinsClient.getCoins(NETWORK_PAGE_SIZE)
+            .onSuccess {
+                setCoinsData(it.data)
+                setCache(it.data)
+            }
+            .onError { mCached?.let { setCache(it) } }
+            .mapOnSuccess { it.data }
+    }
 
     private suspend fun watchlistRequest(): Result<CoinsDataResponse> =
             mCoinsClient.getCoins(NETWORK_PAGE_SIZE, watchlistIds)
@@ -73,6 +87,10 @@ class CoinsRepository(
     //endregion
 
     //region Contract
+
+    override fun setCoinsData(coinsData: CoinsDataResponse) {
+        mLocalSource.setCoinsData(coinsData)
+    }
 
     override fun getCoin(id: Int): CoinEntity? = mCached?.coins?.first { it.id == id }
 
@@ -123,10 +141,11 @@ class CoinsRepository(
 
         fun getInstance(
             coinClient: CoinClient,
-            watchlist: WatchlistSourceContract
+            watchlist: WatchlistSourceContract,
+            localSource: CoinsDataSource
         ): CoinsDataSource {
             if (INSTANCE == null) {
-                INSTANCE = CoinsRepository(coinClient, watchlist)
+                INSTANCE = CoinsRepository(coinClient, watchlist, localSource)
             }
             return INSTANCE!!
         }

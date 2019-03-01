@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import androidx.multidex.MultiDex
+import com.blocksdecoded.coinwave.domain.SourceProvider
 import com.squareup.leakcanary.LeakCanary
 
 // Created by askar on 6/7/18.
@@ -32,6 +33,7 @@ class CoinApp : Application() {
         INSTANCE = this
         LeakCanary.install(this)
 
+        SourceProvider.init(this)
 //        FirebaseApp.initializeApp(this)
 //        FRCUtil.initConfigs()
 

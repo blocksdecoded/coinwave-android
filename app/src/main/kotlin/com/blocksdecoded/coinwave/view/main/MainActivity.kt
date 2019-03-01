@@ -211,7 +211,7 @@ class MainActivity :
         mWatchListPresenter = WatchListPresenter(
                 it,
                 this,
-                UseCaseProvider.getCoinsUseCases(applicationContext),
+                UseCaseProvider.getCoinsUseCases(),
                 UseCaseProvider.getFavoriteChartUseVariant(applicationContext)
         )
     }
@@ -221,7 +221,7 @@ class MainActivity :
                 mCoinsListPresenter = CoinsListPresenter(
                         it,
                         this,
-                        UseCaseProvider.getCoinsUseCases(applicationContext)
+                        UseCaseProvider.getCoinsUseCases()
                 )
             }
 

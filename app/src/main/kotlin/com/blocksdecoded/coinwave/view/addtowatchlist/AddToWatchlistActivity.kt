@@ -42,7 +42,7 @@ class AddToWatchlistActivity : SwipeableActivity() {
 
             mPresenter = AddToWatchlistPresenter(
                     fragment,
-                    UseCaseProvider.getCoinsUseCases(applicationContext)
+                    UseCaseProvider.getCoinsUseCases()
             )
         }
     }

@@ -10,6 +10,8 @@ interface CoinsDataSource {
 
     suspend fun getWatchlist(skipCache: Boolean): Result<CoinsDataResponse>
 
+    fun setCoinsData(coinsData: CoinsDataResponse)
+
     fun getCoin(id: Int): CoinEntity?
 
     fun saveCoin(id: Int): Boolean
