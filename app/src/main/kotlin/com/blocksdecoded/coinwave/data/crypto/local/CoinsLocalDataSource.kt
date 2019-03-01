@@ -54,6 +54,5 @@ class CoinsLocalDataSource(
 
     companion object {
         private val PREF_COINS_KEY = "coins"
-
     }
 }

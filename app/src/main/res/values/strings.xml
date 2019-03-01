@@ -29,7 +29,7 @@
     
     <!--Titles-->
     <string name="title_menu">Menu</string>
-    <string name="title_cryptocurrency">Cryptocurrency</string>
+    <string name="title_cryptocurrency">Cryptocurrencies</string>
     <string name="title_pick_favorite">Pick favorite</string>
     <string name="title_add_to_watchlist">Add to watchlist</string>
     <string name="title_currencies">Currencies</string>

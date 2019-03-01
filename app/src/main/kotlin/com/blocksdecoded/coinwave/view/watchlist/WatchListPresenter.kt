@@ -10,8 +10,10 @@ import com.blocksdecoded.coinwave.util.findCurrency
 import com.blocksdecoded.coinwave.view.main.MenuClickListener
 import com.blocksdecoded.utils.coroutine.launchSilent
 import com.blocksdecoded.utils.coroutine.model.onError
+import com.blocksdecoded.utils.coroutine.model.onResult
 import com.blocksdecoded.utils.coroutine.model.onSuccess
 import com.blocksdecoded.utils.isValidIndex
+import com.blocksdecoded.utils.logD
 import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
 
@@ -64,6 +66,7 @@ class WatchListPresenter(
     private fun setCache(coins: List<CoinEntity>) = launchSilent(uiContext) {
         mCachedData.clear()
         mCachedData.addAll(coins.filter { it.isSaved })
+
         mView?.showCoins(mCachedData)
 
         if (mCachedData.isEmpty()) mView?.showEmpty() else mView?.hideEmpty()
@@ -75,36 +78,31 @@ class WatchListPresenter(
         mView?.showFavoriteLoading()
         mView?.hideFavoriteError()
 
-        mFavoriteChartUseVariant.getCoin()?.onSuccess { mView?.showFavoriteCoin(it) }
+        mFavoriteChartUseVariant.getCoin()
+            ?.onSuccess { mView?.showFavoriteCoin(it) }
 
         mFavoriteChartUseVariant.getChart()
-                ?.onSuccess {
-                    mView?.hideFavoriteLoading()
-                    mView?.showFavoriteChart(it)
-                }?.onError {
-                    mView?.hideFavoriteLoading()
-                    mView?.showFavoriteError()
-                }
+            ?.onResult { mView?.hideFavoriteLoading() }
+            ?.onSuccess { mView?.showFavoriteChart(it) }
+            ?.onError { mView?.showFavoriteError() }
     }
 
     private fun searchCurrency(coinEntity: CoinEntity, body: ((index: Int) -> Unit)? = null): Int =
             mCachedData.findCurrency(coinEntity, body)
 
     private fun updateCurrency(coinEntity: CoinEntity): Int {
-        val index = searchCurrency(coinEntity)
-
-        if (index >= 0) {
-        } else {
-            mCachedData.addSortedByRank(coinEntity)
+        searchCurrency(coinEntity).also {
+            if (it == -1) {
+                mCachedData.addSortedByRank(coinEntity)
+            }
         }
 
         return 0
     }
 
-    private fun removeCurrency(coinEntity: CoinEntity): Int =
-            searchCurrency(coinEntity) {
-                mCachedData.removeAt(it)
-            }
+    private fun removeCurrency(coinEntity: CoinEntity): Int = searchCurrency(coinEntity) {
+        mCachedData.removeAt(it)
+    }
 
     private fun getCurrencies(skipCache: Boolean) = launchSilent(uiContext) {
         mView?.showCoinsLoading()
@@ -113,19 +111,16 @@ class WatchListPresenter(
         }
 
         mCoinsUseCases.getCoins(skipCache)
-                .onSuccess {
-                    mView?.hideCoinsLoading()
-                    setCache(it)
-                }
-                .onError {
-                    mView?.hideCoinsLoading()
-                    mView?.showError(mCachedData.isEmpty())
+            .onResult { mView?.hideCoinsLoading() }
+            .onSuccess { setCache(it) }
+            .onError {
+                mView?.showError(mCachedData.isEmpty())
 
-                    if (mCachedData.isEmpty()) {
-                        mView?.hideFavoriteLoading()
-                        mView?.showFavoriteError()
-                    }
+                if (mCachedData.isEmpty()) {
+                    mView?.hideFavoriteLoading()
+                    mView?.showFavoriteError()
                 }
+            }
     }
 
     //endregion

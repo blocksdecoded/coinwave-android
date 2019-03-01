@@ -224,6 +224,7 @@ open class WatchListFragment :
     }
 
     override fun showEmpty() {
+        mErrorContainer.hide()
         mListHeader.hide()
         mEmptyContainer.visible()
     }

@@ -203,6 +203,7 @@ open class CoinInfoFragment :
     override fun showChartError() {
         mChartErrorImage.visible()
         mChart.hide()
+        showShortToast(context, getString(R.string.message_connection_error))
     }
 
     override fun hideChartError() {

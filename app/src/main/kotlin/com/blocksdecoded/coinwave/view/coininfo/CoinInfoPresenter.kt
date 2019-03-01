@@ -7,6 +7,7 @@ import com.blocksdecoded.coinwave.domain.usecases.chart.ChartsUseCases.ChartPeri
 import com.blocksdecoded.coinwave.domain.usecases.coins.CoinsUseCases
 import com.blocksdecoded.utils.coroutine.launchSilent
 import com.blocksdecoded.utils.coroutine.model.onError
+import com.blocksdecoded.utils.coroutine.model.onResult
 import com.blocksdecoded.utils.coroutine.model.onSuccess
 import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
@@ -23,16 +24,9 @@ class CoinInfoPresenter(
         mView?.hideChartError()
         mView?.showLoading()
         mChartsUseCases.getChartData(id, periodEnum)
-                .onSuccess {
-                    mView?.hideLoading()
-                    mView?.hideChartError()
-                    mView?.showChartData(it)
-                }
-                .onError {
-                    mView?.hideLoading()
-                    mView?.showChartError()
-                    mView?.showMessage("Chart load error")
-                }
+            .onResult { mView?.hideLoading() }
+            .onSuccess { mView?.showChartData(it) }
+            .onError { mView?.showChartError() }
     }
 
     override fun onGoToWebsiteClick() {
