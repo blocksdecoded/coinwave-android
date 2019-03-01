@@ -12,13 +12,14 @@
     <string name="action_big_size">Big size</string>
 
     <!--Messages-->
-    <string name="message_watchlist_is_empty">Watchlist is empty</string>
+    <string name="message_watchlist_is_empty">Your watchlist is empty</string>
     <string name="message_connection_error">You are currently offline.\nCheck your internet connection.</string>
 
     <!--Buttons-->
     <string name="btn_go_to_website">GO TO WEBSITE</string>
     <string name="btn_retry">Retry</string>
     <string name="btn_read_more">Read more</string>
+    <string name="btn_add_coin">Add coin</string>
 
     <!--Fields-->
     <string name="coin_name_field">Name</string>

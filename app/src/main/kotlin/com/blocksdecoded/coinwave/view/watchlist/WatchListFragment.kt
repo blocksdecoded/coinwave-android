@@ -20,6 +20,7 @@ import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.util.format
 import com.blocksdecoded.coinwave.util.init
 import com.blocksdecoded.coinwave.util.loadChartData
+import com.blocksdecoded.coinwave.view.addtowatchlist.AddToWatchlistActivity
 import com.blocksdecoded.coinwave.view.coininfo.CoinInfoActivity
 import com.blocksdecoded.coinwave.view.pickfavorite.PickFavoriteActivity
 import com.blocksdecoded.coinwave.view.watchlist.recycler.WatchlistAdapter
@@ -36,16 +37,18 @@ open class WatchListFragment :
     override var mPresenter: WatchListContract.Presenter? = null
     override val layoutId: Int = R.layout.fragment_watchlist
 
+    @BindView(R.id.fragment_watchlist_header)
+    lateinit var mListHeader: View
+    @BindView(R.id.fragment_watchlist_empty_container)
+    lateinit var mEmptyContainer: View
     @BindView(R.id.fragment_watchlist_recycler)
     lateinit var mRecycler: RecyclerView
     private var mAdapter: WatchlistAdapter? = null
 
     @BindView(R.id.fragment_watchlist_refresh)
     lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
-    @BindView(R.id.fragment_watchlist_empty)
-    lateinit var mEmptyText: View
 
-    @BindView(R.id.fragment_watchlist_error)
+    @BindView(R.id.fragment_watchlist_error_container)
     lateinit var mErrorContainer: View
     @BindView(R.id.connection_error_retry)
     lateinit var mRetry: View
@@ -73,13 +76,6 @@ open class WatchListFragment :
     lateinit var mProgress: View
 
     //endregion
-
-    @OnClick(R.id.watchlist_menu)
-    fun onClick(view: View) {
-        when (view.id) {
-            R.id.watchlist_menu -> mPresenter?.onMenuClick()
-        }
-    }
 
     private val mChartListener = object : ChartListener() {
         override fun onValueSelected(e: Entry?, h: Highlight?) {
@@ -109,6 +105,21 @@ open class WatchListFragment :
             activity?.also {
                 PickFavoriteActivity.start(it)
             }
+        }
+    }
+
+    @OnClick(
+            R.id.watchlist_menu,
+            R.id.connection_error_retry,
+            R.id.partial_watchlist_empty_add
+    )
+    fun onClick(view: View) {
+        when (view.id) {
+            R.id.watchlist_menu -> mPresenter?.onMenuClick()
+
+            R.id.connection_error_retry -> mPresenter?.getCoins()
+
+            R.id.partial_watchlist_empty_add -> mPresenter?.onAddCoinClick()
         }
     }
 
@@ -185,14 +196,16 @@ open class WatchListFragment :
     }
 
     override fun openCoinInfo(id: Int) {
-        activity?.let {
-            CoinInfoActivity.start(it, id)
-        }
+        activity?.let { CoinInfoActivity.start(it, id) }
+    }
+
+    override fun openAddToWatchlist() {
+        activity?.let { AddToWatchlistActivity.start(it) }
     }
 
     override fun updateCoin(position: Int, coinEntity: CoinEntity) {
         mRecycler.visible()
-        mEmptyText.hide()
+        mEmptyContainer.hide()
         mAdapter?.updateItem(coinEntity)
     }
 
@@ -203,6 +216,7 @@ open class WatchListFragment :
 
     override fun showCoins(coins: List<CoinEntity>) {
         mSwipeRefreshLayout?.isRefreshing = false
+        mListHeader.visible()
         mRecycler.visible()
         mRecycler?.post {
             mAdapter?.setItems(coins)
@@ -210,11 +224,12 @@ open class WatchListFragment :
     }
 
     override fun showEmpty() {
-        mEmptyText.visible()
+        mListHeader.hide()
+        mEmptyContainer.visible()
     }
 
     override fun hideEmpty() {
-        mEmptyText.hide()
+        mEmptyContainer.hide()
     }
 
     override fun hideCoinsLoading() {
@@ -226,17 +241,19 @@ open class WatchListFragment :
 
         if (hideList) {
             mErrorContainer.visible()
+            mListHeader.hide()
             mRecycler.hide()
         } else {
             showShortToast(context, "Can't refresh currencies.\nPlease check internet connection and try again.")
             mErrorContainer.hide()
+            mListHeader.visible()
             mRecycler.visible()
         }
     }
 
     override fun showCoinsLoading() {
         mSwipeRefreshLayout?.isRefreshing = true
-        mEmptyText.hide()
+        mEmptyContainer.hide()
         mErrorContainer.hide()
     }
 

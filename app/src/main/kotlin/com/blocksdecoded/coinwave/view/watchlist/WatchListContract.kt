@@ -20,6 +20,8 @@ interface WatchListContract {
 
         fun openCoinInfo(id: Int)
 
+        fun openAddToWatchlist()
+
         fun showError(hideList: Boolean)
 
         fun showEmpty()
@@ -45,6 +47,8 @@ interface WatchListContract {
         fun onCoinClick(position: Int)
 
         fun deleteCoin(position: Int)
+
+        fun onAddCoinClick()
 
         fun getCoins()
 

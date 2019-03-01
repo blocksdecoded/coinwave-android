@@ -158,5 +158,9 @@ class WatchListPresenter(
         mMenuListener.onMenuClick()
     }
 
+    override fun onAddCoinClick() {
+        mView?.openAddToWatchlist()
+    }
+
     //endregion
 }
