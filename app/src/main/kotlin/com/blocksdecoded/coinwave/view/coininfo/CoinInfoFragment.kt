@@ -142,15 +142,6 @@ open class CoinInfoFragment :
         mChange1d.hide()
         mChange1w.hide()
         mChange1h.setChangedPercent(coinEntity.priceChange)
-//        coinEntity.getUsdQuotes()?.hourChange?.let{
-//            mChange1h?.setChangedPercent(it)
-//        }
-//        coinEntity.getUsdQuotes()?.dayChange?.let{
-//            mChange1d?.setChangedPercent(it)
-//        }
-//        coinEntity.getUsdQuotes()?.weekChange?.let{
-//            mChange1w?.setChangedPercent(it)
-//        }
 
         setWatchedIcon(coinEntity.isSaved)
     }
