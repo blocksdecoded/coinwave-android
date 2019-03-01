@@ -7,6 +7,7 @@ import com.blocksdecoded.coinwave.domain.usecases.posts.PostsUseCases
 import com.blocksdecoded.coinwave.view.main.MenuClickListener
 import com.blocksdecoded.utils.Lg
 import com.blocksdecoded.utils.coroutine.launchSilent
+import com.blocksdecoded.utils.coroutine.model.onResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainCoroutineDispatcher
 
@@ -45,20 +46,15 @@ class PostListPresenter(
     override fun getPosts() = launchSilent(ui) {
         mView?.showLoading()
         mPostUseCases.getPosts()
-                ?.onSuccess {
-                    mView?.stopLoading()
-                    mView?.showPosts(it)
-                }
-                ?.onError {
-                    mView?.stopLoading()
-                    mView?.showLoadingError()
-                    Lg.d("Posts loading error ${it.message}")
-                }
+            ?.onResult { mView?.stopLoading() }
+            ?.onSuccess { mView?.showPosts(it) }
+            ?.onError { mView?.showLoadingError() }
     }
 
     override fun getNextPosts() = launchSilent(ui) {
         mPostUseCases.getNextPosts()
                 ?.onSuccess { mView?.nextPosts(it) }
+                ?.onError { mView?.showErrorMessage() }
     }
 
     override fun onMenuClick() {

@@ -14,6 +14,8 @@ interface PostListContract {
 
         fun showLoadingError()
 
+        fun showErrorMessage()
+
         fun showPosts(posts: List<PublisherPost>)
 
         fun nextPosts(posts: List<PublisherPost>)

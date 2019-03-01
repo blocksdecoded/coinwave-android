@@ -1,10 +1,7 @@
 package com.blocksdecoded.coinwave.view.postlist
 
-import android.content.ComponentName
 import android.util.DisplayMetrics
 import android.view.View
-import androidx.browser.customtabs.CustomTabsClient
-import androidx.browser.customtabs.CustomTabsServiceConnection
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +18,7 @@ import com.blocksdecoded.utils.DimenUtils
 import com.blocksdecoded.utils.customtabs.CustomTabsUtil
 import com.blocksdecoded.utils.extensions.setConstraintTopMargin
 import com.blocksdecoded.utils.hide
+import com.blocksdecoded.utils.showShortToast
 import com.blocksdecoded.utils.visible
 import kotlin.math.roundToInt
 
@@ -58,30 +56,6 @@ open class PostListFragment :
             R.id.connection_error_retry -> mPresenter?.getPosts()
         }
     }
-
-    private var mTabServiceConnection = object : CustomTabsServiceConnection() {
-        override fun onCustomTabsServiceConnected(name: ComponentName?, client: CustomTabsClient?) {
-            mClient = client
-            mClient?.warmup(0L)
-            mClient?.newSession(null)
-        }
-
-        override fun onServiceDisconnected(name: ComponentName?) {
-            mClient = null
-        }
-    }
-    private var mClient: CustomTabsClient? = null
-
-    //region Lifecycle
-
-    override fun onStart() {
-        super.onStart()
-//        context?.also {
-//            CustomTabsUtil.bindToService(it, mTabServiceConnection)
-//        }
-    }
-
-    //endregion
 
     //region Init
 
@@ -162,6 +136,10 @@ open class PostListFragment :
         mSwipeRefresh.isRefreshing = false
         mRecycler.hide()
         mErrorView.visible()
+    }
+
+    override fun showErrorMessage() {
+        showShortToast(context, getString(R.string.message_connection_error))
     }
 
     //endregion
