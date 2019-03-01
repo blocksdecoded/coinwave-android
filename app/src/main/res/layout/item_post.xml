@@ -77,7 +77,7 @@
                 android:text="@string/btn_read_more"
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                android:background="@drawable/bg_card_gradient"/>
+                android:background="@drawable/bg_green_gradient"/>
 
             <ImageView
                 android:layout_width="9dp"

@@ -133,7 +133,7 @@
                             android:paddingBottom="12dp"
                             android:text="@string/btn_retry"
                             android:textColor="@color/main_dark"
-                            android:background="@drawable/bg_card_gradient"
+                            android:background="@drawable/bg_green_gradient"
                             android:textSize="14sp"
                             android:letterSpacing="0.15"
                             app:ftv_typeface="semibold"/>
