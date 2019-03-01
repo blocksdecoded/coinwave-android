@@ -66,7 +66,7 @@ class WatchListPresenter(
         mCachedData.addAll(coins.filter { it.isSaved })
         mView?.showCoins(mCachedData)
 
-        if (mCachedData.isEmpty()) mView?.showEmpty()
+        if (mCachedData.isEmpty()) mView?.showEmpty() else mView?.hideEmpty()
 
         loadFavorite()
     }

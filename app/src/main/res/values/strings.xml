@@ -13,7 +13,7 @@
 
     <!--Messages-->
     <string name="message_watchlist_is_empty">Watchlist is empty</string>
-    <string name="message_connection_error">Connection error, please check\nyour internet and press \"retry\"</string>
+    <string name="message_connection_error">You are currently offline.\nCheck your internet connection.</string>
 
     <!--Buttons-->
     <string name="btn_go_to_website">GO TO WEBSITE</string>
