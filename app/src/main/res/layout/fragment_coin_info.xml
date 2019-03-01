@@ -87,8 +87,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginRight="8dp"
                 android:padding="9dp"
-                android:visibility="visible"
-                android:background="@drawable/bg_round_light_selectable"/>
+                android:visibility="visible"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

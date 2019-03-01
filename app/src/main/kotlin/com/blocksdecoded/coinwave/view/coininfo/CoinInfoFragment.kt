@@ -23,6 +23,8 @@ import com.blocksdecoded.coinwave.view.widgets.LockableScrollView
 import com.blocksdecoded.coinwave.view.widgets.OptionSelectorView
 import com.blocksdecoded.coinwave.view.widgets.chart.ChartListener
 import com.blocksdecoded.utils.*
+import com.blocksdecoded.utils.extensions.playAnimation
+import com.blocksdecoded.utils.extensions.playScaleAnimation
 import java.util.*
 
 open class CoinInfoFragment :
@@ -108,7 +110,10 @@ open class CoinInfoFragment :
         when (view.id) {
             R.id.coin_graph_icon -> mPresenter?.onGoToWebsiteClick()
             R.id.back -> finishView()
-            R.id.fragment_coin_add_to_watchlist -> mPresenter?.onWatchingClick()
+            R.id.fragment_coin_add_to_watchlist -> {
+                mPresenter?.onWatchingClick()
+                mWatchlist.playAnimation(R.anim.press_scale_anim)
+            }
         }
     }
     var mScrollEnabled = true
