@@ -5,6 +5,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+###Added
+- 'Add to watchlist' icon on Coin info screen
+
+###Changed
+- Coin info screen background and text colors
+- Side menu options order
+
 ###Fixed
 - Coin info back button align
 
