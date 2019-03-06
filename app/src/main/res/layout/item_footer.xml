@@ -8,7 +8,7 @@
     android:background="?android:selectableItemBackground"
     >
 
-    <com.blocksdecoded.coinwave.view.post.widgets.LoadingView
+    <com.blocksdecoded.coinwave.presentation.post.widgets.LoadingView
         android:theme="@style/AlertDialog.AppCompat.Light"
         android:layout_gravity="center"
         android:visibility="visible"
@@ -25,7 +25,7 @@
         android:visibility="gone"
         >
 
-        <com.blocksdecoded.coinwave.view.widgets.FontTextView
+        <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
             android:id="@+id/footer_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
             android:text="Connection error"
             />
 
-        <com.blocksdecoded.coinwave.view.widgets.FontTextView
+        <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/btn_retry"

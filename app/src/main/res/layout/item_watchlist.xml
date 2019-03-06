@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.blocksdecoded.coinwave.view.widgets.FontTextView
+        <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
             android:id="@+id/adapter_watchlist_item_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginLeft="12dp"/>
 
-        <com.blocksdecoded.coinwave.view.widgets.FontTextView
+        <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
             android:id="@+id/adapter_watchlist_item_symbol"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

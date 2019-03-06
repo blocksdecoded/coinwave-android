@@ -11,7 +11,7 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.data.model.ChartData
 import com.blocksdecoded.coinwave.data.model.CoinEntity
-import com.blocksdecoded.coinwave.view.widgets.chart.ChartListener
+import com.blocksdecoded.coinwave.presentation.widgets.chart.ChartListener
 import com.blocksdecoded.utils.Lg
 import com.blocksdecoded.utils.ResourceUtil
 import com.blocksdecoded.utils.isValidIndex

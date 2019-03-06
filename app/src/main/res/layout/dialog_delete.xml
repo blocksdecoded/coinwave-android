@@ -18,7 +18,7 @@
         android:paddingTop="24dp"
         android:paddingBottom="12dp">
 
-        <com.blocksdecoded.coinwave.view.widgets.FontTextView
+        <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
             android:id="@+id/dialog_delete_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
             android:textColor="@color/white"
             android:alpha="0.8"/>
 
-        <com.blocksdecoded.coinwave.view.widgets.FontTextView
+        <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
             android:id="@+id/dialog_delete_confirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
             android:textSize="13.5sp"
             android:background="@drawable/bg_circle_red"/>
 
-        <com.blocksdecoded.coinwave.view.widgets.FontTextView
+        <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
             android:id="@+id/dialog_delete_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

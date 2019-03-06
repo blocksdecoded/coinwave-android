@@ -37,7 +37,7 @@
             android:background="@color/black"
             android:alpha="0.4" />
 
-        <com.blocksdecoded.coinwave.view.widgets.FontTextView
+        <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
             android:id="@+id/adapter_post_item_title"
             android:layout_marginRight="16dp"
             android:layout_marginLeft="34dp"
@@ -68,7 +68,7 @@
             app:cardPreventCornerOverlap="true"
                 android:stateListAnimator="@drawable/button_state_animation">
 
-            <com.blocksdecoded.coinwave.view.widgets.FontTextView
+            <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"

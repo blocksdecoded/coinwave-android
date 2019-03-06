@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.main.MainActivity">
+    tools:context=".presentation.main.MainActivity">
 
     <ImageView
         android:layout_width="0dp"
@@ -17,7 +17,7 @@
         android:src="@drawable/bg_bottom_nav"
         android:scaleType="fitXY"/>
 
-    <com.blocksdecoded.coinwave.view.widgets.BottomNavigationViewEx
+    <com.blocksdecoded.coinwave.presentation.widgets.BottomNavigationViewEx
         android:id="@+id/main_nav_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
         app:itemHorizontalTranslationEnabled="false"
         app:itemIconSize="18dp"/>
 
-    <com.blocksdecoded.coinwave.view.widgets.NonSwipeableViewPager
+    <com.blocksdecoded.coinwave.presentation.widgets.NonSwipeableViewPager
         android:id="@+id/main_view_pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -77,7 +77,7 @@
             android:padding="12dp"
             android:src="@drawable/ic_add"
             android:visibility="visible"/>
-        <com.blocksdecoded.coinwave.view.widgets.FontTextView
+        <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="@+id/coin_go_to_site"

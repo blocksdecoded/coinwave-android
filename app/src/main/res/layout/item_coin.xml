@@ -39,7 +39,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="16dp"/>
 
-            <com.blocksdecoded.coinwave.view.widgets.FontTextView
+            <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
                 android:id="@+id/adapter_coin_symbol"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
             android:layout_height="match_parent"
             android:background="@color/light_grey" />
 
-        <com.blocksdecoded.coinwave.view.widgets.FontTextView
+        <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
             android:id="@+id/adapter_coin_market_cap"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -84,7 +84,7 @@
             android:layout_height="match_parent"
             android:background="@color/light_grey" />
 
-        <com.blocksdecoded.coinwave.view.widgets.FontTextView
+        <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
             android:id="@+id/adapter_coin_volume"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -125,7 +125,7 @@
                 android:layout_marginLeft="4dp"
                 />
 
-            <com.blocksdecoded.coinwave.view.widgets.FontTextView
+            <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
                 android:id="@+id/adapter_coin_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -139,7 +139,7 @@
                 android:text="$800.0"
                 app:ftv_typeface="semibold"/>
 
-            <com.blocksdecoded.coinwave.view.widgets.FontTextView
+            <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
                 android:id="@+id/adapter_coin_price_change"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

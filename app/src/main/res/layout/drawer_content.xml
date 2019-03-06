@@ -40,7 +40,7 @@
                 android:src="@drawable/ic_close"/>
         </androidx.cardview.widget.CardView>
 
-        <com.blocksdecoded.coinwave.view.widgets.FontTextView
+        <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
             android:id="@+id/drawer_menu_title"
             android:theme="@style/AppTheme.DrawerTitle"
             android:layout_width="wrap_content"
@@ -55,7 +55,7 @@
             app:ftv_typeface="light"/>
 
         <!--Pick favorite-->
-        <com.blocksdecoded.coinwave.view.widgets.FontTextView
+        <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
             android:id="@+id/drawer_favorite"
             android:theme="@style/AppTheme.DrawerMenuItem"
             android:layout_width="match_parent"
@@ -83,7 +83,7 @@
             android:src="@drawable/ic_right_arrow_light"/>
 
         <!--Add to watchlist-->
-        <com.blocksdecoded.coinwave.view.widgets.FontTextView
+        <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
             android:id="@+id/drawer_add_watchlist"
             android:theme="@style/AppTheme.DrawerMenuItem"
             android:layout_width="match_parent"
@@ -111,7 +111,7 @@
             android:src="@drawable/ic_right_arrow_light"/>
 
         <!--Share app-->
-        <com.blocksdecoded.coinwave.view.widgets.FontTextView
+        <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
             android:id="@+id/drawer_share_this_app"
             android:theme="@style/AppTheme.DrawerMenuItem"
             android:layout_width="match_parent"
@@ -139,7 +139,7 @@
             android:src="@drawable/ic_right_arrow_light"/>
 
         <!--Rate us-->
-        <com.blocksdecoded.coinwave.view.widgets.FontTextView
+        <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
             android:id="@+id/drawer_rate_us"
             android:theme="@style/AppTheme.DrawerMenuItem"
             android:layout_width="match_parent"
@@ -167,7 +167,7 @@
             android:src="@drawable/ic_right_arrow_light"/>
 
         <!--Contact us-->
-        <com.blocksdecoded.coinwave.view.widgets.FontTextView
+        <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
             android:id="@+id/drawer_contact_us"
             android:theme="@style/AppTheme.DrawerMenuItem"
             android:layout_width="match_parent"
@@ -221,7 +221,7 @@
             android:src="@drawable/img_blocks_decoded_small"
             android:alpha="0.6"/>
 
-        <com.blocksdecoded.coinwave.view.widgets.FontTextView
+        <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
             android:id="@+id/drawer_company_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -236,7 +236,7 @@
             android:textSize="12sp"
             app:ftv_typeface="light"/>
 
-        <com.blocksdecoded.coinwave.view.widgets.FontTextView
+        <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
             android:id="@+id/drawer_app_version"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

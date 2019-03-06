@@ -8,7 +8,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     
-    <com.blocksdecoded.coinwave.view.widgets.FontTextView
+    <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
         android:id="@+id/partial_watchlist_empty_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
         app:cardCornerRadius="8dp"
         android:stateListAnimator="@drawable/button_state_animation">
         
-        <com.blocksdecoded.coinwave.view.widgets.FontTextView
+        <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="24dp"
