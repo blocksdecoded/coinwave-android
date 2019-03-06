@@ -20,21 +20,20 @@ class WatchListPresenter(
     view: WatchListContract.View?,
     private val mMenuListener: MenuClickListener,
     private val mCoinsUseCases: CoinsUseCases,
-    private val mFavoriteChartUseVariant: FavoriteChartUseVariant,
-    private val uiContext: CoroutineContext = Dispatchers.Main
+    private val mFavoriteChartUseVariant: FavoriteChartUseVariant
 ) : BaseMVPPresenter<WatchListContract.View>(view), WatchListContract.Presenter {
     private var mCachedData = arrayListOf<CoinEntity>()
 
     private val mCurrenciesObserver = object : CoinsUpdateObserver {
-        override fun onAdded(coinEntity: CoinEntity) = launchSilent(uiContext) {
+        override fun onAdded(coinEntity: CoinEntity) = launchSilent(scope) {
             mView?.updateCoin(updateCurrency(coinEntity), coinEntity)
         }
 
-        override fun onUpdated(coins: List<CoinEntity>) = launchSilent(uiContext) {
+        override fun onUpdated(coins: List<CoinEntity>) = launchSilent(scope) {
             setCache(coins)
         }
 
-        override fun onRemoved(coinEntity: CoinEntity) = launchSilent(uiContext) {
+        override fun onRemoved(coinEntity: CoinEntity) = launchSilent(scope) {
             mView?.deleteCoin(removeCurrency(coinEntity))
             if (mCachedData.isEmpty()) mView?.showEmpty()
         }
@@ -62,7 +61,7 @@ class WatchListPresenter(
 
     //region Private
 
-    private fun setCache(coins: List<CoinEntity>) = launchSilent(uiContext) {
+    private fun setCache(coins: List<CoinEntity>) = launchSilent(scope) {
         mCachedData.clear()
         mCachedData.addAll(coins.filter { it.isSaved })
 
@@ -103,7 +102,7 @@ class WatchListPresenter(
         mCachedData.removeAt(it)
     }
 
-    private fun getCurrencies(skipCache: Boolean) = launchSilent(uiContext) {
+    private fun getCurrencies(skipCache: Boolean) = launchSilent(scope) {
         mView?.showCoinsLoading()
         if (mCachedData.isEmpty()) {
             mView?.showFavoriteLoading()

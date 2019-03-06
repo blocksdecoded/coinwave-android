@@ -16,22 +16,21 @@ import kotlin.coroutines.CoroutineContext
 class CoinsListPresenter(
     view: CoinsListContract.View?,
     private val mMenuListener: MenuClickListener,
-    private val mCoinsUseCases: CoinsUseCases,
-    private val uiContext: CoroutineContext = Dispatchers.Main
+    private val mCoinsUseCases: CoinsUseCases
 ) : BaseMVPPresenter<CoinsListContract.View>(view), CoinsListContract.Presenter {
     private var mCachedData = arrayListOf<CoinEntity>()
     private var mInitialized = false
 
     private val mCurrenciesObserver = object : CoinsUpdateObserver {
-        override fun onAdded(coinEntity: CoinEntity) = launchSilent(uiContext) {
+        override fun onAdded(coinEntity: CoinEntity) = launchSilent(scope) {
             mView?.updateCoin(updateCurrency(coinEntity), coinEntity)
         }
 
-        override fun onUpdated(coins: List<CoinEntity>) = launchSilent(uiContext) {
+        override fun onUpdated(coins: List<CoinEntity>) = launchSilent(scope) {
             updateCache(coins)
         }
 
-        override fun onRemoved(coinEntity: CoinEntity) = launchSilent(uiContext) {
+        override fun onRemoved(coinEntity: CoinEntity) = launchSilent(scope) {
             mView?.updateCoin(updateCurrency(coinEntity), coinEntity)
         }
     }
@@ -57,7 +56,7 @@ class CoinsListPresenter(
         mView?.showCoins(mCachedData)
     }
 
-    private fun getCurrencies() = launchSilent(uiContext) {
+    private fun getCurrencies() = launchSilent(scope) {
         mView?.showLoading()
         mCoinsUseCases.getCoins(true)
                 .onSuccess { mView?.hideLoading() }

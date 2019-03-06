@@ -24,6 +24,14 @@ fun launchSilent(
     GlobalScope.launch(context, start, block = block)
 }
 
+fun launchSilent(
+    scope: CoroutineScope,
+    start: CoroutineStart = CoroutineStart.DEFAULT,
+    block: suspend CoroutineScope.() -> Unit
+) {
+    scope.launch(scope.coroutineContext, start, block)
+}
+
 /**
  * Equivalent to [runBlocking] but return [Unit] instead of [T].
  *

@@ -19,9 +19,7 @@ abstract class BaseMVPPresenter<T>(
 
     fun injectSelfToView() {
         try {
-            @Suppress("LeakingThis")
             if (mView != null && mView is BaseMVPContract.View<*>) {
-                @Suppress("LeakingThis")
                 (mView as BaseMVPContract.View<BaseMVPContract.Presenter<*>>).setPresenter(this)
             }
         } catch (e: Exception) {

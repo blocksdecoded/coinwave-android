@@ -15,8 +15,7 @@ import kotlin.coroutines.CoroutineContext
 class CoinInfoPresenter(
     view: CoinInfoContract.View?,
     private val mChartsUseCases: ChartsUseCases,
-    private val mCoinsUseCases: CoinsUseCases,
-    private val uiContext: CoroutineContext = Dispatchers.Main
+    private val mCoinsUseCases: CoinsUseCases
 ) : BaseMVPPresenter<CoinInfoContract.View>(view), CoinInfoContract.Presenter {
     private var mCached: CoinEntity? = null
 
@@ -40,7 +39,7 @@ class CoinInfoPresenter(
         injectSelfToView()
     }
 
-    override fun fetchCurrencyData(id: Int) = launchSilent(uiContext) {
+    override fun fetchCurrencyData(id: Int) = launchSilent(scope) {
         mCached = mCoinsUseCases.getCoin(id)
         mCached?.let {
             mView?.showCurrencyData(it)
@@ -49,7 +48,7 @@ class CoinInfoPresenter(
         }
     }
 
-    override fun onPeriodChanged(position: Int) = launchSilent(uiContext) {
+    override fun onPeriodChanged(position: Int) = launchSilent(scope) {
         mCached?.let {
             val period = when (position) {
                 0 -> TODAY

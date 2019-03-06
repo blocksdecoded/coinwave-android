@@ -8,15 +8,14 @@ import kotlinx.coroutines.MainCoroutineDispatcher
 
 class PostPresenter(
     view: PostContract.View?,
-    private val mPostUseCases: PostsUseCases,
-    private val ui: MainCoroutineDispatcher = Dispatchers.Main
+    private val mPostUseCases: PostsUseCases
 ) : BaseMVPPresenter<PostContract.View>(view), PostContract.Presenter {
     override fun attachView(view: PostContract.View) {
         mView = view
         injectSelfToView()
     }
 
-    override fun getPost(id: Int) = launchSilent(ui) {
+    override fun getPost(id: Int) = launchSilent(scope) {
         mPostUseCases.getPost(id)?.also {
             mView?.showPost(it)
         }

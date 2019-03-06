@@ -14,8 +14,7 @@ import kotlin.coroutines.CoroutineContext
 class PickFavoritePresenter(
     view: PickFavoriteContract.View?,
     private val mFavoriteUseCases: FavoriteUseCases,
-    private val mCoinsUseCases: CoinsUseCases,
-    private val uiContext: CoroutineContext = Dispatchers.Main
+    private val mCoinsUseCases: CoinsUseCases
 ) : BaseMVPPresenter<PickFavoriteContract.View>(view), PickFavoriteContract.Presenter {
 
     private var mCachedData = arrayListOf<CoinEntity>()
@@ -42,7 +41,7 @@ class PickFavoritePresenter(
         mView?.showCoins(mCachedData)
     }
 
-    private fun getCoins() = launchSilent(uiContext) {
+    private fun getCoins() = launchSilent(scope) {
         mView?.hideError()
         mView?.showLoading()
         mCoinsUseCases.getCoins(false)
