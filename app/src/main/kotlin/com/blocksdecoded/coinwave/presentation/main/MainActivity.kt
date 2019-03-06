@@ -21,9 +21,9 @@ import com.blocksdecoded.coinwave.presentation.coinslist.CoinsListContract
 import com.blocksdecoded.coinwave.presentation.coinslist.CoinsListFragment
 import com.blocksdecoded.coinwave.presentation.coinslist.CoinsListPresenter
 import com.blocksdecoded.coinwave.presentation.pickfavorite.PickFavoriteActivity
-import com.blocksdecoded.coinwave.presentation.postlist.PostListContract
-import com.blocksdecoded.coinwave.presentation.postlist.PostListFragment
-import com.blocksdecoded.coinwave.presentation.postlist.PostListPresenter
+import com.blocksdecoded.coinwave.presentation.posts.PostsContract
+import com.blocksdecoded.coinwave.presentation.posts.PostsFragment
+import com.blocksdecoded.coinwave.presentation.posts.PostsPresenter
 import com.blocksdecoded.coinwave.presentation.settings.SettingsContract
 import com.blocksdecoded.coinwave.presentation.settings.SettingsFragment
 import com.blocksdecoded.coinwave.presentation.settings.SettingsPresenter
@@ -47,7 +47,7 @@ class MainActivity :
 
     private var mWatchListPresenter: WatchListContract.Presenter? = null
     private var mCoinsListPresenter: CoinsListContract.Presenter? = null
-    private var mPostListPresenter: PostListContract.Presenter? = null
+    private var mPostsPresenter: PostsContract.Presenter? = null
     private var mSettingsPresenter: SettingsContract.Presenter? = null
 
     private var mRateDialog: RateUsDialogContract? = null
@@ -225,8 +225,8 @@ class MainActivity :
                 )
             }
 
-    private fun createPostListScreen(): Fragment = PostListFragment.newInstance().also {
-        mPostListPresenter = PostListPresenter(
+    private fun createPostListScreen(): Fragment = PostsFragment.newInstance().also {
+        mPostsPresenter = PostsPresenter(
                 it,
                 this,
                 UseCaseProvider.getPostUseCases()

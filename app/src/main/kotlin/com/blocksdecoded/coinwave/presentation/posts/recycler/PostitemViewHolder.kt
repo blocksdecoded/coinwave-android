@@ -1,4 +1,4 @@
-package com.blocksdecoded.coinwave.presentation.postlist.recycler
+package com.blocksdecoded.coinwave.presentation.posts.recycler
 
 import android.view.View
 import android.widget.ImageView
@@ -10,13 +10,13 @@ import butterknife.OnClick
 import com.bumptech.glide.Glide
 import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.data.post.model.PublisherPost
-import com.blocksdecoded.coinwave.presentation.postlist.util.setRandomBg
+import com.blocksdecoded.coinwave.presentation.posts.util.setRandomBg
 
 /**
  * Created by askar on 11/19/18
  * with Android Studio
  */
-class PostListViewHolder(
+class PostitemViewHolder(
     view: View,
     private val mListener: PostVHCLickListener
 ) : RecyclerView.ViewHolder(view) {

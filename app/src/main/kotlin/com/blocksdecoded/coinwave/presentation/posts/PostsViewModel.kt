@@ -1,4 +1,4 @@
-package com.blocksdecoded.coinwave.presentation.postlist
+package com.blocksdecoded.coinwave.presentation.posts
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

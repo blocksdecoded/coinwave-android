@@ -1,4 +1,4 @@
-package com.blocksdecoded.coinwave.presentation.postlist
+package com.blocksdecoded.coinwave.presentation.posts
 
 import com.blocksdecoded.utils.coroutine.model.onError
 import com.blocksdecoded.utils.coroutine.model.onSuccess
@@ -7,18 +7,16 @@ import com.blocksdecoded.coinwave.domain.usecases.posts.PostsUseCases
 import com.blocksdecoded.coinwave.presentation.main.MenuClickListener
 import com.blocksdecoded.utils.coroutine.launchSilent
 import com.blocksdecoded.utils.coroutine.model.onResult
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.MainCoroutineDispatcher
 
-class PostListPresenter(
-    view: PostListContract.View?,
+class PostsPresenter(
+    view: PostsContract.View?,
     private val mMenuListener: MenuClickListener,
     private val mPostUseCases: PostsUseCases
-) : BaseMVPPresenter<PostListContract.View>(view), PostListContract.Presenter {
+) : BaseMVPPresenter<PostsContract.View>(view), PostsContract.Presenter {
 
     private var mInitialized = false
 
-    override fun attachView(view: PostListContract.View) {
+    override fun attachView(view: PostsContract.View) {
         mView = view
         injectSelfToView()
     }

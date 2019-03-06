@@ -1,4 +1,4 @@
-package com.blocksdecoded.coinwave.presentation.postlist.util
+package com.blocksdecoded.coinwave.presentation.posts.util
 
 import android.graphics.Color
 import android.graphics.drawable.Drawable

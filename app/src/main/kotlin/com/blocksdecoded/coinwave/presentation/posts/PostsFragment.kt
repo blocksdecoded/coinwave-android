@@ -1,4 +1,4 @@
-package com.blocksdecoded.coinwave.presentation.postlist
+package com.blocksdecoded.coinwave.presentation.posts
 
 import android.util.DisplayMetrics
 import android.view.View
@@ -12,8 +12,8 @@ import com.blocksdecoded.core.contracts.LoadNextListener
 import com.blocksdecoded.core.mvp.BaseMVPFragment
 import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.data.post.model.PublisherPost
-import com.blocksdecoded.coinwave.presentation.postlist.recycler.deprecated.PostListAdapter
-import com.blocksdecoded.coinwave.presentation.postlist.recycler.PostListViewHolder
+import com.blocksdecoded.coinwave.presentation.posts.recycler.deprecated.PostListAdapter
+import com.blocksdecoded.coinwave.presentation.posts.recycler.PostitemViewHolder
 import com.blocksdecoded.utils.DimenUtils
 import com.blocksdecoded.utils.customtabs.CustomTabsUtil
 import com.blocksdecoded.utils.extensions.setConstraintTopMargin
@@ -22,16 +22,16 @@ import com.blocksdecoded.utils.showShortToast
 import com.blocksdecoded.utils.visible
 import kotlin.math.roundToInt
 
-open class PostListFragment :
-        BaseMVPFragment<PostListContract.Presenter>(),
-        PostListContract.View,
-        PostListViewHolder.PostVHCLickListener,
+open class PostsFragment :
+        BaseMVPFragment<PostsContract.Presenter>(),
+        PostsContract.View,
+        PostitemViewHolder.PostVHCLickListener,
         LoadNextListener {
     companion object {
-        fun newInstance() = PostListFragment()
+        fun newInstance() = PostsFragment()
     }
 
-    override var mPresenter: PostListContract.Presenter? = null
+    override var mPresenter: PostsContract.Presenter? = null
     override val layoutId: Int = R.layout.fragment_post_list
 
     var mAdapter: PostListAdapter? = null

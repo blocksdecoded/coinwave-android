@@ -1,12 +1,12 @@
-package com.blocksdecoded.coinwave.presentation.postlist.recycler.deprecated
+package com.blocksdecoded.coinwave.presentation.posts.recycler.deprecated
 
 import android.view.View
 import android.view.ViewGroup
 import com.blocksdecoded.core.contracts.LoadNextListener
 import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.data.post.model.PublisherPost
-import com.blocksdecoded.coinwave.presentation.postlist.recycler.ListFooterViewHolder
-import com.blocksdecoded.coinwave.presentation.postlist.recycler.PostListViewHolder
+import com.blocksdecoded.coinwave.presentation.posts.recycler.ListFooterViewHolder
+import com.blocksdecoded.coinwave.presentation.posts.recycler.PostitemViewHolder
 import com.blocksdecoded.utils.inflate
 import com.blocksdecoded.utils.isValidIndex
 import com.blocksdecoded.utils.setHeight
@@ -18,7 +18,7 @@ import com.blocksdecoded.utils.setHeight
 @Deprecated("Use newer PagedPostListAdapter")
 class PostListAdapter(
     private var mItems: ArrayList<PublisherPost>,
-    private val mListener: PostListViewHolder.PostVHCLickListener,
+    private val mListener: PostitemViewHolder.PostVHCLickListener,
     private val mLoadNextListener: LoadNextListener,
     private val mPostHeight: Int
 ) : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>(),
@@ -36,7 +36,7 @@ class PostListAdapter(
     //region Override
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder = when (p1) {
-        1 -> PostListViewHolder(p0.inflate(R.layout.item_post)!!, mListener).apply {
+        1 -> PostitemViewHolder(p0.inflate(R.layout.item_post)!!, mListener).apply {
             setHeight(mPostHeight)
         }
         else -> ListFooterViewHolder(p0.inflate(R.layout.item_footer)!!, this)
@@ -49,7 +49,7 @@ class PostListAdapter(
     override fun onBindViewHolder(p0: androidx.recyclerview.widget.RecyclerView.ViewHolder, p1: Int) {
         if (mItems.isValidIndex(p1)) {
             when (p0) {
-                is PostListViewHolder -> p0.onBind(mItems[p1])
+                is PostitemViewHolder -> p0.onBind(mItems[p1])
                 is ListFooterViewHolder -> {
                     mFooterView = p0
                     if (mAlreadyLoading) {

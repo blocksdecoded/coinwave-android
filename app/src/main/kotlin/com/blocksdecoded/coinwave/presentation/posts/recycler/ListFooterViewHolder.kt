@@ -1,4 +1,4 @@
-package com.blocksdecoded.coinwave.presentation.postlist.recycler
+package com.blocksdecoded.coinwave.presentation.posts.recycler
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.View

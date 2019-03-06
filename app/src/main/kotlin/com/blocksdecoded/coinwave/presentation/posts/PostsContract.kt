@@ -1,9 +1,9 @@
-package com.blocksdecoded.coinwave.presentation.postlist
+package com.blocksdecoded.coinwave.presentation.posts
 
 import com.blocksdecoded.core.mvp.BaseMVPContract
 import com.blocksdecoded.coinwave.data.post.model.PublisherPost
 
-interface PostListContract {
+interface PostsContract {
 
     interface View : BaseMVPContract.View<Presenter> {
         fun openPost(url: String)
