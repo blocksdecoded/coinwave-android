@@ -314,12 +314,7 @@ class MainActivity :
             drawer_add_watchlist -> drawerItemClick { AddToWatchlistActivity.start(this) }
             drawer_favorite -> drawerItemClick { PickFavoriteActivity.start(this) }
             drawer_contact_us -> drawerItemClick { ShareUtils.contactUs(this) }
-            drawer_rate_us -> drawerItemClick {
-                mRateDialog = CryptoRateUtil.getDialog(this)
-                        .setListener(object : RateUsListener {
-                            override fun onDismiss() { mRateDialog = null }
-                        })
-            }
+            drawer_rate_us -> drawerItemClick(::onRateClick)
             drawer_share_this_app -> drawerItemClick { ShareUtils.shareApp(this) }
             drawer_close_menu -> closeDrawer()
             drawer_company_selectable -> CustomTabsUtil.openUrl(this, BuildConfig.COMPANY_URL)
@@ -327,8 +322,15 @@ class MainActivity :
     }
 
     private inline fun drawerItemClick(body: () -> Unit) {
-        body.invoke()
+        body()
         closeDrawer()
+    }
+
+    private fun onRateClick() {
+        mRateDialog = CryptoRateUtil.getDialog(this)
+            .setListener(object : RateUsListener {
+                override fun onDismiss() { mRateDialog = null }
+            })
     }
 
     //endregion
