@@ -14,11 +14,11 @@ object SFProTextTypeface {
     }
 
     fun getBold(context: Context?): Typeface {
-        return Typeface.createFromAsset(context?.assets, "fonts/SF-Pro-Text-Semibold.otf")
+        return Typeface.createFromAsset(context?.assets, "fonts/SF-Pro-Text-Bold.otf")
     }
 
     fun getHeavy(context: Context?): Typeface {
-        return Typeface.createFromAsset(context?.assets, "fonts/SF-Pro-Text-Semibold.otf")
+        return Typeface.createFromAsset(context?.assets, "fonts/SF-Pro-Text-Bold.otf")
     }
 
     fun getMedium(context: Context?): Typeface {
