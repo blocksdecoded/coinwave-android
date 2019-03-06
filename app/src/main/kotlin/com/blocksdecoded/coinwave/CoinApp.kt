@@ -30,10 +30,11 @@ class CoinApp : Application() {
             return
         }
 
-        INSTANCE = this
         LeakCanary.install(this)
+        INSTANCE = this
 
         SourceProvider.init(this)
+
 //        FirebaseApp.initializeApp(this)
 //        FRCUtil.initConfigs()
 

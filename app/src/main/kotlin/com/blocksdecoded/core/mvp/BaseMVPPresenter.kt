@@ -2,10 +2,16 @@ package com.blocksdecoded.core.mvp
 
 import androidx.annotation.CallSuper
 import com.blocksdecoded.utils.Lg
+import com.blocksdecoded.utils.coroutine.AppExecutors
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
 
 abstract class BaseMVPPresenter<T>(
     var mView: T?
 ) : BaseMVPContract.Presenter<T> {
+
+    protected val coroutineSupervisor = SupervisorJob()
+    protected val scope = CoroutineScope(AppExecutors.main + coroutineSupervisor)
 
     init {
         injectSelfToView()
@@ -47,5 +53,6 @@ abstract class BaseMVPPresenter<T>(
     @CallSuper
     override fun onDestroy() {
         mView = null
+        coroutineSupervisor.cancel()
     }
 }

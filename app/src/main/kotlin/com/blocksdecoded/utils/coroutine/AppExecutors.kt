@@ -13,7 +13,7 @@ const val THREAD_COUNT = 3
  * webservice requests).
  */
 object AppExecutors {
-    val ioContext: CoroutineContext = Dispatchers.Default
-    val networkContext: CoroutineContext = newFixedThreadPoolContext(THREAD_COUNT, "networkIO")
-    val uiContext: CoroutineContext = Dispatchers.Main
+    val io: CoroutineContext = Dispatchers.Default
+    val network: CoroutineContext = newFixedThreadPoolContext(THREAD_COUNT, "networkIO")
+    val main: CoroutineContext = Dispatchers.Main
 }

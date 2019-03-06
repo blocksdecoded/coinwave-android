@@ -34,7 +34,7 @@ class ChartsInteractor(
         }
     }
 
-    override suspend fun getChartData(coinId: Int, period: ChartPeriod): Result<ChartData> = withContext(AppExecutors.ioContext) {
+    override suspend fun getChartData(coinId: Int, period: ChartPeriod): Result<ChartData> = withContext(AppExecutors.io) {
         if (mCachedId != coinId) {
             mCachedId = coinId
             cachedChart.clear()

@@ -212,7 +212,7 @@ class MainActivity :
                 it,
                 this,
                 UseCaseProvider.getCoinsUseCases(),
-                UseCaseProvider.getFavoriteChartUseVariant(applicationContext)
+                UseCaseProvider.getFavoriteChartUseVariant()
         )
     }
 

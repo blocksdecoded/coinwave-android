@@ -24,14 +24,14 @@ class PostsInteractor(
         }
     }
 
-    override suspend fun getPosts(): Result<List<PublisherPost>>? = withContext(AppExecutors.networkContext) {
+    override suspend fun getPosts(): Result<List<PublisherPost>>? = withContext(AppExecutors.network) {
         date = ""
         mPostsSource.getPosts(date)?.onSuccess {
             updateLastDate(it)
         }
     }
 
-    override suspend fun getNextPosts(): Result<List<PublisherPost>>? = withContext(AppExecutors.networkContext) {
+    override suspend fun getNextPosts(): Result<List<PublisherPost>>? = withContext(AppExecutors.network) {
         mPostsSource.getPosts(date)?.onSuccess {
             updateLastDate(it)
         }

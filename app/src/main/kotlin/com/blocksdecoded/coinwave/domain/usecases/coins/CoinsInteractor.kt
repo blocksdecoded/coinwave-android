@@ -12,7 +12,7 @@ import kotlinx.coroutines.withContext
 class CoinsInteractor(
     private val mCoinsSource: CoinsDataSource
 ) : CoinsUseCases {
-    override suspend fun getCoins(skipCache: Boolean): Result<List<CoinEntity>> = withContext(AppExecutors.ioContext) {
+    override suspend fun getCoins(skipCache: Boolean): Result<List<CoinEntity>> = withContext(AppExecutors.io) {
         mCoinsSource.getAllCoins(skipCache)
                 .mapOnSuccess { it.coins }
     }

@@ -40,6 +40,8 @@ object SourceProvider {
         )
     }
 
+    fun getSharedStorage() = mSharedStorage
+
     fun getPostSource(): PostDataSource = mPostSource
 
     fun getChartsSource(): ChartsSourceContract = ChartsService
