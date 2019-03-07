@@ -25,7 +25,8 @@
         android:visibility="gone"
         >
 
-        <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
+        <TextView
+            android:theme="@style/RegularTextStyle"
             android:id="@+id/footer_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,7 +36,8 @@
             android:text="Connection error"
             />
 
-        <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
+        <TextView
+            android:theme="@style/RegularTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/btn_retry"

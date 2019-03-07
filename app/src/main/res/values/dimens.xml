@@ -5,8 +5,8 @@
     <dimen name="header_content_padding">16dp</dimen>
 
     <!-- Text -->
-    <dimen name="small_title_text_size">21sp</dimen>
-    <dimen name="big_title_text_size">26sp</dimen>
+    <dimen name="screen_small_title_text_size">21sp</dimen>
+    <dimen name="screen_big_title_text_size">26sp</dimen>
 
     <!-- Sizes -->
     <dimen name="drawer_icon_size">14dp</dimen>

@@ -39,7 +39,7 @@
                 android:text="@string/title_add_to_watchlist"
                 app:ftv_typeface="medium"
                 android:textColor="@color/white"
-                android:textSize="@dimen/small_title_text_size" />
+                android:textSize="@dimen/screen_small_title_text_size" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.appbar.AppBarLayout>
     

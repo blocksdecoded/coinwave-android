@@ -44,58 +44,6 @@
         app:layout_constraintBottom_toTopOf="@+id/main_nav_view"
         android:fitsSystemWindows="true"/>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/main_add_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/main_nav_view"
-        android:layout_gravity="bottom"
-        android:visibility="gone">
-
-        <ImageView
-            android:id="@+id/coin_graph_icon"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:src="@drawable/graph"
-            android:scaleType="centerCrop"
-            android:layout_gravity="bottom"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:paddingTop="10dp"
-            android:visibility="visible"/>
-        <ImageView
-            android:id="@+id/coin_go_to_site"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/coin_graph_icon"
-            app:layout_constraintBottom_toBottomOf="@+id/coin_graph_icon"
-            android:layout_gravity="bottom|center"
-            android:background="@drawable/gradient_circle"
-            android:padding="12dp"
-            android:src="@drawable/ic_add"
-            android:visibility="visible"/>
-        <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="@+id/coin_go_to_site"
-            app:layout_constraintRight_toRightOf="@+id/coin_go_to_site"
-            app:layout_constraintTop_toBottomOf="@+id/coin_go_to_site"
-            android:paddingLeft="4dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="20dp"
-            android:layout_gravity="bottom|center"
-            android:text="ADD COIN"
-            android:textColor="@color/accent_text"
-            android:textSize="12sp"
-            android:letterSpacing="0.15"
-            app:ftv_typeface="semibold"
-            android:visibility="visible"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/main_menu"
         android:layout_width="wrap_content"

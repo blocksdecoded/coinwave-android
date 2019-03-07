@@ -167,14 +167,13 @@
             android:src="@drawable/ic_right_arrow_light"/>
 
         <!--Contact us-->
-        <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
-            android:id="@+id/drawer_contact_us"
+        <TextView
             android:theme="@style/AppTheme.DrawerMenuItem"
+            android:id="@+id/drawer_contact_us"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/action_contact_us"
-            app:layout_constraintTop_toBottomOf="@+id/drawer_add_watchlist"
-            app:ftv_typeface="light"/>
+            app:layout_constraintTop_toBottomOf="@+id/drawer_add_watchlist" />
 
         <ImageView
             android:layout_width="@dimen/drawer_icon_size"

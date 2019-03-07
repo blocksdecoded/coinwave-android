@@ -7,7 +7,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     
-    <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
+    <TextView
+        android:theme="@style/RegularTextStyle"
         android:id="@+id/connection_error_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -23,7 +24,7 @@
         android:gravity="center"/>
     
     <androidx.cardview.widget.CardView
-            android:id="@+id/connection_error_retry"
+        android:id="@+id/connection_error_retry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="@+id/connection_error_title"
@@ -33,9 +34,10 @@
         android:layout_marginTop="16dp"
         app:cardElevation="8dp"
         app:cardCornerRadius="8dp"
-            android:stateListAnimator="@drawable/button_state_animation">
+        android:stateListAnimator="@drawable/button_state_animation">
         
-        <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
+        <TextView
+            android:theme="@style/SemiBoldTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="24dp"

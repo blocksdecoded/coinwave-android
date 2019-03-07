@@ -14,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
+        <TextView
+            android:theme="@style/LightTextStyle"
             android:id="@+id/adapter_watchlist_item_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -28,8 +29,7 @@
             android:ellipsize="end"
             android:layout_marginTop="12dp"
             android:layout_marginLeft="12dp"
-            android:alpha="0.5"
-            app:ftv_typeface="light"/>
+            android:alpha="0.5" />
 
         <ImageView
             android:id="@+id/adapter_watchlist_item_icon"
@@ -40,7 +40,8 @@
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginLeft="12dp"/>
 
-        <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
+        <TextView
+            android:theme="@style/BoldTextStyle"
             android:id="@+id/adapter_watchlist_item_symbol"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -55,8 +56,7 @@
             android:textSize="20sp"
             android:textColor="@color/white"
             android:layout_marginBottom="12dp"
-            android:layout_marginLeft="6dp"
-            app:ftv_typeface="bold"/>
+            android:layout_marginLeft="6dp" />
 
         <ImageView
             android:id="@+id/adapter_watchlist_item_star"

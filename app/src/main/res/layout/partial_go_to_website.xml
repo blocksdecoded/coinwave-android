@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="120dp">
+    
+    <ImageView
+        android:id="@+id/coin_graph_icon"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/graph"
+        android:scaleType="centerCrop"
+        android:layout_gravity="bottom"
+        android:paddingTop="50dp"/>
+    <ImageView
+        android:id="@+id/coin_go_to_site"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/gradient_circle"
+        android:layout_centerHorizontal="true"
+        android:padding="12dp"
+        android:src="@drawable/ic_internet"/>
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/coin_go_to_site"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="12dp"
+        android:letterSpacing="0.15"
+        android:paddingLeft="8dp"
+        android:paddingTop="4dp"
+        android:text="@string/btn_go_to_website"
+        android:textColor="@color/accent_text"
+        android:textSize="12sp"
+        android:theme="@style/SemiBoldTextStyle" />
+
+</RelativeLayout>

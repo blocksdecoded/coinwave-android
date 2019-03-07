@@ -16,7 +16,8 @@
         app:layout_constraintVertical_bias="0.2"
         android:src="@drawable/ic_error"/>
     
-    <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
+    <TextView
+        android:theme="@style/RegularTextStyle"
         android:id="@+id/connection_error_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -45,6 +46,7 @@
         android:stateListAnimator="@drawable/button_state_animation">
     
         <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
+            android:theme="@style/SemiBoldTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="24dp"
@@ -55,8 +57,7 @@
             android:textColor="@color/main_dark"
             android:background="@drawable/bg_green_gradient"
             android:textSize="14sp"
-            android:letterSpacing="0.15"
-            app:ftv_typeface="semibold"/>
+            android:letterSpacing="0.15" />
         
     </androidx.cardview.widget.CardView>
 

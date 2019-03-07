@@ -2,10 +2,10 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
+    <TextView
+        android:theme="@style/ListHeaderItem"
         android:id="@+id/pick_favorite_symbol"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -13,43 +13,34 @@
         android:paddingTop="@dimen/header_content_padding"
         android:paddingBottom="@dimen/header_content_padding"
         android:paddingLeft="20dp"
-        android:text="@string/coin_name_field"
-        android:textSize="13sp"
-        android:textColor="@color/light_text"
-        app:ftv_typeface="light"/>
+        android:text="@string/coin_name_field" />
 
-    <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
+    <TextView
+        android:theme="@style/ListHeaderItem"
         android:id="@+id/pick_favorite_market_cap"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.9"
         android:gravity="center"
-        android:textColor="@color/light_text"
-        android:text="@string/coin_market_cap_field"
-        android:textSize="13sp"
-        app:ftv_typeface="light"/>
+        android:text="@string/coin_market_cap_field" />
 
-    <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
+    <TextView
+        android:theme="@style/ListHeaderItem"
         android:id="@+id/pick_favorite_volume"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.9"
         android:gravity="center"
-        android:textColor="@color/light_text"
-        android:text="@string/coin_24h_volume_field"
-        android:textSize="13sp"
-        app:ftv_typeface="light"/>
+        android:text="@string/coin_24h_volume_field" />
 
-    <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
+    <TextView
+        android:theme="@style/ListHeaderItem"
         android:id="@+id/pick_favorite_price"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1.2"
         android:gravity="right"
         android:paddingRight="20dp"
-        android:textColor="@color/light_text"
-        android:text="@string/coin_24h_price_field"
-        android:textSize="13sp"
-        app:ftv_typeface="light"/>
+        android:text="@string/coin_24h_price_field" />
 
 </LinearLayout>

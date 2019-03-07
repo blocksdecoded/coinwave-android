@@ -6,7 +6,8 @@
     android:fitsSystemWindows="true"
     android:paddingTop="20dp">
 
-    <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
+    <TextView
+        android:theme="@style/BoldTextStyle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="Settings"

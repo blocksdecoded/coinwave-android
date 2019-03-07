@@ -37,7 +37,8 @@
             android:background="@color/black"
             android:alpha="0.4" />
 
-        <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
+        <TextView
+            android:theme="@style/BoldTextStyle"
             android:id="@+id/adapter_post_item_title"
             android:layout_marginRight="16dp"
             android:layout_marginLeft="34dp"
@@ -52,8 +53,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/adapter_post_item_read_more"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:ftv_typeface="bold"/>
+            app:layout_constraintBottom_toBottomOf="parent" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/adapter_post_item_read_more"
@@ -66,9 +66,10 @@
             app:cardCornerRadius="18dp"
             app:cardUseCompatPadding="true"
             app:cardPreventCornerOverlap="true"
-                android:stateListAnimator="@drawable/button_state_animation">
+            android:stateListAnimator="@drawable/button_state_animation">
 
-            <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
+            <TextView
+                android:theme="@style/RegularTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"

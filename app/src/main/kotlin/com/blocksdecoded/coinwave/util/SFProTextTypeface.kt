@@ -6,30 +6,30 @@ import android.graphics.Typeface
 // Created by askar on 5/29/18.
 object SFProTextTypeface {
     fun getRegular(context: Context?): Typeface {
-        return Typeface.createFromAsset(context?.assets, "fonts/SF-Pro-Text-Regular.otf")
+        return Typeface.createFromAsset(context?.assets, "fonts/sf_pro_text_regular.otf")
     }
 
     fun getSemibold(context: Context?): Typeface {
-        return Typeface.createFromAsset(context?.assets, "fonts/SF-Pro-Text-Semibold.otf")
+        return Typeface.createFromAsset(context?.assets, "fonts/sf_pro_text_semibold.otf")
     }
 
     fun getBold(context: Context?): Typeface {
-        return Typeface.createFromAsset(context?.assets, "fonts/SF-Pro-Text-Bold.otf")
+        return Typeface.createFromAsset(context?.assets, "fonts/sf_pro_text_bold.otf")
     }
 
     fun getHeavy(context: Context?): Typeface {
-        return Typeface.createFromAsset(context?.assets, "fonts/SF-Pro-Text-Bold.otf")
+        return Typeface.createFromAsset(context?.assets, "fonts/sf_pro_text_bold.otf")
     }
 
     fun getMedium(context: Context?): Typeface {
-        return Typeface.createFromAsset(context?.assets, "fonts/SF-Pro-Text-Regular.otf")
+        return Typeface.createFromAsset(context?.assets, "fonts/sf_pro_text_regular.otf")
     }
 
     fun getThin(context: Context?): Typeface {
-        return Typeface.createFromAsset(context?.assets, "fonts/SF-Pro-Text-Light.otf")
+        return Typeface.createFromAsset(context?.assets, "fonts/sf_pro_text_light.otf")
     }
 
     fun getLight(context: Context?): Typeface {
-        return Typeface.createFromAsset(context?.assets, "fonts/SF-Pro-Text-Light.otf")
+        return Typeface.createFromAsset(context?.assets, "fonts/sf_pro_text_light.otf")
     }
 }
