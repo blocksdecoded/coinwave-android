@@ -99,7 +99,7 @@
     
     <style name="ListHeaderItem" parent="LightTextStyle">
         <item name="android:textColor">@color/light_text</item>
-        <item name="android:textSize">13sp</item>
+        <item name="android:textSize">12sp</item>
     </style>
     
     

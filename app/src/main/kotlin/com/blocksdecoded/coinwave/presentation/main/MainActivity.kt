@@ -188,10 +188,6 @@ class MainActivity :
 
         initViewPager(fragments)
 
-        main_add_container.setOnClickListener {
-            main_view_pager.currentItem = 0
-        }
-
         main_menu.setOnClickListener {
             openDrawer()
         }
