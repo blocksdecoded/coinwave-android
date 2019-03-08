@@ -1,14 +1,13 @@
 package com.blocksdecoded.coinwave.data.crypto.chart
 
-import com.blocksdecoded.utils.coroutine.model.Result
 import com.blocksdecoded.coinwave.data.model.ChartPeriodEnum
 import com.blocksdecoded.coinwave.data.crypto.remote.CoinApiClient
 import com.blocksdecoded.coinwave.data.model.ChartData
-import com.blocksdecoded.utils.coroutine.model.mapOnSuccess
+import io.reactivex.Single
 
 // Created by askar on 7/25/18.
 object ChartsStorage : IChartsStorage {
-    override suspend fun getChart(chartName: String, period: ChartPeriodEnum): Result<ChartData> =
+    override fun getChart(chartName: String, period: ChartPeriodEnum): Single<ChartData> =
             CoinApiClient.getHistory(chartName, period)
-                    .mapOnSuccess { ChartData(it.data.history) }
+                .map { ChartData(it.data.history) }
 }

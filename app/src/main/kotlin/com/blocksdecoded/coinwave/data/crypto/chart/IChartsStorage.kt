@@ -1,13 +1,13 @@
 package com.blocksdecoded.coinwave.data.crypto.chart
 
 import com.blocksdecoded.coinwave.data.model.ChartPeriodEnum
-import com.blocksdecoded.utils.coroutine.model.Result
 import com.blocksdecoded.coinwave.data.model.ChartData
+import io.reactivex.Single
 
 // Created by askar on 7/25/18.
 interface IChartsStorage {
-    suspend fun getChart(
+    fun getChart(
         chartName: String,
         period: ChartPeriodEnum = ChartPeriodEnum.DAY
-    ): Result<ChartData>
+    ): Single<ChartData>
 }

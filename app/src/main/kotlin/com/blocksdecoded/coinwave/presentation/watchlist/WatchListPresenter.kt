@@ -13,6 +13,8 @@ import com.blocksdecoded.utils.coroutine.model.onError
 import com.blocksdecoded.utils.coroutine.model.onResult
 import com.blocksdecoded.utils.coroutine.model.onSuccess
 import com.blocksdecoded.utils.extensions.isValidIndex
+import com.blocksdecoded.utils.rx.uiSubscribe
+import kotlinx.coroutines.launch
 
 class WatchListPresenter(
     view: WatchListContract.View?,
@@ -78,9 +80,11 @@ class WatchListPresenter(
             ?.onSuccess { mView?.showFavoriteCoin(it) }
 
         mFavoriteChartUseVariant.getChart()
-            ?.onResult { mView?.hideFavoriteLoading() }
-            ?.onSuccess { mView?.showFavoriteChart(it) }
-            ?.onError { mView?.showFavoriteError() }
+            ?.doAfterTerminate { scope.launch { mView?.hideFavoriteLoading() }  }
+            ?.uiSubscribe(
+                { mView?.showFavoriteChart(it) },
+                { mView?.showFavoriteError() }
+            )
     }
 
     private fun searchCurrency(coinEntity: CoinEntity, body: ((index: Int) -> Unit)? = null): Int =

@@ -6,9 +6,8 @@ import com.blocksdecoded.coinwave.domain.usecases.chart.ChartsUseCases
 import com.blocksdecoded.coinwave.domain.usecases.chart.ChartsUseCases.ChartPeriod.*
 import com.blocksdecoded.coinwave.domain.usecases.coins.CoinsUseCases
 import com.blocksdecoded.utils.coroutine.launchSilent
-import com.blocksdecoded.utils.coroutine.model.onError
-import com.blocksdecoded.utils.coroutine.model.onResult
-import com.blocksdecoded.utils.coroutine.model.onSuccess
+import com.blocksdecoded.utils.rx.uiSubscribe
+import kotlinx.coroutines.launch
 
 class CoinInfoPresenter(
     view: CoinInfoContract.View?,
@@ -17,13 +16,15 @@ class CoinInfoPresenter(
 ) : BaseMVPPresenter<CoinInfoContract.View>(view), CoinInfoContract.Presenter {
     private var mCached: CoinEntity? = null
 
-    private suspend fun fetchChartData(id: Int, periodEnum: ChartsUseCases.ChartPeriod = TODAY) {
+    private fun fetchChartData(id: Int, periodEnum: ChartsUseCases.ChartPeriod = TODAY) {
         mView?.hideChartError()
         mView?.showLoading()
         mChartsUseCases.getChartData(id, periodEnum)
-            .onResult { mView?.hideLoading() }
-            .onSuccess { mView?.showChartData(it) }
-            .onError { mView?.showChartError() }
+            .doAfterTerminate { scope.launch { mView?.hideLoading() }  }
+            .uiSubscribe(
+                { chartData -> mView?.showChartData(chartData) },
+                { error -> mView?.showChartError() }
+            )
     }
 
     override fun onGoToWebsiteClick() {

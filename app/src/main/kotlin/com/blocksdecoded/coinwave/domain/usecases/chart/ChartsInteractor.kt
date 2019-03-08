@@ -9,6 +9,7 @@ import com.blocksdecoded.coinwave.data.model.ChartData
 import com.blocksdecoded.coinwave.domain.usecases.chart.ChartsUseCases.ChartPeriod
 import com.blocksdecoded.coinwave.domain.usecases.chart.ChartsUseCases.ChartPeriod.*
 import com.blocksdecoded.utils.coroutine.AppExecutors
+import io.reactivex.Single
 import kotlinx.coroutines.withContext
 import kotlin.collections.HashMap
 
@@ -34,30 +35,23 @@ class ChartsInteractor(
         }
     }
 
-    override suspend fun getChartData(coinId: Int, period: ChartPeriod): Result<ChartData> = withContext(AppExecutors.io) {
+    override fun getChartData(coinId: Int, period: ChartPeriod): Single<ChartData> {
         if (mCachedId != coinId) {
             mCachedId = coinId
             cachedChart.clear()
         }
 
-        if (cachedChart[period.toString()] == null) {
+        return if (cachedChart[period.toString()] == null) {
             val coin = mCryptoService.getCoin(coinId)
+
             if (coin != null) {
-                val result = mChartsService.getChart(coin.symbol, getRequestPeriod(period))
-                when (result) {
-                    is Result.Success -> {
-                        cachedChart[period.toString()] = result.data
-                        Result.Success(result.data)
-                    }
-                    else -> {
-                        Result.Error(NetworkException("Unknown error"))
-                    }
-                }
+                mChartsService.getChart(coin.symbol, getRequestPeriod(period))
+                    .doOnSuccess { cachedChart[period.toString()] = it }
             } else {
-                Result.Error(EmptyCache("Currency not found"))
+                Single.error(EmptyCache("Currency not found"))
             }
         } else {
-            Result.Success(cachedChart[period.toString()]!!)
+            Single.just(cachedChart[period.toString()]!!)
         }
     }
 }

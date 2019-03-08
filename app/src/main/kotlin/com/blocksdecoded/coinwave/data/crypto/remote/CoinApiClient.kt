@@ -6,6 +6,7 @@ import com.blocksdecoded.coinwave.data.crypto.remote.model.HistoryResponse
 import com.blocksdecoded.coinwave.data.model.CoinsResponse
 import com.blocksdecoded.core.network.CoreApiClient
 import com.blocksdecoded.utils.coroutine.model.Result
+import io.reactivex.Single
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -33,8 +34,7 @@ internal object CoinApiClient : CoreApiClient(), ICoinClient {
     override suspend fun getCoins(pageSize: Int, ids: String): Result<CoinsResponse> =
             mClient.getCoins(pageSize, ids).getResult()
 
-    override suspend fun getHistory(chartName: String, period: ChartPeriodEnum): Result<HistoryResponse> =
-            mClient.getChartForTime(chartName, period.displayName).getResult()
+    override fun getHistory(chartName: String, period: ChartPeriodEnum) = mClient.getChartForTime(chartName, period.displayName)
 
     //endregion
 
@@ -53,7 +53,7 @@ internal object CoinApiClient : CoreApiClient(), ICoinClient {
         fun getChartForTime(
             @Path("coin") coin: String,
             @Path("period") period: String
-        ): Call<HistoryResponse>
+        ): Single<HistoryResponse>
 
         companion object {
             const val BASE_URL = BuildConfig.API_COINS

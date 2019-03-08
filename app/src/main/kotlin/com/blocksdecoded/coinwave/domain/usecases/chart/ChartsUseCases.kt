@@ -1,7 +1,7 @@
 package com.blocksdecoded.coinwave.domain.usecases.chart
 
-import com.blocksdecoded.utils.coroutine.model.Result
 import com.blocksdecoded.coinwave.data.model.ChartData
+import io.reactivex.Single
 
 // Created by askar on 7/25/18.
 interface ChartsUseCases {
@@ -14,5 +14,6 @@ interface ChartsUseCases {
         YEAR,
         ALL
     }
-    suspend fun getChartData(coinId: Int, period: ChartPeriod = ChartPeriod.TODAY): Result<ChartData>
+
+    fun getChartData(coinId: Int, period: ChartPeriod = ChartPeriod.TODAY): Single<ChartData>
 }
