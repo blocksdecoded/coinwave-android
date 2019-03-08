@@ -108,13 +108,6 @@ object PermissionUtil {
                             }
 
                             override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
-                                report?.grantedPermissionResponses?.forEach {
-                                    logD("Granted permission ${it.permissionName}")
-                                }
-
-                                report?.deniedPermissionResponses?.forEach {
-                                    logD("Denied permission ${it.permissionName}")
-                                }
                                 report?.also {
                                     if (it.areAllPermissionsGranted()) {
                                         onGranted.invoke()
