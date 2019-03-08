@@ -5,6 +5,8 @@ import android.graphics.Point
 import android.view.WindowManager
 import android.os.Build.VERSION_CODES
 import android.os.Build.VERSION
+import androidx.annotation.ColorRes
+import androidx.core.content.ContextCompat
 
 val Context.density
     get() = resources.displayMetrics.density
@@ -43,3 +45,5 @@ fun Context.pxToDp(px: Int) = (px / density).toInt()
 fun Context.pxToSp(px: Float) = px / scaledDensity
 
 fun Context.spToPx(sp: Float) = sp * scaledDensity
+
+fun Context.getColorRes(@ColorRes color: Int): Int = ContextCompat.getColor(this, color)

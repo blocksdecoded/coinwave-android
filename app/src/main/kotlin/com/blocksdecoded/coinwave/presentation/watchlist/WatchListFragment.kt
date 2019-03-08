@@ -182,9 +182,9 @@ open class WatchListFragment :
         coin.getPriceChange()?.let {
             context?.also { context ->
                 val color: Int = if (it > 0f) {
-                    ResourceUtil.getColor(context, R.color.green)
+                    context.getColorRes(R.color.green)
                 } else {
-                    ResourceUtil.getColor(context, R.color.red)
+                    context.getColorRes(R.color.red)
                 }
 
                 mFavoritePrice?.setTextColor(color)

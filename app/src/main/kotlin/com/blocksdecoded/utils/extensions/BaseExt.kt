@@ -12,7 +12,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
-import com.blocksdecoded.utils.ResourceUtil
+import androidx.annotation.ColorRes
 import com.bumptech.glide.Glide
 
 fun ImageView.loadImageFromUrl(url: String) {
@@ -89,6 +89,8 @@ fun View?.moveDown(value: Float) {
     }
 }
 
+fun View.getColorRes(@ColorRes color: Int): Int = context.getColorRes(color)
+
 //endregion
 
 //region Margin
@@ -110,13 +112,11 @@ fun EditText?.setPlainText(text: String) {
     this?.setText(text, TextView.BufferType.EDITABLE)
 }
 
+
+
 fun ImageView?.setImageColor(resId: Int) {
     this?.drawable
-            ?.setColorFilter(
-                ResourceUtil.getColor(
-                    context,
-                    resId
-                ), PorterDuff.Mode.SRC_ATOP)
+            ?.setColorFilter(getColorRes(resId), PorterDuff.Mode.SRC_ATOP)
 }
 
 fun <T> List<T>?.isValidIndex(index: Int): Boolean {

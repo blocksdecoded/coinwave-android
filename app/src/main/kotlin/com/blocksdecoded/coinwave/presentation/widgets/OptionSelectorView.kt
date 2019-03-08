@@ -7,7 +7,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.utils.Lg
-import com.blocksdecoded.utils.ResourceUtil
+import com.blocksdecoded.utils.extensions.getColorRes
 import com.blocksdecoded.utils.extensions.inflate
 
 /**
@@ -72,13 +72,13 @@ class OptionSelectorView : LinearLayout, View.OnClickListener {
         deselectAll()
 
         if (view is TextView) {
-            view.setTextColor(ResourceUtil.getColor(context, mSelectedTextColor))
+            view.setTextColor(getColorRes(mSelectedTextColor))
         }
     }
 
     private fun setDefaultView(view: View) {
         if (view is TextView) {
-            view.setTextColor(ResourceUtil.getColor(context, mDefaultTextColor))
+            view.setTextColor(getColorRes(mDefaultTextColor))
         }
     }
 

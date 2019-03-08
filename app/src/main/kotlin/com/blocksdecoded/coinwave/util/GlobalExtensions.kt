@@ -13,7 +13,7 @@ import com.blocksdecoded.coinwave.data.model.ChartData
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.presentation.widgets.chart.ChartListener
 import com.blocksdecoded.utils.Lg
-import com.blocksdecoded.utils.ResourceUtil
+import com.blocksdecoded.utils.extensions.getColorRes
 import com.blocksdecoded.utils.extensions.isValidIndex
 
 // Created by askar on 7/23/18.
@@ -34,9 +34,9 @@ fun TextView.setChangedPercent(percent: Float) {
     text = "${if (percent > 0) "+" else ""}$percent%"
     this.setTextColor(
             if (percent >= 0f) {
-                ResourceUtil.getColor(this.context, R.color.green)
+                getColorRes(R.color.green)
             } else {
-                ResourceUtil.getColor(this.context, R.color.red)
+                getColorRes(R.color.red)
             }
     )
 }
@@ -67,7 +67,7 @@ fun LineChart.loadChartData(
     dataSet.lineWidth = 1.2f
     dataSet.setDrawValues(false)
 
-    dataSet.color = ResourceUtil.getColor(context, color)
+    dataSet.color = context.getColorRes(color)
     dataSet.fillDrawable = ContextCompat.getDrawable(context, backgroundDrawable)
 
     this.data = LineData(dataSet)

@@ -35,6 +35,7 @@ import com.blocksdecoded.rateus.base.RateUsDialogContract
 import com.blocksdecoded.rateus.base.RateUsListener
 import com.blocksdecoded.utils.*
 import com.blocksdecoded.utils.customtabs.openUrl
+import com.blocksdecoded.utils.extensions.getColorRes
 import com.blocksdecoded.utils.extensions.removeShiftMode
 import com.blocksdecoded.utils.extensions.setConstraintTopMargin
 import com.blocksdecoded.utils.extensions.statusBarHeight
@@ -154,7 +155,7 @@ class MainActivity :
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        setStatusBarImmersiveMode(ResourceUtil.getColor(this, R.color.status_bar_bg))
+        setStatusBarImmersiveMode(getColorRes(R.color.status_bar_bg))
     }
 
     private fun updateStatusBar(drawerOpen: Boolean = false) = try {

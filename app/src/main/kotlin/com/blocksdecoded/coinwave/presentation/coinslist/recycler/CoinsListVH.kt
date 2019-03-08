@@ -8,7 +8,7 @@ import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.util.FormatUtil
 import com.blocksdecoded.coinwave.util.format
 import com.blocksdecoded.coinwave.util.loadIcon
-import com.blocksdecoded.utils.ResourceUtil
+import com.blocksdecoded.utils.extensions.getColorRes
 import com.blocksdecoded.utils.extensions.hide
 import com.blocksdecoded.utils.extensions.visible
 
@@ -50,10 +50,10 @@ class CoinsListVH(
 
             val color: Int = if (it > 0f) {
                 mPriceChangeIcon.setImageResource(R.drawable.ic_arrow_up_green)
-                ResourceUtil.getColor(itemView.context, R.color.green)
+                itemView.getColorRes(R.color.green)
             } else {
                 mPriceChangeIcon.setImageResource(R.drawable.ic_arrow_down_red)
-                ResourceUtil.getColor(itemView.context, R.color.red)
+                itemView.getColorRes(R.color.red)
             }
 
             mPrice.setTextColor(color)
