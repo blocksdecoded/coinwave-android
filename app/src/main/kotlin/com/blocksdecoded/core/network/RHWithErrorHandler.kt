@@ -1,6 +1,6 @@
 package com.blocksdecoded.core.network
 
-import com.blocksdecoded.utils.Lg
+import com.blocksdecoded.utils.logE
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,7 +32,7 @@ interface RHWithErrorHandler<T> : Callback<T> {
 
             404 -> { setError(NetworkError.CONTENT_NOT_FOUND) }
             500 -> {
-                Lg.d(response.message())
+                logE(Exception("Server error - ${call?.request()?.url()}"))
                 setError(NetworkError.SERVER_ERROR)
             }
             400 -> { setError(NetworkError.ACTION_ERROR) }

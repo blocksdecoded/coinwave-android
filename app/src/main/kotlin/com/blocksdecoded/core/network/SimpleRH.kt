@@ -1,7 +1,7 @@
 package com.blocksdecoded.core.network
 
 import android.util.Log
-import com.blocksdecoded.utils.Lg
+import com.blocksdecoded.utils.logD
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -12,7 +12,7 @@ interface SimpleRH<T> : Callback<T> {
     fun onFailure(error: NetworkError)
 
     override fun onResponse(call: Call<T>?, response: Response<T>?) = if (response != null) {
-        Lg.d(call?.request()?.url().toString() + " " + response.code())
+        logD(call?.request()?.url().toString() + " " + response.code())
         when (response.code()) {
             in 200..300 -> { val result = response.body()
                 if (result != null) {

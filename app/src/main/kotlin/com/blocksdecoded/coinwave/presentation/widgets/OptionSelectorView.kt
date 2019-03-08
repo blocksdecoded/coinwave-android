@@ -6,7 +6,6 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.blocksdecoded.coinwave.R
-import com.blocksdecoded.utils.Lg
 import com.blocksdecoded.utils.extensions.getColorRes
 import com.blocksdecoded.utils.extensions.inflate
 
@@ -109,7 +108,6 @@ class OptionSelectorView : LinearLayout, View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        Lg.d("View click $v")
         onViewInteract(v)
     }
 }

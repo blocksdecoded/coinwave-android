@@ -1,8 +1,8 @@
 package com.blocksdecoded.core.mvp
 
 import androidx.annotation.CallSuper
-import com.blocksdecoded.utils.Lg
 import com.blocksdecoded.utils.coroutine.AppExecutors
+import com.blocksdecoded.utils.logE
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 
@@ -23,7 +23,7 @@ abstract class BaseMVPPresenter<T>(
                 (mView as BaseMVPContract.View<BaseMVPContract.Presenter<*>>).setPresenter(this)
             }
         } catch (e: Exception) {
-            Lg.d(e.message)
+            logE(e)
         }
     }
 
@@ -34,7 +34,7 @@ abstract class BaseMVPPresenter<T>(
                 (mView as BaseMVPContract.View<BaseMVPContract.Presenter<*>>).clearPresenter()
             }
         } catch (e: Exception) {
-            Lg.d(e.message)
+            logE(e)
         }
         mView = null
     }

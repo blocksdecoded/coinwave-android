@@ -70,7 +70,7 @@ object PermissionUtil {
                         })
                         .onSameThread()
                         .withErrorListener {
-                            logE(it.name)
+                            logE(Exception("Dexter ${it.name}"))
                         }
                         .check()
                 },
@@ -124,7 +124,7 @@ object PermissionUtil {
                         })
                         .onSameThread()
                         .withErrorListener {
-                            logE(it.name)
+                            logE(Exception("Dexter ${it.name}"))
                         }
                         .check()
                 },

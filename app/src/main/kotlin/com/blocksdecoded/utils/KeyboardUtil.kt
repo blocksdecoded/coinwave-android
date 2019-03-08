@@ -18,7 +18,7 @@ object KeyboardUtil {
                 }
             }
         } catch (e: Exception) {
-            Lg.d(e.message)
+            logE(e)
         }
     }
 

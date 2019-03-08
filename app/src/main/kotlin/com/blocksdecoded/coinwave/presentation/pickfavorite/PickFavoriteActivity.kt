@@ -7,8 +7,8 @@ import android.content.Intent
 import android.os.Bundle
 import com.blocksdecoded.core.SwipeableActivity
 import com.blocksdecoded.coinwave.domain.UseCaseProvider
-import com.blocksdecoded.utils.inRightTransition
-import com.blocksdecoded.utils.outRightTransition
+import com.blocksdecoded.utils.extensions.inRightTransition
+import com.blocksdecoded.utils.extensions.outRightTransition
 
 /**
  * Created by askar on 11/24/18

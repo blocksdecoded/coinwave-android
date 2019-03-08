@@ -12,9 +12,9 @@ import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.data.model.ChartData
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.presentation.widgets.chart.ChartListener
-import com.blocksdecoded.utils.Lg
 import com.blocksdecoded.utils.extensions.getColorRes
 import com.blocksdecoded.utils.extensions.isValidIndex
+import com.blocksdecoded.utils.logE
 
 // Created by askar on 7/23/18.
 fun List<CoinEntity>.findCurrency(coinEntity: CoinEntity, body: ((index: Int) -> Unit)? = null): Int {
@@ -54,7 +54,7 @@ fun LineChart.loadChartData(
         try {
             entries.add(Entry(it.time.toFloat(), it.price.toFloat()))
         } catch (e: Exception) {
-            Lg.d(e.message)
+            logE(e)
         }
     }
 

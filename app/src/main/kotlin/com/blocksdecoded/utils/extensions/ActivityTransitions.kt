@@ -1,4 +1,4 @@
-package com.blocksdecoded.utils
+package com.blocksdecoded.utils.extensions
 
 import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
