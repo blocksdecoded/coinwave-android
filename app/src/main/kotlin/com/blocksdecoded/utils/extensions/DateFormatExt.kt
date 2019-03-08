@@ -1,4 +1,4 @@
-package com.blocksdecoded.utils
+package com.blocksdecoded.utils.extensions
 
 import java.text.DateFormat
 import java.text.DateFormat.*

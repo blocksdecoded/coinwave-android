@@ -6,6 +6,7 @@ import android.os.Build
 import com.google.android.material.snackbar.Snackbar
 import android.view.View
 import android.widget.Toast
+import com.blocksdecoded.utils.extensions.config
 
 /**
  * Created by Tameki on 2/5/18.
@@ -15,7 +16,7 @@ fun showSnack(view: View, text: String) {
     Snackbar.make(
             view,
             text,
-            Toast.LENGTH_SHORT
+            Snackbar.LENGTH_SHORT
     ).config(view.context).show()
 }
 

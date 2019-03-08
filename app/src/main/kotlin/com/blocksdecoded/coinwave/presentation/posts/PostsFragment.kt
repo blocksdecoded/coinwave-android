@@ -14,12 +14,12 @@ import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.data.post.model.PublisherPost
 import com.blocksdecoded.coinwave.presentation.posts.recycler.deprecated.PostListAdapter
 import com.blocksdecoded.coinwave.presentation.posts.recycler.PostitemViewHolder
-import com.blocksdecoded.utils.DimenUtils
-import com.blocksdecoded.utils.customtabs.CustomTabsUtil
+import com.blocksdecoded.utils.customtabs.openUrl
 import com.blocksdecoded.utils.extensions.setConstraintTopMargin
-import com.blocksdecoded.utils.hide
+import com.blocksdecoded.utils.extensions.hide
 import com.blocksdecoded.utils.showShortToast
-import com.blocksdecoded.utils.visible
+import com.blocksdecoded.utils.extensions.visible
+import com.blocksdecoded.utils.extensions.statusBarHeight
 import kotlin.math.roundToInt
 
 open class PostsFragment :
@@ -63,7 +63,7 @@ open class PostsFragment :
         initRecycler()
 
         context?.also {
-            mMenuBtn.setConstraintTopMargin(DimenUtils.getStatusBarHeight(it) + (mMenuBtn.layoutParams as ConstraintLayout.LayoutParams).topMargin)
+            mMenuBtn.setConstraintTopMargin(it.statusBarHeight + (mMenuBtn.layoutParams as ConstraintLayout.LayoutParams).topMargin)
         }
 
         mSwipeRefresh.setOnRefreshListener {
@@ -107,11 +107,7 @@ open class PostsFragment :
 
     //region Contract
 
-    override fun openPost(url: String) {
-        activity?.let {
-            CustomTabsUtil.openUrl(it, url)
-        }
-    }
+    override fun openPost(url: String) = openUrl(url)
 
     override fun showLoading() {
         mSwipeRefresh.isRefreshing = true

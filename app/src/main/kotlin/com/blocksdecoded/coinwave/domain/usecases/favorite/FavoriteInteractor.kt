@@ -1,13 +1,13 @@
 package com.blocksdecoded.coinwave.domain.usecases.favorite
 
-import com.blocksdecoded.utils.shared.SharedContract
+import com.blocksdecoded.utils.shared.ISharedStorage
 
 /**
  * Created by askar on 11/24/18
  * with Android Studio
  */
 class FavoriteInteractor(
-    private val mSharedStorage: SharedContract
+    private val mSharedStorage: ISharedStorage
 ) : FavoriteUseCases {
 
     companion object {

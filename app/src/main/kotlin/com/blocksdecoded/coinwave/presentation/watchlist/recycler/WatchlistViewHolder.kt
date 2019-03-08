@@ -9,8 +9,8 @@ import com.blocksdecoded.coinwave.util.FormatUtil
 import com.blocksdecoded.coinwave.util.format
 import com.blocksdecoded.coinwave.util.loadIcon
 import com.blocksdecoded.utils.ResourceUtil
-import com.blocksdecoded.utils.hide
-import com.blocksdecoded.utils.visible
+import com.blocksdecoded.utils.extensions.hide
+import com.blocksdecoded.utils.extensions.visible
 
 // Created by askar on 7/19/18.
 class WatchlistViewHolder(

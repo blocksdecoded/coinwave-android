@@ -1,7 +1,7 @@
 package com.blocksdecoded.coinwave.data.crypto
 
 import com.blocksdecoded.utils.coroutine.model.Result
-import com.blocksdecoded.coinwave.data.crypto.remote.CoinClient
+import com.blocksdecoded.coinwave.data.crypto.remote.ICoinClient
 import com.blocksdecoded.coinwave.data.model.CoinsDataResponse
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.data.watchlist.WatchlistSourceContract
@@ -13,12 +13,12 @@ import kotlinx.coroutines.async
 
 // Created by askar on 7/19/18.
 class CoinsRepository(
-    private val mCoinsClient: CoinClient,
+    private val mCoinsClient: ICoinClient,
     private val mWatchlistSource: WatchlistSourceContract,
-    private val mLocalSource: CoinsDataSource
-) : CoinsDataSource {
+    private val mLocalSource: ICoinsStorage
+) : ICoinsStorage {
     private var mCached: CoinsDataResponse? = null
-    private val mObservers = hashSetOf<CoinsUpdateObserver>()
+    private val mObservers = hashSetOf<ICoinsObserver>()
 
     private val watchlistIds: String
         get() {
@@ -34,7 +34,7 @@ class CoinsRepository(
 
     init {
         GlobalScope.async {
-            mLocalSource.getAllCoins(false)
+            mLocalSource.getAllCoins(true)
                 .onSuccess { mCached = it }
         }
     }
@@ -50,7 +50,10 @@ class CoinsRepository(
                 setCache(it.data)
             }
             .onError { mCached?.let { setCache(it) } }
-            .mapOnSuccess { it.data }
+            .mapOnSuccess {
+                it.data.coins = it.data.coins.sortedByDescending { it.price }
+                it.data
+            }
     }
 
     private suspend fun watchlistRequest(): Result<CoinsDataResponse> =
@@ -94,11 +97,11 @@ class CoinsRepository(
 
     override fun getCoin(id: Int): CoinEntity? = mCached?.coins?.first { it.id == id }
 
-    override fun addCoinObserver(observer: CoinsUpdateObserver) {
+    override fun addCoinObserver(observer: ICoinsObserver) {
         mObservers.add(observer)
     }
 
-    override fun removeCoinObserver(observer: CoinsUpdateObserver) {
+    override fun removeCoinObserver(observer: ICoinsObserver) {
         mObservers.remove(observer)
     }
 
@@ -140,10 +143,10 @@ class CoinsRepository(
         private var INSTANCE: CoinsRepository? = null
 
         fun getInstance(
-            coinClient: CoinClient,
+            coinClient: ICoinClient,
             watchlist: WatchlistSourceContract,
-            localSource: CoinsDataSource
-        ): CoinsDataSource {
+            localSource: ICoinsStorage
+        ): ICoinsStorage {
             if (INSTANCE == null) {
                 INSTANCE = CoinsRepository(coinClient, watchlist, localSource)
             }

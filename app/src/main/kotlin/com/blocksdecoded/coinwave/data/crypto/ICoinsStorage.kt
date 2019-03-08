@@ -5,7 +5,7 @@ import com.blocksdecoded.utils.coroutine.model.Result
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 
 // Created by askar on 7/19/18.
-interface CoinsDataSource {
+interface ICoinsStorage {
     suspend fun getAllCoins(skipCache: Boolean): Result<CoinsDataResponse>
 
     suspend fun getWatchlist(skipCache: Boolean): Result<CoinsDataResponse>
@@ -18,7 +18,7 @@ interface CoinsDataSource {
 
     fun removeCoin(id: Int): Boolean
 
-    fun addCoinObserver(observer: CoinsUpdateObserver)
+    fun addCoinObserver(observer: ICoinsObserver)
 
-    fun removeCoinObserver(observer: CoinsUpdateObserver)
+    fun removeCoinObserver(observer: ICoinsObserver)
 }

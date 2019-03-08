@@ -7,9 +7,7 @@ import com.blocksdecoded.coinwave.domain.usecases.coins.CoinsUseCases
 import com.blocksdecoded.utils.coroutine.launchSilent
 import com.blocksdecoded.utils.coroutine.model.onError
 import com.blocksdecoded.utils.coroutine.model.onSuccess
-import com.blocksdecoded.utils.isValidIndex
-import kotlinx.coroutines.Dispatchers
-import kotlin.coroutines.CoroutineContext
+import com.blocksdecoded.utils.extensions.isValidIndex
 
 class PickFavoritePresenter(
     view: PickFavoriteContract.View?,

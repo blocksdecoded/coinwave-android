@@ -8,7 +8,7 @@ import android.widget.TextView
 import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.utils.Lg
 import com.blocksdecoded.utils.ResourceUtil
-import com.blocksdecoded.utils.inflate
+import com.blocksdecoded.utils.extensions.inflate
 
 /**
  * Created by Tameki on 2/9/18.

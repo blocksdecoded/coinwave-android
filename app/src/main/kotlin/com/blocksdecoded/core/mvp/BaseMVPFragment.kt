@@ -8,7 +8,7 @@ import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment
 import butterknife.ButterKnife
 import butterknife.Unbinder
-import com.blocksdecoded.utils.inflate
+import com.blocksdecoded.utils.extensions.inflate
 import com.blocksdecoded.utils.logE
 import com.blocksdecoded.utils.showShortToast
 

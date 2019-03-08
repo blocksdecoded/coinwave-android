@@ -1,7 +1,7 @@
 package com.blocksdecoded.coinwave.presentation.watchlist
 
 import com.blocksdecoded.core.mvp.BaseMVPPresenter
-import com.blocksdecoded.coinwave.data.crypto.CoinsUpdateObserver
+import com.blocksdecoded.coinwave.data.crypto.ICoinsObserver
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.domain.usecases.coins.CoinsUseCases
 import com.blocksdecoded.coinwave.domain.variant.favoritechart.FavoriteChartUseVariant
@@ -12,9 +12,7 @@ import com.blocksdecoded.utils.coroutine.launchSilent
 import com.blocksdecoded.utils.coroutine.model.onError
 import com.blocksdecoded.utils.coroutine.model.onResult
 import com.blocksdecoded.utils.coroutine.model.onSuccess
-import com.blocksdecoded.utils.isValidIndex
-import kotlinx.coroutines.Dispatchers
-import kotlin.coroutines.CoroutineContext
+import com.blocksdecoded.utils.extensions.isValidIndex
 
 class WatchListPresenter(
     view: WatchListContract.View?,
@@ -24,7 +22,7 @@ class WatchListPresenter(
 ) : BaseMVPPresenter<WatchListContract.View>(view), WatchListContract.Presenter {
     private var mCachedData = arrayListOf<CoinEntity>()
 
-    private val mCurrenciesObserver = object : CoinsUpdateObserver {
+    private val mCurrenciesObserver = object : ICoinsObserver {
         override fun onAdded(coinEntity: CoinEntity) = launchSilent(scope) {
             mView?.updateCoin(updateCurrency(coinEntity), coinEntity)
         }

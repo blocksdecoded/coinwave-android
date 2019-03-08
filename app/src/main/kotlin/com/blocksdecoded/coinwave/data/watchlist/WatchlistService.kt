@@ -1,10 +1,10 @@
 package com.blocksdecoded.coinwave.data.watchlist
 
-import com.blocksdecoded.utils.shared.SharedContract
+import com.blocksdecoded.utils.shared.ISharedStorage
 
 // Created by askar on 7/20/18.
 class WatchlistService(
-    private val mSharedStorage: SharedContract
+    private val mSharedStorage: ISharedStorage
 ) : WatchlistSourceContract {
     private var mInitialized = false
     private val SAVED_COINS = "saved_coins"
@@ -15,7 +15,7 @@ class WatchlistService(
     companion object {
         private var INSTANCE: WatchlistService? = null
 
-        fun getInstance(sharedStorage: SharedContract): WatchlistSourceContract {
+        fun getInstance(sharedStorage: ISharedStorage): WatchlistSourceContract {
             if (INSTANCE == null) {
                 INSTANCE = WatchlistService(sharedStorage)
             }

@@ -1,37 +1,37 @@
 package com.blocksdecoded.coinwave.domain
 
 import android.content.Context
-import com.blocksdecoded.coinwave.data.crypto.chart.ChartsService
-import com.blocksdecoded.coinwave.data.crypto.chart.ChartsSourceContract
+import com.blocksdecoded.coinwave.data.crypto.chart.ChartsStorage
+import com.blocksdecoded.coinwave.data.crypto.chart.IChartsStorage
 import com.blocksdecoded.coinwave.data.crypto.CoinsRepository
-import com.blocksdecoded.coinwave.data.crypto.CoinsDataSource
-import com.blocksdecoded.coinwave.data.crypto.local.CoinsLocalDataSource
+import com.blocksdecoded.coinwave.data.crypto.ICoinsStorage
+import com.blocksdecoded.coinwave.data.crypto.local.CoinsLocalStorage
 import com.blocksdecoded.coinwave.data.crypto.remote.CoinApiClient
-import com.blocksdecoded.coinwave.data.post.PostDataSource
+import com.blocksdecoded.coinwave.data.post.IPostStorage
 import com.blocksdecoded.coinwave.data.post.PostRepository
-import com.blocksdecoded.coinwave.data.post.remote.PostRemoteDataSource
+import com.blocksdecoded.coinwave.data.post.remote.PostApiClient
 import com.blocksdecoded.coinwave.data.watchlist.WatchlistService
 import com.blocksdecoded.coinwave.data.watchlist.WatchlistSourceContract
-import com.blocksdecoded.utils.shared.SharedContract
+import com.blocksdecoded.utils.shared.ISharedStorage
 import com.blocksdecoded.utils.shared.SharedStorage
 
 // Created by askar on 7/19/18.
 object SourceProvider {
 
     private lateinit var mWatchlistService: WatchlistSourceContract
-    private lateinit var mCoinsLocalDataSource: CoinsDataSource
-    private lateinit var mSharedStorage: SharedContract
-    private lateinit var mPostSource: PostDataSource
-    private lateinit var mCoinsSource: CoinsDataSource
+    private lateinit var mCoinsLocalDataSource: ICoinsStorage
+    private lateinit var mSharedStorage: ISharedStorage
+    private lateinit var mPostSource: IPostStorage
+    private lateinit var mCoinsSource: ICoinsStorage
 
     fun init(context: Context) {
         mSharedStorage = SharedStorage.getInstance(context.applicationContext)
 
-        mCoinsLocalDataSource = CoinsLocalDataSource(mSharedStorage)
+        mCoinsLocalDataSource = CoinsLocalStorage(mSharedStorage)
 
         mWatchlistService = WatchlistService.getInstance(SharedStorage.getInstance(context))
 
-        mPostSource = PostRepository.getInstance(null, PostRemoteDataSource)
+        mPostSource = PostRepository.getInstance(null, PostApiClient)
 
         mCoinsSource = CoinsRepository.getInstance(
             CoinApiClient,
@@ -42,9 +42,9 @@ object SourceProvider {
 
     fun getSharedStorage() = mSharedStorage
 
-    fun getPostSource(): PostDataSource = mPostSource
+    fun getPostSource(): IPostStorage = mPostSource
 
-    fun getChartsSource(): ChartsSourceContract = ChartsService
+    fun getChartsSource(): IChartsStorage = ChartsStorage
 
-    fun getCoinsSource(): CoinsDataSource = mCoinsSource
+    fun getCoinsSource(): ICoinsStorage = mCoinsSource
 }

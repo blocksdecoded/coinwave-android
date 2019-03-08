@@ -1,4 +1,4 @@
-package com.blocksdecoded.utils
+package com.blocksdecoded.utils.extensions
 
 import android.animation.LayoutTransition
 import android.content.Context
@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import com.blocksdecoded.utils.ResourceUtil
 import com.bumptech.glide.Glide
 
 fun ImageView.loadImageFromUrl(url: String) {
@@ -59,10 +60,8 @@ fun View?.disable() {
 val ViewGroup.children
     get() = (0 until childCount).map { getChildAt(it) }
 
-fun ViewGroup?.inflate(layoutRes: Int): View? {
-    this?.let { return LayoutInflater.from(context).inflate(layoutRes, this, false) }
-    return null
-}
+fun ViewGroup?.inflate(layoutRes: Int): View? =
+    this?.let { LayoutInflater.from(context).inflate(layoutRes, this, false) }
 
 //region Move
 
@@ -101,12 +100,10 @@ fun View?.addToRightMargin(value: Float) {
 
 //endregion
 
-fun TextView.updateVisibility() {
-    if (text.isNullOrEmpty()) {
-        visibility = View.GONE
-    } else {
-        visibility = View.VISIBLE
-    }
+fun TextView.updateVisibility() = if (text.isNullOrEmpty()) {
+    visibility = View.GONE
+} else {
+    visibility = View.VISIBLE
 }
 
 fun EditText?.setPlainText(text: String) {
@@ -115,10 +112,11 @@ fun EditText?.setPlainText(text: String) {
 
 fun ImageView?.setImageColor(resId: Int) {
     this?.drawable
-            ?.setColorFilter(ResourceUtil.getColor(
+            ?.setColorFilter(
+                ResourceUtil.getColor(
                     context,
                     resId
-            ), PorterDuff.Mode.SRC_ATOP)
+                ), PorterDuff.Mode.SRC_ATOP)
 }
 
 fun <T> List<T>?.isValidIndex(index: Int): Boolean {
@@ -160,7 +158,7 @@ fun View.enableChangingTransition() {
 
 fun Snackbar.config(context: Context): Snackbar {
     val params = this.view.layoutParams as ViewGroup.MarginLayoutParams
-    val defMargin = DimenUtils.dpToPx(context, 6)
+    val defMargin = context.dpToPx(6)
     params.setMargins(defMargin, defMargin, defMargin, defMargin)
     this.view.layoutParams = params
 

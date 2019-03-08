@@ -23,7 +23,7 @@ import com.blocksdecoded.coinwave.presentation.widgets.LockableScrollView
 import com.blocksdecoded.coinwave.presentation.widgets.OptionSelectorView
 import com.blocksdecoded.coinwave.presentation.widgets.chart.ChartListener
 import com.blocksdecoded.utils.*
-import com.blocksdecoded.utils.extensions.playAnimation
+import com.blocksdecoded.utils.extensions.*
 import java.util.*
 
 open class CoinInfoFragment :

@@ -34,8 +34,10 @@ import com.blocksdecoded.coinwave.presentation.widgets.PagerAdapter
 import com.blocksdecoded.rateus.base.RateUsDialogContract
 import com.blocksdecoded.rateus.base.RateUsListener
 import com.blocksdecoded.utils.*
-import com.blocksdecoded.utils.customtabs.CustomTabsUtil
+import com.blocksdecoded.utils.customtabs.openUrl
+import com.blocksdecoded.utils.extensions.removeShiftMode
 import com.blocksdecoded.utils.extensions.setConstraintTopMargin
+import com.blocksdecoded.utils.extensions.statusBarHeight
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.drawer_content.*
 import kotlinx.android.synthetic.main.content_main.*
@@ -246,7 +248,7 @@ class MainActivity :
         drawer_close_menu.setOnClickListener(this)
         drawer_company_selectable.setOnClickListener(this)
 
-        drawer_top_container.setConstraintTopMargin(DimenUtils.getStatusBarHeight(this))
+        drawer_top_container.setConstraintTopMargin(statusBarHeight)
 
         drawer_layout.addDrawerListener(object : androidx.drawerlayout.widget.DrawerLayout.DrawerListener {
             override fun onDrawerStateChanged(p0: Int) {
@@ -313,7 +315,7 @@ class MainActivity :
             drawer_rate_us -> drawerItemClick(::onRateClick)
             drawer_share_this_app -> drawerItemClick { ShareUtils.shareApp(this) }
             drawer_close_menu -> closeDrawer()
-            drawer_company_selectable -> CustomTabsUtil.openUrl(this, BuildConfig.COMPANY_URL)
+            drawer_company_selectable -> openUrl(BuildConfig.COMPANY_URL)
         }
     }
 

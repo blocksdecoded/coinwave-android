@@ -1,7 +1,7 @@
 package com.blocksdecoded.coinwave.domain.usecases.posts
 
 import com.blocksdecoded.utils.coroutine.model.Result
-import com.blocksdecoded.coinwave.data.post.PostDataSource
+import com.blocksdecoded.coinwave.data.post.IPostStorage
 import com.blocksdecoded.coinwave.data.post.model.PublisherPost
 import com.blocksdecoded.utils.coroutine.AppExecutors
 import com.blocksdecoded.utils.coroutine.model.onSuccess
@@ -12,7 +12,7 @@ import kotlinx.coroutines.withContext
  * with Android Studio
  */
 class PostsInteractor(
-    private val mPostsSource: PostDataSource
+    private val mPostsSource: IPostStorage
 ) : PostsUseCases {
     private var date = ""
 

@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.util.addSortedByRank
-import com.blocksdecoded.utils.inflate
+import com.blocksdecoded.utils.extensions.inflate
 
 /**
  * Created by askar on 2/12/19

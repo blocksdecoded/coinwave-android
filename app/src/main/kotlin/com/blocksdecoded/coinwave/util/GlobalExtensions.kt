@@ -14,7 +14,7 @@ import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.presentation.widgets.chart.ChartListener
 import com.blocksdecoded.utils.Lg
 import com.blocksdecoded.utils.ResourceUtil
-import com.blocksdecoded.utils.isValidIndex
+import com.blocksdecoded.utils.extensions.isValidIndex
 
 // Created by askar on 7/23/18.
 fun List<CoinEntity>.findCurrency(coinEntity: CoinEntity, body: ((index: Int) -> Unit)? = null): Int {

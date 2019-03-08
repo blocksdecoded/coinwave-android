@@ -9,16 +9,16 @@ import com.blocksdecoded.utils.coroutine.model.mapOnSuccess
  * with Android Studio
  */
 class PostRepository(
-    private val mLocal: PostDataSource?,
-    private val mRemote: PostDataSource?
-) : PostDataSource {
+    private val mLocal: IPostStorage?,
+    private val mRemote: IPostStorage?
+) : IPostStorage {
     companion object {
-        private var INSTANCE: PostDataSource? = null
+        private var INSTANCE: IPostStorage? = null
 
         fun getInstance(
-            local: PostDataSource?,
-            remote: PostDataSource?
-        ): PostDataSource {
+            local: IPostStorage?,
+            remote: IPostStorage?
+        ): IPostStorage {
             if (INSTANCE == null)
                 INSTANCE = PostRepository(local, remote)
             return INSTANCE!!

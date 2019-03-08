@@ -5,7 +5,7 @@ import com.blocksdecoded.coinwave.data.model.ChartPeriodEnum
 import com.blocksdecoded.coinwave.data.model.CoinsResponse
 import com.blocksdecoded.utils.coroutine.model.Result
 
-interface CoinClient {
+interface ICoinClient {
     suspend fun getCoins(pageSize: Int): Result<CoinsResponse>
 
     suspend fun getCoins(pageSize: Int, ids: String): Result<CoinsResponse>

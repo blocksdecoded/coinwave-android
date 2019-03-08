@@ -27,6 +27,7 @@ import com.blocksdecoded.coinwave.presentation.watchlist.recycler.WatchlistAdapt
 import com.blocksdecoded.coinwave.presentation.watchlist.recycler.WatchlistViewHolder
 import com.blocksdecoded.coinwave.presentation.widgets.chart.ChartListener
 import com.blocksdecoded.utils.*
+import com.blocksdecoded.utils.extensions.*
 import java.util.*
 
 open class WatchListFragment :
@@ -127,7 +128,7 @@ open class WatchListFragment :
 
     override fun initView(rootView: View) {
         context?.also {
-            mContainer.setPadding(0, DimenUtils.getStatusBarHeight(it), 0, 0)
+            mContainer.setPadding(0, it.statusBarHeight, 0, 0)
         }
 
         mAdapter = WatchlistAdapter(arrayListOf(), this)

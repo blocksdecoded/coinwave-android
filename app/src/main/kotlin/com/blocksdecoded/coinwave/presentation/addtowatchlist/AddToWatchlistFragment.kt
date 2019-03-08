@@ -10,8 +10,8 @@ import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.presentation.addtowatchlist.recycler.AddToWatchlistAdapter
 import com.blocksdecoded.coinwave.presentation.addtowatchlist.recycler.AddToWatchlistVH
 import com.blocksdecoded.core.mvp.BaseMVPFragment
-import com.blocksdecoded.utils.hide
-import com.blocksdecoded.utils.visible
+import com.blocksdecoded.utils.extensions.hide
+import com.blocksdecoded.utils.extensions.visible
 
 class AddToWatchlistFragment : BaseMVPFragment<AddToWatchlistContract.Presenter>(),
         AddToWatchlistContract.View,

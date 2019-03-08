@@ -6,7 +6,7 @@ import com.blocksdecoded.core.mvp.BaseMVPPresenter
 import com.blocksdecoded.utils.coroutine.launchSilent
 import com.blocksdecoded.utils.coroutine.model.onError
 import com.blocksdecoded.utils.coroutine.model.onSuccess
-import com.blocksdecoded.utils.isValidIndex
+import com.blocksdecoded.utils.extensions.isValidIndex
 import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
 

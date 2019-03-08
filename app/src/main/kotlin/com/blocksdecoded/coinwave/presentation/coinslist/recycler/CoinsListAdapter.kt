@@ -4,8 +4,8 @@ import android.view.ViewGroup
 import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.util.findCurrency
-import com.blocksdecoded.utils.inflate
-import com.blocksdecoded.utils.isValidIndex
+import com.blocksdecoded.utils.extensions.inflate
+import com.blocksdecoded.utils.extensions.isValidIndex
 
 // Created by askar on 7/19/18.
 class CoinsListAdapter(

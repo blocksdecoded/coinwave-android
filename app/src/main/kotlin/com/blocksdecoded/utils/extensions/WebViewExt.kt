@@ -1,4 +1,4 @@
-package com.blocksdecoded.utils
+package com.blocksdecoded.utils.extensions
 
 import android.graphics.Bitmap
 import android.graphics.Canvas

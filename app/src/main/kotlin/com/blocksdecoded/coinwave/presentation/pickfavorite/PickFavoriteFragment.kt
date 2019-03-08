@@ -10,8 +10,8 @@ import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.presentation.coinslist.recycler.CoinsListAdapter
 import com.blocksdecoded.coinwave.presentation.coinslist.recycler.CoinsListVH
-import com.blocksdecoded.utils.hide
-import com.blocksdecoded.utils.visible
+import com.blocksdecoded.utils.extensions.hide
+import com.blocksdecoded.utils.extensions.visible
 
 class PickFavoriteFragment :
         BaseMVPFragment<PickFavoriteContract.Presenter>(),

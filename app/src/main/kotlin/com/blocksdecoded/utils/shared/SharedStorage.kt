@@ -7,12 +7,12 @@ import android.content.SharedPreferences
 class SharedStorage(
     context: Context,
     private var mSharedFileName: String = "shared_prefs"
-) : SharedContract {
+) : ISharedStorage {
 
     companion object {
-        private var INSTANCE: SharedContract? = null
+        private var INSTANCE: ISharedStorage? = null
 
-        fun getInstance(context: Context): SharedContract {
+        fun getInstance(context: Context): ISharedStorage {
             if (INSTANCE == null) {
                 INSTANCE = SharedStorage(context)
             }

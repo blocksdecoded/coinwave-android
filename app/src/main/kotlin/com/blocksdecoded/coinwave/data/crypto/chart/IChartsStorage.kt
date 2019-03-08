@@ -5,7 +5,7 @@ import com.blocksdecoded.utils.coroutine.model.Result
 import com.blocksdecoded.coinwave.data.model.ChartData
 
 // Created by askar on 7/25/18.
-interface ChartsSourceContract {
+interface IChartsStorage {
     suspend fun getChart(
         chartName: String,
         period: ChartPeriodEnum = ChartPeriodEnum.DAY

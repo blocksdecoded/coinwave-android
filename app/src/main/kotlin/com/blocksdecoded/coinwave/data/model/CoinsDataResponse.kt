@@ -7,5 +7,5 @@ import com.google.gson.annotations.SerializedName
  * with Android Studio
  */
 data class CoinsDataResponse(
-    @SerializedName("coins") val coins: List<CoinEntity>
+    @SerializedName("coins") var coins: List<CoinEntity>
 )

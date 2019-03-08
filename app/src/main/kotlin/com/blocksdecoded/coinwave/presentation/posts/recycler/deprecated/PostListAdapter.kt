@@ -7,9 +7,9 @@ import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.data.post.model.PublisherPost
 import com.blocksdecoded.coinwave.presentation.posts.recycler.ListFooterViewHolder
 import com.blocksdecoded.coinwave.presentation.posts.recycler.PostitemViewHolder
-import com.blocksdecoded.utils.inflate
-import com.blocksdecoded.utils.isValidIndex
-import com.blocksdecoded.utils.setHeight
+import com.blocksdecoded.utils.extensions.height
+import com.blocksdecoded.utils.extensions.inflate
+import com.blocksdecoded.utils.extensions.isValidIndex
 
 /**
  * Created by askar on 11/19/18
@@ -37,7 +37,7 @@ class PostListAdapter(
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder = when (p1) {
         1 -> PostitemViewHolder(p0.inflate(R.layout.item_post)!!, mListener).apply {
-            setHeight(mPostHeight)
+            this.height = mPostHeight
         }
         else -> ListFooterViewHolder(p0.inflate(R.layout.item_footer)!!, this)
     }

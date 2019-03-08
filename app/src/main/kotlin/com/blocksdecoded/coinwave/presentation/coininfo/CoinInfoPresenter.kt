@@ -9,8 +9,6 @@ import com.blocksdecoded.utils.coroutine.launchSilent
 import com.blocksdecoded.utils.coroutine.model.onError
 import com.blocksdecoded.utils.coroutine.model.onResult
 import com.blocksdecoded.utils.coroutine.model.onSuccess
-import kotlinx.coroutines.Dispatchers
-import kotlin.coroutines.CoroutineContext
 
 class CoinInfoPresenter(
     view: CoinInfoContract.View?,

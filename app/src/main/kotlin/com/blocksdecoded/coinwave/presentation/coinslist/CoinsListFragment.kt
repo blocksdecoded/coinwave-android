@@ -17,6 +17,9 @@ import com.blocksdecoded.coinwave.presentation.coinslist.recycler.CoinsListAdapt
 import com.blocksdecoded.coinwave.presentation.coinslist.recycler.CoinsListVH
 import com.blocksdecoded.coinwave.presentation.widgets.ActionConfirmDialog
 import com.blocksdecoded.utils.*
+import com.blocksdecoded.utils.extensions.hide
+import com.blocksdecoded.utils.extensions.statusBarHeight
+import com.blocksdecoded.utils.extensions.visible
 
 open class CoinsListFragment :
         BaseMVPFragment<CoinsListContract.Presenter>(),
@@ -58,7 +61,7 @@ open class CoinsListFragment :
 
     override fun initView(rootView: View) {
         context?.also {
-            rootView.setPadding(0, DimenUtils.getStatusBarHeight(it), 0, 0)
+            rootView.setPadding(0, it.statusBarHeight, 0, 0)
         }
 
         mTitle?.text = getTitle(arguments)
