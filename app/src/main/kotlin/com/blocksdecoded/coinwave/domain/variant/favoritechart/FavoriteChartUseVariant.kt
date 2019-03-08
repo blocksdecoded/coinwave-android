@@ -10,7 +10,7 @@ import io.reactivex.Single
  * with Android Studio
  */
 interface FavoriteChartUseVariant {
-    suspend fun getChart(): Single<ChartData>?
+    val chart: Single<ChartData>?
 
     suspend fun getCoin(): Result<CoinEntity>?
 }

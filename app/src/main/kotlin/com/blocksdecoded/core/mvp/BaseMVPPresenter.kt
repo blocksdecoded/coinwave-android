@@ -3,6 +3,7 @@ package com.blocksdecoded.core.mvp
 import androidx.annotation.CallSuper
 import com.blocksdecoded.utils.coroutine.AppExecutors
 import com.blocksdecoded.utils.logE
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 
@@ -10,6 +11,7 @@ abstract class BaseMVPPresenter<T>(
     var mView: T?
 ) : BaseMVPContract.Presenter<T> {
 
+    protected val disposables: CompositeDisposable = CompositeDisposable()
     protected val coroutineSupervisor = SupervisorJob()
     protected val scope = CoroutineScope(AppExecutors.main + coroutineSupervisor)
 
@@ -52,5 +54,6 @@ abstract class BaseMVPPresenter<T>(
     override fun onDestroy() {
         mView = null
         coroutineSupervisor.cancel()
+        disposables.clear()
     }
 }

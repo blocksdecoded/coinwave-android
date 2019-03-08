@@ -18,8 +18,8 @@ class FavoriteChartInteractor(
     private val mFavoriteUseCases: FavoriteUseCases,
     private val mCoinsUseCases: CoinsUseCases
 ) : FavoriteChartUseVariant {
-    override suspend fun getChart(): Single<ChartData>? =
-            mChartsUseCases.getChartData(mFavoriteUseCases.getId(), CHART_PERIOD)
+    override val chart: Single<ChartData>?
+        get() = mChartsUseCases.getChartData(mFavoriteUseCases.getId(), CHART_PERIOD)
 
     override suspend fun getCoin(): Result<CoinEntity>? {
         val entity = mCoinsUseCases.getCoin(mFavoriteUseCases.getId())

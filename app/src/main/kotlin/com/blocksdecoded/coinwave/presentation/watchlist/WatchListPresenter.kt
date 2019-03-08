@@ -79,12 +79,12 @@ class WatchListPresenter(
         mFavoriteChartUseVariant.getCoin()
             ?.onSuccess { mView?.showFavoriteCoin(it) }
 
-        mFavoriteChartUseVariant.getChart()
+        mFavoriteChartUseVariant.chart
             ?.doAfterTerminate { scope.launch { mView?.hideFavoriteLoading() }  }
             ?.uiSubscribe(
                 { mView?.showFavoriteChart(it) },
                 { mView?.showFavoriteError() }
-            )
+            )?.let { disposables.add(it) }
     }
 
     private fun searchCurrency(coinEntity: CoinEntity, body: ((index: Int) -> Unit)? = null): Int =
