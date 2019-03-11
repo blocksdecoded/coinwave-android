@@ -6,8 +6,8 @@ import com.blocksdecoded.coinwave.domain.usecases.favorite.FavoriteUseCases
 import com.blocksdecoded.coinwave.domain.usecases.coins.CoinsUseCases
 import com.blocksdecoded.utils.coroutine.launchSilent
 import com.blocksdecoded.utils.coroutine.model.onError
-import com.blocksdecoded.utils.coroutine.model.onSuccess
 import com.blocksdecoded.utils.extensions.isValidIndex
+import com.blocksdecoded.utils.rx.uiSubscribe
 
 class PickFavoritePresenter(
     view: PickFavoriteContract.View?,
@@ -43,14 +43,11 @@ class PickFavoritePresenter(
         mView?.hideError()
         mView?.showLoading()
         mCoinsUseCases.getCoins(false)
-                .onSuccess {
-                    mView?.hideLoading()
-                    updateCache(it)
-                }
-                .onError {
-                    mView?.hideLoading()
-                    mView?.showError()
-                }
+                .uiSubscribe(
+                        onNext = { updateCache(it) },
+                        onError = { mView?.showError() },
+                        onComplete = { mView?.hideLoading() }
+                )
     }
 
     //endregion

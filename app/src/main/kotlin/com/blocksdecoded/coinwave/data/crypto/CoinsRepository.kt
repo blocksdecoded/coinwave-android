@@ -1,13 +1,10 @@
 package com.blocksdecoded.coinwave.data.crypto
 
-import com.blocksdecoded.utils.coroutine.model.Result
 import com.blocksdecoded.coinwave.data.crypto.remote.ICoinClient
 import com.blocksdecoded.coinwave.data.model.CoinsDataResponse
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.data.watchlist.WatchlistSourceContract
-import com.blocksdecoded.utils.coroutine.model.mapOnSuccess
-import com.blocksdecoded.utils.coroutine.model.onError
-import com.blocksdecoded.utils.coroutine.model.onSuccess
+import io.reactivex.Flowable
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 
@@ -35,7 +32,6 @@ class CoinsRepository(
     init {
         GlobalScope.async {
             mLocalSource.getAllCoins(true)
-                .onSuccess { mCached = it }
         }
     }
 
@@ -43,22 +39,19 @@ class CoinsRepository(
 
     //region Calls
 
-    private suspend fun coinsRequest(): Result<CoinsDataResponse> {
-        return mCoinsClient.getCoins(NETWORK_PAGE_SIZE)
-            .onSuccess {
-                setCoinsData(it.data)
-                setCache(it.data)
-            }
-            .onError { mCached?.let { setCache(it) } }
-            .mapOnSuccess {
-                it.data.coins = it.data.coins.sortedByDescending { it.price }
-                it.data
-            }
-    }
+    private fun coinsRequest() = mCoinsClient.getCoins(NETWORK_PAGE_SIZE)
+        .doOnSuccess {
+            setCoinsData(it.data)
+            setCache(it.data)
+        }
+        .doOnError { mCached?.let { setCache(it) } }
+        .map { it.data }
+        .toFlowable()
 
-    private suspend fun watchlistRequest(): Result<CoinsDataResponse> =
+    private fun watchlistRequest() =
             mCoinsClient.getCoins(NETWORK_PAGE_SIZE, watchlistIds)
-                    .mapOnSuccess { it.data }
+                    .map { it.data }
+                    .toFlowable()
 
     //endregion
 
@@ -117,21 +110,21 @@ class CoinsRepository(
         notifyRemoved(it)
     }
 
-    override suspend fun getAllCoins(skipCache: Boolean): Result<CoinsDataResponse> =
+    override fun getAllCoins(skipCache: Boolean): Flowable<CoinsDataResponse> =
             if (skipCache) {
                 coinsRequest()
             } else {
                 mCached?.let {
-                    Result.Success(it)
+                    Flowable.just(it)
                 } ?: coinsRequest()
             }
 
-    override suspend fun getWatchlist(skipCache: Boolean): Result<CoinsDataResponse> =
+    override fun getWatchlist(skipCache: Boolean): Flowable<CoinsDataResponse> =
             if (skipCache) {
                 watchlistRequest()
             } else {
                 mCached?.let {
-                    Result.Success(it)
+                    Flowable.just(it)
                 } ?: watchlistRequest()
             }
 

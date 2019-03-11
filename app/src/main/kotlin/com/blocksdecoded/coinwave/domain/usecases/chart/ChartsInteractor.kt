@@ -1,16 +1,12 @@
 package com.blocksdecoded.coinwave.domain.usecases.chart
 
-import com.blocksdecoded.utils.coroutine.model.Result
 import com.blocksdecoded.coinwave.data.EmptyCache
-import com.blocksdecoded.coinwave.data.NetworkException
 import com.blocksdecoded.coinwave.data.crypto.chart.IChartsStorage
 import com.blocksdecoded.coinwave.data.crypto.ICoinsStorage
 import com.blocksdecoded.coinwave.data.model.ChartData
 import com.blocksdecoded.coinwave.domain.usecases.chart.ChartsUseCases.ChartPeriod
 import com.blocksdecoded.coinwave.domain.usecases.chart.ChartsUseCases.ChartPeriod.*
-import com.blocksdecoded.utils.coroutine.AppExecutors
 import io.reactivex.Single
-import kotlinx.coroutines.withContext
 import kotlin.collections.HashMap
 
 import com.blocksdecoded.coinwave.data.model.ChartPeriodEnum as RequestChartPeriod

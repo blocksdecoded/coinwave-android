@@ -5,8 +5,8 @@ import com.blocksdecoded.coinwave.domain.usecases.coins.CoinsUseCases
 import com.blocksdecoded.core.mvp.BaseMVPPresenter
 import com.blocksdecoded.utils.coroutine.launchSilent
 import com.blocksdecoded.utils.coroutine.model.onError
-import com.blocksdecoded.utils.coroutine.model.onSuccess
 import com.blocksdecoded.utils.extensions.isValidIndex
+import com.blocksdecoded.utils.rx.uiSubscribe
 import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
 
@@ -65,8 +65,11 @@ class AddToWatchlistPresenter(
     override fun getCoins() = launchSilent(uiContext) {
         mView?.hideLoadingError()
         mCoinsUseCases.getCoins(false)
-                .onSuccess(::updateCache)
-                .onError(::showError)
+            .uiSubscribe(
+                    onNext = { updateCache(it) },
+                    onError = { showError(it) },
+                    onComplete = {}
+            )
     }
 
     override fun onCoinClick(position: Int) {

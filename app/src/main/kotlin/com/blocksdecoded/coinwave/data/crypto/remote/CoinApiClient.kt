@@ -5,9 +5,7 @@ import com.blocksdecoded.coinwave.data.model.ChartPeriodEnum
 import com.blocksdecoded.coinwave.data.crypto.remote.model.HistoryResponse
 import com.blocksdecoded.coinwave.data.model.CoinsResponse
 import com.blocksdecoded.core.network.CoreApiClient
-import com.blocksdecoded.utils.coroutine.model.Result
 import io.reactivex.Single
-import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -28,11 +26,11 @@ internal object CoinApiClient : CoreApiClient(), ICoinClient {
 
     //region Public
 
-    override suspend fun getCoins(pageSize: Int): Result<CoinsResponse> =
-            mClient.getCoins(pageSize).getResult()
+    override fun getCoins(pageSize: Int): Single<CoinsResponse> =
+            mClient.getCoins(pageSize)
 
-    override suspend fun getCoins(pageSize: Int, ids: String): Result<CoinsResponse> =
-            mClient.getCoins(pageSize, ids).getResult()
+    override fun getCoins(pageSize: Int, ids: String): Single<CoinsResponse> =
+            mClient.getCoins(pageSize, ids)
 
     override fun getHistory(chartName: String, period: ChartPeriodEnum) = mClient.getChartForTime(chartName, period.displayName)
 
@@ -41,13 +39,13 @@ internal object CoinApiClient : CoreApiClient(), ICoinClient {
     private interface CurrencyNetworkClient {
 
         @GET(COINS_PATH)
-        fun getCoins(@Query("limit") limit: Int): Call<CoinsResponse>
+        fun getCoins(@Query("limit") limit: Int): Single<CoinsResponse>
 
         @GET(COINS_PATH)
         fun getCoins(
             @Query("limit") limit: Int,
             @Query("ids") ids: String
-        ): Call<CoinsResponse>
+        ): Single<CoinsResponse>
 
         @GET("$HISTORY_PATH/{coin}/history/{period}/index.json")
         fun getChartForTime(

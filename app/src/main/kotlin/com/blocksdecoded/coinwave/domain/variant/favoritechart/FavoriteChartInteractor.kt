@@ -7,7 +7,7 @@ import com.blocksdecoded.coinwave.domain.usecases.chart.ChartsUseCases
 import com.blocksdecoded.coinwave.domain.usecases.favorite.FavoriteUseCases
 import com.blocksdecoded.coinwave.domain.usecases.coins.CoinsUseCases
 import com.blocksdecoded.utils.coroutine.model.Result
-import io.reactivex.Single
+import io.reactivex.Flowable
 
 /**
  * Created by askar on 11/24/18
@@ -18,8 +18,8 @@ class FavoriteChartInteractor(
     private val mFavoriteUseCases: FavoriteUseCases,
     private val mCoinsUseCases: CoinsUseCases
 ) : FavoriteChartUseVariant {
-    override val chart: Single<ChartData>?
-        get() = mChartsUseCases.getChartData(mFavoriteUseCases.getId(), CHART_PERIOD)
+    override val chart: Flowable<ChartData>?
+        get() = mChartsUseCases.getChartData(mFavoriteUseCases.getId(), CHART_PERIOD).toFlowable()
 
     override suspend fun getCoin(): Result<CoinEntity>? {
         val entity = mCoinsUseCases.getCoin(mFavoriteUseCases.getId())

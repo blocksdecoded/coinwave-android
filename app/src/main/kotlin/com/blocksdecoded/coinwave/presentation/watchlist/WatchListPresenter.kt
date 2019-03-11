@@ -9,8 +9,6 @@ import com.blocksdecoded.coinwave.util.addSortedByRank
 import com.blocksdecoded.coinwave.util.findCurrency
 import com.blocksdecoded.coinwave.presentation.main.MenuClickListener
 import com.blocksdecoded.utils.coroutine.launchSilent
-import com.blocksdecoded.utils.coroutine.model.onError
-import com.blocksdecoded.utils.coroutine.model.onResult
 import com.blocksdecoded.utils.coroutine.model.onSuccess
 import com.blocksdecoded.utils.extensions.isValidIndex
 import com.blocksdecoded.utils.rx.uiSubscribe
@@ -80,11 +78,12 @@ class WatchListPresenter(
             ?.onSuccess { mView?.showFavoriteCoin(it) }
 
         mFavoriteChartUseVariant.chart
-            ?.doAfterTerminate { scope.launch { mView?.hideFavoriteLoading() }  }
-            ?.uiSubscribe(
-                { mView?.showFavoriteChart(it) },
-                { mView?.showFavoriteError() }
-            )?.let { disposables.add(it) }
+            ?.doAfterTerminate { scope.launch { } }
+                ?.uiSubscribe(
+                        onNext = { mView?.showFavoriteChart(it) },
+                        onError = { mView?.showFavoriteError() },
+                        onComplete = { mView?.hideFavoriteLoading() }
+                )?.let { disposables.add(it) }
     }
 
     private fun searchCurrency(coinEntity: CoinEntity, body: ((index: Int) -> Unit)? = null): Int =
@@ -111,16 +110,18 @@ class WatchListPresenter(
         }
 
         mCoinsUseCases.getCoins(skipCache)
-            .onResult { mView?.hideCoinsLoading() }
-            .onSuccess { setCache(it) }
-            .onError {
-                mView?.showError(mCachedData.isEmpty())
+                .uiSubscribe(
+                        onNext = { setCache(it) },
+                        onError = {
+                            mView?.showError(mCachedData.isEmpty())
 
-                if (mCachedData.isEmpty()) {
-                    mView?.hideFavoriteLoading()
-                    mView?.showFavoriteError()
-                }
-            }
+                            if (mCachedData.isEmpty()) {
+                                mView?.hideFavoriteLoading()
+                                mView?.showFavoriteError()
+                            }
+                        },
+                        onComplete = { mView?.hideCoinsLoading() }
+                )
     }
 
     //endregion

@@ -21,7 +21,7 @@ class CoinInfoPresenter(
         mView?.showLoading()
         disposables.add(
             mChartsUseCases.getChartData(id, periodEnum)
-                .doAfterTerminate { scope.launch { mView?.hideLoading() }  }
+                .doAfterTerminate { scope.launch { mView?.hideLoading() } }
                 .uiSubscribe(
                     { chartData -> mView?.showChartData(chartData) },
                     { error -> mView?.showChartError() }))

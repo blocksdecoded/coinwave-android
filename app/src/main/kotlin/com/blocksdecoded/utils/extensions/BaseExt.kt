@@ -112,8 +112,6 @@ fun EditText?.setPlainText(text: String) {
     this?.setText(text, TextView.BufferType.EDITABLE)
 }
 
-
-
 fun ImageView?.setImageColor(resId: Int) {
     this?.drawable
             ?.setColorFilter(getColorRes(resId), PorterDuff.Mode.SRC_ATOP)

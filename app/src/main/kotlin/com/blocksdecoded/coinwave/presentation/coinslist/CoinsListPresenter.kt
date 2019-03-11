@@ -8,8 +8,8 @@ import com.blocksdecoded.coinwave.util.findCurrency
 import com.blocksdecoded.coinwave.presentation.main.MenuClickListener
 import com.blocksdecoded.utils.coroutine.launchSilent
 import com.blocksdecoded.utils.coroutine.model.onError
-import com.blocksdecoded.utils.coroutine.model.onSuccess
 import com.blocksdecoded.utils.extensions.isValidIndex
+import com.blocksdecoded.utils.rx.uiSubscribe
 
 class CoinsListPresenter(
     view: CoinsListContract.View?,
@@ -57,11 +57,14 @@ class CoinsListPresenter(
     private fun getCurrencies() = launchSilent(scope) {
         mView?.showLoading()
         mCoinsUseCases.getCoins(true)
-                .onSuccess { mView?.hideLoading() }
-                .onError {
+            .uiSubscribe(
+                onNext = { mView?.hideLoading() },
+                onComplete = { },
+                onError = {
                     mView?.hideLoading()
                     mView?.showNetworkError(mCachedData.isEmpty())
                 }
+            )
     }
 
     //endregion

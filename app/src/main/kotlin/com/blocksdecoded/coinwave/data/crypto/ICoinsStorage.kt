@@ -1,14 +1,14 @@
 package com.blocksdecoded.coinwave.data.crypto
 
 import com.blocksdecoded.coinwave.data.model.CoinsDataResponse
-import com.blocksdecoded.utils.coroutine.model.Result
 import com.blocksdecoded.coinwave.data.model.CoinEntity
+import io.reactivex.Flowable
 
 // Created by askar on 7/19/18.
 interface ICoinsStorage {
-    suspend fun getAllCoins(skipCache: Boolean): Result<CoinsDataResponse>
+    fun getAllCoins(skipCache: Boolean): Flowable<CoinsDataResponse>
 
-    suspend fun getWatchlist(skipCache: Boolean): Result<CoinsDataResponse>
+    fun getWatchlist(skipCache: Boolean): Flowable<CoinsDataResponse>
 
     fun setCoinsData(coinsData: CoinsDataResponse)
 

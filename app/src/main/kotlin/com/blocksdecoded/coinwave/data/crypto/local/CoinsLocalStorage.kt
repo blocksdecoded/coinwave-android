@@ -4,12 +4,10 @@ import com.blocksdecoded.coinwave.data.crypto.ICoinsStorage
 import com.blocksdecoded.coinwave.data.crypto.ICoinsObserver
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.data.model.CoinsDataResponse
-import com.blocksdecoded.utils.coroutine.AppExecutors
-import com.blocksdecoded.utils.coroutine.model.Result
 import com.blocksdecoded.utils.logE
 import com.blocksdecoded.utils.shared.ISharedStorage
 import com.google.gson.Gson
-import kotlinx.coroutines.withContext
+import io.reactivex.Flowable
 import java.util.concurrent.Executors
 
 class CoinsLocalStorage(
@@ -37,12 +35,12 @@ class CoinsLocalStorage(
 
     override fun setCoinsData(coinsData: CoinsDataResponse) = saveCoinsData(coinsData)
 
-    override suspend fun getAllCoins(skipCache: Boolean): Result<CoinsDataResponse> = withContext(AppExecutors.io) {
-        fetchSaveCoins()?.let { Result.Success(it) } ?: Result.Error(Exception())
+    override fun getAllCoins(skipCache: Boolean): Flowable<CoinsDataResponse> {
+        return fetchSaveCoins()?.let { Flowable.just(it) } ?: Flowable.error(Exception("Local data source not support watchlist fetch."))
     }
 
-    override suspend fun getWatchlist(skipCache: Boolean): Result<CoinsDataResponse> =
-        Result.Error(Exception("Local data source not support watchlist fetch."))
+    override fun getWatchlist(skipCache: Boolean): Flowable<CoinsDataResponse> =
+        Flowable.error(Exception("Local data source not support watchlist fetch."))
 
     override fun getCoin(id: Int): CoinEntity? = null
 
