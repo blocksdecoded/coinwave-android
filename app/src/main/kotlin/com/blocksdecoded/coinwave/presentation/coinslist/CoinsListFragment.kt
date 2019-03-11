@@ -15,9 +15,7 @@ import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.presentation.coininfo.CoinInfoActivity
 import com.blocksdecoded.coinwave.presentation.coinslist.recycler.CoinsListAdapter
 import com.blocksdecoded.coinwave.presentation.coinslist.recycler.CoinsListVH
-import com.blocksdecoded.coinwave.presentation.sort.ViewSortEnum
 import com.blocksdecoded.coinwave.presentation.sort.ViewSortEnum.*
-import com.blocksdecoded.coinwave.presentation.widgets.ActionConfirmDialog
 import com.blocksdecoded.utils.*
 import com.blocksdecoded.utils.extensions.hide
 import com.blocksdecoded.utils.extensions.statusBarHeight
@@ -52,7 +50,7 @@ open class CoinsListFragment :
             R.id.coins_header_name,
             R.id.coins_header_market_cap,
             R.id.coins_header_price,
-            R.id.coins_header_volume_24h
+            R.id.coins_header_volume
     )
     fun onClick(view: View) {
         when (view.id) {
@@ -60,7 +58,7 @@ open class CoinsListFragment :
             R.id.coins_header_name -> mPresenter?.onSortClick(NAME)
             R.id.coins_header_market_cap -> mPresenter?.onSortClick(CAP)
             R.id.coins_header_price -> mPresenter?.onSortClick(PRICE)
-            R.id.coins_header_volume_24h -> mPresenter?.onSortClick(VOLUME)
+            R.id.coins_header_volume -> mPresenter?.onSortClick(VOLUME)
         }
     }
 

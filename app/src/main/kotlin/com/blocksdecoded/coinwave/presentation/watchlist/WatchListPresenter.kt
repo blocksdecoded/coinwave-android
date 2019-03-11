@@ -8,11 +8,11 @@ import com.blocksdecoded.coinwave.domain.variant.favoritechart.FavoriteChartUseV
 import com.blocksdecoded.coinwave.util.addSortedByRank
 import com.blocksdecoded.coinwave.util.findCurrency
 import com.blocksdecoded.coinwave.presentation.main.MenuClickListener
+import com.blocksdecoded.coinwave.presentation.sort.CoinsCache
 import com.blocksdecoded.utils.coroutine.launchSilent
 import com.blocksdecoded.utils.coroutine.model.onSuccess
 import com.blocksdecoded.utils.extensions.isValidIndex
 import com.blocksdecoded.utils.rx.uiSubscribe
-import kotlinx.coroutines.launch
 
 class WatchListPresenter(
     view: WatchListContract.View?,
@@ -20,6 +20,8 @@ class WatchListPresenter(
     private val mCoinsUseCases: CoinsUseCases,
     private val mFavoriteChartUseVariant: FavoriteChartUseVariant
 ) : BaseMVPPresenter<WatchListContract.View>(view), WatchListContract.Presenter {
+
+    private var mCoinsCache = CoinsCache()
     private var mCachedData = arrayListOf<CoinEntity>()
 
     private val mCurrenciesObserver = object : ICoinsObserver {
@@ -33,7 +35,7 @@ class WatchListPresenter(
 
         override fun onRemoved(coinEntity: CoinEntity) = launchSilent(scope) {
             mView?.deleteCoin(removeCurrency(coinEntity))
-            if (mCachedData.isEmpty()) mView?.showEmpty()
+            if (mCoinsCache.isEmpty()) mView?.showEmpty()
         }
     }
 
@@ -78,7 +80,6 @@ class WatchListPresenter(
             ?.onSuccess { mView?.showFavoriteCoin(it) }
 
         mFavoriteChartUseVariant.chart
-            ?.doAfterTerminate { scope.launch { } }
             ?.uiSubscribe(
                     onNext = { mView?.showFavoriteChart(it) },
                     onError = { mView?.showFavoriteError() },
@@ -109,20 +110,22 @@ class WatchListPresenter(
             mView?.showFavoriteLoading()
         }
 
-        mCoinsUseCases.getCoins(skipCache)
-                .map { it.filter { it.isSaved } }
-                .uiSubscribe(
-                        onNext = { setCache(it) },
-                        onError = {
-                            mView?.showError(mCachedData.isEmpty())
+        disposables.add(
+                mCoinsUseCases.getCoins(skipCache)
+                        .map { it.filter { it.isSaved } }
+                        .uiSubscribe(
+                                onNext = { setCache(it) },
+                                onError = {
+                                    mView?.showError(mCachedData.isEmpty())
 
-                            if (mCachedData.isEmpty()) {
-                                mView?.hideFavoriteLoading()
-                                mView?.showFavoriteError()
-                            }
-                        },
-                        onComplete = { mView?.hideCoinsLoading() }
-                )
+                                    if (mCachedData.isEmpty()) {
+                                        mView?.hideFavoriteLoading()
+                                        mView?.showFavoriteError()
+                                    }
+                                },
+                                onComplete = { mView?.hideCoinsLoading() }
+                        )
+        )
     }
 
     //endregion

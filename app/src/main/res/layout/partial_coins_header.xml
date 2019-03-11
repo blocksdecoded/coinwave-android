@@ -20,6 +20,7 @@
             android:text="@string/coin_name_field" />
         
         <ImageView
+            android:id="@+id/coins_header_name_sort_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_arrow_up_grey"
@@ -43,6 +44,7 @@
             android:text="@string/coin_market_cap_field" />
     
         <ImageView
+            android:id="@+id/coins_header_cap_sort_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_arrow_up_grey"
@@ -52,24 +54,25 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/coins_header_volume_24h"
+        android:id="@+id/coins_header_volume"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="0.9"
         android:background="@drawable/bg_green_selectable">
         <TextView
             android:theme="@style/ListHeaderItem"
-            android:id="@+id/coins_header_volume_24h_title"
+            android:id="@+id/coins_header_volume_title"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="@string/coin_24h_volume_field" />
     
         <ImageView
+            android:id="@+id/coins_header_volume_sort_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_arrow_up_grey"
-            android:layout_toRightOf="@+id/coins_header_volume_24h_title"
+            android:layout_toRightOf="@+id/coins_header_volume_title"
             android:layout_centerVertical="true"
             android:layout_marginLeft="4dp"/>
     </RelativeLayout>
@@ -90,6 +93,7 @@
             android:text="@string/coin_24h_price_field" />
     
         <ImageView
+            android:id="@+id/coins_header_price_sort_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_arrow_up_grey"

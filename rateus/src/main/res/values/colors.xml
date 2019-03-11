@@ -13,6 +13,9 @@
     <color name="rating_inactive">#a8a9b3</color>
     <color name="rating_focused">#cccccc</color>
 
+    <color name="header_active">#3B95FF</color>
+    <color name="header_inactive">#BCBFC1</color>
+    
     <color name="positive_btn_bg">#4372ff</color>
     <color name="positive_btn_bg_pressed">#C856a7ff</color>
 </resources>

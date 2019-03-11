@@ -24,9 +24,6 @@ import com.blocksdecoded.coinwave.presentation.pickfavorite.PickFavoriteActivity
 import com.blocksdecoded.coinwave.presentation.posts.PostsContract
 import com.blocksdecoded.coinwave.presentation.posts.PostsFragment
 import com.blocksdecoded.coinwave.presentation.posts.PostsPresenter
-import com.blocksdecoded.coinwave.presentation.settings.SettingsContract
-import com.blocksdecoded.coinwave.presentation.settings.SettingsFragment
-import com.blocksdecoded.coinwave.presentation.settings.SettingsPresenter
 import com.blocksdecoded.coinwave.presentation.watchlist.WatchListContract
 import com.blocksdecoded.coinwave.presentation.watchlist.WatchListFragment
 import com.blocksdecoded.coinwave.presentation.watchlist.WatchListPresenter
@@ -51,7 +48,6 @@ class MainActivity :
     private var mWatchListPresenter: WatchListContract.Presenter? = null
     private var mCoinsListPresenter: CoinsListContract.Presenter? = null
     private var mPostsPresenter: PostsContract.Presenter? = null
-    private var mSettingsPresenter: SettingsContract.Presenter? = null
 
     private var mRateDialog: RateUsDialogContract? = null
 
@@ -230,12 +226,6 @@ class MainActivity :
                 this,
                 UseCaseProvider.postUseCase
         )
-    }
-
-    private fun createSettingsScreen(): Fragment {
-        return SettingsFragment().also {
-            mSettingsPresenter = SettingsPresenter(it)
-        }
     }
 
     //endregion

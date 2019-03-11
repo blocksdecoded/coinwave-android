@@ -42,14 +42,4 @@ object PostBgUtil {
         gd.cornerRadius = 0f
         return gd
     }
-
-    fun getBackground(seed: Int): Int {
-        val random = Random(seed)
-
-        val r = random.nextInt(MIN_COLOR..MAX_COLOR)
-        val g = random.nextInt(MIN_COLOR..MAX_COLOR)
-        val b = random.nextInt(MIN_COLOR..MAX_COLOR)
-
-        return Color.rgb(r, g, b)
-    }
 }
