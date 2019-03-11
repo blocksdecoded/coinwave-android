@@ -2,6 +2,7 @@ package com.blocksdecoded.coinwave.presentation.coinslist
 
 import com.blocksdecoded.core.mvp.BaseMVPContract
 import com.blocksdecoded.coinwave.data.model.CoinEntity
+import com.blocksdecoded.coinwave.presentation.sort.ViewSortEnum
 
 interface CoinsListContract {
 
@@ -13,8 +14,6 @@ interface CoinsListContract {
         fun deleteCoin(position: Int)
 
         fun openCoinInfo(id: Int)
-
-        fun showDeleteConfirm(coinEntity: CoinEntity, position: Int)
 
         fun showNetworkError(hideList: Boolean)
 
@@ -28,10 +27,10 @@ interface CoinsListContract {
 
         fun onCoinClick(position: Int)
 
-        fun deleteCoin(position: Int)
-
         fun getCoins()
 
         fun onMenuClick()
+
+        fun onSortClick(sortType: ViewSortEnum)
     }
 }

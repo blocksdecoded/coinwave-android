@@ -8,7 +8,8 @@
         android:id="@+id/coins_header_name"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="0.9">
+        android:layout_weight="0.9"
+        android:background="@drawable/bg_green_selectable">
         <TextView
             android:theme="@style/ListHeaderItem"
             android:id="@+id/coins_header_name_title"
@@ -31,7 +32,8 @@
         android:id="@+id/coins_header_market_cap"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="0.9">
+        android:layout_weight="0.9"
+        android:background="@drawable/bg_green_selectable">
         <TextView
             android:theme="@style/ListHeaderItem"
             android:id="@+id/coins_header_market_cap_title"
@@ -53,7 +55,8 @@
         android:id="@+id/coins_header_volume_24h"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="0.9">
+        android:layout_weight="0.9"
+        android:background="@drawable/bg_green_selectable">
         <TextView
             android:theme="@style/ListHeaderItem"
             android:id="@+id/coins_header_volume_24h_title"
@@ -75,7 +78,8 @@
         android:id="@+id/coins_header_price"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1.2">
+        android:layout_weight="1.2"
+        android:background="@drawable/bg_green_selectable">
         <TextView
             android:theme="@style/ListHeaderItem"
             android:id="@+id/coins_header_price_title"

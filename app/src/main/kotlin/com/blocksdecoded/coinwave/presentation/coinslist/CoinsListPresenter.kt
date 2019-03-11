@@ -6,9 +6,9 @@ import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.domain.usecases.coins.CoinsUseCases
 import com.blocksdecoded.coinwave.util.findCurrency
 import com.blocksdecoded.coinwave.presentation.main.MenuClickListener
+import com.blocksdecoded.coinwave.presentation.sort.CoinsCache
+import com.blocksdecoded.coinwave.presentation.sort.ViewSortEnum
 import com.blocksdecoded.utils.coroutine.launchSilent
-import com.blocksdecoded.utils.coroutine.model.onError
-import com.blocksdecoded.utils.extensions.isValidIndex
 import com.blocksdecoded.utils.rx.uiSubscribe
 
 class CoinsListPresenter(
@@ -16,7 +16,7 @@ class CoinsListPresenter(
     private val mMenuListener: MenuClickListener,
     private val mCoinsUseCases: CoinsUseCases
 ) : BaseMVPPresenter<CoinsListContract.View>(view), CoinsListContract.Presenter {
-    private var mCachedData = arrayListOf<CoinEntity>()
+    private val mCoinsCache = CoinsCache()
     private var mInitialized = false
 
     private val mCurrenciesObserver = object : ICoinsObserver {
@@ -36,34 +36,23 @@ class CoinsListPresenter(
     //region Private
 
     private fun searchCurrency(coinEntity: CoinEntity, body: (index: Int) -> Unit): Int =
-            mCachedData.findCurrency(coinEntity, body)
+            mCoinsCache.cachedCoins.findCurrency(coinEntity, body)
 
     private fun updateCurrency(coinEntity: CoinEntity): Int =
-            searchCurrency(coinEntity) {
-                mCachedData[it] = coinEntity
-            }
-
-    private fun removeCurrency(coinEntity: CoinEntity): Int =
-            searchCurrency(coinEntity) {
-                mCachedData.removeAt(it)
-            }
+            mCoinsCache.updateCurrency(coinEntity)
 
     private fun updateCache(coins: List<CoinEntity>) {
-        mCachedData.clear()
-        mCachedData.addAll(coins)
-        mView?.showCoins(mCachedData)
+        mCoinsCache.setCache(coins)
+        mView?.showCoins(mCoinsCache.cachedCoins)
     }
 
     private fun getCurrencies() = launchSilent(scope) {
         mView?.showLoading()
         mCoinsUseCases.getCoins(true)
             .uiSubscribe(
-                onNext = { mView?.hideLoading() },
-                onComplete = { },
-                onError = {
-                    mView?.hideLoading()
-                    mView?.showNetworkError(mCachedData.isEmpty())
-                }
+                onNext = { },
+                onComplete = { mView?.hideLoading() },
+                onError = { mView?.showNetworkError(mCoinsCache.isEmpty()) }
             )
     }
 
@@ -97,23 +86,19 @@ class CoinsListPresenter(
     override fun onCoinPick(position: Int) {
     }
 
-    override fun deleteCoin(position: Int) {
-        if (mCachedData.isValidIndex(position)) {
-            if (mCachedData[position].isSaved) {
-                mView?.showMessage("${mCachedData[position].name} removed from Watchlist")
-                mCoinsUseCases.removeCoin(mCachedData[position].id)
-            }
-        }
-    }
-
     override fun onCoinClick(position: Int) {
-        if (mCachedData.isValidIndex(position)) {
-            mView?.openCoinInfo(mCachedData[position].id)
+        if (mCoinsCache.isValidIndex(position)) {
+            mView?.openCoinInfo(mCoinsCache.cachedCoins[position].id)
         }
     }
 
     override fun onMenuClick() {
         mMenuListener.onMenuClick()
+    }
+
+    override fun onSortClick(sortType: ViewSortEnum) {
+        mCoinsCache.updateSortType(sortType)
+        mView?.showCoins(mCoinsCache.cachedCoins)
     }
 
     //endregion

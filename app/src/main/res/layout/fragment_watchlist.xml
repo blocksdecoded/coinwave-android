@@ -85,10 +85,12 @@
                     android:text="@string/message_watchlist_is_empty"
                     android:textColor="@color/light_text"
                     android:visibility="gone"/>
-
-                <include
+    
+                <com.blocksdecoded.coinwave.presentation.widgets.CoinsHeaderView
                     android:id="@+id/fragment_watchlist_header"
-                    layout="@layout/partial_coins_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
                     android:visibility="gone"/>
     
                 <include

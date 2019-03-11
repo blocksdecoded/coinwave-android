@@ -15,6 +15,8 @@ import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.presentation.coininfo.CoinInfoActivity
 import com.blocksdecoded.coinwave.presentation.coinslist.recycler.CoinsListAdapter
 import com.blocksdecoded.coinwave.presentation.coinslist.recycler.CoinsListVH
+import com.blocksdecoded.coinwave.presentation.sort.ViewSortEnum
+import com.blocksdecoded.coinwave.presentation.sort.ViewSortEnum.*
 import com.blocksdecoded.coinwave.presentation.widgets.ActionConfirmDialog
 import com.blocksdecoded.utils.*
 import com.blocksdecoded.utils.extensions.hide
@@ -45,10 +47,20 @@ open class CoinsListFragment :
     private var mAdapter: CoinsListAdapter? = null
     private var mActiveDialog: Dialog? = null
 
-    @OnClick(R.id.coin_menu)
+    @OnClick(
+            R.id.coin_menu,
+            R.id.coins_header_name,
+            R.id.coins_header_market_cap,
+            R.id.coins_header_price,
+            R.id.coins_header_volume_24h
+    )
     fun onClick(view: View) {
         when (view.id) {
             R.id.coin_menu -> mPresenter?.onMenuClick()
+            R.id.coins_header_name -> mPresenter?.onSortClick(NAME)
+            R.id.coins_header_market_cap -> mPresenter?.onSortClick(CAP)
+            R.id.coins_header_price -> mPresenter?.onSortClick(PRICE)
+            R.id.coins_header_volume_24h -> mPresenter?.onSortClick(VOLUME)
         }
     }
 
@@ -101,21 +113,6 @@ open class CoinsListFragment :
     override fun openCoinInfo(id: Int) {
         activity?.let {
             CoinInfoActivity.start(it, id)
-        }
-    }
-
-    override fun showDeleteConfirm(coinEntity: CoinEntity, position: Int) {
-        activity?.let {
-            mActiveDialog = ActionConfirmDialog(it)
-                    .setCancelListener { it.dismiss() }
-                    .setTitle("Remove ${coinEntity.name} from Watchlist?")
-                    .setConfirmText("Remove")
-                    .setConfirmListener {
-                        it.dismiss()
-                        mPresenter?.deleteCoin(position)
-                    }.setDismissListener {
-                        mActiveDialog = null
-                    }.showDialog()
         }
     }
 
