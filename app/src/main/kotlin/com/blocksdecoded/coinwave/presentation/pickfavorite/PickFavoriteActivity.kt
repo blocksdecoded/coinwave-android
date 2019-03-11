@@ -41,8 +41,8 @@ class PickFavoriteActivity : SwipeableActivity() {
 
             mPresenter = PickFavoritePresenter(
                     fragment,
-                    UseCaseProvider.getFavoriteUseCases(),
-                    UseCaseProvider.getCoinsUseCases()
+                    UseCaseProvider.favoriteUseCase,
+                    UseCaseProvider.coinsUseCase
             )
         }
     }

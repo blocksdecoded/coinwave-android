@@ -13,26 +13,21 @@ import com.blocksdecoded.coinwave.domain.variant.favoritechart.FavoriteChartUseV
 
 // Created by askar on 7/19/18.
 object UseCaseProvider {
-    fun getCoinsUseCases(): CoinsUseCases = CoinsInteractor(
-            SourceProvider.getCoinsSource()
-    )
+    val coinsUseCase: CoinsUseCases
+        get() = CoinsInteractor(SourceProvider.getCoinsSource())
 
-    fun getChartsUseCases(): ChartsUseCases = ChartsInteractor(
-            SourceProvider.getCoinsSource(),
-            SourceProvider.getChartsSource()
-    )
+    val chartsUseCase: ChartsUseCases
+        get() = ChartsInteractor(
+                SourceProvider.getCoinsSource(),
+                SourceProvider.getChartsSource()
+        )
 
-    fun getPostUseCases(): PostsUseCases = PostsInteractor(
-            SourceProvider.getPostSource()
-    )
+    val postUseCase: PostsUseCases
+        get() = PostsInteractor(SourceProvider.getPostSource())
 
-    fun getFavoriteUseCases(): FavoriteUseCases = FavoriteInteractor(
-        SourceProvider.getSharedStorage()
-    )
+    val favoriteUseCase: FavoriteUseCases
+        get() = FavoriteInteractor(SourceProvider.getSharedStorage())
 
-    fun getFavoriteChartUseVariant(): FavoriteChartUseVariant = FavoriteChartInteractor(
-            getChartsUseCases(),
-            getFavoriteUseCases(),
-            getCoinsUseCases()
-    )
+    val favoriteChartUseCase: FavoriteChartUseVariant
+        get() = FavoriteChartInteractor(chartsUseCase, favoriteUseCase, coinsUseCase)
 }

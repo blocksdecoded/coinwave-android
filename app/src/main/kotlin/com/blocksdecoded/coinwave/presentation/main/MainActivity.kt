@@ -210,8 +210,8 @@ class MainActivity :
         mWatchListPresenter = WatchListPresenter(
                 it,
                 this,
-                UseCaseProvider.getCoinsUseCases(),
-                UseCaseProvider.getFavoriteChartUseVariant()
+                UseCaseProvider.coinsUseCase,
+                UseCaseProvider.favoriteChartUseCase
         )
     }
 
@@ -220,7 +220,7 @@ class MainActivity :
                 mCoinsListPresenter = CoinsListPresenter(
                         it,
                         this,
-                        UseCaseProvider.getCoinsUseCases()
+                        UseCaseProvider.coinsUseCase
                 )
             }
 
@@ -228,7 +228,7 @@ class MainActivity :
         mPostsPresenter = PostsPresenter(
                 it,
                 this,
-                UseCaseProvider.getPostUseCases()
+                UseCaseProvider.postUseCase
         )
     }
 

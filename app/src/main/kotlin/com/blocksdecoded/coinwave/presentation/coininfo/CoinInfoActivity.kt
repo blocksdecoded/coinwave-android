@@ -31,8 +31,8 @@ class CoinInfoActivity : SwipeableActivity() {
 
             mPresenter = CoinInfoPresenter(
                     fragment,
-                    UseCaseProvider.getChartsUseCases(),
-                    UseCaseProvider.getCoinsUseCases()
+                    UseCaseProvider.chartsUseCase,
+                    UseCaseProvider.coinsUseCase
             )
 
             mPresenter?.fetchCurrencyData(getIdFromIntent(intent))

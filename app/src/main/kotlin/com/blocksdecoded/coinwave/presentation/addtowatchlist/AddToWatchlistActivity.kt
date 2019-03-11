@@ -8,6 +8,7 @@ import com.blocksdecoded.coinwave.domain.UseCaseProvider
 import com.blocksdecoded.core.SwipeableActivity
 import com.blocksdecoded.utils.extensions.inRightTransition
 import com.blocksdecoded.utils.extensions.outRightTransition
+import com.blocksdecoded.utils.logD
 
 /**
  * Created by askar on 2/11/19
@@ -42,7 +43,7 @@ class AddToWatchlistActivity : SwipeableActivity() {
 
             mPresenter = AddToWatchlistPresenter(
                     fragment,
-                    UseCaseProvider.getCoinsUseCases()
+                    UseCaseProvider.coinsUseCase
             )
         }
     }

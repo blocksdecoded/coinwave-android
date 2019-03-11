@@ -64,7 +64,7 @@ class PostActivity : SwipeableActivity() {
 
             mPresenter = PostPresenter(
                     fragment,
-                    UseCaseProvider.getPostUseCases()
+                    UseCaseProvider.postUseCase
             )
 
             mPresenter?.getPost(getIdFromIntent(intent))

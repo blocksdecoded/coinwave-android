@@ -79,11 +79,11 @@ class WatchListPresenter(
 
         mFavoriteChartUseVariant.chart
             ?.doAfterTerminate { scope.launch { } }
-                ?.uiSubscribe(
-                        onNext = { mView?.showFavoriteChart(it) },
-                        onError = { mView?.showFavoriteError() },
-                        onComplete = { mView?.hideFavoriteLoading() }
-                )?.let { disposables.add(it) }
+            ?.uiSubscribe(
+                    onNext = { mView?.showFavoriteChart(it) },
+                    onError = { mView?.showFavoriteError() },
+                    onComplete = { mView?.hideFavoriteLoading() }
+            )?.let { disposables.add(it) }
     }
 
     private fun searchCurrency(coinEntity: CoinEntity, body: ((index: Int) -> Unit)? = null): Int =
@@ -110,6 +110,7 @@ class WatchListPresenter(
         }
 
         mCoinsUseCases.getCoins(skipCache)
+                .map { it.filter { it.isSaved } }
                 .uiSubscribe(
                         onNext = { setCache(it) },
                         onError = {
