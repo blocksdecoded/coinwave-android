@@ -10,7 +10,7 @@ import com.blocksdecoded.utils.extensions.isValidIndex
 class CoinsCache {
     val coins = ArrayList<CoinEntity>()
 
-    var currentSort = PRICE_DES
+    var currentSort = MARKET_CAP_DES
         set(value) {
             field = value
             sortCoins()
@@ -30,12 +30,12 @@ class CoinsCache {
         currentSort = when {
             sortType == NAME && currentSort != NAME_DES -> NAME_DES
             sortType == NAME && currentSort == NAME_DES -> NAME_ASC
-            sortType == CAP && currentSort != CAP_DES -> CAP_DES
-            sortType == CAP && currentSort == CAP_DES -> CAP_ASC
+            sortType == CAP && currentSort != MARKET_CAP_DES -> MARKET_CAP_DES
+            sortType == CAP && currentSort == MARKET_CAP_DES -> MARKET_CAP_ASC
             sortType == PRICE && currentSort != PRICE_DES -> PRICE_DES
             sortType == PRICE && currentSort == PRICE_DES -> PRICE_ASC
-            sortType == VOLUME && currentSort != VOL_DES -> VOL_DES
-            sortType == VOLUME && currentSort == VOL_DES -> VOL_ASC
+            sortType == VOLUME && currentSort != VOLUME_DES -> VOLUME_DES
+            sortType == VOLUME && currentSort == VOLUME_DES -> VOLUME_ASC
 
             else -> DEFAULT
         }
@@ -69,10 +69,10 @@ class CoinsCache {
         DEFAULT({ it.sortBy { it.rank } }),
         NAME_ASC({ it.sortByDescending { it.symbol } }),
         NAME_DES({ it.sortBy { it.symbol } }),
-        CAP_ASC({ it.sortBy { it.marketCap } }),
-        CAP_DES({ it.sortByDescending { it.marketCap } }),
-        VOL_ASC({ it.sortBy { it.volume } }),
-        VOL_DES({ it.sortByDescending { it.volume } }),
+        MARKET_CAP_ASC({ it.sortBy { it.marketCap } }),
+        MARKET_CAP_DES({ it.sortByDescending { it.marketCap } }),
+        VOLUME_ASC({ it.sortBy { it.volume } }),
+        VOLUME_DES({ it.sortByDescending { it.volume } }),
         PRICE_ASC({ it.sortBy { it.price } }),
         PRICE_DES({ it.sortByDescending { it.price } })
     }

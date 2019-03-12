@@ -116,22 +116,22 @@ class CoinsHeaderView : FrameLayout {
             nameSortIcon.setColorFilter(activeColor)
             nameSortIcon.rotation = 180f
         }
-        CAP_ASC -> {
+        MARKET_CAP_ASC -> {
             marketCapTitle.setTextColor(activeColor)
             capSortIcon.setColorFilter(activeColor)
             capSortIcon.rotation = 0f
         }
-        CAP_DES -> {
+        MARKET_CAP_DES -> {
             marketCapTitle.setTextColor(activeColor)
             capSortIcon.setColorFilter(activeColor)
             capSortIcon.rotation = 180f
         }
-        VOL_ASC -> {
+        VOLUME_ASC -> {
             volumeTitle.setTextColor(activeColor)
             volumeSortIcon.setColorFilter(activeColor)
             volumeSortIcon.rotation = 0f
         }
-        VOL_DES -> {
+        VOLUME_DES -> {
             volumeTitle.setTextColor(activeColor)
             volumeSortIcon.setColorFilter(activeColor)
             volumeSortIcon.rotation = 180f
