@@ -9,15 +9,18 @@ import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.presentation.addtowatchlist.recycler.AddToWatchlistAdapter
 import com.blocksdecoded.coinwave.presentation.addtowatchlist.recycler.AddToWatchlistVH
-import com.blocksdecoded.core.mvp.deprecated.BaseMVPFragment
+import com.blocksdecoded.core.mvp.BaseMvpFragment
 import com.blocksdecoded.utils.extensions.hide
 import com.blocksdecoded.utils.extensions.visible
+import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 
-class AddToWatchlistFragment : BaseMVPFragment<AddToWatchlistContract.Presenter>(),
+class AddToWatchlistFragment : BaseMvpFragment<AddToWatchlistContract.Presenter>(),
         AddToWatchlistContract.View,
         AddToWatchlistVH.WatchlistVHClickListener {
+    
+    override val presenter: AddToWatchlistContract.Presenter by inject { parametersOf(this@AddToWatchlistFragment) }
     override val layoutId: Int = R.layout.fragment_add_to_watchlist
-    override var mPresenter: AddToWatchlistContract.Presenter? = null
 
     private var mAdapter: AddToWatchlistAdapter? = null
 
@@ -34,7 +37,7 @@ class AddToWatchlistFragment : BaseMVPFragment<AddToWatchlistContract.Presenter>
         when (view.id) {
             R.id.back -> finishView()
 
-            R.id.connection_error_retry -> mPresenter?.getCoins()
+            R.id.connection_error_retry -> presenter.getCoins()
         }
     }
 
@@ -49,11 +52,11 @@ class AddToWatchlistFragment : BaseMVPFragment<AddToWatchlistContract.Presenter>
     //region ViewHolder
 
     override fun onClick(position: Int) {
-        mPresenter?.onCoinClick(position)
+        presenter.onCoinClick(position)
     }
 
     override fun onWatchClick(position: Int) {
-        mPresenter?.onCoinWatch(position)
+        presenter.onCoinWatch(position)
     }
 
     //endregion

@@ -2,25 +2,16 @@ package com.blocksdecoded.coinwave.presentation.addtowatchlist
 
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.domain.usecases.coins.CoinsUseCases
-import com.blocksdecoded.core.mvp.deprecated.BaseMVPPresenter
-import com.blocksdecoded.utils.coroutine.launchSilent
+import com.blocksdecoded.core.mvp.BaseMvpPresenter
 import com.blocksdecoded.utils.extensions.isValidIndex
 import com.blocksdecoded.utils.rx.uiSubscribe
-import kotlinx.coroutines.Dispatchers
-import kotlin.coroutines.CoroutineContext
 
 class AddToWatchlistPresenter(
-    view: AddToWatchlistContract.View?,
-    private val mCoinsUseCases: CoinsUseCases,
-    private val uiContext: CoroutineContext = Dispatchers.Main
-) : BaseMVPPresenter<AddToWatchlistContract.View>(view), AddToWatchlistContract.Presenter {
+    override var view: AddToWatchlistContract.View?,
+    private val mCoinsUseCases: CoinsUseCases
+) : BaseMvpPresenter<AddToWatchlistContract.View>(), AddToWatchlistContract.Presenter {
 
     private var cached = arrayListOf<CoinEntity>()
-
-    override fun attachView(view: AddToWatchlistContract.View) {
-        mView = view
-        injectSelfToView()
-    }
 
     //region Lifecycle
 
@@ -36,11 +27,11 @@ class AddToWatchlistPresenter(
     private fun updateCache(coins: List<CoinEntity>) {
         cached.clear()
         cached.addAll(coins)
-        mView?.showCoins(coins)
+        view?.showCoins(coins)
     }
 
     private fun showError(e: Throwable) {
-        mView?.showLoadingError()
+        view?.showLoadingError()
     }
 
     private fun updateCurrencyWatch(position: Int) {
@@ -53,7 +44,7 @@ class AddToWatchlistPresenter(
                 mCoinsUseCases.removeCoin(cached[position].id)
             }
 
-            mView?.updateCoin(cached[position])
+            view?.updateCoin(cached[position])
         }
     }
 
@@ -61,8 +52,8 @@ class AddToWatchlistPresenter(
 
     //region Contract
 
-    override fun getCoins() = launchSilent(uiContext) {
-        mView?.hideLoadingError()
+    override fun getCoins() {
+        view?.hideLoadingError()
         mCoinsUseCases.getCoins(false)
             .uiSubscribe(
                     onNext = { updateCache(it) },

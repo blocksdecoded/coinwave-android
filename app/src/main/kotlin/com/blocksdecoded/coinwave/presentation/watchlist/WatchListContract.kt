@@ -1,12 +1,12 @@
 package com.blocksdecoded.coinwave.presentation.watchlist
 
-import com.blocksdecoded.core.mvp.deprecated.BaseMVPContract
 import com.blocksdecoded.coinwave.data.model.ChartData
 import com.blocksdecoded.coinwave.data.model.CoinEntity
+import com.blocksdecoded.core.mvp.BaseMvpContract
 
 interface WatchListContract {
 
-    interface View : BaseMVPContract.View<Presenter> {
+    interface View : BaseMvpContract.View<Presenter> {
 
         fun showCoins(coins: List<CoinEntity>)
 
@@ -41,7 +41,7 @@ interface WatchListContract {
         fun hideFavoriteError()
     }
 
-    interface Presenter : BaseMVPContract.Presenter<View> {
+    interface Presenter : BaseMvpContract.Presenter<View> {
         fun onCoinPick(position: Int)
 
         fun onCoinClick(position: Int)

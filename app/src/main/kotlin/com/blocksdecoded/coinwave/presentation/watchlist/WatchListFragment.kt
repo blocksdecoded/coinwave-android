@@ -26,16 +26,18 @@ import com.blocksdecoded.coinwave.presentation.pickfavorite.PickFavoriteActivity
 import com.blocksdecoded.coinwave.presentation.watchlist.recycler.WatchlistAdapter
 import com.blocksdecoded.coinwave.presentation.watchlist.recycler.WatchlistViewHolder
 import com.blocksdecoded.coinwave.presentation.widgets.chart.ChartListener
+import com.blocksdecoded.core.mvp.BaseMvpFragment
 import com.blocksdecoded.utils.*
 import com.blocksdecoded.utils.extensions.*
+import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 import java.util.*
 
-open class WatchListFragment :
-        BaseMVPFragment<WatchListContract.Presenter>(),
-        WatchListContract.View,
-        WatchlistViewHolder.CurrencyVHClickListener {
+open class WatchListFragment : BaseMvpFragment<WatchListContract.Presenter>(),
+    WatchListContract.View,
+    WatchlistViewHolder.CurrencyVHClickListener {
 
-    override var mPresenter: WatchListContract.Presenter? = null
+    override val presenter: WatchListContract.Presenter by inject { parametersOf(this@WatchListFragment, context) }
     override val layoutId: Int = R.layout.fragment_watchlist
 
     @BindView(R.id.fragment_watchlist_header)
@@ -116,11 +118,11 @@ open class WatchListFragment :
     )
     fun onClick(view: View) {
         when (view.id) {
-            R.id.watchlist_menu -> mPresenter?.onMenuClick()
+            R.id.watchlist_menu -> presenter.onMenuClick()
 
-            R.id.connection_error_retry -> mPresenter?.getCoins()
+            R.id.connection_error_retry -> presenter.getCoins()
 
-            R.id.partial_watchlist_empty_add -> mPresenter?.onAddCoinClick()
+            R.id.partial_watchlist_empty_add -> presenter.onAddCoinClick()
         }
     }
 
@@ -134,11 +136,11 @@ open class WatchListFragment :
         mAdapter = WatchlistAdapter(arrayListOf(), this)
 
         mRetry.setOnClickListener {
-            mPresenter?.getCoins()
+            presenter.getCoins()
         }
 
         mSwipeRefreshLayout.setOnRefreshListener {
-            mPresenter?.getCoins()
+            presenter.getCoins()
         }
 
         mRecycler.setHasFixedSize(true)
@@ -154,11 +156,11 @@ open class WatchListFragment :
     //region ViewHolder
 
     override fun onPick(position: Int) {
-        mPresenter?.onCoinPick(position)
+        presenter.onCoinPick(position)
     }
 
     override fun onClick(position: Int) {
-        mPresenter?.onCoinClick(position)
+        presenter.onCoinClick(position)
     }
 
     //endregion
@@ -176,8 +178,8 @@ open class WatchListFragment :
     //region Contract
 
     override fun showFavoriteCoin(coin: CoinEntity) {
-        mFavoriteName?.text = coin.symbol
-        mFavoritePrice?.text = "$${coin.getPrice()?.format()}"
+        mFavoriteName.text = coin.symbol
+        mFavoritePrice.text = "$${coin.getPrice()?.format()}"
 
         coin.getPriceChange()?.let {
             context?.also { context ->
@@ -187,7 +189,7 @@ open class WatchListFragment :
                     context.getColorRes(R.color.red)
                 }
 
-                mFavoritePrice?.setTextColor(color)
+                mFavoritePrice.setTextColor(color)
             }
         }
     }
@@ -216,10 +218,10 @@ open class WatchListFragment :
     }
 
     override fun showCoins(coins: List<CoinEntity>) {
-        mSwipeRefreshLayout?.isRefreshing = false
+        mSwipeRefreshLayout.isRefreshing = false
         mListHeader.visible()
         mRecycler.visible()
-        mRecycler?.post {
+        mRecycler.post {
             mAdapter?.setItems(coins)
         }
     }
@@ -235,11 +237,11 @@ open class WatchListFragment :
     }
 
     override fun hideCoinsLoading() {
-        mSwipeRefreshLayout?.isRefreshing = false
+        mSwipeRefreshLayout.isRefreshing = false
     }
 
     override fun showError(hideList: Boolean) {
-        mSwipeRefreshLayout?.isRefreshing = false
+        mSwipeRefreshLayout.isRefreshing = false
         mEmptyContainer.hide()
 
         if (hideList) {
@@ -255,7 +257,7 @@ open class WatchListFragment :
     }
 
     override fun showCoinsLoading() {
-        mSwipeRefreshLayout?.isRefreshing = true
+        mSwipeRefreshLayout.isRefreshing = true
         mEmptyContainer.hide()
         mErrorContainer.hide()
     }

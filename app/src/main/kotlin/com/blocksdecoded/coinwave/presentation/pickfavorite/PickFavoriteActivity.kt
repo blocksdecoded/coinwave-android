@@ -15,8 +15,6 @@ import com.blocksdecoded.utils.extensions.outRightTransition
  * with Android Studio
  */
 class PickFavoriteActivity : SwipeableActivity() {
-    private var mPresenter: PickFavoriteContract.Presenter? = null
-
     override fun onBackPressed() {
         super.onBackPressed()
         outRightTransition()
@@ -38,12 +36,6 @@ class PickFavoriteActivity : SwipeableActivity() {
                     .beginTransaction()
                     .add(android.R.id.content, fragment)
                     .commit()
-
-            mPresenter = PickFavoritePresenter(
-                    fragment,
-                    UseCaseProvider.favoriteUseCase,
-                    UseCaseProvider.coinsUseCase
-            )
         }
     }
 

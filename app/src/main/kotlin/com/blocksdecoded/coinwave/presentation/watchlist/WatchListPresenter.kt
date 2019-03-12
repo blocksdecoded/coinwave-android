@@ -1,6 +1,5 @@
 package com.blocksdecoded.coinwave.presentation.watchlist
 
-import com.blocksdecoded.core.mvp.deprecated.BaseMVPPresenter
 import com.blocksdecoded.coinwave.data.crypto.ICoinsObserver
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.domain.usecases.coins.CoinsUseCases
@@ -9,6 +8,7 @@ import com.blocksdecoded.coinwave.util.addSortedByRank
 import com.blocksdecoded.coinwave.util.findCurrency
 import com.blocksdecoded.coinwave.presentation.main.MenuClickListener
 import com.blocksdecoded.coinwave.presentation.sort.CoinsCache
+import com.blocksdecoded.core.mvp.BaseMvpPresenter
 import com.blocksdecoded.utils.coroutine.launchSilent
 import com.blocksdecoded.utils.coroutine.model.onSuccess
 import com.blocksdecoded.utils.extensions.isValidIndex
@@ -16,18 +16,18 @@ import com.blocksdecoded.utils.rx.uiSubscribe
 import kotlinx.coroutines.async
 
 class WatchListPresenter(
-    view: WatchListContract.View?,
+    override var view: WatchListContract.View?,
     private val mMenuListener: MenuClickListener,
     private val mCoinsUseCases: CoinsUseCases,
     private val mFavoriteChartUseVariant: FavoriteChartUseVariant
-) : BaseMVPPresenter<WatchListContract.View>(view), WatchListContract.Presenter {
+) : BaseMvpPresenter<WatchListContract.View>(), WatchListContract.Presenter {
 
     private var mCoinsCache = CoinsCache()
     private var mCachedData = arrayListOf<CoinEntity>()
 
     private val mCurrenciesObserver = object : ICoinsObserver {
         override fun onAdded(coinEntity: CoinEntity) = launchSilent(scope) {
-            mView?.updateCoin(updateCurrency(coinEntity), coinEntity)
+            view?.updateCoin(updateCurrency(coinEntity), coinEntity)
         }
 
         override fun onUpdated(coins: List<CoinEntity>) = launchSilent(scope) {
@@ -35,17 +35,12 @@ class WatchListPresenter(
         }
 
         override fun onRemoved(coinEntity: CoinEntity) = launchSilent(scope) {
-            mView?.deleteCoin(removeCurrency(coinEntity))
-            if (mCoinsCache.isEmpty()) mView?.showEmpty()
+            view?.deleteCoin(removeCurrency(coinEntity))
+            if (mCoinsCache.isEmpty()) view?.showEmpty()
         }
     }
 
     //region Lifecycle
-
-    override fun attachView(view: WatchListContract.View) {
-        mView = view
-        injectSelfToView()
-    }
 
     override fun onDestroy() {
         super.onDestroy()
@@ -66,25 +61,25 @@ class WatchListPresenter(
         mCachedData.clear()
         mCachedData.addAll(coins.filter { it.isSaved })
 
-        mView?.showCoins(mCachedData)
+        view?.showCoins(mCachedData)
 
-        if (mCachedData.isEmpty()) mView?.showEmpty() else mView?.hideEmpty()
+        if (mCachedData.isEmpty()) view?.showEmpty() else view?.hideEmpty()
 
         loadFavorite()
     }
 
     private suspend fun loadFavorite() {
-        mView?.showFavoriteLoading()
-        mView?.hideFavoriteError()
+        view?.showFavoriteLoading()
+        view?.hideFavoriteError()
 
         mFavoriteChartUseVariant.getCoin()
-            ?.onSuccess { mView?.showFavoriteCoin(it) }
+            ?.onSuccess { view?.showFavoriteCoin(it) }
 
         mFavoriteChartUseVariant.chart
-            ?.doOnComplete { scope.async { mView?.hideFavoriteLoading() } }
+            ?.doOnComplete { scope.async { view?.hideFavoriteLoading() } }
             ?.uiSubscribe(
-                    onNext = { mView?.showFavoriteChart(it) },
-                    onError = { mView?.showFavoriteError() },
+                    onNext = { view?.showFavoriteChart(it) },
+                    onError = { view?.showFavoriteError() },
                     onComplete = {  }
             )?.let { disposables.add(it) }
     }
@@ -107,9 +102,9 @@ class WatchListPresenter(
     }
 
     private fun getCurrencies(skipCache: Boolean) = launchSilent(scope) {
-        mView?.showCoinsLoading()
+        view?.showCoinsLoading()
         if (mCachedData.isEmpty()) {
-            mView?.showFavoriteLoading()
+            view?.showFavoriteLoading()
         }
 
         disposables.add(
@@ -118,14 +113,14 @@ class WatchListPresenter(
                         .uiSubscribe(
                                 onNext = { setCache(it) },
                                 onError = {
-                                    mView?.showError(mCachedData.isEmpty())
+                                    view?.showError(mCachedData.isEmpty())
 
                                     if (mCachedData.isEmpty()) {
-                                        mView?.hideFavoriteLoading()
-                                        mView?.showFavoriteError()
+                                        view?.hideFavoriteLoading()
+                                        view?.showFavoriteError()
                                     }
                                 },
-                                onComplete = { mView?.hideCoinsLoading() }
+                                onComplete = { view?.hideCoinsLoading() }
                         )
         )
     }
@@ -144,7 +139,7 @@ class WatchListPresenter(
     override fun deleteCoin(position: Int) {
         if (mCachedData.isValidIndex(position)) {
             if (mCachedData[position].isSaved) {
-                mView?.showMessage("${mCachedData[position].name} removed from Watchlist")
+                view?.showMessage("${mCachedData[position].name} removed from Watchlist")
                 mCoinsUseCases.removeCoin(mCachedData[position].id)
             }
         }
@@ -152,7 +147,7 @@ class WatchListPresenter(
 
     override fun onCoinClick(position: Int) {
         if (mCachedData.isValidIndex(position)) {
-            mView?.openCoinInfo(mCachedData[position].id)
+            view?.openCoinInfo(mCachedData[position].id)
         }
     }
 
@@ -161,7 +156,7 @@ class WatchListPresenter(
     }
 
     override fun onAddCoinClick() {
-        mView?.openAddToWatchlist()
+        view?.openAddToWatchlist()
     }
 
     //endregion

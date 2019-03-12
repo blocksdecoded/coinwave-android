@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import com.blocksdecoded.coinwave.domain.UseCaseProvider
 import com.blocksdecoded.core.SwipeableActivity
 import com.blocksdecoded.utils.extensions.inRightTransition
 import com.blocksdecoded.utils.extensions.outRightTransition
@@ -14,8 +13,6 @@ import com.blocksdecoded.utils.extensions.outRightTransition
  * with Android Studio
  */
 class AddToWatchlistActivity : SwipeableActivity() {
-
-    private var mPresenter: AddToWatchlistContract.Presenter? = null
 
     override fun onBackPressed() {
         super.onBackPressed()
@@ -39,11 +36,6 @@ class AddToWatchlistActivity : SwipeableActivity() {
                     .beginTransaction()
                     .add(android.R.id.content, fragment)
                     .commit()
-
-            mPresenter = AddToWatchlistPresenter(
-                    fragment,
-                    UseCaseProvider.coinsUseCase
-            )
         }
     }
 

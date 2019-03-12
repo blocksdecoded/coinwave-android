@@ -5,23 +5,21 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import butterknife.BindView
 import butterknife.OnClick
-import com.blocksdecoded.core.mvp.deprecated.BaseMVPFragment
 import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.presentation.coinslist.recycler.CoinsListAdapter
 import com.blocksdecoded.coinwave.presentation.coinslist.recycler.CoinsListVH
+import com.blocksdecoded.core.mvp.BaseMvpFragment
 import com.blocksdecoded.utils.extensions.hide
 import com.blocksdecoded.utils.extensions.visible
+import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 
-class PickFavoriteFragment :
-        BaseMVPFragment<PickFavoriteContract.Presenter>(),
-        PickFavoriteContract.View,
-        CoinsListVH.CoinVHListener {
-    companion object {
-        fun newInstance(): PickFavoriteFragment = PickFavoriteFragment()
-    }
+class PickFavoriteFragment : BaseMvpFragment<PickFavoriteContract.Presenter>(),
+    PickFavoriteContract.View,
+    CoinsListVH.CoinVHListener {
 
-    override var mPresenter: PickFavoriteContract.Presenter? = null
+    override val presenter: PickFavoriteContract.Presenter by inject { parametersOf(this@PickFavoriteFragment) }
     override val layoutId: Int = R.layout.fragment_pick_favorite
 
     @BindView(R.id.fragment_pick_favorite_recycler)
@@ -43,7 +41,7 @@ class PickFavoriteFragment :
         when (view.id) {
             R.id.back -> finishView()
 
-            R.id.connection_error_retry -> mPresenter?.onRetryClick()
+            R.id.connection_error_retry -> presenter.onRetryClick()
         }
     }
 
@@ -63,7 +61,7 @@ class PickFavoriteFragment :
     //region Click
 
     override fun onClick(position: Int) {
-        mPresenter?.onCoinClick(position)
+        presenter.onCoinClick(position)
     }
 
     override fun onPick(position: Int) {
@@ -100,4 +98,8 @@ class PickFavoriteFragment :
     }
 
     //endregion
+
+    companion object {
+        fun newInstance(): PickFavoriteFragment = PickFavoriteFragment()
+    }
 }

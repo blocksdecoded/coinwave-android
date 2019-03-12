@@ -29,9 +29,8 @@ import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 import java.util.*
 
-open class CoinInfoFragment :
-        BaseMvpFragment<CoinInfoContract.Presenter>(),
-        CoinInfoContract.View {
+open class CoinInfoFragment : BaseMvpFragment<CoinInfoContract.Presenter>(),
+    CoinInfoContract.View {
     override val presenter: CoinInfoContract.Presenter by inject { parametersOf(this@CoinInfoFragment) }
     override val layoutId: Int = R.layout.fragment_coin_info
 

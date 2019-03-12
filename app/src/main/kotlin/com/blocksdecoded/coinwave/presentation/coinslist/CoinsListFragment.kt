@@ -21,10 +21,9 @@ import com.blocksdecoded.utils.extensions.visible
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
-open class CoinsListFragment :
-        BaseMvpFragment<CoinsListContract.Presenter>(),
-        CoinsListContract.View,
-        CoinsListVH.CoinVHListener {
+open class CoinsListFragment : BaseMvpFragment<CoinsListContract.Presenter>(),
+    CoinsListContract.View,
+    CoinsListVH.CoinVHListener {
     override val presenter: CoinsListContract.Presenter by inject{ parametersOf(this@CoinsListFragment, context) }
     override val layoutId: Int = R.layout.fragment_coins_list
 

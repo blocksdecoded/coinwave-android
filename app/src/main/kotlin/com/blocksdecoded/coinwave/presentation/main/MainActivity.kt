@@ -17,12 +17,9 @@ import com.blocksdecoded.coinwave.domain.UseCaseProvider
 import com.blocksdecoded.coinwave.util.CryptoRateUtil
 import com.blocksdecoded.coinwave.util.SFProTextTypeface
 import com.blocksdecoded.coinwave.presentation.addtowatchlist.AddToWatchlistActivity
-import com.blocksdecoded.coinwave.presentation.coinslist.CoinsListContract
 import com.blocksdecoded.coinwave.presentation.coinslist.CoinsListFragment
-import com.blocksdecoded.coinwave.presentation.coinslist.CoinsListPresenter
 import com.blocksdecoded.coinwave.presentation.pickfavorite.PickFavoriteActivity
 import com.blocksdecoded.coinwave.presentation.posts.PostsFragment
-import com.blocksdecoded.coinwave.presentation.watchlist.WatchListContract
 import com.blocksdecoded.coinwave.presentation.watchlist.WatchListFragment
 import com.blocksdecoded.coinwave.presentation.watchlist.WatchListPresenter
 import com.blocksdecoded.coinwave.presentation.widgets.PagerAdapter
@@ -42,9 +39,6 @@ class MainActivity :
         AppCompatActivity(),
         View.OnClickListener,
         MenuClickListener {
-
-    private var mWatchListPresenter: WatchListContract.Presenter? = null
-    private var mCoinsListPresenter: CoinsListContract.Presenter? = null
 
     private var mRateDialog: RateUsDialogContract? = null
 
@@ -178,7 +172,7 @@ class MainActivity :
 
         initViewPager(arrayListOf(
             CoinsListFragment.newInstance(),
-            createWatchListScreen(),
+            WatchListFragment.newInstance(),
             PostsFragment.newInstance())
         )
 
@@ -194,19 +188,6 @@ class MainActivity :
             "v${BuildConfig.VERSION_NAME}"
         }
     }
-
-    //region Screens
-
-    private fun createWatchListScreen(): Fragment = WatchListFragment.newInstance().also {
-        mWatchListPresenter = WatchListPresenter(
-                it,
-                this,
-                UseCaseProvider.coinsUseCase,
-                UseCaseProvider.favoriteChartUseCase
-        )
-    }
-
-    //endregion
 
     private fun initNavigationDrawer() {
         drawer_add_watchlist.setOnClickListener(this)
@@ -245,7 +226,7 @@ class MainActivity :
 
         val adapter = PagerAdapter(supportFragmentManager, fragments)
         main_view_pager.adapter = adapter
-        main_view_pager.offscreenPageLimit = 4
+        main_view_pager.offscreenPageLimit = 3
 
         main_view_pager.addOnPageChangeListener(object : androidx.viewpager.widget.ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) = Unit
