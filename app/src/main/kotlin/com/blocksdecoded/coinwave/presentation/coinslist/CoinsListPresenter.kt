@@ -74,9 +74,6 @@ class CoinsListPresenter(
         getCurrencies()
     }
 
-    override fun onCoinPick(position: Int) {
-    }
-
     override fun onCoinClick(position: Int) {
         if (mCoinsCache.isValidIndex(position)) {
             view?.openCoinInfo(mCoinsCache.cachedCoins[position].id)

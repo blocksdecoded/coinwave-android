@@ -70,7 +70,5 @@ class CoinsListVH(
 
     interface CoinVHListener {
         fun onClick(position: Int)
-
-        fun onPick(position: Int)
     }
 }

@@ -64,9 +64,6 @@ class PickFavoriteFragment : BaseMvpFragment<PickFavoriteContract.Presenter>(),
         presenter.onCoinClick(position)
     }
 
-    override fun onPick(position: Int) {
-    }
-
     override fun showError() {
         mHeader.hide()
         mRecycler.hide()

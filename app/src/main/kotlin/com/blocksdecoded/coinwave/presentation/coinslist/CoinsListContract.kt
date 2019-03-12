@@ -23,8 +23,6 @@ interface CoinsListContract {
     }
 
     interface Presenter : BaseMvpContract.Presenter<View> {
-        fun onCoinPick(position: Int)
-
         fun onCoinClick(position: Int)
 
         fun getCoins()

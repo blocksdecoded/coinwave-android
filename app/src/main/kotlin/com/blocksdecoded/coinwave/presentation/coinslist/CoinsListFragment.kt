@@ -90,10 +90,6 @@ open class CoinsListFragment : BaseMvpFragment<CoinsListContract.Presenter>(),
 
     //region ViewHolder
 
-    override fun onPick(position: Int) {
-        presenter.onCoinPick(position)
-    }
-
     override fun onClick(position: Int) {
         presenter.onCoinClick(position)
     }
