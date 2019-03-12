@@ -1,5 +1,6 @@
 package com.blocksdecoded.coinwave.data.model
 
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 /**
@@ -7,5 +8,5 @@ import com.google.gson.annotations.SerializedName
  * with Android Studio
  */
 data class CoinsDataResponse(
-    @SerializedName("coins") var coins: List<CoinEntity>
+    @Expose @SerializedName("coins") var coins: List<CoinEntity>
 )

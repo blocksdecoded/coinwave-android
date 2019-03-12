@@ -21,6 +21,7 @@ import com.blocksdecoded.coinwave.domain.usecases.posts.PostsInteractor
 import com.blocksdecoded.coinwave.domain.usecases.posts.PostsUseCases
 import com.blocksdecoded.coinwave.domain.variant.favoritechart.FavoriteChartInteractor
 import com.blocksdecoded.coinwave.domain.variant.favoritechart.FavoriteChartUseVariant
+import com.blocksdecoded.coinwave.presentation.coininfo.CoinInfoContract
 import com.blocksdecoded.coinwave.presentation.coininfo.CoinInfoPresenter
 import com.blocksdecoded.coinwave.presentation.coinslist.CoinsListContract
 import com.blocksdecoded.coinwave.presentation.coinslist.CoinsListPresenter
@@ -56,7 +57,11 @@ val sourceModule = module {
 
 val coinsModule = module {
 
-    factory { params -> }
+    factory { params -> CoinInfoPresenter(
+        params.component1() as CoinInfoContract.View,
+        get(),
+        get()
+    ) as CoinInfoContract.Presenter }
 
     factory { params -> CoinsListPresenter(
         params.component1() as CoinsListContract.View,

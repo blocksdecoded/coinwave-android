@@ -1,5 +1,6 @@
 package com.blocksdecoded.coinwave.data.post.model
 
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 /**
@@ -8,7 +9,7 @@ import com.google.gson.annotations.SerializedName
  */
 
 data class PublisherImage(
-    @SerializedName("featured") var featured: String?,
-    @SerializedName("thumb") var thumb: String?,
-    @SerializedName("middle") var middle: String?
+    @Expose @SerializedName("featured") var featured: String?,
+    @Expose @SerializedName("thumb") var thumb: String?,
+    @Expose @SerializedName("middle") var middle: String?
 )

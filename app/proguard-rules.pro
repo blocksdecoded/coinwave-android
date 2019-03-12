@@ -1,13 +1,17 @@
--keepattributes SourceFile,LineNumberTable
+-keepattributes SourceFile, LineNumberTable
 -renamesourcefileattribute SourceFile
+
+-keep public class com.blocksdecoded.coinwave.data.model.** { *; }
+-keep public class com.blocksdecoded.coinwave.data.post.model.** { *; }
 
 -keepclassmembers class android.support.design.internal.BottomNavigationMenuView {
     boolean mShiftingMode;
 }
--keep public class android.support.design.widget.BottomNavigationView { *; }
--keep public class android.support.design.internal.BottomNavigationMenuView { *; }
--keep public class android.support.design.internal.BottomNavigationPresenter { *; }
--keep public class android.support.design.internal.BottomNavigationItemView { *; }
+
+-keep public class com.google.android.material.bottomnavigation.BottomNavigationView { *; }
+-keep public class com.google.android.material.bottomnavigation.BottomNavigationMenuView { *; }
+-keep public class com.google.android.material.bottomnavigation.BottomNavigationPresenter { *; }
+-keep public class com.google.android.material.bottomnavigation.BottomNavigationItemView { *; }
 
 -dontwarn okio.**
 -dontwarn com.squareup.okhttp3.**
@@ -28,10 +32,18 @@
 -dontwarn org.w3c.dom.**
 
 # Support
--keepclasseswithmembernames class android.support.v4.** { *; }
+-dontwarn android.support.v4.**
+-keep class android.support.v4.** { *; }
+
 -dontwarn android.support.v7.**
 -keep class android.support.v7.** { *; }
--keep interface android.support.v7.** { *; }
+
+-dontwarn com.google.android.material.**
+-keep class com.google.android.material.** { *; }
+
+-dontwarn androidx.**
+-keep class androidx.** { *; }
+-keep interface androidx.** { *; }
 
 # Retrofit
 -dontwarn okio.**
@@ -73,3 +85,11 @@
 -dontwarn org.w3c.dom.bootstrap.DOMImplementationRegistry
 
 -dontwarn com.caverock.androidsvg.**
+
+# Glide
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep public class * extends com.bumptech.glide.module.AppGlideModule
+-keep public enum com.bumptech.glide.load.ImageHeaderParser$** {
+  **[] $VALUES;
+  public *;
+}

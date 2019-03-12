@@ -1,6 +1,5 @@
 package com.blocksdecoded.coinwave.presentation.widgets
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Paint
@@ -24,7 +23,6 @@ import java.lang.ref.WeakReference
  * with Android Studio
  */
 
-@SuppressLint("RestrictedApi")
 class BottomNavigationViewEx : BottomNavigationView {
     // used for animation
     private var mShiftAmount: Float = 0.toFloat()

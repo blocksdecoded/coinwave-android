@@ -13,6 +13,7 @@ import com.blocksdecoded.utils.coroutine.launchSilent
 import com.blocksdecoded.utils.coroutine.model.onSuccess
 import com.blocksdecoded.utils.extensions.isValidIndex
 import com.blocksdecoded.utils.rx.uiSubscribe
+import kotlinx.coroutines.async
 
 class WatchListPresenter(
     view: WatchListContract.View?,
@@ -80,10 +81,11 @@ class WatchListPresenter(
             ?.onSuccess { mView?.showFavoriteCoin(it) }
 
         mFavoriteChartUseVariant.chart
+            ?.doOnComplete { scope.async { mView?.hideFavoriteLoading() } }
             ?.uiSubscribe(
                     onNext = { mView?.showFavoriteChart(it) },
                     onError = { mView?.showFavoriteError() },
-                    onComplete = { mView?.hideFavoriteLoading() }
+                    onComplete = {  }
             )?.let { disposables.add(it) }
     }
 

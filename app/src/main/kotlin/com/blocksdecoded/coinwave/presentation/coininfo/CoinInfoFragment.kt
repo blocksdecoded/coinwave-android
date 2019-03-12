@@ -22,14 +22,17 @@ import com.blocksdecoded.coinwave.util.*
 import com.blocksdecoded.coinwave.presentation.widgets.LockableScrollView
 import com.blocksdecoded.coinwave.presentation.widgets.OptionSelectorView
 import com.blocksdecoded.coinwave.presentation.widgets.chart.ChartListener
+import com.blocksdecoded.core.mvp.BaseMvpFragment
 import com.blocksdecoded.utils.*
 import com.blocksdecoded.utils.extensions.*
+import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 import java.util.*
 
 open class CoinInfoFragment :
-        BaseMVPFragment<CoinInfoContract.Presenter>(),
+        BaseMvpFragment<CoinInfoContract.Presenter>(),
         CoinInfoContract.View {
-    override var mPresenter: CoinInfoContract.Presenter? = null
+    override val presenter: CoinInfoContract.Presenter by inject { parametersOf(this@CoinInfoFragment) }
     override val layoutId: Int = R.layout.fragment_coin_info
 
     @BindView(R.id.fragment_coin_chart)
@@ -107,10 +110,10 @@ open class CoinInfoFragment :
     @OnClick(R.id.coin_graph_icon, R.id.back, R.id.fragment_coin_add_to_watchlist)
     fun onClick(view: View) {
         when (view.id) {
-            R.id.coin_graph_icon -> mPresenter?.onGoToWebsiteClick()
+            R.id.coin_graph_icon -> presenter.onGoToWebsiteClick()
             R.id.back -> finishView()
             R.id.fragment_coin_add_to_watchlist -> {
-                mPresenter?.onWatchingClick()
+                presenter.onWatchingClick()
                 mWatchlist.playAnimation(R.anim.press_scale_anim)
             }
         }
@@ -122,9 +125,11 @@ open class CoinInfoFragment :
         }
 
     override fun initView(rootView: View) {
-        mChartPeriods.addClickListener { mPresenter?.onPeriodChanged(it) }
+        mChartPeriods.addClickListener { presenter.onPeriodChanged(it) }
 
         mChart.init(mChartListener)
+
+        activity?.intent?.also { presenter.fetchCurrencyData(CoinInfoActivity.getIdFromIntent(it)) }
     }
 
     private fun showData(data: ChartData) = mChart.loadChartData(

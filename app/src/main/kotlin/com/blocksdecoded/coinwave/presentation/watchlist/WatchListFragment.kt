@@ -273,6 +273,7 @@ open class WatchListFragment :
 
     override fun showFavoriteError() {
         mChart.hide()
+        mProgress.hide()
         mErrorIcon.visible()
     }
 

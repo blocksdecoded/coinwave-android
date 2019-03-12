@@ -1,47 +1,42 @@
 package com.blocksdecoded.coinwave.presentation.coininfo
 
-import com.blocksdecoded.core.mvp.deprecated.BaseMVPPresenter
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.domain.usecases.chart.ChartsUseCases
 import com.blocksdecoded.coinwave.domain.usecases.chart.ChartsUseCases.ChartPeriod.*
 import com.blocksdecoded.coinwave.domain.usecases.coins.CoinsUseCases
+import com.blocksdecoded.core.mvp.BaseMvpPresenter
 import com.blocksdecoded.utils.coroutine.launchSilent
 import com.blocksdecoded.utils.rx.uiSubscribe
 import kotlinx.coroutines.launch
 
 class CoinInfoPresenter(
-    view: CoinInfoContract.View?,
+    override var view: CoinInfoContract.View?,
     private val mChartsUseCases: ChartsUseCases,
     private val mCoinsUseCases: CoinsUseCases
-) : BaseMVPPresenter<CoinInfoContract.View>(view), CoinInfoContract.Presenter {
+) : BaseMvpPresenter<CoinInfoContract.View>(), CoinInfoContract.Presenter {
     private var mCached: CoinEntity? = null
 
     private fun fetchChartData(id: Int, periodEnum: ChartsUseCases.ChartPeriod = TODAY) {
-        mView?.hideChartError()
-        mView?.showLoading()
+        view?.hideChartError()
+        view?.showLoading()
         disposables.add(
             mChartsUseCases.getChartData(id, periodEnum)
-                .doAfterTerminate { scope.launch { mView?.hideLoading() } }
+                .doAfterTerminate { scope.launch { view?.hideLoading() } }
                 .uiSubscribe(
-                    { chartData -> mView?.showChartData(chartData) },
-                    { error -> mView?.showChartError() }))
+                    { chartData -> view?.showChartData(chartData) },
+                    { error -> view?.showChartError() }))
     }
 
     override fun onGoToWebsiteClick() {
         mCached?.let {
-            mView?.openSite(it.websiteSlug)
+            view?.openSite(it.websiteSlug)
         }
-    }
-
-    override fun attachView(view: CoinInfoContract.View) {
-        mView = view
-        injectSelfToView()
     }
 
     override fun fetchCurrencyData(id: Int) = launchSilent(scope) {
         mCached = mCoinsUseCases.getCoin(id)
         mCached?.let {
-            mView?.showCurrencyData(it)
+            view?.showCurrencyData(it)
 
             fetchChartData(id)
         }
@@ -64,7 +59,7 @@ class CoinInfoPresenter(
 
     override fun onWatchingClick() {
         mCached?.let {
-            mView?.setWatched(it.isSaved.not())
+            view?.setWatched(it.isSaved.not())
             if (it.isSaved) {
                 mCoinsUseCases.removeCoin(it.id)
                 it.isSaved = false

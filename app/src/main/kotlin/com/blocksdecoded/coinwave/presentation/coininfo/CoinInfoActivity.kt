@@ -14,8 +14,6 @@ import com.blocksdecoded.utils.extensions.outRightTransition
 // Created by askar on 7/24/18.
 class CoinInfoActivity : SwipeableActivity() {
 
-    private var mPresenter: CoinInfoContract.Presenter? = null
-
     @SuppressLint("CommitTransaction")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,14 +26,6 @@ class CoinInfoActivity : SwipeableActivity() {
                     .beginTransaction()
                     .add(android.R.id.content, fragment)
                     .commit()
-
-            mPresenter = CoinInfoPresenter(
-                    fragment,
-                    UseCaseProvider.chartsUseCase,
-                    UseCaseProvider.coinsUseCase
-            )
-
-            mPresenter?.fetchCurrencyData(getIdFromIntent(intent))
         }
     }
 
