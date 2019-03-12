@@ -21,6 +21,9 @@ import com.blocksdecoded.coinwave.domain.usecases.posts.PostsInteractor
 import com.blocksdecoded.coinwave.domain.usecases.posts.PostsUseCases
 import com.blocksdecoded.coinwave.domain.variant.favoritechart.FavoriteChartInteractor
 import com.blocksdecoded.coinwave.domain.variant.favoritechart.FavoriteChartUseVariant
+import com.blocksdecoded.coinwave.presentation.coininfo.CoinInfoPresenter
+import com.blocksdecoded.coinwave.presentation.coinslist.CoinsListContract
+import com.blocksdecoded.coinwave.presentation.coinslist.CoinsListPresenter
 import com.blocksdecoded.coinwave.presentation.main.MenuClickListener
 import com.blocksdecoded.coinwave.presentation.posts.PostsContract
 import com.blocksdecoded.coinwave.presentation.posts.PostsPresenter
@@ -51,6 +54,18 @@ val sourceModule = module {
     single { CoinApiClient as ICoinClient }
 }
 
+val coinsModule = module {
+
+    factory { params -> }
+
+    factory { params -> CoinsListPresenter(
+        params.component1() as CoinsListContract.View,
+        params.component2() as MenuClickListener,
+        get()
+    ) as CoinsListContract.Presenter }
+
+}
+
 val postModule = module {
 
     single { PostRepository(null, PostApiClient) as IPostStorage }
@@ -65,4 +80,4 @@ val postModule = module {
 
 }
 
-val coinApp = listOf(useCaseModule, sourceModule, postModule)
+val coinApp = listOf(useCaseModule, sourceModule, postModule, coinsModule)

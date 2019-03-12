@@ -12,6 +12,14 @@ abstract class BaseMvpPresenter<T> : BaseMvpContract.Presenter<T> {
     protected val coroutineSupervisor = SupervisorJob()
     protected val scope = CoroutineScope(AppExecutors.main + coroutineSupervisor)
 
+    override fun attachView(view: T) {
+        this.view = view
+    }
+
+    override fun detachView() {
+        view = null
+    }
+
     override fun onStart() {
     }
 

@@ -1,12 +1,12 @@
 package com.blocksdecoded.coinwave.presentation.coinslist
 
-import com.blocksdecoded.core.mvp.deprecated.BaseMVPContract
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.presentation.sort.ViewSortEnum
+import com.blocksdecoded.core.mvp.BaseMvpContract
 
 interface CoinsListContract {
 
-    interface View : BaseMVPContract.View<Presenter> {
+    interface View : BaseMvpContract.View<Presenter> {
         fun showCoins(coins: List<CoinEntity>)
 
         fun updateCoin(position: Int, coinEntity: CoinEntity)
@@ -22,7 +22,7 @@ interface CoinsListContract {
         fun hideLoading()
     }
 
-    interface Presenter : BaseMVPContract.Presenter<View> {
+    interface Presenter : BaseMvpContract.Presenter<View> {
         fun onCoinPick(position: Int)
 
         fun onCoinClick(position: Int)

@@ -177,7 +177,7 @@ class MainActivity :
         initNavigationDrawer()
 
         initViewPager(arrayListOf(
-            createCurrencyListScreen(),
+            CoinsListFragment.newInstance(),
             createWatchListScreen(),
             PostsFragment.newInstance())
         )
@@ -205,15 +205,6 @@ class MainActivity :
                 UseCaseProvider.favoriteChartUseCase
         )
     }
-
-    private fun createCurrencyListScreen(): Fragment =
-            CoinsListFragment.newInstance(getString(R.string.title_cryptocurrency)).also {
-                mCoinsListPresenter = CoinsListPresenter(
-                        it,
-                        this,
-                        UseCaseProvider.coinsUseCase
-                )
-            }
 
     //endregion
 

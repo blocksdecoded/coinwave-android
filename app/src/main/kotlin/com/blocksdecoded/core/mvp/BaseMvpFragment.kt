@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.annotation.CallSuper
 import androidx.fragment.app.Fragment
 import butterknife.ButterKnife
@@ -24,7 +25,7 @@ abstract class BaseMvpFragment<T: BaseMvpContract.Presenter<*>> : Fragment(), Ba
         }
     } catch (e: Exception) {
         logE(e)
-        null
+        TextView(context).apply { text = "${javaClass.simpleName} layout initialization error!" }
     }
 
     abstract fun initView(rootView: View)
@@ -56,6 +57,7 @@ abstract class BaseMvpFragment<T: BaseMvpContract.Presenter<*>> : Fragment(), Ba
 
     //region Base Contract
 
+    @CallSuper
     override fun finishView() {
         activity?.finish()
     }

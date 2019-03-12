@@ -1,31 +1,31 @@
 package com.blocksdecoded.coinwave.presentation.coinslist
 
 import android.app.Dialog
-import android.os.Bundle
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import android.view.View
-import android.widget.TextView
 import butterknife.BindView
 import butterknife.OnClick
-import com.blocksdecoded.core.mvp.deprecated.BaseMVPFragment
 import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.presentation.coininfo.CoinInfoActivity
 import com.blocksdecoded.coinwave.presentation.coinslist.recycler.CoinsListAdapter
 import com.blocksdecoded.coinwave.presentation.coinslist.recycler.CoinsListVH
 import com.blocksdecoded.coinwave.presentation.sort.ViewSortEnum.*
+import com.blocksdecoded.core.mvp.BaseMvpFragment
 import com.blocksdecoded.utils.*
 import com.blocksdecoded.utils.extensions.hide
 import com.blocksdecoded.utils.extensions.statusBarHeight
 import com.blocksdecoded.utils.extensions.visible
+import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 
 open class CoinsListFragment :
-        BaseMVPFragment<CoinsListContract.Presenter>(),
+        BaseMvpFragment<CoinsListContract.Presenter>(),
         CoinsListContract.View,
         CoinsListVH.CoinVHListener {
-    override var mPresenter: CoinsListContract.Presenter? = null
+    override val presenter: CoinsListContract.Presenter by inject{ parametersOf(this@CoinsListFragment, context) }
     override val layoutId: Int = R.layout.fragment_coins_list
 
     @BindView(R.id.fragment_coin_list_recycler)
@@ -39,9 +39,6 @@ open class CoinsListFragment :
     @BindView(R.id.fragment_coin_list_header)
     lateinit var mListHeader: View
 
-    @BindView(R.id.fragment_coin_list_title)
-    lateinit var mTitle: TextView
-
     private var mAdapter: CoinsListAdapter? = null
     private var mActiveDialog: Dialog? = null
 
@@ -54,11 +51,11 @@ open class CoinsListFragment :
     )
     fun onClick(view: View) {
         when (view.id) {
-            R.id.coin_menu -> mPresenter?.onMenuClick()
-            R.id.coins_header_name -> mPresenter?.onSortClick(NAME)
-            R.id.coins_header_market_cap -> mPresenter?.onSortClick(CAP)
-            R.id.coins_header_price -> mPresenter?.onSortClick(PRICE)
-            R.id.coins_header_volume -> mPresenter?.onSortClick(VOLUME)
+            R.id.coin_menu -> presenter.onMenuClick()
+            R.id.coins_header_name -> presenter.onSortClick(NAME)
+            R.id.coins_header_market_cap -> presenter.onSortClick(CAP)
+            R.id.coins_header_price -> presenter.onSortClick(PRICE)
+            R.id.coins_header_volume -> presenter.onSortClick(VOLUME)
         }
     }
 
@@ -74,21 +71,19 @@ open class CoinsListFragment :
             rootView.setPadding(0, it.statusBarHeight, 0, 0)
         }
 
-        mTitle?.text = getTitle(arguments)
-
         mAdapter = CoinsListAdapter(arrayListOf(), this)
 
-        mRetry?.setOnClickListener {
-            mPresenter?.getCoins()
+        mRetry.setOnClickListener {
+            presenter.getCoins()
         }
 
-        mSwipeRefreshLayout?.setOnRefreshListener {
-            mPresenter?.getCoins()
+        mSwipeRefreshLayout.setOnRefreshListener {
+            presenter.getCoins()
         }
 
         val lm = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        mRecycler?.layoutManager = lm
-        mRecycler?.adapter = mAdapter
+        mRecycler.layoutManager = lm
+        mRecycler.adapter = mAdapter
         mRecycler.setHasFixedSize(true)
     }
 
@@ -97,11 +92,11 @@ open class CoinsListFragment :
     //region ViewHolder
 
     override fun onPick(position: Int) {
-        mPresenter?.onCoinPick(position)
+        presenter.onCoinPick(position)
     }
 
     override fun onClick(position: Int) {
-        mPresenter?.onCoinClick(position)
+        presenter.onCoinClick(position)
     }
 
     //endregion
@@ -126,9 +121,7 @@ open class CoinsListFragment :
         mRecycler.visible()
         mListHeader.visible()
         mErrorContainer.hide()
-        mRecycler?.post {
-            mAdapter?.setItems(coins)
-        }
+        mRecycler.post { mAdapter?.setItems(coins) }
     }
 
     override fun showNetworkError(hideList: Boolean) {
@@ -145,11 +138,11 @@ open class CoinsListFragment :
     }
 
     override fun hideLoading() {
-        mSwipeRefreshLayout?.isRefreshing = false
+        mSwipeRefreshLayout.isRefreshing = false
     }
 
     override fun showLoading() {
-        mSwipeRefreshLayout?.isRefreshing = true
+        mSwipeRefreshLayout.isRefreshing = true
         mErrorContainer.hide()
         mRecycler.hide()
         mListHeader.hide()
@@ -158,17 +151,6 @@ open class CoinsListFragment :
     //endregion
 
     companion object {
-        private val TITLE_KEY = "list_title"
-
-        fun newInstance(
-            title: String
-        ): CoinsListFragment = CoinsListFragment().apply {
-            arguments = Bundle()
-            arguments?.putString(TITLE_KEY, title)
-        }
-
-        fun getTitle(arguments: Bundle?): String {
-            return arguments?.getString(TITLE_KEY) ?: ""
-        }
+        fun newInstance() = CoinsListFragment()
     }
 }

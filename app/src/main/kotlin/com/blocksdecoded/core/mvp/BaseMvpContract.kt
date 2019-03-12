@@ -12,6 +12,10 @@ interface BaseMvpContract {
     interface Presenter<T> {
         var view: T?
 
+        fun attachView(view: T)
+
+        fun detachView()
+
         fun onStart()
 
         fun onResume()
