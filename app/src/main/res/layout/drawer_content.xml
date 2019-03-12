@@ -40,7 +40,7 @@
                 android:src="@drawable/ic_close"/>
         </androidx.cardview.widget.CardView>
 
-        <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
+        <TextView
             android:id="@+id/drawer_menu_title"
             android:theme="@style/AppTheme.DrawerTitle"
             android:layout_width="wrap_content"
@@ -51,18 +51,16 @@
             android:layout_marginLeft="4dp"
             android:layout_marginRight="4dp"
             android:text="@string/title_menu"
-            android:paddingLeft="0dp"
-            app:ftv_typeface="light"/>
+            android:paddingLeft="0dp" />
 
         <!--Pick favorite-->
-        <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
+        <TextView
             android:id="@+id/drawer_favorite"
             android:theme="@style/AppTheme.DrawerMenuItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/action_pick_favorite_coin"
-            app:layout_constraintTop_toBottomOf="@+id/drawer_close_menu"
-            app:ftv_typeface="light"/>
+            app:layout_constraintTop_toBottomOf="@+id/drawer_close_menu" />
 
         <ImageView
             android:layout_width="@dimen/drawer_icon_size"
@@ -83,14 +81,13 @@
             android:src="@drawable/ic_right_arrow_light"/>
 
         <!--Add to watchlist-->
-        <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
+        <TextView
             android:id="@+id/drawer_add_watchlist"
             android:theme="@style/AppTheme.DrawerMenuItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/title_add_to_watchlist"
-            app:layout_constraintTop_toBottomOf="@+id/drawer_favorite"
-            app:ftv_typeface="light"/>
+            app:layout_constraintTop_toBottomOf="@+id/drawer_favorite" />
 
         <ImageView
             android:layout_width="@dimen/drawer_icon_size"
@@ -111,14 +108,13 @@
             android:src="@drawable/ic_right_arrow_light"/>
 
         <!--Share app-->
-        <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
+        <TextView
             android:id="@+id/drawer_share_this_app"
             android:theme="@style/AppTheme.DrawerMenuItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/action_share_this_app"
-            app:layout_constraintTop_toBottomOf="@+id/drawer_rate_us"
-            app:ftv_typeface="light"/>
+            app:layout_constraintTop_toBottomOf="@+id/drawer_rate_us" />
 
         <ImageView
             android:layout_width="@dimen/drawer_icon_size"
@@ -139,14 +135,13 @@
             android:src="@drawable/ic_right_arrow_light"/>
 
         <!--Rate us-->
-        <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
+        <TextView
             android:id="@+id/drawer_rate_us"
             android:theme="@style/AppTheme.DrawerMenuItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/action_rate_us"
-            app:layout_constraintTop_toBottomOf="@+id/drawer_contact_us"
-            app:ftv_typeface="light"/>
+            app:layout_constraintTop_toBottomOf="@+id/drawer_contact_us" />
 
         <ImageView
             android:layout_width="@dimen/drawer_icon_size"
@@ -220,7 +215,7 @@
             android:src="@drawable/img_blocks_decoded_small"
             android:alpha="0.6"/>
 
-        <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
+        <TextView
             android:id="@+id/drawer_company_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -232,10 +227,9 @@
             android:text="Blocks Decoded"
             android:alpha="0.7"
             android:textColor="@color/white"
-            android:textSize="12sp"
-            app:ftv_typeface="light"/>
+            android:textSize="12sp" />
 
-        <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
+        <TextView
             android:id="@+id/drawer_app_version"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -249,8 +243,7 @@
             android:text="v1.0.0 debug"
             android:alpha="0.6"
             android:textColor="@color/white"
-            android:textSize="12sp"
-            app:ftv_typeface="light"/>
+            android:textSize="12sp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

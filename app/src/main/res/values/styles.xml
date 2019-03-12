@@ -40,20 +40,18 @@
         <item name="android:popupElevation">4dp</item>
     </style>
 
-    <style name="AppTheme.FieldTitle">
+    <style name="AppTheme.FieldTitle" parent="LightTextStyle">
         <item name="android:layout_marginLeft">20dp</item>
         <item name="android:paddingTop">12dp</item>
         <item name="android:paddingBottom">12dp</item>
         <item name="android:textColor">#747679</item>
         <item name="android:textSize">15sp</item>
-        <item name="ftv_typeface">light</item>
     </style>
 
-    <style name="AppTheme.FieldValue">
+    <style name="AppTheme.FieldValue" parent="RegularTextStyle">
         <item name="android:textColor">#1b242a</item>
         <item name="android:layout_marginRight">20dp</item>
         <item name="android:textSize">15sp</item>
-        <item name="ftv_typeface">regular</item>
     </style>
     
     <!-- Drawer Text fields -->
@@ -67,7 +65,7 @@
         <item name="android:textColor">@drawable/drawer_text_color</item>
     </style>
 
-    <style name="AppTheme.DrawerTitle">
+    <style name="AppTheme.DrawerTitle" parent="LightTextStyle">
         <item name="android:paddingLeft">20dp</item>
         <item name="android:paddingTop">10dp</item>
         <item name="android:paddingBottom">10dp</item>

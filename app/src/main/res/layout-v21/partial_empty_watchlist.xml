@@ -49,7 +49,8 @@
             android:textColor="@color/main_dark"
             android:background="@drawable/bg_green_gradient"
             android:textSize="@dimen/message_button_text"
-            android:letterSpacing="0.15" />
+            android:letterSpacing="0.15"
+            android:textAllCaps="true"/>
     
     </androidx.cardview.widget.CardView>
 

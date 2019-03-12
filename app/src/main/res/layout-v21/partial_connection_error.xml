@@ -45,7 +45,7 @@
         app:cardCornerRadius="8dp"
         android:stateListAnimator="@drawable/button_state_animation">
     
-        <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
+        <TextView
             android:theme="@style/SemiBoldTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -56,8 +56,9 @@
             android:text="@string/btn_retry"
             android:textColor="@color/main_dark"
             android:background="@drawable/bg_green_gradient"
-            android:textSize="14sp"
-            android:letterSpacing="0.15" />
+            android:textSize="@dimen/message_button_text"
+            android:letterSpacing="0.15"
+            android:textAllCaps="true"/>
         
     </androidx.cardview.widget.CardView>
 

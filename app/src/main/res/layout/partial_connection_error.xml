@@ -55,8 +55,7 @@
             android:text="@string/btn_retry"
             android:textColor="@color/main_dark"
             android:background="@drawable/bg_green_gradient"
-            android:textSize="14sp"
-            android:letterSpacing="0.15" />
+            android:textSize="@dimen/message_button_text" />
         
     </androidx.cardview.widget.CardView>
 

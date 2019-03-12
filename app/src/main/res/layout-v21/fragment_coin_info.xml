@@ -432,7 +432,8 @@
                 android:paddingTop="4dp"
                 android:text="@string/btn_go_to_website"
                 android:textColor="@color/accent_text"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:letterSpacing="0.15" />
             
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.blocksdecoded.coinwave.presentation.widgets.LockableScrollView>

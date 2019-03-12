@@ -28,7 +28,8 @@
                 android:src="@drawable/ic_left_arrow"
                 android:padding="13dp"/>
 
-            <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
+            <TextView
+                android:theme="@style/RegularTextStyle"
                 android:id="@+id/fragment_coin_list_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -37,7 +38,6 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 android:text="@string/title_add_to_watchlist"
-                app:ftv_typeface="medium"
                 android:textColor="@color/white"
                 android:textSize="@dimen/screen_small_title_text_size" />
         </androidx.constraintlayout.widget.ConstraintLayout>

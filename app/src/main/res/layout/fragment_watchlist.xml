@@ -75,7 +75,8 @@
                     app:layout_constraintTop_toBottomOf="@+id/fragment_watchlist_header"
                     app:layout_constraintBottom_toBottomOf="parent" />
 
-                <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
+                <TextView
+                    android:theme="@style/RegularTextStyle"
                     android:id="@+id/fragment_watchlist_empty"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -136,7 +137,8 @@
                         app:cardBackgroundColor="@color/colorPrimary"
                         android:visibility="invisible">
 
-                        <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
+                        <TextView
+                            android:theme="@style/RegularTextStyle"
                             android:id="@+id/watchlist_chart_picked"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -148,7 +150,8 @@
 
                     </androidx.cardview.widget.CardView>
 
-                    <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
+                    <TextView
+                        android:theme="@style/RegularTextStyle"
                         android:id="@+id/fragment_watchlist_favorite_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -159,7 +162,8 @@
                         android:text="BTC"
                         android:textColor="@color/white"/>
 
-                    <com.blocksdecoded.coinwave.presentation.widgets.FontTextView
+                    <TextView
+                        android:theme="@style/SemiBoldTextStyle"
                         android:id="@+id/fragment_watchlist_favorite_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -168,8 +172,7 @@
                         android:layout_marginRight="16dp"
                         android:layout_marginTop="8dp"
                         android:text=""
-                        android:textColor="@color/white"
-                        app:ftv_typeface="semibold"/>
+                        android:textColor="@color/white" />
 
                     <com.github.mikephil.charting.charts.LineChart
                         android:id="@+id/fragment_watchlist_chart"
