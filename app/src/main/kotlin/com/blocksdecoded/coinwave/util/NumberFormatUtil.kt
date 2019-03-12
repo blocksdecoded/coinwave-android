@@ -1,7 +1,5 @@
 package com.blocksdecoded.coinwave.util
 
-import android.util.Log
-import com.blocksdecoded.utils.logD
 import java.text.DecimalFormat
 import kotlin.math.roundToInt
 

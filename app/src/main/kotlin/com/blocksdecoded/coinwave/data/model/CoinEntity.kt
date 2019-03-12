@@ -26,9 +26,6 @@ data class CoinEntity(
 
     fun getMarketCap(): Float? = marketCap.toFloat()
     fun getDailyVolume(): Float? = volume.toFloat()
-    fun getPrice(): Double? {
-        logD("${symbol} - price is $price")
-        return price
-    }
+    fun getPrice(): Double? = price
     fun getPriceChange(): Float? = priceChange
 }

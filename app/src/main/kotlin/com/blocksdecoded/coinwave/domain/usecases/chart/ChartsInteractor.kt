@@ -11,7 +11,7 @@ import kotlin.collections.HashMap
 
 import com.blocksdecoded.coinwave.data.model.ChartPeriodEnum as RequestChartPeriod
 
-// Created by askar on 7/25/18.
+
 class ChartsInteractor(
     private val mCryptoService: ICoinsStorage,
     private val mChartsService: IChartsStorage
