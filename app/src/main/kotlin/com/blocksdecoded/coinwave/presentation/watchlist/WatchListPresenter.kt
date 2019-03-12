@@ -80,7 +80,7 @@ class WatchListPresenter(
             ?.uiSubscribe(
                     onNext = { view?.showFavoriteChart(it) },
                     onError = { view?.showFavoriteError() },
-                    onComplete = {  }
+                    onComplete = { }
             )?.let { disposables.add(it) }
     }
 

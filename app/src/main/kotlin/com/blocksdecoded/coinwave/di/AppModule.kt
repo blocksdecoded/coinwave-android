@@ -92,7 +92,6 @@ val coinsModule = module {
         params.component1() as AddToWatchlistContract.View,
         get()
     ) as AddToWatchlistContract.Presenter }
-
 }
 
 val postModule = module {
@@ -106,7 +105,6 @@ val postModule = module {
         params.component2() as MenuClickListener,
         get()
     ) as PostsContract.Presenter }
-
 }
 
 val coinApp = listOf(useCaseModule, sourceModule, postModule, coinsModule)

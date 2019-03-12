@@ -9,11 +9,10 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import butterknife.BindView
 import butterknife.OnClick
 import com.blocksdecoded.core.contracts.LoadNextListener
-import com.blocksdecoded.core.mvp.deprecated.BaseMVPFragment
 import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.data.post.model.PublisherPost
 import com.blocksdecoded.coinwave.presentation.posts.recycler.deprecated.PostListAdapter
-import com.blocksdecoded.coinwave.presentation.posts.recycler.PostitemViewHolder
+import com.blocksdecoded.coinwave.presentation.posts.recycler.PostItemViewHolder
 import com.blocksdecoded.core.mvp.BaseMvpFragment
 import com.blocksdecoded.utils.customtabs.openUrl
 import com.blocksdecoded.utils.extensions.setConstraintTopMargin
@@ -28,7 +27,7 @@ import kotlin.math.roundToInt
 open class PostsFragment :
         BaseMvpFragment<PostsContract.Presenter>(),
         PostsContract.View,
-        PostitemViewHolder.PostVHCLickListener,
+        PostItemViewHolder.PostVHCLickListener,
         LoadNextListener {
 
     override val presenter: PostsContract.Presenter by inject { parametersOf(this@PostsFragment, context) }

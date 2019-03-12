@@ -3,6 +3,7 @@ package com.blocksdecoded.coinwave.presentation.watchlist.recycler
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.util.FormatUtil
@@ -16,7 +17,7 @@ import com.blocksdecoded.utils.extensions.visible
 class WatchlistViewHolder(
     view: View,
     private val mListener: CurrencyVHClickListener
-) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
+) : RecyclerView.ViewHolder(view) {
     private val mSymbolIcon: ImageView = itemView.findViewById(R.id.adapter_coin_icon)
     private val mSymbol: TextView = itemView.findViewById(R.id.adapter_coin_symbol)
     private val mMarketCap: TextView = itemView.findViewById(R.id.adapter_coin_market_cap)

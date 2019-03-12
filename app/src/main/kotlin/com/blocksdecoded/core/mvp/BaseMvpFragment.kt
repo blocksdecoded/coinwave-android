@@ -13,7 +13,7 @@ import com.blocksdecoded.utils.extensions.inflate
 import com.blocksdecoded.utils.logE
 import com.blocksdecoded.utils.showShortToast
 
-abstract class BaseMvpFragment<T: BaseMvpContract.Presenter<*>> : Fragment(), BaseMvpContract.View<T> {
+abstract class BaseMvpFragment<T : BaseMvpContract.Presenter<*>> : Fragment(), BaseMvpContract.View<T> {
     abstract val layoutId: Int
 
     private var mUnbinder: Unbinder? = null

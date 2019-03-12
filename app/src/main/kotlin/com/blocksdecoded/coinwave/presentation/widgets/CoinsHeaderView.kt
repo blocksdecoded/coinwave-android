@@ -52,9 +52,9 @@ class CoinsHeaderView : FrameLayout {
             R.id.coins_header_market_cap,
             R.id.coins_header_name,
             R.id.coins_header_price,
-            R.id.coins_header_volume )
+            R.id.coins_header_volume)
     fun onClick(view: View) {
-        when(view.id) {
+        when (view.id) {
             R.id.coins_header_market_cap -> mListener?.onItemClick(CAP)
             R.id.coins_header_name -> mListener?.onItemClick(NAME)
             R.id.coins_header_price -> mListener?.onItemClick(PRICE)
@@ -102,8 +102,8 @@ class CoinsHeaderView : FrameLayout {
     }
 
     private fun setActiveColor() {
-        when(currentState) {
-            DEFAULT -> {  }
+        when (currentState) {
+            DEFAULT -> { }
             NAME_ASC -> {
                 nameTitle.setTextColor(activeColor)
                 nameSortIcon.setColorFilter(activeColor)

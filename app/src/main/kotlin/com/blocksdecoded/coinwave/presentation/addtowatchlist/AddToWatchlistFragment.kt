@@ -18,7 +18,7 @@ import org.koin.core.parameter.parametersOf
 class AddToWatchlistFragment : BaseMvpFragment<AddToWatchlistContract.Presenter>(),
         AddToWatchlistContract.View,
         AddToWatchlistVH.WatchlistVHClickListener {
-    
+
     override val presenter: AddToWatchlistContract.Presenter by inject { parametersOf(this@AddToWatchlistFragment) }
     override val layoutId: Int = R.layout.fragment_add_to_watchlist
 

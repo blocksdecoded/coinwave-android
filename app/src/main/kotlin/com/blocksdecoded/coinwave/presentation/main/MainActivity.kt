@@ -13,7 +13,6 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import com.blocksdecoded.coinwave.BuildConfig
 import com.blocksdecoded.coinwave.R
-import com.blocksdecoded.coinwave.domain.UseCaseProvider
 import com.blocksdecoded.coinwave.util.CryptoRateUtil
 import com.blocksdecoded.coinwave.util.SFProTextTypeface
 import com.blocksdecoded.coinwave.presentation.addtowatchlist.AddToWatchlistActivity
@@ -21,7 +20,6 @@ import com.blocksdecoded.coinwave.presentation.coinslist.CoinsListFragment
 import com.blocksdecoded.coinwave.presentation.pickfavorite.PickFavoriteActivity
 import com.blocksdecoded.coinwave.presentation.posts.PostsFragment
 import com.blocksdecoded.coinwave.presentation.watchlist.WatchListFragment
-import com.blocksdecoded.coinwave.presentation.watchlist.WatchListPresenter
 import com.blocksdecoded.coinwave.presentation.widgets.PagerAdapter
 import com.blocksdecoded.rateus.base.RateUsDialogContract
 import com.blocksdecoded.rateus.base.RateUsListener

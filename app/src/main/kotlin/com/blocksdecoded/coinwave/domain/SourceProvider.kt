@@ -7,9 +7,6 @@ import com.blocksdecoded.coinwave.data.crypto.CoinsRepository
 import com.blocksdecoded.coinwave.data.crypto.ICoinsStorage
 import com.blocksdecoded.coinwave.data.crypto.local.CoinsLocalStorage
 import com.blocksdecoded.coinwave.data.crypto.remote.CoinApiClient
-import com.blocksdecoded.coinwave.data.post.IPostStorage
-import com.blocksdecoded.coinwave.data.post.PostRepository
-import com.blocksdecoded.coinwave.data.post.remote.PostApiClient
 import com.blocksdecoded.coinwave.data.watchlist.WatchlistService
 import com.blocksdecoded.coinwave.data.watchlist.WatchlistSourceContract
 import com.blocksdecoded.utils.shared.ISharedStorage

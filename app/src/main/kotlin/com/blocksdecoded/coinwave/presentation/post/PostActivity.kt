@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.blocksdecoded.core.SwipeableActivity
-import com.blocksdecoded.coinwave.domain.UseCaseProvider
 import com.blocksdecoded.utils.extensions.inRightTransition
 import com.blocksdecoded.utils.extensions.outRightTransition
 
@@ -17,7 +16,7 @@ import com.blocksdecoded.utils.extensions.outRightTransition
 
 class PostActivity : SwipeableActivity() {
     companion object {
-        private val POST_ID_FIELD = "coin_id"
+        private const val POST_ID_FIELD = "coin_id"
 
         fun start(context: Context, postId: Int) {
             context.startActivity(intent(context, postId))
@@ -66,7 +65,7 @@ class PostActivity : SwipeableActivity() {
 //                    fragment,
 //                    UseCaseProvider.postUseCase
 //            )
-            //TODO: Initialize presenter
+            // TODO: Initialize presenter
 
             mPresenter?.getPost(getIdFromIntent(intent))
         }

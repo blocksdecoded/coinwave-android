@@ -24,7 +24,6 @@ class AddToWatchlistVH(
 
     init {
         itemView.setOnClickListener { mListener.onWatchClick(adapterPosition) }
-//        mWatchIcon.setOnClickListener { mListener.onWatchClick(adapterPosition) }
     }
 
     fun onBind(coin: CoinEntity) {

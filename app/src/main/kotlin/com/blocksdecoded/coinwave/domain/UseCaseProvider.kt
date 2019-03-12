@@ -6,8 +6,6 @@ import com.blocksdecoded.coinwave.domain.usecases.favorite.FavoriteInteractor
 import com.blocksdecoded.coinwave.domain.usecases.favorite.FavoriteUseCases
 import com.blocksdecoded.coinwave.domain.usecases.coins.CoinsInteractor
 import com.blocksdecoded.coinwave.domain.usecases.coins.CoinsUseCases
-import com.blocksdecoded.coinwave.domain.usecases.posts.PostsInteractor
-import com.blocksdecoded.coinwave.domain.usecases.posts.PostsUseCases
 import com.blocksdecoded.coinwave.domain.variant.favoritechart.FavoriteChartInteractor
 import com.blocksdecoded.coinwave.domain.variant.favoritechart.FavoriteChartUseVariant
 

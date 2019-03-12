@@ -46,7 +46,7 @@ class CoinsCache {
         sortCoins()
     }
 
-    private fun sortCoins() = when(currentSort) {
+    private fun sortCoins() = when (currentSort) {
         DEFAULT -> cachedCoins.sortBy { it.rank }
         NAME_ASC -> cachedCoins.sortBy { it.symbol }
         NAME_DES -> cachedCoins.sortByDescending { it.symbol }
@@ -64,5 +64,5 @@ class CoinsCache {
 
     fun isEmpty(): Boolean = cachedCoins.isEmpty()
 
-    fun isValidIndex(position: Int) : Boolean = cachedCoins.isValidIndex(position)
+    fun isValidIndex(position: Int): Boolean = cachedCoins.isValidIndex(position)
 }

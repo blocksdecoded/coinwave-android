@@ -1,6 +1,5 @@
 package com.blocksdecoded.coinwave.presentation.posts.recycler
 
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -12,14 +11,12 @@ import com.bumptech.glide.Glide
 import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.data.post.model.PublisherPost
 import com.blocksdecoded.coinwave.presentation.posts.util.setRandomBg
-import com.blocksdecoded.utils.logE
-import com.blocksdecoded.utils.showShortToast
 
 /**
  * Created by askar on 11/19/18
  * with Android Studio
  */
-class PostitemViewHolder(
+class PostItemViewHolder(
     view: View,
     private val mListener: PostVHCLickListener
 ) : RecyclerView.ViewHolder(view) {

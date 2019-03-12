@@ -24,7 +24,7 @@ import org.koin.core.parameter.parametersOf
 open class CoinsListFragment : BaseMvpFragment<CoinsListContract.Presenter>(),
     CoinsListContract.View,
     CoinsListVH.CoinVHListener {
-    override val presenter: CoinsListContract.Presenter by inject{ parametersOf(this@CoinsListFragment, context) }
+    override val presenter: CoinsListContract.Presenter by inject { parametersOf(this@CoinsListFragment, context) }
     override val layoutId: Int = R.layout.fragment_coins_list
 
     @BindView(R.id.fragment_coin_list_recycler)
