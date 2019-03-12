@@ -22,9 +22,12 @@
     <color name="white_transparent">#30FFFFFF</color>
     <color name="saved_bg">#f9f9f9</color>
     <color name="dark_saved_bg">#19252d</color>
+    
+    <color name="blue">#3B95FF</color>
+    <color name="blue_90">#dd3B95FF</color>
+    <color name="header_active">#3B95FF</color>
 
     <color name="status_bar_bg">#00000000</color>
-    <!--<color name="light_status_bar">#FFF</color>-->
     <color name="light_grey">#50F0F0F0</color>
     <color name="selectable_bg_50">#50FFFFFF</color>
     <color name="selectable_bg_70">#70FFFFFF</color>

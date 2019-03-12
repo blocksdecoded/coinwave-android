@@ -36,7 +36,6 @@ interface SimpleRH<T> : Callback<T> {
     }
 
     override fun onFailure(call: Call<T>?, t: Throwable?) {
-        Log.e("ololo", t?.message)
         onFailure(NetworkError.CONNECTION_ERROR)
     }
 }

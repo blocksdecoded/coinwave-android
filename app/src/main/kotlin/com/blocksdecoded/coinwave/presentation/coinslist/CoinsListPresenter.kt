@@ -15,7 +15,7 @@ class CoinsListPresenter(
     private val mMenuListener: MenuClickListener,
     private val mCoinsUseCases: CoinsUseCases
 ) : BaseMvpPresenter<CoinsListContract.View>(), CoinsListContract.Presenter {
-    private val mCoinsCache = CoinsCache()
+    private val mCoinsCache = CoinsCache().apply { currentSort = CoinsCache.CoinSortEnum.PRICE_DES }
     private var mInitialized = false
 
     private val mCurrenciesObserver = object : ICoinsObserver {
@@ -39,7 +39,7 @@ class CoinsListPresenter(
 
     private fun updateCache(coins: List<CoinEntity>) {
         mCoinsCache.setCache(coins)
-        view?.showCoins(mCoinsCache.cachedCoins)
+        refreshView()
     }
 
     private fun getCurrencies() = launchSilent(scope) {
@@ -50,6 +50,11 @@ class CoinsListPresenter(
                 onComplete = { view?.hideLoading() },
                 onError = { view?.showNetworkError(mCoinsCache.isEmpty()) }
             )
+    }
+
+    private fun refreshView() {
+        view?.showCoins(mCoinsCache.cachedCoins)
+        view?.showSortType(mCoinsCache.currentSort)
     }
 
     //endregion
@@ -86,7 +91,7 @@ class CoinsListPresenter(
 
     override fun onSortClick(sortType: ViewSortEnum) {
         mCoinsCache.updateSortType(sortType)
-        view?.showCoins(mCoinsCache.cachedCoins)
+        refreshView()
     }
 
     //endregion

@@ -12,7 +12,9 @@ import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.presentation.coininfo.CoinInfoActivity
 import com.blocksdecoded.coinwave.presentation.coinslist.recycler.CoinsListAdapter
 import com.blocksdecoded.coinwave.presentation.coinslist.recycler.CoinsListVH
+import com.blocksdecoded.coinwave.presentation.sort.CoinsCache
 import com.blocksdecoded.coinwave.presentation.sort.ViewSortEnum.*
+import com.blocksdecoded.coinwave.presentation.widgets.CoinsHeaderView
 import com.blocksdecoded.core.mvp.BaseMvpFragment
 import com.blocksdecoded.utils.*
 import com.blocksdecoded.utils.extensions.hide
@@ -36,25 +38,17 @@ open class CoinsListFragment : BaseMvpFragment<CoinsListContract.Presenter>(),
     @BindView(R.id.connection_error_retry)
     lateinit var mRetry: View
     @BindView(R.id.fragment_coin_list_header)
-    lateinit var mListHeader: View
+    lateinit var mListHeader: CoinsHeaderView
 
     private var mAdapter: CoinsListAdapter? = null
     private var mActiveDialog: Dialog? = null
 
     @OnClick(
-            R.id.coin_menu,
-            R.id.coins_header_name,
-            R.id.coins_header_market_cap,
-            R.id.coins_header_price,
-            R.id.coins_header_volume
+            R.id.coin_menu
     )
     fun onClick(view: View) {
         when (view.id) {
             R.id.coin_menu -> presenter.onMenuClick()
-            R.id.coins_header_name -> presenter.onSortClick(NAME)
-            R.id.coins_header_market_cap -> presenter.onSortClick(CAP)
-            R.id.coins_header_price -> presenter.onSortClick(PRICE)
-            R.id.coins_header_volume -> presenter.onSortClick(VOLUME)
         }
     }
 
@@ -66,6 +60,10 @@ open class CoinsListFragment : BaseMvpFragment<CoinsListContract.Presenter>(),
     }
 
     override fun initView(rootView: View) {
+        mListHeader.setListener {
+            presenter.onSortClick(it)
+        }
+
         context?.also {
             rootView.setPadding(0, it.statusBarHeight, 0, 0)
         }
@@ -97,6 +95,10 @@ open class CoinsListFragment : BaseMvpFragment<CoinsListContract.Presenter>(),
     //endregion
 
     //region Contract
+
+    override fun showSortType(sortType: CoinsCache.CoinSortEnum) {
+        mListHeader.currentState = sortType
+    }
 
     override fun openCoinInfo(id: Int) {
         activity?.let {

@@ -27,8 +27,8 @@ class CoinsHeaderView : FrameLayout {
             updateViews()
         }
 
-    private val activeColor by lazy { getColorRes(R.color.header_active) }
-    private val inactiveColor by lazy { getColorRes(R.color.header_inactive) }
+    private val activeColor by lazy { getColorRes(R.color.blue) }
+    private val inactiveColor by lazy { getColorRes(R.color.light_text)}
 
     @BindView(R.id.coins_header_market_cap_title)
     lateinit var marketCapTitle: TextView
@@ -55,14 +55,14 @@ class CoinsHeaderView : FrameLayout {
             R.id.coins_header_volume)
     fun onClick(view: View) {
         when (view.id) {
-            R.id.coins_header_market_cap -> mListener?.onItemClick(CAP)
-            R.id.coins_header_name -> mListener?.onItemClick(NAME)
-            R.id.coins_header_price -> mListener?.onItemClick(PRICE)
-            R.id.coins_header_volume -> mListener?.onItemClick(VOLUME)
+            R.id.coins_header_market_cap -> mListener?.invoke(CAP)
+            R.id.coins_header_name -> mListener?.invoke(NAME)
+            R.id.coins_header_price -> mListener?.invoke(PRICE)
+            R.id.coins_header_volume -> mListener?.invoke(VOLUME)
         }
     }
 
-    private var mListener: HeaderClickListener? = null
+    private var mListener: ((sortType: ViewSortEnum) -> Unit)? = null
 
     constructor(context: Context) : super(context, null) {
         init()
@@ -86,7 +86,7 @@ class CoinsHeaderView : FrameLayout {
         ButterKnife.bind(this)
     }
 
-    fun setListener(listener: HeaderClickListener) {
+    fun setListener(listener: (sortType: ViewSortEnum) -> Unit) {
         mListener = listener
     }
 
@@ -98,48 +98,53 @@ class CoinsHeaderView : FrameLayout {
 
     private fun resetAllViews() {
         arrayListOf(nameTitle, priceTitle, volumeTitle, marketCapTitle).forEach { it.setTextColor(inactiveColor) }
-        arrayListOf(nameSortIcon, priceSortIcon, volumeSortIcon, capSortIcon).forEach { it.setColorFilter(inactiveColor) }
+        arrayListOf(nameSortIcon, priceSortIcon, volumeSortIcon, capSortIcon).forEach {
+            it.rotation = 0f
+            it.setColorFilter(inactiveColor)
+        }
     }
 
-    private fun setActiveColor() {
-        when (currentState) {
-            DEFAULT -> { }
-            NAME_ASC -> {
-                nameTitle.setTextColor(activeColor)
-                nameSortIcon.setColorFilter(activeColor)
-            }
-            NAME_DES -> {
-                nameTitle.setTextColor(activeColor)
-                nameSortIcon.setColorFilter(activeColor)
-            }
-            CAP_ASC -> {
-                marketCapTitle.setTextColor(activeColor)
-                capSortIcon.setColorFilter(activeColor)
-            }
-            CAP_DES -> {
-                marketCapTitle.setTextColor(activeColor)
-                capSortIcon.setColorFilter(activeColor)
-            }
-            VOL_ASC -> {
-                volumeTitle.setTextColor(activeColor)
-                volumeSortIcon.setColorFilter(activeColor)
-                volumeSortIcon.rotation = 0f
-            }
-            VOL_DES -> {
-                volumeTitle.setTextColor(activeColor)
-                volumeSortIcon.setColorFilter(activeColor)
-                volumeSortIcon.rotation = 180f
-            }
-            PRICE_ASC -> {
-                priceTitle.setTextColor(activeColor)
-                priceSortIcon.setColorFilter(activeColor)
-                priceSortIcon.rotation = 0f
-            }
-            PRICE_DES -> {
-                priceTitle.setTextColor(activeColor)
-                priceSortIcon.setColorFilter(activeColor)
-                priceSortIcon.rotation = 180f
-            }
+    private fun setActiveColor() = when (currentState) {
+        DEFAULT -> { }
+        NAME_ASC -> {
+            nameTitle.setTextColor(activeColor)
+            nameSortIcon.setColorFilter(activeColor)
+            nameSortIcon.rotation = 0f
+        }
+        NAME_DES -> {
+            nameTitle.setTextColor(activeColor)
+            nameSortIcon.setColorFilter(activeColor)
+            nameSortIcon.rotation = 180f
+        }
+        CAP_ASC -> {
+            marketCapTitle.setTextColor(activeColor)
+            capSortIcon.setColorFilter(activeColor)
+            capSortIcon.rotation = 0f
+        }
+        CAP_DES -> {
+            marketCapTitle.setTextColor(activeColor)
+            capSortIcon.setColorFilter(activeColor)
+            capSortIcon.rotation = 180f
+        }
+        VOL_ASC -> {
+            volumeTitle.setTextColor(activeColor)
+            volumeSortIcon.setColorFilter(activeColor)
+            volumeSortIcon.rotation = 0f
+        }
+        VOL_DES -> {
+            volumeTitle.setTextColor(activeColor)
+            volumeSortIcon.setColorFilter(activeColor)
+            volumeSortIcon.rotation = 180f
+        }
+        PRICE_ASC -> {
+            priceTitle.setTextColor(activeColor)
+            priceSortIcon.setColorFilter(activeColor)
+            priceSortIcon.rotation = 0f
+        }
+        PRICE_DES -> {
+            priceTitle.setTextColor(activeColor)
+            priceSortIcon.setColorFilter(activeColor)
+            priceSortIcon.rotation = 180f
         }
     }
 

@@ -13,8 +13,8 @@ class CoinsCache {
             var sort: (coins: ArrayList<CoinEntity>) -> Unit
     ) {
         DEFAULT({ }),
-        NAME_ASC({ it.sortBy { it.symbol } }),
-        NAME_DES({ it.sortByDescending { it.symbol } }),
+        NAME_ASC({ it.sortByDescending { it.symbol } }),
+        NAME_DES({ it.sortBy { it.symbol } }),
         CAP_ASC({ it.sortBy { it.marketCap } }),
         CAP_DES({ it.sortByDescending { it.marketCap } }),
         VOL_ASC({ it.sortBy { it.volume } }),
@@ -23,7 +23,7 @@ class CoinsCache {
         PRICE_DES({ it.sortByDescending { it.price } })
     }
 
-    private var currentSort = DEFAULT
+    var currentSort = DEFAULT
         set(value) {
             field = value
             sortCoins()
@@ -37,8 +37,8 @@ class CoinsCache {
 
     fun updateSortType(sortType: ViewSortEnum) {
         currentSort = when {
-            sortType == NAME && currentSort != NAME_ASC -> NAME_ASC
-            sortType == NAME && currentSort == NAME_ASC -> NAME_DES
+            sortType == NAME && currentSort != NAME_DES -> NAME_DES
+            sortType == NAME && currentSort == NAME_DES -> NAME_ASC
             sortType == CAP && currentSort != CAP_DES -> CAP_DES
             sortType == CAP && currentSort == CAP_DES -> CAP_ASC
             sortType == PRICE && currentSort != PRICE_DES -> PRICE_DES

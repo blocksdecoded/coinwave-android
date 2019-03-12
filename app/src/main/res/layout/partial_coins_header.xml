@@ -2,39 +2,41 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:baselineAligned="false">
     
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/coins_header_name"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="0.9"
-        android:background="@drawable/bg_green_selectable">
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="@drawable/bg_blue_selectable">
         <TextView
             android:theme="@style/ListHeaderItem"
             android:id="@+id/coins_header_name_title"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:paddingLeft="20dp"
             android:text="@string/coin_name_field" />
         
         <ImageView
             android:id="@+id/coins_header_name_sort_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/header_arrow_size"
+            android:layout_height="@dimen/header_arrow_size"
             android:src="@drawable/ic_arrow_up_grey"
-            android:layout_toRightOf="@+id/coins_header_name_title"
-            android:layout_centerVertical="true"
             android:layout_marginLeft="4dp"/>
-    </RelativeLayout>
+    </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/coins_header_market_cap"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="0.9"
-        android:background="@drawable/bg_green_selectable">
+        android:layout_gravity="center"
+        android:background="@drawable/bg_blue_selectable"
+        android:gravity="center">
         <TextView
             android:theme="@style/ListHeaderItem"
             android:id="@+id/coins_header_market_cap_title"
@@ -45,20 +47,20 @@
     
         <ImageView
             android:id="@+id/coins_header_cap_sort_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/header_arrow_size"
+            android:layout_height="@dimen/header_arrow_size"
             android:src="@drawable/ic_arrow_up_grey"
-            android:layout_toRightOf="@+id/coins_header_market_cap_title"
-            android:layout_centerVertical="true"
             android:layout_marginLeft="4dp"/>
-    </RelativeLayout>
+    </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/coins_header_volume"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="0.9"
-        android:background="@drawable/bg_green_selectable">
+        android:background="@drawable/bg_blue_selectable"
+        android:layout_gravity="center"
+        android:gravity="center">
         <TextView
             android:theme="@style/ListHeaderItem"
             android:id="@+id/coins_header_volume_title"
@@ -69,37 +71,34 @@
     
         <ImageView
             android:id="@+id/coins_header_volume_sort_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/header_arrow_size"
+            android:layout_height="@dimen/header_arrow_size"
             android:src="@drawable/ic_arrow_up_grey"
-            android:layout_toRightOf="@+id/coins_header_volume_title"
-            android:layout_centerVertical="true"
             android:layout_marginLeft="4dp"/>
-    </RelativeLayout>
+    </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/coins_header_price"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1.2"
-        android:background="@drawable/bg_green_selectable">
+        android:background="@drawable/bg_blue_selectable"
+        android:gravity="center"
+        android:layout_gravity="center">
         <TextView
             android:theme="@style/ListHeaderItem"
             android:id="@+id/coins_header_price_title"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:gravity="right|center"
-            android:layout_centerHorizontal="true"
+            android:gravity="center"
             android:text="@string/coin_24h_price_field" />
     
         <ImageView
             android:id="@+id/coins_header_price_sort_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/header_arrow_size"
+            android:layout_height="@dimen/header_arrow_size"
             android:src="@drawable/ic_arrow_up_grey"
-            android:layout_toRightOf="@+id/coins_header_price_title"
-            android:layout_centerVertical="true"
             android:layout_marginLeft="4dp"/>
-    </RelativeLayout>
+    </LinearLayout>
 
 </LinearLayout>
