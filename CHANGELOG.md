@@ -5,7 +5,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+###Added
+- Sort feature
+
 ###Changed
+- 'News' = 'Posts'
 - Very small numbers format
 - Change post title font to bold
 
