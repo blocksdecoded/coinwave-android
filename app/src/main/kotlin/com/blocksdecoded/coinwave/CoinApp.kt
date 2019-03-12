@@ -5,7 +5,6 @@ import android.app.Application
 import android.content.Context
 import androidx.multidex.MultiDex
 import com.blocksdecoded.coinwave.di.coinApp
-import com.blocksdecoded.coinwave.domain.SourceProvider
 import com.blocksdecoded.utils.Logger
 import com.squareup.leakcanary.LeakCanary
 import org.koin.android.ext.android.startKoin
@@ -38,7 +37,6 @@ class CoinApp : Application() {
         startKoin(this, coinApp)
 
         Logger.setup(BuildConfig.DEBUG)
-        SourceProvider.init(this)
 
 //        FirebaseApp.initializeApp(this)
 //        FRCUtil.initConfigs()
