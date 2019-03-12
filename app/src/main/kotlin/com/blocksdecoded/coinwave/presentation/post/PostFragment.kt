@@ -15,8 +15,8 @@ import com.blocksdecoded.coinwave.presentation.post.util.PostConfig
 import com.blocksdecoded.coinwave.presentation.post.widgets.NestedWebView
 import com.blocksdecoded.utils.ShareUtils
 
-open class PostFragment : BaseMVPFragment<PostContract.Presenter>(), PostContract.View {
-    override var mPresenter: PostContract.Presenter? = null
+open class PostFragment : BaseMVPFragment<IPostContract.Presenter>(), IPostContract.View {
+    override var mPresenter: IPostContract.Presenter? = null
     override val layoutId: Int = R.layout.fragment_post
 
     private var mPost: PublisherPost? = null

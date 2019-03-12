@@ -15,11 +15,11 @@ import com.blocksdecoded.utils.extensions.visible
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
-class AddToWatchlistFragment : BaseMvpFragment<AddToWatchlistContract.Presenter>(),
-        AddToWatchlistContract.View,
+class AddToWatchlistFragment : BaseMvpFragment<IAddToWatchlistContract.Presenter>(),
+        IAddToWatchlistContract.View,
         AddToWatchlistVH.WatchlistVHClickListener {
 
-    override val presenter: AddToWatchlistContract.Presenter by inject { parametersOf(this@AddToWatchlistFragment) }
+    override val presenter: IAddToWatchlistContract.Presenter by inject { parametersOf(this@AddToWatchlistFragment) }
     override val layoutId: Int = R.layout.fragment_add_to_watchlist
 
     private var mAdapter: AddToWatchlistAdapter? = null

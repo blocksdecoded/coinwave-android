@@ -2,8 +2,8 @@ package com.blocksdecoded.coinwave.presentation.coinslist
 
 import com.blocksdecoded.coinwave.data.crypto.ICoinsObserver
 import com.blocksdecoded.coinwave.data.model.CoinEntity
-import com.blocksdecoded.coinwave.domain.usecases.coins.CoinsUseCases
-import com.blocksdecoded.coinwave.presentation.main.MenuClickListener
+import com.blocksdecoded.coinwave.domain.usecases.coins.ICoinsUseCases
+import com.blocksdecoded.coinwave.presentation.main.IMenuClickListener
 import com.blocksdecoded.coinwave.presentation.sort.CoinsCache
 import com.blocksdecoded.coinwave.presentation.sort.ViewSortEnum
 import com.blocksdecoded.core.mvp.BaseMvpPresenter
@@ -11,10 +11,10 @@ import com.blocksdecoded.utils.coroutine.launchSilent
 import com.blocksdecoded.utils.rx.uiSubscribe
 
 class CoinsListPresenter(
-    override var view: CoinsListContract.View?,
-    private val mMenuListener: MenuClickListener,
-    private val mCoinsUseCases: CoinsUseCases
-) : BaseMvpPresenter<CoinsListContract.View>(), CoinsListContract.Presenter {
+        override var view: ICoinsListContract.View?,
+        private val mMenuListener: IMenuClickListener,
+        private val mCoinsUseCases: ICoinsUseCases
+) : BaseMvpPresenter<ICoinsListContract.View>(), ICoinsListContract.Presenter {
     private val mCoinsCache = CoinsCache()
     private var mInitialized = false
 

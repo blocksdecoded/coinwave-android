@@ -8,7 +8,7 @@ import io.reactivex.Flowable
 // Created by askar on 7/19/18.
 class CoinsInteractor(
     private val mCoinsSource: ICoinsStorage
-) : CoinsUseCases {
+) : ICoinsUseCases {
     override fun getCoins(skipCache: Boolean): Flowable<List<CoinEntity>> = mCoinsSource.getAllCoins(skipCache)
         .map { it.coins }
 

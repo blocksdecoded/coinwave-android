@@ -9,7 +9,7 @@ import io.reactivex.Flowable
  * Created by askar on 11/24/18
  * with Android Studio
  */
-interface FavoriteChartUseVariant {
+interface IFavoriteChartUseVariant {
     val chart: Flowable<ChartData>?
 
     suspend fun getCoin(): Result<CoinEntity>?

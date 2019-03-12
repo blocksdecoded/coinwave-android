@@ -3,7 +3,7 @@ package com.blocksdecoded.coinwave.presentation.posts
 import com.blocksdecoded.coinwave.data.post.model.PublisherPost
 import com.blocksdecoded.core.mvp.BaseMvpContract
 
-interface PostsContract {
+interface IPostsContract {
 
     interface View : BaseMvpContract.View<Presenter> {
         fun openPost(url: String)

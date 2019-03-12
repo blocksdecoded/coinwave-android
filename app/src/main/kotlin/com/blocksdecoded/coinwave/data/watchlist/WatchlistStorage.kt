@@ -3,9 +3,9 @@ package com.blocksdecoded.coinwave.data.watchlist
 import com.blocksdecoded.utils.shared.ISharedStorage
 
 // Created by askar on 7/20/18.
-class WatchlistService(
+class WatchlistStorage(
     private val mSharedStorage: ISharedStorage
-) : WatchlistSourceContract {
+) : IWatchlistStorage {
     private var mInitialized = false
     private val SAVED_COINS = "saved_coins"
     private val saveDelimiter = ","

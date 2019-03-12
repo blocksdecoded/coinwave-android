@@ -8,7 +8,7 @@ import com.blocksdecoded.utils.shared.ISharedStorage
  */
 class FavoriteInteractor(
     private val mSharedStorage: ISharedStorage
-) : FavoriteUseCases {
+) : IFavoriteUseCases {
 
     companion object {
         private const val FAVORITE_ID_KEY = "favorite_id_key"

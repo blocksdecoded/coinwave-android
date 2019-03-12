@@ -1,22 +1,22 @@
 package com.blocksdecoded.coinwave.presentation.coininfo
 
 import com.blocksdecoded.coinwave.data.model.CoinEntity
-import com.blocksdecoded.coinwave.domain.usecases.chart.ChartsUseCases
-import com.blocksdecoded.coinwave.domain.usecases.chart.ChartsUseCases.ChartPeriod.*
-import com.blocksdecoded.coinwave.domain.usecases.coins.CoinsUseCases
+import com.blocksdecoded.coinwave.domain.usecases.chart.IChartsUseCases
+import com.blocksdecoded.coinwave.domain.usecases.chart.IChartsUseCases.ChartPeriod.*
+import com.blocksdecoded.coinwave.domain.usecases.coins.ICoinsUseCases
 import com.blocksdecoded.core.mvp.BaseMvpPresenter
 import com.blocksdecoded.utils.coroutine.launchSilent
 import com.blocksdecoded.utils.rx.uiSubscribe
 import kotlinx.coroutines.launch
 
 class CoinInfoPresenter(
-    override var view: CoinInfoContract.View?,
-    private val mChartsUseCases: ChartsUseCases,
-    private val mCoinsUseCases: CoinsUseCases
-) : BaseMvpPresenter<CoinInfoContract.View>(), CoinInfoContract.Presenter {
+        override var view: ICoinInfoContract.View?,
+        private val mChartsUseCases: IChartsUseCases,
+        private val mCoinsUseCases: ICoinsUseCases
+) : BaseMvpPresenter<ICoinInfoContract.View>(), ICoinInfoContract.Presenter {
     private var mCached: CoinEntity? = null
 
-    private fun fetchChartData(id: Int, periodEnum: ChartsUseCases.ChartPeriod = TODAY) {
+    private fun fetchChartData(id: Int, periodEnum: IChartsUseCases.ChartPeriod = TODAY) {
         view?.hideChartError()
         view?.showLoading()
         disposables.add(

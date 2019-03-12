@@ -25,12 +25,12 @@ import org.koin.core.parameter.parametersOf
 import kotlin.math.roundToInt
 
 open class PostsFragment :
-        BaseMvpFragment<PostsContract.Presenter>(),
-        PostsContract.View,
+        BaseMvpFragment<IPostsContract.Presenter>(),
+        IPostsContract.View,
         PostItemViewHolder.PostVHCLickListener,
         LoadNextListener {
 
-    override val presenter: PostsContract.Presenter by inject { parametersOf(this@PostsFragment, context) }
+    override val presenter: IPostsContract.Presenter by inject { parametersOf(this@PostsFragment, context) }
     override val layoutId: Int = R.layout.fragment_post_list
 
     var mAdapter: PostListAdapter? = null

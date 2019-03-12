@@ -3,7 +3,7 @@ package com.blocksdecoded.coinwave.presentation.post
 import com.blocksdecoded.core.mvp.deprecated.BaseMVPContract
 import com.blocksdecoded.coinwave.data.post.model.PublisherPost
 
-interface PostContract {
+interface IPostContract {
 
     interface View : BaseMVPContract.View<Presenter> {
         fun showPost(post: PublisherPost)

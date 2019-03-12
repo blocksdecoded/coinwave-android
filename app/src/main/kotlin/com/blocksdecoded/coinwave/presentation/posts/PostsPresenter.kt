@@ -2,17 +2,17 @@ package com.blocksdecoded.coinwave.presentation.posts
 
 import com.blocksdecoded.utils.coroutine.model.onError
 import com.blocksdecoded.utils.coroutine.model.onSuccess
-import com.blocksdecoded.coinwave.domain.usecases.posts.PostsUseCases
-import com.blocksdecoded.coinwave.presentation.main.MenuClickListener
+import com.blocksdecoded.coinwave.domain.usecases.posts.IPostsUseCases
+import com.blocksdecoded.coinwave.presentation.main.IMenuClickListener
 import com.blocksdecoded.core.mvp.BaseMvpPresenter
 import com.blocksdecoded.utils.coroutine.launchSilent
 import com.blocksdecoded.utils.coroutine.model.onResult
 
 class PostsPresenter(
-    override var view: PostsContract.View?,
-    private val mMenuListener: MenuClickListener,
-    private val mPostUseCases: PostsUseCases
-) : BaseMvpPresenter<PostsContract.View>(), PostsContract.Presenter {
+        override var view: IPostsContract.View?,
+        private val mMenuListener: IMenuClickListener,
+        private val mPostUseCases: IPostsUseCases
+) : BaseMvpPresenter<IPostsContract.View>(), IPostsContract.Presenter {
 
     private var mInitialized = false
 

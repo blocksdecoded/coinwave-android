@@ -3,16 +3,16 @@ package com.blocksdecoded.coinwave.data.crypto
 import com.blocksdecoded.coinwave.data.crypto.remote.ICoinClient
 import com.blocksdecoded.coinwave.data.model.CoinsDataResponse
 import com.blocksdecoded.coinwave.data.model.CoinEntity
-import com.blocksdecoded.coinwave.data.watchlist.WatchlistSourceContract
+import com.blocksdecoded.coinwave.data.watchlist.IWatchlistStorage
 import io.reactivex.Flowable
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 
 // Created by askar on 7/19/18.
 class CoinsRepository(
-    private val mCoinsClient: ICoinClient,
-    private val mWatchlistSource: WatchlistSourceContract,
-    private val mLocalSource: ICoinsStorage?
+        private val mCoinsClient: ICoinClient,
+        private val mWatchlistSource: IWatchlistStorage,
+        private val mLocalSource: ICoinsStorage?
 ) : ICoinsStorage {
     private var mCached: CoinsDataResponse? = null
     private val mObservers = hashSetOf<ICoinsObserver>()

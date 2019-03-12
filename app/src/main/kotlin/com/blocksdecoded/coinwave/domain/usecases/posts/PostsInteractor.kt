@@ -13,7 +13,7 @@ import kotlinx.coroutines.withContext
  */
 class PostsInteractor(
     private val mPostsSource: IPostStorage
-) : PostsUseCases {
+) : IPostsUseCases {
     private var date = ""
 
     private fun updateLastDate(posts: List<PublisherPost>) {

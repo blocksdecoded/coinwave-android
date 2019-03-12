@@ -1,18 +1,18 @@
 package com.blocksdecoded.coinwave.presentation.pickfavorite
 
 import com.blocksdecoded.coinwave.data.model.CoinEntity
-import com.blocksdecoded.coinwave.domain.usecases.favorite.FavoriteUseCases
-import com.blocksdecoded.coinwave.domain.usecases.coins.CoinsUseCases
+import com.blocksdecoded.coinwave.domain.usecases.favorite.IFavoriteUseCases
+import com.blocksdecoded.coinwave.domain.usecases.coins.ICoinsUseCases
 import com.blocksdecoded.coinwave.presentation.sort.CoinsCache
 import com.blocksdecoded.coinwave.presentation.sort.ViewSortEnum
 import com.blocksdecoded.core.mvp.BaseMvpPresenter
 import com.blocksdecoded.utils.rx.uiSubscribe
 
 class PickFavoritePresenter(
-    override var view: PickFavoriteContract.View?,
-    private val mFavoriteUseCases: FavoriteUseCases,
-    private val mCoinsUseCases: CoinsUseCases
-) : BaseMvpPresenter<PickFavoriteContract.View>(), PickFavoriteContract.Presenter {
+        override var view: IPickFavoriteContract.View?,
+        private val mFavoriteUseCases: IFavoriteUseCases,
+        private val mCoinsUseCases: ICoinsUseCases
+) : BaseMvpPresenter<IPickFavoriteContract.View>(), IPickFavoriteContract.Presenter {
 
     private val mCoinsCache = CoinsCache()
 

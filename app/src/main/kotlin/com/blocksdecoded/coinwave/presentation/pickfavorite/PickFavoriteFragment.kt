@@ -17,11 +17,11 @@ import com.blocksdecoded.utils.extensions.visible
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
-class PickFavoriteFragment : BaseMvpFragment<PickFavoriteContract.Presenter>(),
-    PickFavoriteContract.View,
+class PickFavoriteFragment : BaseMvpFragment<IPickFavoriteContract.Presenter>(),
+    IPickFavoriteContract.View,
     CoinsListVH.CoinVHListener {
 
-    override val presenter: PickFavoriteContract.Presenter by inject { parametersOf(this@PickFavoriteFragment) }
+    override val presenter: IPickFavoriteContract.Presenter by inject { parametersOf(this@PickFavoriteFragment) }
     override val layoutId: Int = R.layout.fragment_pick_favorite
 
     @BindView(R.id.fragment_pick_favorite_recycler)

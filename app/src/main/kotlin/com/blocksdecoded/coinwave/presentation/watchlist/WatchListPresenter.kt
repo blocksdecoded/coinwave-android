@@ -2,9 +2,9 @@ package com.blocksdecoded.coinwave.presentation.watchlist
 
 import com.blocksdecoded.coinwave.data.crypto.ICoinsObserver
 import com.blocksdecoded.coinwave.data.model.CoinEntity
-import com.blocksdecoded.coinwave.domain.usecases.coins.CoinsUseCases
-import com.blocksdecoded.coinwave.domain.variant.favoritechart.FavoriteChartUseVariant
-import com.blocksdecoded.coinwave.presentation.main.MenuClickListener
+import com.blocksdecoded.coinwave.domain.usecases.coins.ICoinsUseCases
+import com.blocksdecoded.coinwave.domain.variant.favoritechart.IFavoriteChartUseVariant
+import com.blocksdecoded.coinwave.presentation.main.IMenuClickListener
 import com.blocksdecoded.coinwave.presentation.sort.CoinsCache
 import com.blocksdecoded.coinwave.presentation.sort.ViewSortEnum
 import com.blocksdecoded.core.mvp.BaseMvpPresenter
@@ -14,11 +14,11 @@ import com.blocksdecoded.utils.rx.uiSubscribe
 import kotlinx.coroutines.async
 
 class WatchListPresenter(
-    override var view: WatchListContract.View?,
-    private val mMenuListener: MenuClickListener,
-    private val mCoinsUseCases: CoinsUseCases,
-    private val mFavoriteChartUseVariant: FavoriteChartUseVariant
-) : BaseMvpPresenter<WatchListContract.View>(), WatchListContract.Presenter {
+        override var view: IWatchListContract.View?,
+        private val mMenuListener: IMenuClickListener,
+        private val mCoinsUseCases: ICoinsUseCases,
+        private val mFavoriteChartUseVariant: IFavoriteChartUseVariant
+) : BaseMvpPresenter<IWatchListContract.View>(), IWatchListContract.Presenter {
 
     private val mCoinsCache = CoinsCache()
 

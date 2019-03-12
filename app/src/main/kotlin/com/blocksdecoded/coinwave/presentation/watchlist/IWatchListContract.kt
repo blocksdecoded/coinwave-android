@@ -6,7 +6,7 @@ import com.blocksdecoded.coinwave.presentation.sort.CoinsCache
 import com.blocksdecoded.coinwave.presentation.sort.ViewSortEnum
 import com.blocksdecoded.core.mvp.BaseMvpContract
 
-interface WatchListContract {
+interface IWatchListContract {
 
     interface View : BaseMvpContract.View<Presenter> {
 

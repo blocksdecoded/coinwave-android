@@ -5,7 +5,7 @@ import com.blocksdecoded.coinwave.data.model.CoinEntity
 import io.reactivex.Flowable
 
 // Created by askar on 7/19/18.
-interface CoinsUseCases {
+interface ICoinsUseCases {
     fun getCoins(skipCache: Boolean): Flowable<List<CoinEntity>>
 
     fun getCoin(id: Int): CoinEntity?

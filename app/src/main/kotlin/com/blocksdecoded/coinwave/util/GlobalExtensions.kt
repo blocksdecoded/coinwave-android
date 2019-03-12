@@ -17,13 +17,12 @@ import com.blocksdecoded.utils.extensions.isValidIndex
 import com.blocksdecoded.utils.logE
 
 // Created by askar on 7/23/18.
-fun List<CoinEntity>.findCurrency(coinEntity: CoinEntity, body: ((index: Int) -> Unit)? = null): Int {
-    val index = this.indexOfFirst { it.id == coinEntity.id }
-    if (this.isValidIndex(index)) {
-        body?.invoke(index)
-    }
-    return index
-}
+fun List<CoinEntity>.findCurrency(coinEntity: CoinEntity, body: ((index: Int) -> Unit)? = null): Int =
+        this.indexOfFirst { it.id == coinEntity.id }.also {
+            if (this.isValidIndex(it)) {
+                body?.invoke(it)
+            }
+        }
 
 fun ArrayList<CoinEntity>.addSortedByRank(coinEntity: CoinEntity) {
     this.add(coinEntity)

@@ -4,7 +4,7 @@ import com.blocksdecoded.coinwave.data.model.ChartData
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.core.mvp.BaseMvpContract
 
-interface CoinInfoContract {
+interface ICoinInfoContract {
 
     interface View : BaseMvpContract.View<Presenter> {
         fun showChartData(chartData: ChartData)

@@ -33,10 +33,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.drawer_content.*
 import kotlinx.android.synthetic.main.content_main.*
 
-class MainActivity :
-        AppCompatActivity(),
+class MainActivity : AppCompatActivity(),
         View.OnClickListener,
-        MenuClickListener {
+        IMenuClickListener {
 
     private var mRateDialog: RateUsDialogContract? = null
 

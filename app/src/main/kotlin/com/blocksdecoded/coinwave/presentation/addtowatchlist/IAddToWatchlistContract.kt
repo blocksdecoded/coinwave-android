@@ -3,7 +3,7 @@ package com.blocksdecoded.coinwave.presentation.addtowatchlist
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.core.mvp.BaseMvpContract
 
-interface AddToWatchlistContract {
+interface IAddToWatchlistContract {
 
     interface View : BaseMvpContract.View<Presenter> {
         fun showCoins(coins: List<CoinEntity>)

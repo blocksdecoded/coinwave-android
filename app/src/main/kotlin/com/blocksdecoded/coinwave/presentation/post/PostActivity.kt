@@ -47,7 +47,7 @@ class PostActivity : SwipeableActivity() {
         outRightTransition()
     }
 
-    private var mPresenter: PostContract.Presenter? = null
+    private var mPresenter: IPostContract.Presenter? = null
 
     @SuppressLint("CommitTransaction")
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -34,11 +34,11 @@ import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 import java.util.*
 
-open class WatchListFragment : BaseMvpFragment<WatchListContract.Presenter>(),
-    WatchListContract.View,
+open class WatchListFragment : BaseMvpFragment<IWatchListContract.Presenter>(),
+    IWatchListContract.View,
     WatchlistViewHolder.CurrencyVHClickListener {
 
-    override val presenter: WatchListContract.Presenter by inject { parametersOf(this@WatchListFragment, context) }
+    override val presenter: IWatchListContract.Presenter by inject { parametersOf(this@WatchListFragment, context) }
     override val layoutId: Int = R.layout.fragment_watchlist
 
     @BindView(R.id.fragment_watchlist_header)

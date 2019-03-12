@@ -5,7 +5,7 @@ import com.blocksdecoded.coinwave.presentation.sort.CoinsCache
 import com.blocksdecoded.coinwave.presentation.sort.ViewSortEnum
 import com.blocksdecoded.core.mvp.BaseMvpContract
 
-interface PickFavoriteContract {
+interface IPickFavoriteContract {
 
     interface View : BaseMvpContract.View<Presenter> {
         fun showCoins(coins: List<CoinEntity>)
