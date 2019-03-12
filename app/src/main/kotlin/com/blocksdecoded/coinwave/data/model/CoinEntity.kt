@@ -1,5 +1,6 @@
 package com.blocksdecoded.coinwave.data.model
 
+import com.blocksdecoded.utils.logD
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
@@ -15,7 +16,7 @@ data class CoinEntity(
     @Expose @SerializedName("circulatingSupply") val circulatingSupply: Float,
     @Expose @SerializedName("volume") val volume: Long,
     @Expose @SerializedName("marketCap") val marketCap: Long,
-    @Expose @SerializedName("price") val price: Float,
+    @Expose @SerializedName("price") val price: Double,
     @Expose @SerializedName("change") val priceChange: Float,
     var isSaved: Boolean = false
 ) {
@@ -25,6 +26,9 @@ data class CoinEntity(
 
     fun getMarketCap(): Float? = marketCap.toFloat()
     fun getDailyVolume(): Float? = volume.toFloat()
-    fun getPrice(): Float? = price
+    fun getPrice(): Double? {
+        logD("${symbol} - price is $price")
+        return price
+    }
     fun getPriceChange(): Float? = priceChange
 }

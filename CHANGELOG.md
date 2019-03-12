@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ###Changed
+- Very small numbers format
 - Change post title font to bold
 
 ## [0.4.0 (8)] - 2019-03-01

@@ -1,5 +1,7 @@
 package com.blocksdecoded.coinwave.util
 
+import android.util.Log
+import com.blocksdecoded.utils.logD
 import java.text.DecimalFormat
 import kotlin.math.roundToInt
 
@@ -17,12 +19,10 @@ object FormatUtil {
                 "kmbtpe"[exp - 1])
     }
 
-    private fun cleanDouble(double: Double): Double {
-        return try {
-            decimalFormat.format(double).replace(",", "").toDouble()
-        } catch (e: Exception) {
-            double
-        }
+    private fun cleanDouble(double: Double): Double = try {
+        decimalFormat.format(double).replace(",", "").toDouble()
+    } catch (e: Exception) {
+        double
     }
 
     private fun cleanFloat(float: Float): Float = try {
@@ -31,19 +31,29 @@ object FormatUtil {
         float
     }
 
-    fun formatFloatString(float: Float): String {
-        return if (cleanFloat(float) == float.roundToInt().toFloat()) {
-            defaultFormat.format(float)
-        } else {
-            if (float < 10f) {
-                smallDecimalFormat.format(float)
+    fun formatFloatString(float: Float): String =
+            if (cleanFloat(float) == float.roundToInt().toFloat()) {
+                defaultFormat.format(float)
             } else {
-                decimalFormat.format(float)
+                if (float < 10f) {
+                    smallDecimalFormat.format(float)
+                } else {
+                    decimalFormat.format(float)
+                }
+            }
+
+    fun formatDoubleString(double: Double): String =
+        if (double < 10f) {
+            smallDecimalFormat.format(double)
+        } else {
+            if (cleanDouble(double) == double.roundToInt().toDouble()) {
+                defaultFormat.format(double)
+            } else {
+                decimalFormat.format(double)
             }
         }
-    }
 }
 
-fun Float.format(): String {
-    return FormatUtil.formatFloatString(this)
-}
+fun Float.format(): String = FormatUtil.formatFloatString(this)
+
+fun Double.format(): String = FormatUtil.formatDoubleString(this)
