@@ -24,7 +24,7 @@
     <color name="dark_saved_bg">#19252d</color>
     
     <color name="blue">#3B95FF</color>
-    <color name="blue_90">#dd3B95FF</color>
+    <color name="blue_80">#bb3B95FF</color>
     <color name="header_active">#3B95FF</color>
 
     <color name="status_bar_bg">#00000000</color>

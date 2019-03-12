@@ -2,6 +2,8 @@ package com.blocksdecoded.coinwave.presentation.watchlist
 
 import com.blocksdecoded.coinwave.data.model.ChartData
 import com.blocksdecoded.coinwave.data.model.CoinEntity
+import com.blocksdecoded.coinwave.presentation.sort.CoinsCache
+import com.blocksdecoded.coinwave.presentation.sort.ViewSortEnum
 import com.blocksdecoded.core.mvp.BaseMvpContract
 
 interface WatchListContract {
@@ -39,11 +41,11 @@ interface WatchListContract {
         fun showFavoriteError()
 
         fun hideFavoriteError()
+
+        fun showSortType(sortType: CoinsCache.CoinSortEnum)
     }
 
     interface Presenter : BaseMvpContract.Presenter<View> {
-        fun onCoinPick(position: Int)
-
         fun onCoinClick(position: Int)
 
         fun deleteCoin(position: Int)
@@ -53,5 +55,7 @@ interface WatchListContract {
         fun getCoins()
 
         fun onMenuClick()
+
+        fun onSortClick(sortType: ViewSortEnum)
     }
 }

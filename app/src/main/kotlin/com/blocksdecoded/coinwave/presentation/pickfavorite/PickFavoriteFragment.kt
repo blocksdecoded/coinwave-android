@@ -9,6 +9,8 @@ import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.presentation.coinslist.recycler.CoinsListAdapter
 import com.blocksdecoded.coinwave.presentation.coinslist.recycler.CoinsListVH
+import com.blocksdecoded.coinwave.presentation.sort.CoinsCache
+import com.blocksdecoded.coinwave.presentation.widgets.CoinsHeaderView
 import com.blocksdecoded.core.mvp.BaseMvpFragment
 import com.blocksdecoded.utils.extensions.hide
 import com.blocksdecoded.utils.extensions.visible
@@ -27,7 +29,7 @@ class PickFavoriteFragment : BaseMvpFragment<PickFavoriteContract.Presenter>(),
     private var mAdapter: CoinsListAdapter? = null
 
     @BindView(R.id.fragment_pick_favorite_header)
-    lateinit var mHeader: View
+    lateinit var mHeader: CoinsHeaderView
     @BindView(R.id.fragment_pick_favorite_error_container)
     lateinit var mErrorContainer: View
     @BindView(R.id.fragment_pick_favorite_progress)
@@ -49,6 +51,7 @@ class PickFavoriteFragment : BaseMvpFragment<PickFavoriteContract.Presenter>(),
 
     override fun initView(rootView: View) {
         mAdapter = CoinsListAdapter(arrayListOf(), this)
+        mHeader.setListener { presenter.onSortClick(it) }
 
         mRecycler?.setHasFixedSize(true)
         val lm = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
@@ -87,6 +90,10 @@ class PickFavoriteFragment : BaseMvpFragment<PickFavoriteContract.Presenter>(),
     //endregion
 
     //region Contract
+
+    override fun showSortType(sortType: CoinsCache.CoinSortEnum) {
+        mHeader.currentSort = sortType
+    }
 
     override fun showCoins(coins: List<CoinEntity>) {
         mHeader.visible()

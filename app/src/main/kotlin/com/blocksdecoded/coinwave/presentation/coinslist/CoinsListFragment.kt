@@ -13,7 +13,6 @@ import com.blocksdecoded.coinwave.presentation.coininfo.CoinInfoActivity
 import com.blocksdecoded.coinwave.presentation.coinslist.recycler.CoinsListAdapter
 import com.blocksdecoded.coinwave.presentation.coinslist.recycler.CoinsListVH
 import com.blocksdecoded.coinwave.presentation.sort.CoinsCache
-import com.blocksdecoded.coinwave.presentation.sort.ViewSortEnum.*
 import com.blocksdecoded.coinwave.presentation.widgets.CoinsHeaderView
 import com.blocksdecoded.core.mvp.BaseMvpFragment
 import com.blocksdecoded.utils.*
@@ -97,7 +96,7 @@ open class CoinsListFragment : BaseMvpFragment<CoinsListContract.Presenter>(),
     //region Contract
 
     override fun showSortType(sortType: CoinsCache.CoinSortEnum) {
-        mListHeader.currentState = sortType
+        mListHeader.currentSort = sortType
     }
 
     override fun openCoinInfo(id: Int) {

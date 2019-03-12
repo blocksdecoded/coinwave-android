@@ -22,8 +22,10 @@ import com.blocksdecoded.coinwave.util.loadChartData
 import com.blocksdecoded.coinwave.presentation.addtowatchlist.AddToWatchlistActivity
 import com.blocksdecoded.coinwave.presentation.coininfo.CoinInfoActivity
 import com.blocksdecoded.coinwave.presentation.pickfavorite.PickFavoriteActivity
+import com.blocksdecoded.coinwave.presentation.sort.CoinsCache
 import com.blocksdecoded.coinwave.presentation.watchlist.recycler.WatchlistAdapter
 import com.blocksdecoded.coinwave.presentation.watchlist.recycler.WatchlistViewHolder
+import com.blocksdecoded.coinwave.presentation.widgets.CoinsHeaderView
 import com.blocksdecoded.coinwave.presentation.widgets.chart.ChartListener
 import com.blocksdecoded.core.mvp.BaseMvpFragment
 import com.blocksdecoded.utils.*
@@ -40,7 +42,7 @@ open class WatchListFragment : BaseMvpFragment<WatchListContract.Presenter>(),
     override val layoutId: Int = R.layout.fragment_watchlist
 
     @BindView(R.id.fragment_watchlist_header)
-    lateinit var mListHeader: View
+    lateinit var mListHeader: CoinsHeaderView
     @BindView(R.id.fragment_watchlist_empty_container)
     lateinit var mEmptyContainer: View
     @BindView(R.id.fragment_watchlist_recycler)
@@ -148,15 +150,13 @@ open class WatchListFragment : BaseMvpFragment<WatchListContract.Presenter>(),
         mRecycler.adapter = mAdapter
 
         mChart.init(mChartListener)
+
+        mListHeader.setListener { presenter.onSortClick(it) }
     }
 
     //endregion
 
     //region ViewHolder
-
-    override fun onPick(position: Int) {
-        presenter.onCoinPick(position)
-    }
 
     override fun onClick(position: Int) {
         presenter.onCoinClick(position)
@@ -280,6 +280,10 @@ open class WatchListFragment : BaseMvpFragment<WatchListContract.Presenter>(),
 
     override fun hideFavoriteError() {
         mErrorIcon.hide()
+    }
+
+    override fun showSortType(sortType: CoinsCache.CoinSortEnum) {
+        mListHeader.currentSort = sortType
     }
 
     //endregion

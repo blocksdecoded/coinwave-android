@@ -70,7 +70,5 @@ class WatchlistViewHolder(
 
     interface CurrencyVHClickListener {
         fun onClick(position: Int)
-
-        fun onPick(position: Int)
     }
 }

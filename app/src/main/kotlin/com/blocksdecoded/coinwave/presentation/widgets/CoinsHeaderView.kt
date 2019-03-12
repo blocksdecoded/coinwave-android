@@ -21,7 +21,7 @@ import com.blocksdecoded.utils.extensions.inflate
 
 class CoinsHeaderView : FrameLayout {
 
-    var currentState: CoinsCache.CoinSortEnum = DEFAULT
+    var currentSort: CoinsCache.CoinSortEnum = DEFAULT
         set(value) {
             field = value
             updateViews()
@@ -104,7 +104,7 @@ class CoinsHeaderView : FrameLayout {
         }
     }
 
-    private fun setActiveColor() = when (currentState) {
+    private fun setActiveColor() = when (currentSort) {
         DEFAULT -> { }
         NAME_ASC -> {
             nameTitle.setTextColor(activeColor)

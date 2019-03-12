@@ -4,14 +4,12 @@ import com.blocksdecoded.coinwave.data.crypto.ICoinsObserver
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.domain.usecases.coins.CoinsUseCases
 import com.blocksdecoded.coinwave.domain.variant.favoritechart.FavoriteChartUseVariant
-import com.blocksdecoded.coinwave.util.addSortedByRank
-import com.blocksdecoded.coinwave.util.findCurrency
 import com.blocksdecoded.coinwave.presentation.main.MenuClickListener
 import com.blocksdecoded.coinwave.presentation.sort.CoinsCache
+import com.blocksdecoded.coinwave.presentation.sort.ViewSortEnum
 import com.blocksdecoded.core.mvp.BaseMvpPresenter
 import com.blocksdecoded.utils.coroutine.launchSilent
 import com.blocksdecoded.utils.coroutine.model.onSuccess
-import com.blocksdecoded.utils.extensions.isValidIndex
 import com.blocksdecoded.utils.rx.uiSubscribe
 import kotlinx.coroutines.async
 
@@ -22,8 +20,7 @@ class WatchListPresenter(
     private val mFavoriteChartUseVariant: FavoriteChartUseVariant
 ) : BaseMvpPresenter<WatchListContract.View>(), WatchListContract.Presenter {
 
-    private var mCoinsCache = CoinsCache()
-    private var mCachedData = arrayListOf<CoinEntity>()
+    private val mCoinsCache = CoinsCache()
 
     private val mCurrenciesObserver = object : ICoinsObserver {
         override fun onAdded(coinEntity: CoinEntity) = launchSilent(scope) {
@@ -57,13 +54,17 @@ class WatchListPresenter(
 
     //region Private
 
+    private fun refreshView() {
+        view?.showCoins(mCoinsCache.coins)
+        view?.showSortType(mCoinsCache.currentSort)
+    }
+
     private fun setCache(coins: List<CoinEntity>) = launchSilent(scope) {
-        mCachedData.clear()
-        mCachedData.addAll(coins.filter { it.isSaved })
+        mCoinsCache.setCache(coins.filter { it.isSaved })
 
-        view?.showCoins(mCachedData)
+        refreshView()
 
-        if (mCachedData.isEmpty()) view?.showEmpty() else view?.hideEmpty()
+        if (mCoinsCache.isEmpty()) view?.showEmpty() else view?.hideEmpty()
 
         loadFavorite()
     }
@@ -84,26 +85,13 @@ class WatchListPresenter(
             )?.let { disposables.add(it) }
     }
 
-    private fun searchCurrency(coinEntity: CoinEntity, body: ((index: Int) -> Unit)? = null): Int =
-            mCachedData.findCurrency(coinEntity, body)
+    private fun updateCurrency(coinEntity: CoinEntity): Int = mCoinsCache.add(coinEntity)
 
-    private fun updateCurrency(coinEntity: CoinEntity): Int {
-        searchCurrency(coinEntity).also {
-            if (it == -1) {
-                mCachedData.addSortedByRank(coinEntity)
-            }
-        }
-
-        return 0
-    }
-
-    private fun removeCurrency(coinEntity: CoinEntity): Int = searchCurrency(coinEntity) {
-        mCachedData.removeAt(it)
-    }
+    private fun removeCurrency(coinEntity: CoinEntity): Int = mCoinsCache.remove(coinEntity)
 
     private fun getCurrencies(skipCache: Boolean) = launchSilent(scope) {
         view?.showCoinsLoading()
-        if (mCachedData.isEmpty()) {
+        if (mCoinsCache.isEmpty()) {
             view?.showFavoriteLoading()
         }
 
@@ -113,9 +101,9 @@ class WatchListPresenter(
                         .uiSubscribe(
                                 onNext = { setCache(it) },
                                 onError = {
-                                    view?.showError(mCachedData.isEmpty())
+                                    view?.showError(mCoinsCache.isEmpty())
 
-                                    if (mCachedData.isEmpty()) {
+                                    if (mCoinsCache.isEmpty()) {
                                         view?.hideFavoriteLoading()
                                         view?.showFavoriteError()
                                     }
@@ -133,21 +121,18 @@ class WatchListPresenter(
         getCurrencies(true)
     }
 
-    override fun onCoinPick(position: Int) {
-    }
-
     override fun deleteCoin(position: Int) {
-        if (mCachedData.isValidIndex(position)) {
-            if (mCachedData[position].isSaved) {
-                view?.showMessage("${mCachedData[position].name} removed from Watchlist")
-                mCoinsUseCases.removeCoin(mCachedData[position].id)
+        if (mCoinsCache.isValidIndex(position)) {
+            if (mCoinsCache.coins[position].isSaved) {
+                view?.showMessage("${mCoinsCache.coins[position].name} removed from Watchlist")
+                mCoinsUseCases.removeCoin(mCoinsCache.coins[position].id)
             }
         }
     }
 
     override fun onCoinClick(position: Int) {
-        if (mCachedData.isValidIndex(position)) {
-            view?.openCoinInfo(mCachedData[position].id)
+        if (mCoinsCache.isValidIndex(position)) {
+            view?.openCoinInfo(mCoinsCache.coins[position].id)
         }
     }
 
@@ -157,6 +142,11 @@ class WatchListPresenter(
 
     override fun onAddCoinClick() {
         view?.openAddToWatchlist()
+    }
+
+    override fun onSortClick(sortType: ViewSortEnum) {
+        mCoinsCache.updateSortType(sortType)
+        refreshView()
     }
 
     //endregion

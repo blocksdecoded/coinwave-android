@@ -3,35 +3,26 @@ package com.blocksdecoded.coinwave.presentation.sort
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.presentation.sort.CoinsCache.CoinSortEnum.*
 import com.blocksdecoded.coinwave.presentation.sort.ViewSortEnum.*
+import com.blocksdecoded.coinwave.util.addSortedByRank
 import com.blocksdecoded.coinwave.util.findCurrency
 import com.blocksdecoded.utils.extensions.isValidIndex
 
 class CoinsCache {
-    val cachedCoins = ArrayList<CoinEntity>()
+    val coins = ArrayList<CoinEntity>()
 
-    enum class CoinSortEnum(
-            var sort: (coins: ArrayList<CoinEntity>) -> Unit
-    ) {
-        DEFAULT({ }),
-        NAME_ASC({ it.sortByDescending { it.symbol } }),
-        NAME_DES({ it.sortBy { it.symbol } }),
-        CAP_ASC({ it.sortBy { it.marketCap } }),
-        CAP_DES({ it.sortByDescending { it.marketCap } }),
-        VOL_ASC({ it.sortBy { it.volume } }),
-        VOL_DES({ it.sortByDescending { it.volume } }),
-        PRICE_ASC({ it.sortBy { it.price } }),
-        PRICE_DES({ it.sortByDescending { it.price } })
-    }
-
-    var currentSort = DEFAULT
+    var currentSort = PRICE_DES
         set(value) {
             field = value
             sortCoins()
         }
 
+    private fun sortCoins() = currentSort.sort(coins)
+
+    //region Public
+
     fun setCache(coins: Collection<CoinEntity>) {
-        cachedCoins.clear()
-        cachedCoins.addAll(coins)
+        this.coins.clear()
+        this.coins.addAll(coins)
         sortCoins()
     }
 
@@ -50,13 +41,39 @@ class CoinsCache {
         }
     }
 
-    private fun sortCoins() = currentSort.sort(cachedCoins)
-
-    fun updateCurrency(coinEntity: CoinEntity) = cachedCoins.findCurrency(coinEntity) {
-        cachedCoins[it] = coinEntity
+    fun updateCurrency(coinEntity: CoinEntity) = coins.findCurrency(coinEntity) {
+        coins[it] = coinEntity
     }
 
-    fun isEmpty(): Boolean = cachedCoins.isEmpty()
+    fun isEmpty(): Boolean = coins.isEmpty()
 
-    fun isValidIndex(position: Int): Boolean = cachedCoins.isValidIndex(position)
+    fun isValidIndex(position: Int): Boolean = coins.isValidIndex(position)
+
+    fun add(coinEntity: CoinEntity): Int = coins.findCurrency(coinEntity) {
+        if (it == -1) {
+            coins.add(coinEntity)
+            sortCoins()
+            coins.addSortedByRank(coinEntity)
+        }
+    }
+
+    fun remove(coinEntity: CoinEntity) : Int = coins.findCurrency(coinEntity) {
+        coins.removeAt(it)
+    }
+
+    //endregion
+
+    enum class CoinSortEnum(
+            var sort: (coins: ArrayList<CoinEntity>) -> Unit
+    ) {
+        DEFAULT({ it.sortBy { it.rank } }),
+        NAME_ASC({ it.sortByDescending { it.symbol } }),
+        NAME_DES({ it.sortBy { it.symbol } }),
+        CAP_ASC({ it.sortBy { it.marketCap } }),
+        CAP_DES({ it.sortByDescending { it.marketCap } }),
+        VOL_ASC({ it.sortBy { it.volume } }),
+        VOL_DES({ it.sortByDescending { it.volume } }),
+        PRICE_ASC({ it.sortBy { it.price } }),
+        PRICE_DES({ it.sortByDescending { it.price } })
+    }
 }

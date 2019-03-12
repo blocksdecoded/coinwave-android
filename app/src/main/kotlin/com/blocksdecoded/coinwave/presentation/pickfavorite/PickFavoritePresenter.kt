@@ -3,8 +3,9 @@ package com.blocksdecoded.coinwave.presentation.pickfavorite
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.domain.usecases.favorite.FavoriteUseCases
 import com.blocksdecoded.coinwave.domain.usecases.coins.CoinsUseCases
+import com.blocksdecoded.coinwave.presentation.sort.CoinsCache
+import com.blocksdecoded.coinwave.presentation.sort.ViewSortEnum
 import com.blocksdecoded.core.mvp.BaseMvpPresenter
-import com.blocksdecoded.utils.extensions.isValidIndex
 import com.blocksdecoded.utils.rx.uiSubscribe
 
 class PickFavoritePresenter(
@@ -13,7 +14,7 @@ class PickFavoritePresenter(
     private val mCoinsUseCases: CoinsUseCases
 ) : BaseMvpPresenter<PickFavoriteContract.View>(), PickFavoriteContract.Presenter {
 
-    private var mCachedData = arrayListOf<CoinEntity>()
+    private val mCoinsCache = CoinsCache()
 
     //region Lifecycle
 
@@ -27,9 +28,13 @@ class PickFavoritePresenter(
     //region Private
 
     private fun updateCache(coins: List<CoinEntity>) {
-        mCachedData.clear()
-        mCachedData.addAll(coins)
-        view?.showCoins(mCachedData)
+        mCoinsCache.setCache(coins)
+        refreshView()
+    }
+
+    private fun refreshView() {
+        view?.showCoins(mCoinsCache.coins)
+        view?.showSortType(mCoinsCache.currentSort)
     }
 
     private fun getCoins() {
@@ -48,8 +53,8 @@ class PickFavoritePresenter(
     //region Contract
 
     override fun onCoinClick(position: Int) {
-        if (mCachedData.isValidIndex(position)) {
-            mFavoriteUseCases.setId(mCachedData[position].id)
+        if (mCoinsCache.isValidIndex(position)) {
+            mFavoriteUseCases.setId(mCoinsCache.coins[position].id)
             view?.showMessage("Favorite saved.")
             view?.finishView()
         }
@@ -57,6 +62,11 @@ class PickFavoritePresenter(
 
     override fun onRetryClick() {
         getCoins()
+    }
+
+    override fun onSortClick(sortType: ViewSortEnum) {
+        mCoinsCache.updateSortType(sortType)
+        refreshView()
     }
 
     //endregion
