@@ -9,19 +9,25 @@ import com.blocksdecoded.utils.extensions.isValidIndex
 class CoinsCache {
     val cachedCoins = ArrayList<CoinEntity>()
 
-    enum class CoinSortEnum {
-        DEFAULT,
-        NAME_ASC,
-        NAME_DES,
-        CAP_ASC,
-        CAP_DES,
-        VOL_ASC,
-        VOL_DES,
-        PRICE_ASC,
-        PRICE_DES
+    enum class CoinSortEnum(
+            var sort: (coins: ArrayList<CoinEntity>) -> Unit
+    ) {
+        DEFAULT({ }),
+        NAME_ASC({ it.sortBy { it.symbol } }),
+        NAME_DES({ it.sortByDescending { it.symbol } }),
+        CAP_ASC({ it.sortBy { it.marketCap } }),
+        CAP_DES({ it.sortByDescending { it.marketCap } }),
+        VOL_ASC({ it.sortBy { it.volume } }),
+        VOL_DES({ it.sortByDescending { it.volume } }),
+        PRICE_ASC({ it.sortBy { it.price } }),
+        PRICE_DES({ it.sortByDescending { it.price } })
     }
 
-    var currentSort = DEFAULT
+    private var currentSort = DEFAULT
+        set(value) {
+            field = value
+            sortCoins()
+        }
 
     fun setCache(coins: Collection<CoinEntity>) {
         cachedCoins.clear()
@@ -42,21 +48,9 @@ class CoinsCache {
 
             else -> DEFAULT
         }
-
-        sortCoins()
     }
 
-    private fun sortCoins() = when (currentSort) {
-        DEFAULT -> cachedCoins.sortBy { it.rank }
-        NAME_ASC -> cachedCoins.sortBy { it.symbol }
-        NAME_DES -> cachedCoins.sortByDescending { it.symbol }
-        CAP_ASC -> cachedCoins.sortBy { it.marketCap }
-        CAP_DES -> cachedCoins.sortByDescending { it.marketCap }
-        VOL_ASC -> cachedCoins.sortBy { it.volume }
-        VOL_DES -> cachedCoins.sortByDescending { it.volume }
-        PRICE_ASC -> cachedCoins.sortBy { it.price }
-        PRICE_DES -> cachedCoins.sortByDescending { it.price }
-    }
+    private fun sortCoins() = currentSort.sort(cachedCoins)
 
     fun updateCurrency(coinEntity: CoinEntity) = cachedCoins.findCurrency(coinEntity) {
         cachedCoins[it] = coinEntity
