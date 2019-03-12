@@ -1,6 +1,6 @@
 package com.blocksdecoded.coinwave.presentation.coininfo
 
-import com.blocksdecoded.core.mvp.BaseMVPContract
+import com.blocksdecoded.core.mvp.deprecated.BaseMVPContract
 import com.blocksdecoded.coinwave.data.model.ChartData
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 

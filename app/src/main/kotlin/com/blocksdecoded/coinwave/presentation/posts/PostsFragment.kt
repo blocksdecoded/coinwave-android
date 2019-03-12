@@ -9,29 +9,29 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import butterknife.BindView
 import butterknife.OnClick
 import com.blocksdecoded.core.contracts.LoadNextListener
-import com.blocksdecoded.core.mvp.BaseMVPFragment
+import com.blocksdecoded.core.mvp.deprecated.BaseMVPFragment
 import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.data.post.model.PublisherPost
 import com.blocksdecoded.coinwave.presentation.posts.recycler.deprecated.PostListAdapter
 import com.blocksdecoded.coinwave.presentation.posts.recycler.PostitemViewHolder
+import com.blocksdecoded.core.mvp.BaseMvpFragment
 import com.blocksdecoded.utils.customtabs.openUrl
 import com.blocksdecoded.utils.extensions.setConstraintTopMargin
 import com.blocksdecoded.utils.extensions.hide
 import com.blocksdecoded.utils.showShortToast
 import com.blocksdecoded.utils.extensions.visible
 import com.blocksdecoded.utils.extensions.statusBarHeight
+import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 import kotlin.math.roundToInt
 
 open class PostsFragment :
-        BaseMVPFragment<PostsContract.Presenter>(),
+        BaseMvpFragment<PostsContract.Presenter>(),
         PostsContract.View,
         PostitemViewHolder.PostVHCLickListener,
         LoadNextListener {
-    companion object {
-        fun newInstance() = PostsFragment()
-    }
 
-    override var mPresenter: PostsContract.Presenter? = null
+    override val presenter: PostsContract.Presenter by inject { parametersOf(this@PostsFragment, context) }
     override val layoutId: Int = R.layout.fragment_post_list
 
     var mAdapter: PostListAdapter? = null
@@ -51,9 +51,9 @@ open class PostsFragment :
     )
     fun onClick(view: View) {
         when (view.id) {
-            R.id.post_menu -> mPresenter?.onMenuClick()
+            R.id.post_menu -> presenter.onMenuClick()
 
-            R.id.connection_error_retry -> mPresenter?.getPosts()
+            R.id.connection_error_retry -> presenter.getPosts()
         }
     }
 
@@ -67,7 +67,7 @@ open class PostsFragment :
         }
 
         mSwipeRefresh.setOnRefreshListener {
-            mPresenter?.getPosts()
+            presenter.getPosts()
         }
     }
 
@@ -91,7 +91,7 @@ open class PostsFragment :
 
     override fun onClick(position: Int) {
         mAdapter?.getItem(position)?.also {
-            mPresenter?.onPostClick(it.id)
+            presenter.onPostClick(it.id)
         }
     }
 
@@ -100,7 +100,7 @@ open class PostsFragment :
     //region Load next
 
     override fun onLoadNext() {
-        mPresenter?.getNextPosts()
+        presenter.getNextPosts()
     }
 
     //endregion
@@ -139,4 +139,8 @@ open class PostsFragment :
     }
 
     //endregion
+
+    companion object {
+        fun newInstance() = PostsFragment()
+    }
 }

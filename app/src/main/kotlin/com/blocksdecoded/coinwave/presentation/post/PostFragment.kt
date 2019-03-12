@@ -8,7 +8,7 @@ import androidx.appcompat.widget.PopupMenu
 import android.view.View
 import android.webkit.*
 import android.widget.ImageView
-import com.blocksdecoded.core.mvp.BaseMVPFragment
+import com.blocksdecoded.core.mvp.deprecated.BaseMVPFragment
 import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.data.post.model.PublisherPost
 import com.blocksdecoded.coinwave.presentation.post.util.PostConfig

@@ -1,11 +1,11 @@
 package com.blocksdecoded.coinwave.presentation.posts
 
-import com.blocksdecoded.core.mvp.BaseMVPContract
 import com.blocksdecoded.coinwave.data.post.model.PublisherPost
+import com.blocksdecoded.core.mvp.BaseMvpContract
 
 interface PostsContract {
 
-    interface View : BaseMVPContract.View<Presenter> {
+    interface View : BaseMvpContract.View<Presenter> {
         fun openPost(url: String)
 
         fun showLoading()
@@ -21,7 +21,7 @@ interface PostsContract {
         fun nextPosts(posts: List<PublisherPost>)
     }
 
-    interface Presenter : BaseMVPContract.Presenter<View> {
+    interface Presenter : BaseMvpContract.Presenter<View> {
         fun onPostClick(id: Int)
 
         fun getPosts()

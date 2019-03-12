@@ -1,6 +1,6 @@
 package com.blocksdecoded.coinwave.presentation.watchlist
 
-import com.blocksdecoded.core.mvp.BaseMVPPresenter
+import com.blocksdecoded.core.mvp.deprecated.BaseMVPPresenter
 import com.blocksdecoded.coinwave.data.crypto.ICoinsObserver
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.domain.usecases.coins.CoinsUseCases

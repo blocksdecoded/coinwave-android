@@ -62,10 +62,11 @@ class PostActivity : SwipeableActivity() {
                     .add(android.R.id.content, fragment)
                     .commit()
 
-            mPresenter = PostPresenter(
-                    fragment,
-                    UseCaseProvider.postUseCase
-            )
+//            mPresenter = PostPresenter(
+//                    fragment,
+//                    UseCaseProvider.postUseCase
+//            )
+            //TODO: Initialize presenter
 
             mPresenter?.getPost(getIdFromIntent(intent))
         }

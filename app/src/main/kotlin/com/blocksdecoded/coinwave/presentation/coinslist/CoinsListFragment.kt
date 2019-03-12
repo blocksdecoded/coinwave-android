@@ -9,7 +9,7 @@ import android.view.View
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.OnClick
-import com.blocksdecoded.core.mvp.BaseMVPFragment
+import com.blocksdecoded.core.mvp.deprecated.BaseMVPFragment
 import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.presentation.coininfo.CoinInfoActivity

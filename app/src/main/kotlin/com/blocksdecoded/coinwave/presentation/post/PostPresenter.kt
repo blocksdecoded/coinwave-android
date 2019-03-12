@@ -1,6 +1,6 @@
 package com.blocksdecoded.coinwave.presentation.post
 
-import com.blocksdecoded.core.mvp.BaseMVPPresenter
+import com.blocksdecoded.core.mvp.deprecated.BaseMVPPresenter
 import com.blocksdecoded.coinwave.domain.usecases.posts.PostsUseCases
 import com.blocksdecoded.utils.coroutine.launchSilent
 

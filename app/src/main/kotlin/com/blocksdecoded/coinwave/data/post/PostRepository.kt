@@ -12,19 +12,6 @@ class PostRepository(
     private val mLocal: IPostStorage?,
     private val mRemote: IPostStorage?
 ) : IPostStorage {
-    companion object {
-        private var INSTANCE: IPostStorage? = null
-
-        fun getInstance(
-            local: IPostStorage?,
-            remote: IPostStorage?
-        ): IPostStorage {
-            if (INSTANCE == null)
-                INSTANCE = PostRepository(local, remote)
-            return INSTANCE!!
-        }
-    }
-
     private val mCache = HashMap<Int, PublisherPost>()
 
     //region Contract

@@ -1,4 +1,4 @@
-package com.blocksdecoded.core.mvp
+package com.blocksdecoded.core.mvp.deprecated
 
 import androidx.appcompat.app.AppCompatActivity
 import com.blocksdecoded.utils.showShortToast
@@ -6,7 +6,9 @@ import com.blocksdecoded.utils.showShortToast
 /**
  * Created by Tameki on 1/15/18.
  */
-abstract class BaseMVPActivity <T> : AppCompatActivity(), BaseMVPContract.View<T> {
+@Deprecated("Use newer version BaseMvpActivity")
+abstract class BaseMVPActivity <T> : AppCompatActivity(),
+    BaseMVPContract.View<T> {
     abstract var mPresenter: T?
 
     override fun isActive() = true

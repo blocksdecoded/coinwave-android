@@ -21,7 +21,6 @@ object SourceProvider {
     private lateinit var mWatchlistService: WatchlistSourceContract
     private lateinit var mCoinsLocalDataSource: ICoinsStorage
     private lateinit var mSharedStorage: ISharedStorage
-    private lateinit var mPostSource: IPostStorage
     private lateinit var mCoinsSource: ICoinsStorage
 
     fun init(context: Context) {
@@ -29,11 +28,9 @@ object SourceProvider {
 
         mCoinsLocalDataSource = CoinsLocalStorage(mSharedStorage)
 
-        mWatchlistService = WatchlistService.getInstance(SharedStorage.getInstance(context))
+        mWatchlistService = WatchlistService(SharedStorage.getInstance(context))
 
-        mPostSource = PostRepository.getInstance(null, PostApiClient)
-
-        mCoinsSource = CoinsRepository.getInstance(
+        mCoinsSource = CoinsRepository(
             CoinApiClient,
             mWatchlistService,
             mCoinsLocalDataSource
@@ -41,8 +38,6 @@ object SourceProvider {
     }
 
     fun getSharedStorage() = mSharedStorage
-
-    fun getPostSource(): IPostStorage = mPostSource
 
     fun getChartsSource(): IChartsStorage = ChartsStorage
 

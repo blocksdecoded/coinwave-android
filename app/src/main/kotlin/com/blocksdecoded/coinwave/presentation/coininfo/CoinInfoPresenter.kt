@@ -1,6 +1,6 @@
 package com.blocksdecoded.coinwave.presentation.coininfo
 
-import com.blocksdecoded.core.mvp.BaseMVPPresenter
+import com.blocksdecoded.core.mvp.deprecated.BaseMVPPresenter
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.domain.usecases.chart.ChartsUseCases
 import com.blocksdecoded.coinwave.domain.usecases.chart.ChartsUseCases.ChartPeriod.*

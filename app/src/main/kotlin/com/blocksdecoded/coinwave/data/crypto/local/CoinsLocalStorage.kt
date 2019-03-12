@@ -55,6 +55,6 @@ class CoinsLocalStorage(
     //endregion
 
     companion object {
-        private val PREF_COINS_KEY = "coins"
+        private const val PREF_COINS_KEY = "coins"
     }
 }

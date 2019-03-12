@@ -12,21 +12,6 @@ class WatchlistService(
 
     private var mSavedCache = arrayListOf<Int>()
 
-    companion object {
-        private var INSTANCE: WatchlistService? = null
-
-        fun getInstance(sharedStorage: ISharedStorage): WatchlistSourceContract {
-            if (INSTANCE == null) {
-                INSTANCE = WatchlistService(sharedStorage)
-            }
-            return INSTANCE!!
-        }
-
-        fun destroyInstance() {
-            INSTANCE = null
-        }
-    }
-
     //region Private
 
     private fun fetchData() {

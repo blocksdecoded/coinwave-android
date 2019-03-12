@@ -1,4 +1,4 @@
-package com.blocksdecoded.core.mvp
+package com.blocksdecoded.core.mvp.deprecated
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +12,9 @@ import com.blocksdecoded.utils.extensions.inflate
 import com.blocksdecoded.utils.logE
 import com.blocksdecoded.utils.showShortToast
 
-abstract class BaseMvpFragment<T: BaseMvpContract.Presenter<*>> : Fragment(), BaseMvpContract.View<T> {
+@Deprecated("Use newer version BaseMvpFragment")
+abstract class BaseMVPFragment<T> : Fragment(), BaseMVPContract.View<T> {
+    abstract var mPresenter: T?
     abstract val layoutId: Int
 
     private var mUnbinder: Unbinder? = null
@@ -32,32 +34,55 @@ abstract class BaseMvpFragment<T: BaseMvpContract.Presenter<*>> : Fragment(), Ba
     @CallSuper
     override fun onResume() {
         super.onResume()
-        presenter.onResume()
+        if (mPresenter is BaseMVPContract.Presenter<*>)
+            (mPresenter as BaseMVPContract.Presenter<*>).onResume()
     }
 
     @CallSuper
     override fun onPause() {
         super.onPause()
-        presenter.onPause()
+        if (mPresenter is BaseMVPContract.Presenter<*>)
+            (mPresenter as BaseMVPContract.Presenter<*>).onPause()
     }
 
     @CallSuper
     override fun onDestroy() {
         super.onDestroy()
-        presenter.onDestroy()
+        if (mPresenter is BaseMVPContract.Presenter<*>)
+            (mPresenter as BaseMVPContract.Presenter<*>).onDestroy()
     }
 
     @CallSuper
     override fun onDestroyView() {
         super.onDestroyView()
-        presenter.onDestroy()
+        if (mPresenter is BaseMVPContract.Presenter<*>)
+            (mPresenter as BaseMVPContract.Presenter<*>).onDestroy()
+
         mUnbinder?.unbind()
+    }
+
+    override fun onDetach() {
+        super.onDetach()
     }
 
     //region Base Contract
 
+    override fun isActive(): Boolean = isAdded
+
+    @CallSuper
+    override fun setPresenter(presenter: T) {
+        mPresenter = presenter
+        if (mPresenter is BaseMVPContract.Presenter<*>)
+            (mPresenter as BaseMVPContract.Presenter<*>).onStart()
+    }
+
     override fun finishView() {
         activity?.finish()
+    }
+
+    @CallSuper
+    override fun clearPresenter() {
+        mPresenter = null
     }
 
     override fun showMessage(message: String) {

@@ -4,9 +4,11 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import androidx.multidex.MultiDex
+import com.blocksdecoded.coinwave.di.coinApp
 import com.blocksdecoded.coinwave.domain.SourceProvider
 import com.blocksdecoded.utils.Logger
 import com.squareup.leakcanary.LeakCanary
+import org.koin.android.ext.android.startKoin
 
 // Created by askar on 6/7/18.
 class CoinApp : Application() {
@@ -33,6 +35,7 @@ class CoinApp : Application() {
 
         LeakCanary.install(this)
         INSTANCE = this
+        startKoin(this, coinApp)
 
         Logger.setup(BuildConfig.DEBUG)
         SourceProvider.init(this)

@@ -22,9 +22,6 @@ object UseCaseProvider {
                 SourceProvider.getChartsSource()
         )
 
-    val postUseCase: PostsUseCases
-        get() = PostsInteractor(SourceProvider.getPostSource())
-
     val favoriteUseCase: FavoriteUseCases
         get() = FavoriteInteractor(SourceProvider.getSharedStorage())
 

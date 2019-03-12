@@ -2,9 +2,8 @@ package com.blocksdecoded.coinwave.presentation.addtowatchlist
 
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.domain.usecases.coins.CoinsUseCases
-import com.blocksdecoded.core.mvp.BaseMVPPresenter
+import com.blocksdecoded.core.mvp.deprecated.BaseMVPPresenter
 import com.blocksdecoded.utils.coroutine.launchSilent
-import com.blocksdecoded.utils.coroutine.model.onError
 import com.blocksdecoded.utils.extensions.isValidIndex
 import com.blocksdecoded.utils.rx.uiSubscribe
 import kotlinx.coroutines.Dispatchers

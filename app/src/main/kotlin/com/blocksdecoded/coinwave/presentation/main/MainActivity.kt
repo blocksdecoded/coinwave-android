@@ -21,9 +21,7 @@ import com.blocksdecoded.coinwave.presentation.coinslist.CoinsListContract
 import com.blocksdecoded.coinwave.presentation.coinslist.CoinsListFragment
 import com.blocksdecoded.coinwave.presentation.coinslist.CoinsListPresenter
 import com.blocksdecoded.coinwave.presentation.pickfavorite.PickFavoriteActivity
-import com.blocksdecoded.coinwave.presentation.posts.PostsContract
 import com.blocksdecoded.coinwave.presentation.posts.PostsFragment
-import com.blocksdecoded.coinwave.presentation.posts.PostsPresenter
 import com.blocksdecoded.coinwave.presentation.watchlist.WatchListContract
 import com.blocksdecoded.coinwave.presentation.watchlist.WatchListFragment
 import com.blocksdecoded.coinwave.presentation.watchlist.WatchListPresenter
@@ -47,7 +45,6 @@ class MainActivity :
 
     private var mWatchListPresenter: WatchListContract.Presenter? = null
     private var mCoinsListPresenter: CoinsListContract.Presenter? = null
-    private var mPostsPresenter: PostsContract.Presenter? = null
 
     private var mRateDialog: RateUsDialogContract? = null
 
@@ -179,13 +176,11 @@ class MainActivity :
     private fun init() {
         initNavigationDrawer()
 
-        val fragments = arrayListOf(
-                createCurrencyListScreen(),
-                createWatchListScreen(),
-                createPostListScreen()
+        initViewPager(arrayListOf(
+            createCurrencyListScreen(),
+            createWatchListScreen(),
+            PostsFragment.newInstance())
         )
-
-        initViewPager(fragments)
 
         main_menu.setOnClickListener {
             openDrawer()
@@ -219,14 +214,6 @@ class MainActivity :
                         UseCaseProvider.coinsUseCase
                 )
             }
-
-    private fun createPostListScreen(): Fragment = PostsFragment.newInstance().also {
-        mPostsPresenter = PostsPresenter(
-                it,
-                this,
-                UseCaseProvider.postUseCase
-        )
-    }
 
     //endregion
 

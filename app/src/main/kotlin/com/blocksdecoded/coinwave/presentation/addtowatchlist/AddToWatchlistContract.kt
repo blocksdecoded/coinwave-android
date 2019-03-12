@@ -1,7 +1,7 @@
 package com.blocksdecoded.coinwave.presentation.addtowatchlist
 
 import com.blocksdecoded.coinwave.data.model.CoinEntity
-import com.blocksdecoded.core.mvp.BaseMVPContract
+import com.blocksdecoded.core.mvp.deprecated.BaseMVPContract
 
 interface AddToWatchlistContract {
 

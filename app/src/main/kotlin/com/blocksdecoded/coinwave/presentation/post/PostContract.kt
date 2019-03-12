@@ -1,6 +1,6 @@
 package com.blocksdecoded.coinwave.presentation.post
 
-import com.blocksdecoded.core.mvp.BaseMVPContract
+import com.blocksdecoded.core.mvp.deprecated.BaseMVPContract
 import com.blocksdecoded.coinwave.data.post.model.PublisherPost
 
 interface PostContract {

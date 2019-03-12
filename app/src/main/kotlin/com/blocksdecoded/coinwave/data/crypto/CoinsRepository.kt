@@ -12,7 +12,7 @@ import kotlinx.coroutines.async
 class CoinsRepository(
     private val mCoinsClient: ICoinClient,
     private val mWatchlistSource: WatchlistSourceContract,
-    private val mLocalSource: ICoinsStorage
+    private val mLocalSource: ICoinsStorage?
 ) : ICoinsStorage {
     private var mCached: CoinsDataResponse? = null
     private val mObservers = hashSetOf<ICoinsObserver>()
@@ -31,7 +31,7 @@ class CoinsRepository(
 
     init {
         GlobalScope.async {
-            mLocalSource.getAllCoins(true)
+            mLocalSource?.getAllCoins(true)
         }
     }
 
@@ -85,7 +85,7 @@ class CoinsRepository(
     //region Contract
 
     override fun setCoinsData(coinsData: CoinsDataResponse) {
-        mLocalSource.setCoinsData(coinsData)
+        mLocalSource?.setCoinsData(coinsData)
     }
 
     override fun getCoin(id: Int): CoinEntity? = mCached?.coins?.first { it.id == id }
@@ -133,17 +133,5 @@ class CoinsRepository(
     companion object {
         private const val NETWORK_PAGE_SIZE = 100
         private const val BD_PAGE_SIZE = 20
-        private var INSTANCE: CoinsRepository? = null
-
-        fun getInstance(
-            coinClient: ICoinClient,
-            watchlist: WatchlistSourceContract,
-            localSource: ICoinsStorage
-        ): ICoinsStorage {
-            if (INSTANCE == null) {
-                INSTANCE = CoinsRepository(coinClient, watchlist, localSource)
-            }
-            return INSTANCE!!
-        }
     }
 }
