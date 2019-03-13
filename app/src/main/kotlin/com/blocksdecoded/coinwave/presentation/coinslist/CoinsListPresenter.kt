@@ -43,7 +43,7 @@ class CoinsListPresenter(
         refreshView()
     }
 
-    private fun getCurrencies() = launchSilent(scope) {
+    private fun getCurrencies() {
         view?.showLoading()
         mCoinsUseCases.getCoins(true)
             .uiSubscribe(

@@ -27,6 +27,10 @@
         <item name="android:windowBackground">@color/black</item>
     </style>
 
+    <style name="AppTheme.LaunchScreen" parent="AppTheme.Fullscreen">
+        <item name="android:windowBackground">@drawable/bg_launch_screen</item>
+    </style>
+
     <style name="AppTheme.ProgressStyle">
         <item name="colorAccent">@color/black</item>
     </style>
@@ -58,8 +62,8 @@
 
     <style name="AppTheme.DrawerMenuItem" parent="LightTextStyle">
         <item name="android:paddingLeft">56dp</item>
-        <item name="android:paddingTop">28dp</item>
-        <item name="android:paddingBottom">28dp</item>
+        <item name="android:paddingTop">24dp</item>
+        <item name="android:paddingBottom">24dp</item>
         <item name="android:textSize">15sp</item>
         <item name="android:background">@drawable/drawer_item_bg</item>
         <item name="android:textColor">@drawable/drawer_text_color</item>
