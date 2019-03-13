@@ -8,15 +8,15 @@ import androidx.appcompat.widget.PopupMenu
 import android.view.View
 import android.webkit.*
 import android.widget.ImageView
-import com.blocksdecoded.core.mvp.deprecated.BaseMVPFragment
 import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.data.post.model.PublisherPost
 import com.blocksdecoded.coinwave.presentation.post.util.PostConfig
 import com.blocksdecoded.coinwave.presentation.post.widgets.NestedWebView
+import com.blocksdecoded.core.mvp.BaseMvpFragment
 import com.blocksdecoded.utils.ShareUtils
 
-open class PostFragment : BaseMVPFragment<IPostContract.Presenter>(), IPostContract.View {
-    override var mPresenter: IPostContract.Presenter? = null
+open class PostFragment : BaseMvpFragment<IPostContract.Presenter>(), IPostContract.View {
+    override lateinit var presenter: IPostContract.Presenter
     override val layoutId: Int = R.layout.fragment_post
 
     private var mPost: PublisherPost? = null

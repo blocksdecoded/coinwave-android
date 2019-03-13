@@ -12,5 +12,5 @@ interface IPostsUseCases {
 
     suspend fun getNextPosts(): Result<List<PublisherPost>>?
 
-    suspend fun getPost(id: Int): PublisherPost?
+    fun getPost(id: Int): PublisherPost?
 }

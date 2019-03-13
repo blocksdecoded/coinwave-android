@@ -37,5 +37,5 @@ class PostsInteractor(
         }
     }
 
-    override suspend fun getPost(id: Int): PublisherPost? = mPostsSource.getPost(id)
+    override fun getPost(id: Int): PublisherPost? = mPostsSource.getPost(id)
 }

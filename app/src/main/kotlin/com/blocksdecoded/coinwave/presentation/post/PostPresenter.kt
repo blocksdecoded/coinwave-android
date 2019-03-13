@@ -1,21 +1,16 @@
 package com.blocksdecoded.coinwave.presentation.post
 
-import com.blocksdecoded.core.mvp.deprecated.BaseMVPPresenter
 import com.blocksdecoded.coinwave.domain.usecases.posts.IPostsUseCases
-import com.blocksdecoded.utils.coroutine.launchSilent
+import com.blocksdecoded.core.mvp.BaseMvpPresenter
 
 class PostPresenter(
-    view: IPostContract.View?,
+    override var view: IPostContract.View?,
     private val mPostUseCases: IPostsUseCases
-) : BaseMVPPresenter<IPostContract.View>(view), IPostContract.Presenter {
-    override fun attachView(view: IPostContract.View) {
-        mView = view
-        injectSelfToView()
-    }
+) : BaseMvpPresenter<IPostContract.View>(), IPostContract.Presenter {
 
-    override fun getPost(id: Int) = launchSilent(scope) {
+    override fun getPost(id: Int) {
         mPostUseCases.getPost(id)?.also {
-            mView?.showPost(it)
+            view?.showPost(it)
         }
     }
 }
