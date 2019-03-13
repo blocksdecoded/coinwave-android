@@ -300,7 +300,7 @@ class MainActivity : AppCompatActivity(),
     companion object {
         fun start(context: Context) {
             context.startActivity(Intent(context, MainActivity::class.java))
-            (context as Activity).overridePendingTransition(0, 0)
+            (context as Activity).overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
         }
     }
 }
