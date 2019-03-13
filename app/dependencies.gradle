@@ -5,7 +5,7 @@ ext {
             coroutine       : "1.0.1",
             firebase        : '12.0.1',
             okHttp          : "3.10.0",
-            retrofit        : '2.4.0',
+            retrofit        : '2.5.0',
             dagger          : '2.15',
             butterKnife     : '10.0.0',
             rxJava          : '2.2.7',

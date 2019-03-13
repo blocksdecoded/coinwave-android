@@ -220,6 +220,7 @@ open class WatchListFragment : BaseMvpFragment<IWatchListContract.Presenter>(),
         mSwipeRefreshLayout.isRefreshing = false
         mListHeader.visible()
         mRecycler.visible()
+        mErrorContainer.hide()
         mRecycler.post {
             mAdapter?.setItems(coins)
         }
