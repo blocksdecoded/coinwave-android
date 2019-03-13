@@ -14,7 +14,7 @@ import kotlinx.coroutines.withContext
 class PostsInteractor(
     private val mPostsSource: IPostStorage
 ) : IPostsUseCases {
-    private var date = ""
+    var date = ""
 
     private fun updateLastDate(posts: List<PublisherPost>) {
         date = if (posts.isNotEmpty()) {
