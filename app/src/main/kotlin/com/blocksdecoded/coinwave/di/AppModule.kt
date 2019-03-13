@@ -1,11 +1,16 @@
 package com.blocksdecoded.coinwave.di
 
+import com.blocksdecoded.coinwave.BuildConfig
+import com.blocksdecoded.coinwave.data.bootstrap.BootstrapApiClient
+import com.blocksdecoded.coinwave.data.bootstrap.IBootstrapClient
+import com.blocksdecoded.coinwave.data.config.ConfigProvider
 import com.blocksdecoded.coinwave.data.crypto.CoinsRepository
 import com.blocksdecoded.coinwave.data.crypto.ICoinsStorage
 import com.blocksdecoded.coinwave.data.crypto.chart.ChartsStorage
 import com.blocksdecoded.coinwave.data.crypto.chart.IChartsStorage
 import com.blocksdecoded.coinwave.data.crypto.remote.CoinApiClient
 import com.blocksdecoded.coinwave.data.crypto.remote.ICoinClient
+import com.blocksdecoded.coinwave.data.crypto.remote.ICoinClientConfig
 import com.blocksdecoded.coinwave.data.post.IPostStorage
 import com.blocksdecoded.coinwave.data.post.PostRepository
 import com.blocksdecoded.coinwave.data.post.remote.IPostClient
@@ -51,7 +56,12 @@ val useCaseModule = module {
 }
 
 val sourceModule = module {
-    single { CoinApiClient() as ICoinClient }
+    single { ConfigProvider(
+        BuildConfig.API_COINS,
+        BuildConfig.API_POSTS
+    ) as ICoinClientConfig }
+
+    single { CoinApiClient(get()) as ICoinClient }
 
     single { SharedStorage(androidApplication()) as ISharedStorage }
 
@@ -108,4 +118,10 @@ val postModule = module {
     ) as IPostsContract.Presenter }
 }
 
-val coinApp = listOf(useCaseModule, sourceModule, postModule, coinsModule)
+val bootstrapModule = module {
+    single {
+        BootstrapApiClient() as IBootstrapClient
+    }
+}
+
+val coinApp = listOf(useCaseModule, sourceModule, postModule, coinsModule, bootstrapModule)

@@ -14,12 +14,15 @@ import retrofit2.http.Query
  * Created by askar on 2/12/19
  * with Android Studio
  */
-class CoinApiClient : CoreApiClient(), ICoinClient {
+class CoinApiClient(
+    val config: ICoinClientConfig
+) : CoreApiClient(), ICoinClient {
     private val mClient: CurrencyNetworkClient
 
     init {
         mClient = getRetrofitClient(
-                CurrencyNetworkClient.BASE_URL,
+//                CurrencyNetworkClient.BASE_URL,
+                config.coinUrl,
                 CurrencyNetworkClient::class.java
         )
     }
@@ -37,7 +40,6 @@ class CoinApiClient : CoreApiClient(), ICoinClient {
     //endregion
 
     private interface CurrencyNetworkClient {
-
         @GET(COINS_PATH)
         fun getCoins(@Query("limit") limit: Int): Single<CoinsResponse>
 

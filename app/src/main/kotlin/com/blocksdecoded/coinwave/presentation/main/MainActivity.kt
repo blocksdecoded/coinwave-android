@@ -1,5 +1,8 @@
 package com.blocksdecoded.coinwave.presentation.main
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -293,4 +296,11 @@ class MainActivity : AppCompatActivity(),
     }
 
     //endregion
+
+    companion object {
+        fun start(context: Context) {
+            context.startActivity(Intent(context, MainActivity::class.java))
+            (context as Activity).overridePendingTransition(0, 0)
+        }
+    }
 }
