@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ###Changed
 - 'News' = 'Posts'
-- Very small numbers format
+- Very small numbers display format
 - Change post title font to bold
 
 ## [0.4.0 (8)] - 2019-03-01
