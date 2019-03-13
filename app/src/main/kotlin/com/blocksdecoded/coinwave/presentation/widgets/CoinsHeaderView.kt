@@ -28,7 +28,7 @@ class CoinsHeaderView : FrameLayout {
         }
 
     private val activeColor by lazy { getColorRes(R.color.blue) }
-    private val inactiveColor by lazy { getColorRes(R.color.light_text)}
+    private val inactiveColor by lazy { getColorRes(R.color.light_text) }
 
     @BindView(R.id.coins_header_market_cap_title)
     lateinit var marketCapTitle: TextView

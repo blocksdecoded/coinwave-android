@@ -9,9 +9,9 @@ import com.blocksdecoded.core.mvp.BaseMvpPresenter
 import com.blocksdecoded.utils.rx.uiSubscribe
 
 class PickFavoritePresenter(
-        override var view: IPickFavoriteContract.View?,
-        private val mFavoriteUseCases: IFavoriteUseCases,
-        private val mCoinsUseCases: ICoinsUseCases
+    override var view: IPickFavoriteContract.View?,
+    private val mFavoriteUseCases: IFavoriteUseCases,
+    private val mCoinsUseCases: ICoinsUseCases
 ) : BaseMvpPresenter<IPickFavoriteContract.View>(), IPickFavoriteContract.Presenter {
 
     private val mCoinsCache = CoinsCache()

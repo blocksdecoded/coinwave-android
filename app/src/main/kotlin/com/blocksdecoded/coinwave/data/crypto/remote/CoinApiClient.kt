@@ -14,7 +14,7 @@ import retrofit2.http.Query
  * Created by askar on 2/12/19
  * with Android Studio
  */
-internal object CoinApiClient : CoreApiClient(), ICoinClient {
+class CoinApiClient : CoreApiClient(), ICoinClient {
     private val mClient: CurrencyNetworkClient
 
     init {

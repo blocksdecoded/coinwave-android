@@ -10,9 +10,9 @@ import kotlinx.coroutines.async
 
 // Created by askar on 7/19/18.
 class CoinsRepository(
-        private val mCoinsClient: ICoinClient,
-        private val mWatchlistSource: IWatchlistStorage,
-        private val mLocalSource: ICoinsStorage?
+    private val mCoinsClient: ICoinClient,
+    private val mWatchlistSource: IWatchlistStorage,
+    private val mLocalSource: ICoinsStorage?
 ) : ICoinsStorage {
     private var mCached: CoinsDataResponse? = null
     private val mObservers = hashSetOf<ICoinsObserver>()

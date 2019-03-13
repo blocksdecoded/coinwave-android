@@ -1,6 +1,5 @@
 package com.blocksdecoded.coinwave.data.model
 
-import com.blocksdecoded.utils.logD
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 

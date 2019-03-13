@@ -2,6 +2,7 @@ package com.blocksdecoded.coinwave.data.post
 
 import com.blocksdecoded.utils.coroutine.model.Result
 import com.blocksdecoded.coinwave.data.post.model.PublisherPost
+import com.blocksdecoded.coinwave.data.post.remote.IPostClient
 import com.blocksdecoded.utils.coroutine.model.mapOnSuccess
 
 /**
@@ -10,7 +11,7 @@ import com.blocksdecoded.utils.coroutine.model.mapOnSuccess
  */
 class PostRepository(
     private val mLocal: IPostStorage?,
-    private val mRemote: IPostStorage?
+    private val mRemote: IPostClient?
 ) : IPostStorage {
     private val mCache = HashMap<Int, PublisherPost>()
 
@@ -19,8 +20,8 @@ class PostRepository(
     override suspend fun getPosts(date: String): Result<List<PublisherPost>>? =
             mRemote?.getPosts(date)
                     ?.mapOnSuccess {
-                        it.forEach { mCache[it.id] = it }
-                        it
+                        it.posts.forEach { mCache[it.id] = it }
+                        it.posts
                     }
 
     override fun getPost(id: Int): PublisherPost? = mCache[id]

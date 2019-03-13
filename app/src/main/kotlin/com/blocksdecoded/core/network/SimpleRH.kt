@@ -1,6 +1,5 @@
 package com.blocksdecoded.core.network
 
-import android.util.Log
 import com.blocksdecoded.utils.logD
 import retrofit2.Call
 import retrofit2.Callback

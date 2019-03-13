@@ -26,7 +26,6 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 object PermissionUtil {
 
     //region Public
-
     fun requestPermission(
         activity: Activity,
         permission: String,
@@ -149,32 +148,32 @@ object PermissionUtil {
         onPositive: () -> Unit,
         onNegative: () -> Unit
     ): Dialog? = try {
-        val builder = AlertDialog.Builder(activity)
-        builder.setTitle(title)
-        builder.setMessage("$description\n\nThis app needs permission to use this feature.")
-        builder.setPositiveButton("Ok") { dialog, which ->
-            onPositive.invoke()
-            dialog.cancel()
-        }
-        builder.setNegativeButton("Cancel") { dialog, which ->
-            onNegative.invoke()
-            dialog.cancel()
-        }
-        builder.show()
+        AlertDialog.Builder(activity)
+            .setTitle(title)
+            .setMessage("$description\n\nThis app needs permission to use this feature.")
+            .setPositiveButton("Ok") { dialog, which ->
+                onPositive.invoke()
+                dialog.cancel()
+                }
+            .setNegativeButton("Cancel") { dialog, which ->
+                onNegative.invoke()
+                dialog.cancel()
+            }
+            .show()
     } catch (e: Exception) {
         null
     }
 
     private fun showSettingsDialog(activity: Activity, title: String, description: String): Dialog? = try {
-        val builder = AlertDialog.Builder(activity)
-        builder.setTitle(title)
-        builder.setMessage("$description\n\nThis app needs permission to use this feature. You can grant them in app settings.")
-        builder.setPositiveButton("SETTINGS") { dialog, which ->
-            dialog.cancel()
-            openSettings(activity)
-        }
-        builder.setNegativeButton("Cancel") { dialog, which -> dialog.cancel() }
-        builder.show()
+        AlertDialog.Builder(activity)
+            .setTitle(title)
+            .setMessage("$description\n\nThis app needs permission to use this feature. You can grant them in app settings.")
+            .setPositiveButton("SETTINGS") { dialog, which ->
+                dialog.cancel()
+                openSettings(activity)
+            }
+            .setNegativeButton("Cancel") { dialog, which -> dialog.cancel() }
+            .show()
     } catch (e: Exception) {
         null
     }

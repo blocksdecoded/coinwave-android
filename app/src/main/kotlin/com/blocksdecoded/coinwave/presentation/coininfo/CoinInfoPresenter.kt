@@ -10,9 +10,9 @@ import com.blocksdecoded.utils.rx.uiSubscribe
 import kotlinx.coroutines.launch
 
 class CoinInfoPresenter(
-        override var view: ICoinInfoContract.View?,
-        private val mChartsUseCases: IChartsUseCases,
-        private val mCoinsUseCases: ICoinsUseCases
+    override var view: ICoinInfoContract.View?,
+    private val mChartsUseCases: IChartsUseCases,
+    private val mCoinsUseCases: ICoinsUseCases
 ) : BaseMvpPresenter<ICoinInfoContract.View>(), ICoinInfoContract.Presenter {
     private var mCached: CoinEntity? = null
 

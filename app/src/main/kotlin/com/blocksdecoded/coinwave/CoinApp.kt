@@ -39,7 +39,6 @@ class CoinApp : Application() {
         Logger.setup(BuildConfig.DEBUG)
 
 //        FirebaseApp.initializeApp(this)
-//        FRCUtil.initConfigs()
 
 //        Fabric.with(this, Crashlytics())
     }

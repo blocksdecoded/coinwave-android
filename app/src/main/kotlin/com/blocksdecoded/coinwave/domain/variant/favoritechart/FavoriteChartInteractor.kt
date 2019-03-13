@@ -14,9 +14,9 @@ import io.reactivex.Flowable
  * with Android Studio
  */
 class FavoriteChartInteractor(
-        private val mChartsUseCases: IChartsUseCases,
-        private val mFavoriteUseCases: IFavoriteUseCases,
-        private val mCoinsUseCases: ICoinsUseCases
+    private val mChartsUseCases: IChartsUseCases,
+    private val mFavoriteUseCases: IFavoriteUseCases,
+    private val mCoinsUseCases: ICoinsUseCases
 ) : IFavoriteChartUseVariant {
     override val chart: Flowable<ChartData>?
         get() = mChartsUseCases.getChartData(mFavoriteUseCases.getId(), CHART_PERIOD).toFlowable()

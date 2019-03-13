@@ -14,10 +14,10 @@ import com.blocksdecoded.utils.rx.uiSubscribe
 import kotlinx.coroutines.async
 
 class WatchListPresenter(
-        override var view: IWatchListContract.View?,
-        private val mMenuListener: IMenuClickListener,
-        private val mCoinsUseCases: ICoinsUseCases,
-        private val mFavoriteChartUseVariant: IFavoriteChartUseVariant
+    override var view: IWatchListContract.View?,
+    private val mMenuListener: IMenuClickListener,
+    private val mCoinsUseCases: ICoinsUseCases,
+    private val mFavoriteChartUseVariant: IFavoriteChartUseVariant
 ) : BaseMvpPresenter<IWatchListContract.View>(), IWatchListContract.Presenter {
 
     private val mCoinsCache = CoinsCache()

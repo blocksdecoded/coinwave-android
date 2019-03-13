@@ -11,9 +11,9 @@ import com.blocksdecoded.utils.coroutine.launchSilent
 import com.blocksdecoded.utils.rx.uiSubscribe
 
 class CoinsListPresenter(
-        override var view: ICoinsListContract.View?,
-        private val mMenuListener: IMenuClickListener,
-        private val mCoinsUseCases: ICoinsUseCases
+    override var view: ICoinsListContract.View?,
+    private val mMenuListener: IMenuClickListener,
+    private val mCoinsUseCases: ICoinsUseCases
 ) : BaseMvpPresenter<ICoinsListContract.View>(), ICoinsListContract.Presenter {
     private val mCoinsCache = CoinsCache()
     private var mInitialized = false

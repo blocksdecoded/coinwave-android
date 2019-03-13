@@ -7,8 +7,8 @@ import com.blocksdecoded.utils.extensions.isValidIndex
 import com.blocksdecoded.utils.rx.uiSubscribe
 
 class AddToWatchlistPresenter(
-        override var view: IAddToWatchlistContract.View?,
-        private val mCoinsUseCases: ICoinsUseCases
+    override var view: IAddToWatchlistContract.View?,
+    private val mCoinsUseCases: ICoinsUseCases
 ) : BaseMvpPresenter<IAddToWatchlistContract.View>(), IAddToWatchlistContract.Presenter {
 
     private var cached = arrayListOf<CoinEntity>()

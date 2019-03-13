@@ -8,6 +8,7 @@ import com.blocksdecoded.coinwave.data.crypto.remote.CoinApiClient
 import com.blocksdecoded.coinwave.data.crypto.remote.ICoinClient
 import com.blocksdecoded.coinwave.data.post.IPostStorage
 import com.blocksdecoded.coinwave.data.post.PostRepository
+import com.blocksdecoded.coinwave.data.post.remote.IPostClient
 import com.blocksdecoded.coinwave.data.post.remote.PostApiClient
 import com.blocksdecoded.coinwave.data.watchlist.WatchlistStorage
 import com.blocksdecoded.coinwave.data.watchlist.IWatchlistStorage
@@ -50,19 +51,18 @@ val useCaseModule = module {
 }
 
 val sourceModule = module {
+    single { CoinApiClient() as ICoinClient }
+
     single { SharedStorage(androidApplication()) as ISharedStorage }
 
     single { CoinsRepository(get(), get(), null) as ICoinsStorage }
 
     single { WatchlistStorage(get()) as IWatchlistStorage }
 
-    single { ChartsStorage as IChartsStorage }
-
-    single { CoinApiClient as ICoinClient }
+    single { ChartsStorage(get()) as IChartsStorage }
 }
 
 val coinsModule = module {
-
     factory { params -> PickFavoritePresenter(
         params.component1() as IPickFavoriteContract.View,
         get(),
@@ -95,8 +95,9 @@ val coinsModule = module {
 }
 
 val postModule = module {
+    single { PostApiClient() as IPostClient }
 
-    single { PostRepository(null, PostApiClient) as IPostStorage }
+    single { PostRepository(null, get()) as IPostStorage }
 
     factory { PostsInteractor(get()) as IPostsUseCases }
 

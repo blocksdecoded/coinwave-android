@@ -139,12 +139,12 @@ ext {
     networkLibs = retrofit.values() + okHttp.values()
     rxJavaLibs = rxJava.values()
     coroutineLibs = coroutineDeps.values()
-    otherLibs = [butterKnife, timber, dagger, glide]
+    otherLibs = [butterKnife, timber, glide]
 
     debugLibs = onlyDebug.values() + leakCannary + leakCanaryFragment
     releaseLibs = onlyRelease.values() + noOpLeakCannary
 
-    annotationProcessorLibs = [butterKnifeCompiler, daggerCompiler, glideCompiler]
+    annotationProcessorLibs = [butterKnifeCompiler, glideCompiler]
 
     unitTestLibs = unitTest.values() + leakCannary
     androidTestsLibs = androidTests.values() + supportLibs

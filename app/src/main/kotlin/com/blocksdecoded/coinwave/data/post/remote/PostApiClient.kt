@@ -2,10 +2,7 @@ package com.blocksdecoded.coinwave.data.post.remote
 
 import com.blocksdecoded.coinwave.BuildConfig
 import com.blocksdecoded.utils.coroutine.model.Result
-import com.blocksdecoded.utils.coroutine.model.mapOnSuccess
-import com.blocksdecoded.coinwave.data.post.IPostStorage
 import com.blocksdecoded.coinwave.data.post.model.PostResponse
-import com.blocksdecoded.coinwave.data.post.model.PublisherPost
 import com.blocksdecoded.core.network.CoreApiClient
 import retrofit2.Call
 import retrofit2.http.GET
@@ -15,28 +12,22 @@ import retrofit2.http.QueryMap
  * Created by askar on 11/19/18
  * with Android Studio
  */
-object PostApiClient : CoreApiClient(), IPostStorage {
+class PostApiClient : CoreApiClient(), IPostClient {
 
     private val mClient: PostNetworkClient = getRetrofitClient(
             PostNetworkClient.BASE_URL,
             PostNetworkClient::class.java
     )
 
-    //region Contract
-
-    override suspend fun getPosts(date: String): Result<List<PublisherPost>> {
+    override suspend fun getPosts(date: String): Result<PostResponse> {
         val options = HashMap<String, String>()
 
         if (date.isNotEmpty()) {
             options["last_item_datetime"] = date
         }
 
-        return mClient.getPosts(options).getResult().mapOnSuccess { it.posts }
+        return mClient.getPosts(options).getResult()
     }
-
-    override fun getPost(id: Int): PublisherPost? = null
-
-    //endregion
 
     private interface PostNetworkClient {
 

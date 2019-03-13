@@ -11,7 +11,7 @@ class FavoriteInteractor(
 ) : IFavoriteUseCases {
 
     companion object {
-        private const val FAVORITE_ID_KEY = "favorite_id_key"
+        const val FAVORITE_ID_KEY = "favorite_id_key"
         private const val DEFAULT_ID = 1
     }
 

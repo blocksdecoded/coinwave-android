@@ -9,9 +9,9 @@ import com.blocksdecoded.utils.coroutine.launchSilent
 import com.blocksdecoded.utils.coroutine.model.onResult
 
 class PostsPresenter(
-        override var view: IPostsContract.View?,
-        private val mMenuListener: IMenuClickListener,
-        private val mPostUseCases: IPostsUseCases
+    override var view: IPostsContract.View?,
+    private val mMenuListener: IMenuClickListener,
+    private val mPostUseCases: IPostsUseCases
 ) : BaseMvpPresenter<IPostsContract.View>(), IPostsContract.Presenter {
 
     private var mInitialized = false

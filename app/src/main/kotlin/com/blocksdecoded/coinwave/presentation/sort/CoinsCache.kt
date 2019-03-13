@@ -57,14 +57,14 @@ class CoinsCache {
         }
     }
 
-    fun remove(coinEntity: CoinEntity) : Int = coins.findCurrency(coinEntity) {
+    fun remove(coinEntity: CoinEntity): Int = coins.findCurrency(coinEntity) {
         coins.removeAt(it)
     }
 
     //endregion
 
     enum class CoinSortEnum(
-            var sort: (coins: ArrayList<CoinEntity>) -> Unit
+        var sort: (coins: ArrayList<CoinEntity>) -> Unit
     ) {
         DEFAULT({ it.sortBy { it.rank } }),
         NAME_ASC({ it.sortByDescending { it.symbol } }),

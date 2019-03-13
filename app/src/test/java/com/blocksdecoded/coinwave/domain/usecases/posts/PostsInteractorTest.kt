@@ -21,7 +21,7 @@ class PostsInteractorTest {
     lateinit var interactor: PostsInteractor
 
     private val nextPostDate = "99.99.99"
-    private val fakeResponse = listOf(PublisherPost(1, nextPostDate, null ,null ,null ,null, null))
+    private val fakeResponse = listOf(PublisherPost(1, nextPostDate, null, null, null, null, null))
 
     @Before
     fun setUp() {
