@@ -12,20 +12,20 @@ fun logE(e: Exception, tag: String = Logger.TAG) {
 
 object Logger {
     val TAG = "ololo"
-    private var mIsDebuggable = true
+    private var isDebuggable = true
 
     fun setup(isDebuggable: Boolean) {
-        mIsDebuggable = isDebuggable
+        this.isDebuggable = isDebuggable
     }
 
     fun logD(message: String, tag: String = TAG) {
-        if (mIsDebuggable) {
+        if (isDebuggable) {
             Log.d(tag, message)
         }
     }
 
     fun logE(e: Exception, tag: String = TAG) {
-        if (mIsDebuggable) {
+        if (isDebuggable) {
             Log.e(tag, e.message, e)
         }
     }

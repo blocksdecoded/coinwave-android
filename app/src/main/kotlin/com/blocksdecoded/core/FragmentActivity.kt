@@ -2,6 +2,7 @@ package com.blocksdecoded.core
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 
 /**
  * Created by Tameki on 2/7/18.
@@ -15,7 +16,7 @@ abstract class FragmentActivity<V>(
         super.onCreate(savedInstanceState)
 
         if (savedInstanceState == null) {
-            (mFragment as androidx.fragment.app.Fragment).let {
+            (mFragment as Fragment).let {
                 supportFragmentManager
                         .beginTransaction()
                         .add(android.R.id.content, it)

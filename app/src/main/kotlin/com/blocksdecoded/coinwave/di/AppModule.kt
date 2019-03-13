@@ -14,6 +14,7 @@ import com.blocksdecoded.coinwave.data.crypto.remote.ICoinClientConfig
 import com.blocksdecoded.coinwave.data.post.IPostStorage
 import com.blocksdecoded.coinwave.data.post.PostRepository
 import com.blocksdecoded.coinwave.data.post.remote.IPostClient
+import com.blocksdecoded.coinwave.data.post.remote.IPostClientConfig
 import com.blocksdecoded.coinwave.data.post.remote.PostApiClient
 import com.blocksdecoded.coinwave.data.watchlist.WatchlistStorage
 import com.blocksdecoded.coinwave.data.watchlist.IWatchlistStorage
@@ -59,7 +60,7 @@ val sourceModule = module {
     single { ConfigProvider(
         BuildConfig.API_COINS,
         BuildConfig.API_POSTS
-    ) as ICoinClientConfig }
+    ) as ICoinClientConfig } bind (IPostClientConfig::class)
 
     single { CoinApiClient(get()) as ICoinClient }
 
@@ -119,9 +120,7 @@ val postModule = module {
 }
 
 val bootstrapModule = module {
-    single {
-        BootstrapApiClient() as IBootstrapClient
-    }
+    single { BootstrapApiClient() as IBootstrapClient }
 }
 
 val coinApp = listOf(useCaseModule, sourceModule, postModule, coinsModule, bootstrapModule)
