@@ -77,7 +77,7 @@
             android:gravity="center"
             android:layout_gravity="center"
             android:textColor="@color/default_text"
-            android:textSize="14sp"
+            android:textSize="13.5sp"
             android:paddingTop="30dp"
             android:paddingBottom="30dp"
             android:text="$165b"/>
@@ -100,7 +100,7 @@
             android:gravity="center"
             android:layout_gravity="center"
             android:textColor="@color/default_text"
-            android:textSize="14sp"
+            android:textSize="13.5sp"
             android:text="$9.8b"/>
 
         <View
