@@ -136,7 +136,7 @@
                 android:gravity="right"
                 android:paddingRight="20dp"
                 app:layout_constraintVertical_chainStyle="packed"
-                android:textSize="16sp"
+                android:textSize="15.5sp"
                 android:textColor="@color/white"
                 android:text="$800.0" />
 
@@ -148,6 +148,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/adapter_coin_price"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintVertical_bias="0.0"
+                android:layout_marginTop="2dp"
                 android:gravity="right"
                 android:paddingRight="20dp"
                 android:text="+4,5%"
