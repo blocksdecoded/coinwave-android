@@ -55,7 +55,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="8dp"
                 android:text="BTC"
-                android:textSize="15sp"
+                android:textSize="14sp"
                 android:textColor="@color/default_text" />
         </LinearLayout>
 
@@ -139,9 +139,9 @@
                 android:gravity="right"
                 android:paddingRight="20dp"
                 app:layout_constraintVertical_chainStyle="packed"
-                android:textSize="15.5sp"
+                android:textSize="14sp"
                 android:textColor="@color/white"
-                android:text="$800.0" />
+                android:text="$9999.99" />
 
             <TextView
                 android:theme="@style/RegularTextStyle"

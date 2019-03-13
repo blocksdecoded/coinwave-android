@@ -3,7 +3,7 @@
     <string name="const_app_name">CoinWave</string>
 
     <!--Menu-->
-    <string name="action_pick_favorite_coin">Favorite cryptocurrency</string>
+    <string name="action_pick_favorite_coin">Pick favorite</string>
     <string name="action_share_this_app">Share this app</string>
     <string name="action_rate_us">Rate us</string>
     <string name="action_contact_us">Contact us</string>
