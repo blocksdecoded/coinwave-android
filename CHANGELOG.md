@@ -5,8 +5,6 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
-
-## [0.5.0 (9)] - 2019-03-13
 ###Added
 - Sort feature
 - Launch screen
@@ -15,6 +13,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - 'News' = 'Posts'
 - Very small numbers display format
 - Change post title font to bold
+- Coin list items font sizes
 
 ## [0.4.0 (8)] - 2019-03-01
 ###Added
