@@ -48,6 +48,7 @@
             android:textColor="@color/main_dark"
             android:background="@drawable/bg_green_gradient"
             android:textSize="14sp"
+            android:textAllCaps="true"
             android:letterSpacing="0.15" />
     
     </androidx.cardview.widget.CardView>
