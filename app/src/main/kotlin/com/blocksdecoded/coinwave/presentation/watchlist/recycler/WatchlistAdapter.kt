@@ -1,9 +1,11 @@
 package com.blocksdecoded.coinwave.presentation.watchlist.recycler
 
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.data.model.CoinEntity
+import com.blocksdecoded.coinwave.presentation.coinslist.recycler.CoinDiffUtil
 import com.blocksdecoded.coinwave.util.addSortedByRank
 import com.blocksdecoded.utils.extensions.inflate
 import com.blocksdecoded.utils.extensions.isValidIndex
@@ -30,9 +32,10 @@ class WatchlistAdapter(
     }
 
     fun setItems(coins: List<CoinEntity>) {
+        val diffResult = DiffUtil.calculateDiff(CoinDiffUtil(mCoins, coins))
         mCoins.clear()
         mCoins.addAll(coins)
-        notifyDataSetChanged()
+        diffResult.dispatchUpdatesTo(this)
     }
 
     fun deleteItemAt(position: Int) {

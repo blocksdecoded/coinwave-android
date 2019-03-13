@@ -3,6 +3,7 @@ package com.blocksdecoded.coinwave.presentation.addtowatchlist
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.domain.usecases.coins.ICoinsUseCases
 import com.blocksdecoded.core.mvp.BaseMvpPresenter
+import com.blocksdecoded.utils.coroutine.launchSilent
 import com.blocksdecoded.utils.extensions.isValidIndex
 import com.blocksdecoded.utils.rx.uiSubscribe
 
@@ -24,7 +25,7 @@ class AddToWatchlistPresenter(
 
     //region Private
 
-    private fun updateCache(coins: List<CoinEntity>) {
+    private fun updateCache(coins: List<CoinEntity>) = launchSilent(scope) {
         cached.clear()
         cached.addAll(coins)
         view?.showCoins(coins)

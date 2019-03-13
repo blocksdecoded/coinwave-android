@@ -55,7 +55,7 @@ class CoinsListPresenter(
             )
     }
 
-    private fun refreshView() {
+    private fun refreshView() = launchSilent(scope) {
         view?.showCoins(mCoinsCache.coins)
         view?.showSortType(mCoinsCache.currentSort)
     }

@@ -6,6 +6,7 @@ import com.blocksdecoded.coinwave.domain.usecases.coins.ICoinsUseCases
 import com.blocksdecoded.coinwave.presentation.sort.CoinsCache
 import com.blocksdecoded.coinwave.presentation.sort.ViewSortEnum
 import com.blocksdecoded.core.mvp.BaseMvpPresenter
+import com.blocksdecoded.utils.coroutine.launchSilent
 import com.blocksdecoded.utils.rx.uiSubscribe
 
 class PickFavoritePresenter(
@@ -32,7 +33,7 @@ class PickFavoritePresenter(
         refreshView()
     }
 
-    private fun refreshView() {
+    private fun refreshView() = launchSilent(scope) {
         view?.showCoins(mCoinsCache.coins)
         view?.showSortType(mCoinsCache.currentSort)
     }

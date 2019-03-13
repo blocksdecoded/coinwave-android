@@ -54,7 +54,7 @@ class WatchListPresenter(
 
     //region Private
 
-    private fun refreshView() {
+    private fun refreshView() = launchSilent(scope) {
         view?.showCoins(mCoinsCache.coins)
         view?.showSortType(mCoinsCache.currentSort)
     }

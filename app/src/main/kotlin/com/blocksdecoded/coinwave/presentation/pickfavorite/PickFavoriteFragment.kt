@@ -25,7 +25,7 @@ class PickFavoriteFragment : BaseMvpFragment<IPickFavoriteContract.Presenter>(),
     override val layoutId: Int = R.layout.fragment_pick_favorite
 
     @BindView(R.id.fragment_pick_favorite_recycler)
-    @JvmField var mRecycler: RecyclerView? = null
+    lateinit var mRecycler: RecyclerView
     private var mAdapter: CoinsListAdapter? = null
 
     @BindView(R.id.fragment_pick_favorite_header)
@@ -53,10 +53,10 @@ class PickFavoriteFragment : BaseMvpFragment<IPickFavoriteContract.Presenter>(),
         mAdapter = CoinsListAdapter(arrayListOf(), this)
         mHeader.setListener { presenter.onSortClick(it) }
 
-        mRecycler?.setHasFixedSize(true)
+        mRecycler.setHasFixedSize(true)
         val lm = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        mRecycler?.layoutManager = lm
-        mRecycler?.adapter = mAdapter
+        mRecycler.layoutManager = lm
+        mRecycler.adapter = mAdapter
     }
 
     //endregion
@@ -99,6 +99,7 @@ class PickFavoriteFragment : BaseMvpFragment<IPickFavoriteContract.Presenter>(),
         mHeader.visible()
         mRecycler.visible()
         mAdapter?.setItems(coins)
+        mRecycler.scrollToPosition(0)
     }
 
     //endregion

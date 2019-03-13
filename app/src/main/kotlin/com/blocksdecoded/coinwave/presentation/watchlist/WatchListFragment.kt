@@ -221,9 +221,8 @@ open class WatchListFragment : BaseMvpFragment<IWatchListContract.Presenter>(),
         mListHeader.visible()
         mRecycler.visible()
         mErrorContainer.hide()
-        mRecycler.post {
-            mAdapter?.setItems(coins)
-        }
+        mAdapter?.setItems(coins)
+        mRecycler.scrollToPosition(0)
     }
 
     override fun showEmpty() {

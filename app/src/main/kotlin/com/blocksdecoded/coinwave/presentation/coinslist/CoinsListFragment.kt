@@ -78,9 +78,9 @@ open class CoinsListFragment : BaseMvpFragment<ICoinsListContract.Presenter>(),
         }
 
         val lm = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        mRecycler.setHasFixedSize(true)
         mRecycler.layoutManager = lm
         mRecycler.adapter = mAdapter
-        mRecycler.setHasFixedSize(true)
     }
 
     //endregion
@@ -117,7 +117,8 @@ open class CoinsListFragment : BaseMvpFragment<ICoinsListContract.Presenter>(),
         mRecycler.visible()
         mListHeader.visible()
         mErrorContainer.hide()
-        mRecycler.post { mAdapter?.setItems(coins) }
+        mAdapter?.setItems(coins)
+        mRecycler.scrollToPosition(0)
     }
 
     override fun showNetworkError(hideList: Boolean) {
