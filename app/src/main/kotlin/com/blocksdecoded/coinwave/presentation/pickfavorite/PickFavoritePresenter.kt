@@ -42,9 +42,14 @@ class PickFavoritePresenter(
         view?.showLoading()
         mCoinsUseCases.getCoins(false)
                 .uiSubscribe(
-                        onNext = { updateCache(it) },
-                        onError = { view?.showError() },
-                        onComplete = { view?.hideLoading() }
+                        onNext = {
+                            view?.hideLoading()
+                            updateCache(it)
+                        },
+                        onError = {
+                            view?.hideLoading()
+                            view?.showError()
+                        }
                 )
     }
 

@@ -60,7 +60,7 @@ val sourceModule = module {
     single { ConfigProvider(
         BuildConfig.API_COINS,
         BuildConfig.API_POSTS
-    ) as ICoinClientConfig } bind (IPostClientConfig::class)
+    ) as ICoinClientConfig }
 
     single { CoinApiClient(get()) as ICoinClient }
 

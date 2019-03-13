@@ -80,8 +80,7 @@ class WatchListPresenter(
             ?.doOnComplete { scope.async { view?.hideFavoriteLoading() } }
             ?.uiSubscribe(
                     onNext = { view?.showFavoriteChart(it) },
-                    onError = { view?.showFavoriteError() },
-                    onComplete = { }
+                    onError = { view?.showFavoriteError() }
             )?.let { disposables.add(it) }
     }
 
@@ -95,22 +94,23 @@ class WatchListPresenter(
             view?.showFavoriteLoading()
         }
 
-        disposables.add(
-                mCoinsUseCases.getCoins(skipCache)
-                        .map { it.filter { it.isSaved } }
-                        .uiSubscribe(
-                                onNext = { setCache(it) },
-                                onError = {
-                                    view?.showError(mCoinsCache.isEmpty())
+        mCoinsUseCases.getCoins(skipCache)
+            .map { it.filter { it.isSaved } }
+            .uiSubscribe(
+                onNext = {
+                    view?.hideCoinsLoading()
+                    setCache(it)
+                },
+                onError = {
+                    view?.hideCoinsLoading()
+                    view?.showError(mCoinsCache.isEmpty())
 
-                                    if (mCoinsCache.isEmpty()) {
-                                        view?.hideFavoriteLoading()
-                                        view?.showFavoriteError()
-                                    }
-                                },
-                                onComplete = { view?.hideCoinsLoading() }
-                        )
-        )
+                    if (mCoinsCache.isEmpty()) {
+                        view?.hideFavoriteLoading()
+                        view?.showFavoriteError()
+                    }
+                }
+            ).let { disposables.add(it) }
     }
 
     //endregion
