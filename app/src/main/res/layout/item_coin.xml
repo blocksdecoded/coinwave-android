@@ -137,6 +137,7 @@
                 android:paddingRight="20dp"
                 app:layout_constraintVertical_chainStyle="packed"
                 android:textSize="16sp"
+                android:textColor="@color/white"
                 android:text="$800.0" />
 
             <TextView

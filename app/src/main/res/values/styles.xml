@@ -58,8 +58,8 @@
 
     <style name="AppTheme.DrawerMenuItem" parent="LightTextStyle">
         <item name="android:paddingLeft">56dp</item>
-        <item name="android:paddingTop">20dp</item>
-        <item name="android:paddingBottom">20dp</item>
+        <item name="android:paddingTop">28dp</item>
+        <item name="android:paddingBottom">28dp</item>
         <item name="android:textSize">15sp</item>
         <item name="android:background">@drawable/drawer_item_bg</item>
         <item name="android:textColor">@drawable/drawer_text_color</item>
@@ -97,7 +97,7 @@
     
     <style name="ListHeaderItem" parent="LightTextStyle">
         <item name="android:textColor">@color/light_text</item>
-        <item name="android:textSize">11sp</item>
+        <item name="android:textSize">11.5sp</item>
     </style>
     
     

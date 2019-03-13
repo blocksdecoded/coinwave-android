@@ -56,7 +56,7 @@ class WatchlistViewHolder(
                 itemView.getColorRes(R.color.red)
             }
 
-            mPrice.setTextColor(color)
+//            mPrice.setTextColor(color)
             mPriceChange.setTextColor(color)
         }
     }

@@ -11,7 +11,7 @@
 
     <!-- Sizes -->
     <dimen name="drawer_icon_size">14dp</dimen>
-    <dimen name="drawer_arrow_size">8dp</dimen>
+    <dimen name="drawer_arrow_size">9dp</dimen>
     <dimen name="back_btn_size">40dp</dimen>
     <dimen name="message_button_text">14sp</dimen>
     <dimen name="message_title_text">16sp</dimen>
