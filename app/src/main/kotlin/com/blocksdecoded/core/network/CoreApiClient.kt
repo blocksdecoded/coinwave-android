@@ -3,7 +3,6 @@ package com.blocksdecoded.core.network
 import com.google.gson.GsonBuilder
 import com.blocksdecoded.utils.coroutine.model.Result
 import com.blocksdecoded.utils.coroutine.model.Result.*
-import com.blocksdecoded.coinwave.BuildConfig
 import com.blocksdecoded.coinwave.CoinApp
 import com.blocksdecoded.coinwave.data.NetworkException
 import com.readystatesoftware.chuck.ChuckInterceptor
@@ -40,11 +39,8 @@ abstract class CoreApiClient {
                 .baseUrl(baseUrl)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
-                .apply {
-                    if (BuildConfig.DEBUG) {
-                        client(httpClient.build())
-                    }
-                }.build()
+                .client(httpClient.build())
+                .build()
     }
 
     fun <T> getRetrofitClient(

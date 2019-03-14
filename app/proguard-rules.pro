@@ -3,6 +3,7 @@
 
 -keep public class com.blocksdecoded.coinwave.data.model.** { *; }
 -keep public class com.blocksdecoded.coinwave.data.post.model.** { *; }
+-keep public class com.blocksdecoded.coinwave.data.crypto.remote.model.** { *; }
 
 -keepclassmembers class android.support.design.internal.BottomNavigationMenuView {
     boolean mShiftingMode;

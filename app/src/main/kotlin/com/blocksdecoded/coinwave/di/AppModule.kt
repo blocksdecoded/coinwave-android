@@ -14,7 +14,6 @@ import com.blocksdecoded.coinwave.data.crypto.remote.ICoinClientConfig
 import com.blocksdecoded.coinwave.data.post.IPostStorage
 import com.blocksdecoded.coinwave.data.post.PostRepository
 import com.blocksdecoded.coinwave.data.post.remote.IPostClient
-import com.blocksdecoded.coinwave.data.post.remote.IPostClientConfig
 import com.blocksdecoded.coinwave.data.post.remote.PostApiClient
 import com.blocksdecoded.coinwave.data.watchlist.WatchlistStorage
 import com.blocksdecoded.coinwave.data.watchlist.IWatchlistStorage

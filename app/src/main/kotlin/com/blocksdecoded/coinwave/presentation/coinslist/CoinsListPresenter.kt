@@ -8,7 +8,6 @@ import com.blocksdecoded.coinwave.presentation.sort.CoinsCache
 import com.blocksdecoded.coinwave.presentation.sort.ViewSortEnum
 import com.blocksdecoded.core.mvp.BaseMvpPresenter
 import com.blocksdecoded.utils.coroutine.launchSilent
-import com.blocksdecoded.utils.logD
 import com.blocksdecoded.utils.rx.uiSubscribe
 
 class CoinsListPresenter(

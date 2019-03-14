@@ -4,9 +4,9 @@ import androidx.recyclerview.widget.DiffUtil
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 
 class CoinDiffUtil(
-        private val oldCoins: List<CoinEntity>,
-        private val newCoins: List<CoinEntity>
-): DiffUtil.Callback() {
+    private val oldCoins: List<CoinEntity>,
+    private val newCoins: List<CoinEntity>
+) : DiffUtil.Callback() {
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean = try {
         oldCoins[oldItemPosition].id == newCoins[newItemPosition].id
     } catch (e: Exception) {
@@ -21,9 +21,9 @@ class CoinDiffUtil(
         val oldCoin = oldCoins[oldItemPosition]
         val newCoin = newCoins[oldItemPosition]
 
-        oldCoin.id == newCoin.id && oldCoin.price == newCoin.price
-                && oldCoin.priceChange == newCoin.priceChange
-                && oldCoin.marketCap == newCoin.marketCap
+        oldCoin.id == newCoin.id && oldCoin.price == newCoin.price &&
+                oldCoin.priceChange == newCoin.priceChange &&
+                oldCoin.marketCap == newCoin.marketCap
     } catch (e: Exception) {
         false
     }

@@ -19,12 +19,11 @@ class CoinInfoPresenter(
     private fun fetchChartData(id: Int, periodEnum: IChartsUseCases.ChartPeriod = TODAY) {
         view?.hideChartError()
         view?.showLoading()
-        disposables.add(
-            mChartsUseCases.getChartData(id, periodEnum)
-                .doAfterTerminate { scope.launch { view?.hideLoading() } }
-                .uiSubscribe(
-                    { chartData -> view?.showChartData(chartData) },
-                    { error -> view?.showChartError() }))
+        mChartsUseCases.getChartData(id, periodEnum)
+            .doAfterTerminate { scope.launch { view?.hideLoading() } }
+            .uiSubscribe(
+                { chartData -> view?.showChartData(chartData) },
+                { error -> view?.showChartError() }).let { disposables.add(it) }
     }
 
     override fun onGoToWebsiteClick() {
