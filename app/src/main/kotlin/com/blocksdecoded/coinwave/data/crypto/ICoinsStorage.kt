@@ -2,13 +2,13 @@ package com.blocksdecoded.coinwave.data.crypto
 
 import com.blocksdecoded.coinwave.data.model.CoinsDataResponse
 import com.blocksdecoded.coinwave.data.model.CoinEntity
-import io.reactivex.Flowable
+import io.reactivex.Observable
 
 // Created by askar on 7/19/18.
 interface ICoinsStorage {
-    fun getAllCoins(skipCache: Boolean): Flowable<CoinsDataResponse>
+    fun getAllCoins(skipCache: Boolean): Observable<CoinsDataResponse>
 
-    fun getWatchlist(skipCache: Boolean): Flowable<CoinsDataResponse>
+    fun getWatchlist(skipCache: Boolean): Observable<CoinsDataResponse>
 
     fun setCoinsData(coinsData: CoinsDataResponse)
 

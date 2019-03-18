@@ -1,57 +1,40 @@
 package com.blocksdecoded.coinwave.data.crypto
 
+import com.blocksdecoded.coinwave.data.crypto.local.CoinsLocalStorage
 import com.blocksdecoded.coinwave.data.crypto.remote.ICoinClient
 import com.blocksdecoded.coinwave.data.model.CoinsDataResponse
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.data.watchlist.IWatchlistStorage
-import io.reactivex.Flowable
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
+import io.reactivex.*
 
 // Created by askar on 7/19/18.
 class CoinsRepository(
     private val mCoinsClient: ICoinClient,
     private val mWatchlistSource: IWatchlistStorage,
-    private val mLocalSource: ICoinsStorage?
+    private val mLocalSource: CoinsLocalStorage
 ) : ICoinsStorage {
     private var mCached: CoinsDataResponse? = null
     private val mObservers = hashSetOf<ICoinsObserver>()
 
-    private val watchlistIds: String
-        get() {
-            var ids = ""
-            mWatchlistSource.getAll().forEachIndexed { index, i ->
-                ids += when (index) {
-                    0 -> "$i"
-                    else -> ",$i"
-                }
-            }
-            return ids
-        }
-
     init {
-        GlobalScope.async {
-            mLocalSource?.getAllCoins(true)
-        }
+        mLocalSource.getAllCoins().subscribe({
+            mCached = it
+        }, {})
     }
 
     //region Private
 
     //region Calls
 
+    private fun remoteCoinsFetch() = Observable.concat(mLocalSource.getAllCoins(), coinsRequest())
+
     private fun coinsRequest() = mCoinsClient.getCoins(NETWORK_PAGE_SIZE)
-        .doOnSuccess {
+        .doOnNext {
             setCoinsData(it.data)
             setCache(it.data)
         }
         .doOnError { mCached?.let { setCache(it) } }
         .map { it.data }
-        .toFlowable()
-
-    private fun watchlistRequest() =
-            mCoinsClient.getCoins(NETWORK_PAGE_SIZE, watchlistIds)
-                    .map { it.data }
-                    .toFlowable()
 
     //endregion
 
@@ -85,7 +68,7 @@ class CoinsRepository(
     //region Contract
 
     override fun setCoinsData(coinsData: CoinsDataResponse) {
-        mLocalSource?.setCoinsData(coinsData)
+        mLocalSource.setCoinsData(coinsData)
     }
 
     override fun getCoin(id: Int): CoinEntity? = mCached?.coins?.first { it.id == id }
@@ -110,28 +93,28 @@ class CoinsRepository(
         notifyRemoved(it)
     }
 
-    override fun getAllCoins(skipCache: Boolean): Flowable<CoinsDataResponse> =
+    override fun getAllCoins(skipCache: Boolean): Observable<CoinsDataResponse> =
             if (skipCache) {
-                coinsRequest()
+                remoteCoinsFetch()
             } else {
                 mCached?.let {
-                    Flowable.just(it)
-                } ?: coinsRequest()
+                    Observable.just(it)
+                } ?: remoteCoinsFetch()
             }
 
-    override fun getWatchlist(skipCache: Boolean): Flowable<CoinsDataResponse> =
+    override fun getWatchlist(skipCache: Boolean): Observable<CoinsDataResponse> =
             if (skipCache) {
-                watchlistRequest()
+                remoteCoinsFetch()
             } else {
                 mCached?.let {
-                    Flowable.just(it)
-                } ?: watchlistRequest()
+                    Observable.just(it)
+                } ?: remoteCoinsFetch()
             }
 
     //endregion
 
     companion object {
-        private const val NETWORK_PAGE_SIZE = 100
+        private const val NETWORK_PAGE_SIZE = 50
         private const val BD_PAGE_SIZE = 20
     }
 }

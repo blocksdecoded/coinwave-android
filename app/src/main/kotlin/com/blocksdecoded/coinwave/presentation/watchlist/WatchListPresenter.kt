@@ -109,8 +109,8 @@ class WatchListPresenter(
                         view?.hideFavoriteLoading()
                         view?.showFavoriteError()
                     }
-                }
-            ).let { disposables.add(it) }
+                })
+            .let { disposables.add(it) }
     }
 
     //endregion

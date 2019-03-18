@@ -23,7 +23,8 @@ class CoinInfoPresenter(
             .doAfterTerminate { scope.launch { view?.hideLoading() } }
             .uiSubscribe(
                 { chartData -> view?.showChartData(chartData) },
-                { error -> view?.showChartError() }).let { disposables.add(it) }
+                { error -> view?.showChartError() })
+            .let { disposables.add(it) }
     }
 
     override fun onGoToWebsiteClick() {

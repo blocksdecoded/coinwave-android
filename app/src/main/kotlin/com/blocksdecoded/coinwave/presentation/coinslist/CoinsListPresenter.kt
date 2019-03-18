@@ -46,12 +46,16 @@ class CoinsListPresenter(
         view?.showLoading()
         mCoinsUseCases.getCoins(true)
             .uiSubscribe(
-                onNext = { view?.hideLoading() },
+                onNext = {
+                    view?.hideLoading()
+                    updateCache(it)
+                },
                 onError = {
                     view?.hideLoading()
                     view?.showNetworkError(mCoinsCache.isEmpty())
                 }
             )
+            .let { disposables.add(it) }
     }
 
     private fun refreshView() = launchSilent(scope) {

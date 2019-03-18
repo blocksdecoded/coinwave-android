@@ -2,11 +2,11 @@ package com.blocksdecoded.coinwave.domain.usecases.coins
 
 import com.blocksdecoded.coinwave.data.crypto.ICoinsObserver
 import com.blocksdecoded.coinwave.data.model.CoinEntity
-import io.reactivex.Flowable
+import io.reactivex.Observable
 
 // Created by askar on 7/19/18.
 interface ICoinsUseCases {
-    fun getCoins(skipCache: Boolean): Flowable<List<CoinEntity>>
+    fun getCoins(skipCache: Boolean): Observable<List<CoinEntity>>
 
     fun getCoin(id: Int): CoinEntity?
 

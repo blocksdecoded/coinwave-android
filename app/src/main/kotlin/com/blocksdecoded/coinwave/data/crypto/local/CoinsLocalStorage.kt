@@ -1,20 +1,14 @@
 package com.blocksdecoded.coinwave.data.crypto.local
 
-import com.blocksdecoded.coinwave.data.crypto.ICoinsStorage
-import com.blocksdecoded.coinwave.data.crypto.ICoinsObserver
-import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.data.model.CoinsDataResponse
 import com.blocksdecoded.utils.logE
 import com.blocksdecoded.utils.shared.ISharedStorage
 import com.google.gson.Gson
-import io.reactivex.Flowable
-import java.util.concurrent.Executors
+import io.reactivex.Observable
 
 class CoinsLocalStorage(
     private val mSharedStorage: ISharedStorage
-) : ICoinsStorage {
-    val executor = Executors.newSingleThreadExecutor()
-
+) {
     private fun fetchSaveCoins(): CoinsDataResponse? = try {
         Gson().fromJson(
             mSharedStorage.getPreference(PREF_COINS_KEY, ""),
@@ -33,24 +27,10 @@ class CoinsLocalStorage(
 
     //region Contract
 
-    override fun setCoinsData(coinsData: CoinsDataResponse) = saveCoinsData(coinsData)
+    fun setCoinsData(coinsData: CoinsDataResponse) = saveCoinsData(coinsData)
 
-    override fun getAllCoins(skipCache: Boolean): Flowable<CoinsDataResponse> {
-        return fetchSaveCoins()?.let { Flowable.just(it) } ?: Flowable.error(Exception("Local data source not support watchlist fetch."))
-    }
-
-    override fun getWatchlist(skipCache: Boolean): Flowable<CoinsDataResponse> =
-        Flowable.error(Exception("Local data source not support watchlist fetch."))
-
-    override fun getCoin(id: Int): CoinEntity? = null
-
-    override fun saveCoin(id: Int): Boolean = false
-
-    override fun removeCoin(id: Int): Boolean = false
-
-    override fun addCoinObserver(observer: ICoinsObserver) = Unit
-
-    override fun removeCoinObserver(observer: ICoinsObserver) = Unit
+    fun getAllCoins(): Observable<CoinsDataResponse> =
+        fetchSaveCoins()?.let { Observable.just(it) } ?: Observable.empty()
 
     //endregion
 

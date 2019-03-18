@@ -52,6 +52,7 @@ class PickFavoritePresenter(
                             view?.showError()
                         }
                 )
+            .let { disposables.add(it) }
     }
 
     //endregion

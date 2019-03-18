@@ -59,8 +59,8 @@ class AddToWatchlistPresenter(
             .uiSubscribe(
                     onNext = { updateCache(it) },
                     onError = { showError(it) },
-                    onComplete = {}
-            )
+                    onComplete = {})
+            .let { disposables.add(it) }
     }
 
     override fun onCoinClick(position: Int) {

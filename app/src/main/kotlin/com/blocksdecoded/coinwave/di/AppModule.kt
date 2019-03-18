@@ -8,6 +8,7 @@ import com.blocksdecoded.coinwave.data.crypto.CoinsRepository
 import com.blocksdecoded.coinwave.data.crypto.ICoinsStorage
 import com.blocksdecoded.coinwave.data.crypto.chart.ChartsStorage
 import com.blocksdecoded.coinwave.data.crypto.chart.IChartsStorage
+import com.blocksdecoded.coinwave.data.crypto.local.CoinsLocalStorage
 import com.blocksdecoded.coinwave.data.crypto.remote.CoinApiClient
 import com.blocksdecoded.coinwave.data.crypto.remote.ICoinClient
 import com.blocksdecoded.coinwave.data.crypto.remote.ICoinClientConfig
@@ -45,16 +46,6 @@ import com.blocksdecoded.utils.shared.SharedStorage
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module.module
 
-val useCaseModule = module {
-    factory { CoinsInteractor(get()) as ICoinsUseCases }
-
-    factory { ChartsInteractor(get(), get()) as IChartsUseCases }
-
-    factory { FavoriteInteractor(get()) as IFavoriteUseCases }
-
-    factory { FavoriteChartInteractor(get(), get(), get()) as IFavoriteChartUseVariant }
-}
-
 val sourceModule = module {
     single { ConfigProvider(
         BuildConfig.API_COINS,
@@ -65,11 +56,21 @@ val sourceModule = module {
 
     single { SharedStorage(androidApplication()) as ISharedStorage }
 
-    single { CoinsRepository(get(), get(), null) as ICoinsStorage }
+    single { CoinsRepository(get(), get(), CoinsLocalStorage(get())) as ICoinsStorage }
 
     single { WatchlistStorage(get()) as IWatchlistStorage }
 
     single { ChartsStorage(get()) as IChartsStorage }
+}
+
+val useCaseModule = module {
+    factory { CoinsInteractor(get()) as ICoinsUseCases }
+
+    factory { ChartsInteractor(get(), get()) as IChartsUseCases }
+
+    factory { FavoriteInteractor(get()) as IFavoriteUseCases }
+
+    factory { FavoriteChartInteractor(get(), get(), get()) as IFavoriteChartUseVariant }
 }
 
 val coinsModule = module {
