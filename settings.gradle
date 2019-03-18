@@ -1,1 +1,1 @@
-include ':app', ':appslist', ':rateus'
+include ':app', ':rateus'
