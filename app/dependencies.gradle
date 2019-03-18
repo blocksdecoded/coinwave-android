@@ -69,7 +69,7 @@ ext {
     ]
 
     okHttp = [
-            logger: "com.squareup.okhttp3:logging-interceptor:$versions.okHttp",
+            logger  : "com.squareup.okhttp3:logging-interceptor:$versions.okHttp",
             okhttp  : "com.squareup.okhttp3:okhttp:$versions.okHttp",
             stetho  : "com.facebook.stetho:stetho-okhttp3:$versions.stetho"
     ]
