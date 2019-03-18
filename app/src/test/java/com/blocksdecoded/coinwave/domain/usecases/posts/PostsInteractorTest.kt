@@ -7,27 +7,17 @@ import com.blocksdecoded.utils.coroutine.model.onResult
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
-import org.junit.Before
 import org.junit.Test
-import org.mockito.Mock
 import org.mockito.Mockito.`when`
-import org.mockito.MockitoAnnotations
+import org.mockito.Mockito.mock
 
 class PostsInteractorTest {
 
-    @Mock
-    lateinit var postStorage: IPostStorage
-
-    lateinit var interactor: PostsInteractor
+    var postStorage: IPostStorage = mock(IPostStorage::class.java)
+    var interactor: PostsInteractor = PostsInteractor(postStorage)
 
     private val nextPostDate = "99.99.99"
     private val fakeResponse = listOf(PublisherPost(1, nextPostDate, null, null, null, null, null))
-
-    @Before
-    fun setUp() {
-        MockitoAnnotations.initMocks(this)
-        interactor = PostsInteractor(postStorage)
-    }
 
     @Test
     fun `Test next post date update`() {
