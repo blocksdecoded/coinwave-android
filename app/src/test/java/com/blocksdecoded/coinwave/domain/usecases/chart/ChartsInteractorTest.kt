@@ -11,7 +11,4 @@ class ChartsInteractorTest {
     private val chartsStorage = mock(IChartsStorage::class.java)
 
     private val interactor = ChartsInteractor(coinsStorage, chartsStorage)
-
-
-
 }

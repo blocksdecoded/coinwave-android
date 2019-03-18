@@ -3,7 +3,6 @@ package com.blocksdecoded.coinwave.domain.usecases.favorite
 import com.blocksdecoded.utils.shared.ISharedStorage
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import org.mockito.Mock
 import org.mockito.Mockito.*
 
 class FavoriteInteractorTest {
@@ -26,5 +25,4 @@ class FavoriteInteractorTest {
 
         assertEquals(FAVORITE_ID, interactor.getId())
     }
-
 }

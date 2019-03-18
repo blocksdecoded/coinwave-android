@@ -11,18 +11,18 @@ import com.blocksdecoded.utils.coroutine.model.mapOnSuccess
  */
 class PostRepository(
     private val mLocal: IPostStorage?,
-    private val mRemote: IPostClient?
+    private val mRemote: IPostClient
 ) : IPostStorage {
     private val mCache = HashMap<Int, PublisherPost>()
 
     //region Contract
 
-    override suspend fun getPosts(date: String): Result<List<PublisherPost>>? =
-            mRemote?.getPosts(date)
-                    ?.mapOnSuccess {
-                        it.posts.forEach { mCache[it.id] = it }
-                        it.posts
-                    }
+    override suspend fun getPosts(date: String): Result<List<PublisherPost>> =
+            mRemote.getPosts(date)
+                .mapOnSuccess {
+                    it.posts.forEach { mCache[it.id] = it }
+                    it.posts
+                }
 
     override fun getPost(id: Int): PublisherPost? = mCache[id]
 

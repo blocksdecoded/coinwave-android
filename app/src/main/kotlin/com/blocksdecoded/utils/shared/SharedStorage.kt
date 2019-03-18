@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 
 // Created by askar on 5/31/18.
+@Suppress("IMPLICIT_CAST_TO_ANY", "UNCHECKED_CAST")
 class SharedStorage(
     context: Context,
     private var mSharedFileName: String = "shared_prefs"

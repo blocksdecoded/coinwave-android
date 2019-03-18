@@ -78,7 +78,7 @@ class ActionConfirmDialog(
 
         initView()
 
-        window.attributes.width = WindowManager.LayoutParams.MATCH_PARENT
+        window?.attributes?.width = WindowManager.LayoutParams.MATCH_PARENT
     }
 
     private fun initView() {

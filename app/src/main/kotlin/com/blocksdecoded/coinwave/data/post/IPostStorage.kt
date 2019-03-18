@@ -8,7 +8,7 @@ import com.blocksdecoded.coinwave.data.post.model.PublisherPost
  * with Android Studio
  */
 interface IPostStorage {
-    suspend fun getPosts(date: String): Result<List<PublisherPost>>?
+    suspend fun getPosts(date: String): Result<List<PublisherPost>>
 
     fun getPost(id: Int): PublisherPost?
 }

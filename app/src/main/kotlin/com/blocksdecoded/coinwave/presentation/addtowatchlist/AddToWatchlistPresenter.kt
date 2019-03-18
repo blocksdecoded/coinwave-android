@@ -31,7 +31,7 @@ class AddToWatchlistPresenter(
         view?.showCoins(coins)
     }
 
-    private fun showError(e: Throwable) {
+    private fun showError() {
         view?.showLoadingError()
     }
 
@@ -58,7 +58,7 @@ class AddToWatchlistPresenter(
         mCoinsUseCases.getCoins(false)
             .uiSubscribe(
                     onNext = { updateCache(it) },
-                    onError = { showError(it) },
+                    onError = { showError() },
                     onComplete = {})
             .let { disposables.add(it) }
     }

@@ -47,10 +47,7 @@ import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module.module
 
 val sourceModule = module {
-    single { ConfigProvider(
-        BuildConfig.API_COINS,
-        BuildConfig.API_POSTS
-    ) as ICoinClientConfig }
+    single { ConfigProvider(BuildConfig.API_COINS) as ICoinClientConfig }
 
     single { CoinApiClient(get()) as ICoinClient }
 
