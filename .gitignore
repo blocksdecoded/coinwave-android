@@ -8,3 +8,4 @@
 .externalNativeBuild
 /fastlane/report.xml
 /fastlane/README.md
+/app/supply
