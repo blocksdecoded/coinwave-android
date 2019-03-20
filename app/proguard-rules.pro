@@ -94,3 +94,6 @@
   **[] $VALUES;
   public *;
 }
+
+# MpAndroidChart
+-keep class com.github.mikephil.charting.** { *; }
