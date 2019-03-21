@@ -15,11 +15,8 @@ import com.blocksdecoded.coinwave.presentation.posts.recycler.deprecated.PostLis
 import com.blocksdecoded.coinwave.presentation.posts.recycler.PostItemViewHolder
 import com.blocksdecoded.core.mvp.BaseMvpFragment
 import com.blocksdecoded.utils.customtabs.openUrl
-import com.blocksdecoded.utils.extensions.setConstraintTopMargin
-import com.blocksdecoded.utils.extensions.hide
+import com.blocksdecoded.utils.extensions.*
 import com.blocksdecoded.utils.showShortToast
-import com.blocksdecoded.utils.extensions.visible
-import com.blocksdecoded.utils.extensions.statusBarHeight
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 import kotlin.math.roundToInt
@@ -71,12 +68,7 @@ open class PostsFragment :
     }
 
     private fun initRecycler() {
-        var postHeight = 0
-        activity?.also {
-            val metrics = DisplayMetrics()
-            it.windowManager.defaultDisplay.getMetrics(metrics)
-            postHeight = (metrics.heightPixels * 0.27).roundToInt()
-        }
+        val postHeight = ((context?.screenHeight?:0) * 0.27).roundToInt()
 
         mRecycler.setHasFixedSize(true)
         mAdapter = PostListAdapter(arrayListOf(), this, this, postHeight)
