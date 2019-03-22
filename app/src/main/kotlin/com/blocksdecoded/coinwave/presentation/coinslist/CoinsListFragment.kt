@@ -5,6 +5,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import android.view.View
+import android.widget.TextView
 import butterknife.BindView
 import butterknife.OnClick
 import com.blocksdecoded.coinwave.R
@@ -14,6 +15,7 @@ import com.blocksdecoded.coinwave.presentation.coinslist.recycler.CoinsListAdapt
 import com.blocksdecoded.coinwave.presentation.coinslist.recycler.CoinsListVH
 import com.blocksdecoded.coinwave.presentation.sort.CoinsCache
 import com.blocksdecoded.coinwave.presentation.widgets.CoinsHeaderView
+import com.blocksdecoded.coinwave.util.DateHelper
 import com.blocksdecoded.core.mvp.BaseMvpFragment
 import com.blocksdecoded.utils.*
 import com.blocksdecoded.utils.extensions.hide
@@ -21,6 +23,7 @@ import com.blocksdecoded.utils.extensions.statusBarHeight
 import com.blocksdecoded.utils.extensions.visible
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
+import java.util.*
 
 open class CoinsListFragment : BaseMvpFragment<ICoinsListContract.Presenter>(),
     ICoinsListContract.View,
@@ -38,6 +41,10 @@ open class CoinsListFragment : BaseMvpFragment<ICoinsListContract.Presenter>(),
     lateinit var mRetry: View
     @BindView(R.id.fragment_coin_list_header)
     lateinit var mListHeader: CoinsHeaderView
+    @BindView(R.id.fragment_coins_progress)
+    lateinit var mLoadingProgress: View
+    @BindView(R.id.fragment_coins_last_updated)
+    lateinit var mLastUpdated: TextView
 
     private var mAdapter: CoinsListAdapter? = null
     private var mActiveDialog: Dialog? = null
@@ -141,8 +148,33 @@ open class CoinsListFragment : BaseMvpFragment<ICoinsListContract.Presenter>(),
     override fun showLoading() {
         mSwipeRefreshLayout.isRefreshing = true
         mErrorContainer.hide()
+    }
+
+    override fun showProgress() {
+        mLoadingProgress.visible()
+    }
+
+    override fun hideProgress() {
+        mLoadingProgress.hide()
+    }
+
+    override fun showLastUpdated(date: Date) {
+        mLastUpdated.visible()
+        mLastUpdated.text = "last updated:\n${DateHelper.getRelativeDate(date)}"
+    }
+
+    override fun hideLastUpdated() {
+        mLastUpdated.hide()
+    }
+
+    override fun hideList() {
         mRecycler.hide()
         mListHeader.hide()
+    }
+
+    override fun showList() {
+        mRecycler.visible()
+        mListHeader.visible()
     }
 
     //endregion

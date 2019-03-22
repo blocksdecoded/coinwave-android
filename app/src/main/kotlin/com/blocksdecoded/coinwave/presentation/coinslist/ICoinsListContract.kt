@@ -4,6 +4,7 @@ import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.presentation.sort.CoinsCache
 import com.blocksdecoded.coinwave.presentation.sort.ViewSortEnum
 import com.blocksdecoded.core.mvp.BaseMvpContract
+import java.util.*
 
 interface ICoinsListContract {
 
@@ -20,9 +21,21 @@ interface ICoinsListContract {
 
         fun showNetworkError(hideList: Boolean)
 
+        fun hideList()
+
+        fun showList()
+
         fun showLoading()
 
+        fun showProgress()
+
+        fun hideProgress()
+
         fun hideLoading()
+
+        fun showLastUpdated(date: Date)
+
+        fun hideLastUpdated()
     }
 
     interface Presenter : BaseMvpContract.Presenter<View> {

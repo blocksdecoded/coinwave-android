@@ -9,6 +9,8 @@ import com.blocksdecoded.coinwave.presentation.sort.ViewSortEnum
 import com.blocksdecoded.core.mvp.BaseMvpPresenter
 import com.blocksdecoded.utils.coroutine.launchSilent
 import com.blocksdecoded.utils.rx.uiSubscribe
+import kotlinx.coroutines.launch
+import java.util.*
 
 class CoinsListPresenter(
     override var view: ICoinsListContract.View?,
@@ -44,11 +46,24 @@ class CoinsListPresenter(
 
     private fun getCurrencies() {
         view?.showLoading()
+        if (mCoinsCache.isEmpty()) {
+            view?.hideList()
+            view?.hideProgress()
+            view?.hideLastUpdated()
+        } else {
+            view?.showProgress()
+            view?.hideLoading()
+        }
         mCoinsUseCases.getCoins(true)
+                .doOnComplete { scope.launch {
+                    view?.hideProgress()
+                    view?.showLastUpdated(Date())
+                } }
             .uiSubscribe(
                 onNext = {
                     view?.hideLoading()
                     updateCache(it)
+                    view?.showLastUpdated(Date())
                 },
                 onError = {
                     view?.hideLoading()

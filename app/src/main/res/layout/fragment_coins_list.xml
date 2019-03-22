@@ -34,6 +34,32 @@
                 android:text="@string/title_cryptocurrency"
                 android:textColor="@color/white"
                 android:textSize="@dimen/screen_big_title_text_size" />
+            
+            <ProgressBar
+                android:id="@+id/fragment_coins_progress"
+                android:layout_width="26dp"
+                android:layout_height="30dp"
+                app:layout_constraintLeft_toRightOf="@+id/fragment_coin_list_title"
+                app:layout_constraintTop_toTopOf="@+id/fragment_coin_list_title"
+                app:layout_constraintBottom_toBottomOf="@+id/fragment_coin_list_title"
+                android:layout_marginTop="4dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"/>
+            
+            <TextView
+                android:id="@+id/fragment_coins_last_updated"
+                android:theme="@style/RegularTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/fragment_coin_list_title"
+                app:layout_constraintBottom_toBottomOf="@+id/fragment_coin_list_title"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="20dp"
+                android:alpha="0.7"
+                android:textSize="12sp"
+                android:text="last updated:\n1h. ago"
+                android:textColor="@color/light_text"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.appbar.AppBarLayout>
 

@@ -1,5 +1,6 @@
 package com.blocksdecoded.coinwave.data.crypto.remote
 
+import android.util.Log
 import com.blocksdecoded.coinwave.data.model.ChartPeriodEnum
 import com.blocksdecoded.coinwave.data.crypto.remote.model.HistoryResponse
 import com.blocksdecoded.coinwave.data.model.CoinsResponse
@@ -9,6 +10,7 @@ import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
+import java.util.concurrent.TimeoutException
 
 /**
  * Created by askar on 2/12/19
@@ -28,14 +30,28 @@ class CoinApiClient(
 
     //region Public
 
-    override fun getCoins(pageSize: Int): Observable<CoinsResponse> =
-            mClient.getCoins(config.ipnsKey, pageSize)
+    override fun getCoins(pageSize: Int): Observable<CoinsResponse> = mClient.getCoins(
+        config.ipnsKey,
+        pageSize
+    ).retry { t1, t2 ->
+        Log.d("ololo", t2.toString())
+        when(t2) {
+            is TimeoutException -> true
+            else -> false
+        }
+    }
 
     override fun getHistory(chartName: String, period: ChartPeriodEnum) = mClient.getChartForTime(
         config.ipnsKey,
         chartName,
         period.displayName
-    )
+    ).retry { t1, t2 ->
+        Log.d("ololo", t2.toString())
+        when(t2) {
+            is TimeoutException -> true
+            else -> false
+        }
+    }
 
     //endregion
 
