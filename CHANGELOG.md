@@ -8,7 +8,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.0.0 (12)] - 2019-03-22
 ###Added
-- Show last update date
 - Cache refresh on return from background
 
 ## [1.0.0 (11)] - 2019-03-19
