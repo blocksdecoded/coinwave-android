@@ -19,7 +19,7 @@ interface ICoinsListContract {
 
         fun openCoinInfo(id: Int)
 
-        fun showNetworkError()
+        fun showNetworkError(hideList: Boolean)
 
         fun hideList()
 

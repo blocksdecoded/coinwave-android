@@ -18,6 +18,8 @@ class CoinsListPresenter(
     private val mMenuListener: IMenuClickListener,
     private val mCoinsUseCases: ICoinsUseCases
 ) : BaseMvpPresenter<ICoinsListContract.View>(), ICoinsListContract.Presenter {
+
+    private var mLastDate: Date? = null
     private val mCoinsCache = CoinsCache()
     private var mInitialized = false
 
@@ -45,6 +47,7 @@ class CoinsListPresenter(
         view?.showLastUpdated(coins.lastUpdated)
         mCoinsCache.setCache(coins.coins)
         refreshView()
+        mLastDate = coins.lastUpdated
     }
 
     private fun getCurrencies() {
@@ -66,7 +69,7 @@ class CoinsListPresenter(
                 onError = {
                     view?.hideLoading()
                     view?.hideProgress()
-                    if (mCoinsCache.isEmpty()) view?.hideList() else view?.showNetworkError()
+                    view?.showNetworkError(mCoinsCache.isEmpty())
                 }
             ).let { disposables.add(it) }
     }
@@ -87,6 +90,7 @@ class CoinsListPresenter(
             mInitialized = true
             getCurrencies()
         }
+        mLastDate?.let { view?.showLastUpdated(it) }
     }
 
     override fun onDestroy() {

@@ -124,8 +124,13 @@ open class CoinsListFragment : BaseMvpFragment<ICoinsListContract.Presenter>(),
         mRecycler.post { mRecycler.scrollToPosition(0) }
     }
 
-    override fun showNetworkError() {
-        showShortToast(context, getString(R.string.message_connection_error))
+    override fun showNetworkError(hideList: Boolean) {
+        if (hideList) {
+            hideList()
+            mErrorContainer.visible()
+        } else {
+            showShortToast(context, getString(R.string.message_connection_error))
+        }
     }
 
     override fun hideLoading() {
