@@ -7,7 +7,7 @@ import io.reactivex.Observable
 
 // Created by askar on 7/19/18.
 interface ICoinsUseCases {
-    fun getCoins(skipCache: Boolean): Observable<CoinsResult>
+    fun getCoins(skipCache: Boolean, force: Boolean = false): Observable<CoinsResult>
 
     fun getCoin(id: Int): CoinEntity?
 

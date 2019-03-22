@@ -11,7 +11,7 @@ import java.util.*
 class CoinsInteractor(
     private val mCoinsSource: ICoinsStorage
 ) : ICoinsUseCases {
-    override fun getCoins(skipCache: Boolean): Observable<CoinsResult> = mCoinsSource.getAllCoins(skipCache)
+    override fun getCoins(skipCache: Boolean, force: Boolean): Observable<CoinsResult> = mCoinsSource.getAllCoins(skipCache, force)
         .map { CoinsResult(it.coins, it.updatedAt ?: Date()) }
 
     override fun getCoin(id: Int): CoinEntity? {

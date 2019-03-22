@@ -6,7 +6,7 @@ import io.reactivex.Observable
 
 // Created by askar on 7/19/18.
 interface ICoinsStorage {
-    fun getAllCoins(skipCache: Boolean): Observable<CoinsDataResponse>
+    fun getAllCoins(skipCache: Boolean, force: Boolean): Observable<CoinsDataResponse>
 
     fun getWatchlist(skipCache: Boolean): Observable<CoinsDataResponse>
 

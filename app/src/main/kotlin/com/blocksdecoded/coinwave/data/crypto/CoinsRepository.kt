@@ -28,16 +28,19 @@ class CoinsRepository(
 
     //region Calls
 
-    private fun remoteCoinsFetch() = Observable.concat(mLocalSource.getAllCoins(), coinsRequest())
+    private fun isDirty(): Boolean = mCached?.updatedAt
+            ?.let { (Date().time - it.time) > VALID_CACHE_TIME } ?: true
 
-    private fun coinsRequest() = mCoinsClient.getCoins(NETWORK_PAGE_SIZE)
-        .doOnNext {
-            it.data.updatedAt = Date()
-            setCoinsData(it.data)
-            setCache(it.data)
-        }
-        .doOnError { mCached?.let { setCache(it) } }
-        .map { it.data }
+    private fun remoteCoinsFetch(force: Boolean) = Observable.concat(mLocalSource.getAllCoins(), coinsRequest(force))
+
+    private fun coinsRequest(force: Boolean) = if (isDirty() || force) mCoinsClient.getCoins(NETWORK_PAGE_SIZE)
+            .doOnNext {
+                it.data.updatedAt = Date()
+                setCoinsData(it.data)
+                setCache(it.data)
+            }
+            .doOnError { mCached?.let { setCache(it) } }
+            .map { it.data } else Observable.empty()
 
     //endregion
 
@@ -96,27 +99,28 @@ class CoinsRepository(
         notifyRemoved(it)
     }
 
-    override fun getAllCoins(skipCache: Boolean): Observable<CoinsDataResponse> =
+    override fun getAllCoins(skipCache: Boolean, force: Boolean): Observable<CoinsDataResponse> =
             if (skipCache) {
-                remoteCoinsFetch()
+                remoteCoinsFetch(force)
             } else {
                 mCached?.let {
                     Observable.just(it)
-                } ?: remoteCoinsFetch()
+                } ?: remoteCoinsFetch(false)
             }
 
     override fun getWatchlist(skipCache: Boolean): Observable<CoinsDataResponse> =
             if (skipCache) {
-                remoteCoinsFetch()
+                remoteCoinsFetch(false)
             } else {
                 mCached?.let {
                     Observable.just(it)
-                } ?: remoteCoinsFetch()
+                } ?: remoteCoinsFetch(false)
             }
 
     //endregion
 
     companion object {
+        private const val VALID_CACHE_TIME = 5 * 60 * 1000
         private const val NETWORK_PAGE_SIZE = 50
         private const val BD_PAGE_SIZE = 20
     }

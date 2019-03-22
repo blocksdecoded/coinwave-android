@@ -50,7 +50,7 @@ class CoinsListPresenter(
         mLastDate = coins.lastUpdated
     }
 
-    private fun getCurrencies() {
+    private fun getCurrencies(force: Boolean) {
         if (mCoinsCache.isEmpty()) {
             view?.showLoading()
             view?.hideList()
@@ -59,7 +59,7 @@ class CoinsListPresenter(
             view?.showProgress()
             view?.hideLoading()
         }
-        mCoinsUseCases.getCoins(true)
+        mCoinsUseCases.getCoins(skipCache = true, force = force)
             .doOnComplete { scope.launch { view?.hideProgress() } }
             .uiSubscribe(
                 onNext = {
@@ -88,7 +88,7 @@ class CoinsListPresenter(
         mCoinsUseCases.addObserver(mCurrenciesObserver)
         if (!mInitialized) {
             mInitialized = true
-            getCurrencies()
+            getCurrencies(false)
         }
         mLastDate?.let { view?.showLastUpdated(it) }
     }
@@ -99,7 +99,7 @@ class CoinsListPresenter(
     }
 
     override fun getCoins() {
-        getCurrencies()
+        getCurrencies(true)
     }
 
     override fun onCoinClick(position: Int) {
