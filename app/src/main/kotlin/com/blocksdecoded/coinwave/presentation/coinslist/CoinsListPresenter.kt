@@ -86,9 +86,9 @@ class CoinsListPresenter(
     override fun onResume() {
         super.onResume()
         mCoinsUseCases.addObserver(mCurrenciesObserver)
+        getCurrencies(!mInitialized)
         if (!mInitialized) {
             mInitialized = true
-            getCurrencies(false)
         }
         mLastDate?.let { view?.showLastUpdated(it) }
     }
