@@ -57,7 +57,7 @@ class AddToWatchlistPresenter(
         view?.hideLoadingError()
         mCoinsUseCases.getCoins(false)
             .uiSubscribe(
-                    onNext = { updateCache(it) },
+                    onNext = { updateCache(it.coins) },
                     onError = { showError() },
                     onComplete = {})
             .let { disposables.add(it) }

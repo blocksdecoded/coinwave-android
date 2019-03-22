@@ -2,7 +2,6 @@ package com.blocksdecoded.coinwave.util
 
 import android.os.Build
 import android.text.format.DateFormat
-import com.blocksdecoded.coinwave.R
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -69,7 +68,7 @@ object DateHelper {
             return SimpleDateFormat(DateFormat.getBestDateTimePattern(Locale.getDefault(), outputFormat)).format(date)
         }
 
-        var of = outputFormat;
+        var of = outputFormat
         if (Locale.getDefault().language == "ru" || Locale.getDefault().language == "ky") {
             of = of.replace("MMMM d", "d MMMM")
             of = of.replace("MMM d", "d MMM")
@@ -173,5 +172,4 @@ object DateHelper {
 
         return durationInHuman
     }
-
 }

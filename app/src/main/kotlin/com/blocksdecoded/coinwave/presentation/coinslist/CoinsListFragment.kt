@@ -18,9 +18,7 @@ import com.blocksdecoded.coinwave.presentation.widgets.CoinsHeaderView
 import com.blocksdecoded.coinwave.util.DateHelper
 import com.blocksdecoded.core.mvp.BaseMvpFragment
 import com.blocksdecoded.utils.*
-import com.blocksdecoded.utils.extensions.hide
-import com.blocksdecoded.utils.extensions.statusBarHeight
-import com.blocksdecoded.utils.extensions.visible
+import com.blocksdecoded.utils.extensions.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 import java.util.*
@@ -121,24 +119,13 @@ open class CoinsListFragment : BaseMvpFragment<ICoinsListContract.Presenter>(),
     }
 
     override fun showCoins(coins: List<CoinEntity>) {
-        mRecycler.visible()
-        mListHeader.visible()
         mErrorContainer.hide()
         mAdapter?.setItems(coins)
-        mRecycler.scrollToPosition(0)
+        mRecycler.post { mRecycler.scrollToPosition(0) }
     }
 
-    override fun showNetworkError(hideList: Boolean) {
-        if (hideList) {
-            mListHeader.hide()
-            mRecycler.hide()
-            mErrorContainer.visible()
-        } else {
-            showShortToast(context, getString(R.string.message_connection_error))
-            mListHeader.visible()
-            mRecycler.visible()
-            mErrorContainer.hide()
-        }
+    override fun showNetworkError() {
+        showShortToast(context, getString(R.string.message_connection_error))
     }
 
     override fun hideLoading() {
@@ -155,21 +142,22 @@ open class CoinsListFragment : BaseMvpFragment<ICoinsListContract.Presenter>(),
     }
 
     override fun hideProgress() {
-        mLoadingProgress.hide()
+        mLoadingProgress.invisible()
     }
 
     override fun showLastUpdated(date: Date) {
-        mLastUpdated.visible()
-        mLastUpdated.text = "last updated:\n${DateHelper.getRelativeDate(date)}"
+        mLastUpdated.setColouredSpanAfter(
+                getString(R.string.last_updated, DateHelper.getRelativeDate(date)),
+                ":",
+                mLastUpdated.context.getColorRes(R.color.green))
     }
 
     override fun hideLastUpdated() {
-        mLastUpdated.hide()
     }
 
     override fun hideList() {
-        mRecycler.hide()
-        mListHeader.hide()
+        mRecycler.invisible()
+        mListHeader.invisible()
     }
 
     override fun showList() {

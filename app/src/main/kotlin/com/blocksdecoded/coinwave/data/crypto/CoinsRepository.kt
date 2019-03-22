@@ -4,8 +4,10 @@ import com.blocksdecoded.coinwave.data.crypto.local.CoinsLocalStorage
 import com.blocksdecoded.coinwave.data.crypto.remote.ICoinClient
 import com.blocksdecoded.coinwave.data.model.CoinsDataResponse
 import com.blocksdecoded.coinwave.data.model.CoinEntity
+import com.blocksdecoded.coinwave.data.model.CoinsResult
 import com.blocksdecoded.coinwave.data.watchlist.IWatchlistStorage
-import io.reactivex.*
+import io.reactivex.Observable
+import java.util.*
 
 // Created by askar on 7/19/18.
 class CoinsRepository(
@@ -30,6 +32,7 @@ class CoinsRepository(
 
     private fun coinsRequest() = mCoinsClient.getCoins(NETWORK_PAGE_SIZE)
         .doOnNext {
+            it.data.updatedAt = Date()
             setCoinsData(it.data)
             setCache(it.data)
         }
@@ -41,7 +44,7 @@ class CoinsRepository(
     private fun setCache(data: CoinsDataResponse) {
         markSaved(data.coins)
         mCached = data
-        mObservers.forEach { it.onUpdated(data.coins) }
+        mObservers.forEach { it.onUpdated(CoinsResult(data.coins, data.updatedAt ?: Date())) }
     }
 
     private fun markSaved(coins: List<CoinEntity>) {

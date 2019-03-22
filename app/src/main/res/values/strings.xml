@@ -37,6 +37,7 @@
     <string name="title_news">Posts</string>
     
     <!--Timestamps-->
+    <string name="last_updated">last updated:\n%s</string>
     <string name="timestamp_hours_ago" >%dh. ago</string>
     <string name="timestamp_last_seen_absolute" >last seen %s</string>
     <string name="timestamp_last_seen_relative" >last seen %s</string>

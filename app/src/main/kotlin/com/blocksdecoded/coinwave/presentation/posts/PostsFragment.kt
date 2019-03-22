@@ -1,6 +1,5 @@
 package com.blocksdecoded.coinwave.presentation.posts
 
-import android.util.DisplayMetrics
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -68,7 +67,7 @@ open class PostsFragment :
     }
 
     private fun initRecycler() {
-        val postHeight = ((context?.screenHeight?:0) * 0.27).roundToInt()
+        val postHeight = ((context?.screenHeight ?: 0) * 0.27).roundToInt()
 
         mRecycler.setHasFixedSize(true)
         mAdapter = PostListAdapter(arrayListOf(), this, this, postHeight)

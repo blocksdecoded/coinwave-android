@@ -2,6 +2,7 @@ package com.blocksdecoded.coinwave.presentation.watchlist
 
 import com.blocksdecoded.coinwave.data.crypto.ICoinsObserver
 import com.blocksdecoded.coinwave.data.model.CoinEntity
+import com.blocksdecoded.coinwave.data.model.CoinsResult
 import com.blocksdecoded.coinwave.domain.usecases.coins.ICoinsUseCases
 import com.blocksdecoded.coinwave.domain.variant.favoritechart.IFavoriteChartUseVariant
 import com.blocksdecoded.coinwave.presentation.main.IMenuClickListener
@@ -27,8 +28,8 @@ class WatchListPresenter(
             view?.updateCoin(updateCurrency(coinEntity), coinEntity)
         }
 
-        override fun onUpdated(coins: List<CoinEntity>) = launchSilent(scope) {
-            setCache(coins)
+        override fun onUpdated(coins: CoinsResult) = launchSilent(scope) {
+            setCache(coins.coins)
         }
 
         override fun onRemoved(coinEntity: CoinEntity) = launchSilent(scope) {
@@ -95,7 +96,7 @@ class WatchListPresenter(
         }
 
         mCoinsUseCases.getCoins(skipCache)
-            .map { it.filter { it.isSaved } }
+            .map { it.coins.filter { it.isSaved } }
             .uiSubscribe(
                 onNext = {
                     view?.hideCoinsLoading()

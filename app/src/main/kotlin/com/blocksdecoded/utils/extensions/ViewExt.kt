@@ -1,12 +1,16 @@
 package com.blocksdecoded.utils.extensions
 
 import android.annotation.SuppressLint
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.animation.ScaleAnimation
+import android.widget.TextView
 import androidx.annotation.AnimRes
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView
@@ -26,6 +30,18 @@ fun View.setConstraintTopMargin(value: Int) = try {
     params.topMargin = value
     layoutParams = params
 } catch (e: Exception) {
+}
+
+fun TextView.setColouredSpanAfter(text: String, delimiter: String, color: Int) {
+    val spannableString = SpannableString(text)
+    val start = text.indexOf(delimiter) + 1
+    val end = text.length
+    try {
+        spannableString.setSpan(ForegroundColorSpan(color), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        this.text = spannableString
+    } catch (e: IndexOutOfBoundsException) {
+        println("'$delimiter' was not not found in TextView text")
+    }
 }
 
 fun View.playScaleAnimation(to: Float) {

@@ -2,6 +2,7 @@ package com.blocksdecoded.coinwave.presentation.coinslist
 
 import com.blocksdecoded.coinwave.data.crypto.ICoinsObserver
 import com.blocksdecoded.coinwave.data.model.CoinEntity
+import com.blocksdecoded.coinwave.data.model.CoinsResult
 import com.blocksdecoded.coinwave.domain.usecases.coins.ICoinsUseCases
 import com.blocksdecoded.coinwave.presentation.main.IMenuClickListener
 import com.blocksdecoded.coinwave.presentation.sort.CoinsCache
@@ -25,7 +26,7 @@ class CoinsListPresenter(
             view?.updateCoin(updateCurrency(coinEntity), coinEntity)
         }
 
-        override fun onUpdated(coins: List<CoinEntity>) = launchSilent(scope) {
+        override fun onUpdated(coins: CoinsResult) = launchSilent(scope) {
             updateCache(coins)
         }
 
@@ -39,41 +40,38 @@ class CoinsListPresenter(
     private fun updateCurrency(coinEntity: CoinEntity): Int =
             mCoinsCache.updateCurrency(coinEntity)
 
-    private fun updateCache(coins: List<CoinEntity>) {
-        mCoinsCache.setCache(coins)
+    private fun updateCache(coins: CoinsResult) {
+        view?.showList()
+        view?.showLastUpdated(coins.lastUpdated)
+        mCoinsCache.setCache(coins.coins)
         refreshView()
     }
 
     private fun getCurrencies() {
-        view?.showLoading()
         if (mCoinsCache.isEmpty()) {
+            view?.showLoading()
             view?.hideList()
             view?.hideProgress()
-            view?.hideLastUpdated()
         } else {
             view?.showProgress()
             view?.hideLoading()
         }
         mCoinsUseCases.getCoins(true)
-                .doOnComplete { scope.launch {
-                    view?.hideProgress()
-                    view?.showLastUpdated(Date())
-                } }
+            .doOnComplete { scope.launch { view?.hideProgress() } }
             .uiSubscribe(
                 onNext = {
                     view?.hideLoading()
                     updateCache(it)
-                    view?.showLastUpdated(Date())
                 },
                 onError = {
                     view?.hideLoading()
-                    view?.showNetworkError(mCoinsCache.isEmpty())
+                    view?.hideProgress()
+                    if (mCoinsCache.isEmpty()) view?.hideList() else view?.showNetworkError()
                 }
-            )
-            .let { disposables.add(it) }
+            ).let { disposables.add(it) }
     }
 
-    private fun refreshView() = launchSilent(scope) {
+    private fun refreshView() {
         view?.showCoins(mCoinsCache.coins)
         view?.showSortType(mCoinsCache.currentSort)
     }

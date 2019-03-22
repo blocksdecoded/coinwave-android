@@ -45,7 +45,7 @@ class PickFavoritePresenter(
                 .uiSubscribe(
                         onNext = {
                             view?.hideLoading()
-                            updateCache(it)
+                            updateCache(it.coins)
                         },
                         onError = {
                             view?.hideLoading()
