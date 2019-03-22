@@ -28,8 +28,10 @@ abstract class CoreApiClient {
         val httpClient = OkHttpClient.Builder()
                 .addInterceptor(logger)
                 .addInterceptor(ChuckInterceptor(CoinApp.INSTANCE))
-                .connectTimeout(60, TimeUnit.SECONDS)
-                .readTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(120, TimeUnit.SECONDS)
+                .callTimeout(120, TimeUnit.SECONDS)
+                .connectTimeout(120, TimeUnit.SECONDS)
+                .readTimeout(120, TimeUnit.SECONDS)
 
         val gsonBuilder = GsonBuilder()
         gsonBuilder.setLenient()
