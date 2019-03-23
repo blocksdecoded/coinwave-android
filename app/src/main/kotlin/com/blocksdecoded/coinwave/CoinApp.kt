@@ -5,7 +5,9 @@ import android.content.Context
 import androidx.multidex.MultiDex
 import com.blocksdecoded.coinwave.di.coinApp
 import com.blocksdecoded.utils.Logger
+import com.crashlytics.android.Crashlytics
 import com.squareup.leakcanary.LeakCanary
+import io.fabric.sdk.android.Fabric
 import org.koin.android.ext.android.startKoin
 
 class CoinApp : Application() {
@@ -35,6 +37,6 @@ class CoinApp : Application() {
 
         Logger.setup(BuildConfig.DEBUG)
 
-//        Fabric.with(this, Crashlytics())
+        Fabric.with(this, Crashlytics())
     }
 }
