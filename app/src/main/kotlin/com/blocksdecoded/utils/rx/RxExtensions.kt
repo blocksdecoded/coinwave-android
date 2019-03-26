@@ -16,7 +16,7 @@ fun <T> Single<T>.observeUi(): Single<T> = this.subscribeOn(RxSchedulers.io)
 fun <T> Single<T>.observeIo(): Single<T> = this.subscribeOn(RxSchedulers.io)
     .observeOn(RxSchedulers.io)
 
-fun <T> Single<T>.uiSubscribe(onNext: (T) -> Unit): Disposable = uiSubscribe(onNext)
+fun <T> Single<T>.uiSubscribe(onNext: (T) -> Unit): Disposable = uiSubscribe(onNext, null)
 
 fun <T> Observable<T>.uiSubscribe(onNext: (T) -> Unit): Disposable =
     uiSubscribe(onNext, null, null)

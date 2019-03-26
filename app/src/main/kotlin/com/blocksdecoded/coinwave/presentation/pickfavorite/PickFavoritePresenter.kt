@@ -1,6 +1,7 @@
 package com.blocksdecoded.coinwave.presentation.pickfavorite
 
 import com.blocksdecoded.coinwave.data.model.CoinEntity
+import com.blocksdecoded.coinwave.data.model.CoinsResult
 import com.blocksdecoded.coinwave.domain.usecases.favorite.IFavoriteUseCases
 import com.blocksdecoded.coinwave.domain.usecases.coins.ICoinsUseCases
 import com.blocksdecoded.coinwave.presentation.sort.CoinsCache
@@ -43,16 +44,20 @@ class PickFavoritePresenter(
         view?.showLoading()
         mCoinsUseCases.getCoins(false)
                 .uiSubscribe(
-                        onNext = {
-                            view?.hideLoading()
-                            updateCache(it.coins)
-                        },
-                        onError = {
-                            view?.hideLoading()
-                            view?.showError()
-                        }
+                        onNext = ::onNextCoinsLoad,
+                        onError = ::onCoinsLoadError
                 )
-            .let { disposables.add(it) }
+            .addDisposable()
+    }
+
+    private fun onNextCoinsLoad(coins: CoinsResult) {
+        view?.hideLoading()
+        updateCache(coins.coins)
+    }
+
+    private fun onCoinsLoadError(t: Throwable) {
+        view?.hideLoading()
+        view?.showError()
     }
 
     //endregion

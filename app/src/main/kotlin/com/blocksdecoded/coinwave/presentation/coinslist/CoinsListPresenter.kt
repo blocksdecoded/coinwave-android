@@ -10,7 +10,6 @@ import com.blocksdecoded.coinwave.presentation.sort.ViewSortEnum
 import com.blocksdecoded.core.mvp.BaseMvpPresenter
 import com.blocksdecoded.utils.coroutine.launchSilent
 import com.blocksdecoded.utils.rx.uiSubscribe
-import kotlinx.coroutines.launch
 import java.util.*
 
 class CoinsListPresenter(
@@ -60,18 +59,16 @@ class CoinsListPresenter(
             view?.hideLoading()
         }
         mCoinsUseCases.getCoins(skipCache = true, force = force)
-            .doOnComplete { scope.launch { view?.hideProgress() } }
             .uiSubscribe(
                 onNext = {
                     view?.hideLoading()
-                    updateCache(it)
-                },
+                    updateCache(it) },
                 onError = {
                     view?.hideLoading()
                     view?.hideProgress()
-                    view?.showNetworkError(mCoinsCache.isEmpty())
-                }
-            ).let { disposables.add(it) }
+                    view?.showNetworkError(mCoinsCache.isEmpty()) },
+                onComplete = { view?.hideProgress() })
+            .addDisposable()
     }
 
     private fun refreshView() {

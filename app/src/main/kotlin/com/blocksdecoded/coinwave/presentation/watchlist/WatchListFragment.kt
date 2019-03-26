@@ -261,6 +261,16 @@ open class WatchListFragment : BaseMvpFragment<IWatchListContract.Presenter>(),
         mErrorContainer.hide()
     }
 
+    override fun showList() {
+        mRecycler.visible()
+        mListHeader.visible()
+    }
+
+    override fun hideList() {
+        mRecycler.hide()
+        mListHeader.hide()
+    }
+
     override fun showFavoriteLoading() {
         mErrorIcon.hide()
         mProgress.visible()

@@ -24,7 +24,7 @@ class CoinInfoPresenter(
             .uiSubscribe(
                 { chartData -> view?.showChartData(chartData) },
                 { error -> view?.showChartError() })
-            .let { disposables.add(it) }
+            .addDisposable()
     }
 
     override fun onGoToWebsiteClick() {

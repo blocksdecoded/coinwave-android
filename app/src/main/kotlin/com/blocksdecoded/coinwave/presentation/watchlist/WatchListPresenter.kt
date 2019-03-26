@@ -11,8 +11,8 @@ import com.blocksdecoded.coinwave.presentation.sort.ViewSortEnum
 import com.blocksdecoded.core.mvp.BaseMvpPresenter
 import com.blocksdecoded.utils.coroutine.launchSilent
 import com.blocksdecoded.utils.coroutine.model.onSuccess
+import com.blocksdecoded.utils.logD
 import com.blocksdecoded.utils.rx.uiSubscribe
-import kotlinx.coroutines.async
 
 class WatchListPresenter(
     override var view: IWatchListContract.View?,
@@ -61,6 +61,7 @@ class WatchListPresenter(
     }
 
     private fun setCache(coins: List<CoinEntity>) = launchSilent(scope) {
+        logD("Set cached ${coins.size}")
         mCoinsCache.setCache(coins.filter { it.isSaved })
 
         refreshView()
@@ -78,19 +79,20 @@ class WatchListPresenter(
             ?.onSuccess { view?.showFavoriteCoin(it) }
 
         mFavoriteChartUseVariant.chart
-            ?.doOnComplete { scope.async { view?.hideFavoriteLoading() } }
             ?.uiSubscribe(
                     onNext = { view?.showFavoriteChart(it) },
-                    onError = { view?.showFavoriteError() }
-            )?.let { disposables.add(it) }
+                    onError = { view?.showFavoriteError() },
+                    onComplete = { view?.hideFavoriteLoading() })
+            .addDisposable()
     }
 
     private fun updateCurrency(coinEntity: CoinEntity): Int = mCoinsCache.add(coinEntity)
 
     private fun removeCurrency(coinEntity: CoinEntity): Int = mCoinsCache.remove(coinEntity)
 
-    private fun getCurrencies(skipCache: Boolean) = launchSilent(scope) {
+    private fun getCurrencies(skipCache: Boolean) {
         view?.showCoinsLoading()
+
         if (mCoinsCache.isEmpty()) {
             view?.showFavoriteLoading()
         }
@@ -98,20 +100,25 @@ class WatchListPresenter(
         mCoinsUseCases.getCoins(skipCache)
             .map { it.coins.filter { it.isSaved } }
             .uiSubscribe(
-                onNext = {
-                    view?.hideCoinsLoading()
-                    setCache(it)
-                },
-                onError = {
-                    view?.hideCoinsLoading()
-                    view?.showError(mCoinsCache.isEmpty())
+                onNext = ::onCoinsLoad,
+                onError = ::onCoinsLoadError
+            )
+            .addDisposable()
+    }
 
-                    if (mCoinsCache.isEmpty()) {
-                        view?.hideFavoriteLoading()
-                        view?.showFavoriteError()
-                    }
-                })
-            .let { disposables.add(it) }
+    private fun onCoinsLoad(coins: List<CoinEntity>) {
+        view?.hideCoinsLoading()
+        setCache(coins)
+    }
+
+    private fun onCoinsLoadError(t: Throwable) {
+        view?.hideCoinsLoading()
+        view?.showError(mCoinsCache.isEmpty())
+
+        if (mCoinsCache.isEmpty()) {
+            view?.hideFavoriteLoading()
+            view?.showFavoriteError()
+        }
     }
 
     //endregion

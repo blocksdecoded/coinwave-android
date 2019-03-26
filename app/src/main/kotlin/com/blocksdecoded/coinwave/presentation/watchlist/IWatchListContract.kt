@@ -24,7 +24,13 @@ interface IWatchListContract {
 
         fun openAddToWatchlist()
 
+        fun showSortType(sortType: CoinsCache.CoinSortEnum)
+
         fun showError(hideList: Boolean)
+
+        fun showList()
+
+        fun hideList()
 
         fun showEmpty()
 
@@ -41,8 +47,6 @@ interface IWatchListContract {
         fun showFavoriteError()
 
         fun hideFavoriteError()
-
-        fun showSortType(sortType: CoinsCache.CoinSortEnum)
     }
 
     interface Presenter : BaseMvpContract.Presenter<View> {

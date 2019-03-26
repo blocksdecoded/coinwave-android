@@ -4,7 +4,7 @@ import com.blocksdecoded.coinwave.domain.usecases.posts.IPostsUseCases
 import com.blocksdecoded.coinwave.presentation.main.IMenuClickListener
 import com.blocksdecoded.core.mvp.BaseMvpPresenter
 import com.blocksdecoded.utils.coroutine.launchSilent
-import com.blocksdecoded.utils.rx.observeUi
+import com.blocksdecoded.utils.rx.uiSubscribe
 
 class PostsPresenter(
     override var view: IPostsContract.View?,
@@ -35,21 +35,19 @@ class PostsPresenter(
     override fun getPosts() = launchSilent(scope) {
         view?.showLoading()
         mPostUseCases.getPosts()
-            .observeUi()
-            .subscribe(
+            .uiSubscribe(
                 { view?.showPosts(it) },
                 { view?.showLoadingError() },
-                { view?.stopLoading() }
-            ).let { disposables.add(it) }
+                { view?.stopLoading() })
+            .addDisposable()
     }
 
     override fun getNextPosts() = launchSilent(scope) {
         mPostUseCases.getNextPosts()
-            .observeUi()
-            .subscribe(
+            .uiSubscribe(
                 { view?.nextPosts(it) },
-                { view?.showErrorMessage() }
-            ).let { disposables.add(it) }
+                { view?.showErrorMessage() })
+            .addDisposable()
     }
 
     override fun onMenuClick() {
