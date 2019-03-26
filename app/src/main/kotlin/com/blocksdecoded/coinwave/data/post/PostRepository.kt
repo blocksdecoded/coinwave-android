@@ -1,9 +1,8 @@
 package com.blocksdecoded.coinwave.data.post
 
-import com.blocksdecoded.utils.coroutine.model.Result
 import com.blocksdecoded.coinwave.data.post.model.PublisherPost
 import com.blocksdecoded.coinwave.data.post.remote.IPostClient
-import com.blocksdecoded.utils.coroutine.model.mapOnSuccess
+import io.reactivex.Observable
 
 /**
  * Created by askar on 11/19/18
@@ -17,12 +16,13 @@ class PostRepository(
 
     //region Contract
 
-    override suspend fun getPosts(date: String): Result<List<PublisherPost>> =
+    override suspend fun getPosts(date: String): Observable<List<PublisherPost>> =
             mRemote.getPosts(date)
-                .mapOnSuccess {
+                .map {
                     it.posts.forEach { mCache[it.id] = it }
                     it.posts
                 }
+                .toObservable()
 
     override fun getPost(id: Int): PublisherPost? = mCache[id]
 

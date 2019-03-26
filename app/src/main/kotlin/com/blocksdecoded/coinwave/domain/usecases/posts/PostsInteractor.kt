@@ -1,11 +1,8 @@
 package com.blocksdecoded.coinwave.domain.usecases.posts
 
-import com.blocksdecoded.utils.coroutine.model.Result
 import com.blocksdecoded.coinwave.data.post.IPostStorage
 import com.blocksdecoded.coinwave.data.post.model.PublisherPost
-import com.blocksdecoded.utils.coroutine.AppExecutors
-import com.blocksdecoded.utils.coroutine.model.onSuccess
-import kotlinx.coroutines.withContext
+import io.reactivex.Observable
 
 /**
  * Created by askar on 11/19/18
@@ -24,17 +21,18 @@ class PostsInteractor(
         }
     }
 
-    override suspend fun getPosts(): Result<List<PublisherPost>>? = withContext(AppExecutors.network) {
+    override suspend fun getPosts(): Observable<List<PublisherPost>> {
         date = ""
-        mPostsSource.getPosts(date).onSuccess {
-            updateLastDate(it)
-        }
+        return mPostsSource.getPosts(date)
+            .map {
+                updateLastDate(it)
+                it
+            }
     }
 
-    override suspend fun getNextPosts(): Result<List<PublisherPost>>? = withContext(AppExecutors.network) {
-        mPostsSource.getPosts(date).onSuccess {
-            updateLastDate(it)
-        }
+    override suspend fun getNextPosts(): Observable<List<PublisherPost>> = mPostsSource.getPosts(date).map {
+        updateLastDate(it)
+        it
     }
 
     override fun getPost(id: Int): PublisherPost? = mPostsSource.getPost(id)
