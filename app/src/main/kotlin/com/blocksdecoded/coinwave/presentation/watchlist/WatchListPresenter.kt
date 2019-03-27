@@ -48,7 +48,7 @@ class WatchListPresenter(
     override fun onResume() {
         super.onResume()
         mCoinsUseCases.addObserver(mCurrenciesObserver)
-        getCurrencies(false)
+        getCurrencies(skipCache = false, force = false)
     }
 
     //endregion
@@ -61,7 +61,6 @@ class WatchListPresenter(
     }
 
     private fun setCache(coins: List<CoinEntity>) = launchSilent(scope) {
-        logD("Set cached ${coins.size}")
         mCoinsCache.setCache(coins.filter { it.isSaved })
 
         refreshView()
@@ -90,24 +89,28 @@ class WatchListPresenter(
 
     private fun removeCurrency(coinEntity: CoinEntity): Int = mCoinsCache.remove(coinEntity)
 
-    private fun getCurrencies(skipCache: Boolean) {
+    private fun getCurrencies(skipCache: Boolean, force: Boolean) {
         view?.showCoinsLoading()
 
         if (mCoinsCache.isEmpty()) {
             view?.showFavoriteLoading()
         }
 
-        mCoinsUseCases.getCoins(skipCache)
+        mCoinsUseCases.getCoins(skipCache, force)
             .map { it.coins.filter { it.isSaved } }
             .uiSubscribe(
                 onNext = ::onCoinsLoad,
-                onError = ::onCoinsLoadError
+                onError = ::onCoinsLoadError,
+                onComplete = ::onCoinsLoadComplete
             )
             .addDisposable()
     }
 
-    private fun onCoinsLoad(coins: List<CoinEntity>) {
+    private fun onCoinsLoadComplete() {
         view?.hideCoinsLoading()
+    }
+
+    private fun onCoinsLoad(coins: List<CoinEntity>) {
         setCache(coins)
     }
 
@@ -126,7 +129,7 @@ class WatchListPresenter(
     //region Contract
 
     override fun getCoins() {
-        getCurrencies(true)
+        getCurrencies(skipCache = true, force = true)
     }
 
     override fun deleteCoin(position: Int) {

@@ -16,12 +16,14 @@ class CoinsRepository(
     private val mLocalSource: CoinsLocalStorage
 ) : ICoinsStorage {
     private var mCached: CoinsDataResponse? = null
+        set(value) {
+            field = value
+            field?.coins?.let { markSaved(it) }
+        }
     private val mObservers = hashSetOf<ICoinsObserver>()
 
     init {
-        mLocalSource.getAllCoins().subscribe({
-            mCached = it
-        }, {})
+        mLocalSource.getAllCoins().subscribe { mCached = it }
     }
 
     //region Private
@@ -31,9 +33,12 @@ class CoinsRepository(
     private fun isDirty(): Boolean = mCached?.updatedAt
             ?.let { (Date().time - it.time) > VALID_CACHE_TIME } ?: true
 
-    private fun remoteCoinsFetch(force: Boolean) = Observable.concat(mLocalSource.getAllCoins(), coinsRequest(force))
+    private fun localCoinsFetch() = if (mCached != null)
+        Observable.just(mCached!!)
+    else
+        mLocalSource.getAllCoins()
 
-    private fun coinsRequest(force: Boolean) = if (isDirty() || force) mCoinsClient.getCoins(NETWORK_PAGE_SIZE)
+    private fun remoteCoinsFetch(force: Boolean) = if (isDirty() || force) mCoinsClient.getCoins(NETWORK_PAGE_SIZE)
             .doOnNext {
                 it.data.updatedAt = Date()
                 setCoinsData(it.data)
@@ -42,10 +47,11 @@ class CoinsRepository(
             .doOnError { mCached?.let { setCache(it) } }
             .map { it.data } else Observable.empty()
 
+    private fun fetchCoins(force: Boolean) = Observable.concat(localCoinsFetch(), remoteCoinsFetch(force))
+
     //endregion
 
     private fun setCache(data: CoinsDataResponse) {
-        markSaved(data.coins)
         mCached = data
         mObservers.forEach { it.onUpdated(CoinsResult(data.coins, data.updatedAt ?: Date())) }
     }
@@ -101,20 +107,20 @@ class CoinsRepository(
 
     override fun getAllCoins(skipCache: Boolean, force: Boolean): Observable<CoinsDataResponse> =
             if (skipCache) {
-                remoteCoinsFetch(force)
+                fetchCoins(force)
             } else {
                 mCached?.let {
                     Observable.just(it)
-                } ?: remoteCoinsFetch(false)
+                } ?: fetchCoins(false)
             }
 
     override fun getWatchlist(skipCache: Boolean): Observable<CoinsDataResponse> =
             if (skipCache) {
-                remoteCoinsFetch(false)
+                fetchCoins(false)
             } else {
                 mCached?.let {
                     Observable.just(it)
-                } ?: remoteCoinsFetch(false)
+                } ?: fetchCoins(false)
             }
 
     //endregion
@@ -122,6 +128,5 @@ class CoinsRepository(
     companion object {
         private const val VALID_CACHE_TIME = 5 * 60 * 1000
         private const val NETWORK_PAGE_SIZE = 50
-        private const val BD_PAGE_SIZE = 20
     }
 }
