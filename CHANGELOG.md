@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+###Fixed
+- Watchlist refresh
 
 ## [1.0.0 (12)] - 2019-03-22
 ###Added
