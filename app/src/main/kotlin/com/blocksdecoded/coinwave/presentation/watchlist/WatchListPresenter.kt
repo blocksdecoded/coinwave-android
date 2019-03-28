@@ -66,8 +66,6 @@ class WatchListPresenter(
         refreshView()
 
         if (mCoinsCache.isEmpty()) view?.showEmpty() else view?.hideEmpty()
-
-        loadFavorite()
     }
 
     private suspend fun loadFavorite() {
@@ -106,8 +104,9 @@ class WatchListPresenter(
             .addDisposable()
     }
 
-    private fun onCoinsLoadComplete() {
+    private fun onCoinsLoadComplete() = launchSilent(scope){
         view?.hideCoinsLoading()
+        loadFavorite()
     }
 
     private fun onCoinsLoad(coins: List<CoinEntity>) {

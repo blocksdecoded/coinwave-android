@@ -21,6 +21,7 @@ class PostApiClient : CoreApiClient(), IPostClient {
     override suspend fun getPosts(date: String): Single<PostResponse> {
         val options = HashMap<String, String>()
 
+        options["include_content"] = "0"
         if (date.isNotEmpty()) {
             options["last_item_datetime"] = date
         }
