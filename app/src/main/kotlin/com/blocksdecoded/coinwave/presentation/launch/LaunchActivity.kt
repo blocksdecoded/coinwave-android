@@ -3,7 +3,7 @@ package com.blocksdecoded.coinwave.presentation.launch
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.blocksdecoded.coinwave.data.bootstrap.IBootstrapClient
-import com.blocksdecoded.coinwave.data.crypto.remote.ICoinClientConfig
+import com.blocksdecoded.coinwave.data.coins.remote.ICoinClientConfig
 import com.blocksdecoded.coinwave.presentation.main.MainActivity
 import com.blocksdecoded.utils.logE
 import com.blocksdecoded.utils.rx.uiSubscribe

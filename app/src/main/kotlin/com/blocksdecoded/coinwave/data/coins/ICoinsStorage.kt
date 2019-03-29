@@ -1,14 +1,19 @@
-package com.blocksdecoded.coinwave.data.crypto
+package com.blocksdecoded.coinwave.data.coins
 
-import com.blocksdecoded.coinwave.data.model.CoinsDataResponse
-import com.blocksdecoded.coinwave.data.model.CoinEntity
+import com.blocksdecoded.coinwave.data.model.*
 import io.reactivex.Observable
+import io.reactivex.Single
+import io.reactivex.subjects.PublishSubject
 
 // Created by askar on 7/19/18.
 interface ICoinsStorage {
+    val coinsUpdateSubject: PublishSubject<CoinsResult>
+
     fun getAllCoins(skipCache: Boolean, force: Boolean): Observable<CoinsDataResponse>
 
     fun getWatchlist(skipCache: Boolean): Observable<CoinsDataResponse>
+
+    fun getChart(chartName: String, period: ChartPeriodEnum = ChartPeriodEnum.DAY): Single<ChartData>
 
     fun setCoinsData(coinsData: CoinsDataResponse)
 
@@ -17,8 +22,4 @@ interface ICoinsStorage {
     fun saveCoin(id: Int): Boolean
 
     fun removeCoin(id: Int): Boolean
-
-    fun addCoinObserver(observer: ICoinsObserver)
-
-    fun removeCoinObserver(observer: ICoinsObserver)
 }

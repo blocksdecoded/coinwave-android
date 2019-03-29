@@ -8,7 +8,7 @@ import io.reactivex.Observable
  * with Android Studio
  */
 interface IPostStorage {
-    suspend fun getPosts(date: String): Observable<List<PublisherPost>>
+    fun getPosts(date: String): Observable<List<PublisherPost>>
 
     fun getPost(id: Int): PublisherPost?
 }

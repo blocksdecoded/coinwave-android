@@ -1,4 +1,4 @@
-package com.blocksdecoded.coinwave.data.crypto.remote
+package com.blocksdecoded.coinwave.data.coins.remote
 
 interface ICoinClientConfig {
     var coinUrl: String

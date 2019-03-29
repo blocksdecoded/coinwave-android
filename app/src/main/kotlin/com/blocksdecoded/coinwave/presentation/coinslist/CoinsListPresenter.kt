@@ -1,14 +1,11 @@
 package com.blocksdecoded.coinwave.presentation.coinslist
 
-import com.blocksdecoded.coinwave.data.crypto.ICoinsObserver
-import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.data.model.CoinsResult
 import com.blocksdecoded.coinwave.domain.usecases.coins.ICoinsUseCases
 import com.blocksdecoded.coinwave.presentation.main.IMenuClickListener
 import com.blocksdecoded.coinwave.presentation.sort.CoinsCache
 import com.blocksdecoded.coinwave.presentation.sort.ViewSortEnum
 import com.blocksdecoded.core.mvp.BaseMvpPresenter
-import com.blocksdecoded.utils.coroutine.launchSilent
 import com.blocksdecoded.utils.rx.uiSubscribe
 import java.util.*
 
@@ -22,24 +19,15 @@ class CoinsListPresenter(
     private val mCoinsCache = CoinsCache()
     private var mInitialized = false
 
-    private val mCurrenciesObserver = object : ICoinsObserver {
-        override fun onAdded(coinEntity: CoinEntity) = launchSilent(scope) {
-            view?.updateCoin(updateCurrency(coinEntity), coinEntity)
-        }
-
-        override fun onUpdated(coins: CoinsResult) = launchSilent(scope) {
-            updateCache(coins)
-        }
-
-        override fun onRemoved(coinEntity: CoinEntity) = launchSilent(scope) {
-            view?.updateCoin(updateCurrency(coinEntity), coinEntity)
-        }
+    init {
+        mCoinsUseCases.coinsUpdateSubject
+            .uiSubscribe {
+                updateCache(it)
+            }
+            .addDisposable()
     }
 
     //region Private
-
-    private fun updateCurrency(coinEntity: CoinEntity): Int =
-            mCoinsCache.updateCurrency(coinEntity)
 
     private fun updateCache(coins: CoinsResult) {
         view?.showList()
@@ -82,17 +70,11 @@ class CoinsListPresenter(
 
     override fun onResume() {
         super.onResume()
-        mCoinsUseCases.addObserver(mCurrenciesObserver)
         getCurrencies(!mInitialized)
         if (!mInitialized) {
             mInitialized = true
         }
         mLastDate?.let { view?.showLastUpdated(it) }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        mCoinsUseCases.removeObserver(mCurrenciesObserver)
     }
 
     override fun getCoins() {

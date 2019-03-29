@@ -3,7 +3,6 @@ package com.blocksdecoded.coinwave.presentation.posts
 import com.blocksdecoded.coinwave.domain.usecases.posts.IPostsUseCases
 import com.blocksdecoded.coinwave.presentation.main.IMenuClickListener
 import com.blocksdecoded.core.mvp.BaseMvpPresenter
-import com.blocksdecoded.utils.coroutine.launchSilent
 import com.blocksdecoded.utils.rx.uiSubscribe
 
 class PostsPresenter(
@@ -24,7 +23,7 @@ class PostsPresenter(
 
     //region Contract
 
-    override fun onPostClick(id: Int) = launchSilent(scope) {
+    override fun onPostClick(id: Int) {
         mPostUseCases.getPost(id)?.also {
             it.url?.also {
                 view?.openPost(it)
@@ -32,7 +31,7 @@ class PostsPresenter(
         }
     }
 
-    override fun getPosts() = launchSilent(scope) {
+    override fun getPosts() {
         view?.showLoading()
         mPostUseCases.getPosts()
             .uiSubscribe(
@@ -42,7 +41,7 @@ class PostsPresenter(
             .addDisposable()
     }
 
-    override fun getNextPosts() = launchSilent(scope) {
+    override fun getNextPosts() {
         mPostUseCases.getNextPosts()
             .uiSubscribe(
                 { view?.nextPosts(it) },

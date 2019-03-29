@@ -1,8 +1,8 @@
 package com.blocksdecoded.coinwave.domain.usecases.chart
 
 import com.blocksdecoded.coinwave.data.EmptyCache
-import com.blocksdecoded.coinwave.data.crypto.chart.IChartsStorage
-import com.blocksdecoded.coinwave.data.crypto.ICoinsStorage
+import com.blocksdecoded.coinwave.data.coins.chart.IChartsStorage
+import com.blocksdecoded.coinwave.data.coins.ICoinsStorage
 import com.blocksdecoded.coinwave.data.model.ChartData
 import com.blocksdecoded.coinwave.domain.usecases.chart.IChartsUseCases.ChartPeriod
 import com.blocksdecoded.coinwave.domain.usecases.chart.IChartsUseCases.ChartPeriod.*

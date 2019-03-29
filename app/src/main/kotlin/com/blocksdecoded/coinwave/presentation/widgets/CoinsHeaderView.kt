@@ -147,8 +147,4 @@ class CoinsHeaderView : FrameLayout {
             priceSortIcon.rotation = 180f
         }
     }
-
-    interface HeaderClickListener {
-        fun onItemClick(headerType: ViewSortEnum)
-    }
 }

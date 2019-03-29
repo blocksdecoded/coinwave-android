@@ -2,7 +2,6 @@ package com.blocksdecoded.coinwave.domain.variant.favoritechart
 
 import com.blocksdecoded.coinwave.data.model.ChartData
 import com.blocksdecoded.coinwave.data.model.CoinEntity
-import com.blocksdecoded.utils.coroutine.model.Result
 import io.reactivex.Observable
 
 /**
@@ -12,5 +11,5 @@ import io.reactivex.Observable
 interface IFavoriteChartUseVariant {
     val chart: Observable<ChartData>?
 
-    suspend fun getCoin(): Result<CoinEntity>?
+    fun getCoin(): CoinEntity?
 }

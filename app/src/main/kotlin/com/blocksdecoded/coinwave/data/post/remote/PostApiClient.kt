@@ -18,7 +18,7 @@ class PostApiClient : CoreApiClient(), IPostClient {
             PostNetworkClient::class.java
     )
 
-    override suspend fun getPosts(date: String): Single<PostResponse> {
+    override fun getPosts(date: String): Single<PostResponse> {
         val options = HashMap<String, String>()
 
         options["include_content"] = "0"

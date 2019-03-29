@@ -10,8 +10,8 @@ import butterknife.OnClick
 import com.blocksdecoded.core.contracts.LoadNextListener
 import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.data.post.model.PublisherPost
-import com.blocksdecoded.coinwave.presentation.posts.recycler.deprecated.PostListAdapter
-import com.blocksdecoded.coinwave.presentation.posts.recycler.PostItemViewHolder
+import com.blocksdecoded.coinwave.presentation.posts.recycler.PostsAdapter
+import com.blocksdecoded.coinwave.presentation.posts.recycler.PostViewHolder
 import com.blocksdecoded.core.mvp.BaseMvpFragment
 import com.blocksdecoded.utils.customtabs.openUrl
 import com.blocksdecoded.utils.extensions.*
@@ -23,13 +23,13 @@ import kotlin.math.roundToInt
 open class PostsFragment :
         BaseMvpFragment<IPostsContract.Presenter>(),
         IPostsContract.View,
-        PostItemViewHolder.PostVHCLickListener,
+        PostViewHolder.PostVHCLickListener,
         LoadNextListener {
 
     override val presenter: IPostsContract.Presenter by inject { parametersOf(this@PostsFragment, context) }
     override val layoutId: Int = R.layout.fragment_post_list
 
-    var mAdapter: PostListAdapter? = null
+    var mAdapter: PostsAdapter? = null
     @BindView(R.id.fragment_post_list_recycler)
     lateinit var mRecycler: RecyclerView
     @BindView(R.id.fragment_post_list_swipe_refresh)
@@ -70,7 +70,12 @@ open class PostsFragment :
         val postHeight = ((context?.screenHeight ?: 0) * 0.27).roundToInt()
 
         mRecycler.setHasFixedSize(true)
-        mAdapter = PostListAdapter(arrayListOf(), this, this, postHeight)
+        mAdapter = PostsAdapter(
+            arrayListOf(),
+            this,
+            this,
+            postHeight
+        )
         mRecycler.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         mRecycler.adapter = mAdapter
     }

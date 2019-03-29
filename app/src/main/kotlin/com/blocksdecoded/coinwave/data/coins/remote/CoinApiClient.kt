@@ -1,11 +1,10 @@
-package com.blocksdecoded.coinwave.data.crypto.remote
+package com.blocksdecoded.coinwave.data.coins.remote
 
 import com.blocksdecoded.coinwave.data.model.ChartPeriodEnum
-import com.blocksdecoded.coinwave.data.crypto.remote.model.HistoryResponse
+import com.blocksdecoded.coinwave.data.coins.remote.model.HistoryResponse
 import com.blocksdecoded.coinwave.data.model.CoinsResponse
 import com.blocksdecoded.core.network.CoreApiClient
 import com.blocksdecoded.utils.logE
-import io.reactivex.Observable
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -20,39 +19,31 @@ import java.util.concurrent.TimeoutException
 class CoinApiClient(
     private val config: ICoinClientConfig
 ) : CoreApiClient(), ICoinClient {
-    private val mClient: CurrencyNetworkClient
-
-    init {
-        mClient = getRetrofitClient(
-                config.coinUrl,
-                CurrencyNetworkClient::class.java
-        )
-    }
+    private val mClient: CurrencyNetworkClient = getRetrofitClient(
+        config.coinUrl,
+        CurrencyNetworkClient::class.java
+    )
 
     //region Public
 
-    override fun getCoins(pageSize: Int): Observable<CoinsResponse> = mClient.getCoins(
-        config.ipnsKey,
-        pageSize
-    ).retry { t1, t2 ->
+    private fun <T> Single<T>.timeoutRetry(): Single<T> = this.retry { t1, t2 ->
         logE(Exception(t2))
         when (t2) {
             is TimeoutException -> true
             else -> false
         }
-    }.doOnError { logE(Exception(it)) }
+    }
+
+    override fun getCoins(pageSize: Int): Single<CoinsResponse> = mClient.getCoins(
+        config.ipnsKey,
+        pageSize
+    ).timeoutRetry().doOnError { logE(Exception(it)) }
 
     override fun getHistory(chartName: String, period: ChartPeriodEnum) = mClient.getChartForTime(
         config.ipnsKey,
         chartName,
         period.displayName
-    ).retry { t1, t2 ->
-        logE(Exception(t2))
-        when (t2) {
-            is TimeoutException -> true
-            else -> false
-        }
-    }.doOnError { logE(Exception(it)) }
+    ).timeoutRetry().doOnError { logE(Exception(it)) }
 
     //endregion
 
@@ -61,7 +52,7 @@ class CoinApiClient(
         fun getCoins(
             @Path(KEY) ipnsPath: String,
             @Query(LIMIT) limit: Int
-        ): Observable<CoinsResponse>
+        ): Single<CoinsResponse>
 
         @GET(HISTORY_PATH)
         fun getChartForTime(

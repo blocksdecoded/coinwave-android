@@ -4,14 +4,14 @@ import com.blocksdecoded.coinwave.BuildConfig
 import com.blocksdecoded.coinwave.data.bootstrap.BootstrapApiClient
 import com.blocksdecoded.coinwave.data.bootstrap.IBootstrapClient
 import com.blocksdecoded.coinwave.data.config.ConfigProvider
-import com.blocksdecoded.coinwave.data.crypto.CoinsRepository
-import com.blocksdecoded.coinwave.data.crypto.ICoinsStorage
-import com.blocksdecoded.coinwave.data.crypto.chart.ChartsStorage
-import com.blocksdecoded.coinwave.data.crypto.chart.IChartsStorage
-import com.blocksdecoded.coinwave.data.crypto.local.CoinsLocalStorage
-import com.blocksdecoded.coinwave.data.crypto.remote.CoinApiClient
-import com.blocksdecoded.coinwave.data.crypto.remote.ICoinClient
-import com.blocksdecoded.coinwave.data.crypto.remote.ICoinClientConfig
+import com.blocksdecoded.coinwave.data.coins.CoinsRepository
+import com.blocksdecoded.coinwave.data.coins.ICoinsStorage
+import com.blocksdecoded.coinwave.data.coins.chart.ChartsStorage
+import com.blocksdecoded.coinwave.data.coins.chart.IChartsStorage
+import com.blocksdecoded.coinwave.data.coins.local.CoinsLocalStorage
+import com.blocksdecoded.coinwave.data.coins.remote.CoinApiClient
+import com.blocksdecoded.coinwave.data.coins.remote.ICoinClient
+import com.blocksdecoded.coinwave.data.coins.remote.ICoinClientConfig
 import com.blocksdecoded.coinwave.data.post.IPostStorage
 import com.blocksdecoded.coinwave.data.post.PostRepository
 import com.blocksdecoded.coinwave.data.post.remote.IPostClient
@@ -26,6 +26,8 @@ import com.blocksdecoded.coinwave.domain.usecases.favorite.FavoriteInteractor
 import com.blocksdecoded.coinwave.domain.usecases.favorite.IFavoriteUseCases
 import com.blocksdecoded.coinwave.domain.usecases.posts.PostsInteractor
 import com.blocksdecoded.coinwave.domain.usecases.posts.IPostsUseCases
+import com.blocksdecoded.coinwave.domain.usecases.watchlist.IWatchlistUseCases
+import com.blocksdecoded.coinwave.domain.usecases.watchlist.WatchlistInteractor
 import com.blocksdecoded.coinwave.domain.variant.favoritechart.FavoriteChartInteractor
 import com.blocksdecoded.coinwave.domain.variant.favoritechart.IFavoriteChartUseVariant
 import com.blocksdecoded.coinwave.presentation.addtowatchlist.IAddToWatchlistContract
@@ -62,6 +64,8 @@ val sourceModule = module {
 
 val useCaseModule = module {
     factory { CoinsInteractor(get()) as ICoinsUseCases }
+
+    factory { WatchlistInteractor(get()) as IWatchlistUseCases }
 
     factory { ChartsInteractor(get(), get()) as IChartsUseCases }
 

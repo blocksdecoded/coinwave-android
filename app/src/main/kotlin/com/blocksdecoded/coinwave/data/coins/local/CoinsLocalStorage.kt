@@ -1,4 +1,4 @@
-package com.blocksdecoded.coinwave.data.crypto.local
+package com.blocksdecoded.coinwave.data.coins.local
 
 import com.blocksdecoded.coinwave.data.model.CoinsDataResponse
 import com.blocksdecoded.utils.logE

@@ -8,9 +8,9 @@ import io.reactivex.Observable
  * with Android Studio
  */
 interface IPostsUseCases {
-    suspend fun getPosts(): Observable<List<PublisherPost>>
+    fun getPosts(): Observable<List<PublisherPost>>
 
-    suspend fun getNextPosts(): Observable<List<PublisherPost>>
+    fun getNextPosts(): Observable<List<PublisherPost>>
 
     fun getPost(id: Int): PublisherPost?
 }

@@ -205,17 +205,6 @@ open class WatchListFragment : BaseMvpFragment<IWatchListContract.Presenter>(),
         activity?.let { AddToWatchlistActivity.start(it) }
     }
 
-    override fun updateCoin(position: Int, coinEntity: CoinEntity) {
-        mRecycler.visible()
-        mEmptyContainer.hide()
-        mAdapter?.updateItem(coinEntity)
-    }
-
-    override fun deleteCoin(position: Int) {
-        mRecycler.visible()
-        mAdapter?.deleteItemAt(position)
-    }
-
     override fun showCoins(coins: List<CoinEntity>) {
         mSwipeRefreshLayout.isRefreshing = false
         mListHeader.visible()

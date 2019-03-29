@@ -1,12 +1,10 @@
 package com.blocksdecoded.coinwave.domain.variant.favoritechart
 
-import android.content.res.Resources
 import com.blocksdecoded.coinwave.data.model.ChartData
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.domain.usecases.chart.IChartsUseCases
 import com.blocksdecoded.coinwave.domain.usecases.favorite.IFavoriteUseCases
 import com.blocksdecoded.coinwave.domain.usecases.coins.ICoinsUseCases
-import com.blocksdecoded.utils.coroutine.model.Result
 import io.reactivex.Observable
 
 /**
@@ -21,15 +19,7 @@ class FavoriteChartInteractor(
     override val chart: Observable<ChartData>?
         get() = mChartsUseCases.getChartData(mFavoriteUseCases.getId(), CHART_PERIOD).toObservable()
 
-    override suspend fun getCoin(): Result<CoinEntity>? {
-        val entity = mCoinsUseCases.getCoin(mFavoriteUseCases.getId())
-
-        return if (entity != null) {
-            Result.Success(entity)
-        } else {
-            Result.Error(Resources.NotFoundException())
-        }
-    }
+    override fun getCoin(): CoinEntity? = mCoinsUseCases.getCoin(mFavoriteUseCases.getId())
 
     companion object {
         @JvmStatic

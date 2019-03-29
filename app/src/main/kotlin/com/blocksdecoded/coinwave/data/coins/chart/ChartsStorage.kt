@@ -1,7 +1,7 @@
-package com.blocksdecoded.coinwave.data.crypto.chart
+package com.blocksdecoded.coinwave.data.coins.chart
 
 import com.blocksdecoded.coinwave.data.model.ChartPeriodEnum
-import com.blocksdecoded.coinwave.data.crypto.remote.ICoinClient
+import com.blocksdecoded.coinwave.data.coins.remote.ICoinClient
 import com.blocksdecoded.coinwave.data.model.ChartData
 import io.reactivex.Single
 

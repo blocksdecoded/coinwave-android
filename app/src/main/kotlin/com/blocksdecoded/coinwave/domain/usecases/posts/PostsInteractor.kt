@@ -21,7 +21,7 @@ class PostsInteractor(
         }
     }
 
-    override suspend fun getPosts(): Observable<List<PublisherPost>> {
+    override fun getPosts(): Observable<List<PublisherPost>> {
         date = ""
         return mPostsSource.getPosts(date)
             .map {
@@ -30,7 +30,7 @@ class PostsInteractor(
             }
     }
 
-    override suspend fun getNextPosts(): Observable<List<PublisherPost>> = mPostsSource.getPosts(date).map {
+    override fun getNextPosts(): Observable<List<PublisherPost>> = mPostsSource.getPosts(date).map {
         updateLastDate(it)
         it
     }

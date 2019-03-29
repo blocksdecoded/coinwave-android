@@ -16,10 +16,6 @@ interface IWatchListContract {
 
         fun showFavoriteChart(chartData: ChartData)
 
-        fun updateCoin(position: Int, coinEntity: CoinEntity)
-
-        fun deleteCoin(position: Int)
-
         fun openCoinInfo(id: Int)
 
         fun openAddToWatchlist()
@@ -51,8 +47,6 @@ interface IWatchListContract {
 
     interface Presenter : BaseMvpContract.Presenter<View> {
         fun onCoinClick(position: Int)
-
-        fun deleteCoin(position: Int)
 
         fun onAddCoinClick()
 

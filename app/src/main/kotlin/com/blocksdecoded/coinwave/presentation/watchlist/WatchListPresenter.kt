@@ -1,53 +1,35 @@
 package com.blocksdecoded.coinwave.presentation.watchlist
 
-import com.blocksdecoded.coinwave.data.crypto.ICoinsObserver
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.data.model.CoinsResult
-import com.blocksdecoded.coinwave.domain.usecases.coins.ICoinsUseCases
+import com.blocksdecoded.coinwave.domain.usecases.watchlist.IWatchlistUseCases
 import com.blocksdecoded.coinwave.domain.variant.favoritechart.IFavoriteChartUseVariant
 import com.blocksdecoded.coinwave.presentation.main.IMenuClickListener
 import com.blocksdecoded.coinwave.presentation.sort.CoinsCache
 import com.blocksdecoded.coinwave.presentation.sort.ViewSortEnum
 import com.blocksdecoded.core.mvp.BaseMvpPresenter
 import com.blocksdecoded.utils.coroutine.launchSilent
-import com.blocksdecoded.utils.coroutine.model.onSuccess
-import com.blocksdecoded.utils.logD
 import com.blocksdecoded.utils.rx.uiSubscribe
 
 class WatchListPresenter(
     override var view: IWatchListContract.View?,
     private val mMenuListener: IMenuClickListener,
-    private val mCoinsUseCases: ICoinsUseCases,
+    private val mWatchlistUseCases: IWatchlistUseCases,
     private val mFavoriteChartUseVariant: IFavoriteChartUseVariant
 ) : BaseMvpPresenter<IWatchListContract.View>(), IWatchListContract.Presenter {
 
     private val mCoinsCache = CoinsCache()
 
-    private val mCurrenciesObserver = object : ICoinsObserver {
-        override fun onAdded(coinEntity: CoinEntity) = launchSilent(scope) {
-            view?.updateCoin(updateCurrency(coinEntity), coinEntity)
-        }
-
-        override fun onUpdated(coins: CoinsResult) = launchSilent(scope) {
-            setCache(coins.coins)
-        }
-
-        override fun onRemoved(coinEntity: CoinEntity) = launchSilent(scope) {
-            view?.deleteCoin(removeCurrency(coinEntity))
-            if (mCoinsCache.isEmpty()) view?.showEmpty()
-        }
+    init {
+        mWatchlistUseCases.watchlistObservable
+            .uiSubscribe { setCache(it.coins) }
+            .addDisposable()
     }
 
     //region Lifecycle
 
-    override fun onDestroy() {
-        super.onDestroy()
-        mCoinsUseCases.removeObserver(mCurrenciesObserver)
-    }
-
     override fun onResume() {
         super.onResume()
-        mCoinsUseCases.addObserver(mCurrenciesObserver)
         getCurrencies(skipCache = false, force = false)
     }
 
@@ -61,19 +43,20 @@ class WatchListPresenter(
     }
 
     private fun setCache(coins: List<CoinEntity>) = launchSilent(scope) {
-        mCoinsCache.setCache(coins.filter { it.isSaved })
+        mCoinsCache.setCache(coins)
 
         refreshView()
 
         if (mCoinsCache.isEmpty()) view?.showEmpty() else view?.hideEmpty()
     }
 
-    private suspend fun loadFavorite() {
+    private fun loadFavorite() {
         view?.showFavoriteLoading()
         view?.hideFavoriteError()
 
-        mFavoriteChartUseVariant.getCoin()
-            ?.onSuccess { view?.showFavoriteCoin(it) }
+        mFavoriteChartUseVariant.getCoin()?.let {
+            view?.showFavoriteCoin(it)
+        }
 
         mFavoriteChartUseVariant.chart
             ?.uiSubscribe(
@@ -83,10 +66,6 @@ class WatchListPresenter(
             .addDisposable()
     }
 
-    private fun updateCurrency(coinEntity: CoinEntity): Int = mCoinsCache.add(coinEntity)
-
-    private fun removeCurrency(coinEntity: CoinEntity): Int = mCoinsCache.remove(coinEntity)
-
     private fun getCurrencies(skipCache: Boolean, force: Boolean) {
         view?.showCoinsLoading()
 
@@ -94,8 +73,7 @@ class WatchListPresenter(
             view?.showFavoriteLoading()
         }
 
-        mCoinsUseCases.getCoins(skipCache, force)
-            .map { it.coins.filter { it.isSaved } }
+        mWatchlistUseCases.getCoins(skipCache, force)
             .uiSubscribe(
                 onNext = ::onCoinsLoad,
                 onError = ::onCoinsLoadError,
@@ -104,13 +82,13 @@ class WatchListPresenter(
             .addDisposable()
     }
 
-    private fun onCoinsLoadComplete() = launchSilent(scope){
+    private fun onCoinsLoadComplete() = launchSilent(scope) {
         view?.hideCoinsLoading()
         loadFavorite()
     }
 
-    private fun onCoinsLoad(coins: List<CoinEntity>) {
-        setCache(coins)
+    private fun onCoinsLoad(result: CoinsResult) {
+        setCache(result.coins)
     }
 
     private fun onCoinsLoadError(t: Throwable) {
@@ -129,15 +107,6 @@ class WatchListPresenter(
 
     override fun getCoins() {
         getCurrencies(skipCache = true, force = true)
-    }
-
-    override fun deleteCoin(position: Int) {
-        if (mCoinsCache.isValidIndex(position)) {
-            if (mCoinsCache.coins[position].isSaved) {
-                view?.showMessage("${mCoinsCache.coins[position].name} removed from Watchlist")
-                mCoinsUseCases.removeCoin(mCoinsCache.coins[position].id)
-            }
-        }
     }
 
     override fun onCoinClick(position: Int) {

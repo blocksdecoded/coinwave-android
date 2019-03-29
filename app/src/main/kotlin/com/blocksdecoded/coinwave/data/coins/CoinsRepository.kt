@@ -1,12 +1,12 @@
-package com.blocksdecoded.coinwave.data.crypto
+package com.blocksdecoded.coinwave.data.coins
 
-import com.blocksdecoded.coinwave.data.crypto.local.CoinsLocalStorage
-import com.blocksdecoded.coinwave.data.crypto.remote.ICoinClient
-import com.blocksdecoded.coinwave.data.model.CoinsDataResponse
-import com.blocksdecoded.coinwave.data.model.CoinEntity
-import com.blocksdecoded.coinwave.data.model.CoinsResult
+import com.blocksdecoded.coinwave.data.coins.local.CoinsLocalStorage
+import com.blocksdecoded.coinwave.data.coins.remote.ICoinClient
+import com.blocksdecoded.coinwave.data.model.*
 import com.blocksdecoded.coinwave.data.watchlist.IWatchlistStorage
 import io.reactivex.Observable
+import io.reactivex.Single
+import io.reactivex.subjects.PublishSubject
 import java.util.*
 
 // Created by askar on 7/19/18.
@@ -20,7 +20,8 @@ class CoinsRepository(
             field = value
             field?.coins?.let { markSaved(it) }
         }
-    private val mObservers = hashSetOf<ICoinsObserver>()
+
+    override val coinsUpdateSubject: PublishSubject<CoinsResult> = PublishSubject.create()
 
     init {
         mLocalSource.getAllCoins().subscribe { mCached = it }
@@ -31,7 +32,7 @@ class CoinsRepository(
     //region Calls
 
     private fun isDirty(): Boolean = mCached?.updatedAt
-            ?.let { (Date().time - it.time) > VALID_CACHE_TIME } ?: true
+        ?.let { (Date().time - it.time) > VALID_CACHE_TIME } ?: true
 
     private fun localCoinsFetch() = if (mCached != null)
         Observable.just(mCached!!)
@@ -39,6 +40,7 @@ class CoinsRepository(
         mLocalSource.getAllCoins()
 
     private fun remoteCoinsFetch(force: Boolean) = if (isDirty() || force) mCoinsClient.getCoins(NETWORK_PAGE_SIZE)
+            .toObservable()
             .doOnNext {
                 it.data.updatedAt = Date()
                 setCoinsData(it.data)
@@ -53,7 +55,7 @@ class CoinsRepository(
 
     private fun setCache(data: CoinsDataResponse) {
         mCached = data
-        mObservers.forEach { it.onUpdated(CoinsResult(data.coins, data.updatedAt ?: Date())) }
+        coinsUpdateSubject.onNext(CoinsResult(data.coins, data.updatedAt ?: Date()))
     }
 
     private fun markSaved(coins: List<CoinEntity>) {
@@ -62,12 +64,6 @@ class CoinsRepository(
             it.isSaved = saved.contains(it.id)
         }
     }
-
-    private fun notifyAdded(coinEntity: CoinEntity) =
-            mObservers.forEach { it.onAdded(coinEntity) }
-
-    private fun notifyRemoved(coinEntity: CoinEntity) =
-            mObservers.forEach { it.onRemoved(coinEntity) }
 
     private fun findCoin(id: Int, onFind: (coin: CoinEntity) -> Unit): Boolean =
             mCached?.coins?.first { it.id == id }?.let {
@@ -85,24 +81,14 @@ class CoinsRepository(
 
     override fun getCoin(id: Int): CoinEntity? = mCached?.coins?.first { it.id == id }
 
-    override fun addCoinObserver(observer: ICoinsObserver) {
-        mObservers.add(observer)
-    }
-
-    override fun removeCoinObserver(observer: ICoinsObserver) {
-        mObservers.remove(observer)
-    }
-
     override fun saveCoin(id: Int): Boolean = findCoin(id) {
         mWatchlistSource.addId(id)
         it.isSaved = true
-        notifyAdded(it)
     }
 
     override fun removeCoin(id: Int): Boolean = findCoin(id) {
         mWatchlistSource.deleteId(id)
         it.isSaved = false
-        notifyRemoved(it)
     }
 
     override fun getAllCoins(skipCache: Boolean, force: Boolean): Observable<CoinsDataResponse> =
@@ -122,6 +108,10 @@ class CoinsRepository(
                     Observable.just(it)
                 } ?: fetchCoins(false)
             }
+
+    override fun getChart(chartName: String, period: ChartPeriodEnum): Single<ChartData> =
+        mCoinsClient.getHistory(chartName, period)
+            .map { ChartData(it.data.history) }
 
     //endregion
 

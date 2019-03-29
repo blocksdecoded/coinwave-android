@@ -1,4 +1,4 @@
-package com.blocksdecoded.coinwave.data.crypto.remote.model
+package com.blocksdecoded.coinwave.data.coins.remote.model
 
 import com.blocksdecoded.coinwave.data.model.ChartDataEntry
 import com.google.gson.annotations.Expose

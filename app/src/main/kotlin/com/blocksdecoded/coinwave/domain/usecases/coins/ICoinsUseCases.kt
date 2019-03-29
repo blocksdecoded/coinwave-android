@@ -1,21 +1,14 @@
 package com.blocksdecoded.coinwave.domain.usecases.coins
 
-import com.blocksdecoded.coinwave.data.crypto.ICoinsObserver
-import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.data.model.CoinsResult
-import io.reactivex.Observable
+import com.blocksdecoded.coinwave.domain.usecases.BaseCoinsUseCase
+import io.reactivex.subjects.PublishSubject
 
 // Created by askar on 7/19/18.
-interface ICoinsUseCases {
-    fun getCoins(skipCache: Boolean, force: Boolean = false): Observable<CoinsResult>
-
-    fun getCoin(id: Int): CoinEntity?
+interface ICoinsUseCases : BaseCoinsUseCase {
+    val coinsUpdateSubject: PublishSubject<CoinsResult>
 
     fun saveCoin(id: Int): Boolean
 
     fun removeCoin(id: Int): Boolean
-
-    fun addObserver(observer: ICoinsObserver)
-
-    fun removeObserver(observer: ICoinsObserver)
 }

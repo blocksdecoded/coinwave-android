@@ -1,4 +1,4 @@
-package com.blocksdecoded.coinwave.presentation.posts.recycler.deprecated
+package com.blocksdecoded.coinwave.presentation.posts.recycler
 
 import android.view.View
 import android.view.ViewGroup
@@ -6,8 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.blocksdecoded.core.contracts.LoadNextListener
 import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.data.post.model.PublisherPost
-import com.blocksdecoded.coinwave.presentation.posts.recycler.ListFooterViewHolder
-import com.blocksdecoded.coinwave.presentation.posts.recycler.PostItemViewHolder
+import com.blocksdecoded.coinwave.presentation.widgets.FooterViewHolder
 import com.blocksdecoded.utils.extensions.height
 import com.blocksdecoded.utils.extensions.inflate
 import com.blocksdecoded.utils.extensions.isValidIndex
@@ -16,13 +15,12 @@ import com.blocksdecoded.utils.extensions.isValidIndex
  * Created by askar on 11/19/18
  * with Android Studio
  */
-@Deprecated("Use newer PagedPostListAdapter")
-class PostListAdapter(
+class PostsAdapter(
     private var mItems: ArrayList<PublisherPost>,
-    private val mListener: PostItemViewHolder.PostVHCLickListener,
+    private val mListener: PostViewHolder.PostVHCLickListener,
     private val mLoadNextListener: LoadNextListener,
     private val mPostHeight: Int
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), ListFooterViewHolder.ClickListener {
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), FooterViewHolder.ClickListener {
 
     companion object {
         private val POST = 1
@@ -31,15 +29,18 @@ class PostListAdapter(
 
     private var mAlreadyLoading = false
     private val mAllLoaded = false
-    private var mFooterView: ListFooterViewHolder? = null
+    private var mFooterView: FooterViewHolder? = null
 
     //region Override
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): RecyclerView.ViewHolder = when (p1) {
-        1 -> PostItemViewHolder(p0.inflate(R.layout.item_post)!!, mListener).apply {
+        1 -> PostViewHolder(p0.inflate(R.layout.item_post)!!, mListener).apply {
             this.height = mPostHeight
         }
-        else -> ListFooterViewHolder(p0.inflate(R.layout.item_footer)!!, this)
+        else -> FooterViewHolder(
+            p0.inflate(R.layout.item_footer)!!,
+            this
+        )
     }
 
     override fun getItemCount(): Int {
@@ -49,8 +50,8 @@ class PostListAdapter(
     override fun onBindViewHolder(p0: RecyclerView.ViewHolder, p1: Int) {
         if (mItems.isValidIndex(p1)) {
             when (p0) {
-                is PostItemViewHolder -> p0.onBind(mItems[p1])
-                is ListFooterViewHolder -> {
+                is PostViewHolder -> p0.onBind(mItems[p1])
+                is FooterViewHolder -> {
                     mFooterView = p0
                     if (mAlreadyLoading) {
                         mFooterView?.errorView?.visibility = View.GONE
@@ -78,10 +79,9 @@ class PostListAdapter(
 
     private fun loadNext() {
         mAlreadyLoading = true
-        if (mFooterView != null) {
-            mFooterView!!.errorView.visibility = View.GONE
-            mFooterView!!.progressView.visibility = View.VISIBLE
-        }
+
+        mFooterView?.errorView?.visibility = View.GONE
+        mFooterView?.progressView?.visibility = View.VISIBLE
 
         mLoadNextListener.onLoadNext()
     }

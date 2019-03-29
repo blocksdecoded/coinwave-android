@@ -16,7 +16,7 @@ class PostRepository(
 
     //region Contract
 
-    override suspend fun getPosts(date: String): Observable<List<PublisherPost>> =
+    override fun getPosts(date: String): Observable<List<PublisherPost>> =
             mRemote.getPosts(date)
                 .map {
                     it.posts.forEach { mCache[it.id] = it }

@@ -1,8 +1,7 @@
 package com.blocksdecoded.coinwave.domain.usecases.chart
 
-import com.blocksdecoded.coinwave.data.crypto.ICoinsStorage
-import com.blocksdecoded.coinwave.data.crypto.chart.IChartsStorage
-import org.junit.Assert.*
+import com.blocksdecoded.coinwave.data.coins.ICoinsStorage
+import com.blocksdecoded.coinwave.data.coins.chart.IChartsStorage
 import org.mockito.Mockito.mock
 
 class ChartsInteractorTest {

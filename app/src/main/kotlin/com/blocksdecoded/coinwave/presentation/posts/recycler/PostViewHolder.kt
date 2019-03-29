@@ -16,7 +16,7 @@ import com.blocksdecoded.coinwave.presentation.posts.util.setRandomBg
  * Created by askar on 11/19/18
  * with Android Studio
  */
-class PostItemViewHolder(
+class PostViewHolder(
     view: View,
     private val mListener: PostVHCLickListener
 ) : RecyclerView.ViewHolder(view) {

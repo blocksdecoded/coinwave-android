@@ -44,16 +44,20 @@ class WatchlistStorage(
     //endregion
 
     //region Contract
-    override fun addId(id: Int): Boolean {
+    override fun addId(id: Int): Boolean = if (!mSavedCache.contains(id)) {
         mSavedCache.add(id)
         save(mSavedCache)
-        return true
+        true
+    } else {
+        false
     }
 
-    override fun deleteId(id: Int): Boolean {
+    override fun deleteId(id: Int): Boolean = if (mSavedCache.contains(id)) {
         mSavedCache.remove(id)
         save(mSavedCache)
-        return true
+        true
+    } else {
+        false
     }
 
     override fun getAll(): List<Int> {
