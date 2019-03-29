@@ -104,47 +104,24 @@ class CoinsHeaderView : FrameLayout {
         }
     }
 
-    private fun setActiveColor() = when (currentSort) {
-        DEFAULT -> { }
-        NAME_ASC -> {
-            nameTitle.setTextColor(activeColor)
-            nameSortIcon.setColorFilter(activeColor)
-            nameSortIcon.rotation = 0f
+    private fun setActiveColor() {
+        val views = when (currentSort) {
+            NAME_ASC -> Triple(nameTitle, nameSortIcon, 0f)
+            NAME_DES -> Triple(nameTitle, nameSortIcon, 180f)
+            MARKET_CAP_ASC -> Triple(marketCapTitle, capSortIcon, 0f)
+            MARKET_CAP_DES -> Triple(marketCapTitle, capSortIcon, 180f)
+            VOLUME_ASC -> Triple(volumeTitle, volumeSortIcon, 0f)
+            VOLUME_DES -> Triple(volumeTitle, volumeSortIcon, 180f)
+            PRICE_ASC -> Triple(priceTitle, priceSortIcon, 0f)
+            PRICE_DES -> Triple(priceTitle, priceSortIcon, 180f)
+
+            else -> null
         }
-        NAME_DES -> {
-            nameTitle.setTextColor(activeColor)
-            nameSortIcon.setColorFilter(activeColor)
-            nameSortIcon.rotation = 180f
-        }
-        MARKET_CAP_ASC -> {
-            marketCapTitle.setTextColor(activeColor)
-            capSortIcon.setColorFilter(activeColor)
-            capSortIcon.rotation = 0f
-        }
-        MARKET_CAP_DES -> {
-            marketCapTitle.setTextColor(activeColor)
-            capSortIcon.setColorFilter(activeColor)
-            capSortIcon.rotation = 180f
-        }
-        VOLUME_ASC -> {
-            volumeTitle.setTextColor(activeColor)
-            volumeSortIcon.setColorFilter(activeColor)
-            volumeSortIcon.rotation = 0f
-        }
-        VOLUME_DES -> {
-            volumeTitle.setTextColor(activeColor)
-            volumeSortIcon.setColorFilter(activeColor)
-            volumeSortIcon.rotation = 180f
-        }
-        PRICE_ASC -> {
-            priceTitle.setTextColor(activeColor)
-            priceSortIcon.setColorFilter(activeColor)
-            priceSortIcon.rotation = 0f
-        }
-        PRICE_DES -> {
-            priceTitle.setTextColor(activeColor)
-            priceSortIcon.setColorFilter(activeColor)
-            priceSortIcon.rotation = 180f
+
+        views?.apply {
+            first.setTextColor(activeColor)
+            second.setColorFilter(activeColor)
+            second.rotation = third
         }
     }
 }
