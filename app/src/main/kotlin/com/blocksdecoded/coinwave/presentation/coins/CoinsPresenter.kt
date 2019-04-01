@@ -1,4 +1,4 @@
-package com.blocksdecoded.coinwave.presentation.coinslist
+package com.blocksdecoded.coinwave.presentation.coins
 
 import com.blocksdecoded.coinwave.data.model.CoinsResult
 import com.blocksdecoded.coinwave.domain.usecases.coins.ICoinsUseCases
@@ -9,11 +9,11 @@ import com.blocksdecoded.core.mvp.BaseMvpPresenter
 import com.blocksdecoded.utils.rx.uiSubscribe
 import java.util.*
 
-class CoinsListPresenter(
-    override var view: ICoinsListContract.View?,
+class CoinsPresenter(
+    override var view: ICoinsContract.View?,
     private val mMenuListener: IMenuClickListener,
     private val mCoinsUseCases: ICoinsUseCases
-) : BaseMvpPresenter<ICoinsListContract.View>(), ICoinsListContract.Presenter {
+) : BaseMvpPresenter<ICoinsContract.View>(), ICoinsContract.Presenter {
 
     private var mLastDate: Date? = null
     private val mCoinsCache = CoinsCache()

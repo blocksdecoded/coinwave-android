@@ -1,4 +1,4 @@
-package com.blocksdecoded.coinwave.presentation.coinslist
+package com.blocksdecoded.coinwave.presentation.coins
 
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.presentation.sort.CoinsCache
@@ -6,7 +6,7 @@ import com.blocksdecoded.coinwave.presentation.sort.ViewSortEnum
 import com.blocksdecoded.core.mvp.BaseMvpContract
 import java.util.*
 
-interface ICoinsListContract {
+interface ICoinsContract {
 
     interface View : BaseMvpContract.View<Presenter> {
         fun showCoins(coins: List<CoinEntity>)

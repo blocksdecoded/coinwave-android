@@ -1,4 +1,4 @@
-package com.blocksdecoded.coinwave.presentation.coinslist.recycler
+package com.blocksdecoded.coinwave.presentation.coins.recycler
 
 import androidx.recyclerview.widget.DiffUtil
 import com.blocksdecoded.coinwave.data.model.CoinEntity

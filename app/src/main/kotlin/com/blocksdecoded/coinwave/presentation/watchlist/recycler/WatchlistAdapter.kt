@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.data.model.CoinEntity
-import com.blocksdecoded.coinwave.presentation.coinslist.recycler.CoinDiffUtil
+import com.blocksdecoded.coinwave.presentation.coins.recycler.CoinDiffUtil
 import com.blocksdecoded.coinwave.util.addSortedByRank
 import com.blocksdecoded.utils.extensions.inflate
 import com.blocksdecoded.utils.extensions.isValidIndex

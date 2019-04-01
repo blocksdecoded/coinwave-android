@@ -34,8 +34,8 @@ import com.blocksdecoded.coinwave.presentation.addtowatchlist.IAddToWatchlistCon
 import com.blocksdecoded.coinwave.presentation.addtowatchlist.AddToWatchlistPresenter
 import com.blocksdecoded.coinwave.presentation.coininfo.ICoinInfoContract
 import com.blocksdecoded.coinwave.presentation.coininfo.CoinInfoPresenter
-import com.blocksdecoded.coinwave.presentation.coinslist.ICoinsListContract
-import com.blocksdecoded.coinwave.presentation.coinslist.CoinsListPresenter
+import com.blocksdecoded.coinwave.presentation.coins.ICoinsContract
+import com.blocksdecoded.coinwave.presentation.coins.CoinsPresenter
 import com.blocksdecoded.coinwave.presentation.main.IMenuClickListener
 import com.blocksdecoded.coinwave.presentation.pickfavorite.IPickFavoriteContract
 import com.blocksdecoded.coinwave.presentation.pickfavorite.PickFavoritePresenter
@@ -94,11 +94,11 @@ val coinsModule = module {
         get()
     ) as ICoinInfoContract.Presenter }
 
-    factory { params -> CoinsListPresenter(
-        params.component1() as ICoinsListContract.View,
+    factory { params -> CoinsPresenter(
+        params.component1() as ICoinsContract.View,
         params.component2() as IMenuClickListener,
         get()
-    ) as ICoinsListContract.Presenter }
+    ) as ICoinsContract.Presenter }
 
     factory { params -> AddToWatchlistPresenter(
         params.component1() as IAddToWatchlistContract.View,

@@ -1,4 +1,4 @@
-package com.blocksdecoded.coinwave.presentation.coinslist.recycler
+package com.blocksdecoded.coinwave.presentation.coins.recycler
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -10,19 +10,19 @@ import com.blocksdecoded.utils.extensions.inflate
 import com.blocksdecoded.utils.extensions.isValidIndex
 
 // Created by askar on 7/19/18.
-class CoinsListAdapter(
+class CoinsAdapter(
     private var mCoins: ArrayList<CoinEntity>,
-    private val mListener: CoinsListVH.CoinVHListener
+    private val mListener: CoinViewHolder.CoinVHListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return CoinsListVH(parent.inflate(R.layout.item_coin)!!, mListener)
+        return CoinViewHolder(parent.inflate(R.layout.item_coin)!!, mListener)
     }
 
     override fun getItemCount(): Int = mCoins.size
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is CoinsListVH -> holder.onBind(mCoins[position])
+            is CoinViewHolder -> holder.onBind(mCoins[position])
         }
     }
 

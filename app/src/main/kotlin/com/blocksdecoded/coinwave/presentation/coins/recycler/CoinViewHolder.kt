@@ -1,4 +1,4 @@
-package com.blocksdecoded.coinwave.presentation.coinslist.recycler
+package com.blocksdecoded.coinwave.presentation.coins.recycler
 
 import android.view.View
 import android.widget.ImageView
@@ -14,7 +14,7 @@ import com.blocksdecoded.utils.extensions.hide
 import com.blocksdecoded.utils.extensions.visible
 
 // Created by askar on 7/19/18.
-class CoinsListVH(
+class CoinViewHolder(
     view: View,
     private val mListener: CoinVHListener
 ) : RecyclerView.ViewHolder(view) {

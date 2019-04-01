@@ -13,16 +13,16 @@ import com.blocksdecoded.utils.extensions.inflate
  */
 class AddToWatchlistAdapter(
     private val coins: ArrayList<CoinEntity> = arrayListOf(),
-    private val listener: AddToWatchlistVH.WatchlistVHClickListener
+    private val listener: WatchlistViewHolder.WatchlistVHClickListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
-            AddToWatchlistVH(parent.inflate(R.layout.item_watchlist)!!, listener)
+            WatchlistViewHolder(parent.inflate(R.layout.item_watchlist)!!, listener)
 
     override fun getItemCount(): Int = coins.size
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is AddToWatchlistVH -> holder.onBind(coins[position])
+            is WatchlistViewHolder -> holder.onBind(coins[position])
         }
     }
 

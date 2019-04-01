@@ -8,7 +8,7 @@ import butterknife.OnClick
 import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.presentation.addtowatchlist.recycler.AddToWatchlistAdapter
-import com.blocksdecoded.coinwave.presentation.addtowatchlist.recycler.AddToWatchlistVH
+import com.blocksdecoded.coinwave.presentation.addtowatchlist.recycler.WatchlistViewHolder
 import com.blocksdecoded.core.mvp.BaseMvpFragment
 import com.blocksdecoded.utils.extensions.hide
 import com.blocksdecoded.utils.extensions.visible
@@ -17,7 +17,7 @@ import org.koin.core.parameter.parametersOf
 
 class AddToWatchlistFragment : BaseMvpFragment<IAddToWatchlistContract.Presenter>(),
         IAddToWatchlistContract.View,
-        AddToWatchlistVH.WatchlistVHClickListener {
+        WatchlistViewHolder.WatchlistVHClickListener {
 
     override val presenter: IAddToWatchlistContract.Presenter by inject { parametersOf(this@AddToWatchlistFragment) }
     override val layoutId: Int = R.layout.fragment_add_to_watchlist

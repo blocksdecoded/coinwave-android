@@ -19,7 +19,7 @@ import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.util.CryptoRateUtil
 import com.blocksdecoded.coinwave.util.SFProTextTypeface
 import com.blocksdecoded.coinwave.presentation.addtowatchlist.AddToWatchlistActivity
-import com.blocksdecoded.coinwave.presentation.coinslist.CoinsListFragment
+import com.blocksdecoded.coinwave.presentation.coins.CoinsFragment
 import com.blocksdecoded.coinwave.presentation.pickfavorite.PickFavoriteActivity
 import com.blocksdecoded.coinwave.presentation.posts.PostsFragment
 import com.blocksdecoded.coinwave.presentation.watchlist.WatchListFragment
@@ -171,7 +171,7 @@ class MainActivity : AppCompatActivity(),
         initNavigationDrawer()
 
         initViewPager(arrayListOf(
-            CoinsListFragment.newInstance(),
+            CoinsFragment.newInstance(),
             WatchListFragment.newInstance(),
             PostsFragment.newInstance())
         )

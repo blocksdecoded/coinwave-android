@@ -7,8 +7,8 @@ import butterknife.BindView
 import butterknife.OnClick
 import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.data.model.CoinEntity
-import com.blocksdecoded.coinwave.presentation.coinslist.recycler.CoinsListAdapter
-import com.blocksdecoded.coinwave.presentation.coinslist.recycler.CoinsListVH
+import com.blocksdecoded.coinwave.presentation.coins.recycler.CoinsAdapter
+import com.blocksdecoded.coinwave.presentation.coins.recycler.CoinViewHolder
 import com.blocksdecoded.coinwave.presentation.sort.CoinsCache
 import com.blocksdecoded.coinwave.presentation.widgets.CoinsHeaderView
 import com.blocksdecoded.core.mvp.BaseMvpFragment
@@ -19,14 +19,14 @@ import org.koin.core.parameter.parametersOf
 
 class PickFavoriteFragment : BaseMvpFragment<IPickFavoriteContract.Presenter>(),
     IPickFavoriteContract.View,
-    CoinsListVH.CoinVHListener {
+    CoinViewHolder.CoinVHListener {
 
     override val presenter: IPickFavoriteContract.Presenter by inject { parametersOf(this@PickFavoriteFragment) }
     override val layoutId: Int = R.layout.fragment_pick_favorite
 
     @BindView(R.id.fragment_pick_favorite_recycler)
     lateinit var mRecycler: RecyclerView
-    private var mAdapter: CoinsListAdapter? = null
+    private var mAdapter: CoinsAdapter? = null
 
     @BindView(R.id.fragment_pick_favorite_header)
     lateinit var mHeader: CoinsHeaderView
@@ -50,7 +50,7 @@ class PickFavoriteFragment : BaseMvpFragment<IPickFavoriteContract.Presenter>(),
     //region Lifecycle
 
     override fun initView(rootView: View) {
-        mAdapter = CoinsListAdapter(arrayListOf(), this)
+        mAdapter = CoinsAdapter(arrayListOf(), this)
         mHeader.setListener { presenter.onSortClick(it) }
 
         mRecycler.setHasFixedSize(true)

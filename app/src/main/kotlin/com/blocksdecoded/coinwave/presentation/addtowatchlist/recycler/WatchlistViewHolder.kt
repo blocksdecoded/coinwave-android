@@ -12,7 +12,7 @@ import com.blocksdecoded.coinwave.util.loadIcon
  * Created by askar on 2/12/19
  * with Android Studio
  */
-class AddToWatchlistVH(
+class WatchlistViewHolder(
     view: View,
     private val mListener: WatchlistVHClickListener
 ) : RecyclerView.ViewHolder(view) {

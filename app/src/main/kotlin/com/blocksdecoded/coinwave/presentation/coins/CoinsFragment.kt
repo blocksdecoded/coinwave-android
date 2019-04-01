@@ -1,4 +1,4 @@
-package com.blocksdecoded.coinwave.presentation.coinslist
+package com.blocksdecoded.coinwave.presentation.coins
 
 import android.app.Dialog
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -11,8 +11,8 @@ import butterknife.OnClick
 import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.presentation.coininfo.CoinInfoActivity
-import com.blocksdecoded.coinwave.presentation.coinslist.recycler.CoinsListAdapter
-import com.blocksdecoded.coinwave.presentation.coinslist.recycler.CoinsListVH
+import com.blocksdecoded.coinwave.presentation.coins.recycler.CoinsAdapter
+import com.blocksdecoded.coinwave.presentation.coins.recycler.CoinViewHolder
 import com.blocksdecoded.coinwave.presentation.sort.CoinsCache
 import com.blocksdecoded.coinwave.presentation.widgets.CoinsHeaderView
 import com.blocksdecoded.coinwave.util.DateHelper
@@ -23,10 +23,10 @@ import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 import java.util.*
 
-open class CoinsListFragment : BaseMvpFragment<ICoinsListContract.Presenter>(),
-    ICoinsListContract.View,
-    CoinsListVH.CoinVHListener {
-    override val presenter: ICoinsListContract.Presenter by inject { parametersOf(this@CoinsListFragment, context) }
+open class CoinsFragment : BaseMvpFragment<ICoinsContract.Presenter>(),
+    ICoinsContract.View,
+    CoinViewHolder.CoinVHListener {
+    override val presenter: ICoinsContract.Presenter by inject { parametersOf(this@CoinsFragment, context) }
     override val layoutId: Int = R.layout.fragment_coins_list
 
     @BindView(R.id.fragment_coin_list_recycler)
@@ -44,7 +44,7 @@ open class CoinsListFragment : BaseMvpFragment<ICoinsListContract.Presenter>(),
     @BindView(R.id.fragment_coins_last_updated)
     lateinit var mLastUpdated: TextView
 
-    private var mAdapter: CoinsListAdapter? = null
+    private var mAdapter: CoinsAdapter? = null
     private var mActiveDialog: Dialog? = null
 
     @OnClick(
@@ -72,7 +72,7 @@ open class CoinsListFragment : BaseMvpFragment<ICoinsListContract.Presenter>(),
             rootView.setPadding(0, it.statusBarHeight, 0, 0)
         }
 
-        mAdapter = CoinsListAdapter(arrayListOf(), this)
+        mAdapter = CoinsAdapter(arrayListOf(), this)
 
         mRetry.setOnClickListener {
             presenter.getCoins()
@@ -173,6 +173,6 @@ open class CoinsListFragment : BaseMvpFragment<ICoinsListContract.Presenter>(),
     //endregion
 
     companion object {
-        fun newInstance() = CoinsListFragment()
+        fun newInstance() = CoinsFragment()
     }
 }
