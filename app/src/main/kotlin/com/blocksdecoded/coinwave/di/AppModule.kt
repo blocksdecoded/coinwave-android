@@ -48,7 +48,7 @@ import com.blocksdecoded.utils.shared.SharedStorage
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module.module
 
-val sourceModule = module {
+val dataModule = module {
     single { ConfigProvider(BuildConfig.API_COINS) as ICoinClientConfig }
 
     single { CoinApiClient(get()) as ICoinClient }
@@ -60,9 +60,13 @@ val sourceModule = module {
     single { WatchlistStorage(get()) as IWatchlistStorage }
 
     single { ChartsStorage(get()) as IChartsStorage }
+
+    single { PostApiClient() as IPostClient }
+
+    single { PostRepository(null, get()) as IPostStorage }
 }
 
-val useCaseModule = module {
+val domainModule = module {
     factory { CoinsInteractor(get()) as ICoinsUseCases }
 
     factory { WatchlistInteractor(get()) as IWatchlistUseCases }
@@ -72,9 +76,11 @@ val useCaseModule = module {
     factory { FavoriteInteractor(get()) as IFavoriteUseCases }
 
     factory { FavoriteChartInteractor(get(), get(), get()) as IFavoriteChartUseVariant }
+
+    factory { PostsInteractor(get()) as IPostsUseCases }
 }
 
-val coinsModule = module {
+val presentationModule = module {
     factory { params -> PickFavoritePresenter(
         params.component1() as IPickFavoriteContract.View,
         get(),
@@ -104,14 +110,6 @@ val coinsModule = module {
         params.component1() as IAddToWatchlistContract.View,
         get()
     ) as IAddToWatchlistContract.Presenter }
-}
-
-val postModule = module {
-    single { PostApiClient() as IPostClient }
-
-    single { PostRepository(null, get()) as IPostStorage }
-
-    factory { PostsInteractor(get()) as IPostsUseCases }
 
     factory { params -> PostsPresenter(
         params.component1() as IPostsContract.View,
@@ -124,4 +122,4 @@ val bootstrapModule = module {
     single { BootstrapApiClient() as IBootstrapClient }
 }
 
-val coinApp = listOf(useCaseModule, sourceModule, postModule, coinsModule, bootstrapModule)
+val coinApp = listOf(dataModule, domainModule, presentationModule, bootstrapModule)
