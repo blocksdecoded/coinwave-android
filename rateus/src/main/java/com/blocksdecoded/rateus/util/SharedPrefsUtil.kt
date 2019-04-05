@@ -6,7 +6,7 @@ import android.content.SharedPreferences
 /**
  * Created by Tameki on 3/20/18.
  */
-object SharedPrefsUtil {
+internal object SharedPrefsUtil {
     private fun getPreferences(context: Context): SharedPreferences =
             context.getSharedPreferences(
                     "shared_app_rate",
@@ -23,7 +23,7 @@ object SharedPrefsUtil {
             is Float -> { edit.putFloat(key, value) }
         }
 
-        edit.commit()
+        edit.apply()
     }
 
     fun getBooleanPreference(context: Context, key: String): Boolean =
@@ -34,5 +34,5 @@ object SharedPrefsUtil {
     fun getFloatPreference(context: Context, key: String): Float = getPreferences(context).getFloat(key, 0f)
 
     fun getStringPreference(context: Context, key: String): String =
-            getPreferences(context).getString(key, "")
+            getPreferences(context).getString(key, "")?:""
 }

@@ -23,8 +23,8 @@ import com.blocksdecoded.coinwave.presentation.pickfavorite.PickFavoriteActivity
 import com.blocksdecoded.coinwave.presentation.posts.PostsFragment
 import com.blocksdecoded.coinwave.presentation.watchlist.WatchListFragment
 import com.blocksdecoded.coinwave.presentation.widgets.PagerAdapter
-import com.blocksdecoded.rateus.base.RateUsDialogContract
-import com.blocksdecoded.rateus.base.RateUsListener
+import com.blocksdecoded.rateus.widget.IRateUsDialog
+import com.blocksdecoded.rateus.widget.IRateUsListener
 import com.blocksdecoded.utils.*
 import com.blocksdecoded.utils.customtabs.openUrl
 import com.blocksdecoded.utils.extensions.getColorRes
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity(),
         View.OnClickListener,
         IMenuClickListener {
 
-    private var mRateDialog: RateUsDialogContract? = null
+    private var mRateDialog: IRateUsDialog? = null
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity(),
         initStatusBar()
 
         mRateDialog = CryptoRateUtil.tryShowRateUs(this)
-                ?.setListener(object : RateUsListener {
+                ?.setListener(object : IRateUsListener {
                     override fun onDismiss() { mRateDialog = null }
                 })
 
@@ -266,7 +266,7 @@ class MainActivity : AppCompatActivity(),
 
     private fun onRateClick() {
         mRateDialog = CryptoRateUtil.getDialog(this)
-            .setListener(object : RateUsListener {
+            .setListener(object : IRateUsListener {
                 override fun onDismiss() { mRateDialog = null }
             })
     }

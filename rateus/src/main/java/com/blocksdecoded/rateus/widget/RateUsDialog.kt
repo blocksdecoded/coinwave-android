@@ -1,4 +1,4 @@
-package com.blocksdecoded.rateus.base
+package com.blocksdecoded.rateus.widget
 
 import android.app.Dialog
 import android.content.Context
@@ -19,12 +19,13 @@ import android.widget.RatingBar
 import android.widget.TextView
 import android.widget.Toast
 import com.blocksdecoded.rateus.R
-import com.blocksdecoded.rateus.base.RateUsDialog.State.*
+import com.blocksdecoded.rateus.widget.RateUsDialog.State.*
 import com.blocksdecoded.rateus.util.IntentUtil
 import com.blocksdecoded.rateus.util.ResourceUtil
 import com.blocksdecoded.rateus.util.SharedPrefsUtil
 import android.view.WindowManager
-import com.blocksdecoded.rateus.SFUITypeface
+import com.blocksdecoded.rateus.RateUs
+import com.blocksdecoded.rateus.util.SFUITypeface
 import com.blocksdecoded.rateus.util.AnimationUtil
 
 /**
@@ -34,8 +35,8 @@ internal class RateUsDialog(
     context: Context,
     private var mAppName: String = context.applicationInfo.name,
     private var mAppID: String = context.packageName,
-    private var mListener: RateUsListener? = null
-) : Dialog(context), View.OnClickListener, RateUsDialogContract {
+    private var mListener: IRateUsListener? = null
+) : Dialog(context), View.OnClickListener, IRateUsDialog {
 
     enum class State {
         DEFAULT,
@@ -80,6 +81,8 @@ internal class RateUsDialog(
 
         setTitleTypeface(SFUITypeface.getSemibold(context))
         setButtonsTypeface(SFUITypeface.getBold(context))
+
+        Log.d("ololo", "Context is $context")
     }
 
     override fun dismiss() {
@@ -96,7 +99,7 @@ internal class RateUsDialog(
 
     private fun loadPreferences() {
         mRatingBar?.let {
-            it.rating = SharedPrefsUtil.getFloatPreference(context, RateUtil.LAST_SUBMITTED_RATING)
+            it.rating = SharedPrefsUtil.getFloatPreference(context, RateUs.LAST_SUBMITTED_RATING)
         }
     }
 
@@ -147,7 +150,7 @@ internal class RateUsDialog(
             DEFAULT -> {
                 var rating = 0f
                 mRatingBar?.let { rating = it.rating }
-                SharedPrefsUtil.setPreference(context, RateUtil.LAST_SUBMITTED_RATING, rating)
+                SharedPrefsUtil.setPreference(context, RateUs.LAST_SUBMITTED_RATING, rating)
 
                 if (rating == 5f) {
                     setState(RATE)
@@ -232,37 +235,37 @@ internal class RateUsDialog(
 
     //region Contract
 
-    override fun setPositiveTypeface(typeface: Typeface): RateUsDialogContract {
+    override fun setPositiveTypeface(typeface: Typeface): IRateUsDialog {
         mPositiveBtn?.typeface = typeface
 
         return this
     }
 
-    override fun setNegativeTypeface(typeface: Typeface): RateUsDialogContract {
+    override fun setNegativeTypeface(typeface: Typeface): IRateUsDialog {
         mNegativeBtn?.typeface = typeface
 
         return this
     }
 
-    override fun setTitleTypeface(typeface: Typeface): RateUsDialogContract {
+    override fun setTitleTypeface(typeface: Typeface): IRateUsDialog {
         mTitle?.typeface = typeface
         mSecondTitle?.typeface = typeface
 
         return this
     }
 
-    override fun setDescriptionTypeface(typeface: Typeface): RateUsDialogContract {
+    override fun setDescriptionTypeface(typeface: Typeface): IRateUsDialog {
         return this
     }
 
-    override fun setButtonsTypeface(typeface: Typeface): RateUsDialogContract {
+    override fun setButtonsTypeface(typeface: Typeface): IRateUsDialog {
         mNegativeBtn?.typeface = typeface
         mPositiveBtn?.typeface = typeface
 
         return this
     }
 
-    override fun showRate(): RateUsDialogContract {
+    override fun showRate(): IRateUsDialog {
         this.show()
 
         return this
@@ -275,7 +278,7 @@ internal class RateUsDialog(
         this.dismiss()
     }
 
-    override fun setListener(listener: RateUsListener): RateUsDialogContract {
+    override fun setListener(listener: IRateUsListener): IRateUsDialog {
         mListener = listener
 
         return this

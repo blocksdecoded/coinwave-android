@@ -1,4 +1,4 @@
-package com.blocksdecoded.rateus
+package com.blocksdecoded.rateus.util
 
 import android.content.Context
 import android.graphics.Typeface

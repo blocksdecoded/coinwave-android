@@ -1,6 +1,8 @@
-package com.blocksdecoded.rateus.base
+package com.blocksdecoded.rateus
 
 import android.content.Context
+import com.blocksdecoded.rateus.widget.IRateUsDialog
+import com.blocksdecoded.rateus.widget.RateUsDialog
 import com.blocksdecoded.rateus.util.SharedPrefsUtil
 import com.blocksdecoded.rateus.util.SharedPrefsUtil.setPreference
 import com.blocksdecoded.rateus.util.TimeUtil
@@ -9,15 +11,15 @@ import com.blocksdecoded.rateus.util.TimeUtil
  * Created by Tameki on 3/20/18.
  */
 
-object RateUtil {
-    val LAST_SUBMITTED_RATING = "last_submitted_rating"
-    private val LAST_CHECK_DATE = "last_rate_date"
+object RateUs {
+    internal const val LAST_SUBMITTED_RATING = "last_submitted_rating"
+    private const val LAST_CHECK_DATE = "last_rate_date"
 
     fun checkRateShow(
         context: Context?,
         appName: String = context?.applicationInfo?.name.toString(),
         appID: String = context?.packageName.toString()
-    ): RateUsDialogContract? {
+    ): IRateUsDialog? {
         context?.let {
             if (checkDate(it) && checkRating(it)) {
                 return showRate(it, appName, appID)
@@ -31,7 +33,7 @@ object RateUtil {
         context: Context,
         appName: String = context.applicationInfo.name,
         appID: String = context.packageName
-    ): RateUsDialogContract {
+    ): IRateUsDialog {
         val dialog = RateUsDialog(context, mAppName = appName, mAppID = appID)
         dialog.show()
         return dialog
