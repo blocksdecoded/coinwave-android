@@ -22,7 +22,6 @@ class FavoriteChartInteractor(
     override fun getCoin(): CoinEntity? = mCoinsUseCases.getCoin(mFavoriteUseCases.getId())
 
     companion object {
-        @JvmStatic
         private val CHART_PERIOD = IChartsUseCases.ChartPeriod.TODAY
     }
 }

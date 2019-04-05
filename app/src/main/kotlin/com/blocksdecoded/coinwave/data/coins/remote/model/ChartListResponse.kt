@@ -9,6 +9,6 @@ import com.google.gson.annotations.SerializedName
  * with Android Studio
  */
 data class ChartListResponse(
-    @Expose @SerializedName("change") val change: String,
+    @Expose @SerializedName("change") val change: Float,
     @Expose @SerializedName("history") val history: List<ChartDataEntry>
 )

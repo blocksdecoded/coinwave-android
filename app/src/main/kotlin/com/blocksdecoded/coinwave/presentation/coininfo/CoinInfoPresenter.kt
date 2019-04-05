@@ -1,11 +1,13 @@
 package com.blocksdecoded.coinwave.presentation.coininfo
 
+import android.util.Log
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.domain.usecases.chart.IChartsUseCases
 import com.blocksdecoded.coinwave.domain.usecases.chart.IChartsUseCases.ChartPeriod.*
 import com.blocksdecoded.coinwave.domain.usecases.coins.ICoinsUseCases
 import com.blocksdecoded.core.mvp.BaseMvpPresenter
 import com.blocksdecoded.utils.coroutine.launchSilent
+import com.blocksdecoded.utils.logE
 import com.blocksdecoded.utils.rx.uiSubscribe
 import kotlinx.coroutines.launch
 
@@ -23,7 +25,10 @@ class CoinInfoPresenter(
             .doAfterTerminate { scope.launch { view?.hideLoading() } }
             .uiSubscribe(
                 { chartData -> view?.showChartData(chartData) },
-                { error -> view?.showChartError() })
+                { error ->
+                    Log.e("ololo", error.message, error)
+                    view?.showChartError()
+                })
             .addDisposable()
     }
 

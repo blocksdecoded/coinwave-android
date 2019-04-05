@@ -16,19 +16,12 @@ object ConstantSourceUtil {
 }
 
 fun ImageView.loadIcon(coinEntity: CoinEntity) = try {
-//    loadSvg(coinEntity.iconUrl)
-
     GlideApp.with(this)
             .`as`(PictureDrawable::class.java)
             .transition(withCrossFade())
             .listener(SvgSoftwareLayerSetter())
             .load(coinEntity.iconUrl)
             .into(this)
-
-//    Glide.with(this)
-//            .load(ConstantSourceUtil.getIconUrl(coinEntity))
-//            .load(coinEntity.iconUrl)
-//            .into(this)
 } catch (e: Exception) {
     logE(e)
 }

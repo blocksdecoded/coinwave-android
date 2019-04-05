@@ -3,16 +3,7 @@
 
 -keep public class com.blocksdecoded.coinwave.data.model.** { *; }
 -keep public class com.blocksdecoded.coinwave.data.post.model.** { *; }
--keep public class com.blocksdecoded.coinwave.data.crypto.remote.model.** { *; }
-
--keepclassmembers class android.support.design.internal.BottomNavigationMenuView {
-    boolean mShiftingMode;
-}
-
--keep public class com.google.android.material.bottomnavigation.BottomNavigationView { *; }
--keep public class com.google.android.material.bottomnavigation.BottomNavigationMenuView { *; }
--keep public class com.google.android.material.bottomnavigation.BottomNavigationPresenter { *; }
--keep public class com.google.android.material.bottomnavigation.BottomNavigationItemView { *; }
+-keep public class com.blocksdecoded.coinwave.data.coins.remote.model.** { *; }
 
 -dontwarn okio.**
 -dontwarn com.squareup.okhttp3.**

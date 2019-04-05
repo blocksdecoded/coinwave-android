@@ -9,7 +9,7 @@ import io.reactivex.Observable
  * with Android Studio
  */
 class PostsInteractor(
-    private val mPostsSource: IPostStorage
+    private val mPostsStorage: IPostStorage
 ) : IPostsUseCases {
     var date = ""
 
@@ -23,17 +23,17 @@ class PostsInteractor(
 
     override fun getPosts(): Observable<List<PublisherPost>> {
         date = ""
-        return mPostsSource.getPosts(date)
+        return mPostsStorage.getPosts(date)
             .map {
                 updateLastDate(it)
                 it
             }
     }
 
-    override fun getNextPosts(): Observable<List<PublisherPost>> = mPostsSource.getPosts(date).map {
+    override fun getNextPosts(): Observable<List<PublisherPost>> = mPostsStorage.getPosts(date).map {
         updateLastDate(it)
         it
     }
 
-    override fun getPost(id: Int): PublisherPost? = mPostsSource.getPost(id)
+    override fun getPost(id: Int): PublisherPost? = mPostsStorage.getPost(id)
 }

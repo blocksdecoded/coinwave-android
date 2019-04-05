@@ -12,6 +12,10 @@ fun logE(e: Exception) {
     Logger.logE(e)
 }
 
+fun logE(t: Throwable) {
+    Logger.logE(t)
+}
+
 object Logger {
     fun init(isDebug: Boolean) = if (isDebug) {
         Timber.plant(object : Timber.DebugTree() {
@@ -29,6 +33,10 @@ object Logger {
 
     fun logE(e: Exception) {
         Timber.e(e)
+    }
+
+    fun logE(t: Throwable) {
+        Timber.e(t)
     }
 
     private class ReleaseLogTree : Timber.Tree() {

@@ -12,8 +12,8 @@ import kotlin.collections.HashMap
 import com.blocksdecoded.coinwave.data.model.ChartPeriodEnum as RequestChartPeriod
 
 class ChartsInteractor(
-    private val mCryptoService: ICoinsStorage,
-    private val mChartsService: IChartsStorage
+    private val mCoinsStorage: ICoinsStorage,
+    private val mChartsStorage: IChartsStorage
 ) : IChartsUseCases {
     private var mCachedId: Int = -1
     private var cachedChart: HashMap<String, ChartData> = HashMap()
@@ -37,10 +37,10 @@ class ChartsInteractor(
         }
 
         return if (cachedChart[period.toString()] == null) {
-            val coin = mCryptoService.getCoin(coinId)
+            val coin = mCoinsStorage.getCoin(coinId)
 
             if (coin != null) {
-                mChartsService.getChart(coin.symbol, getRequestPeriod(period))
+                mChartsStorage.getChart(coin.symbol, getRequestPeriod(period))
                     .doOnSuccess { cachedChart[period.toString()] = it }
             } else {
                 Single.error(Exceptions.EmptyCache("Currency not found"))
