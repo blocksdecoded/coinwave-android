@@ -6,14 +6,10 @@ import retrofit2.http.GET
 
 class BootstrapApiClient : CoreApiClient(), IBootstrapClient {
 
-    private val mClient: BootstrapNetworkClient
-
-    init {
-        mClient = getRetrofitClient(
-            BootstrapNetworkClient.BASE_URL,
-            BootstrapNetworkClient::class.java
-        )
-    }
+    private val mClient: BootstrapNetworkClient = getRetrofitClient(
+        BootstrapNetworkClient.BASE_URL,
+        BootstrapNetworkClient::class.java
+    )
 
     override fun getConfigs(): Single<BootstrapResponse> = mClient.getBootstrap()
 

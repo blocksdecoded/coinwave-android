@@ -33,7 +33,9 @@ object Logger {
 
     private class ReleaseLogTree : Timber.Tree() {
         override fun log(
-            priority: Int, tag: String?, @NonNull message: String,
+            priority: Int,
+            tag: String?,
+            @NonNull message: String,
             throwable: Throwable?
         ) {
             if (priority == Log.DEBUG || priority == Log.VERBOSE || priority == Log.INFO) {

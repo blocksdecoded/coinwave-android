@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.blocksdecoded.core.SwipeableActivity
-import com.blocksdecoded.core.network.NetworkErrorHandler
 import com.blocksdecoded.utils.extensions.inRightTransition
 import com.blocksdecoded.utils.extensions.outRightTransition
 
@@ -16,8 +15,6 @@ class CoinInfoActivity : SwipeableActivity() {
     @SuppressLint("CommitTransaction")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        NetworkErrorHandler.getInstance(applicationContext)
-
         if (savedInstanceState == null) {
             val fragment = CoinInfoFragment.newInstance()
 

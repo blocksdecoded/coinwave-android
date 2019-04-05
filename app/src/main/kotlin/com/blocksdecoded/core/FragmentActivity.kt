@@ -1,6 +1,5 @@
 package com.blocksdecoded.core
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 
@@ -11,7 +10,6 @@ abstract class FragmentActivity<V>(
     var mFragment: V
 ) : SwipeableActivity() {
 
-    @SuppressLint("CommitTransaction")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
