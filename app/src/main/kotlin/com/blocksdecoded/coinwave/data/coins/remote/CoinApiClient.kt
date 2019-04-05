@@ -26,7 +26,7 @@ class CoinApiClient(
 
     //region Public
 
-    private fun <T> Single<T>.timeoutRetry(): Single<T> = this.retry { t1, t2 ->
+    private fun <T> Single<T>.timeoutRetry(): Single<T> = this.retry { _, t2 ->
         logE(Exception(t2))
         when (t2) {
             is TimeoutException -> true

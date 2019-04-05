@@ -93,15 +93,6 @@ fun View.getColorRes(@ColorRes color: Int): Int = context.getColorRes(color)
 
 //endregion
 
-//region Margin
-
-fun View?.addToRightMargin(value: Float) {
-    this?.let {
-    }
-}
-
-//endregion
-
 fun TextView.updateVisibility() = if (text.isNullOrEmpty()) {
     visibility = View.GONE
 } else {
@@ -113,8 +104,7 @@ fun EditText?.setPlainText(text: String) {
 }
 
 fun ImageView?.setImageColor(resId: Int) {
-    this?.drawable
-            ?.setColorFilter(getColorRes(resId), PorterDuff.Mode.SRC_ATOP)
+    this?.drawable?.setColorFilter(getColorRes(resId), PorterDuff.Mode.SRC_ATOP)
 }
 
 fun <T> List<T>?.isValidIndex(index: Int): Boolean {
