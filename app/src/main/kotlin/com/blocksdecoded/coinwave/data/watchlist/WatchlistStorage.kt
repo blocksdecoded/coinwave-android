@@ -18,7 +18,7 @@ class WatchlistStorage(
         if (!mInitialized) {
             mInitialized = true
             mSavedCache = load()
-            mSharedStorage.getPreference(SAVED_COINS, hashSetOf<String>())
+            mSharedStorage.getPreference(SAVED_COINS, "")
         }
     }
 
