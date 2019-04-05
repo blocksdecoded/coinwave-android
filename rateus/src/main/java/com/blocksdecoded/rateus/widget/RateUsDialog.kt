@@ -25,7 +25,6 @@ import com.blocksdecoded.rateus.util.ResourceUtil
 import com.blocksdecoded.rateus.util.SharedPrefsUtil
 import android.view.WindowManager
 import com.blocksdecoded.rateus.RateUs
-import com.blocksdecoded.rateus.util.SFUITypeface
 import com.blocksdecoded.rateus.util.AnimationUtil
 
 /**
@@ -78,11 +77,6 @@ internal class RateUsDialog(
         setState(DEFAULT)
 
         window.attributes.width = WindowManager.LayoutParams.MATCH_PARENT
-
-        setTitleTypeface(SFUITypeface.getSemibold(context))
-        setButtonsTypeface(SFUITypeface.getBold(context))
-
-        Log.d("ololo", "Context is $context")
     }
 
     override fun dismiss() {
