@@ -50,7 +50,7 @@ class OptionSelectorView : LinearLayout, View.OnClickListener {
         mNumberViews.clear()
 
         options.forEachIndexed { index, it ->
-            val view = this.inflate(R.layout.selector_text) as TextView
+            val view = this.inflate(R.layout.partial_selector_text) as TextView
             view.text = it
             mNumberViews[index] = view
             this.addView(view)

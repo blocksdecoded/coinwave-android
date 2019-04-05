@@ -1,6 +1,6 @@
 package com.blocksdecoded.coinwave.domain.usecases.chart
 
-import com.blocksdecoded.coinwave.data.EmptyCache
+import com.blocksdecoded.coinwave.data.Exceptions
 import com.blocksdecoded.coinwave.data.coins.chart.IChartsStorage
 import com.blocksdecoded.coinwave.data.coins.ICoinsStorage
 import com.blocksdecoded.coinwave.data.model.ChartData
@@ -43,7 +43,7 @@ class ChartsInteractor(
                 mChartsService.getChart(coin.symbol, getRequestPeriod(period))
                     .doOnSuccess { cachedChart[period.toString()] = it }
             } else {
-                Single.error(EmptyCache("Currency not found"))
+                Single.error(Exceptions.EmptyCache("Currency not found"))
             }
         } else {
             Single.just(cachedChart[period.toString()]!!)

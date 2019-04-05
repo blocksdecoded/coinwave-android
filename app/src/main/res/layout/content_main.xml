@@ -17,7 +17,8 @@
         android:src="@drawable/bg_bottom_nav"
         android:scaleType="fitXY"/>
 
-    <com.blocksdecoded.coinwave.presentation.widgets.BottomNavigationViewEx
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:theme="@style/Widget.BottomNavigationView"
         android:id="@+id/main_nav_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,12 +28,11 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         app:itemBackground="@drawable/bg_nav_bar_item"
-        app:itemIconTint="@drawable/menu_item_color"
-        app:itemTextColor="@drawable/menu_item_color"
+        app:itemIconTint="@drawable/menu_icon_color"
+        app:itemTextColor="@drawable/menu_text_color"
         app:menu="@menu/menu_bottom_nav"
         app:labelVisibilityMode="labeled"
-        app:itemHorizontalTranslationEnabled="false"
-        app:itemIconSize="18dp"/>
+        app:itemHorizontalTranslationEnabled="false" />
 
     <com.blocksdecoded.coinwave.presentation.widgets.NonSwipeableViewPager
         android:id="@+id/main_view_pager"
@@ -43,19 +43,5 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/main_nav_view"
         android:fitsSystemWindows="true"/>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/main_menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/ic_menu"
-        app:backgroundTint="@color/main_light"
-        app:useCompatPadding="true"
-        android:visibility="gone"
-        app:maxImageSize="18dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

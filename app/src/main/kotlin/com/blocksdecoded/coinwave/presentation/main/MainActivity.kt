@@ -17,7 +17,6 @@ import android.view.WindowManager
 import com.blocksdecoded.coinwave.BuildConfig
 import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.util.CryptoRateUtil
-import com.blocksdecoded.coinwave.util.SFProTextTypeface
 import com.blocksdecoded.coinwave.presentation.addtowatchlist.AddToWatchlistActivity
 import com.blocksdecoded.coinwave.presentation.coins.CoinsFragment
 import com.blocksdecoded.coinwave.presentation.pickfavorite.PickFavoriteActivity
@@ -29,7 +28,6 @@ import com.blocksdecoded.rateus.base.RateUsListener
 import com.blocksdecoded.utils.*
 import com.blocksdecoded.utils.customtabs.openUrl
 import com.blocksdecoded.utils.extensions.getColorRes
-import com.blocksdecoded.utils.extensions.removeShiftMode
 import com.blocksdecoded.utils.extensions.setConstraintTopMargin
 import com.blocksdecoded.utils.extensions.statusBarHeight
 import kotlinx.android.synthetic.main.activity_main.*
@@ -175,10 +173,6 @@ class MainActivity : AppCompatActivity(),
             WatchListFragment.newInstance(),
             PostsFragment.newInstance())
         )
-
-        main_menu.setOnClickListener {
-            openDrawer()
-        }
     }
 
     private fun setVersionInfo() {
@@ -219,10 +213,6 @@ class MainActivity : AppCompatActivity(),
 
     private fun initViewPager(fragments: ArrayList<Fragment>) {
         main_nav_view.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-        main_nav_view.enableAnimation(false)
-        main_nav_view.isItemHorizontalTranslationEnabled = false
-        main_nav_view.removeShiftMode()
-        main_nav_view.setTypeface(SFProTextTypeface.getRegular(this))
 
         val adapter = PagerAdapter(supportFragmentManager, fragments)
         main_view_pager.adapter = adapter

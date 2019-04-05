@@ -43,6 +43,7 @@
     <color name="green_chart_gradient_end">#251dd7d1</color>
 
     <color name="light_text">#AAAEB3</color>
+    <color name="dark_text">#86888A</color>
     <color name="dark_title_text">#28333b</color>
     <color name="default_text">#FFF</color>
 </resources>

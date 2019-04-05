@@ -37,6 +37,8 @@ class CoinApp : Application() {
 
         Logger.init(BuildConfig.DEBUG)
 
-        Fabric.with(this, Crashlytics())
+        if (!BuildConfig.DEBUG) {
+            Fabric.with(this, Crashlytics())
+        }
     }
 }
