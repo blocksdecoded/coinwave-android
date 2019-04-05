@@ -206,34 +206,26 @@ internal class RateUsDialog(
     }
 
     private fun setDefaultState() {
-        mTitle?.text = "How would you rate\n$mAppName?"
+        mTitle?.text = context.getString(R.string.rate_dialog_default_description, mAppName)
 
-        mNegativeBtn?.text = "Later"
-        mPositiveBtn?.text = "Submit"
+        mNegativeBtn?.setText(R.string.rate_dialog_later)
+        mPositiveBtn?.setText(R.string.rate_dialog_submit)
     }
 
     private fun setFeedbackState() {
-        mNegativeBtn?.text = "NO"
-        mPositiveBtn?.text = "YES"
-        mSecondTitle?.text = "Would you like to\nshare your\nfeedback with us?"
+        mNegativeBtn?.setText(R.string.rate_dialog_no)
+        mPositiveBtn?.setText(R.string.rate_dialog_yes)
+        mSecondTitle?.setText(R.string.rate_dialog_feedback_description)
 
         playCrossfadeAnimation()
-
-// 		mSecondTitle?.visibility = View.VISIBLE
-// 		mRatingBar?.visibility = View.INVISIBLE
-// 		mTitle?.visibility = View.INVISIBLE
     }
 
     private fun setRateState() {
-        mNegativeBtn?.text = "Later"
-        mPositiveBtn?.text = "Rate"
-        mSecondTitle?.text = "Would you like to rate\nus on the Play Store?"
+        mNegativeBtn?.setText(R.string.rate_dialog_later)
+        mPositiveBtn?.setText(R.string.rate_dialog_success)
+        mSecondTitle?.setText(R.string.rate_dialog_store_description)
 
         playCrossfadeAnimation()
-
-// 		mSecondTitle?.visibility = View.VISIBLE
-// 		mRatingBar?.visibility = View.INVISIBLE
-// 		mTitle?.visibility = View.INVISIBLE
     }
 
     //endregion

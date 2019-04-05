@@ -1,4 +1,11 @@
 <resources>
-    <string name="app_name">RateUs</string>
     <string name="thanks_for_feedback">Thank you for your feedback</string>
+    <string name="rate_dialog_later">Later</string>
+    <string name="rate_dialog_submit">Submit</string>
+    <string name="rate_dialog_no">NO</string>
+    <string name="rate_dialog_yes">YES</string>
+    <string name="rate_dialog_success">Rate</string>
+    <string name="rate_dialog_default_description">How would you rate\n%s?</string>
+    <string name="rate_dialog_feedback_description">Would you like to\nshare your\nfeedback with us?</string>
+    <string name="rate_dialog_store_description">Would you like to rate\nus on the Play Store?</string>
 </resources>
