@@ -5,8 +5,6 @@ import android.view.View
 import android.widget.TextView
 import com.blocksdecoded.coinwave.R
 
-import com.blocksdecoded.coinwave.presentation.post.widgets.LoadingView
-
 class FooterViewHolder(itemView: View, private val mClickListener: ClickListener?) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
     var progressView: LoadingView
     var errorView: View

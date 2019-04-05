@@ -7,7 +7,7 @@ import com.blocksdecoded.coinwave.BuildConfig
  * with Android Studio
  */
 object PostConfig {
-    const val SITE_URL = BuildConfig.SITE_URL
+    const val SITE_URL = BuildConfig.COMPANY_URL
     const val TEXT_SIZE_SMALL = 0
     const val TEXT_SIZE_MEDIUM = 1
     const val TEXT_SIZE_LARGE = 2

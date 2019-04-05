@@ -1,32 +1,52 @@
 package com.blocksdecoded.utils
 
 import android.util.Log
+import androidx.annotation.NonNull
+import timber.log.Timber
 
-fun logD(message: String, tag: String = Logger.TAG) {
-    Logger.logD(message, tag)
+fun logD(message: String) {
+    Logger.logD(message)
 }
 
-fun logE(e: Exception, tag: String = Logger.TAG) {
-    Logger.logE(e, tag)
+fun logE(e: Exception) {
+    Logger.logE(e)
 }
 
 object Logger {
-    val TAG = "ololo"
-    private var isDebuggable = true
-
-    fun setup(isDebuggable: Boolean) {
-        this.isDebuggable = isDebuggable
+    fun init(isDebug: Boolean) = if (isDebug) {
+        Timber.plant(object : Timber.DebugTree() {
+            override fun createStackElementTag(element: StackTraceElement): String? {
+                return super.createStackElementTag(element) + ": " + element.lineNumber
+            }
+        })
+    } else {
+        Timber.plant(ReleaseLogTree())
     }
 
-    fun logD(message: String, tag: String = TAG) {
-        if (isDebuggable) {
-            Log.d(tag, message)
-        }
+    fun logD(message: String) {
+        Timber.d(message)
     }
 
-    fun logE(e: Exception, tag: String = TAG) {
-        if (isDebuggable) {
-            Log.e(tag, e.message, e)
+    fun logE(e: Exception) {
+        Timber.e(e)
+    }
+
+    private class ReleaseLogTree : Timber.Tree() {
+        override fun log(
+            priority: Int, tag: String?, @NonNull message: String,
+            throwable: Throwable?
+        ) {
+            if (priority == Log.DEBUG || priority == Log.VERBOSE || priority == Log.INFO) {
+                return
+            }
+
+            if (priority == Log.ERROR) {
+                if (throwable == null) {
+                    Timber.e(message)
+                } else {
+                    Timber.e(throwable, message)
+                }
+            }
         }
     }
 }

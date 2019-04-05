@@ -1,4 +1,4 @@
-package com.blocksdecoded.coinwave.presentation.post.widgets
+package com.blocksdecoded.coinwave.presentation.widgets
 
 import android.content.Context
 import android.util.AttributeSet

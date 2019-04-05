@@ -47,8 +47,6 @@ open class PostFragment : BaseMvpFragment<IPostContract.Presenter>(), IPostContr
         } catch (ignored: NoSuchMethodError) {
         }
 
-//        mWebView?.settings?.userAgentString = "android_library+" + BuildConfig.VERSION_NAME
-
         initWebView()
     }
 
@@ -127,7 +125,6 @@ open class PostFragment : BaseMvpFragment<IPostContract.Presenter>(), IPostContr
             postBody = postBody.replace("<body", "<body class=\"" + getTextClassNameForBody(this) + "\"")
         }
         postBody = postBody.replace("class=\"article__poster\"", String.format("class=\"article__poster\" onClick=\"muo_android.clickImage('%s');return false;\"", post.image?.featured))
-//        postBody = postBody.replace("</head>", "<link rel=\"stylesheet\" href=\"file://" + postsProvider.getSavedCSSFilePath(activity) +
         postBody = postBody.replace("</head>", "<link rel=\"stylesheet\" href=\"https://pa.grouvi.im/makeuseof/styles" +
                 "\"><script type=\"text/javascript\">function changeText(name){ document.body.className=name;} function init(){muo_android.domReady();}" +
                 "function updateGleam(){ var frames = document.getElementsByTagName(\"iframe\"); \n" +

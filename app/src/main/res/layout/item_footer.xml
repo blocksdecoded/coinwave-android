@@ -8,7 +8,7 @@
     android:background="?android:selectableItemBackground"
     >
 
-    <com.blocksdecoded.coinwave.presentation.post.widgets.LoadingView
+    <com.blocksdecoded.coinwave.presentation.widgets.LoadingView
         android:theme="@style/AlertDialog.AppCompat.Light"
         android:layout_gravity="center"
         android:visibility="visible"

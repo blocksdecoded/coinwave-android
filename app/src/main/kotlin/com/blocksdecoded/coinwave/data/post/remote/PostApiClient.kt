@@ -1,6 +1,5 @@
 package com.blocksdecoded.coinwave.data.post.remote
 
-import com.blocksdecoded.coinwave.BuildConfig
 import com.blocksdecoded.coinwave.data.post.model.PostResponse
 import com.blocksdecoded.core.network.CoreApiClient
 import io.reactivex.Single
@@ -35,7 +34,7 @@ class PostApiClient : CoreApiClient(), IPostClient {
         fun getPosts(@QueryMap options: Map<String, String>): Single<PostResponse>
 
         companion object {
-            const val BASE_URL = BuildConfig.API_POSTS
+            const val BASE_URL = "http://muoarticles.muoapps.com"
             const val PUBLISHER_URL = "/blocksdecoded"
             const val POSTS_URL = "$PUBLISHER_URL/posts"
         }

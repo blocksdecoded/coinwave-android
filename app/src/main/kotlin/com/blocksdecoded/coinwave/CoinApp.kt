@@ -35,7 +35,7 @@ class CoinApp : Application() {
         INSTANCE = this
         startKoin(this, coinApp)
 
-        Logger.setup(BuildConfig.DEBUG)
+        Logger.init(BuildConfig.DEBUG)
 
         Fabric.with(this, Crashlytics())
     }
