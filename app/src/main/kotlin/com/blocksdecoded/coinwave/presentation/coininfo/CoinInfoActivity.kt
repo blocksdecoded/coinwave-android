@@ -16,13 +16,21 @@ class CoinInfoActivity : SwipeableActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (savedInstanceState == null) {
-            val fragment = CoinInfoFragment.newInstance()
-
             supportFragmentManager
                     .beginTransaction()
-                    .add(android.R.id.content, fragment)
+                    .add(android.R.id.content, CoinInfoFragment.newInstance())
                     .commit()
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        outRightTransition()
+    }
+
+    override fun finish() {
+        super.finish()
+        outRightTransition()
     }
 
     companion object {
@@ -45,15 +53,5 @@ class CoinInfoActivity : SwipeableActivity() {
         }
 
         fun getIdFromIntent(intent: Intent): Int = intent.getIntExtra(EXTRA_COIN_ID, -1)
-    }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        outRightTransition()
-    }
-
-    override fun finish() {
-        super.finish()
-        outRightTransition()
     }
 }

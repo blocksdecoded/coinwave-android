@@ -1,4 +1,4 @@
-package com.blocksdecoded.core
+package com.blocksdecoded.core.mvvm
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData

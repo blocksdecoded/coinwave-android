@@ -14,6 +14,19 @@ import com.blocksdecoded.utils.extensions.outRightTransition
  * with Android Studio
  */
 class PickFavoriteActivity : SwipeableActivity() {
+
+    @SuppressLint("CommitTransaction")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        if (savedInstanceState == null) {
+            supportFragmentManager
+                    .beginTransaction()
+                    .add(android.R.id.content, PickFavoriteFragment.newInstance())
+                    .commit()
+        }
+    }
+
     override fun onBackPressed() {
         super.onBackPressed()
         outRightTransition()
@@ -22,20 +35,6 @@ class PickFavoriteActivity : SwipeableActivity() {
     override fun finish() {
         super.finish()
         outRightTransition()
-    }
-
-    @SuppressLint("CommitTransaction")
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        if (savedInstanceState == null) {
-            val fragment = PickFavoriteFragment.newInstance()
-
-            supportFragmentManager
-                    .beginTransaction()
-                    .add(android.R.id.content, fragment)
-                    .commit()
-        }
     }
 
     companion object {

@@ -14,6 +14,17 @@ import com.blocksdecoded.utils.extensions.outRightTransition
  */
 class AddToWatchlistActivity : SwipeableActivity() {
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        if (savedInstanceState == null) {
+            supportFragmentManager
+                    .beginTransaction()
+                    .add(android.R.id.content, AddToWatchlistFragment.newInstance())
+                    .commit()
+        }
+    }
+
     override fun onBackPressed() {
         super.onBackPressed()
         outRightTransition()
@@ -23,23 +34,6 @@ class AddToWatchlistActivity : SwipeableActivity() {
         super.finish()
         outRightTransition()
     }
-
-    //region Lifecycle
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        if (savedInstanceState == null) {
-            val fragment = AddToWatchlistFragment.newInstance()
-
-            supportFragmentManager
-                    .beginTransaction()
-                    .add(android.R.id.content, fragment)
-                    .commit()
-        }
-    }
-
-    //endregion
 
     companion object {
         fun start(context: Context) {

@@ -1,34 +1,12 @@
 package com.blocksdecoded.core.mvp
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
 import androidx.annotation.CallSuper
-import androidx.fragment.app.Fragment
-import butterknife.ButterKnife
 import butterknife.Unbinder
-import com.blocksdecoded.utils.extensions.inflate
-import com.blocksdecoded.utils.logE
+import com.blocksdecoded.core.CoreFragment
 import com.blocksdecoded.utils.showShortToast
 
-abstract class BaseMvpFragment<T : BaseMvpContract.Presenter<*>> : Fragment(), BaseMvpContract.View<T> {
-    abstract val layoutId: Int
-
+abstract class BaseMvpFragment<T : BaseMvpContract.Presenter<*>> : CoreFragment(), BaseMvpContract.View<T> {
     private var mUnbinder: Unbinder? = null
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? = try {
-        container.inflate(layoutId)?.also {
-            mUnbinder = ButterKnife.bind(this, it)
-            initView(it)
-        }
-    } catch (e: Exception) {
-        logE(e)
-        TextView(context).apply { text = "${javaClass.simpleName} layout initialization error!" }
-    }
-
-    abstract fun initView(rootView: View)
 
     @CallSuper
     override fun onResume() {

@@ -119,7 +119,7 @@ open class CoinInfoFragment : BaseMvpFragment<ICoinInfoContract.Presenter>(),
     var mScrollEnabled = true
         set(value) {
             field = value
-            mScrollContainer.mScrollable = value
+            mScrollContainer.scrollable = value
         }
 
     override fun initView(rootView: View) {

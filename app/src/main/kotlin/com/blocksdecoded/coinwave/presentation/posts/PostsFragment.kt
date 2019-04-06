@@ -1,7 +1,9 @@
 package com.blocksdecoded.coinwave.presentation.posts
 
+import android.os.Bundle
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -9,24 +11,22 @@ import butterknife.BindView
 import butterknife.OnClick
 import com.blocksdecoded.core.contracts.LoadNextListener
 import com.blocksdecoded.coinwave.R
-import com.blocksdecoded.coinwave.data.post.model.PublisherPost
 import com.blocksdecoded.coinwave.presentation.posts.recycler.PostsAdapter
 import com.blocksdecoded.coinwave.presentation.posts.recycler.PostViewHolder
-import com.blocksdecoded.core.mvp.BaseMvpFragment
+import com.blocksdecoded.core.mvvm.CoreMvvmFragment
 import com.blocksdecoded.utils.customtabs.openUrl
 import com.blocksdecoded.utils.extensions.*
 import com.blocksdecoded.utils.showShortToast
-import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import kotlin.math.roundToInt
 
 open class PostsFragment :
-        BaseMvpFragment<IPostsContract.Presenter>(),
-        IPostsContract.View,
+        CoreMvvmFragment<PostsViewModel>(),
         PostViewHolder.PostVHCLickListener,
         LoadNextListener {
 
-    override val presenter: IPostsContract.Presenter by inject { parametersOf(this@PostsFragment, context) }
+    override val mViewModel: PostsViewModel by viewModel { parametersOf(context) }
     override val layoutId: Int = R.layout.fragment_post_list
 
     var mAdapter: PostsAdapter? = null
@@ -46,9 +46,9 @@ open class PostsFragment :
     )
     fun onClick(view: View) {
         when (view.id) {
-            R.id.post_menu -> presenter.onMenuClick()
+            R.id.post_menu -> mViewModel.onMenuClick()
 
-            R.id.connection_error_retry -> presenter.getPosts()
+            R.id.connection_error_retry -> mViewModel.onRetryClick()
         }
     }
 
@@ -62,8 +62,39 @@ open class PostsFragment :
         }
 
         mSwipeRefresh.setOnRefreshListener {
-            presenter.getPosts()
+            mViewModel.getPosts()
         }
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        mViewModel.posts.observe(this, Observer { mAdapter?.setItems(it) })
+
+        mViewModel.openPostEvent.observe(this, Observer { it.url?.let { openUrl(it) } })
+
+        mViewModel.allLoaded.observe(this, Observer { mAdapter?.setAllLoaded(it) })
+
+        mViewModel.isLoading.observe(this, Observer {
+            if (it) {
+                mSwipeRefresh.isRefreshing = true
+                mErrorView.hide()
+                mRecycler.hide()
+            } else {
+                mSwipeRefresh.isRefreshing = false
+                mRecycler.visible()
+            }
+        })
+
+        mViewModel.loadingErrorEvent.observe(this, Observer { showView ->
+            if (showView) {
+                mSwipeRefresh.isRefreshing = false
+                mRecycler.hide()
+                mErrorView.visible()
+            } else {
+                showShortToast(context, getString(R.string.message_connection_error))
+            }
+        })
     }
 
     private fun initRecycler() {
@@ -82,58 +113,13 @@ open class PostsFragment :
 
     //endregion
 
-    //region Click
-
     override fun onClick(position: Int) {
-        mAdapter?.getItem(position)?.also {
-            presenter.onPostClick(it.id)
-        }
+        mViewModel.onPostClick(position)
     }
-
-    //endregion
-
-    //region Load next
 
     override fun onLoadNext() {
-        presenter.getNextPosts()
+        mViewModel.getNextPosts()
     }
-
-    //endregion
-
-    //region Contract
-
-    override fun openPost(url: String) = openUrl(url)
-
-    override fun showLoading() {
-        mSwipeRefresh.isRefreshing = true
-        mErrorView.hide()
-        mRecycler.hide()
-    }
-
-    override fun stopLoading() {
-        mSwipeRefresh.isRefreshing = false
-        mRecycler.visible()
-    }
-
-    override fun showPosts(posts: List<PublisherPost>) {
-        mAdapter?.setItems(posts)
-    }
-
-    override fun nextPosts(posts: List<PublisherPost>) {
-        mAdapter?.addItems(posts)
-    }
-
-    override fun showLoadingError() {
-        mSwipeRefresh.isRefreshing = false
-        mRecycler.hide()
-        mErrorView.visible()
-    }
-
-    override fun showErrorMessage() {
-        showShortToast(context, getString(R.string.message_connection_error))
-    }
-
-    //endregion
 
     companion object {
         fun newInstance() = PostsFragment()

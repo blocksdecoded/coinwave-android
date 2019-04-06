@@ -34,5 +34,5 @@ internal object SharedPrefsUtil {
     fun getFloatPreference(context: Context, key: String): Float = getPreferences(context).getFloat(key, 0f)
 
     fun getStringPreference(context: Context, key: String): String =
-            getPreferences(context).getString(key, "")?:""
+            getPreferences(context).getString(key, "") ?: ""
 }

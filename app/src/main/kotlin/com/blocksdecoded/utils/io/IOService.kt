@@ -11,38 +11,16 @@ import java.nio.charset.Charset
 // Created by askar on 6/8/18.
 class IOService(context: Context) : IOContract {
 
-    private var assets: AssetManager? = null
-    private var filesDir: File? = null
-
-    init {
-        assets = context.assets
-        filesDir = context.filesDir
-    }
-
-    companion object {
-        private var INSTANCE: IOService? = null
-
-        fun getInstance(context: Context): IOContract {
-            if (INSTANCE == null)
-                INSTANCE = IOService(context)
-            return INSTANCE!!
-        }
-
-        fun destroyInstance() {
-            INSTANCE?.assets = null
-            INSTANCE = null
-        }
-    }
+    private var assets: AssetManager = context.assets
+    private var filesDir: File = context.filesDir
 
     private fun loadBytes(name: String): ByteArray? = try {
-        val `is` = assets?.open(name)
-        val size = `is`?.available()
-        var buffer: ByteArray? = null
-        if (size != null) {
-            buffer = ByteArray(size)
-            `is`.read(buffer)
-            `is`.close()
-        }
+        val `is` = assets.open(name)
+        val size = `is`.available()
+        val buffer: ByteArray?
+        buffer = ByteArray(size)
+        `is`.read(buffer)
+        `is`.close()
         buffer
     } catch (e: IOException) {
         e.printStackTrace()
@@ -80,5 +58,19 @@ class IOService(context: Context) : IOContract {
             e.printStackTrace()
         }
         return ""
+    }
+
+    companion object {
+        private var INSTANCE: IOService? = null
+
+        fun getInstance(context: Context): IOContract {
+            if (INSTANCE == null)
+                INSTANCE = IOService(context)
+            return INSTANCE!!
+        }
+
+        fun destroyInstance() {
+            INSTANCE = null
+        }
     }
 }

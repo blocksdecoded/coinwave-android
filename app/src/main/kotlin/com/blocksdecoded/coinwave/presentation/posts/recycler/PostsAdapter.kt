@@ -2,21 +2,20 @@ package com.blocksdecoded.coinwave.presentation.posts.recycler
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.blocksdecoded.core.contracts.LoadNextListener
 import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.data.post.model.PublisherPost
 import com.blocksdecoded.coinwave.presentation.widgets.FooterViewHolder
-import com.blocksdecoded.utils.extensions.height
-import com.blocksdecoded.utils.extensions.inflate
-import com.blocksdecoded.utils.extensions.isValidIndex
+import com.blocksdecoded.utils.extensions.*
 
 /**
  * Created by askar on 11/19/18
  * with Android Studio
  */
 class PostsAdapter(
-    private var mItems: ArrayList<PublisherPost>,
+    private var mPosts: ArrayList<PublisherPost>,
     private val mListener: PostViewHolder.PostVHCLickListener,
     private val mLoadNextListener: LoadNextListener,
     private val mPostHeight: Int
@@ -28,7 +27,7 @@ class PostsAdapter(
     }
 
     private var mAlreadyLoading = false
-    private val mAllLoaded = false
+    private var mAllLoaded = false
     private var mFooterView: FooterViewHolder? = null
 
     //region Override
@@ -43,14 +42,12 @@ class PostsAdapter(
         )
     }
 
-    override fun getItemCount(): Int {
-        return mItems.size + 1
-    }
+    override fun getItemCount(): Int = if (mAllLoaded) mPosts.size else mPosts.size + 1
 
     override fun onBindViewHolder(p0: RecyclerView.ViewHolder, p1: Int) {
-        if (mItems.isValidIndex(p1)) {
+        if (mPosts.isValidIndex(p1)) {
             when (p0) {
-                is PostViewHolder -> p0.onBind(mItems[p1])
+                is PostViewHolder -> p0.onBind(mPosts[p1])
                 is FooterViewHolder -> {
                     mFooterView = p0
                     if (mAlreadyLoading) {
@@ -68,11 +65,10 @@ class PostsAdapter(
         }
     }
 
-    override fun getItemViewType(position: Int): Int {
-        if (position == mItems.size) {
-            return FOOTER
-        }
-        return POST
+    override fun getItemViewType(position: Int): Int = if (position == mPosts.size) {
+        FOOTER
+    } else {
+        POST
     }
 
     //endregion
@@ -91,23 +87,30 @@ class PostsAdapter(
 
     //region Public
 
+    fun setAllLoaded(loaded: Boolean) {
+        mAllLoaded = loaded
+
+        if (loaded) {
+            mFooterView?.itemView.hide()
+        } else {
+            mFooterView?.itemView.visible()
+        }
+
+        notifyDataSetChanged()
+    }
+
     fun setItems(posts: List<PublisherPost>) {
         mAlreadyLoading = false
-        mItems.clear()
-        mItems.addAll(posts)
-        notifyDataSetChanged()
+        val diffResult = DiffUtil.calculateDiff(PostsDiffUtil(mPosts, posts))
+        mPosts.clear()
+        mPosts.addAll(posts)
+        diffResult.dispatchUpdatesTo(this)
     }
 
     fun addItems(posts: List<PublisherPost>) {
         mAlreadyLoading = false
-        mItems.addAll(posts)
+        mPosts.addAll(posts)
         notifyDataSetChanged()
-    }
-
-    fun getItem(position: Int): PublisherPost? = if (mItems.isValidIndex(position)) {
-        mItems[position]
-    } else {
-        null
     }
 
     //endregion

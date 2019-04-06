@@ -15,28 +15,6 @@ import com.blocksdecoded.utils.extensions.outRightTransition
  */
 
 class PostActivity : SwipeableActivity() {
-    companion object {
-        private const val POST_ID_FIELD = "coin_id"
-
-        fun start(context: Context, postId: Int) {
-            context.startActivity(intent(context, postId))
-
-            if (context is Activity) {
-                context.inRightTransition()
-            }
-        }
-
-        fun intent(context: Context, postId: Int): Intent {
-            val intent = Intent(context, PostActivity::class.java)
-
-            intent.putExtra(POST_ID_FIELD, postId)
-
-            return intent
-        }
-
-        fun getIdFromIntent(intent: Intent): Int = intent.getIntExtra(POST_ID_FIELD, -1)
-    }
-
     override fun onBackPressed() {
         super.onBackPressed()
         outRightTransition()
@@ -69,5 +47,27 @@ class PostActivity : SwipeableActivity() {
 
             mPresenter?.getPost(getIdFromIntent(intent))
         }
+    }
+
+    companion object {
+        private const val POST_ID_FIELD = "coin_id"
+
+        fun start(context: Context, postId: Int) {
+            context.startActivity(intent(context, postId))
+
+            if (context is Activity) {
+                context.inRightTransition()
+            }
+        }
+
+        fun intent(context: Context, postId: Int): Intent {
+            val intent = Intent(context, PostActivity::class.java)
+
+            intent.putExtra(POST_ID_FIELD, postId)
+
+            return intent
+        }
+
+        fun getIdFromIntent(intent: Intent): Int = intent.getIntExtra(POST_ID_FIELD, -1)
     }
 }

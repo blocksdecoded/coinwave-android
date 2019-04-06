@@ -39,13 +39,13 @@ import com.blocksdecoded.coinwave.presentation.coins.CoinsPresenter
 import com.blocksdecoded.coinwave.presentation.main.IMenuClickListener
 import com.blocksdecoded.coinwave.presentation.pickfavorite.IPickFavoriteContract
 import com.blocksdecoded.coinwave.presentation.pickfavorite.PickFavoritePresenter
-import com.blocksdecoded.coinwave.presentation.posts.IPostsContract
-import com.blocksdecoded.coinwave.presentation.posts.PostsPresenter
+import com.blocksdecoded.coinwave.presentation.posts.PostsViewModel
 import com.blocksdecoded.coinwave.presentation.watchlist.IWatchListContract
 import com.blocksdecoded.coinwave.presentation.watchlist.WatchListPresenter
 import com.blocksdecoded.utils.shared.ISharedStorage
 import com.blocksdecoded.utils.shared.SharedStorage
 import org.koin.android.ext.koin.androidApplication
+import org.koin.androidx.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
 
 val dataModule = module {
@@ -111,11 +111,7 @@ val presentationModule = module {
         get()
     ) as IAddToWatchlistContract.Presenter }
 
-    factory { params -> PostsPresenter(
-        params.component1() as IPostsContract.View,
-        params.component2() as IMenuClickListener,
-        get()
-    ) as IPostsContract.Presenter }
+    viewModel { params -> PostsViewModel(get(), params.component1() as IMenuClickListener) }
 }
 
 val bootstrapModule = module {
