@@ -4,11 +4,11 @@ import com.blocksdecoded.coinwave.data.model.ChartPeriodEnum
 import com.blocksdecoded.coinwave.data.coins.remote.model.HistoryResponse
 import com.blocksdecoded.coinwave.data.model.CoinsResponse
 import com.blocksdecoded.core.network.CoreApiClient
+import com.blocksdecoded.utils.logD
 import com.blocksdecoded.utils.logE
 import io.reactivex.Single
 import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.Url
 import java.lang.Exception
 import java.util.concurrent.TimeoutException
 
@@ -20,9 +20,13 @@ class CoinApiClient(
     private val config: ICoinClientConfig
 ) : CoreApiClient(), ICoinClient {
     private val mClient: CurrencyNetworkClient = getRetrofitClient(
-        config.coinUrl,
+        config.ipnsUrl,
         CurrencyNetworkClient::class.java
     )
+
+    init {
+        logD(config.ipnsPath)
+    }
 
     //region Public
 
@@ -34,42 +38,30 @@ class CoinApiClient(
         }
     }
 
-    override fun getCoins(pageSize: Int): Single<CoinsResponse> = mClient.getCoins(
-        config.ipnsKey,
-        pageSize
-    ).timeoutRetry().doOnError { logE(Exception(it)) }
+    override fun getCoins(): Single<CoinsResponse> =
+        mClient.getCoins("${config.ipnsPath}index.json")
+            .timeoutRetry()
 
-    override fun getHistory(chartName: String, period: ChartPeriodEnum) = mClient.getChartForTime(
-        config.ipnsKey,
-        chartName,
-        period.displayName
-    ).timeoutRetry().doOnError { logE(Exception(it)) }
+    override fun getHistory(coin: String, period: ChartPeriodEnum) =
+        mClient.getChart("${config.ipnsPath}coin/$coin/history/${period.displayName}/index.json")
+            .timeoutRetry()
 
     //endregion
 
     private interface CurrencyNetworkClient {
-        @GET(COINS_PATH)
-        fun getCoins(
-            @Path(KEY) ipnsPath: String,
-            @Query(LIMIT) limit: Int
-        ): Single<CoinsResponse>
+        @GET
+        fun getCoins(@Url url: String): Single<CoinsResponse>
 
-        @GET(HISTORY_PATH)
-        fun getChartForTime(
-            @Path(KEY) ipnsPath: String,
-            @Path(COIN) coin: String,
-            @Path(PERIOD) period: String
-        ): Single<HistoryResponse>
+        @GET
+        fun getChart(@Url url: String): Single<HistoryResponse>
 
         companion object {
-            private const val KEY = "key"
+            private const val IPNS = "ipns"
             private const val COIN = "coin"
             private const val PERIOD = "period"
-            private const val LIMIT = "limit"
 
-            private const val PREFIX_PATH = "/ipns/{$KEY}"
-            private const val COINS_PATH = "$PREFIX_PATH/index.json"
-            private const val HISTORY_PATH = "$PREFIX_PATH/coin/{$COIN}/history/{$PERIOD}/index.json"
+            private const val COINS_PATH = "/index.json"
+            private const val HISTORY_PATH = "/coin/{$COIN}/history/{$PERIOD}/index.json"
         }
     }
 }

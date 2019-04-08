@@ -13,7 +13,7 @@ interface ICoinsStorage {
 
     fun getWatchlist(skipCache: Boolean): Observable<CoinsDataResponse>
 
-    fun getChart(chartName: String, period: ChartPeriodEnum = ChartPeriodEnum.DAY): Single<ChartData>
+    fun getChart(coin: String, period: ChartPeriodEnum = ChartPeriodEnum.DAY): Single<ChartData>
 
     fun setCoinsData(coinsData: CoinsDataResponse)
 

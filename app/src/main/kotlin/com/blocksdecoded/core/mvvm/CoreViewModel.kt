@@ -7,7 +7,7 @@ import io.reactivex.disposables.Disposable
 abstract class CoreViewModel : ViewModel() {
     private val disposables = CompositeDisposable()
 
-    fun Disposable.add() {
+    fun Disposable.addDisposable() {
         disposables.add(this)
     }
 

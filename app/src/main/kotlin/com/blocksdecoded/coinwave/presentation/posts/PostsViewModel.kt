@@ -33,7 +33,7 @@ class PostsViewModel(
                 { posts.value = ArrayList(it) },
                 { loadingErrorEvent.postValue(true) },
                 { isLoading.value = false })
-            .add()
+            .addDisposable()
     }
 
     fun getNextPosts() {
@@ -44,7 +44,7 @@ class PostsViewModel(
                     posts.addAll(it)
                 },
                 { loadingErrorEvent.postValue(false) })
-            .add()
+            .addDisposable()
     }
 
     fun onRetryClick() {

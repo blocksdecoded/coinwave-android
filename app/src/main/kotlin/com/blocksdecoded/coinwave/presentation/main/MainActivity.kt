@@ -41,21 +41,13 @@ class MainActivity : AppCompatActivity(),
     private var mRateDialog: IRateUsDialog? = null
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-        when (item.itemId) {
-            R.id.navigation_currencies -> {
-                main_view_pager.currentItem = 0
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.navigation_watchlist -> {
-                main_view_pager.currentItem = 1
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.navigation_news -> {
-                main_view_pager.currentItem = 2
-                return@OnNavigationItemSelectedListener true
-            }
+        main_view_pager.currentItem = when (item.itemId) {
+            R.id.navigation_currencies -> 0
+            R.id.navigation_watchlist -> 1
+            R.id.navigation_news -> 2
+            else -> 0
         }
-        false
+        true
     }
 
     override fun onBackPressed() {
@@ -64,7 +56,7 @@ class MainActivity : AppCompatActivity(),
         } else {
             when (main_view_pager.currentItem) {
                 0 -> super.onBackPressed()
-                else -> { main_view_pager.currentItem = 0 }
+                else -> main_view_pager.currentItem = 0
             }
         }
     }

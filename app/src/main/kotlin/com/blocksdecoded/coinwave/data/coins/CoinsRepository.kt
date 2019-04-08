@@ -39,7 +39,7 @@ class CoinsRepository(
     else
         mLocalSource.getAllCoins()
 
-    private fun remoteCoinsFetch(force: Boolean) = if (isDirty() || force) mCoinsClient.getCoins(NETWORK_PAGE_SIZE)
+    private fun remoteCoinsFetch(force: Boolean) = if (isDirty() || force) mCoinsClient.getCoins()
             .toObservable()
             .doOnNext {
                 it.data.updatedAt = Date()
@@ -109,14 +109,13 @@ class CoinsRepository(
                 } ?: fetchCoins(false)
             }
 
-    override fun getChart(chartName: String, period: ChartPeriodEnum): Single<ChartData> =
-        mCoinsClient.getHistory(chartName, period)
+    override fun getChart(coin: String, period: ChartPeriodEnum): Single<ChartData> =
+        mCoinsClient.getHistory(coin, period)
             .map { ChartData(it.data.history) }
 
     //endregion
 
     companion object {
         private const val VALID_CACHE_TIME = 5 * 60 * 1000
-        private const val NETWORK_PAGE_SIZE = 50
     }
 }

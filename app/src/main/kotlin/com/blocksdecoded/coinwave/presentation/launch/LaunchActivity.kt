@@ -23,7 +23,7 @@ class LaunchActivity : AppCompatActivity() {
         bootstrapClient.getConfigs()
             .uiSubscribe(
                 onNext = {
-                    if (it.servers.isNotEmpty()) coinClientConfig.coinUrl = it.servers.first()
+                    if (it.servers.isNotEmpty()) coinClientConfig.ipnsUrl = it.servers[0]
                     startMain()
                 },
                 onError = {
