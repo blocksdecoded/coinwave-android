@@ -3,8 +3,8 @@ package com.blocksdecoded.coinwave.data.coins.remote
 import okhttp3.HttpUrl
 
 interface ICoinClientConfig {
-    var ipnsUrl: String
+    var ipfsUrl: String
 
     val ipnsPath: String
-        get() = HttpUrl.get(ipnsUrl).encodedPath()
+        get() = HttpUrl.get(ipfsUrl).encodedPath()
 }

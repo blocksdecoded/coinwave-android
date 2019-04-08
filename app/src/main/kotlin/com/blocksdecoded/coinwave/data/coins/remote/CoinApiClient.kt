@@ -4,7 +4,6 @@ import com.blocksdecoded.coinwave.data.model.ChartPeriodEnum
 import com.blocksdecoded.coinwave.data.coins.remote.model.HistoryResponse
 import com.blocksdecoded.coinwave.data.model.CoinsResponse
 import com.blocksdecoded.core.network.CoreApiClient
-import com.blocksdecoded.utils.logD
 import com.blocksdecoded.utils.logE
 import io.reactivex.Single
 import retrofit2.http.GET
@@ -20,13 +19,9 @@ class CoinApiClient(
     private val config: ICoinClientConfig
 ) : CoreApiClient(), ICoinClient {
     private val mClient: CurrencyNetworkClient = getRetrofitClient(
-        config.ipnsUrl,
+        config.ipfsUrl,
         CurrencyNetworkClient::class.java
     )
-
-    init {
-        logD(config.ipnsPath)
-    }
 
     //region Public
 
