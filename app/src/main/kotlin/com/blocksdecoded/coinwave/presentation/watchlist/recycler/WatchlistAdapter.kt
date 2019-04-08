@@ -6,9 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.presentation.coins.recycler.CoinDiffUtil
-import com.blocksdecoded.coinwave.util.addSortedByRank
 import com.blocksdecoded.utils.extensions.inflate
-import com.blocksdecoded.utils.extensions.isValidIndex
 
 // Created by askar on 7/19/18.
 class WatchlistAdapter(
@@ -27,39 +25,10 @@ class WatchlistAdapter(
         }
     }
 
-    private fun findItem(id: Int, onFind: (index: Int) -> Unit) {
-        onFind.invoke(mCoins.indexOfFirst { it.id == id })
-    }
-
     fun setItems(coins: List<CoinEntity>) {
         val diffResult = DiffUtil.calculateDiff(CoinDiffUtil(mCoins, coins))
         mCoins.clear()
         mCoins.addAll(coins)
         diffResult.dispatchUpdatesTo(this)
-    }
-
-    fun deleteItemAt(position: Int) {
-        if (mCoins.isValidIndex(position)) {
-            mCoins.removeAt(position)
-            notifyItemRemoved(position)
-        }
-    }
-
-    fun deleteItem(coin: CoinEntity) {
-        findItem(coin.id) {
-            deleteItemAt(it)
-        }
-    }
-
-    fun updateItem(coin: CoinEntity) {
-        findItem(coin.id) {
-            if (it >= 0) {
-                mCoins[it] = coin
-                notifyItemChanged(it)
-            } else {
-                mCoins.addSortedByRank(coin)
-                notifyDataSetChanged()
-            }
-        }
     }
 }

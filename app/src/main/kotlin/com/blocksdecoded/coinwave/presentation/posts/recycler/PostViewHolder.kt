@@ -45,7 +45,7 @@ class PostViewHolder(
 
         mTitle.text = post.title
 
-        post.image?.featured?.also {
+        post.image?.featured?.let {
             Glide.with(mImage.context)
                     .load(it)
                     .thumbnail(0.01f)

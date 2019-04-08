@@ -7,6 +7,7 @@ ext {
             okHttp          : "3.10.0",
             retrofit        : '2.5.0',
             dagger          : '2.15',
+            koin            : '1.0.2',
             butterKnife     : '10.0.0',
             rxJava          : '2.2.7',
             rxKotlin        : '2.2.0',
@@ -48,7 +49,6 @@ ext {
             appcompatV7      : "com.android.support:appcompat-v7:$versions.support",
             design           : "com.android.support:design:$versions.support",
             recyclerView     : "com.android.support:recyclerview-v7:$versions.support",
-            supportAnnotation: "com.android.support:support-annotations:$versions.support",
             gridLayout       : "com.android.support:gridlayout-v7:$versions.support",
             multiDex         : "com.android.support:multidex:$versions.multiDex",
             constraint       : "androidx.constraintlayout:constraintlayout:$versions.constraint",
@@ -70,6 +70,11 @@ ext {
             sqlbrite         : "com.squareup.sqlbrite:sqlbrite:$versions.sqlbrite"
     ]
 
+    koin = [
+            android          : "org.koin:koin-android:$versions.koin",
+            viewModel        : "org.koin:koin-androidx-viewmodel:$versions.koin"
+    ]
+
     okHttp = [
             logger  : "com.squareup.okhttp3:logging-interceptor:$versions.okHttp",
             okhttp  : "com.squareup.okhttp3:okhttp:$versions.okHttp",
@@ -82,6 +87,7 @@ ext {
             firebaseCore     : "com.google.firebase:firebase-core:$versions.firebase",
             firebaseMessaging: "com.google.firebase:firebase-messaging:$versions.firebase"
     ]
+
     onlyDebug = [
             chuck              : "com.readystatesoftware.chuck:library:1.1.0",
             leakCannary        : "com.squareup.leakcanary:leakcanary-android:$versions.leakcanary",
@@ -104,7 +110,8 @@ ext {
             assertj             : "com.squareup.assertj:assertj-android:$versions.assertj",
             kotlinTest          : "org.jetbrains.kotlin:kotlin-test:$kotlin_version",
             kotlinJunit         : "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version",
-            mockitoKotlin       : "com.nhaarman:mockito-kotlin:$versions.mockitoKotlin"
+            mockitoKotlin       : "com.nhaarman:mockito-kotlin:$versions.mockitoKotlin",
+            koin                : "org.koin:koin-test:$versions.koin"
 
     ] + junit + mockito
 
@@ -141,7 +148,8 @@ ext {
     networkLibs = retrofit.values() + okHttp.values()
     rxJavaLibs = rxJava.values()
     coroutineLibs = coroutineDeps.values()
-    otherLibs = [butterKnife, timber, glide, swipeback]
+
+    otherLibs = [butterKnife, timber, glide, swipeback, koin.values()]
 
     debugLibs = onlyDebug.values()
     releaseLibs = onlyRelease.values()

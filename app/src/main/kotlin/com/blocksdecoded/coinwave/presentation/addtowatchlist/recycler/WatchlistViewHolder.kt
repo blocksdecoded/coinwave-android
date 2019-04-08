@@ -6,7 +6,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.data.model.CoinEntity
-import com.blocksdecoded.coinwave.util.loadIcon
+import com.blocksdecoded.coinwave.util.loadCoinIcon
 
 /**
  * Created by askar on 2/12/19
@@ -30,7 +30,7 @@ class WatchlistViewHolder(
         nameTextView.text = coin.name
         symbolTextView.text = coin.symbol
 
-        coinIcon.loadIcon(coin)
+        coinIcon.loadCoinIcon(coin)
         mWatchIcon.setImageResource(if (coin.isSaved) R.drawable.ic_star_filled else R.drawable.ic_star_border)
     }
 

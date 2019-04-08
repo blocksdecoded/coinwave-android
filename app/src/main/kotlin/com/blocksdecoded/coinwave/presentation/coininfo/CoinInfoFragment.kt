@@ -137,7 +137,7 @@ open class CoinInfoFragment : BaseMvpFragment<ICoinInfoContract.Presenter>(),
     )
 
     private fun showCurrencyInfo(coinEntity: CoinEntity) {
-        mIcon.loadIcon(coinEntity)
+        mIcon.loadCoinIcon(coinEntity)
         mName.text = coinEntity.name
         mSymbol.text = coinEntity.symbol
         mPrice.text = "$${coinEntity.getPrice()?.format()}"

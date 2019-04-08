@@ -1,5 +1,7 @@
 package com.blocksdecoded.coinwave.util
 
+import android.graphics.drawable.PictureDrawable
+import android.widget.ImageView
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
@@ -14,9 +16,11 @@ import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.presentation.widgets.chart.ChartListener
 import com.blocksdecoded.utils.extensions.getColorRes
 import com.blocksdecoded.utils.extensions.isValidIndex
+import com.blocksdecoded.utils.glide.GlideApp
+import com.blocksdecoded.utils.glide.SvgSoftwareLayerSetter
 import com.blocksdecoded.utils.logE
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
-// Created by askar on 7/23/18.
 fun List<CoinEntity>.findCurrency(coinEntity: CoinEntity, body: ((index: Int) -> Unit)? = null): Int =
         this.indexOfFirst { it.id == coinEntity.id }.also {
             if (this.isValidIndex(it)) {
@@ -88,4 +92,15 @@ fun LineChart.init(listener: ChartListener) {
     this.setViewPortOffsets(0f, 50f, 0f, 50f)
     this.setOnChartValueSelectedListener(listener)
     this.onChartGestureListener = listener
+}
+
+fun ImageView.loadCoinIcon(coinEntity: CoinEntity) = try {
+    GlideApp.with(this)
+        .`as`(PictureDrawable::class.java)
+        .transition(DrawableTransitionOptions.withCrossFade())
+        .listener(SvgSoftwareLayerSetter())
+        .load(coinEntity.iconUrl)
+        .into(this)
+} catch (e: Exception) {
+    logE(e)
 }

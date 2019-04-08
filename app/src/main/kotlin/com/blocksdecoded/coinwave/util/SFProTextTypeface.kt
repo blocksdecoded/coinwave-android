@@ -3,7 +3,6 @@ package com.blocksdecoded.coinwave.util
 import android.content.Context
 import android.graphics.Typeface
 
-// Created by askar on 5/29/18.
 object SFProTextTypeface {
     fun getRegular(context: Context?): Typeface {
         return Typeface.createFromAsset(context?.assets, "fonts/sf_pro_text_regular.otf")
@@ -15,18 +14,6 @@ object SFProTextTypeface {
 
     fun getBold(context: Context?): Typeface {
         return Typeface.createFromAsset(context?.assets, "fonts/sf_pro_text_bold.otf")
-    }
-
-    fun getHeavy(context: Context?): Typeface {
-        return Typeface.createFromAsset(context?.assets, "fonts/sf_pro_text_bold.otf")
-    }
-
-    fun getMedium(context: Context?): Typeface {
-        return Typeface.createFromAsset(context?.assets, "fonts/sf_pro_text_regular.otf")
-    }
-
-    fun getThin(context: Context?): Typeface {
-        return Typeface.createFromAsset(context?.assets, "fonts/sf_pro_text_light.otf")
     }
 
     fun getLight(context: Context?): Typeface {

@@ -3,7 +3,10 @@ package com.blocksdecoded.coinwave.util
 import java.text.DecimalFormat
 import kotlin.math.roundToInt
 
-// Created by askar on 7/20/18.
+fun Float.format(): String = FormatUtil.formatFloatString(this)
+
+fun Double.format(): String = FormatUtil.formatDoubleString(this)
+
 object FormatUtil {
     private val defaultFormat = DecimalFormat("###,###,###,###,###,###,###")
     private val decimalFormat = DecimalFormat("###,###,###,###,###,###,###.00")
@@ -51,7 +54,3 @@ object FormatUtil {
             }
         }
 }
-
-fun Float.format(): String = FormatUtil.formatFloatString(this)
-
-fun Double.format(): String = FormatUtil.formatDoubleString(this)

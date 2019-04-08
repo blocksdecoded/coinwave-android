@@ -17,13 +17,17 @@ class NonSwipeableViewPager : ViewPager {
 
     private fun setScroller() {
         try {
-            val viewpager = androidx.viewpager.widget.ViewPager::class.java
+            val viewpager = ViewPager::class.java
             val scroller = viewpager.getDeclaredField("mScroller")
             scroller.isAccessible = true
             scroller.set(this, SmoothScroller(context, 0))
         } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
+
+    override fun setCurrentItem(item: Int, smoothScroll: Boolean) {
+        super.setCurrentItem(item, false)
     }
 
     override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {

@@ -80,7 +80,7 @@ class CoinsHeaderView : FrameLayout {
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes)
 
     fun init() {
-        val view = inflate(R.layout.partial_coins_header)!!
+        val view = inflate(R.layout.partial_coins_header)
         addView(view)
 
         ButterKnife.bind(this)

@@ -8,7 +8,7 @@ import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.util.FormatUtil
 import com.blocksdecoded.coinwave.util.format
-import com.blocksdecoded.coinwave.util.loadIcon
+import com.blocksdecoded.coinwave.util.loadCoinIcon
 import com.blocksdecoded.utils.extensions.getColorRes
 import com.blocksdecoded.utils.extensions.hide
 import com.blocksdecoded.utils.extensions.visible
@@ -42,7 +42,7 @@ class CoinViewHolder(
 
         setupDividers()
 
-        mSymbolIcon.loadIcon(coin)
+        mSymbolIcon.loadCoinIcon(coin)
     }
 
     private fun configPriceChanges(coin: CoinEntity) {

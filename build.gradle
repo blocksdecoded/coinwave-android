@@ -8,23 +8,26 @@ buildscript {
         room_version = '1.1.0'
         volley_version = '1.1.0'
         retrofit_version = '2.4.0'
-        picasso_version = '2.71828'
         glide_version = '4.8.0'
         hockey_version = '5.1.0'
-        fcm_version = '17.3.4'
         koin_version = '1.0.2'
 
         min_sdk_version = 19
         target_sdk_version = 28
     }
+
     repositories {
         google()
         jcenter()
+        maven { url 'https://maven.fabric.io/public' }
     }
+
     dependencies {
         classpath 'com.android.tools.build:gradle:3.3.2'
         classpath 'com.google.gms:google-services:4.2.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        //noinspection GradleDynamicVersion
+        classpath 'io.fabric.tools:gradle:1.+'
     }
 }
 

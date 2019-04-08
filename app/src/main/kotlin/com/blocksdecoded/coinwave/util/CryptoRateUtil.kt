@@ -12,10 +12,7 @@ import com.blocksdecoded.rateus.RateUs
 object CryptoRateUtil {
     fun tryShowRateUs(context: Context): IRateUsDialog? {
         return RateUs
-                .checkRateShow(
-                        context,
-                        context.getString(R.string.const_app_name)
-                )
+                .checkRateShow(context, context.getString(R.string.const_app_name))
                 ?.setTitleTypeface(SFProTextTypeface.getBold(context))
                 ?.setDescriptionTypeface(SFProTextTypeface.getBold(context))
                 ?.setNegativeTypeface(SFProTextTypeface.getRegular(context))
@@ -24,10 +21,7 @@ object CryptoRateUtil {
 
     fun getDialog(context: Context): IRateUsDialog {
         return RateUs
-                .showRate(
-                        context,
-                        context.getString(R.string.const_app_name)
-                )
+                .showRate(context, context.getString(R.string.const_app_name))
                 .setTitleTypeface(SFProTextTypeface.getBold(context))
                 .setDescriptionTypeface(SFProTextTypeface.getBold(context))
                 .setNegativeTypeface(SFProTextTypeface.getRegular(context))

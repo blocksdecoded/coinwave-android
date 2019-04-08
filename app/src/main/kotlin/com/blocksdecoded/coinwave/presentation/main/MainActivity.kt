@@ -247,7 +247,7 @@ class MainActivity : AppCompatActivity(),
             drawer_rate_us -> drawerItemClick(::onRateClick)
             drawer_share_this_app -> drawerItemClick { ShareUtils.shareApp(this) }
             drawer_close_menu -> closeDrawer()
-            drawer_company_selectable -> openUrl(BuildConfig.COMPANY_URL)
+            drawer_company_selectable -> drawerItemClick { openUrl(BuildConfig.COMPANY_URL) }
         }
     }
 
