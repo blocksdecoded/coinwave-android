@@ -73,7 +73,7 @@ class CoinsCache {
         MARKET_CAP_DES({ it.sortByDescending { it.marketCap } }),
         VOLUME_ASC({ it.sortBy { it.volume } }),
         VOLUME_DES({ it.sortByDescending { it.volume } }),
-        PRICE_ASC({ it.sortBy { it.price } }),
-        PRICE_DES({ it.sortByDescending { it.price } })
+        PRICE_ASC({ it.sortBy { it.priceChange } }),
+        PRICE_DES({ it.sortByDescending { it.priceChange } })
     }
 }
