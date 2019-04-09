@@ -1,7 +1,6 @@
 package com.blocksdecoded.coinwave.domain.usecases.posts
 
 import com.blocksdecoded.coinwave.data.post.IPostStorage
-import com.blocksdecoded.coinwave.data.post.model.PublisherPost
 import com.blocksdecoded.coinwave.mock.FakeData
 import io.reactivex.Observable
 import org.junit.Assert.assertEquals
@@ -29,7 +28,7 @@ class PostsInteractorTest {
     fun `Test next post fetch error`() {
         val exception = Exception()
         `when`(postStorage.getPosts("")).thenReturn(Observable.just(FakeData.postsResponse))
-        `when`(postStorage.getPosts(FakeData.postsResponse.last().date?:"")).thenReturn(Observable.error(exception))
+        `when`(postStorage.getPosts(FakeData.postsResponse.last().date ?: "")).thenReturn(Observable.error(exception))
 
         interactor.getPosts()
             .test()
