@@ -12,11 +12,6 @@
         <item name="android:fontFamily">@font/sf_pro_text_regular</item>
     </style>
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
     <style name="AppTheme.NoActionBarLight">
         <item name="android:windowBackground">@drawable/bg_light_main</item>
         <item name="colorPrimaryDark">@color/dark_status_bar</item>
