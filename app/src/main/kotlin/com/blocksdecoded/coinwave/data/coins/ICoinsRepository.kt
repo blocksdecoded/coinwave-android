@@ -13,8 +13,6 @@ interface ICoinsRepository {
 
     fun getChart(coin: String, period: ChartPeriodEnum = ChartPeriodEnum.DAY): Single<ChartData>
 
-    fun setCoinsData(coinsData: CoinsDataResponse)
-
     fun getCoin(id: Int): CoinEntity?
 
     fun saveCoin(id: Int): Boolean

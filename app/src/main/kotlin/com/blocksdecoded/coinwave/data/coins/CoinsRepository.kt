@@ -1,6 +1,6 @@
 package com.blocksdecoded.coinwave.data.coins
 
-import com.blocksdecoded.coinwave.data.coins.local.CoinsLocalStorage
+import com.blocksdecoded.coinwave.data.coins.local.ICoinsLocalStorage
 import com.blocksdecoded.coinwave.data.coins.remote.ICoinClient
 import com.blocksdecoded.coinwave.data.model.*
 import com.blocksdecoded.coinwave.data.watchlist.IWatchlistStorage
@@ -13,7 +13,7 @@ import java.util.*
 class CoinsRepository(
     private val mCoinsClient: ICoinClient,
     private val mWatchlistSource: IWatchlistStorage,
-    private val mLocalSource: CoinsLocalStorage
+    private val mLocalSource: ICoinsLocalStorage
 ) : ICoinsRepository {
     private var mCached: CoinsDataResponse? = null
         set(value) {
@@ -44,7 +44,7 @@ class CoinsRepository(
             .toObservable()
             .doOnNext {
                 it.data.updatedAt = Date()
-                setCoinsData(it.data)
+                mLocalSource.setCoinsData(it.data)
                 setCache(it.data)
             }
             .doOnError { mCached?.let { setCache(it) } }
@@ -75,10 +75,6 @@ class CoinsRepository(
     //endregion
 
     //region Contract
-
-    override fun setCoinsData(coinsData: CoinsDataResponse) {
-        mLocalSource.setCoinsData(coinsData)
-    }
 
     override fun getCoin(id: Int): CoinEntity? = mCached?.coins?.first { it.id == id }
 

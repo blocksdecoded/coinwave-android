@@ -8,7 +8,7 @@ import io.reactivex.Observable
 
 class CoinsLocalStorage(
     private val mSharedStorage: ISharedStorage
-) {
+) : ICoinsLocalStorage {
     private fun fetchSaveCoins(): CoinsDataResponse? = try {
         Gson().fromJson(
             mSharedStorage.getPreference(PREF_COINS_KEY, ""),
@@ -27,9 +27,9 @@ class CoinsLocalStorage(
 
     //region Contract
 
-    fun setCoinsData(coinsData: CoinsDataResponse) = saveCoinsData(coinsData)
+    override fun setCoinsData(coinsData: CoinsDataResponse) = saveCoinsData(coinsData)
 
-    fun getAllCoins(): Observable<CoinsDataResponse> =
+    override fun getAllCoins(): Observable<CoinsDataResponse> =
         fetchSaveCoins()?.let { Observable.just(it) } ?: Observable.empty()
 
     //endregion

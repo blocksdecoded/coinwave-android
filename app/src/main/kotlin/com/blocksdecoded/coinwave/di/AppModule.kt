@@ -7,6 +7,7 @@ import com.blocksdecoded.coinwave.data.coins.ICoinsRepository
 import com.blocksdecoded.coinwave.data.coins.chart.ChartsStorage
 import com.blocksdecoded.coinwave.data.coins.chart.IChartsStorage
 import com.blocksdecoded.coinwave.data.coins.local.CoinsLocalStorage
+import com.blocksdecoded.coinwave.data.coins.local.ICoinsLocalStorage
 import com.blocksdecoded.coinwave.data.coins.remote.CoinApiClient
 import com.blocksdecoded.coinwave.data.coins.remote.ICoinClient
 import com.blocksdecoded.coinwave.data.coins.remote.ICoinClientConfig
@@ -53,9 +54,11 @@ val dataModule = module {
 
     single { CoinApiClient(get()) as ICoinClient }
 
+    single { CoinsLocalStorage(get()) as ICoinsLocalStorage }
+
     single { SharedStorage(androidApplication()) as ISharedStorage }
 
-    single { CoinsRepository(get(), get(), CoinsLocalStorage(get())) as ICoinsRepository }
+    single { CoinsRepository(get(), get(), get()) as ICoinsRepository }
 
     single { WatchlistStorage(get()) as IWatchlistStorage }
 
