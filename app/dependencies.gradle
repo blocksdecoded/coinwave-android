@@ -12,7 +12,6 @@ ext {
             rxJava          : '2.2.7',
             rxKotlin        : '2.2.0',
             rxAndroid       : '2.1.1',
-            rxPermissions   : '0.9.4@aar',
             sqlbrite        : '1.1.2',
             traceur         : '1.0.1',
             stetho          : '1.5.0',
@@ -59,8 +58,7 @@ ext {
             rxAndroid        : "io.reactivex.rxjava2:rxandroid:$versions.rxAndroid",
             rxJava           : "io.reactivex.rxjava2:rxjava:$versions.rxJava",
             rxKotlin         : "io.reactivex.rxjava2:rxkotlin:$versions.rxKotlin",
-            traceur          : "com.tspoon.traceur:traceur:$versions.traceur",
-            rxRermissions    : "com.tbruyelle.rxpermissions:rxpermissions:$versions.rxPermissions"
+            traceur          : "com.tspoon.traceur:traceur:$versions.traceur"
     ]
 
     retrofit = [

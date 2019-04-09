@@ -2,11 +2,8 @@ package com.blocksdecoded.coinwave.domain.usecases.posts
 
 import com.blocksdecoded.coinwave.data.post.IPostStorage
 import com.blocksdecoded.coinwave.data.post.model.PublisherPost
-import com.blocksdecoded.utils.coroutine.model.Result
-import com.blocksdecoded.utils.coroutine.model.onResult
-import kotlinx.coroutines.runBlocking
+import io.reactivex.Observable
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
@@ -21,21 +18,29 @@ class PostsInteractorTest {
 
     @Test
     fun `Test next post date update`() {
-        runBlocking {
-            `when`(postStorage.getPosts("")).thenReturn(Result.Success(fakeResponse))
+        `when`(postStorage.getPosts("")).thenReturn(Observable.just(fakeResponse))
 
-            interactor.getPosts()?.onResult { assertEquals(nextPostDate, interactor.date) }
-        }
+        interactor.getPosts()
+            .test()
+            .assertComplete()
+            .dispose()
+
+        assertEquals(nextPostDate, interactor.date)
     }
 
     @Test
     fun `Test next post fetch error`() {
-        runBlocking {
-            `when`(postStorage.getPosts("")).thenReturn(Result.Success(fakeResponse))
-            `when`(postStorage.getPosts(nextPostDate)).thenReturn(Result.Error(Exception()))
+        val exception = Exception()
+        `when`(postStorage.getPosts("")).thenReturn(Observable.just(fakeResponse))
+        `when`(postStorage.getPosts(nextPostDate)).thenReturn(Observable.error(exception))
 
-            interactor.getPosts()
-            interactor.getNextPosts()?.onResult { assertTrue(it is Result.Error) }
-        }
+        interactor.getPosts()
+            .test()
+            .dispose()
+
+        interactor.getNextPosts()
+            .test()
+            .assertError(exception)
+            .dispose()
     }
 }
