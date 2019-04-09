@@ -4,7 +4,6 @@ import com.blocksdecoded.coinwave.data.coins.ICoinsRepository
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.data.model.CoinsResult
 import io.reactivex.Observable
-import io.reactivex.subjects.PublishSubject
 import java.util.*
 
 // Created by askar on 7/19/18.

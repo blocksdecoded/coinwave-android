@@ -1,20 +1,20 @@
 package com.blocksdecoded.rateus.widget
 
-import android.graphics.Typeface
+import androidx.annotation.FontRes
 
 /**
  * Created by Tameki on 3/21/18.
  */
 interface IRateUsDialog {
-    fun setTitleTypeface(typeface: Typeface): IRateUsDialog
+    fun setTitleFont(@FontRes font: Int): IRateUsDialog
 
-    fun setDescriptionTypeface(typeface: Typeface): IRateUsDialog
+    fun setDescriptionFont(@FontRes font: Int): IRateUsDialog
 
-    fun setPositiveTypeface(typeface: Typeface): IRateUsDialog
+    fun setPositiveFont(@FontRes font: Int): IRateUsDialog
 
-    fun setNegativeTypeface(typeface: Typeface): IRateUsDialog
+    fun setNegativeFont(@FontRes font: Int): IRateUsDialog
 
-    fun setButtonsTypeface(typeface: Typeface): IRateUsDialog
+    fun setButtonsFont(@FontRes font: Int): IRateUsDialog
 
     fun showRate(): IRateUsDialog
 

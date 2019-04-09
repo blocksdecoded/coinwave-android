@@ -10,21 +10,17 @@ import com.blocksdecoded.rateus.RateUs
  * with Android Studio
  */
 object CryptoRateUtil {
-    fun tryShowRateUs(context: Context): IRateUsDialog? {
-        return RateUs
-                .checkRateShow(context, context.getString(R.string.const_app_name))
-                ?.setTitleTypeface(SFProTextTypeface.getBold(context))
-                ?.setDescriptionTypeface(SFProTextTypeface.getBold(context))
-                ?.setNegativeTypeface(SFProTextTypeface.getRegular(context))
-                ?.setPositiveTypeface(SFProTextTypeface.getBold(context))
-    }
+    fun tryShowRateUs(context: Context): IRateUsDialog? = RateUs
+            .checkRateShow(context, context.getString(R.string.const_app_name))
+            ?.setTitleFont(R.font.sf_pro_text_bold)
+            ?.setDescriptionFont(R.font.sf_pro_text_bold)
+            ?.setNegativeFont(R.font.sf_pro_text_regular)
+            ?.setPositiveFont(R.font.sf_pro_text_bold)
 
-    fun getDialog(context: Context): IRateUsDialog {
-        return RateUs
-                .showRate(context, context.getString(R.string.const_app_name))
-                .setTitleTypeface(SFProTextTypeface.getBold(context))
-                .setDescriptionTypeface(SFProTextTypeface.getBold(context))
-                .setNegativeTypeface(SFProTextTypeface.getRegular(context))
-                .setPositiveTypeface(SFProTextTypeface.getBold(context))
-    }
+    fun getDialog(context: Context): IRateUsDialog = RateUs
+            .showRate(context, context.getString(R.string.const_app_name))
+            .setTitleFont(R.font.sf_pro_text_bold)
+            .setDescriptionFont(R.font.sf_pro_text_bold)
+            .setNegativeFont(R.font.sf_pro_text_regular)
+            .setPositiveFont(R.font.sf_pro_text_bold)
 }

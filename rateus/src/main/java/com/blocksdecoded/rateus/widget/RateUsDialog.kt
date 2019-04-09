@@ -4,7 +4,6 @@ import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.PorterDuff
-import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
@@ -20,12 +19,10 @@ import android.widget.TextView
 import android.widget.Toast
 import com.blocksdecoded.rateus.R
 import com.blocksdecoded.rateus.widget.RateUsDialog.State.*
-import com.blocksdecoded.rateus.util.IntentUtil
-import com.blocksdecoded.rateus.util.ResourceUtil
-import com.blocksdecoded.rateus.util.SharedPrefsUtil
 import android.view.WindowManager
+import androidx.annotation.FontRes
 import com.blocksdecoded.rateus.RateUs
-import com.blocksdecoded.rateus.util.AnimationUtil
+import com.blocksdecoded.rateus.util.*
 
 /**
  * Created by Tameki on 3/19/18.
@@ -229,30 +226,32 @@ internal class RateUsDialog(
 
     //region Contract
 
-    override fun setPositiveTypeface(typeface: Typeface): IRateUsDialog {
-        mPositiveBtn?.typeface = typeface
+    override fun setPositiveFont(@FontRes font: Int): IRateUsDialog {
+        mPositiveBtn?.typeface = context.getFont(font)
 
         return this
     }
 
-    override fun setNegativeTypeface(typeface: Typeface): IRateUsDialog {
-        mNegativeBtn?.typeface = typeface
+    override fun setNegativeFont(@FontRes font: Int): IRateUsDialog {
+        mNegativeBtn?.typeface = context.getFont(font)
 
         return this
     }
 
-    override fun setTitleTypeface(typeface: Typeface): IRateUsDialog {
+    override fun setTitleFont(@FontRes font: Int): IRateUsDialog {
+        val typeface = context.getFont(font)
         mTitle?.typeface = typeface
         mSecondTitle?.typeface = typeface
 
         return this
     }
 
-    override fun setDescriptionTypeface(typeface: Typeface): IRateUsDialog {
+    override fun setDescriptionFont(@FontRes font: Int): IRateUsDialog {
         return this
     }
 
-    override fun setButtonsTypeface(typeface: Typeface): IRateUsDialog {
+    override fun setButtonsFont(@FontRes font: Int): IRateUsDialog {
+        val typeface = context.getFont(font)
         mNegativeBtn?.typeface = typeface
         mPositiveBtn?.typeface = typeface
 
