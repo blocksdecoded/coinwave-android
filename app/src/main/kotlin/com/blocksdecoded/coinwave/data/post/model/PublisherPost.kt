@@ -19,7 +19,6 @@ data class PublisherPost(
     @Expose @SerializedName("url") var url: String?,
     @Expose @SerializedName("featured_image") var image: PublisherImage?
 ) {
-
     override fun toString(): String = "$id $title $url $image"
 
     companion object {
