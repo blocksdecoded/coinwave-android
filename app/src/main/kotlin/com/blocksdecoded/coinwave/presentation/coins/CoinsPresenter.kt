@@ -20,7 +20,7 @@ class CoinsPresenter(
     private var mInitialized = false
 
     init {
-        mCoinsUseCases.coinsUpdateSubject
+        mCoinsUseCases.coinsObservable
             .uiSubscribe {
                 updateCache(it)
             }

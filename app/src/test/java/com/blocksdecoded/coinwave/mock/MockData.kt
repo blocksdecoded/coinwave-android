@@ -5,7 +5,7 @@ import com.blocksdecoded.coinwave.data.model.CoinsResult
 import com.blocksdecoded.coinwave.data.post.model.PublisherPost
 import java.util.*
 
-object FakeData {
+object MockData {
     val postsResponse
             get() = listOf(
                 PublisherPost(1, "1234213"),

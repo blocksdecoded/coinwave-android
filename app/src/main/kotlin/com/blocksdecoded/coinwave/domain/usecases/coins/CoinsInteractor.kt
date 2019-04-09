@@ -11,7 +11,7 @@ import java.util.*
 class CoinsInteractor(
     private val mCoinsRepository: ICoinsRepository
 ) : ICoinsUseCases {
-    override val coinsUpdateSubject: PublishSubject<CoinsResult>
+    override val coinsObservable: Observable<CoinsResult>
         get() = mCoinsRepository.coinsUpdateSubject
 
     override fun getCoins(skipCache: Boolean, force: Boolean): Observable<CoinsResult> = mCoinsRepository.getAllCoins(skipCache, force)

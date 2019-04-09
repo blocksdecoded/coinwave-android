@@ -2,7 +2,7 @@ package com.blocksdecoded.coinwave.data.post
 
 import com.blocksdecoded.coinwave.data.post.model.PostResponse
 import com.blocksdecoded.coinwave.data.post.remote.IPostClient
-import com.blocksdecoded.coinwave.mock.FakeData
+import com.blocksdecoded.coinwave.mock.MockData
 import io.reactivex.Single
 import org.junit.Test
 import org.mockito.Mockito
@@ -15,7 +15,7 @@ class PostRepositoryTest {
 
     @Test
     fun `Fetch post by id after posts request`() {
-        Mockito.`when`(postClient.getPosts("")).thenReturn(Single.just(PostResponse(FakeData.postsResponse)))
+        Mockito.`when`(postClient.getPosts("")).thenReturn(Single.just(PostResponse(MockData.postsResponse)))
 
         repository.getPosts("")
             .test()
@@ -23,6 +23,6 @@ class PostRepositoryTest {
             .assertComplete()
             .dispose()
 
-        assertNotNull(repository.getPost(FakeData.postsResponse.first().id))
+        assertNotNull(repository.getPost(MockData.postsResponse.first().id))
     }
 }

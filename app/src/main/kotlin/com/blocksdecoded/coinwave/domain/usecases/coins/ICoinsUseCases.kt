@@ -2,11 +2,11 @@ package com.blocksdecoded.coinwave.domain.usecases.coins
 
 import com.blocksdecoded.coinwave.data.model.CoinsResult
 import com.blocksdecoded.coinwave.domain.usecases.BaseCoinsUseCase
-import io.reactivex.subjects.PublishSubject
+import io.reactivex.Observable
 
 // Created by askar on 7/19/18.
 interface ICoinsUseCases : BaseCoinsUseCase {
-    val coinsUpdateSubject: PublishSubject<CoinsResult>
+    val coinsObservable: Observable<CoinsResult>
 
     fun saveCoin(id: Int): Boolean
 

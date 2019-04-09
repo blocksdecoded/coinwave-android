@@ -2,7 +2,7 @@ package com.blocksdecoded.coinwave.domain.usecases.watchlist
 
 import com.blocksdecoded.coinwave.data.coins.ICoinsRepository
 import com.blocksdecoded.coinwave.data.model.CoinsResult
-import com.blocksdecoded.coinwave.mock.FakeData
+import com.blocksdecoded.coinwave.mock.MockData
 import io.reactivex.subjects.PublishSubject
 import org.junit.Test
 import org.mockito.Mockito.`when`
@@ -19,15 +19,15 @@ class WatchlistInteractorTest {
 
         val testObserver = interactor.watchlistObservable.test()
 
-        coinsRepository.coinsUpdateSubject.onNext(FakeData.coinsResult)
+        coinsRepository.coinsUpdateSubject.onNext(MockData.coinsResult)
 
         testObserver.assertSubscribed()
-        testObserver.assertValueAt(0) { it.coins.size == FakeData.savedCoinsCount }
+        testObserver.assertValueAt(0) { it.coins.size == MockData.savedCoinsCount }
 
-        coinsRepository.coinsUpdateSubject.onNext(FakeData.coinsResult)
+        coinsRepository.coinsUpdateSubject.onNext(MockData.coinsResult)
 
         testObserver.assertSubscribed()
-        testObserver.assertValueAt(1) { it.coins.size == FakeData.savedCoinsCount }
+        testObserver.assertValueAt(1) { it.coins.size == MockData.savedCoinsCount }
 
         testObserver.dispose()
     }
