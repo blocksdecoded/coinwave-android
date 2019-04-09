@@ -8,7 +8,9 @@ import java.util.*
 object FakeData {
     val postsResponse
             get() = listOf(
-                PublisherPost(1, "1234213", "", "", "", "", null)
+                PublisherPost(1, "1234213"),
+                PublisherPost(2, "2345677"),
+                PublisherPost(3, "3456734")
             )
 
     val coinsResult

@@ -13,11 +13,11 @@ import java.text.SimpleDateFormat
 data class PublisherPost(
     @Expose @SerializedName("ID") var id: Int,
     @Expose @SerializedName("post_date") var date: String?,
-    @Expose @SerializedName("post_title") var title: String?,
-    @Expose @SerializedName("author") var author: String?,
-    @Expose @SerializedName("html") var html: String?,
-    @Expose @SerializedName("url") var url: String?,
-    @Expose @SerializedName("featured_image") var image: PublisherImage?
+    @Expose @SerializedName("post_title") var title: String? = "",
+    @Expose @SerializedName("author") var author: String? = "",
+    @Expose @SerializedName("html") var html: String? = "",
+    @Expose @SerializedName("url") var url: String? = "",
+    @Expose @SerializedName("featured_image") var image: PublisherImage? = null
 ) {
     override fun toString(): String = "$id $title $url $image"
 
