@@ -2,7 +2,7 @@ package com.blocksdecoded.coinwave.data.post
 
 import com.blocksdecoded.coinwave.data.post.model.PostResponse
 import com.blocksdecoded.coinwave.data.post.remote.IPostClient
-import com.blocksdecoded.coinwave.mock.MockData
+import com.blocksdecoded.coinwave.MockData
 import io.reactivex.Single
 import org.junit.Test
 import org.mockito.Mockito

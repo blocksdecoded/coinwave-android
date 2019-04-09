@@ -1,4 +1,4 @@
-package com.blocksdecoded.coinwave.mock
+package com.blocksdecoded.coinwave
 
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.data.model.CoinsResult

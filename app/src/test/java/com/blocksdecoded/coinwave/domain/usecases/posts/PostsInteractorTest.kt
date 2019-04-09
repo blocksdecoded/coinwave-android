@@ -2,7 +2,7 @@ package com.blocksdecoded.coinwave.domain.usecases.posts
 
 import com.blocksdecoded.coinwave.data.post.IPostStorage
 import com.blocksdecoded.coinwave.data.post.model.PublisherPost
-import com.blocksdecoded.coinwave.mock.MockData
+import com.blocksdecoded.coinwave.MockData
 import io.reactivex.Observable
 import org.junit.Assert.assertEquals
 import org.junit.Before

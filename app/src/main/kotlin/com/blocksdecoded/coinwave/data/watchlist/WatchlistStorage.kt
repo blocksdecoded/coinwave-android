@@ -17,7 +17,7 @@ class WatchlistStorage(
     private fun fetchData() {
         if (!mInitialized) {
             mInitialized = true
-            mSavedCache = load()
+            mSavedCache = ArrayList(load())
             mSharedStorage.getPreference(SAVED_COINS, "")
         }
     }
@@ -32,11 +32,9 @@ class WatchlistStorage(
         mSharedStorage.setPreference(SAVED_COINS, save)
     }
 
-    private fun load(): ArrayList<Int> = try {
+    private fun load(): List<Int> = try {
         val saved = mSharedStorage.getPreference(SAVED_COINS, "")
-        val result = arrayListOf<Int>()
-        result.addAll(saved.split(saveDelimiter).map { it.toInt() })
-        result
+        saved.split(saveDelimiter).map { it.toInt() }
     } catch (e: Exception) {
         arrayListOf()
     }

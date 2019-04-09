@@ -24,7 +24,8 @@ class CoinsRepository(
     override val coinsUpdateSubject: PublishSubject<CoinsResult> = PublishSubject.create()
 
     init {
-        mLocalSource.getAllCoins().subscribe { mCached = it }
+        mLocalSource.getAllCoins()
+            .subscribe { mCached = it }
     }
 
     //region Private
