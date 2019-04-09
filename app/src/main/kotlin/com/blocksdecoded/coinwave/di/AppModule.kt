@@ -3,7 +3,7 @@ package com.blocksdecoded.coinwave.di
 import com.blocksdecoded.coinwave.data.bootstrap.BootstrapApiClient
 import com.blocksdecoded.coinwave.data.bootstrap.IBootstrapClient
 import com.blocksdecoded.coinwave.data.coins.CoinsRepository
-import com.blocksdecoded.coinwave.data.coins.ICoinsStorage
+import com.blocksdecoded.coinwave.data.coins.ICoinsRepository
 import com.blocksdecoded.coinwave.data.coins.chart.ChartsStorage
 import com.blocksdecoded.coinwave.data.coins.chart.IChartsStorage
 import com.blocksdecoded.coinwave.data.coins.local.CoinsLocalStorage
@@ -55,7 +55,7 @@ val dataModule = module {
 
     single { SharedStorage(androidApplication()) as ISharedStorage }
 
-    single { CoinsRepository(get(), get(), CoinsLocalStorage(get())) as ICoinsStorage }
+    single { CoinsRepository(get(), get(), CoinsLocalStorage(get())) as ICoinsRepository }
 
     single { WatchlistStorage(get()) as IWatchlistStorage }
 

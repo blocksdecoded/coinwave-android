@@ -14,7 +14,7 @@ class CoinsRepository(
     private val mCoinsClient: ICoinClient,
     private val mWatchlistSource: IWatchlistStorage,
     private val mLocalSource: CoinsLocalStorage
-) : ICoinsStorage {
+) : ICoinsRepository {
     private var mCached: CoinsDataResponse? = null
         set(value) {
             field = value
@@ -100,15 +100,6 @@ class CoinsRepository(
                 } ?: fetchCoins(false)
             }
 
-    override fun getWatchlist(skipCache: Boolean): Observable<CoinsDataResponse> =
-            if (skipCache) {
-                fetchCoins(false)
-            } else {
-                mCached?.let {
-                    Observable.just(it)
-                } ?: fetchCoins(false)
-            }
-
     override fun getChart(coin: String, period: ChartPeriodEnum): Single<ChartData> =
         mCoinsClient.getHistory(coin, period)
             .map { ChartData(it.data.history) }
@@ -116,6 +107,6 @@ class CoinsRepository(
     //endregion
 
     companion object {
-        private const val VALID_CACHE_TIME = 5 * 60 * 1000
+        private const val VALID_CACHE_TIME = 1000 * 60 * 5
     }
 }
