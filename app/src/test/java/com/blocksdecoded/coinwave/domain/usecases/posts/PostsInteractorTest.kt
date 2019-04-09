@@ -10,9 +10,8 @@ import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
 
 class PostsInteractorTest {
-
-    var postStorage: IPostStorage = mock(IPostStorage::class.java)
-    var interactor: PostsInteractor = PostsInteractor(postStorage)
+    private var postStorage: IPostStorage = mock(IPostStorage::class.java)
+    private var interactor: PostsInteractor = PostsInteractor(postStorage)
 
     @Test
     fun `Test next post date update`() {

@@ -6,7 +6,6 @@ import org.junit.Test
 import org.mockito.Mockito.*
 
 class FavoriteInteractorTest {
-
     private val sharedStorage: ISharedStorage = mock(ISharedStorage::class.java)
     private var interactor = FavoriteInteractor(sharedStorage)
 
