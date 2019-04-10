@@ -9,3 +9,4 @@ build/
 /fastlane/report.xml
 /fastlane/README.md
 /app/supply
+/app/fabric.properties
