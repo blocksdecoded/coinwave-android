@@ -22,7 +22,7 @@ class LaunchActivity : AppCompatActivity() {
     private fun fetchConfigs() {
         bootstrapClient.getConfigs()
             .uiSubscribe(
-                onNext = {
+                onSuccess = {
                     if (it.servers.isNotEmpty()) coinClientConfig.ipfsUrl = it.servers[0]
                     startMain()
                 },

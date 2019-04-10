@@ -18,8 +18,8 @@ fun <T> Single<T>.observeIo(): Single<T> = this.subscribeOn(RxSchedulers.io)
 
 fun <T> Single<T>.uiSubscribe(onNext: (T) -> Unit): Disposable = uiSubscribe(onNext, null)
 
-fun <T> Observable<T>.uiSubscribe(onNext: (T) -> Unit): Disposable =
-    uiSubscribe(onNext, null, null)
+fun <T> Observable<T>.uiSubscribe(onSuccess: (T) -> Unit): Disposable =
+    uiSubscribe(onSuccess, null, null)
 
 fun <T> Observable<T>.uiSubscribe(
     onNext: (T) -> Unit,
@@ -33,10 +33,10 @@ fun <T> Observable<T>.uiSubscribe(
     )
 
 fun <T> Single<T>.uiSubscribe(
-    onNext: (T) -> Unit,
+    onSuccess: (T) -> Unit,
     onError: ((Throwable) -> Unit)? = null
 ): Disposable =
     observeUi().subscribe(
-        onNext,
+        onSuccess,
         { throwable -> onError?.apply { this(throwable) } }
     )
