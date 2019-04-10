@@ -29,8 +29,8 @@ import com.blocksdecoded.coinwave.domain.usecases.watchlist.IWatchlistUseCases
 import com.blocksdecoded.coinwave.domain.usecases.watchlist.WatchlistInteractor
 import com.blocksdecoded.coinwave.domain.variant.favoritechart.FavoriteChartInteractor
 import com.blocksdecoded.coinwave.domain.variant.favoritechart.IFavoriteChartUseVariant
-import com.blocksdecoded.coinwave.presentation.addtowatchlist.IAddToWatchlistContract
-import com.blocksdecoded.coinwave.presentation.addtowatchlist.AddToWatchlistPresenter
+import com.blocksdecoded.coinwave.presentation.editwatchlist.EditWatchlistContract
+import com.blocksdecoded.coinwave.presentation.editwatchlist.EditWatchlistPresenter
 import com.blocksdecoded.coinwave.presentation.coininfo.ICoinInfoContract
 import com.blocksdecoded.coinwave.presentation.coininfo.CoinInfoPresenter
 import com.blocksdecoded.coinwave.presentation.coins.ICoinsContract
@@ -39,8 +39,8 @@ import com.blocksdecoded.coinwave.presentation.main.IMenuClickListener
 import com.blocksdecoded.coinwave.presentation.pickfavorite.IPickFavoriteContract
 import com.blocksdecoded.coinwave.presentation.pickfavorite.PickFavoritePresenter
 import com.blocksdecoded.coinwave.presentation.posts.PostsViewModel
-import com.blocksdecoded.coinwave.presentation.watchlist.IWatchListContract
-import com.blocksdecoded.coinwave.presentation.watchlist.WatchListPresenter
+import com.blocksdecoded.coinwave.presentation.watchlist.IWatchlistContract
+import com.blocksdecoded.coinwave.presentation.watchlist.WatchlistPresenter
 import com.blocksdecoded.utils.shared.ISharedStorage
 import com.blocksdecoded.utils.shared.SharedStorage
 import org.koin.android.ext.koin.androidApplication
@@ -90,12 +90,12 @@ val presentationModule = module {
         get()
     ) as IPickFavoriteContract.Presenter }
 
-    factory { params -> WatchListPresenter(
-        params.component1() as IWatchListContract.View,
+    factory { params -> WatchlistPresenter(
+        params.component1() as IWatchlistContract.View,
         params.component2() as IMenuClickListener,
         get(),
         get()
-    ) as IWatchListContract.Presenter }
+    ) as IWatchlistContract.Presenter }
 
     factory { params -> CoinInfoPresenter(
         params.component1() as ICoinInfoContract.View,
@@ -109,10 +109,10 @@ val presentationModule = module {
         get()
     ) as ICoinsContract.Presenter }
 
-    factory { params -> AddToWatchlistPresenter(
-        params.component1() as IAddToWatchlistContract.View,
+    factory { params -> EditWatchlistPresenter(
+        params.component1() as EditWatchlistContract.View,
         get()
-    ) as IAddToWatchlistContract.Presenter }
+    ) as EditWatchlistContract.Presenter }
 
     viewModel { params -> PostsViewModel(get(), params.component1() as IMenuClickListener) }
 }

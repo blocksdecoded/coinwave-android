@@ -17,11 +17,11 @@ import android.view.WindowManager
 import com.blocksdecoded.coinwave.BuildConfig
 import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.util.CryptoRateUtil
-import com.blocksdecoded.coinwave.presentation.addtowatchlist.AddToWatchlistActivity
+import com.blocksdecoded.coinwave.presentation.editwatchlist.EditWatchlistActivity
 import com.blocksdecoded.coinwave.presentation.coins.CoinsFragment
 import com.blocksdecoded.coinwave.presentation.pickfavorite.PickFavoriteActivity
 import com.blocksdecoded.coinwave.presentation.posts.PostsFragment
-import com.blocksdecoded.coinwave.presentation.watchlist.WatchListFragment
+import com.blocksdecoded.coinwave.presentation.watchlist.WatchlistFragment
 import com.blocksdecoded.coinwave.presentation.widgets.PagerAdapter
 import com.blocksdecoded.rateus.widget.IRateUsDialog
 import com.blocksdecoded.rateus.widget.IRateUsListener
@@ -162,7 +162,7 @@ class MainActivity : AppCompatActivity(),
 
         initViewPager(arrayListOf(
             CoinsFragment.newInstance(),
-            WatchListFragment.newInstance(),
+            WatchlistFragment.newInstance(),
             PostsFragment.newInstance())
         )
     }
@@ -241,7 +241,7 @@ class MainActivity : AppCompatActivity(),
 
     override fun onClick(v: View?) {
         when (v) {
-            drawer_add_watchlist -> drawerItemClick { AddToWatchlistActivity.start(this) }
+            drawer_add_watchlist -> drawerItemClick { EditWatchlistActivity.start(this) }
             drawer_favorite -> drawerItemClick { PickFavoriteActivity.start(this) }
             drawer_contact_us -> drawerItemClick { ShareUtils.contactUs(this) }
             drawer_rate_us -> drawerItemClick(::onRateClick)

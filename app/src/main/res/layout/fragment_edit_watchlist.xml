@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/fragment_add_to_watchlist_app_bar"
+        android:id="@+id/edit_watchlist_app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:elevation="0dp"
@@ -30,7 +30,7 @@
 
             <TextView
                 android:theme="@style/RegularTextStyle"
-                android:id="@+id/fragment_coin_list_title"
+                android:id="@+id/edit_watchlist_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
@@ -50,7 +50,7 @@
         android:layout_width="match_parent"/>
     
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/add_to_watchlist_recycler"
+        android:id="@+id/edit_watchlist_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="8dp"

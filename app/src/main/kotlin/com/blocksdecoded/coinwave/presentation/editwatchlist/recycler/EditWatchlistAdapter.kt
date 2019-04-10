@@ -1,4 +1,4 @@
-package com.blocksdecoded.coinwave.presentation.addtowatchlist.recycler
+package com.blocksdecoded.coinwave.presentation.editwatchlist.recycler
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -11,18 +11,18 @@ import com.blocksdecoded.utils.extensions.inflate
  * Created by askar on 2/12/19
  * with Android Studio
  */
-class AddToWatchlistAdapter(
+class EditWatchlistAdapter(
     private val coins: ArrayList<CoinEntity> = arrayListOf(),
-    private val listener: WatchlistViewHolder.WatchlistVHClickListener
+    private val listener: EditWatchlistVH.WatchlistVHClickListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
-            WatchlistViewHolder(parent.inflate(R.layout.item_watchlist)!!, listener)
+            EditWatchlistVH(parent.inflate(R.layout.item_watchlist)!!, listener)
 
     override fun getItemCount(): Int = coins.size
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is WatchlistViewHolder -> holder.onBind(coins[position])
+            is EditWatchlistVH -> holder.onBind(coins[position])
         }
     }
 

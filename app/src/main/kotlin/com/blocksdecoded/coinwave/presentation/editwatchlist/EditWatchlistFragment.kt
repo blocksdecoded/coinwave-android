@@ -1,4 +1,4 @@
-package com.blocksdecoded.coinwave.presentation.addtowatchlist
+package com.blocksdecoded.coinwave.presentation.editwatchlist
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
@@ -7,26 +7,26 @@ import butterknife.BindView
 import butterknife.OnClick
 import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.data.model.CoinEntity
-import com.blocksdecoded.coinwave.presentation.addtowatchlist.recycler.AddToWatchlistAdapter
-import com.blocksdecoded.coinwave.presentation.addtowatchlist.recycler.WatchlistViewHolder
+import com.blocksdecoded.coinwave.presentation.editwatchlist.recycler.EditWatchlistAdapter
+import com.blocksdecoded.coinwave.presentation.editwatchlist.recycler.EditWatchlistVH
 import com.blocksdecoded.core.mvp.BaseMvpFragment
 import com.blocksdecoded.utils.extensions.hide
 import com.blocksdecoded.utils.extensions.visible
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
-class AddToWatchlistFragment : BaseMvpFragment<IAddToWatchlistContract.Presenter>(),
-        IAddToWatchlistContract.View,
-        WatchlistViewHolder.WatchlistVHClickListener {
+class EditWatchlistFragment : BaseMvpFragment<EditWatchlistContract.Presenter>(),
+        EditWatchlistContract.View,
+        EditWatchlistVH.WatchlistVHClickListener {
 
-    override val presenter: IAddToWatchlistContract.Presenter by inject { parametersOf(this@AddToWatchlistFragment) }
-    override val layoutId: Int = R.layout.fragment_add_to_watchlist
+    override val presenter: EditWatchlistContract.Presenter by inject { parametersOf(this@EditWatchlistFragment) }
+    override val layoutId: Int = R.layout.fragment_edit_watchlist
 
-    private var mAdapter: AddToWatchlistAdapter? = null
+    private var mAdapter: EditWatchlistAdapter? = null
 
     @BindView(R.id.connection_error_container)
     lateinit var mErrorContainer: View
-    @BindView(R.id.add_to_watchlist_recycler)
+    @BindView(R.id.edit_watchlist_recycler)
     lateinit var mRecycler: RecyclerView
 
     @OnClick(
@@ -42,7 +42,7 @@ class AddToWatchlistFragment : BaseMvpFragment<IAddToWatchlistContract.Presenter
     }
 
     override fun initView(rootView: View) {
-        mAdapter = AddToWatchlistAdapter(listener = this)
+        mAdapter = EditWatchlistAdapter(listener = this)
 
         mRecycler.setHasFixedSize(true)
         mRecycler.layoutManager = StaggeredGridLayoutManager(2, RecyclerView.VERTICAL)
@@ -84,6 +84,6 @@ class AddToWatchlistFragment : BaseMvpFragment<IAddToWatchlistContract.Presenter
     //endregion
 
     companion object {
-        fun newInstance() = AddToWatchlistFragment()
+        fun newInstance() = EditWatchlistFragment()
     }
 }

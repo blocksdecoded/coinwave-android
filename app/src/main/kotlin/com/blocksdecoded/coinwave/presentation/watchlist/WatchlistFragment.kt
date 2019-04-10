@@ -19,7 +19,7 @@ import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.util.format
 import com.blocksdecoded.coinwave.util.init
 import com.blocksdecoded.coinwave.util.loadChartData
-import com.blocksdecoded.coinwave.presentation.addtowatchlist.AddToWatchlistActivity
+import com.blocksdecoded.coinwave.presentation.editwatchlist.EditWatchlistActivity
 import com.blocksdecoded.coinwave.presentation.coininfo.CoinInfoActivity
 import com.blocksdecoded.coinwave.presentation.pickfavorite.PickFavoriteActivity
 import com.blocksdecoded.coinwave.presentation.sort.CoinsCache
@@ -34,11 +34,11 @@ import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 import java.util.*
 
-open class WatchListFragment : BaseMvpFragment<IWatchListContract.Presenter>(),
-    IWatchListContract.View,
+open class WatchlistFragment : BaseMvpFragment<IWatchlistContract.Presenter>(),
+    IWatchlistContract.View,
     WatchlistViewHolder.CurrencyVHClickListener {
 
-    override val presenter: IWatchListContract.Presenter by inject { parametersOf(this@WatchListFragment, context) }
+    override val presenter: IWatchlistContract.Presenter by inject { parametersOf(this@WatchlistFragment, context) }
     override val layoutId: Int = R.layout.fragment_watchlist
 
     @BindView(R.id.fragment_watchlist_header)
@@ -202,7 +202,7 @@ open class WatchListFragment : BaseMvpFragment<IWatchListContract.Presenter>(),
     }
 
     override fun openAddToWatchlist() {
-        activity?.let { AddToWatchlistActivity.start(it) }
+        activity?.let { EditWatchlistActivity.start(it) }
     }
 
     override fun showCoins(coins: List<CoinEntity>) {
@@ -288,6 +288,6 @@ open class WatchListFragment : BaseMvpFragment<IWatchListContract.Presenter>(),
     //endregion
 
     companion object {
-        fun newInstance(): WatchListFragment = WatchListFragment()
+        fun newInstance(): WatchlistFragment = WatchlistFragment()
     }
 }

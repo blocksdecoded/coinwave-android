@@ -1,4 +1,4 @@
-package com.blocksdecoded.coinwave.presentation.addtowatchlist.recycler
+package com.blocksdecoded.coinwave.presentation.editwatchlist.recycler
 
 import android.view.View
 import android.widget.ImageView
@@ -12,7 +12,7 @@ import com.blocksdecoded.coinwave.util.loadCoinIcon
  * Created by askar on 2/12/19
  * with Android Studio
  */
-class WatchlistViewHolder(
+class EditWatchlistVH(
     view: View,
     private val mListener: WatchlistVHClickListener
 ) : RecyclerView.ViewHolder(view) {

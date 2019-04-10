@@ -11,12 +11,12 @@ import com.blocksdecoded.core.mvp.BaseMvpPresenter
 import com.blocksdecoded.utils.coroutine.launchSilent
 import com.blocksdecoded.utils.rx.uiSubscribe
 
-class WatchListPresenter(
-    override var view: IWatchListContract.View?,
+class WatchlistPresenter(
+    override var view: IWatchlistContract.View?,
     private val mMenuListener: IMenuClickListener,
     private val mWatchlistUseCases: IWatchlistUseCases,
     private val mFavoriteChartUseVariant: IFavoriteChartUseVariant
-) : BaseMvpPresenter<IWatchListContract.View>(), IWatchListContract.Presenter {
+) : BaseMvpPresenter<IWatchlistContract.View>(), IWatchlistContract.Presenter {
 
     private val mCoinsCache = CoinsCache()
 

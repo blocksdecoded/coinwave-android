@@ -1,4 +1,4 @@
-package com.blocksdecoded.coinwave.presentation.addtowatchlist
+package com.blocksdecoded.coinwave.presentation.editwatchlist
 
 import com.blocksdecoded.coinwave.data.model.CoinEntity
 import com.blocksdecoded.coinwave.domain.usecases.coins.ICoinsUseCases
@@ -7,10 +7,10 @@ import com.blocksdecoded.utils.coroutine.launchSilent
 import com.blocksdecoded.utils.extensions.isValidIndex
 import com.blocksdecoded.utils.rx.uiSubscribe
 
-class AddToWatchlistPresenter(
-    override var view: IAddToWatchlistContract.View?,
+class EditWatchlistPresenter(
+    override var view: EditWatchlistContract.View?,
     private val mCoinsUseCases: ICoinsUseCases
-) : BaseMvpPresenter<IAddToWatchlistContract.View>(), IAddToWatchlistContract.Presenter {
+) : BaseMvpPresenter<EditWatchlistContract.View>(), EditWatchlistContract.Presenter {
 
     private var cached = arrayListOf<CoinEntity>()
 

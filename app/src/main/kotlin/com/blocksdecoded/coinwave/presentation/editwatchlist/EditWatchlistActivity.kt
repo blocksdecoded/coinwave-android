@@ -1,4 +1,4 @@
-package com.blocksdecoded.coinwave.presentation.addtowatchlist
+package com.blocksdecoded.coinwave.presentation.editwatchlist
 
 import android.app.Activity
 import android.content.Context
@@ -12,7 +12,7 @@ import com.blocksdecoded.utils.extensions.outRightTransition
  * Created by askar on 2/11/19
  * with Android Studio
  */
-class AddToWatchlistActivity : SwipeableActivity() {
+class EditWatchlistActivity : SwipeableActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,7 +20,7 @@ class AddToWatchlistActivity : SwipeableActivity() {
         if (savedInstanceState == null) {
             supportFragmentManager
                     .beginTransaction()
-                    .add(android.R.id.content, AddToWatchlistFragment.newInstance())
+                    .add(android.R.id.content, EditWatchlistFragment.newInstance())
                     .commit()
         }
     }
@@ -44,6 +44,6 @@ class AddToWatchlistActivity : SwipeableActivity() {
             }
         }
 
-        fun intent(context: Context): Intent = Intent(context, AddToWatchlistActivity::class.java)
+        fun intent(context: Context): Intent = Intent(context, EditWatchlistActivity::class.java)
     }
 }
