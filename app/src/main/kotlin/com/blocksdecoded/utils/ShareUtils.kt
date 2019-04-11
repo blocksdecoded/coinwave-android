@@ -7,7 +7,7 @@ import com.blocksdecoded.coinwave.BuildConfig
 import com.blocksdecoded.coinwave.R
 
 object ShareUtils {
-    private const val CONTACT_MAILS = BuildConfig.CONTACT_EMAIL
+    private val CONTACT_MAILS = arrayOf(BuildConfig.CONTACT_EMAIL)
     private const val SHARE_LINK = BuildConfig.SHARE_LINK
 
     fun shareText(activity: Activity, text: String) {
