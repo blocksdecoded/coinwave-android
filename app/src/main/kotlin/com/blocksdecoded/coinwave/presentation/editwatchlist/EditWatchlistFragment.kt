@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import butterknife.BindView
 import butterknife.OnClick
 import com.blocksdecoded.coinwave.R
-import com.blocksdecoded.coinwave.data.model.CoinEntity
+import com.blocksdecoded.coinwave.data.model.coin.CoinEntity
 import com.blocksdecoded.coinwave.presentation.editwatchlist.recycler.EditWatchlistAdapter
 import com.blocksdecoded.coinwave.presentation.editwatchlist.recycler.EditWatchlistVH
 import com.blocksdecoded.core.mvp.BaseMvpFragment

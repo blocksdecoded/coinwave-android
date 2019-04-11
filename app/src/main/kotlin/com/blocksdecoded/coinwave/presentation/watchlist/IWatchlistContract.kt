@@ -1,7 +1,7 @@
 package com.blocksdecoded.coinwave.presentation.watchlist
 
-import com.blocksdecoded.coinwave.data.model.ChartData
-import com.blocksdecoded.coinwave.data.model.CoinEntity
+import com.blocksdecoded.coinwave.data.model.chart.ChartData
+import com.blocksdecoded.coinwave.data.model.coin.CoinEntity
 import com.blocksdecoded.coinwave.presentation.sort.CoinsCache
 import com.blocksdecoded.coinwave.presentation.sort.ViewSortEnum
 import com.blocksdecoded.core.mvp.BaseMvpContract

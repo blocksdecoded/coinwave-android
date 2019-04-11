@@ -2,7 +2,11 @@ package com.blocksdecoded.coinwave.data.coins
 
 import com.blocksdecoded.coinwave.data.coins.local.ICoinsLocalStorage
 import com.blocksdecoded.coinwave.data.coins.remote.ICoinClient
-import com.blocksdecoded.coinwave.data.model.*
+import com.blocksdecoded.coinwave.data.model.chart.ChartData
+import com.blocksdecoded.coinwave.data.model.chart.ChartPeriodEnum
+import com.blocksdecoded.coinwave.data.model.coin.CoinEntity
+import com.blocksdecoded.coinwave.data.model.coin.CoinsDataResponse
+import com.blocksdecoded.coinwave.data.model.coin.CoinsResult
 import com.blocksdecoded.coinwave.data.watchlist.IWatchlistStorage
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -56,7 +60,12 @@ class CoinsRepository(
 
     private fun setCache(data: CoinsDataResponse) {
         mCached = data
-        coinsUpdateSubject.onNext(CoinsResult(data.coins, data.updatedAt ?: Date()))
+        coinsUpdateSubject.onNext(
+            CoinsResult(
+                data.coins,
+                data.updatedAt ?: Date()
+            )
+        )
     }
 
     private fun markSaved(coins: List<CoinEntity>) {

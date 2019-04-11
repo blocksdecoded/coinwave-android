@@ -1,6 +1,6 @@
 package com.blocksdecoded.coinwave.presentation.coins
 
-import com.blocksdecoded.coinwave.data.model.CoinsResult
+import com.blocksdecoded.coinwave.data.model.coin.CoinsResult
 import com.blocksdecoded.coinwave.domain.usecases.coins.ICoinsUseCases
 import com.blocksdecoded.coinwave.presentation.main.IMenuClickListener
 import com.blocksdecoded.coinwave.presentation.sort.CoinsCache

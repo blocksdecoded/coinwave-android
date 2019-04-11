@@ -1,7 +1,7 @@
 package com.blocksdecoded.coinwave.domain.usecases.watchlist
 
 import com.blocksdecoded.coinwave.data.coins.ICoinsRepository
-import com.blocksdecoded.coinwave.data.model.CoinsResult
+import com.blocksdecoded.coinwave.data.model.coin.CoinsResult
 import com.blocksdecoded.coinwave.MockData
 import io.reactivex.subjects.PublishSubject
 import org.junit.Test

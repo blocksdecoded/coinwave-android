@@ -1,6 +1,6 @@
 package com.blocksdecoded.coinwave.domain.usecases.chart
 
-import com.blocksdecoded.coinwave.data.model.ChartData
+import com.blocksdecoded.coinwave.data.model.chart.ChartData
 import io.reactivex.Single
 
 interface IChartsUseCases {

@@ -1,6 +1,6 @@
 package com.blocksdecoded.coinwave.presentation.sort
 
-import com.blocksdecoded.coinwave.data.model.CoinEntity
+import com.blocksdecoded.coinwave.data.model.coin.CoinEntity
 import com.blocksdecoded.coinwave.presentation.sort.CoinsCache.CoinSortEnum.*
 import com.blocksdecoded.coinwave.presentation.sort.ViewSortEnum.*
 import com.blocksdecoded.coinwave.util.addSortedByRank

@@ -1,7 +1,7 @@
 package com.blocksdecoded.coinwave.presentation.coins.recycler
 
 import androidx.recyclerview.widget.DiffUtil
-import com.blocksdecoded.coinwave.data.model.CoinEntity
+import com.blocksdecoded.coinwave.data.model.coin.CoinEntity
 
 class CoinDiffUtil(
     private val oldCoins: List<CoinEntity>,

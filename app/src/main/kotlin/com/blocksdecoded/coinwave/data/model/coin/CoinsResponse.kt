@@ -1,4 +1,4 @@
-package com.blocksdecoded.coinwave.data.model
+package com.blocksdecoded.coinwave.data.model.coin
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName

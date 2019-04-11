@@ -1,4 +1,4 @@
-package com.blocksdecoded.coinwave.data.model
+package com.blocksdecoded.coinwave.data.model.coin
 
 import java.util.*
 

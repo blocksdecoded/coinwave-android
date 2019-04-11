@@ -1,7 +1,7 @@
 package com.blocksdecoded.coinwave.domain.variant.favoritechart
 
-import com.blocksdecoded.coinwave.data.model.ChartData
-import com.blocksdecoded.coinwave.data.model.CoinEntity
+import com.blocksdecoded.coinwave.data.model.chart.ChartData
+import com.blocksdecoded.coinwave.data.model.coin.CoinEntity
 import io.reactivex.Observable
 
 /**

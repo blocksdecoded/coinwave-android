@@ -14,8 +14,8 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.ChartTouchListener
 import com.blocksdecoded.coinwave.R
-import com.blocksdecoded.coinwave.data.model.ChartData
-import com.blocksdecoded.coinwave.data.model.CoinEntity
+import com.blocksdecoded.coinwave.data.model.chart.ChartData
+import com.blocksdecoded.coinwave.data.model.coin.CoinEntity
 import com.blocksdecoded.coinwave.util.format
 import com.blocksdecoded.coinwave.util.init
 import com.blocksdecoded.coinwave.util.loadChartData

@@ -1,6 +1,6 @@
 package com.blocksdecoded.coinwave.presentation.coininfo
 
-import com.blocksdecoded.coinwave.data.model.CoinEntity
+import com.blocksdecoded.coinwave.data.model.coin.CoinEntity
 import com.blocksdecoded.coinwave.domain.usecases.chart.IChartsUseCases
 import com.blocksdecoded.coinwave.domain.usecases.chart.IChartsUseCases.ChartPeriod.*
 import com.blocksdecoded.coinwave.domain.usecases.coins.ICoinsUseCases

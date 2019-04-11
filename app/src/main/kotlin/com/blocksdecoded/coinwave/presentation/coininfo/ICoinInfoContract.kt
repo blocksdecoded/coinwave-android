@@ -1,7 +1,7 @@
 package com.blocksdecoded.coinwave.presentation.coininfo
 
-import com.blocksdecoded.coinwave.data.model.ChartData
-import com.blocksdecoded.coinwave.data.model.CoinEntity
+import com.blocksdecoded.coinwave.data.model.chart.ChartData
+import com.blocksdecoded.coinwave.data.model.coin.CoinEntity
 import com.blocksdecoded.core.mvp.BaseMvpContract
 
 interface ICoinInfoContract {

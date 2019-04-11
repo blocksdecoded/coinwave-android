@@ -11,8 +11,8 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.blocksdecoded.coinwave.R
-import com.blocksdecoded.coinwave.data.model.ChartData
-import com.blocksdecoded.coinwave.data.model.CoinEntity
+import com.blocksdecoded.coinwave.data.model.chart.ChartData
+import com.blocksdecoded.coinwave.data.model.coin.CoinEntity
 import com.blocksdecoded.coinwave.presentation.widgets.chart.ChartListener
 import com.blocksdecoded.utils.extensions.getColorRes
 import com.blocksdecoded.utils.extensions.isValidIndex

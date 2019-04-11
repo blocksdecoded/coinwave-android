@@ -1,6 +1,6 @@
 package com.blocksdecoded.coinwave.presentation.editwatchlist
 
-import com.blocksdecoded.coinwave.data.model.CoinEntity
+import com.blocksdecoded.coinwave.data.model.coin.CoinEntity
 import com.blocksdecoded.coinwave.domain.usecases.coins.ICoinsUseCases
 import com.blocksdecoded.core.mvp.BaseMvpPresenter
 import com.blocksdecoded.utils.coroutine.launchSilent

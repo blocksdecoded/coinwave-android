@@ -1,8 +1,8 @@
 package com.blocksdecoded.coinwave.data.coins.remote
 
-import com.blocksdecoded.coinwave.data.model.ChartPeriodEnum
+import com.blocksdecoded.coinwave.data.model.chart.ChartPeriodEnum
 import com.blocksdecoded.coinwave.data.coins.remote.model.HistoryResponse
-import com.blocksdecoded.coinwave.data.model.CoinsResponse
+import com.blocksdecoded.coinwave.data.model.coin.CoinsResponse
 import com.blocksdecoded.core.network.CoreApiClient
 import com.blocksdecoded.utils.logE
 import io.reactivex.Single

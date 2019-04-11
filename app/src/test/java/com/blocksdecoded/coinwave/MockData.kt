@@ -1,7 +1,7 @@
 package com.blocksdecoded.coinwave
 
-import com.blocksdecoded.coinwave.data.model.CoinEntity
-import com.blocksdecoded.coinwave.data.model.CoinsResult
+import com.blocksdecoded.coinwave.data.model.coin.CoinEntity
+import com.blocksdecoded.coinwave.data.model.coin.CoinsResult
 import com.blocksdecoded.coinwave.data.post.model.PublisherPost
 import java.util.*
 

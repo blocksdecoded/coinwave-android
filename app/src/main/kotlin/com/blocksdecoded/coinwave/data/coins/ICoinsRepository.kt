@@ -1,6 +1,10 @@
 package com.blocksdecoded.coinwave.data.coins
 
-import com.blocksdecoded.coinwave.data.model.*
+import com.blocksdecoded.coinwave.data.model.chart.ChartData
+import com.blocksdecoded.coinwave.data.model.chart.ChartPeriodEnum
+import com.blocksdecoded.coinwave.data.model.coin.CoinEntity
+import com.blocksdecoded.coinwave.data.model.coin.CoinsDataResponse
+import com.blocksdecoded.coinwave.data.model.coin.CoinsResult
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.subjects.PublishSubject

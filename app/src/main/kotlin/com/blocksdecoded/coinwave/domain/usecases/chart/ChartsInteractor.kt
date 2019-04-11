@@ -3,13 +3,13 @@ package com.blocksdecoded.coinwave.domain.usecases.chart
 import com.blocksdecoded.coinwave.data.Exceptions
 import com.blocksdecoded.coinwave.data.coins.chart.IChartsStorage
 import com.blocksdecoded.coinwave.data.coins.ICoinsRepository
-import com.blocksdecoded.coinwave.data.model.ChartData
+import com.blocksdecoded.coinwave.data.model.chart.ChartData
 import com.blocksdecoded.coinwave.domain.usecases.chart.IChartsUseCases.ChartPeriod
 import com.blocksdecoded.coinwave.domain.usecases.chart.IChartsUseCases.ChartPeriod.*
 import io.reactivex.Single
 import kotlin.collections.HashMap
 
-import com.blocksdecoded.coinwave.data.model.ChartPeriodEnum as RequestChartPeriod
+import com.blocksdecoded.coinwave.data.model.chart.ChartPeriodEnum as RequestChartPeriod
 
 class ChartsInteractor(
     private val mCoinsRepository: ICoinsRepository,

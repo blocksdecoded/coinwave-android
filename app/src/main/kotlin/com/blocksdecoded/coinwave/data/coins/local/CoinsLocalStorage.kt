@@ -1,6 +1,6 @@
 package com.blocksdecoded.coinwave.data.coins.local
 
-import com.blocksdecoded.coinwave.data.model.CoinsDataResponse
+import com.blocksdecoded.coinwave.data.model.coin.CoinsDataResponse
 import com.blocksdecoded.utils.logE
 import com.blocksdecoded.utils.shared.ISharedStorage
 import com.google.gson.Gson
