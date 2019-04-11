@@ -19,13 +19,15 @@ fun Fragment.openUrl(url: String) {
 }
 
 fun Context.openUrl(url: String) {
-    CustomTabsIntent
-        .Builder()
-        .setToolbarColor(Color.WHITE)
-        .setStartAnimations(this, R.anim.slide_in_right, R.anim.slide_out_left)
-        .setExitAnimations(this, R.anim.slide_in_left, R.anim.slide_out_right)
-        .build()
-        .launchUrl(this, Uri.parse(url))
+    if (url.isNotEmpty()) {
+        CustomTabsIntent
+            .Builder()
+            .setToolbarColor(Color.WHITE)
+            .setStartAnimations(this, R.anim.slide_in_right, R.anim.slide_out_left)
+            .setExitAnimations(this, R.anim.slide_in_left, R.anim.slide_out_right)
+            .build()
+            .launchUrl(this, Uri.parse(url))
+    }
 }
 
 object CustomTabsUtil {
