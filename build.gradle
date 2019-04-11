@@ -6,12 +6,6 @@ buildscript {
         kotlin_version = '1.3.21'
         support_library_version = '1.0.0'
         constraint_version = '1.1.2'
-        room_version = '1.1.0'
-        volley_version = '1.1.0'
-        retrofit_version = '2.4.0'
-        glide_version = '4.8.0'
-        hockey_version = '5.1.0'
-        koin_version = '1.0.2'
     }
 
     repositories {

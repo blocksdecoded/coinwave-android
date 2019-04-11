@@ -117,7 +117,5 @@
         <item name="android:textColor">@color/light_text</item>
         <item name="android:textSize">11.5sp</item>
     </style>
-    
-    
 
 </resources>
