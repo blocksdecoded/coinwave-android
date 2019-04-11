@@ -23,5 +23,6 @@ class FavoriteInteractorTest {
         `when`(sharedStorage.getPreference(anyString(), anyInt())).thenReturn(FAVORITE_ID)
 
         assertEquals(FAVORITE_ID, interactor.getId())
+        verify(sharedStorage, atLeastOnce()).getPreference(anyString(), anyInt())
     }
 }
