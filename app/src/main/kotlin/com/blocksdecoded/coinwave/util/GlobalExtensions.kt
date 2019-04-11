@@ -6,6 +6,7 @@ import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import android.widget.TextView
+import com.blocksdecoded.coinwave.GlideApp
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
@@ -16,7 +17,6 @@ import com.blocksdecoded.coinwave.data.model.coin.CoinEntity
 import com.blocksdecoded.coinwave.presentation.widgets.chart.ChartListener
 import com.blocksdecoded.utils.extensions.getColorRes
 import com.blocksdecoded.utils.extensions.isValidIndex
-import com.blocksdecoded.utils.glide.GlideApp
 import com.blocksdecoded.utils.glide.SvgSoftwareLayerSetter
 import com.blocksdecoded.utils.logE
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions

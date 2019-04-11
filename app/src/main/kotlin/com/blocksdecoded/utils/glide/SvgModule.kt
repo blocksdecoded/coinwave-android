@@ -6,11 +6,12 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.Registry
 import com.bumptech.glide.annotation.GlideModule
 import com.bumptech.glide.module.AppGlideModule
+import com.bumptech.glide.module.LibraryGlideModule
 import com.caverock.androidsvg.SVG
 import java.io.InputStream
 
 @GlideModule
-class SvgGlideModule : AppGlideModule() {
+class SvgGlideModule : LibraryGlideModule() {
     override fun registerComponents(
         context: Context,
         glide: Glide,
@@ -19,7 +20,4 @@ class SvgGlideModule : AppGlideModule() {
         registry.register(SVG::class.java, PictureDrawable::class.java, SvgDrawableTranscoder())
                 .append(InputStream::class.java, SVG::class.java, SvgDecoder())
     }
-
-    // Disable manifest parsing to avoid adding similar modules twice.
-    override fun isManifestParsingEnabled(): Boolean = false
 }
