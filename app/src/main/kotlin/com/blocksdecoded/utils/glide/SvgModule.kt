@@ -9,11 +9,8 @@ import com.bumptech.glide.module.AppGlideModule
 import com.caverock.androidsvg.SVG
 import java.io.InputStream
 
-/**
- * Module for the SVG sample app.
- */
 @GlideModule
-class SvgModule : AppGlideModule() {
+class SvgGlideModule : AppGlideModule() {
     override fun registerComponents(
         context: Context,
         glide: Glide,
@@ -24,7 +21,5 @@ class SvgModule : AppGlideModule() {
     }
 
     // Disable manifest parsing to avoid adding similar modules twice.
-    override fun isManifestParsingEnabled(): Boolean {
-        return false
-    }
+    override fun isManifestParsingEnabled(): Boolean = false
 }

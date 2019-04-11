@@ -7,10 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
-import com.bumptech.glide.Glide
 import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.data.post.model.PublisherPost
 import com.blocksdecoded.coinwave.presentation.posts.util.setRandomBg
+import com.blocksdecoded.coinwave.util.loadImage
 
 /**
  * Created by askar on 11/19/18
@@ -46,10 +46,7 @@ class PostViewHolder(
         mTitle.text = post.title
 
         post.image?.featured?.let {
-            Glide.with(mImage.context)
-                    .load(it)
-                    .thumbnail(0.01f)
-                    .into(mImage)
+            mImage.loadImage(it)
         }
     }
 

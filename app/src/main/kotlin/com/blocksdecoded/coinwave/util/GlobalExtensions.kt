@@ -20,6 +20,7 @@ import com.blocksdecoded.utils.glide.GlideApp
 import com.blocksdecoded.utils.glide.SvgSoftwareLayerSetter
 import com.blocksdecoded.utils.logE
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 
 fun List<CoinEntity>.findCurrency(coinEntity: CoinEntity, body: ((index: Int) -> Unit)? = null): Int =
         this.indexOfFirst { it.id == coinEntity.id }.also {
@@ -103,4 +104,12 @@ fun ImageView.loadCoinIcon(coinEntity: CoinEntity) = try {
         .into(this)
 } catch (e: Exception) {
     logE(e)
+}
+
+fun ImageView.loadImage(url: String) {
+    GlideApp.with(this)
+        .load(url)
+        .transition(withCrossFade())
+        .thumbnail(0.02f)
+        .into(this)
 }
