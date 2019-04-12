@@ -1,1 +1,1 @@
-### CoinWave DApp
+# CoinWave (Android)
