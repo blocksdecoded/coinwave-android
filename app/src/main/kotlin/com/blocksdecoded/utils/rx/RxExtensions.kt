@@ -5,13 +5,13 @@ import io.reactivex.Single
 import io.reactivex.disposables.Disposable
 
 fun <T> Observable<T>.observeUi() = this.subscribeOn(RxSchedulers.io)
-    .observeOn(RxSchedulers.mainThread)
+    .observeOn(RxSchedulers.main)
 
 fun <T> Observable<T>.observeIo() = this.subscribeOn(RxSchedulers.io)
     .observeOn(RxSchedulers.io)
 
 fun <T> Single<T>.observeUi(): Single<T> = this.subscribeOn(RxSchedulers.io)
-    .observeOn(RxSchedulers.mainThread)
+    .observeOn(RxSchedulers.main)
 
 fun <T> Single<T>.observeIo(): Single<T> = this.subscribeOn(RxSchedulers.io)
     .observeOn(RxSchedulers.io)

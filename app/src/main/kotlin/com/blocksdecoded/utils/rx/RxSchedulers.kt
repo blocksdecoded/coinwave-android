@@ -6,6 +6,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 
 object RxSchedulers {
     val io: Scheduler = Schedulers.io()
-    val mainThread = AndroidSchedulers.mainThread()
+    val main = AndroidSchedulers.mainThread()
     val computation = Schedulers.computation()
 }

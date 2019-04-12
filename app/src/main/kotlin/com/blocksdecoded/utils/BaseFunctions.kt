@@ -8,21 +8,6 @@ import android.view.View
 import android.widget.Toast
 import com.blocksdecoded.utils.extensions.config
 
-/**
- * Created by Tameki on 2/5/18.
- */
-
-fun showSnack(view: View, text: String) {
-    Snackbar.make(
-            view,
-            text,
-            Snackbar.LENGTH_SHORT
-    ).config(view.context).show()
-}
-
-fun showFeatureNotAvailable(context: Context?, featureName: String = "This") =
-        showToast(context, "$featureName feature will be available soon...", Toast.LENGTH_SHORT)
-
 fun showShortToast(context: Context?, text: String) = showToast(context, text, Toast.LENGTH_SHORT)
 
 fun showLongToast(context: Context?, text: String) = showToast(context, text, Toast.LENGTH_LONG)
