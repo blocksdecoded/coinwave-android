@@ -4,7 +4,7 @@ package com.blocksdecoded.coinwave.data.watchlist
 interface IWatchlistStorage {
     fun addId(id: Int): Boolean
 
-    fun deleteId(id: Int): Boolean
+    fun removeId(id: Int): Boolean
 
     fun getAll(): List<Int>
 }

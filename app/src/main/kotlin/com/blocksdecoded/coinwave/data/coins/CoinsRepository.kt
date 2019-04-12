@@ -16,8 +16,8 @@ import java.util.*
 // Created by askar on 7/19/18.
 class CoinsRepository(
     private val mCoinsClient: ICoinClient,
-    private val mWatchlistSource: IWatchlistStorage,
-    private val mLocalSource: ICoinsLocalStorage
+    private val mLocalSource: ICoinsLocalStorage,
+    private val mWatchlistSource: IWatchlistStorage
 ) : ICoinsRepository {
     private var mCached: CoinsDataResponse? = null
         set(value) {
@@ -44,7 +44,8 @@ class CoinsRepository(
     else
         mLocalSource.getAllCoins()
 
-    private fun remoteCoinsFetch(force: Boolean) = if (isDirty() || force) mCoinsClient.getCoins()
+    private fun remoteCoinsFetch(force: Boolean) = if (isDirty() || force)
+        mCoinsClient.getCoins()
             .toObservable()
             .doOnNext {
                 it.data.updatedAt = Date()
@@ -52,7 +53,9 @@ class CoinsRepository(
                 setCache(it.data)
             }
             .doOnError { mCached?.let { setCache(it) } }
-            .map { it.data } else Observable.empty()
+            .map { it.data }
+    else
+        Observable.empty()
 
     private fun fetchCoins(force: Boolean) = Observable.concat(localCoinsFetch(), remoteCoinsFetch(force))
 
@@ -76,7 +79,7 @@ class CoinsRepository(
     }
 
     private fun findCoin(id: Int, onFind: (coin: CoinEntity) -> Unit): Boolean =
-            mCached?.coins?.first { it.id == id }?.let {
+            mCached?.coins?.firstOrNull { it.id == id }?.let {
                 onFind.invoke(it)
                 true
             } ?: false
@@ -93,7 +96,7 @@ class CoinsRepository(
     }
 
     override fun removeCoin(id: Int): Boolean = findCoin(id) {
-        mWatchlistSource.deleteId(id)
+        mWatchlistSource.removeId(id)
         it.isSaved = false
     }
 

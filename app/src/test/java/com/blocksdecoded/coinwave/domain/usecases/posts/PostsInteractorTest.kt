@@ -47,7 +47,7 @@ class PostsInteractorTest {
     }
 
     @Test
-    fun `Fetch post from repository`() {
+    fun `Get post from repository`() {
         `when`(postStorage.getPost(1)).thenReturn(PublisherPost(1, ""))
 
         interactor.getPosts()

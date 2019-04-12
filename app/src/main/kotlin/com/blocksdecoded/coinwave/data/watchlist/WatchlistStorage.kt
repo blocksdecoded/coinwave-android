@@ -50,7 +50,7 @@ class WatchlistStorage(
         false
     }
 
-    override fun deleteId(id: Int): Boolean = if (mSavedCache.contains(id)) {
+    override fun removeId(id: Int): Boolean = if (mSavedCache.contains(id)) {
         mSavedCache.remove(id)
         save(mSavedCache)
         true

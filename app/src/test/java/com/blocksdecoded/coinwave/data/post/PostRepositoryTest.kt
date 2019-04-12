@@ -14,7 +14,7 @@ class PostRepositoryTest {
     private val repository = PostRepository(null, postClient)
 
     @Test
-    fun `Fetch post by id after posts request`() {
+    fun `Get post by id after posts request`() {
         Mockito.`when`(postClient.getPosts("")).thenReturn(Single.just(PostResponse(MockData.postsResponse)))
 
         repository.getPosts("")
