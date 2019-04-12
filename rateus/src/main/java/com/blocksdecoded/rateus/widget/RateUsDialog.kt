@@ -85,7 +85,7 @@ internal class RateUsDialog(
     private fun showMessage(text: String) = try {
         Toast.makeText(context, text, Toast.LENGTH_LONG).show()
     } catch (e: Exception) {
-        Log.d("ololo", "Exception " + e.message)
+        e.printStackTrace()
     }
 
     private fun loadPreferences() {
@@ -110,12 +110,12 @@ internal class RateUsDialog(
 
     private fun setStartsColors() {
         try {
-            if (mRatingBar?.progressDrawable is LayerDrawable) {
-                val stars = mRatingBar?.progressDrawable as LayerDrawable
-                setRatingStarColor(stars.getDrawable(0), R.color.rating_inactive)
+            val progressDrawable = mRatingBar?.progressDrawable
+            if (progressDrawable is LayerDrawable) {
+                setRatingStarColor(progressDrawable.getDrawable(0), R.color.rating_inactive)
             }
         } catch (e: Exception) {
-            Log.e("ololo", e.message, e)
+            e.printStackTrace()
         }
     }
 
