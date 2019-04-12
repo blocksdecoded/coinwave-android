@@ -46,7 +46,7 @@ class ChartsInteractor(
                 Single.error(Exceptions.EmptyCache("Currency not found"))
             }
         } else {
-            Single.just(cachedChart[period.toString()]!!)
+            Single.just(cachedChart[period.toString()])
         }
     }
 }

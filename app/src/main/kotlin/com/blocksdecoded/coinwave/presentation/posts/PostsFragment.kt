@@ -58,7 +58,10 @@ open class PostsFragment :
         initRecycler()
 
         context?.also {
-            mMenuBtn.setConstraintTopMargin(it.statusBarHeight + (mMenuBtn.layoutParams as ConstraintLayout.LayoutParams).topMargin)
+            val menuLayoutParams = mMenuBtn.layoutParams
+            if (menuLayoutParams is ConstraintLayout.LayoutParams) {
+                mMenuBtn.setConstraintTopMargin(it.statusBarHeight + menuLayoutParams.topMargin)
+            }
         }
 
         mSwipeRefresh.setOnRefreshListener {

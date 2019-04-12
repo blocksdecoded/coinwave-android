@@ -33,8 +33,9 @@ class SvgSoftwareLayerSetter : RequestListener<PictureDrawable> {
         dataSource: DataSource,
         isFirstResource: Boolean
     ): Boolean {
-        val view = (target as ImageViewTarget<*>).view
-        view.setLayerType(ImageView.LAYER_TYPE_SOFTWARE, null)
+        if (target is ImageViewTarget<*>) {
+            target.view.setLayerType(ImageView.LAYER_TYPE_SOFTWARE, null)
+        }
         return false
     }
 }
