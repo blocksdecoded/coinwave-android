@@ -17,8 +17,6 @@
 package com.blocksdecoded.coinwave.presentation.post.widgets;
 
 import android.content.Context;
-import android.os.Parcel;
-import android.os.Parcelable;
 import androidx.core.view.MotionEventCompat;
 import androidx.core.view.NestedScrollingChild;
 import androidx.core.view.NestedScrollingChildHelper;
@@ -68,23 +66,6 @@ public class NestedWebView extends WebView implements NestedScrollingChild, Scro
         mChildHelper = new NestedScrollingChildHelper(this);
         setNestedScrollingEnabled(true);
     }
-
-//    @Override
-//    public void onRestoreInstanceState(Parcelable state) {
-//        SavedState ss = (SavedState) state;
-//        mPrevScrollY = ss.prevScrollY;
-//        mScrollY = ss.scrollY;
-//        super.onRestoreInstanceState(ss.getSuperState());
-//    }
-//
-//    @Override
-//    public Parcelable onSaveInstanceState() {
-//        Parcelable superState = super.onSaveInstanceState();
-//        SavedState ss = new SavedState(superState);
-//        ss.prevScrollY = mPrevScrollY;
-//        ss.scrollY = mScrollY;
-//        return ss;
-//    }
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
@@ -142,7 +123,7 @@ public class NestedWebView extends WebView implements NestedScrollingChild, Scro
                         // we should aggregate offsets from all of the parents.
                         float offsetX = 0;
                         float offsetY = 0;
-                        for (View v = this; v != null && v != parent; v = (View) v.getParent()) {
+                        for (View v = this; v != null && !v.equals(parent); v = (View) v.getParent()) {
                             offsetX += v.getLeft() - v.getScrollX();
                             offsetY += v.getTop() - v.getScrollY();
                         }
@@ -232,12 +213,6 @@ public class NestedWebView extends WebView implements NestedScrollingChild, Scro
         if (mCallbacks != null) {
             switch (ev.getActionMasked()) {
                 case MotionEvent.ACTION_DOWN:
-                    // Whether or not motion events are consumed by children,
-                    // flag initializations which are related to ACTION_DOWN events should be executed.
-                    // Because if the ACTION_DOWN is consumed by children and only ACTION_MOVEs are
-                    // passed to parent (this view), the flags will be invalid.
-                    // Also, applications might implement initialization codes to onDownMotionEvent,
-                    // so call it here.
                     mFirstScroll = mDragging = true;
                     mCallbacks.onDownMotionEvent();
                     break;
@@ -314,47 +289,6 @@ public class NestedWebView extends WebView implements NestedScrollingChild, Scro
 
     public void setOnReachEndCallback(OnReachEndCallback onReachEndCallback) {
         this.onReachEndCallback = onReachEndCallback;
-    }
-
-    static class SavedState extends BaseSavedState {
-        int prevScrollY;
-        int scrollY;
-
-        /**
-         * Called by onSaveInstanceState.
-         */
-        SavedState(Parcelable superState) {
-            super(superState);
-        }
-
-        /**
-         * Called by CREATOR.
-         */
-        private SavedState(Parcel in) {
-            super(in);
-            prevScrollY = in.readInt();
-            scrollY = in.readInt();
-        }
-
-        @Override
-        public void writeToParcel(Parcel out, int flags) {
-            super.writeToParcel(out, flags);
-            out.writeInt(prevScrollY);
-            out.writeInt(scrollY);
-        }
-
-        public static final Creator<SavedState> CREATOR
-                = new Creator<SavedState>() {
-            @Override
-            public SavedState createFromParcel(Parcel in) {
-                return new SavedState(in);
-            }
-
-            @Override
-            public SavedState[] newArray(int size) {
-                return new SavedState[size];
-            }
-        };
     }
 
     public interface OnReachEndCallback{

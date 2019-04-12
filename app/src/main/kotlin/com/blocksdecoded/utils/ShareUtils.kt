@@ -17,6 +17,7 @@ object ShareUtils {
             i.putExtra(Intent.EXTRA_TEXT, text)
             activity.startActivity(Intent.createChooser(i, "Share with"))
         } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
@@ -44,6 +45,7 @@ object ShareUtils {
                 }
             }
         } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 }

@@ -39,12 +39,12 @@ class CoinsRepository(
     private fun isDirty(): Boolean = mCached?.updatedAt
         ?.let { (Date().time - it.time) > VALID_CACHE_TIME } ?: true
 
-    private fun localCoinsFetch() = if (mCached != null)
-        Observable.just(mCached!!)
+    private fun localCoinsFetch(): Observable<CoinsDataResponse> = if (mCached != null)
+        Observable.just(mCached)
     else
         mLocalSource.getAllCoins()
 
-    private fun remoteCoinsFetch(force: Boolean) = if (isDirty() || force)
+    private fun remoteCoinsFetch(force: Boolean): Observable<CoinsDataResponse> = if (isDirty() || force)
         mCoinsClient.getCoins()
             .toObservable()
             .doOnNext {
@@ -57,7 +57,8 @@ class CoinsRepository(
     else
         Observable.empty()
 
-    private fun fetchCoins(force: Boolean) = Observable.concat(localCoinsFetch(), remoteCoinsFetch(force))
+    private fun fetchCoins(force: Boolean): Observable<CoinsDataResponse> =
+        Observable.concat(localCoinsFetch(), remoteCoinsFetch(force))
 
     //endregion
 

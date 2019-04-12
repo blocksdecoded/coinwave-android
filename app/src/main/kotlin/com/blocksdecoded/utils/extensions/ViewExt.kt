@@ -14,8 +14,8 @@ import androidx.annotation.AnimRes
 private const val FAST_ANIM_DURATION = 100L
 
 fun View.setConstraintTopMargin(value: Int) {
-    if (layoutParams is ViewGroup.MarginLayoutParams) {
-        val params = layoutParams as ViewGroup.MarginLayoutParams
+    val params = layoutParams
+    if (params is ViewGroup.MarginLayoutParams) {
         params.topMargin = value
         layoutParams = params
     }

@@ -33,11 +33,11 @@ internal object IntentUtil {
                 intent.putExtra(Intent.EXTRA_EMAIL, CONTACT_MAILS)
                 intent.putExtra(Intent.EXTRA_SUBJECT, "Android $appName Feedback")
                 if (intent.resolveActivity(it.packageManager) != null) {
-                    it.startActivity(
-                            Intent.createChooser(intent, "Send email..."))
+                    it.startActivity(Intent.createChooser(intent, "Send email..."))
                 }
             }
         } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 }

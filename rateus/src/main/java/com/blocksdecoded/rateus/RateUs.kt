@@ -53,6 +53,7 @@ object RateUs {
                     return true
                 }
             } catch (e: Exception) {
+                e.printStackTrace()
             }
         }
 

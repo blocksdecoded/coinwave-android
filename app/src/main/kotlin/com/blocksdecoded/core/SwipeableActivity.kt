@@ -15,7 +15,7 @@ abstract class SwipeableActivity : AppCompatActivity(), SwipeBackActivityBase {
     private var mSwipeListener = object : SwipeBackLayout.SwipeListener {
         override fun onScrollStateChange(state: Int, scrollPercent: Float) {
             if (SwipeBackLayout.SCREEN_STATE_ON == state) {
-                KeyboardUtil.hideKeyboard(this@SwipeableActivity)
+                hideKeyboard()
             }
         }
 
@@ -24,6 +24,10 @@ abstract class SwipeableActivity : AppCompatActivity(), SwipeBackActivityBase {
 
         override fun onScrollOverThreshold() {
         }
+    }
+
+    private fun hideKeyboard() {
+        KeyboardUtil.hideKeyboard(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,7 +44,7 @@ abstract class SwipeableActivity : AppCompatActivity(), SwipeBackActivityBase {
 
     override fun <T : View?> findViewById(id: Int): T {
         val v: View? = super.findViewById(id)
-        val t = mHelper!!.findViewById(id)
+        val t = mHelper?.findViewById(id)
         return if (v == null && mHelper != null) (t as T) else (v as T)
     }
 

@@ -23,8 +23,11 @@ fun RecyclerView.ViewHolder.updateHeight(height: Int, animated: Boolean = false)
         val valueAnimator = ValueAnimator.ofInt(start, height)
 
         valueAnimator.addUpdateListener {
-            this.height = it.animatedValue as Int
-            this.itemView.invalidate()
+            val value = it.animatedValue
+            if (value is Int) {
+                this.height = value
+                this.itemView.invalidate()
+            }
         }
 
         valueAnimator.duration = 200

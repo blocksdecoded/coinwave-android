@@ -29,16 +29,3 @@ fun Context.openUrl(url: String) {
             .launchUrl(this, Uri.parse(url))
     }
 }
-
-object CustomTabsUtil {
-
-    val CUSTOM_TAB_PACKAGE_NAME = "com.android.chrome"
-
-    fun bindToService(context: Context, connection: CustomTabsServiceConnection) = try {
-        CustomTabsClient.bindCustomTabsService(context, CUSTOM_TAB_PACKAGE_NAME, connection)
-    } catch (e: Exception) {
-    }
-
-    fun unbindFromService() {
-    }
-}

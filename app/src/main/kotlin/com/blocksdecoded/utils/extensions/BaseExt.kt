@@ -102,13 +102,3 @@ fun <T> List<T>?.isValidIndex(index: Int): Boolean {
     this?.let { return index >= 0 && it.size > index }
     return false
 }
-
-fun Snackbar.config(context: Context): Snackbar {
-    val params = this.view.layoutParams as ViewGroup.MarginLayoutParams
-    val defMargin = context.dpToPx(6)
-    params.setMargins(defMargin, defMargin, defMargin, defMargin)
-    this.view.layoutParams = params
-
-    ViewCompat.setElevation(this.view, 8f)
-    return this
-}

@@ -4,9 +4,6 @@ import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import com.blocksdecoded.coinwave.R
 
-/**
- * Created by Tameki on 2/15/18.
- */
 private const val TRANSITIONS_ENABLED = true
 
 fun Activity.inRightTransition() {

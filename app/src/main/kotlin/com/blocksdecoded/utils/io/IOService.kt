@@ -59,18 +59,4 @@ class IOService(context: Context) : IOContract {
         }
         return ""
     }
-
-    companion object {
-        private var INSTANCE: IOService? = null
-
-        fun getInstance(context: Context): IOContract {
-            if (INSTANCE == null)
-                INSTANCE = IOService(context)
-            return INSTANCE!!
-        }
-
-        fun destroyInstance() {
-            INSTANCE = null
-        }
-    }
 }
