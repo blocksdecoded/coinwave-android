@@ -8,7 +8,7 @@ internal object TimeUtil {
     private fun getLongDateFormat(): SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
 
     fun getDaysBetween(date: String): Int {
-        try {
+        return try {
             val format = getLongDateFormat()
             format.timeZone = TimeZone.getDefault()
             val lDate = format.parse(date)
@@ -17,9 +17,8 @@ internal object TimeUtil {
 
             return TimeUnit.MILLISECONDS.toDays(diff).toInt()
         } catch (e: Exception) {
+            0
         }
-
-        return 0
     }
 
     fun getFormattedDate(): String {

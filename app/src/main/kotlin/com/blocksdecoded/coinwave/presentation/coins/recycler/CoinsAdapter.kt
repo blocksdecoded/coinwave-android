@@ -15,7 +15,7 @@ class CoinsAdapter(
     private val mListener: CoinViewHolder.CoinVHListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return CoinViewHolder(parent.inflate(R.layout.item_coin)!!, mListener)
+        return CoinViewHolder(parent.inflate(R.layout.item_coin), mListener)
     }
 
     override fun getItemCount(): Int = mCoins.size

@@ -18,7 +18,7 @@ abstract class CoreFragment : Fragment() {
     abstract fun initView(rootView: View)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? = try {
-        container.inflate(layoutId)?.also {
+        container?.inflate(layoutId)?.also {
             mUnbinder = ButterKnife.bind(this, it)
             initView(it)
         }

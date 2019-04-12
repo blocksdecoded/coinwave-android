@@ -33,11 +33,11 @@ class PostsAdapter(
     //region Override
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): RecyclerView.ViewHolder = when (p1) {
-        1 -> PostViewHolder(p0.inflate(R.layout.item_post)!!, mListener).apply {
+        1 -> PostViewHolder(p0.inflate(R.layout.item_post), mListener).apply {
             this.height = mPostHeight
         }
         else -> FooterViewHolder(
-            p0.inflate(R.layout.item_footer)!!,
+            p0.inflate(R.layout.item_footer),
             this
         )
     }

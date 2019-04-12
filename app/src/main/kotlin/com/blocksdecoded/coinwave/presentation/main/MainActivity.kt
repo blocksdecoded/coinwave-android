@@ -35,8 +35,8 @@ import kotlinx.android.synthetic.main.drawer_content.*
 import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity(),
-        View.OnClickListener,
-        IMenuClickListener {
+    View.OnClickListener,
+    IMenuClickListener {
 
     private var mRateDialog: IRateUsDialog? = null
 
@@ -73,9 +73,9 @@ class MainActivity : AppCompatActivity(),
         initStatusBar()
 
         mRateDialog = CryptoRateUtil.tryShowRateUs(this)
-                ?.setListener(object : IRateUsListener {
-                    override fun onDismiss() { mRateDialog = null }
-                })
+            ?.setListener(object : IRateUsListener {
+                override fun onDismiss() { mRateDialog = null }
+            })
 
         updateStatusBar()
 
@@ -93,7 +93,7 @@ class MainActivity : AppCompatActivity(),
 
     private fun initStatusBar() {
         if (Build.VERSION.SDK_INT >= 19) { // 19, 4.4, KITKAT
-            val contentParent = findViewById<View>(android.R.id.content) as ViewGroup
+            val contentParent = findViewById<ViewGroup>(android.R.id.content)
             val content = contentParent.getChildAt(0)
             setFitsSystemWindows(content, false, true)
         }
@@ -118,12 +118,11 @@ class MainActivity : AppCompatActivity(),
         if (view == null) return
         view.fitsSystemWindows = fitSystemWindows
         if (applyToChildren && view is ViewGroup) {
-            val viewGroup = view as ViewGroup?
             var i = 0
-            viewGroup?.let {
-                val n = viewGroup.childCount
+            view.let {
+                val n = view.childCount
                 while (i < n) {
-                    viewGroup.getChildAt(i).fitsSystemWindows = fitSystemWindows
+                    view.getChildAt(i).fitsSystemWindows = fitSystemWindows
                     i ++
                 }
             }
@@ -135,9 +134,9 @@ class MainActivity : AppCompatActivity(),
         setStatusBarImmersiveMode(getColorRes(R.color.status_bar_bg))
     }
 
-    private fun updateStatusBar(drawerOpen: Boolean = false) = try {
+    private fun updateStatusBar(drawerOpen: Boolean = false) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val flags = if (drawerOpen) {
+            window.decorView.systemUiVisibility = if (drawerOpen) {
                 0
             } else {
                 when (main_view_pager.currentItem) {
@@ -145,12 +144,7 @@ class MainActivity : AppCompatActivity(),
                     else -> View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
                 }
             }
-
-            window.decorView.systemUiVisibility = flags
         }
-        Unit
-    } catch (e: Exception) {
-        logE(e)
     }
 
     //endregion

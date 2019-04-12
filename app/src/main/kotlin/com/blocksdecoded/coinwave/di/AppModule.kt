@@ -1,5 +1,6 @@
 package com.blocksdecoded.coinwave.di
 
+import com.blocksdecoded.coinwave.data.bootstrap.CoinClientConfig
 import com.blocksdecoded.coinwave.data.bootstrap.BootstrapApiClient
 import com.blocksdecoded.coinwave.data.bootstrap.IBootstrapClient
 import com.blocksdecoded.coinwave.data.coins.CoinsRepository
@@ -48,9 +49,7 @@ import org.koin.androidx.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
 
 val dataModule = module {
-    single { object : ICoinClientConfig {
-        override var ipfsUrl: String = ""
-    } as ICoinClientConfig }
+    single { CoinClientConfig(get()) as ICoinClientConfig }
 
     single { CoinApiClient(get()) as ICoinClient }
 

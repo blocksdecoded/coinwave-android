@@ -5,7 +5,6 @@ import com.blocksdecoded.coinwave.data.coins.local.ICoinsLocalStorage
 import com.blocksdecoded.coinwave.data.coins.remote.ICoinClient
 import com.blocksdecoded.coinwave.data.model.chart.ChartPeriodEnum
 import com.blocksdecoded.coinwave.data.watchlist.IWatchlistStorage
-import com.nhaarman.mockito_kotlin.atLeast
 import com.nhaarman.mockito_kotlin.verify
 import io.reactivex.Observable
 import io.reactivex.Single

@@ -16,7 +16,7 @@ class EditWatchlistAdapter(
     private val listener: EditWatchlistVH.WatchlistVHClickListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
-            EditWatchlistVH(parent.inflate(R.layout.item_watchlist)!!, listener)
+            EditWatchlistVH(parent.inflate(R.layout.item_watchlist), listener)
 
     override fun getItemCount(): Int = coins.size
 

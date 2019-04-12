@@ -22,7 +22,6 @@ object MockData {
     val coinsResult
         get() = CoinsResult(coinsList, Date())
 
-
     val coinsResponse
         get() = CoinsResponse("success", coinsDataResponse)
 

@@ -22,7 +22,7 @@ open class PostFragment : BaseMvpFragment<IPostContract.Presenter>(), IPostContr
     private var mPost: PublisherPost? = null
     private var mWebView: NestedWebView? = null
     private var mTextSize: Int = 0
-    private var textFormatButton: View? = null
+    private lateinit var textFormatButton: View
 
     private var mHtmlOriginal: String? = null
     private var mPopupMenu: PopupMenu? = null
@@ -39,7 +39,7 @@ open class PostFragment : BaseMvpFragment<IPostContract.Presenter>(), IPostContr
 
     override fun initView(rootView: View) {
         initToolbar(rootView)
-        mWebView = rootView.findViewById<View>(R.id.web_view) as NestedWebView
+        mWebView = rootView.findViewById(R.id.web_view)
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 CookieManager.getInstance().setAcceptThirdPartyCookies(mWebView, true)
@@ -51,39 +51,36 @@ open class PostFragment : BaseMvpFragment<IPostContract.Presenter>(), IPostContr
     }
 
     private fun initToolbar(rootView: View) {
-        val backButton = rootView.findViewById<View>(R.id.post_view_fragment_back) as ImageView
-        backButton.setOnClickListener { activity!!.onBackPressed() }
+        val backButton: ImageView = rootView.findViewById(R.id.post_view_fragment_back)
+        backButton.setOnClickListener { activity?.onBackPressed() }
         textFormatButton = rootView.findViewById(R.id.post_view_fragment_format)
-        textFormatButton?.setOnClickListener { inflateTextFormatPopupMenu() }
-        val shareButton = rootView.findViewById<View>(R.id.post_view_fragment_share) as ImageView
+        textFormatButton.setOnClickListener { inflateTextFormatPopupMenu() }
+        val shareButton: ImageView = rootView.findViewById(R.id.post_view_fragment_share)
         shareButton.setOnClickListener {
             if (mPost != null) {
-                ShareUtils.shareText(activity!!, mPost?.url!!)
+                activity?.let { ShareUtils.shareText(it, mPost?.url ?: "") }
             }
         }
     }
 
     private fun inflateTextFormatPopupMenu() {
-        if (mPopupMenu != null) {
-            mPopupMenu!!.dismiss()
-        }
-        mPopupMenu = PopupMenu(activity!!, textFormatButton!!)
-        mPopupMenu?.inflate(R.menu.menu_text_format)
-        mPopupMenu?.setOnDismissListener { mPopupMenu = null }
-        mPopupMenu?.show()
-        mPopupMenu?.setOnMenuItemClickListener { item ->
-            val i = item.itemId
-            if (i == R.id.action_text_format_big) {
-                mTextSize = PostConfig.TEXT_SIZE_LARGE
-            } else if (i == R.id.action_text_format_medium) {
-                mTextSize = PostConfig.TEXT_SIZE_MEDIUM
-            } else if (i == R.id.action_text_format_small) {
-                mTextSize = PostConfig.TEXT_SIZE_SMALL
+        mPopupMenu?.dismiss()
+        activity?.let {
+            mPopupMenu = PopupMenu(it, textFormatButton)
+            mPopupMenu?.inflate(R.menu.menu_text_format)
+            mPopupMenu?.setOnDismissListener { mPopupMenu = null }
+            mPopupMenu?.show()
+            mPopupMenu?.setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.action_text_format_big -> mTextSize = PostConfig.TEXT_SIZE_LARGE
+                    R.id.action_text_format_medium -> mTextSize = PostConfig.TEXT_SIZE_MEDIUM
+                    R.id.action_text_format_small -> mTextSize = PostConfig.TEXT_SIZE_SMALL
+                }
+                mWebView?.loadUrl("javascript:changeText('$textClassNameForBody');")
+                true
             }
-            mWebView?.loadUrl("javascript:changeText('$textClassNameForBody');")
-            true
+            mPopupMenu?.show()
         }
-        mPopupMenu?.show()
     }
 
     override fun onDestroy() {
@@ -99,12 +96,12 @@ open class PostFragment : BaseMvpFragment<IPostContract.Presenter>(), IPostContr
     @SuppressLint("SetJavaScriptEnabled")
     private fun initWebView() {
         if (mWebView != null) {
-            mWebView!!.settings.javaScriptEnabled = true
-            mWebView!!.settings.useWideViewPort = true
-            mWebView!!.settings.loadWithOverviewMode = true
-            mWebView!!.settings.cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK
-            mWebView!!.webChromeClient = WebChromeClient()
-            mWebView!!.webViewClient = object : WebViewClient() {
+            mWebView?.settings?.javaScriptEnabled = true
+            mWebView?.settings?.useWideViewPort = true
+            mWebView?.settings?.loadWithOverviewMode = true
+            mWebView?.settings?.cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK
+            mWebView?.webChromeClient = WebChromeClient()
+            mWebView?.webViewClient = object : WebViewClient() {
                 override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
                     openLink(url)
                     return true

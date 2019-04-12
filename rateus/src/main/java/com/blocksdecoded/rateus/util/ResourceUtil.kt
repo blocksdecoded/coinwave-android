@@ -16,12 +16,10 @@ internal fun Context.getFont(@FontRes font: Int): Typeface? = ResourceUtil.getTy
 internal fun Context.getColorRes(@ColorRes color: Int): Int = ResourceUtil.getColor(this, color)
 
 internal object ResourceUtil {
-    fun getColor(context: Context, @ColorRes color: Int): Int {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            return context.resources.getColor(color, null)
-        } else {
-            return context.resources.getColor(color)
-        }
+    fun getColor(context: Context, @ColorRes color: Int): Int = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        context.resources.getColor(color, null)
+    } else {
+        context.resources.getColor(color)
     }
 
     fun getTypeface(context: Context, @FontRes font: Int): Typeface? = ResourcesCompat.getFont(context, font)

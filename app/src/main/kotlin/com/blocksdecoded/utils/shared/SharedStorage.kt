@@ -14,10 +14,10 @@ class SharedStorage(
     //region Private
 
     private fun getPreferences(context: Context): SharedPreferences =
-            context.getSharedPreferences(
-                    sharedFileName,
-                    Context.MODE_PRIVATE
-            )
+        context.getSharedPreferences(
+            sharedFileName,
+            Context.MODE_PRIVATE
+        )
 
     private fun editPreference(body: (SharedPreferences.Editor) -> Unit) {
         mPreferences.edit().apply {
@@ -34,24 +34,18 @@ class SharedStorage(
     //region Contract
 
     override fun <T> getPreference(key: String, defValue: T): T {
-        try {
-            mPreferences.let {
-                return when (defValue) {
-                    is String -> { it.getString(key, defValue as String) }
-                    is Float -> { it.getFloat(key, defValue as Float) }
-                    is Int -> { it.getInt(key, defValue as Int) }
-                    is Boolean -> { it.getBoolean(key, defValue as Boolean) }
-                    is Long -> { it.getLong(key, defValue as Long) }
-                    is Set<*> -> { it.getStringSet(key, defValue as Set<String>) }
+        mPreferences.let {
+            return when (defValue) {
+                is String -> { it.getString(key, defValue as String) }
+                is Float -> { it.getFloat(key, defValue as Float) }
+                is Int -> { it.getInt(key, defValue as Int) }
+                is Boolean -> { it.getBoolean(key, defValue as Boolean) }
+                is Long -> { it.getLong(key, defValue as Long) }
+                is Set<*> -> { it.getStringSet(key, defValue as Set<String>) }
 
-                    else -> defValue
-                } as T
-            }
-        } catch (e: Exception) {
-            logE(e)
+                else -> throw ClassNotFoundException()
+            } as T
         }
-
-        return defValue
     }
 
     override fun <T> setPreference(key: String, value: T) {
@@ -72,20 +66,4 @@ class SharedStorage(
     override fun removePreference(key: String) = editPreference { it.remove(key) }
 
     //endregion
-
-    companion object {
-        private var INSTANCE: ISharedStorage? = null
-
-        fun getInstance(context: Context): ISharedStorage {
-            if (INSTANCE == null) {
-                INSTANCE = SharedStorage(context)
-            }
-
-            return INSTANCE!!
-        }
-
-        fun destroyInstance() {
-            INSTANCE = null
-        }
-    }
 }

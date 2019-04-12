@@ -3,9 +3,16 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
-android {
-    compileSdkVersion rootProject.ext.target_sdk_version
+Properties properties = new Properties()
+if (project.rootProject.file('local.properties').exists()) {
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+}
 
+android {
+    def STRING = "String"
+    def CONTACT_EMAIL = "CONTACT_EMAIL"
+
+    compileSdkVersion rootProject.ext.target_sdk_version
     defaultConfig {
         minSdkVersion rootProject.ext.min_sdk_version
         targetSdkVersion rootProject.ext.target_sdk_version
@@ -13,6 +20,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField STRING, CONTACT_EMAIL, properties.getProperty("contact_email", "\"\"")
     }
 
     lintOptions {

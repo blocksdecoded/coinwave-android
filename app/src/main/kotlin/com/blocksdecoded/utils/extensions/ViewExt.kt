@@ -11,20 +11,14 @@ import android.view.animation.ScaleAnimation
 import android.widget.TextView
 import androidx.annotation.AnimRes
 
-/**
- * Created by askar on 2/1/19
- * with Android Studio
- */
-
 private const val FAST_ANIM_DURATION = 100L
-private const val SHORT_ANIM_DURATION = 200L
-private const val MEDIUM_ANIM_DURATION = 400L
 
-fun View.setConstraintTopMargin(value: Int) = try {
-    val params = layoutParams as ViewGroup.MarginLayoutParams
-    params.topMargin = value
-    layoutParams = params
-} catch (e: Exception) {
+fun View.setConstraintTopMargin(value: Int) {
+    if (layoutParams is ViewGroup.MarginLayoutParams) {
+        val params = layoutParams as ViewGroup.MarginLayoutParams
+        params.topMargin = value
+        layoutParams = params
+    }
 }
 
 fun TextView.setColouredSpanAfter(text: String, delimiter: String, color: Int) {

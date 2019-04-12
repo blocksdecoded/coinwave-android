@@ -83,10 +83,10 @@ internal class RateUsDialog(
     }
 
     private fun showMessage(text: String) = try {
-            Toast.makeText(context, text, Toast.LENGTH_LONG).show()
-        } catch (e: Exception) {
-            Log.d("ololo", "Exception " + e.message)
-        }
+        Toast.makeText(context, text, Toast.LENGTH_LONG).show()
+    } catch (e: Exception) {
+        Log.d("ololo", "Exception " + e.message)
+    }
 
     private fun loadPreferences() {
         mRatingBar?.let {
@@ -110,9 +110,12 @@ internal class RateUsDialog(
 
     private fun setStartsColors() {
         try {
-            val stars = mRatingBar?.progressDrawable as LayerDrawable
-            setRatingStarColor(stars.getDrawable(0), R.color.rating_inactive)
+            if (mRatingBar?.progressDrawable is LayerDrawable) {
+                val stars = mRatingBar?.progressDrawable as LayerDrawable
+                setRatingStarColor(stars.getDrawable(0), R.color.rating_inactive)
+            }
         } catch (e: Exception) {
+            Log.e("ololo", e.message, e)
         }
     }
 
@@ -193,9 +196,9 @@ internal class RateUsDialog(
 
     private fun playCrossfadeAnimation() {
         AnimationUtil.crossFade(
-                arrayListOf(mRatingBar, mTitle),
-                arrayListOf(mSecondTitle),
-                0.8f
+            arrayListOf(mRatingBar, mTitle),
+            arrayListOf(mSecondTitle),
+            0.8f
         )
     }
 
@@ -277,18 +280,10 @@ internal class RateUsDialog(
         return this
     }
 
-    override fun showFeedbackThanks(): Boolean {
-        try {
-            if (mCurrentState == THANKS) {
-                showMessage(context.getString(R.string.thanks_for_feedback))
-                return true
-            }
-        } catch (e: Exception) {
-            return true
-        }
-
-        return false
-    }
+    override fun showFeedbackThanks(): Boolean = if (mCurrentState == THANKS) {
+        showMessage(context.getString(R.string.thanks_for_feedback))
+        true
+    } else false
 
     //endregion
 }

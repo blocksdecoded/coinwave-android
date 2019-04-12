@@ -3,14 +3,10 @@ package com.blocksdecoded.coinwave.domain.usecases.chart
 import com.blocksdecoded.coinwave.MockData
 import com.blocksdecoded.coinwave.data.coins.ICoinsRepository
 import com.blocksdecoded.coinwave.data.coins.chart.IChartsStorage
-import com.blocksdecoded.coinwave.data.model.chart.ChartData
-import com.blocksdecoded.coinwave.data.model.chart.ChartDataEntry
-import com.blocksdecoded.coinwave.data.model.chart.ChartPeriodEnum
 import com.blocksdecoded.coinwave.data.model.coin.CoinEntity
 import com.nhaarman.mockito_kotlin.verify
 import io.reactivex.Single
 import org.junit.Test
-import org.mockito.ArgumentMatchers
 import org.mockito.Mockito.*
 
 class ChartsInteractorTest {

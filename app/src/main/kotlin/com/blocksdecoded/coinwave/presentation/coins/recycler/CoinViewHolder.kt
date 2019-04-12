@@ -33,8 +33,8 @@ class CoinViewHolder(
 
     fun onBind(coin: CoinEntity) {
         mSymbol.text = "${coin.symbol}"
-        mMarketCap.text = "$${FormatUtil.withSuffix(coin.getMarketCap()!!)}"
-        mVolume.text = "$${FormatUtil.withSuffix(coin.getDailyVolume()!!)}"
+        mMarketCap.text = "$${FormatUtil.withSuffix(coin.getMarketCap() ?: 0f)}"
+        mVolume.text = "$${FormatUtil.withSuffix(coin.getDailyVolume() ?: 0f)}"
 
         mPrice.text = "$${coin.getPrice()?.format()}"
 
