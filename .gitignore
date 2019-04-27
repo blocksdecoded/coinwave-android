@@ -7,6 +7,7 @@ build/
 /captures
 .externalNativeBuild
 /fastlane/report.xml
+/fastlane/Fastfile
 /fastlane/README.md
 /app/supply
 /app/fabric.properties
