@@ -24,7 +24,7 @@ android {
         applicationId "com.blocksdecoded.coinwave"
         minSdkVersion min_sdk_version
         targetSdkVersion target_sdk_version
-        versionCode 12
+        versionCode 13
         versionName "1.0.1"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
