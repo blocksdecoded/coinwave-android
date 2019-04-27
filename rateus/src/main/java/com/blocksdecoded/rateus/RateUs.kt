@@ -1,11 +1,11 @@
 package com.blocksdecoded.rateus
 
 import android.content.Context
-import com.blocksdecoded.rateus.widget.IRateUsDialog
-import com.blocksdecoded.rateus.widget.RateUsDialog
 import com.blocksdecoded.rateus.util.SharedPrefsUtil
 import com.blocksdecoded.rateus.util.SharedPrefsUtil.setPreference
 import com.blocksdecoded.rateus.util.TimeUtil
+import com.blocksdecoded.rateus.widget.IRateUsDialog
+import com.blocksdecoded.rateus.widget.RateUsDialog
 
 /**
  * Created by Tameki on 3/20/18.
@@ -48,7 +48,7 @@ object RateUs {
             return false
         } else {
             try {
-                if (TimeUtil.getDaysBetween(date) >= 3) {
+                if (TimeUtil.getDaysBetween(date) >= 5) {
                     setPreference(context, LAST_CHECK_DATE, TimeUtil.getFormattedDate())
                     return true
                 }
