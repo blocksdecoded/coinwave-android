@@ -1,8 +1,6 @@
 package com.blocksdecoded.utils
 
 import android.util.Log
-import androidx.annotation.NonNull
-import timber.log.Timber
 
 fun logD(message: String) {
     Logger.logD(message)
@@ -17,46 +15,32 @@ fun logE(t: Throwable) {
 }
 
 object Logger {
-    fun init(isDebug: Boolean) = if (isDebug) {
-        Timber.plant(object : Timber.DebugTree() {
-            override fun createStackElementTag(element: StackTraceElement): String? {
-                return super.createStackElementTag(element) + ": " + element.lineNumber
-            }
-        })
-    } else {
-        Timber.plant(ReleaseLogTree())
+    private const val TAG = "logger"
+    private var debuggable = true
+
+    fun init(isDebug: Boolean) {
+        debuggable = isDebug
     }
 
     fun logD(message: String) {
-        Timber.d(message)
+        if (debuggable) {
+            Log.d(TAG, message)
+        }
     }
 
     fun logE(e: Exception) {
-        Timber.e(e)
+        if (debuggable) {
+            e.message?.let {
+                Log.e(TAG, e.message, e)
+            } ?: Log.e(TAG, "", e)
+        }
     }
 
     fun logE(t: Throwable) {
-        Timber.e(t)
-    }
-
-    private class ReleaseLogTree : Timber.Tree() {
-        override fun log(
-            priority: Int,
-            tag: String?,
-            @NonNull message: String,
-            throwable: Throwable?
-        ) {
-            if (priority == Log.DEBUG || priority == Log.VERBOSE || priority == Log.INFO) {
-                return
-            }
-
-            if (priority == Log.ERROR) {
-                if (throwable == null) {
-                    Timber.e(message)
-                } else {
-                    Timber.e(throwable, message)
-                }
-            }
+        if (debuggable) {
+            t.message?.let {
+                Log.e(TAG, t.message, t)
+            } ?: Log.e(TAG, "", t)
         }
     }
 }

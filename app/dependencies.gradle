@@ -12,7 +12,6 @@ ext {
             rxKotlin        : '2.2.0',
             rxAndroid       : '2.1.1',
             traceur         : '1.0.1',
-            timber          : '4.7.0',
             glide           : '4.9.0',
             swipeback       : '1.1.0',
 
@@ -102,7 +101,6 @@ ext {
             koin                : "org.koin:koin-test:$versions.koin"
     ] + junit + mockito
 
-    timber = "com.jakewharton.timber:timber:$versions.timber"
     sherlock = "com.github.ajitsing:sherlock:$versions.sherlock"
 
     butterKnife = "com.jakewharton:butterknife:$versions.butterKnife"
@@ -121,7 +119,7 @@ ext {
     rxJavaLibs = rxJava.values()
     coroutineLibs = coroutineDeps.values()
 
-    otherLibs = [viewModel.values(), butterKnife, timber, glide, swipeback, koin.values(), mpChart, androidSvg, observableScroll]
+    otherLibs = [viewModel.values(), butterKnife, glide, swipeback, koin.values(), mpChart, androidSvg, observableScroll]
 
     debugLibs = onlyDebug.values()
     releaseLibs = onlyRelease.values()
