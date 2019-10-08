@@ -1,3 +1,3 @@
-[![CircleCI](https://circleci.com/gh/blocksdecoded/coinwave-android.svg?style=shield)](https://circleci.com/gh/blocksdecoded/coinwave-android) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/996cbf4e5a7746baaf23d96a3bd48b56)](https://www.codacy.com/app/blocksdecoded/coinwave-android?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=blocksdecoded/coinwave-android&amp;utm_campaign=Badge_Grade)
+[![CircleCI](https://circleci.com/gh/blocksdecodedcom/coinwave-android.svg?style=shield)](https://circleci.com/gh/blocksdecodedcom/coinwave-android)
 
 # CoinWave (Android)
