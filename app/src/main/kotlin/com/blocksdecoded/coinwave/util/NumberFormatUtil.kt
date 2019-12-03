@@ -1,6 +1,7 @@
 package com.blocksdecoded.coinwave.util
 
 import java.text.DecimalFormat
+import kotlin.math.ln
 import kotlin.math.roundToInt
 
 fun Float.format(): String = FormatUtil.formatFloatString(this)
@@ -14,7 +15,7 @@ object FormatUtil {
 
     fun withSuffix(count: Float): String {
         if (count < 1000) return "" + count
-        val exp = (Math.log(count.toDouble()) / Math.log(1000.0)).toInt()
+        val exp = (ln(count.toDouble()) / ln(1000.0)).toInt()
         return String.format("%.1f %c",
                 count / Math.pow(1000.0, exp.toDouble()),
                 "kmbtpe"[exp - 1])

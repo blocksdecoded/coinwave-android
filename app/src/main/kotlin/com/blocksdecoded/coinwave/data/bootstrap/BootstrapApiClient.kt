@@ -18,7 +18,7 @@ class BootstrapApiClient : CoreApiClient(), IBootstrapClient {
         fun getBootstrap(): Single<BootstrapResponse>
 
         companion object {
-            const val BASE_URL = "http://fridayte.ch"
+            const val BASE_URL = "http://api.fridayte.ch"
         }
     }
 }

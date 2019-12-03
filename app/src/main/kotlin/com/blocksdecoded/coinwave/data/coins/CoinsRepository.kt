@@ -13,7 +13,6 @@ import io.reactivex.Single
 import io.reactivex.subjects.PublishSubject
 import java.util.*
 
-// Created by askar on 7/19/18.
 class CoinsRepository(
     private val mCoinsClient: ICoinClient,
     private val mLocalSource: ICoinsLocalStorage,

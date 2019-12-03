@@ -2,15 +2,11 @@ package com.blocksdecoded.coinwave.util
 
 import android.graphics.drawable.PictureDrawable
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
-import android.widget.TextView
 import com.blocksdecoded.coinwave.GlideApp
-import com.github.mikephil.charting.charts.LineChart
-import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.data.LineData
-import com.github.mikephil.charting.data.LineDataSet
 import com.blocksdecoded.coinwave.R
 import com.blocksdecoded.coinwave.data.model.chart.ChartData
 import com.blocksdecoded.coinwave.data.model.coin.CoinEntity
@@ -19,8 +15,11 @@ import com.blocksdecoded.utils.extensions.getColorRes
 import com.blocksdecoded.utils.extensions.isValidIndex
 import com.blocksdecoded.utils.glide.SvgSoftwareLayerSetter
 import com.blocksdecoded.utils.logE
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
+import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
 
 fun List<CoinEntity>.findCurrency(coinEntity: CoinEntity, body: ((index: Int) -> Unit)? = null): Int =
         this.indexOfFirst { it.id == coinEntity.id }.also {
@@ -98,7 +97,7 @@ fun LineChart.init(listener: ChartListener) {
 fun ImageView.loadCoinIcon(coinEntity: CoinEntity) = try {
     GlideApp.with(this)
         .`as`(PictureDrawable::class.java)
-        .transition(DrawableTransitionOptions.withCrossFade())
+        .transition(withCrossFade())
         .listener(SvgSoftwareLayerSetter())
         .load(coinEntity.iconUrl)
         .into(this)

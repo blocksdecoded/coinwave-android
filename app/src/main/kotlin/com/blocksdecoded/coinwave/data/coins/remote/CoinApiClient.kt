@@ -1,14 +1,13 @@
 package com.blocksdecoded.coinwave.data.coins.remote
 
-import com.blocksdecoded.coinwave.data.model.chart.ChartPeriodEnum
 import com.blocksdecoded.coinwave.data.coins.remote.model.HistoryResponse
+import com.blocksdecoded.coinwave.data.model.chart.ChartPeriodEnum
 import com.blocksdecoded.coinwave.data.model.coin.CoinsResponse
 import com.blocksdecoded.core.network.CoreApiClient
 import com.blocksdecoded.utils.logE
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Url
-import java.lang.Exception
 import java.util.concurrent.TimeoutException
 
 /**
